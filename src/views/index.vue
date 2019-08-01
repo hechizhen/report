@@ -19,6 +19,14 @@
         <one-help-sale :salesData="monthSalesData"></one-help-sale>
         <!-- 二帮卖分析 -->
         <secondBand></secondBand>
+
+        <!--产品-->
+        <productIndex ></productIndex>
+        <!--门店-->
+        <shopIndex></shopIndex>
+         <!--库存-->
+        <second-title :titleName="inventoryTitle"></second-title>
+        <inventoryIndex :salesData="inventoryData" > </inventoryIndex>
     </div>
 </template>
 <script>
@@ -26,12 +34,15 @@
     import secondTitle from '../components/secondTitle.vue'//模块标题
     import oneHelpSale from '../components/oneHelpSale.vue'//一帮卖分析
     import finance from '../components/finance.vue'//财务
-    import oneHelpSale from '../components/oneHelpSale.vue'
+    // import oneHelpSale from '../components/oneHelpSale.vue'
 
     import pieEchart from '../components/echarts/pie.vue'//饼图
     import lineEchart from '../components/echarts/line.vue'//折线图
     import barEchart from '../components/echarts/bar.vue'//柱状图
     import secondBand from "./../components/secondBand/index.vue"  //二帮卖分析
+    import productIndex from '../components/productIndex' //产品
+    import shopIndex from '../components/shopIndex' //门店
+    import inventoryIndex from  '../components/inventoryIndex' //库存
     export default {
         name : 'index',
         components : {
@@ -42,7 +53,10 @@
             pieEchart,
             lineEchart,
             barEchart,
-            secondBand
+            secondBand,
+            productIndex,
+            shopIndex,
+            inventoryIndex
         },
         data () {
             return {
@@ -53,6 +67,7 @@
                 currentDate:'',//当前时间
                 oneHelpSaleTitle:'一帮卖分析',//一帮卖分析标题
                 financeTitle:'财务',//财务标题
+                inventoryTitle:'库存',//库存标题
                 //一帮卖本月销量
                 monthSalesData:{
                     sales:39989.7,
@@ -146,7 +161,37 @@
                     overDueval:'3345',
                     overDueRadioTxt:'逾期占比',
                     overDueRadio:'3345',
-                }
+                },
+                // 库存详细
+                inventoryData:{
+                    //库存详细柱狀圖
+                    inventoryBarData:{
+                        id:'barIdinventory',
+                        xAxisData:["立白","立白","立白","立白","立白","立白"],
+                        xAxis:{
+                            isShowLine:false,
+                            isShowSplit:false,
+                            axisLabelColor:'#333',
+                        },
+                        yAxis:{
+                            isShowLine:false,
+                            isShowSplit:false,
+                            axisLabelColor:'#D7D9E5',
+                        },
+                        label:{
+                            isShow:true
+                        },
+                        type:'xAxis',
+                        barData:[
+                            {
+                                name:'ABC',
+                                data:[23,43,83,213,400],
+                                color:'#6BBCFF',
+                                barWidth:5
+                            },
+                        ]
+                    },
+                },
             }
         },
         mounted () {

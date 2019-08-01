@@ -6,11 +6,11 @@
             <div class="left-txt">
                     <div class="left-txt-title">
                         <span>环比增长： </span>
-                        <p>46.03% %</p>
+                        <p>46.03%%</p>
                     </div>
                     <div class="left-txt-title">
                         <span>同比增长：</span>
-                        <p>-23.23%%</p>
+                        <p>-23.23%</p>
                     </div>
                 </div>
             <span class="shu"></span>
