@@ -16,7 +16,6 @@
         <!-- 财务 -->
         <second-title :titleName="financeTitle"></second-title>
         <finance :financeData="financeData" :receivableData="receivableData" :overDueData="overDueData"></finance>
-        <one-help-sale :salesData="monthSalesData"></one-help-sale>
         <!-- 二帮卖分析 -->
         <secondBand></secondBand>
     </div>
