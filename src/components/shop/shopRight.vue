@@ -14,26 +14,31 @@
             <span>3512</span>
         </div>
         </div>
-        <div class="shopRight-base">
-
-        </div>
+        <shopBase></shopBase>
     </div>
 </template>
 
 <script>
+    import shopBase from './shopBase'
     export default {
-        name: "shopRight"
+        name: "shopRight",
+        components:{
+            shopBase
+        }
     }
 </script>
 
 <style lang="less" scoped>
     .shopRight {
-        width: 40%;
+        width: 49%;
         height: 100%;
         float: left;
-        margin-left: 9%;
+        /*margin-left: 9%;*/
+        .shopRight-title{
+            height: 174px;
+        }
         .shop-active {
-            width: 22%;
+            width: 18%;
             height: 165px;
             background:linear-gradient(90deg,rgba(0,166,255,1),rgba(140,93,255,1));
             border-radius: 6px;
@@ -41,7 +46,7 @@
             color: rgba(255, 255, 255, 1);
             text-align: center;
             float: left;
-            margin-left:50px;
+            margin-left:10%;
             p {
                 display: grid;
                 font-size: 14px;

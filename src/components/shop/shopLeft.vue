@@ -34,13 +34,16 @@
           </div>
       </div>
         <span class="shu"></span>
+        <shopBase></shopBase>
     </div>
 </template>
 
 <script>
+    import shopBase from  './shopBase'
     export default {
         name: "shopLeft",
         components:{
+            shopBase
         }
     }
 </script>
@@ -48,7 +51,6 @@
 <style lang="less" scoped>
 .shopLeft{
     width: 51%;
-    height: 100%;
     float: left;
 
     .shop-active{
