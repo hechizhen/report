@@ -29,7 +29,7 @@
             </div>
         </div>
         <inventoryCenten></inventoryCenten>
-        <inventoryDase></inventoryDase>
+        <inventoryDase :salesData="salesData"></inventoryDase>
     </div>
 </template>
 
@@ -41,7 +41,12 @@
         components:{
             inventoryCenten,
             inventoryDase
-        }
+        },
+        props:{
+            salesData:{
+                type:Object,
+            }
+        },
     }
 </script>
 
