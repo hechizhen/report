@@ -73,9 +73,6 @@
                     },
                 };
                 if(_this.pieEchartsData.labelType==1){
-                }else{
-                }
-                if(_this.pieEchartsData.labelType==1){
                     var labelStyle= {
                         normal: {
                             textStyle: {
@@ -93,7 +90,7 @@
                             rich: rich
                         },
                     }
-                }else{
+                }else if(_this.pieEchartsData.labelType==2){
                     var labelStyle =  { //标签的位置
                         normal: {
                             show: true,
@@ -102,6 +99,12 @@
                             textStyle: {
                                 color: '#fff',
                             }
+                        },
+                    }
+                }else{
+                    var labelStyle =  {
+                        normal: {
+                            show: false,
                         },
                     }
                 }

@@ -9,13 +9,20 @@
         <header-title :dealName="indexDealName" :score="indexScore" :summary="indexSummary" :defaultDate="indexDefaultDate" :changeDateHandle="indexChangeDate"></header-title>
         <!-- 一帮卖分析 -->
         <second-title :titleName="oneHelpSaleTitle"></second-title>
-        <one-help-sale :salesData="monthSalesData"></one-help-sale>
+        <div class="oneHelpSalesBox">
+            <one-help-sale :salesData="monthSalesData" style="margin-right:2%;"></one-help-sale>
+            <one-help-sale :salesData="yearSalesData"></one-help-sale>
+        </div>
+        <!-- 财务 -->
+        <second-title :titleName="financeTitle"></second-title>
+        <finance :financeData="financeData" :receivableData="receivableData" :overDueData="overDueData"></finance>
     </div>
 </template>
 <script>
     import headerTitle from '../components/headerTitle.vue'//头部标题
     import secondTitle from '../components/secondTitle.vue'//模块标题
-    import oneHelpSale from '../components/oneHelpSale.vue'
+    import oneHelpSale from '../components/oneHelpSale.vue'//一帮卖分析
+    import finance from '../components/finance.vue'//财务
     import pieEchart from '../components/echarts/pie.vue'//饼图
     import lineEchart from '../components/echarts/line.vue'//折线图
     import barEchart from '../components/echarts/bar.vue'//柱状图
@@ -25,6 +32,7 @@
             headerTitle,
             secondTitle,
             oneHelpSale,
+            finance,
             pieEchart,
             lineEchart,
             barEchart
@@ -37,36 +45,11 @@
                 indexDefaultDate:'2017/07',//默认时间
                 currentDate:'',//当前时间
                 oneHelpSaleTitle:'一帮卖分析',//一帮卖分析标题
+                financeTitle:'财务',//财务标题
                 //一帮卖本月销量
                 monthSalesData:{
                     sales:39989.7,
-                    reach:0.98,
-                    monthPieData:{
-                        id:'pieIdSales',
-                        colorList:['#FF8352', '#E271DE', '#00FFFF', '#4AEAB0'],
-                        labelType:2,
-                        //本月饼图
-                        pieData:[
-                            {
-                                value: 111,
-                                name: 'TV'
-                            }, {
-                                value: 1234,
-                                name: '盒子'
-                            }, {
-                                value: 333,
-                                name: '基础盒子'
-                            }, {
-                                value: 444,
-                                name: '高级盒子'
-                            }, {
-                                value: 555,
-                                name: 'PC'
-                            }
-                        ],
-                        radius:['52%', '60%'],
-                        borderWidth:0,
-                    },
+                    reach:'98%',
                     //本月柱狀圖
                     monthBarData:{
                         id:'barIdSales',
@@ -79,32 +62,84 @@
                         yAxis:{
                             isShowLine:false,
                             isShowSplit:false,
-                            axisLabelColor:'#333',
+                            axisLabelColor:'#D7D9E5',
                         },
                         label:{
-                            isShow:false
+                            isShow:true
                         },
                         type:'xAxis',
                         barData:[ 
                             {
                                 name:'ABC',
                                 data:[200,300,400,500,600],
-                                color:'red'
+                                color:'#D7D9E5',
+                                barWidth:11
                             },
-                            {
-                                name:'ABC11',
-                                data:[300,400,500,100,123],
-                                color:'blue'
-                            },
-                            {
-                                name:'ABC33',
-                                data:[333,444,555,666,777],
-                                color:'yellow'
-                            }
                         ]
                     },
                 },
-                yearPieData:'',//本月饼图
+                //一帮卖本月销量
+                yearSalesData:{
+                    sales:39989.7,
+                    reach:'98%',
+                    //本月柱狀圖
+                    monthBarData:{
+                        id:'barIdSalesYear',
+                        xAxisData:[1,2,3,4,5,6,7,8,9,10],
+                        xAxis:{
+                            isShowLine:false,
+                            isShowSplit:false,
+                            axisLabelColor:'#333',
+                        },
+                        yAxis:{
+                            isShowLine:false,
+                            isShowSplit:false,
+                            axisLabelColor:'#D7D9E5',
+                        },
+                        label:{
+                            isShow:true
+                        },
+                        type:'xAxis',
+                        barData:[ 
+                            {
+                                name:'ABC',
+                                data:[200,300,400,500,600],
+                                color:'#D7D9E5',
+                                barWidth:11
+                            },
+                        ]
+                    },
+                },
+                //财务数据
+                financeData:[
+                    {name:'收入（万元）',val:'43321'},
+                    {name:'成本（万元）',val:'43321'},
+                    {name:'毛利（万元）',val:'43321'},
+                    {name:'厂家费用（万元）',val:'43321'},
+                    {name:'支出费用（万元）',val:'43321'},
+                    {name:'利润（万元）',val:'43321'},
+                ],
+                //应收账款
+                receivableData:{
+                    receivableTxt:'应收欠款（万元）',
+                    receivableValUnit:'￥',
+                    receivableVal:'12345',
+                    receivableMonth:'当月已收（万元）',
+                    receivableMonthValUnit:'￥',
+                    receivableMonthVal:'1111',
+                    receivableAverage:'平均账龄（天数）',
+                    receivableAverageVal:'300',
+                    receivableDay:'应收账款周转天数（天）',
+                    receivableDayVal:'333',
+                },
+                //逾期账款
+                overDueData:{
+                    overDueTxt:'逾期账款(万元）',
+                    overDueValUnit:'￥',
+                    overDueval:'3345',
+                    overDueRadioTxt:'逾期占比',
+                    overDueRadio:'3345',
+                }
             }
         },
         mounted () {
@@ -130,7 +165,7 @@
 <style scoped lang="less">
     .index{
        width:100%;
-       padding:0 20px;
+       padding:0 20px 120px 20px;
        background:#eaeff8;
        p{
            margin-bottom:0;
@@ -147,6 +182,11 @@
                color:#2D92FC;
                font-size: 16px;
            }
+       }
+       .oneHelpSalesBox{
+           width:100%;
+           display: flex;
+           flex-wrap: wrap;
        }
     }
 </style>
