@@ -2,80 +2,23 @@
     <div>
         <div class="productLeft">
              <div class="productLeft-img">
-                 <img src="../../assets/img/dongxiao.png" alt="">
+                 <img :src="productdata.productimg">
              </div>
             <div class="productLeft-txt">
-                <p>商品动销率</p>
-                <span>58.75%</span>
+                <p>{{productdata.name}}</p>
+                <span>{{productdata.sales}}</span>
             </div>
             <div class="productLeft-btn">
-                <span>动销清单</span>
+                <span>{{productdata.btn}}</span>
             </div>
         </div>
-        <!--<div class="pinRight" v-if="productRight==1">-->
-            <!--<div class="pinRight-centen">-->
-                <!--<div class="product-centen">-->
-                    <!--<span>立白</span>-->
-                    <!--<div class="w" v-bind:style="{ 'width': '88%'}">-->
-                        <!--<div class="q">32.34%</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-                <!--<div class="product-centen">-->
-                    <!--<span>立白</span>-->
-                    <!--<div class="w" v-bind:style="{ 'width': '32.34%'}">-->
-                        <!--<div class="q">32.34%</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-                <!--<div class="product-centen">-->
-                    <!--<span>立白</span>-->
-                    <!--<div class="w" v-bind:style="{ 'width': '32.34%'}">-->
-                        <!--<div class="q">32.34%</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-                <!--<div class="product-centen">-->
-                    <!--<span>立白</span>-->
-                    <!--<div class="w" v-bind:style="{ 'width': '32.34%'}">-->
-                        <!--<div class="q">32.34%</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-                <!--<div class="product-centen">-->
-                    <!--<span>立白</span>-->
-                    <!--<div class="w" v-bind:style="{ 'width': '32.34%'}">-->
-                        <!--<div class="q">32.34%</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-
-        <!--<div class="commodityRight" v-if="productRight==2">-->
-                    <!--<div class="commodityR-centen">-->
-                        <!--<div class="commodityR-title"    >-->
-                            <!--<div class="commodityR-title1">-->
-                                <!--<span>环比: </span>-->
-                                <!--<p>-59%</p>-->
-                            <!--</div>-->
-                            <!--<div class="commodityR-title1">-->
-                                <!--<span>同比: </span>-->
-                                <!--<p>-59%</p>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="commodityR-base">-->
-                            <!--<span></span>-->
-                            <!--<span>销量增长商品数：</span>-->
-                            <!--<span>20个</span>-->
-                            <!--<div class="productLeft-btn">-->
-                                <!--<span>下滑商品</span>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-        <!--</div>-->
     </div>
 </template>
 
 <script>
     export default {
         name: "productLeft",
-        props:["productRight"]
+        props:["productdata"]
     }
 </script>
 
@@ -112,6 +55,7 @@
                 margin: 0 auto;
                 display: block;
                 margin-top: 12px;
+                text-align: center;
             }
         }
         .productLeft-btn{

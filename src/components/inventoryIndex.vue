@@ -29,7 +29,7 @@
             </div>
         </div>
         <inventoryCenten></inventoryCenten>
-        <inventoryDase :salesData="salesData"></inventoryDase>
+        <inventoryDase :salesData="inventoryData"></inventoryDase>
     </div>
 </template>
 
@@ -42,11 +42,45 @@
             inventoryCenten,
             inventoryDase
         },
-        props:{
-            salesData:{
-                type:Object,
+        data(){
+            return{
+                // 库存详细
+                inventoryData:{
+                    //库存详细柱狀圖
+                    inventoryBarData:{
+                        id:'barIdinventory',
+                        xAxisData:["立白","立白","立白","立白","立白"],
+                        xAxis:{
+                            isShowLine:false,
+                            isShowSplit:false,
+                            axisLabelColor:'#333',
+                        },
+                        yAxis:{
+                            isShowLine:false,
+                            isShowSplit:false,
+                            axisLabelColor:'#D7D9E5',
+                        },
+                        label:{
+                            isShow:true
+                        },
+                        type:'xAxis',
+                        barData:[
+                            {
+                                name:'ABC',
+                                data:[23,43,83,213,400],
+                                color:'#6BBCFF',
+                                barWidth:5
+                            },
+                        ]
+                    },
+                },
             }
         },
+        // props:{
+        //     salesData:{
+        //         type:Object,
+        //     }
+        // },
     }
 </script>
 
