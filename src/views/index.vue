@@ -16,6 +16,9 @@
         <!-- 财务 -->
         <second-title :titleName="financeTitle"></second-title>
         <finance :financeData="financeData" :receivableData="receivableData" :overDueData="overDueData"></finance>
+        <one-help-sale :salesData="monthSalesData"></one-help-sale>
+        <!-- 二帮卖分析 -->
+        <secondBand></secondBand>
     </div>
 </template>
 <script>
@@ -26,6 +29,7 @@
     import pieEchart from '../components/echarts/pie.vue'//饼图
     import lineEchart from '../components/echarts/line.vue'//折线图
     import barEchart from '../components/echarts/bar.vue'//柱状图
+    import secondBand from "./../components/secondBand/index.vue"  //二帮卖分析
     export default {
         name : 'index',
         components : {
@@ -35,7 +39,8 @@
             finance,
             pieEchart,
             lineEchart,
-            barEchart
+            barEchart,
+            secondBand
         },
         data () {
             return {
