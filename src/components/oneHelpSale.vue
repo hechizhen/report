@@ -29,7 +29,7 @@
         <div class="oneHelpSaleBottom">
             <div class="oneHelpSaleBottomTitle">达成率</div>
             <div class="oneHelpSaleBottomContent">
-                <bar-chart :barEchartsData="salesData.monthBarData"></bar-chart>
+                <bar-chart :barEchartsData="barData"></bar-chart>
             </div>
         </div>
     </div>
@@ -43,6 +43,10 @@
             //一帮卖本月/累计销量
             salesData:{
                 type:Object,
+            },
+            //达成率柱状图数据
+            barData:{
+                type:Object
             }
         },
         components : {
@@ -54,7 +58,7 @@
             }
         },
         mounted () {
-            console.log(this.salesData)
+            console.log(this.barData)
         },
         methods: {
         },
