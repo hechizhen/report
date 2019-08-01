@@ -10,8 +10,8 @@
         <!-- 一帮卖分析 -->
         <second-title :titleName="oneHelpSaleTitle"></second-title>
         <div class="oneHelpSalesBox">
-            <one-help-sale :salesData="monthSalesData" style="margin-right:2%;"></one-help-sale>
-            <one-help-sale :salesData="yearSalesData"></one-help-sale>
+            <one-help-sale :salesData="monthSalesData" :barData="monthBarData" style="margin-right:2%;" v-if="monthBarData.length!=0"></one-help-sale>
+            <one-help-sale :salesData="yearSalesData" :barData="yearBarData" v-if="yearBarData.length!=0"></one-help-sale>
         </div>
         <!-- 财务 -->
         <second-title :titleName="financeTitle"></second-title>
@@ -25,8 +25,6 @@
     import secondTitle from '../components/secondTitle.vue'//模块标题
     import oneHelpSale from '../components/oneHelpSale.vue'//一帮卖分析
     import finance from '../components/finance.vue'//财务
-    import oneHelpSale from '../components/oneHelpSale.vue'
-
     import pieEchart from '../components/echarts/pie.vue'//饼图
     import lineEchart from '../components/echarts/line.vue'//折线图
     import barEchart from '../components/echarts/bar.vue'//柱状图
@@ -49,113 +47,210 @@
                 indexScore:97,//体检评分
                 indexSummary:'很好',//总结
                 indexDefaultDate:'2017/07',//默认时间
-                currentDate:'',//当前时间
+                currentDate:'201907',//当前时间
                 oneHelpSaleTitle:'一帮卖分析',//一帮卖分析标题
                 financeTitle:'财务',//财务标题
                 //一帮卖本月销量
-                monthSalesData:{
-                    sales:39989.7,
-                    reach:'98%',
-                    //本月柱狀圖
-                    monthBarData:{
-                        id:'barIdSales',
-                        xAxisData:[1,2,3,4,5,6,7,8,9,10],
-                        xAxis:{
-                            isShowLine:false,
-                            isShowSplit:false,
-                            axisLabelColor:'#333',
-                        },
-                        yAxis:{
-                            isShowLine:false,
-                            isShowSplit:false,
-                            axisLabelColor:'#D7D9E5',
-                        },
-                        label:{
-                            isShow:true
-                        },
-                        type:'xAxis',
-                        barData:[
-                            {
-                                name:'ABC',
-                                data:[200,300,400,500,600],
-                                color:'#D7D9E5',
-                                barWidth:11
-                            },
-                        ]
-                    },
-                },
+                monthBarData:'',
                 //一帮卖本月销量
-                yearSalesData:{
-                    sales:39989.7,
-                    reach:'98%',
-                    //本月柱狀圖
-                    monthBarData:{
-                        id:'barIdSalesYear',
-                        xAxisData:[1,2,3,4,5,6,7,8,9,10],
-                        xAxis:{
-                            isShowLine:false,
-                            isShowSplit:false,
-                            axisLabelColor:'#333',
-                        },
-                        yAxis:{
-                            isShowLine:false,
-                            isShowSplit:false,
-                            axisLabelColor:'#D7D9E5',
-                        },
-                        label:{
-                            isShow:true
-                        },
-                        type:'xAxis',
-                        barData:[
-                            {
-                                name:'ABC',
-                                data:[200,300,400,500,600],
-                                color:'#D7D9E5',
-                                barWidth:11
-                            },
-                        ]
-                    },
-                },
+                yearBarData:'',
                 //财务数据
-                financeData:[
-                    {name:'收入（万元）',val:'43321'},
-                    {name:'成本（万元）',val:'43321'},
-                    {name:'毛利（万元）',val:'43321'},
-                    {name:'厂家费用（万元）',val:'43321'},
-                    {name:'支出费用（万元）',val:'43321'},
-                    {name:'利润（万元）',val:'43321'},
-                ],
+                financeData:'',
                 //应收账款
-                receivableData:{
-                    receivableTxt:'应收欠款（万元）',
-                    receivableValUnit:'￥',
-                    receivableVal:'12345',
-                    receivableMonth:'当月已收（万元）',
-                    receivableMonthValUnit:'￥',
-                    receivableMonthVal:'1111',
-                    receivableAverage:'平均账龄（天数）',
-                    receivableAverageVal:'300',
-                    receivableDay:'应收账款周转天数（天）',
-                    receivableDayVal:'333',
-                },
+                receivableData:'',
                 //逾期账款
-                overDueData:{
-                    overDueTxt:'逾期账款(万元）',
-                    overDueValUnit:'￥',
-                    overDueval:'3345',
-                    overDueRadioTxt:'逾期占比',
-                    overDueRadio:'3345',
-                }
+                overDueData:'',
+                requestHttpUrl:'https://www.easy-mock.com/mock/5d429dcbd3020d2d3bc58a32/medicalReport',//接口请求地址
+                monthSalesData:'',//本月销量以及达成率
+                yearSalesData:'',//累计销量以及达成率
             }
         },
         mounted () {
-
+            this.getOverViewData()
+            this.getSalesData()
+            this.getMonthSalesHistoryData()
+            this.getFinanceTableData()
+            this.getReceivableData()
+            this.getOverdueData()
         },
         methods: {
             //修改时间
             indexChangeDate(val){
                 this.currentDate = val
-            }
+                this.getOverViewData()
+            },
+            //体检报告概览
+            getOverViewData(){
+                var _this = this
+                this.$http({
+                    url: _this.requestHttpUrl+'/overviewScoring',
+                    method: 'POST',
+                    data: {
+                        dateTime:_this.currentDate
+                    }
+                }).then(function(res){
+                    console.log(res)
+                    let data = res.data.data.data
+                    _this.indexDealName = data.dealName
+                    _this.indexScore = data.score
+                    _this.indexSummary = data.summary
+                })
+            },
+            //本月/年累计下单金额以及总达成
+            getSalesData(){
+                var _this = this
+                this.$http({
+                    url: _this.requestHttpUrl+'/SalesData',
+                    method: 'POST',
+                    data: {
+                        dateTime:_this.currentDate
+                    }
+                }).then(function(res){
+                    console.log(res)
+                    let data = res.data.data.data
+                    _this.monthSalesData = {
+                        sales:_this.dataProcess(data.monthSales,'money').num,
+                        reach:_this.dataProcess(data.monthReach,'percent').num+_this.dataProcess(data.monthReach,'percent').num
+                    }
+                    _this.yearSalesData = {
+                        sales:_this.dataProcess(data.yearSales,'money').num,
+                        reach:_this.dataProcess(data.yearReach,'percent').num+_this.dataProcess(data.yearReach,'percent').num
+                    }
+                })
+            },
+            //本月/年累计达成率历史趋势
+            getMonthSalesHistoryData(){
+                var _this = this
+                this.$http({
+                    url: _this.requestHttpUrl+'/salesHistoryLineData',
+                    method: 'POST',
+                    data: {
+                        dateTime:_this.currentDate
+                    }
+                }).then(function(res){
+                    console.log(res)
+                    let data = res.data.data.data
+                    _this.monthBarData = {
+                        id:'barIdMonthSales',
+                        xAxisData:data.BusinessAxiax,
+                        xAxis:{
+                            isShowLine:false,
+                            isShowSplit:false,
+                            axisLabelColor:'#333',
+                        },
+                        yAxis:{
+                            isShowLine:false,
+                            isShowSplit:false,
+                            axisLabelColor:'#D7D9E5',
+                        },
+                        label:{
+                            isShow:true
+                        },
+                        type:'xAxis',
+                        barData:[
+                            {
+                                name:'ABC',
+                                data:data.monthData,
+                                color:'#D7D9E5',
+                                barWidth:11
+                            },
+                        ]
+                    }
+                    _this.yearBarData={
+                        id:'barIdYearSales',
+                        xAxisData:data.BusinessAxiax,
+                        xAxis:{
+                            isShowLine:false,
+                            isShowSplit:false,
+                            axisLabelColor:'#333',
+                        },
+                        yAxis:{
+                            isShowLine:false,
+                            isShowSplit:false,
+                            axisLabelColor:'#D7D9E5',
+                        },
+                        label:{
+                            isShow:true
+                        },
+                        type:'xAxis',
+                        barData:[
+                            {
+                                name:'ABC',
+                                data:data.yearData,
+                                color:'#D7D9E5',
+                                barWidth:11
+                            },
+                        ]
+                    }
+                })
+            },
+            //财务报表数据
+            getFinanceTableData(){
+                var _this = this
+                this.$http({
+                    url: _this.requestHttpUrl+'/financeTableData',
+                    method: 'POST',
+                    data: {
+                        dateTime:_this.currentDate
+                    }
+                }).then(function(res){
+                    console.log(res)
+                    let data =res.data.data.data
+                    let list =[]
+                    data.map(function(item,index){
+                        item.val = _this.dataProcess(item.val,'money').num
+                        list.push({name:item.name,val:item.val})
+                    })
+                    _this.financeData = list
+                })
+            },
+            //应收账款
+            getReceivableData(){
+                var _this = this
+                this.$http({
+                    url: _this.requestHttpUrl+'/receivableData',
+                    method: 'POST',
+                    data: {
+                        dateTime:_this.currentDate
+                    }
+                }).then(function(res){
+                    console.log(res)
+                    let data = res.data.data.data
+                    _this.receivableData = {
+                        receivableTxt:'应收欠款（万元）',
+                        receivableValUnit:'￥',
+                        receivableVal:_this.dataProcess(data.receivableVal,'money').num,
+                        receivableMonth:'当月已收（万元）',
+                        receivableMonthValUnit:'￥',
+                        receivableMonthVal:_this.dataProcess(data.monthReceivableVal,'money').num,
+                        receivableAverage:'平均账龄（天数）',
+                        receivableAverageVal:_this.dataProcess(data.averageAge,'day').num,
+                        receivableDay:'应收账款周转天数（天）',
+                        receivableDayVal:_this.dataProcess(data.receivableDayVal,'day').num,
+                    }
+                })
+            },
+            //逾期欠款
+            getOverdueData(){
+                var _this = this
+                this.$http({
+                    url: _this.requestHttpUrl+'/overdueData',
+                    method: 'POST',
+                    data: {
+                        dateTime:_this.currentDate
+                    }
+                }).then(function(res){
+                    console.log(res)
+                    let data = res.data.data.data
+                    _this.overDueData = {
+                        overDueTxt:'逾期账款(万元）',
+                        overDueValUnit:'￥',
+                        overDueval:_this.dataProcess(data.overdueVal,'money').num,
+                        overDueRadioTxt:'逾期占比',
+                        overDueRadio:_this.dataProcess(data.overduePercent,'percent').num+_this.dataProcess(data.overduePercent,'percent').unit
+                    }
+                })
+            },
         },
         computed:{
 
