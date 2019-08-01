@@ -1,7 +1,7 @@
 
 <template>
     <div class="bar">
-        <div id="barId">
+        <div :id="barEchartsData.id" class="barChart">
             
         </div>
     </div>
@@ -14,6 +14,7 @@
             barEchartsData:{
                 type:Object,
                 default:{
+                    id:'barId',
                     xAxisData:[1,2,3,4,5,6,7,8,9,10],
                     xAxis:{
                         isShowLine:false,
@@ -60,7 +61,7 @@
         mounted () {
             var _this = this  
             let echarts = _this.$echarts;
-            _this.myChart = echarts.init(document.getElementById('barId'))
+            _this.myChart = echarts.init(document.getElementById(_this.barEchartsData.id))
             _this.setBarOptions()
             $(window).resize(function() {
                 _this.myChart.resize()
@@ -180,7 +181,7 @@
     .bar{
         width:100%;
         height:100%;
-        #barId{
+        .barChart{
             width:100%;
             height:100%;  
         }

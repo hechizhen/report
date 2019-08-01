@@ -1,7 +1,7 @@
 
 <template>
     <div class="pie">
-        <div id="pieId">
+        <div :id="pieEchartsData.id" class="pieChart">
             
         </div>
     </div>
@@ -14,6 +14,7 @@
             pieEchartsData:{
                 type:Object,
                 default:{
+                    id:'pieId',
                     colorList:['#FF8352', '#E271DE', '#00FFFF', '#4AEAB0'],
                     labelType:1,
                     pieData:[{
@@ -45,9 +46,10 @@
             }
         },
         mounted () {
+            console.log(this.pieEchartsData)
             var _this = this  
             let echarts = _this.$echarts;
-            _this.myChart = echarts.init(document.getElementById('pieId'))
+            _this.myChart = echarts.init(document.getElementById(_this.pieEchartsData.id))
             _this.setPieOptions()
             $(window).resize(function() {
                 _this.myChart.resize()
@@ -167,8 +169,14 @@
         computed:{
           
         },
-        watch: {
-           
+        watch:{
+            pieEchartsData(val){
+                alert(111)
+                var _this = this  
+                let echarts = _this.$echarts;
+                _this.myChart = echarts.init(document.getElementById(_this.pieEchartsData.id))
+                _this.setPieOptions()
+            }
         },
         distroyed: function () {
             
@@ -179,7 +187,7 @@
     .pie{
         width:100%;
         height:100%;
-        #pieId{
+        .pieChart{
             width:100%;
             height:100%;  
         }

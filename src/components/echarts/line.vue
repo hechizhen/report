@@ -1,7 +1,7 @@
 
 <template>
     <div class="line">
-        <div id="lineId">
+        <div :id="lineEchartsData.id" class="lineChart">
             
         </div>
     </div>
@@ -14,6 +14,7 @@
             lineEchartsData:{
                 type:Object,
                 default:{
+                    id:'lineId',
                     xAxisData:[1,2,3,4,5,6,7,8,9,10],
                     lineData:[ 
                         {
@@ -46,7 +47,7 @@
         mounted () {
             var _this = this  
             let echarts = _this.$echarts;
-            _this.myChart = echarts.init(document.getElementById('lineId'))
+            _this.myChart = echarts.init(document.getElementById(_this.lineEchartsData.id))
             _this.setLineOptions()
             $(window).resize(function() {
                 _this.myChart.resize()
@@ -137,7 +138,7 @@
     .line{
         width:100%;
         height:100%;
-        #lineId{
+        .lineChart{
             width:100%;
             height:100%;  
         }

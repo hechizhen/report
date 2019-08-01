@@ -8,7 +8,7 @@
             </p>
             <p class="paddingStyle1">
                 <span class="spanFont">查询日期：</span>
-                <a-month-picker :defaultValue="moment(defaultDate, monthFormat)" :format="monthFormat" />
+                <a-month-picker :defaultValue="moment(defaultDate, monthFormat)" :format="monthFormat" :allowClear="false" @change="changeDate" />
                 <button-list :buttonType="buttonList.buttonType" :isGhost="buttonList.isGhost" :buttonHandleClick="buttonHandleClick" :defaultVal="buttonList.defaultVal" style="margin-left:20px;"></button-list>
             </p>
         </div>
@@ -23,6 +23,8 @@
 </template>
 <script>
     import moment from 'moment';
+    import 'moment/locale/zh-cn';
+    moment.locale('zh-cn');
     import buttonList from '../components/base/newButton.vue'
     export default {
         name : 'headerTitle',
@@ -30,7 +32,7 @@
             //经销商名称
             dealName:{
                 type:String,
-                default:'吴凌云',
+                default:'吴凌云1',
             },
             //评分
             score:{
@@ -45,7 +47,11 @@
             //默认时间
             defaultDate:{
                 type:String,
-                default:'2017/07'
+                default:'2017/05'
+            },
+            //修改时间
+            changeDateHandle:{
+                type:Function,
             }
         },
         components : {
@@ -67,8 +73,15 @@
         },
         methods: {
             moment,
+            //点击查询
             buttonHandleClick(){
 
+            },
+            //选择时间
+            changeDate(val,newDate){
+                let dateTime = newDate
+                dateTime = dateTime.substring(0,4)+dateTime.substring(5,7)
+                this.changeDateHandle(dateTime)
             }
         },
         computed:{
