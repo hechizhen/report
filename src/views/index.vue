@@ -13,11 +13,18 @@
             <one-help-sale :salesData="monthSalesData" :barData="monthBarData" style="margin-right:2%;" v-if="monthBarData.length!=0"></one-help-sale>
             <one-help-sale :salesData="yearSalesData" :barData="yearBarData" v-if="yearBarData.length!=0"></one-help-sale>
         </div>
-        <!-- 财务 -->
-        <second-title :titleName="financeTitle"></second-title>
-        <finance :financeData="financeData" :receivableData="receivableData" :overDueData="overDueData"></finance>
         <!-- 二帮卖分析 -->
         <secondBand></secondBand>
+        <!--产品-->
+        <productIndex ></productIndex>
+        <!--门店-->
+        <shopIndex></shopIndex>
+         <!--库存-->
+        <second-title :titleName="inventoryTitle"></second-title>
+        <inventoryIndex :salesData="inventoryData" > </inventoryIndex>
+          <!-- 财务 -->
+        <second-title :titleName="financeTitle"></second-title>
+        <finance :financeData="financeData" :receivableData="receivableData" :overDueData="overDueData"></finance>
     </div>
 </template>
 <script>
@@ -29,6 +36,9 @@
     import lineEchart from '../components/echarts/line.vue'//折线图
     import barEchart from '../components/echarts/bar.vue'//柱状图
     import secondBand from "./../components/secondBand/index.vue"  //二帮卖分析
+    import productIndex from '../components/productIndex' //产品
+    import shopIndex from '../components/shopIndex' //门店
+    import inventoryIndex from  '../components/inventoryIndex' //库存
     export default {
         name : 'index',
         components : {
@@ -39,7 +49,10 @@
             pieEchart,
             lineEchart,
             barEchart,
-            secondBand
+            secondBand,
+            productIndex,
+            shopIndex,
+            inventoryIndex
         },
         data () {
             return {
@@ -50,6 +63,7 @@
                 currentDate:'201907',//当前时间
                 oneHelpSaleTitle:'一帮卖分析',//一帮卖分析标题
                 financeTitle:'财务',//财务标题
+                inventoryTitle:'库存',//库存标题
                 //一帮卖本月销量
                 monthBarData:'',
                 //一帮卖本月销量

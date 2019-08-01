@@ -14,9 +14,10 @@
             <shopLeft></shopLeft>
             <shopRight></shopRight>
         </div>
-        <div class="shop-centen-dase">
-            <shopBase></shopBase>
-        </div>
+        <!--<div class="shop-centen-dase">-->
+            <!--<shopBase></shopBase>-->
+            <!--<shopBase></shopBase>-->
+        <!--</div>-->
     </div>
 </div>
 </template>
@@ -25,14 +26,14 @@
     import  dataTitle from  './dataTitle'
     import  shopLeft from  './shop/shopLeft'
     import  shopRight from  './shop/shopRight'
-    import  shopBase from  './shop/shopBase'
+    // import  shopBase from  './shop/shopBase'
     export default {
         name: "shopIndex",
         components:{
             dataTitle,
             shopLeft,
             shopRight,
-            shopBase
+            // shopBase
         }
     }
 </script>
@@ -44,7 +45,7 @@
     height: 100%;
 }
 .shop-centen{
-    width: 90%;
+    width: 100%;
     height:345px;
     background:rgba(255,255,255,1);
     border-radius:6px;
@@ -74,9 +75,13 @@
         width: 100%;
         float: left;
     }
-    .shop-centen-dase{
-        width: 100%;
-        float: left;
-    }
+    /*.shop-centen-dase{*/
+        /*width: 100%;*/
+        /*height: 68px;*/
+        /*background:rgba(238,240,245,1);*/
+        /*opacity:0.5;*/
+        /*border-radius:6px 6px 0px 0px;*/
+        /*float: left;*/
+    /*}*/
 }
 </style>
