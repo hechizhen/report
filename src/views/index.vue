@@ -26,6 +26,8 @@
     import secondTitle from '../components/secondTitle.vue'//模块标题
     import oneHelpSale from '../components/oneHelpSale.vue'//一帮卖分析
     import finance from '../components/finance.vue'//财务
+    import oneHelpSale from '../components/oneHelpSale.vue'
+
     import pieEchart from '../components/echarts/pie.vue'//饼图
     import lineEchart from '../components/echarts/line.vue'//折线图
     import barEchart from '../components/echarts/bar.vue'//柱状图
@@ -73,7 +75,7 @@
                             isShow:true
                         },
                         type:'xAxis',
-                        barData:[ 
+                        barData:[
                             {
                                 name:'ABC',
                                 data:[200,300,400,500,600],
@@ -105,7 +107,7 @@
                             isShow:true
                         },
                         type:'xAxis',
-                        barData:[ 
+                        barData:[
                             {
                                 name:'ABC',
                                 data:[200,300,400,500,600],
@@ -148,7 +150,7 @@
             }
         },
         mounted () {
-          
+
         },
         methods: {
             //修改时间
@@ -157,13 +159,13 @@
             }
         },
         computed:{
-          
+
         },
         watch: {
-           
+
         },
         distroyed: function () {
-            
+
         }
     }
 </script>
@@ -172,6 +174,7 @@
        width:100%;
        padding:0 20px 120px 20px;
        background:#eaeff8;
+        margin-bottom: 10%;
        p{
            margin-bottom:0;
        }
