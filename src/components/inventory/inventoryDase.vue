@@ -56,7 +56,7 @@
     background:rgba(255,255,255,1);
     border-radius:10px;
     float: left;
-    margin-left: 24px;
+    margin-left: 1%;
     .inventoryDase-left{
         width: 30%;
         height: 100%;
@@ -80,7 +80,7 @@
             display: block;
         }
         .left-txt{
-            width:152px;
+            width: 65%;
             height:69px;
             background:rgba(238,240,245,1);
             margin-top: 39px;
