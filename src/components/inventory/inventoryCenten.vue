@@ -22,7 +22,7 @@
     background:rgba(255,255,255,1);
     border-radius:10px;
     float: left;
-    margin-left: 24px;
+    margin-left: 1%;
     .inventoryCenten-bor{
         width:180px;
         height:180px;
