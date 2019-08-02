@@ -1,30 +1,37 @@
 <template>
-    <div class="product-head">
-        <h2>产品</h2>
+    <div class="dataTitle">
+        <div class="subtitle_content">{{subtitlename}}</div>
     </div>
 </template>
 
 <script>
     export default {
-        name: "dataTitle"
+        name: "dataTitle",
+        props: {
+            // 副标题名称
+            subtitlename: {
+                type: String,
+                default: '订单'
+            },
+        }
     }
 </script>
 
 <style lang="less" scoped>
-    .product-head{
+    .dataTitle {
+        height: 50px;
         width: 100%;
-        height: 40px;
-        line-height: 40px;
-        margin: 0 auto;
-        h2{
-            height: 20px;
-            font-size:18px;
-            font-family:PingFangSC-Regular;
-            font-weight:bold;
-            color:rgba(51,51,51,1);
-            line-height:20px;
-            border-left:6px solid #2D92FC ;
-            padding-left: 1%;
-        }
+        display: flex;
+        align-items: center;
+        /*justify-content: center;		*/
     }
+    .subtitle_content {
+        font-size:20px;
+        padding-left: 10px;
+        font-family:PingFangSC-Medium;
+        font-weight:500;
+        color:rgba(51,51,51,1);
+        border-left: 6px solid #2D92FC;
+    }
+
 </style>

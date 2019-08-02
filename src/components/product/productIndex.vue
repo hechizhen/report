@@ -1,5 +1,5 @@
 <template>
-    <div class="cententindex" style="width: 100%;margin-top: 5%">
+    <div class="cententindex" style="width: 100%;margin:4% 0 ">
         <div class="product">
             <dataTitle></dataTitle>
             <div class="product-content">
@@ -16,6 +16,7 @@
                 </a-Row>
             </div>
         </div>
+        <core :coretype="'产品得分'" :coretext="87" :evaluate="'较好'"></core>
     </div>
 </template>
 
@@ -24,13 +25,15 @@
     import productRight from './productRight'
     import  commodityRight from './commodityRight'
     import  dataTitle from '../dataTitle'
+    import  core from  '../core'
     export default {
         name: "cententindex",
         components:{
             productLeft,
             productRight,
             commodityRight,
-            dataTitle
+            dataTitle,
+            core
         },
         data(){
             return{
@@ -106,6 +109,7 @@
 
 <style lang="less" scoped>
     .product{
+        margin-bottom: 1%;
         .product-content{
             width: 100%;
             margin: 0 auto;

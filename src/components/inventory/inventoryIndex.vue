@@ -1,5 +1,6 @@
 <template>
     <div class="inventoryindex">
+        <div style="width: 100%;height: 100%;">
         <div class="inventory-table">
             <div class="table-head">
                 <div class="table-headtxt">
@@ -30,6 +31,8 @@
         </div>
         <inventoryCenten></inventoryCenten>
         <inventoryDase :salesData="inventoryData"></inventoryDase>
+        </div>
+        <core :coretype="'库存得分'" :coretext="87" :evaluate="'较好'"></core>
     </div>
 </template>
 
@@ -37,12 +40,14 @@
     import inventoryCenten from './inventoryCenten'
     import inventoryDase from './inventoryDase'
     import  newButton from  '../base/newButton'
+    import  core from  '../core'
     export default {
         name: "inventoryIndex",
         components:{
             inventoryCenten,
             inventoryDase,
-            newButton
+            newButton,
+            core
         },
         data(){
             return{
@@ -89,7 +94,8 @@
 <style lang="less" scoped>
 .inventoryindex{
     width: 100%;
-    height:234px;
+    height:220px;
+    margin-bottom: 4%;
 }
 .table-headtxt:last-child  .yuan{
     display: none !important;

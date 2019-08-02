@@ -19,6 +19,7 @@
             <!--<shopBase></shopBase>-->
         <!--</div>-->
     </div>
+    <core :coretype="'门店得分'" :coretext="87" :evaluate="'较好'"></core>
 </div>
 </template>
 
@@ -26,6 +27,7 @@
     import  dataTitle from '../dataTitle'
     import  shopLeft from './shopLeft'
     import  shopRight from './shopRight'
+    import  core from  '../core'
     // import  shopBase from  './shop/shopBase'
     export default {
         name: "shopIndex",
@@ -33,6 +35,7 @@
             dataTitle,
             shopLeft,
             shopRight,
+            core
             // shopBase
         }
     }
@@ -41,15 +44,16 @@
 <style lang="less" scoped>
 .shopindex{
     margin-top: 36px;
-    margin-bottom: 5%;
+    margin-bottom: 2%;
     height: 100%;
 }
 .shop-centen{
     width: 100%;
-    height:345px;
+    height:350px;
     background:rgba(255,255,255,1);
     border-radius:6px;
     margin: auto;
+    margin-bottom: 1%;
     .shop-centen-title{
         height:63px;
         line-height:63px;
@@ -73,6 +77,7 @@
     }
     .shop-centen-middle{
         width: 100%;
+        height: 75%;
         float: left;
     }
     /*.shop-centen-dase{*/

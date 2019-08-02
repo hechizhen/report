@@ -31,12 +31,11 @@
 <style lang="less" scoped>
     .shopBase {
         width: 100%;
-        height: 100%;
         float: left;
         position: relative;
         background:rgba(238,240,245,.5);
         border-radius:6px 6px 0px 0px;
-        margin-top: 1%;
+        margin-top: 1.2%;
         .commodityR-base {
             width: 80%;
             margin-left: 49px;
