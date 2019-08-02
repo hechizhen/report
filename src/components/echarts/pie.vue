@@ -33,7 +33,7 @@
                                 value: 3515,
                                 name: 'PC'
                             }],
-                    radius:['52%', '60%'],
+                    radius:['40%', '60%'],
                     borderWidth:0,
                 }
             }
@@ -79,13 +79,14 @@
                                 fontSize: 12 * scale,
                             },
                             formatter: function(params, ticket, callback) {
+                                console.log(params)
                                 var total = 0; //考生总数量
                                 var percent = 0; //考生占比
                                 _this.pieEchartsData.pieData.forEach(function(value, index, array) {
                                     total += value.value;
                                 });
                                 percent = ((params.value / total) * 100).toFixed(1);
-                                return '{yellow|' + params.value + '}\n{blue|' + percent + '%}';
+                                return '{yellow|' + params.name + '}\n{blue|' + percent + '%}';
                             },
                             rich: rich
                         },
@@ -109,38 +110,6 @@
                     }
                 }
                 var option = {
-                    // title: {
-                    //     text: '在线总数量',
-                    //     left: 'center',
-                    //     top: '40%',
-                    //     padding: [24, 0],
-                    //     textStyle: {
-                    //         color: '#fff',
-                    //         fontSize: 18 * scale,
-                    //         align: 'center'
-                    //     }
-                    // },
-                    // legend: {
-                    //     selectedMode: false,
-                    //     formatter: function(name) {
-                    //         var total = 0; //各科正确率总和
-                    //         var averagePercent; //综合正确率
-                    //         datas.forEach(function(value, index, array) {
-                    //             total += value.value;
-                    //         });
-                    //         return total;
-                    //     },
-                    //     data: [datas[0].name],
-                    //     left: 'center',
-                    //     top: 'center',
-                    //     icon: 'none',
-                    //     align: 'center',
-                    //     padding: [10, 0],
-                    //     textStyle: {
-                    //         color: "#ffc72b",
-                    //         fontSize: 30 * scale
-                    //     },
-                    // },
                     series: [{
                         name: '在线数量',
                         type: 'pie',

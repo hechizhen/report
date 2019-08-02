@@ -21,7 +21,10 @@
 				</a-Row>
 			</div>
 			<div class="proportion">
-				<pie ></pie>
+				<div class="proportion_title">占比</div>
+				<div class="proportion_echarts">
+					<pie></pie>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -129,6 +132,10 @@
 							span {
 								font-size:12px;
 							}
+							img {
+								vertical-align:middle;
+								margin-right: 6px;
+							}
 						}
 						div:nth-child(1),
 						div:nth-child(3) {
@@ -148,6 +155,19 @@
 			.proportion {
 				width: 100%;
 				height: 345px;
+				.proportion_title {
+					width: 100%;
+					height: 45px;
+					padding-top: 20px;
+					font-size:18px;
+					font-family:PingFangSC-Semibold;
+					font-weight:600;
+					color:rgba(51,51,51,1);
+				}
+				.proportion_echarts {
+					width: 100%;
+					height: 300px;
+				}
 			}
 		}
 	}

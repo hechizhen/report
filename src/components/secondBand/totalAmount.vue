@@ -100,6 +100,10 @@
 				flex-direction:column;
 				p {
 					margin: 0px;
+					img {
+						vertical-align:middle;
+						margin-right: 6px;
+					}
 				}
 				p:nth-child(1) {
 					font-size:16px;
@@ -130,6 +134,10 @@
 			    			font-size:16px;
 							font-family:PingFangSC-Regular;
 							font-weight:bold;
+							img {
+								vertical-align:middle;
+								margin-right: 6px;
+							}
 			    		}
 			    		p:nth-child(1) {
 							color:rgba(152,162,180,1);
