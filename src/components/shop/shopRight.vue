@@ -1,20 +1,12 @@
 <template>
     <div class="shopRight">
         <div class="shopRight-title">
-        <div class="shop-active">
-            <p>门店单产 <span>（万元）</span></p>
-            <span>3512</span>
-        </div>
-        <div class="shop-active">
-            <p>门店单产 <span>（万元）</span></p>
-            <span>3512</span>
-        </div>
-        <div class="shop-active">
-            <p>门店单产 <span>（万元）</span></p>
-            <span>3512</span>
+        <div class="shop-active" v-for="(item,index) in ActiveDetail.shopActiveDetail" :key="index">
+            <p>{{item.ActiveStores}}<span>{{item.ActiveStoresing}}</span></p>
+            <span>{{item.Activestressum}}</span>
         </div>
         </div>
-        <shopBase></shopBase>
+        <shopBase :shopDaseData="ActiveDetail.shopDaseData" :defaultVal="defaultVal"></shopBase>
     </div>
 </template>
 
@@ -22,6 +14,12 @@
     import shopBase from './shopBase'
     export default {
         name: "shopRight",
+        props:["ActiveDetail"],
+        data(){
+            return{
+                defaultVal:"应收明细"
+            }
+        },
         components:{
             shopBase
         }

@@ -2,8 +2,8 @@
     <div class="inventoryCenten">
          <div class="inventoryCenten-bor">
              <div class="inventoryCenten-txt">
-                 <p>库存周转次数 </p>
-                 <span>3次</span>
+                 <p>{{turnoverTxt}} </p>
+                 <span>{{turnover}}</span>
              </div>
          </div>
     </div>
@@ -11,7 +11,8 @@
 
 <script>
     export default {
-        name: "inventoryCenten"
+        name: "inventoryCenten",
+        props:["turnoverTxt","turnover"]
     }
 </script>
 

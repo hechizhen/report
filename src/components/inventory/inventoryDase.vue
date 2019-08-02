@@ -1,16 +1,16 @@
 <template>
     <div class="inventoryDase">
         <div class="inventoryDase-left">
-            <span>库存可销天数（天） </span>
-            <b>234</b>
+            <span>{{inventoryTxt.inventoryDay}}</span>
+            <b>{{inventoryTxt.inventoryVal}}</b>
             <div class="left-txt">
                     <div class="left-txt-title">
-                        <span>环比增长： </span>
-                        <p>46.03%%</p>
+                        <span>{{inventoryTxt.inventoryChain}}</span>
+                        <p>{{inventoryTxt.inventoryChainVal}}</p>
                     </div>
                     <div class="left-txt-title">
-                        <span>同比增长：</span>
-                        <p>-23.23%</p>
+                        <span>{{inventoryTxt.inventoryYear}}</span>
+                        <p>{{inventoryTxt.inventoryYearVal}}</p>
                     </div>
                 </div>
             <span class="shu"></span>
@@ -28,13 +28,15 @@
         props:{
             salesData:{
                 type:Object,
+            },
+            inventoryTxt:{
+                type: Object
             }
         },
         components:{
             barChart
         },
         mounted () {
-            console.log(this.salesData.  inventoryBarData)
         },
     }
 </script>

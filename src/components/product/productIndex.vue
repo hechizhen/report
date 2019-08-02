@@ -1,7 +1,7 @@
 <template>
     <div class="cententindex" style="width: 100%;margin:4% 0 ">
         <div class="product">
-            <dataTitle></dataTitle>
+            <dataTitle :subtitlename="titName"></dataTitle>
             <div class="product-content">
                 <a-Row >
                     <a-Col :span="10">
@@ -11,7 +11,7 @@
                     </a-Col>
                     <a-Col :span="13" :push="1">
                         <productLeft  :productdata="productData.productlist[1]"></productLeft>
-                        <commodityRight></commodityRight>
+                        <commodityRight :commoditydata="commoditydata"></commodityRight>
                     </a-Col>
                 </a-Row>
             </div>
@@ -37,6 +37,7 @@
         },
         data(){
             return{
+                titName:"产品",
                 // 产品
                 productData:{
                     productlist:[

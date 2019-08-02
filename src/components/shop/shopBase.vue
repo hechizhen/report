@@ -1,18 +1,13 @@
 <template>
 <div class="shopBase">
     <div class="shopBase">
-        <div class="commodityR-base">
+        <div class="commodityR-base" v-for="(item,index) in shopDaseData" :key="index">
             <div class="quan"></div>
-            <span>当月无交易门店数(家）：</span>
-            <span style="font-size:16px;font-family:PingFangSC-Semibold;font-weight:600;">20</span>
-        </div>
-        <div class="commodityR-base">
-            <div class="quan"></div>
-            <span>3个月无交易门店数（家）：</span>
-            <span style="font-size:16px;font-family:PingFangSC-Semibold;font-weight:600;">20</span>
+            <span>{{item.txt}}</span>
+            <span style="font-size:16px;font-family:PingFangSC-Semibold;font-weight:600;">{{item.value}}</span>
         </div>
         <div class="productLeft-btn">
-            <newButton></newButton>
+            <newButton :defaultVal="defaultVal"></newButton>
         </div>
     </div>
 </div>
@@ -22,6 +17,7 @@
     import  newButton from  '../base/newButton'
     export default {
         name: "shopBase",
+        props:["shopDaseData","defaultVal"],
         components:{
             newButton
         }

@@ -3,37 +3,25 @@
         <div class="commodityRight">
             <div class="commodityR-centen">
                 <div class="commodityR-title"    >
-                    <div class="commodityR-title1">
-                        <span>环比: </span>
-                        <p>-59%</p>
-                    </div>
-                    <div class="commodityR-title1">
-                        <span>同比: </span>
-                        <p>-59%</p>
+                    <div class="commodityR-title1" v-for="(item,index) in commoditydata.commoditytitle" :key="index">
+                        <span>{{item.name}}</span>
+                        <p>{{item.sales}}</p>
                     </div>
                 </div>
-                <div class="commodityR-base">
+                <div class="commodityR-base" v-for="(em,i) in commoditydata.commoditylink" :key="i">
                     <div class="quan"></div>
-                    <span>销量增长商品数：</span>
-                    <span style="font-size:16px;font-family:PingFangSC-Semibold;font-weight:600;">20个</span>
+                    <span>{{em.name}}</span>
+                    <span style="font-size:16px;font-family:PingFangSC-Semibold;font-weight:600;">{{em.nunbers}}</span>
                     <div class="productLeft-btn">
-                        <newButton :isGhost="true"></newButton>
-                    </div>
-                </div>
-                <div class="commodityR-base">
-                    <div class="quan"></div>
-                    <span>销量增长商品数：</span>
-                    <span style="font-size:16px;font-family:PingFangSC-Semibold;font-weight:600;">20个</span>
-                    <div class="productLeft-btn">
-                        <newButton :isGhost="true"></newButton>
+                        <newButton :isGhost="true" :defaultVal="em.btn"></newButton>
                     </div>
                 </div>
             </div>
             <div class="commodityRight-sum">
                 <div class="commodityRight-sumbor">
                     <div class="commodityRight-sumtxt">
-                    <p>总商品数</p>
-                    <span>3445</span>
+                    <p>{{commoditydata.commodityname}}</p>
+                    <span>{{commoditydata.commoditysum}}</span>
                     </div>
                 </div>
             </div>
@@ -45,13 +33,46 @@
     import  newButton from  '../base/newButton'
     export default {
         name: "commodityRight",
+        props:{
+            // commoditydata:{
+            //     type:Object
+            // }
+        },
         data(){
             return{
-                commodityRight:false
+                commoditydata: {
+                    commoditytitle:[
+                        {
+                            name:"环比: ",
+                            sales:" -59%"
+                        },
+                        {
+                            name:"同比: ",
+                            sales:" -59%"
+                        }
+                    ],
+                    commoditylink:[
+                        {
+                            name:"销量增长商品数：",
+                            nunbers:"20个",
+                            btn:"下滑商品"
+                        },
+                        {
+                            name:"销量下滑商品数：",
+                            nunbers:"30个",
+                            btn:"增长商品"
+                        }
+                    ],
+                    commodityname:"总商品数",
+                    commoditysum:3445
+                }
             }
         },
         components:{
             newButton
+        },
+        mounted() {
+            console.log(this.commoditydata)
         }
     }
 </script>

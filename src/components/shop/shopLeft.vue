@@ -1,40 +1,29 @@
 <template>
     <div class="shopLeft">
       <div class="shop-active">
-          <p>活跃门店数 <span>（家）</span></p>
-          <span>35</span>
+          <p>{{shopActives.ActiveStores}}<span>{{shopActives.ActiveStoresing}}</span></p>
+          <span>{{shopActives.Activestressum}}</span>
           <div class="productLeft-btn">
-              <span>门店详情</span>
+              <span>{{shopActives.detailbtn}}</span>
           </div>
       </div>
       <div class="shop-data">
-          <div class="shop-data-title"    >
-              <div class="shop-data-title1">
-                  <span>环比: </span>
-                  <p>-59%</p>
-              </div>
-              <div class="shop-data-title1">
-                  <span>同比: </span>
-                  <p>-59%</p>
+          <div class="shop-data-title" >
+              <div class="shop-data-title1" v-for="(item,index) in shopActives.shopActiveTitle " :key="index"   >
+                  <span>{{item.name}} </span>
+                  <p>{{item.sales}}</p>
               </div>
           </div>
-          <div class="shop-data-base">
-              <span>销量下滑门店数（家）：</span>
-              <span>16.67%</span>
+          <div class="shop-data-base" v-for="(t,i) in shopActives.shoplist " :key="i">
+              <span>{{t.name}}</span>
+              <span>{{t.sales}}</span>
               <div class="productLeft-btn">
-                  <newButton></newButton>
-              </div>
-          </div>
-          <div class="shop-data-base">
-              <span>销量下滑门店数（家）：</span>
-              <span>16.67%</span>
-              <div class="productLeft-btn">
-                  <newButton></newButton>
+                  <newButton :defaultVal="t.btn"></newButton>
               </div>
           </div>
       </div>
         <span class="shu"></span>
-         <shopBase></shopBase>
+         <shopBase :shopDaseData="shopActives.shopDaseData" :defaultVal="defaultVal"></shopBase>
     </div>
 </template>
 
@@ -43,6 +32,12 @@
     import shopBase from  './shopBase'
     export default {
         name: "shopLeft",
+        props:["shopActives"],
+        data(){
+            return{
+                defaultVal:"无交易明细"
+            }
+        },
         components:{
             shopBase,
             newButton
