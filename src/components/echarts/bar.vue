@@ -174,7 +174,10 @@
           
         },
         watch: {
-           
+           barEchartsData(val){
+                var _this = this  
+                _this.setBarOptions()
+           }
         },
         distroyed: function () {
             

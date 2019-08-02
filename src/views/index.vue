@@ -21,7 +21,7 @@
         <shopIndex></shopIndex>
          <!--库存-->
         <second-title :titleName="inventoryTitle"></second-title>
-        <inventoryIndex :salesData="inventoryData" > </inventoryIndex>
+        <!-- <inventoryIndex :salesData="inventoryData" > </inventoryIndex> -->
           <!-- 财务 -->
         <second-title :titleName="financeTitle"></second-title>
         <finance :financeData="financeData" :receivableData="receivableData" :overDueData="overDueData"></finance>
@@ -59,8 +59,8 @@
                 indexDealName:'吴凌云',//经销商名称
                 indexScore:97,//体检评分
                 indexSummary:'很好',//总结
-                indexDefaultDate:'2017/07',//默认时间
-                currentDate:'201907',//当前时间
+                indexDefaultDate:'',//默认时间
+                currentDate:'',//当前时间
                 oneHelpSaleTitle:'一帮卖分析',//一帮卖分析标题
                 financeTitle:'财务',//财务标题
                 inventoryTitle:'库存',//库存标题
@@ -79,6 +79,16 @@
                 yearSalesData:'',//累计销量以及达成率
             }
         },
+        created(){
+            let date=new Date;
+            let year=date.getFullYear(); 
+            let month=date.getMonth()+1;
+            month = month<10 ? "0"+month : month;
+            //获取当前接口年月
+            this.currentDate = year +''+ month 
+            //获取当前默认显示年月
+            this.indexDefaultDate = year +'/'+ month 
+        },
         mounted () {
             this.getOverViewData()
             this.getSalesData()
@@ -92,6 +102,11 @@
             indexChangeDate(val){
                 this.currentDate = val
                 this.getOverViewData()
+                this.getSalesData()
+                this.getMonthSalesHistoryData()
+                this.getFinanceTableData()
+                this.getReceivableData()
+                this.getOverdueData()
             },
             //体检报告概览
             getOverViewData(){
@@ -282,7 +297,6 @@
        width:100%;
        padding:0 20px 120px 20px;
        background:#eaeff8;
-        margin-bottom: 10%;
        p{
            margin-bottom:0;
        }
