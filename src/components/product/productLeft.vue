@@ -9,16 +9,20 @@
                 <span>{{productdata.sales}}</span>
             </div>
             <div class="productLeft-btn">
-                <span>{{productdata.btn}}</span>
+                <newButton :isGhost="true"></newButton>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+    import  newButton from  '../base/newButton'
     export default {
         name: "productLeft",
-        props:["productdata"]
+        props:["productdata"],
+        components:{
+            newButton
+        }
     }
 </script>
 
@@ -59,13 +63,10 @@
             }
         }
         .productLeft-btn{
-            width: 30%;
             height:100%;
             line-height: 26px;
             margin: 22px  auto  51px;
             text-align: center;
-            border:1px solid rgba(255,255,255,1);
-            border-radius:6px;
             span{
                 width:48px;
                 font-size:12px;

@@ -12,7 +12,7 @@
         </div>
         <div class="shop-centen-middle">
             <shopLeft :defaultVal="defaultVal1"></shopLeft>
-            <shopRight></shopRight>
+             <shopRight></shopRight>
         </div>
         <!--<div class="shop-centen-dase">-->
             <!--<shopBase></shopBase>-->

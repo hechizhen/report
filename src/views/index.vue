@@ -21,7 +21,7 @@
         <shopIndex></shopIndex>
          <!--库存-->
         <second-title :titleName="inventoryTitle"></second-title>
-        <!-- <inventoryIndex :salesData="inventoryData" > </inventoryIndex> -->
+         <inventoryIndex  > </inventoryIndex>
           <!-- 财务 -->
         <second-title :titleName="financeTitle"></second-title>
         <finance :financeData="financeData" :receivableData="receivableData" :overDueData="overDueData"></finance>
@@ -81,13 +81,13 @@
         },
         created(){
             let date=new Date;
-            let year=date.getFullYear(); 
+            let year=date.getFullYear();
             let month=date.getMonth()+1;
             month = month<10 ? "0"+month : month;
             //获取当前接口年月
-            this.currentDate = year +''+ month 
+            this.currentDate = year +''+ month
             //获取当前默认显示年月
-            this.indexDefaultDate = year +'/'+ month 
+            this.indexDefaultDate = year +'/'+ month
         },
         mounted () {
             this.getOverViewData()

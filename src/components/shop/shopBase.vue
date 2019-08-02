@@ -12,15 +12,19 @@
             <span style="font-size:16px;font-family:PingFangSC-Semibold;font-weight:600;">20</span>
         </div>
         <div class="productLeft-btn">
-            <span>无交易明细</span>
+            <newButton></newButton>
         </div>
     </div>
 </div>
 </template>
 
 <script>
+    import  newButton from  '../base/newButton'
     export default {
-        name: "shopBase"
+        name: "shopBase",
+        components:{
+            newButton
+        }
     }
 </script>
 
@@ -57,14 +61,12 @@
         }
         .productLeft-btn {
             position: absolute;
-            top: 20%;
+            top: 30%;
             left: 52%;
             width:88px;
             height:32px;
             line-height: 26px;
             text-align: center;
-            border:1px solid rgba(220,220,220,1);
-            border-radius:6px;
             float: right;
 
             span {

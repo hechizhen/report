@@ -22,28 +22,30 @@
               <span>销量下滑门店数（家）：</span>
               <span>16.67%</span>
               <div class="productLeft-btn">
-                  <span>下滑商品</span>
+                  <newButton></newButton>
               </div>
           </div>
           <div class="shop-data-base">
               <span>销量下滑门店数（家）：</span>
               <span>16.67%</span>
               <div class="productLeft-btn">
-                  <span>下滑商品</span>
+                  <newButton></newButton>
               </div>
           </div>
       </div>
         <span class="shu"></span>
-        <shopBase></shopBase>
+         <shopBase></shopBase>
     </div>
 </template>
 
 <script>
+    import  newButton from  '../base/newButton'
     import shopBase from  './shopBase'
     export default {
         name: "shopLeft",
         components:{
-            shopBase
+            shopBase,
+            newButton
         }
     }
 </script>
@@ -140,12 +142,9 @@
                 color:rgba(152,162,180,1);
             }
             .productLeft-btn{
-                width: 30%;
                 height:100%;
                 line-height: 26px;
                 text-align: center;
-                border:1px solid rgba(220,220,220,1);
-                border-radius:6px;
                 float: right;
                 span{
                     width:48px;

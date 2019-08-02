@@ -17,7 +17,7 @@
                     <span>销量增长商品数：</span>
                     <span style="font-size:16px;font-family:PingFangSC-Semibold;font-weight:600;">20个</span>
                     <div class="productLeft-btn">
-                        <span>下滑商品</span>
+                        <newButton :isGhost="true"></newButton>
                     </div>
                 </div>
                 <div class="commodityR-base">
@@ -25,7 +25,7 @@
                     <span>销量增长商品数：</span>
                     <span style="font-size:16px;font-family:PingFangSC-Semibold;font-weight:600;">20个</span>
                     <div class="productLeft-btn">
-                        <span>下滑商品</span>
+                        <newButton :isGhost="true"></newButton>
                     </div>
                 </div>
             </div>
@@ -42,12 +42,16 @@
 </template>
 
 <script>
+    import  newButton from  '../base/newButton'
     export default {
         name: "commodityRight",
         data(){
             return{
                 commodityRight:false
             }
+        },
+        components:{
+            newButton
         }
     }
 </script>
@@ -105,12 +109,9 @@
                     color:rgba(255,255,255,1);
                 }
                 .productLeft-btn{
-                    width: 30%;
                     height:100%;
                     line-height: 26px;
                     text-align: center;
-                    border:1px solid rgba(255,255,255,1);
-                    border-radius:6px;
                     float: right;
                     span{
                         width:48px;
