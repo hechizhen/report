@@ -13,6 +13,7 @@
             <one-help-sale :salesData="monthSalesData" :barData="monthBarData" style="margin-right:2%;" v-if="monthBarData.length!=0"></one-help-sale>
             <one-help-sale :salesData="yearSalesData" :barData="yearBarData" v-if="yearBarData.length!=0"></one-help-sale>
         </div>
+        <core :coretype="oneHelpSaleScoreList.coretype" :coretext="oneHelpSaleScoreList.coretext" :evaluate="oneHelpSaleScoreList.evaluate"></core>
         <!-- 帮卖分析-订单 -->
         <secondBand></secondBand>
         <!-- 二帮卖分析-业务员 -->
@@ -23,10 +24,9 @@
         <shopIndex></shopIndex>
          <!--库存-->
         <second-title :titleName="inventoryTitle"></second-title>
-         <inventoryIndex  > </inventoryIndex>
-          <!-- 财务 -->
-        <second-title :titleName="financeTitle"></second-title>
-        <finance :financeData="financeData" :receivableData="receivableData" :overDueData="overDueData"></finance>
+        <inventoryIndex  > </inventoryIndex>
+        <!-- 财务 -->
+        <finance :financeData="financeData" :receivableData="receivableData" :overDueData="overDueData" :titleName="financeTitle"></finance>
     </div>
 </template>
 <script>
@@ -42,6 +42,7 @@
     import productIndex from '../components/product/productIndex' //产品
     import shopIndex from '../components/shop/shopIndex' //门店
     import inventoryIndex from '../components/inventory/inventoryIndex' //库存
+    import core from '../components/core.vue'
     export default {
         name : 'index',
         components : {
@@ -56,7 +57,8 @@
             salesman,
             productIndex,
             shopIndex,
-            inventoryIndex
+            inventoryIndex,
+            core
         },
         data () {
             return {
@@ -81,6 +83,11 @@
                 requestHttpUrl:'https://www.easy-mock.com/mock/5d429dcbd3020d2d3bc58a32/medicalReport',//接口请求地址
                 monthSalesData:'',//本月销量以及达成率
                 yearSalesData:'',//累计销量以及达成率
+                oneHelpSaleScoreList:{//一帮卖评分
+                    coretype:'一帮卖得分',
+                    coretext:100,
+                    evaluate:'优秀'
+                }
             }
         },
         created(){

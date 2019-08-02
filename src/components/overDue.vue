@@ -25,7 +25,7 @@
                     </p>
                 </div>
             </div>
-            <new-button></new-button>
+            <new-button :defaultVal="defaultVal" :buttonHandleClick="detailHandleClick" style="position:absolute;right:0;"></new-button>
         </div>
     </div>
 </template>
@@ -44,13 +44,17 @@
         },
         data () {
             return {
-                
+                defaultVal:'逾期明细'
             }
         },
         mounted () {
           
         },
         methods: {
+            //逾期明细
+            detailHandleClick(){
+
+            }
         },
         computed:{
           
@@ -101,6 +105,7 @@
             align-items: center;
             width:100%;
             height:173px;
+            position: relative;
             .overDueBox{
                 position: absolute;
                 width:126px;
