@@ -1,16 +1,19 @@
 <template>
 	<div class="bandSelling">
 		<subTitle :subtitlename="subtitlename" :listing="listing"></subTitle>
-		<core :coretype="'二帮卖得分'" :coretext="100" :evaluate="'优秀'"></core>
+		<manager></manager>
+		<core :coretype="'业务员得分'" :coretext="100" :evaluate="'较好'"></core>
 	</div>
 </template>
 <script>
 	import subTitle from "./../subTitle.vue"
+	import manager from "./manager.vue"
 	import core from "./../core.vue"
 	export default {
 		name:'index',
 		components:{
 			subTitle,
+			manager,
 			core
 		},
 		props:{
@@ -27,8 +30,6 @@
 		},
 		methods:{
 			explicit(a,b){
-				alert(a)
-				alert(b)
 			}
 		},
 		computd:{
