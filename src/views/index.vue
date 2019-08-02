@@ -13,9 +13,11 @@
             <one-help-sale :salesData="monthSalesData" :barData="monthBarData" style="margin-right:2%;" v-if="monthBarData.length!=0"></one-help-sale>
             <one-help-sale :salesData="yearSalesData" :barData="yearBarData" v-if="yearBarData.length!=0"></one-help-sale>
         </div>
-        <!-- 二帮卖分析 -->
+        <!-- 帮卖分析-订单 -->
         <secondBand></secondBand>
-        <!--产品-->
+        <!-- 二帮卖分析-业务员 -->
+        <salesman></salesman>
+        <!-- 产品 -->
         <productIndex ></productIndex>
         <!--门店-->
         <shopIndex></shopIndex>
@@ -35,7 +37,8 @@
     import pieEchart from '../components/echarts/pie.vue'//饼图
     import lineEchart from '../components/echarts/line.vue'//折线图
     import barEchart from '../components/echarts/bar.vue'//柱状图
-    import secondBand from "./../components/secondBand/index.vue"  //二帮卖分析
+    import secondBand from "./../components/secondBand/index.vue"  //二帮卖分析-订单
+    import salesman from "./../components/salesman/index.vue"  //二帮卖分析-业务员
     import productIndex from '../components/product/productIndex' //产品
     import shopIndex from '../components/shop/shopIndex' //门店
     import inventoryIndex from '../components/inventory/inventoryIndex' //库存
@@ -50,6 +53,7 @@
             lineEchart,
             barEchart,
             secondBand,
+            salesman,
             productIndex,
             shopIndex,
             inventoryIndex
