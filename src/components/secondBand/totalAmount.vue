@@ -6,13 +6,13 @@
 			   <div class="titletext">{{titleName}}</div>
 			</div>
 			<div class="record">
-				<p><a-icon type="pay-circle" />总下单金额{{titleName}}</p>
+				<p><img src="./../../assets/img/dkw_jine.png">总下单金额{{titleName}}</p>
 				<p>2.56%</p>
 			</div>
 			<a-Row class="proportion">
 				<a-Col :span="12" class="proportionitmes">
 				  	<div class="proportiondiv">
-				  		<p>毛利额{{titleName}}</p>
+				  		<p><img src="./../../assets/img/jine.png">毛利额{{titleName}}</p>
 				  		<p>15.34%</p>
 				  	</div>
 				</a-Col>

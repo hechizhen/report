@@ -8,29 +8,30 @@
 			<div class="record">
 				<a-Row class="recordConten">
 				  <a-Col :span="14" class="recordLeft">
-				  	<div><a-icon type="pay-circle" />下单金额（万元）</div>
+				  	<div><img src="./../../assets/img/dkw_jine.png">下单金额（万元）</div>
 					<div>(以创建订单日期统计)</div>
 					<div><span>￥</span>385<span>.08</span></div>
 				  </a-Col>
 				  <a-Col :span="10" class="recordRight">
-				  	<div>毛利额（万元）</div>
+				  	<div><img src="./../../assets/img/jine.png">毛利额（万元）</div>
 					<div><span>￥</span>81.13</div>
-					<div>毛利率</div>
+					<div><img src="./../../assets/img/jine.png">毛利率</div>
 					<div>13.24%</div>
 				  </a-Col>
 				</a-Row>
 			</div>
 			<div class="proportion">
-				
+				<pie ></pie>
 			</div>
 		</div>
 	</div>
 </template>
 <script>
+	import pie from "./../echarts/pie.vue" 
 	export default {
 		name:'samaMonth',
 		components:{
-
+			pie
 		},
 		props:{
 		},
@@ -143,6 +144,10 @@
 						}
 					}
 				}
+			}
+			.proportion {
+				width: 100%;
+				height: 345px;
 			}
 		}
 	}
