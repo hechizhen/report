@@ -1,7 +1,7 @@
 <template>
 	<div class="bandSelling">
 		<subTitle :subtitlename="subtitlename" :listing="listing"></subTitle>
-		<manager></manager>
+		<manager :explicit="explicit"></manager>
 		<core :coretype="'业务员得分'" :coretext="100" :evaluate="'较好'"></core>
 	</div>
 </template>
@@ -29,7 +29,8 @@
 
 		},
 		methods:{
-			explicit(a,b){
+			explicit(a){
+				alert(a)
 			}
 		},
 		computd:{

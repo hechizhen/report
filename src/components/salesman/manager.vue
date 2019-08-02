@@ -14,8 +14,8 @@
 				  	<p>80%</p>
 				  </a-Col>
 				  <a-Col :span="6" class="managerCol">
-				  	<p>达成与贡献</p>
-				  	<p>走势图</p>
+				  	<p @click="concludeClick('达成与贡献')">达成与贡献</p>
+				  	<p @click="trendClick('走势图')">走势图</p>
 				  </a-Col>
 				</a-Row>
 		  	</div>
@@ -50,7 +50,7 @@
 				  	<p>业绩下滑人数<span>12</span>人</p>
 				  </a-Col>
 				  <a-Col :span="6" class="managerCol">
-				  	<p>达成与贡献</p>
+				  	<p @click="glidingClick('下滑人员')">下滑人员</p>
 				  </a-Col>
 				</a-Row>
 		  	</div>
@@ -65,7 +65,9 @@
 
 		},
 		props:{
-
+			explicit:{
+				type:Function,
+			}
 		},
 		data(){
 			return {
@@ -76,7 +78,15 @@
 
 		},
 		methods:{
-
+			concludeClick(a){
+				this.explicit(a)
+			},
+			trendClick(a){
+				this.explicit(a)
+			},
+			glidingClick(a){
+				this.explicit(a)
+			}
 		},
 		computd:{
 
