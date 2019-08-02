@@ -11,8 +11,8 @@
             </div>
         </div>
         <div class="shop-centen-middle">
-            <shopLeft :defaultVal="defaultVal1"></shopLeft>
-             <shopRight></shopRight>
+            <shopLeft></shopLeft>
+            <shopRight></shopRight>
         </div>
         <!--<div class="shop-centen-dase">-->
             <!--<shopBase></shopBase>-->
@@ -34,11 +34,6 @@
             shopLeft,
             shopRight,
             // shopBase
-        },
-        data(){
-            return{
-                defaultVal1:"动销清单",
-            }
         }
     }
 </script>

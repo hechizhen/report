@@ -5,13 +5,13 @@
             <div class="product-content">
                 <a-Row >
                     <a-Col :span="10">
-                        <productLeft :productdata="productData.productlist[0]" :defaultVal="defaultVal1"></productLeft>
+                        <productLeft :productdata="productData.productlist[0]"></productLeft>
                         <productRight></productRight>
 
                     </a-Col>
                     <a-Col :span="13" :push="1">
-                        <productLeft  :productdata="productData.productlist[1]" :defaultVal="defaultVal2"></productLeft>
-                        <commodityRight :defaultVal="defaultVal3"></commodityRight>
+                        <productLeft  :productdata="productData.productlist[1]"></productLeft>
+                        <commodityRight></commodityRight>
                     </a-Col>
                 </a-Row>
             </div>
@@ -99,11 +99,6 @@
                         commoditysum:3445
                     }
                 },
-                defaultVal1:"动销清单",
-                defaultVal2:"商品明细",
-
-                defaultVal3:"下滑商品",
-                // defaultVal4:"增长商品",
             }
         }
     }

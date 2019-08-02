@@ -36,9 +36,9 @@
     import lineEchart from '../components/echarts/line.vue'//折线图
     import barEchart from '../components/echarts/bar.vue'//柱状图
     import secondBand from "./../components/secondBand/index.vue"  //二帮卖分析
-    import productIndex from '../components/productIndex' //产品
-    import shopIndex from '../components/shopIndex' //门店
-    import inventoryIndex from  '../components/inventoryIndex' //库存
+    import productIndex from '../components/product/productIndex' //产品
+    import shopIndex from '../components/shop/shopIndex' //门店
+    import inventoryIndex from '../components/inventory/inventoryIndex' //库存
     export default {
         name : 'index',
         components : {

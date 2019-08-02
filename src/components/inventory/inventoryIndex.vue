@@ -24,7 +24,7 @@
                     <span style="font-size:18px;font-family:PingFangSC-Semibold;font-weight:500;width: 74px;text-align: left">&nbsp23</span>
                 </div>
                 <div class="tableLeft-btn">
-                   1111
+                    <newButton></newButton>
                 </div>
             </div>
         </div>
@@ -36,7 +36,7 @@
 <script>
     import inventoryCenten from './inventoryCenten'
     import inventoryDase from './inventoryDase'
-    import newButton from  '../base/newButton'
+    import  newButton from  '../base/newButton'
     export default {
         name: "inventoryIndex",
         components:{
@@ -185,6 +185,13 @@
                     text-align: center;
                     float: right;
 
+                    span {
+                        width: 48px;
+                        font-size:14px;
+                        font-family:PingFangSC-Regular;
+                        font-weight:600;
+                        color:rgba(0,0,0,1);
+                    }
                 }
         }
     }
