@@ -15,7 +15,7 @@
         </div>
         <core :coretype="oneHelpSaleScoreList.coretype" :coretext="oneHelpSaleScoreList.coretext" :evaluate="oneHelpSaleScoreList.evaluate"></core>
         <!-- 帮卖分析-订单 -->
-        <secondBand :orderAmountData="orderAmountData" :grossProfitData="grossProfitData" :grossInterestRateData="grossInterestRateData"></secondBand>
+        <secondBand :orderAmountData="orderAmountData" :grossProfitData="grossProfitData" :grossInterestRateData="grossInterestRateData" :proportio="proportioData"></secondBand>
         <!-- 二帮卖分析-业务员 -->
         <salesman :salesmanData="salesmanData"></salesman>
         <!-- 产品 -->
@@ -92,6 +92,7 @@
                 orderAmountData:{}, //金额数据
                 grossProfitData:{}, //毛利额
                 grossInterestRateData:{},//毛利率
+                proportioData:[],  //占比数据
             }
         },
         created(){
@@ -113,6 +114,7 @@
             this.getOverdueData()
             this.getsalesman()
             this.getsecondBand()
+            this.getProportio()
         },
         methods: {
             //修改时间
@@ -344,6 +346,20 @@
                     _this.orderAmountData = orderAmountData;
                     _this.grossProfitData = grossProfitData;
                     _this.grossInterestRateData = grossInterestRateData;
+                })
+            },
+            //二帮卖-订单占比
+            getProportio(){
+                var _this = this
+                this.$http({
+                    url: _this.requestHttpUrl+'/Proportion',
+                    method: 'POST',
+                    data: {
+                        dateTime:_this.currentDate
+                    }
+                }).then(function(res){
+                    var proportioData = res.data.data;
+                    _this.proportioData = proportioData;
                 })
             },
         },

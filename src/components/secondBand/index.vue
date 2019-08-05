@@ -4,7 +4,7 @@
 		<subTitle :subtitlename="subtitlename" :listing="listing" :explicit="explicit"></subTitle>
 		<a-Row :gutter="23">
 		  <a-Col :span="10">
-		  	<sameMonth :orderAmountData="orderAmountData"></sameMonth>
+		  	<sameMonth :orderAmountData="orderAmountData" :proportioData="proportio"></sameMonth>
 		  </a-Col>
 		  <a-Col :span="7">
 		  	<totalAmount :titleName="'环比'" :displayData="grossProfitData"></totalAmount>
@@ -44,22 +44,25 @@
 				type:Object,
 				default:{}
 			},
+			proportio:{
+				type:Array,
+				default:[]
+			}
 		},
 		data(){
 			return {
 				titleName:'二帮卖分析',
 				subtitlename:'订单',
 				listing:['订单详情','门店效益'],
-				pathUrl:this.$store.state.pathUrl
 			}
 		},
 		mounted(){
-
+			console.log('111111111111')
+			console.log(this.proportio)
 		},
 		methods:{
 			explicit(a,b){
-				alert(a)
-				alert(b)
+
 			}
 		},
 		computd:{
