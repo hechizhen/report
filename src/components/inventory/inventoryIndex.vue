@@ -83,7 +83,7 @@
                     //库存详细柱狀圖
                     inventoryBarData:{
                         id:'barIdinventory',
-                        xAxisData:["立白","立白","立白","立白","立白"],
+                        xAxisData:["立白","立白","立白","立白","立白","立白"],
                         xAxis:{
                             isShowLine:false,
                             isShowSplit:false,
@@ -101,11 +101,12 @@
                         barData:[
                             {
                                 name:'ABC',
-                                data:[23,43,83,213,400],
+                                data:[23,43,83,111,213,400],
                                 color:'#6BBCFF',
                                 barWidth:5
                             },
-                        ]
+                        ],
+                        showType:0
                     },
                 },
             }

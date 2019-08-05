@@ -1,5 +1,6 @@
 <template>
     <div class="shopLeft">
+      <div class="shopLeft-centen" style="height: 178px;">
       <div class="shop-active">
           <p>{{shopActives.ActiveStores}}<span>{{shopActives.ActiveStoresing}}</span></p>
           <span>{{shopActives.Activestressum}}</span>
@@ -23,6 +24,7 @@
           </div>
       </div>
         <span class="shu"></span>
+      </div>
          <shopBase :shopDaseData="shopActives.shopDaseData" :defaultVal="defaultVal"></shopBase>
     </div>
 </template>
@@ -61,7 +63,7 @@
         float: left;
         margin-left: 33px;
         p{
-            width: 80%;
+            width: 79%;
             margin-left: 10%;
             font-size:12px;
             font-weight:500;
@@ -84,7 +86,7 @@
             text-align: center;
             border:1px solid rgba(255,255,255,1);
             border-radius:6px;
-            margin-left: 20%;
+            margin: auto;
             margin-top: 20px;
             span{
                 width:48px;
@@ -127,7 +129,7 @@
       .shop-data-base{
             width: 80%;
             height: 12%;
-            margin-top: 16px;
+            margin-top: 2%;
             margin-left: 11%;
             span{
                 line-height: 28px;
@@ -141,13 +143,6 @@
                 line-height: 26px;
                 text-align: center;
                 float: right;
-                span{
-                    width:48px;
-                    font-size:12px;
-                    font-family:PingFangSC-Regular;
-                    font-weight:400;
-                    color:rgba(51,51,51,1);
-                }
             }
         }
     }

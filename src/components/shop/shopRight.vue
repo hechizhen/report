@@ -33,7 +33,7 @@
         float: left;
         /*margin-left: 9%;*/
         .shopRight-title{
-            height: 174px;
+            height:68%
         }
         .shop-active {
             width: 18%;
