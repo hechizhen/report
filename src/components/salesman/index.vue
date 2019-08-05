@@ -33,7 +33,6 @@
 		},
 		methods:{
 			explicit(a){
-				alert(a)
 			}
 		},
 		computd:{

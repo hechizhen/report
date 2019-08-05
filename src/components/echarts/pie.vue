@@ -143,7 +143,6 @@
         },
         watch:{
             pieEchartsData(val){
-                alert(111)
                 var _this = this  
                 let echarts = _this.$echarts;
                 _this.myChart = echarts.init(document.getElementById(_this.pieEchartsData.id))
