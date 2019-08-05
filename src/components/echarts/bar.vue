@@ -50,7 +50,7 @@
                             barWidth:11,
                         }
                     ],
-                    showType:0
+                    showType:0//0是柱状图横过来 1是竖起来
                 }
             }
         },
