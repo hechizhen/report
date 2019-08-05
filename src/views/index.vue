@@ -325,22 +325,25 @@
                         dateTime:_this.currentDate
                     }
                 }).then(function(res){
-                    var secondBandData = res.data.data[0];
+                    var secondBandData = res.data.data[0],orderAmountData = {},grossProfitData = {},grossInterestRateData = {};
                     secondBandData.orderAmount = !secondBandData.orderAmount ? '--' : _this.dataProcess(secondBandData.orderAmount,'money',1).num;
                     // 下单金额数据
-                    _this.orderAmountData.orderAmountInteger = secondBandData.orderAmount.split(".")[0];
-                    _this.orderAmountData.orderAmountDecimal = secondBandData.orderAmount.split(".")[1];
-                    _this.orderAmountData.grossProfit = !secondBandData.grossProfit ? '--' : _this.dataProcess(secondBandData.grossProfit,'money',1).num;
-                    _this.orderAmountData.grossInterestRate = !salesmanData.grossInterestRate ? '--' : _this.dataProcess(salesmanData.grossInterestRate,'percent').num+'%';
+                    orderAmountData.orderAmountInteger = secondBandData.orderAmount.split(".")[0];
+                    orderAmountData.orderAmountDecimal = secondBandData.orderAmount.split(".")[1];
+                    orderAmountData.grossProfit = !secondBandData.grossProfit ? '--' : _this.dataProcess(secondBandData.grossProfit,'money',1).num;
+                    orderAmountData.grossInterestRate = !secondBandData.grossInterestRate ? '--' : _this.dataProcess(secondBandData.grossInterestRate,'percent').num+'%';
                     // 环比数据
-                    _this.grossProfitData.orderAmount = !salesmanData.orderAmountRatio ? '--' : _this.dataProcess(salesmanData.orderAmountRatio,'percent').num+'%';
-                    _this.grossProfitData.grossProfit = !salesmanData.grossProfitRatio ? '--' : _this.dataProcess(salesmanData.grossProfitRatio,'percent').num+'%';
-                    _this.grossProfitData.grossInterestRate = !salesmanData.grossInterestRateRatio ? '--' : _this.dataProcess(salesmanData.grossInterestRateRatio,'percent').num+'%';
+                    grossProfitData.orderAmount = !secondBandData.orderAmountRatio ? '--' : _this.dataProcess(secondBandData.orderAmountRatio,'percent').num+'%';
+                    grossProfitData.grossProfit = !secondBandData.grossProfitRatio ? '--' : _this.dataProcess(secondBandData.grossProfitRatio,'percent').num+'%';
+                    grossProfitData.grossInterestRate = !secondBandData.grossInterestRateRatio ? '--' : _this.dataProcess(secondBandData.grossInterestRateRatio,'percent').num+'%';
                     // 同比数据
-                    _this.grossInterestRateData.orderAmount = !salesmanData.orderAmountTerms ? '--' : _this.dataProcess(salesmanData.orderAmountTerms,'percent').num+'%';
-                    _this.grossInterestRateData.grossProfit = !salesmanData.grossProfitTerms ? '--' : _this.dataProcess(salesmanData.grossProfitTerms,'percent').num+'%';
-                    _this.grossInterestRateData.grossInterestRate = !salesmanData.grossInterestRateTerms ? '--' : _this.dataProcess(salesmanData.grossInterestRateTerms,'percent').num+'%';
+                    grossInterestRateData.orderAmount = !secondBandData.orderAmountTerms ? '--' : _this.dataProcess(secondBandData.orderAmountTerms,'percent').num+'%';
+                    grossInterestRateData.grossProfit = !secondBandData.grossProfitTerms ? '--' : _this.dataProcess(secondBandData.grossProfitTerms,'percent').num+'%';
+                    grossInterestRateData.grossInterestRate = !secondBandData.grossInterestRateTerms ? '--' : _this.dataProcess(secondBandData.grossInterestRateTerms,'percent').num+'%';
 
+                    _this.orderAmountData = orderAmountData;
+                    _this.grossProfitData = grossProfitData;
+                    _this.grossInterestRateData = grossInterestRateData;
                 })
             },
         },

@@ -7,19 +7,19 @@
 			</div>
 			<div class="record">
 				<p><img src="./../../assets/img/dkw_jine.png">总下单金额{{titleName}}</p>
-				<p>2.56%</p>
+				<p>{{displayData.orderAmount}}</p>
 			</div>
 			<a-Row class="proportion">
 				<a-Col :span="12" class="proportionitmes">
 				  	<div class="proportiondiv">
 				  		<p><img src="./../../assets/img/jine.png">毛利额{{titleName}}</p>
-				  		<p>15.34%</p>
+				  		<p>{{displayData.grossProfit}}</p>
 				  	</div>
 				</a-Col>
 				<a-Col :span="12"class="proportionitmes">
 				  	<div class="proportiondiv">
 				  		<p>毛利率{{titleName}}</p>
-				  		<p>15.34%</p>
+				  		<p>{{displayData.grossInterestRate}}</p>
 				  	</div>
 				</a-Col>
 			</a-Row>
@@ -45,6 +45,10 @@
 			titleName:{
 				type:String,
 				default:'环比'
+			},
+			displayData:{
+				type:Object,
+				default:{}
 			}
 		},
 		data(){

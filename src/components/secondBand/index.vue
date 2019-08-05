@@ -4,13 +4,13 @@
 		<subTitle :subtitlename="subtitlename" :listing="listing" :explicit="explicit"></subTitle>
 		<a-Row :gutter="23">
 		  <a-Col :span="10">
-		  	<sameMonth></sameMonth>
+		  	<sameMonth :orderAmountData="orderAmountData"></sameMonth>
 		  </a-Col>
 		  <a-Col :span="7">
-		  	<totalAmount :titleName="'环比'"></totalAmount>
+		  	<totalAmount :titleName="'环比'" :displayData="grossProfitData"></totalAmount>
 		  </a-Col>
 		  <a-Col :span="7">
-		  	<totalAmount :titleName="'同比'"></totalAmount>
+		  	<totalAmount :titleName="'同比'" :displayData="grossInterestRateData"></totalAmount>
 		  </a-Col>
 		</a-Row>
 		<core :coretype="'二帮卖得分'" :coretext="100" :evaluate="'优秀'"></core>
@@ -54,6 +54,7 @@
 			}
 		},
 		mounted(){
+
 		},
 		methods:{
 			explicit(a,b){
