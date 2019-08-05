@@ -124,7 +124,7 @@ export default{
     // }
   };
   // 数据处理
-    Vue.prototype.dataProcess = function (data,type) {
+    Vue.prototype.dataProcess = function (data,type,decimal) {
         if(data !== "" && data !== null) {
             // if (data.indexOf(",") != -1) {
             var reg = /^-?[0-9]+.?[0-9]*/;//是否为数字
@@ -132,8 +132,12 @@ export default{
             //如果是数字
             if (reg.test(data)) {
                 if (type == 'money') {
+                  if(decimal == 1){
+                    var num = this.formatCurrency((data / 10000).toFixed(2))
+                  }else {
                     var num = this.formatCurrency((data / 10000).toFixed(0))
-                    var unit = "万"
+                  }
+                  var unit = "万"
                 } else if (type == 'percent') {
                     var dataType = (data * 100).toString().indexOf(".")
                     if (dataType != -1) {

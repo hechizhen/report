@@ -32,17 +32,28 @@
 			core
 		},
 		props:{
-
+			orderAmountData:{
+				type:Object,
+				default:{}
+			},
+			grossProfitData:{
+				type:Object,
+				default:{}
+			},
+			grossInterestRateData:{
+				type:Object,
+				default:{}
+			},
 		},
 		data(){
 			return {
 				titleName:'二帮卖分析',
 				subtitlename:'订单',
-				listing:['订单详情','门店效益']
+				listing:['订单详情','门店效益'],
+				pathUrl:this.$store.state.pathUrl
 			}
 		},
 		mounted(){
-
 		},
 		methods:{
 			explicit(a,b){

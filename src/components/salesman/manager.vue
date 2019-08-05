@@ -11,7 +11,7 @@
 				  </a-Col>
 				  <a-Col :span="12" class="managerCol">
 				  	<p>业务员达成</p>
-				  	<p>80%</p>
+				  	<p>{{salesmanData.reached}}</p>
 				  </a-Col>
 				  <a-Col :span="6" class="managerCol">
 				  	<p @click="concludeClick('达成与贡献')">达成与贡献</p>
@@ -32,7 +32,7 @@
 				  	<p>人均产出(万元)</p>
 				  </a-Col>
 				  <a-Col :span="6" class="managerCol">
-				  	<p>￥<span>3828</span></p>
+				  	<p>￥<span>{{salesmanData.perCapitaOutput}}</span></p>
 				  </a-Col>
 				</a-Row>
 		  	</div>
@@ -46,8 +46,8 @@
 				  	</div>
 				  </a-Col>
 				  <a-Col :span="12" class="managerCol">
-				  	<p>总业务员人数<span>12</span>人</p>
-				  	<p>业绩下滑人数<span>12</span>人</p>
+				  	<p>总业务员人数<span>{{salesmanData.totalNumber}}</span>人</p>
+				  	<p>业绩下滑人数<span>{{salesmanData.declinePerformance}}</span>人</p>
 				  </a-Col>
 				  <a-Col :span="6" class="managerCol">
 				  	<p @click="glidingClick('下滑人员')">下滑人员</p>
@@ -67,6 +67,10 @@
 		props:{
 			explicit:{
 				type:Function,
+			},
+			salesmanData:{
+				type:Object,
+				default:{}
 			}
 		},
 		data(){
