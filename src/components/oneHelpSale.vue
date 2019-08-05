@@ -83,7 +83,7 @@
             background:rgba(255,255,255,1);
             border-radius:6px;
             height:426px;
-            width:49%;
+            width:100%;
             p{
                 margin:0;
             }

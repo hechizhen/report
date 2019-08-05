@@ -8,12 +8,9 @@
         <!-- 头部 -->
         <header-title :dealName="indexDealName" :score="indexScore" :summary="indexSummary" :defaultDate="indexDefaultDate" :changeDateHandle="indexChangeDate"></header-title>
         <!-- 一帮卖分析 -->
-        <second-title :titleName="oneHelpSaleTitle"></second-title>
-        <div class="oneHelpSalesBox">
-            <one-help-sale :salesData="monthSalesData" :barData="monthBarData" style="margin-right:2%;" v-if="monthBarData.length!=0"></one-help-sale>
-            <one-help-sale :salesData="yearSalesData" :barData="yearBarData" v-if="yearBarData.length!=0"></one-help-sale>
-        </div>
-        <core :coretype="oneHelpSaleScoreList.coretype" :coretext="oneHelpSaleScoreList.coretext" :evaluate="oneHelpSaleScoreList.evaluate"></core>
+        <one-help-sale-en :titleName="oneHelpSaleTitle" :salesData="salesData" :coreData="oneHelpSaleScoreList" :barData="salesBarData"
+        v-if="salesData.length!=0 && salesBarData.length!=0" ></one-help-sale-en>
+
         <!-- 帮卖分析-订单 -->
         <secondBand></secondBand>
         <!-- 二帮卖分析-业务员 -->
@@ -26,13 +23,14 @@
         <second-title :titleName="inventoryTitle"></second-title>
         <inventoryIndex  > </inventoryIndex>
         <!-- 财务 -->
-        <finance :financeData="financeData" :receivableData="receivableData" :overDueData="overDueData" :titleName="financeTitle"></finance>
+        <finance :financeData="financeData" :receivableData="receivableData" :overDueData="overDueData" :titleName="financeTitle"
+        v-if="financeData.length!=0 && receivableData.length!=0 && overDueData.length!=0"></finance>
     </div>
 </template>
 <script>
     import headerTitle from '../components/headerTitle.vue'//头部标题
     import secondTitle from '../components/secondTitle.vue'//模块标题
-    import oneHelpSale from '../components/oneHelpSale.vue'//一帮卖分析
+    import oneHelpSaleEn from '../components/oneHelpSaleEn.vue' //一帮卖分析
     import finance from '../components/finance.vue'//财务
     import pieEchart from '../components/echarts/pie.vue'//饼图
     import lineEchart from '../components/echarts/line.vue'//折线图
@@ -48,7 +46,7 @@
         components : {
             headerTitle,
             secondTitle,
-            oneHelpSale,
+            oneHelpSaleEn,
             finance,
             pieEchart,
             lineEchart,
@@ -70,19 +68,15 @@
                 oneHelpSaleTitle:'一帮卖分析',//一帮卖分析标题
                 financeTitle:'财务',//财务标题
                 inventoryTitle:'库存',//库存标题
-                //一帮卖本月销量
-                monthBarData:'',
-                //一帮卖本月销量
-                yearBarData:'',
                 //财务数据
                 financeData:'',
                 //应收账款
                 receivableData:'',
                 //逾期账款
                 overDueData:'',
-                requestHttpUrl:'https://www.easy-mock.com/mock/5d429dcbd3020d2d3bc58a32/medicalReport',//接口请求地址
-                monthSalesData:'',//本月销量以及达成率
-                yearSalesData:'',//累计销量以及达成率
+                requestHttpUrl:this.$store.state.requestHttpUrl,//接口请求地址
+                salesData:'',//本月/累计销量以及达成率
+                salesBarData:'',//一帮卖本月/年累计销量
                 oneHelpSaleScoreList:{//一帮卖评分
                     coretype:'一帮卖得分',
                     coretext:100,
@@ -148,13 +142,15 @@
                 }).then(function(res){
                     console.log(res)
                     let data = res.data.data.data
-                    _this.monthSalesData = {
-                        sales:_this.dataProcess(data.monthSales,'money').num,
-                        reach:_this.dataProcess(data.monthReach,'percent').num+_this.dataProcess(data.monthReach,'percent').num
-                    }
-                    _this.yearSalesData = {
-                        sales:_this.dataProcess(data.yearSales,'money').num,
-                        reach:_this.dataProcess(data.yearReach,'percent').num+_this.dataProcess(data.yearReach,'percent').num
+                    _this.salesData = {
+                        monthData:{
+                            sales:_this.dataProcess(data.monthSales,'money').num,
+                            reach:_this.dataProcess(data.monthReach,'percent').num+_this.dataProcess(data.monthReach,'percent').num,
+                        },
+                        yearData:{
+                            sales:_this.dataProcess(data.yearSales,'money').num,
+                            reach:_this.dataProcess(data.yearReach,'percent').num+_this.dataProcess(data.yearReach,'percent').num
+                        }
                     }
                 })
             },
@@ -170,7 +166,7 @@
                 }).then(function(res){
                     console.log(res)
                     let data = res.data.data.data
-                    _this.monthBarData = {
+                    let monthBarData = {
                         id:'barIdMonthSales',
                         xAxisData:data.BusinessAxiax,
                         xAxis:{
@@ -196,7 +192,7 @@
                             },
                         ]
                     }
-                    _this.yearBarData={
+                    let yearBarData={
                         id:'barIdYearSales',
                         xAxisData:data.BusinessAxiax,
                         xAxis:{
@@ -221,6 +217,10 @@
                                 barWidth:11
                             },
                         ]
+                    }
+                    _this.salesBarData = {
+                        monthBarData,
+                        yearBarData
                     }
                 })
             },

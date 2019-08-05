@@ -38,7 +38,7 @@
 </script>
 <style lang="less" scoped>
 	.core {
-		height: 30px;
+		height: 50px;
 		display: flex;
 		align-items: center;
 		p {
