@@ -10,20 +10,20 @@
 				  <a-Col :span="14" class="recordLeft">
 				  	<div><img src="./../../assets/img/dkw_jine.png">下单金额（万元）</div>
 					<div>(以创建订单日期统计)</div>
-					<div><span>￥</span>385<span>.08</span></div>
+					<div><span>￥</span>{{orderAmountData.orderAmountInteger}}<span>.{{orderAmountData.orderAmountDecimal}}</span></div>
 				  </a-Col>
 				  <a-Col :span="10" class="recordRight">
 				  	<div><img src="./../../assets/img/jine.png">毛利额（万元）</div>
-					<div><span>￥</span>81.13</div>
+					<div><span>￥</span>{{orderAmountData.grossProfit}}</div>
 					<div><img src="./../../assets/img/jine.png">毛利率</div>
-					<div>13.24%</div>
+					<div>{{orderAmountData.grossInterestRate}}</div>
 				  </a-Col>
 				</a-Row>
 			</div>
 			<div class="proportion">
 				<div class="proportion_title">占比</div>
 				<div class="proportion_echarts">
-					<pie></pie>
+					<pie :pieEchartsData="pieEchartsData"></pie>
 				</div>
 			</div>
 		</div>
@@ -37,14 +37,31 @@
 			pie
 		},
 		props:{
+			orderAmountData:{
+				type:Object,
+				default:{}
+			},
+			proportioData:{
+				type:Array,
+				default:[]
+			}
 		},
 		data(){
 			return {
-
+				pieEchartsData:{}
 			}
 		},
 		mounted(){
-
+			console.log('111111111111')
+			console.log(this.proportioData)
+			this.pieEchartsData = {
+				id:'pieId',
+                colorList:['#FF8352', '#E271DE', '#00FFFF', '#4AEAB0'],
+                labelType:1,
+                pieData:this.proportio,
+                radius:['40%', '60%'],
+                borderWidth:0,
+			}
 		},
 		methods(){
 
