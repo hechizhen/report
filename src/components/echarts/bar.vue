@@ -49,7 +49,8 @@
                             color:'yellow',
                             barWidth:11,
                         }
-                    ]
+                    ],
+                    showType:0
                 }
             }
         },
@@ -58,7 +59,10 @@
         },
         data () {
             return {
-                
+                xAxisType:'',
+                yAxisType:'',
+                xAxisData:'',
+                yAxisData:'',
             }
         },
         mounted () {
@@ -94,6 +98,17 @@
                     })
                 })
                 console.log(seriesData)
+                if(_this.barEchartsData.showType==0){
+                    _this.xAxisType = 'category'
+                    _this.xAxisData = _this.barEchartsData.xAxisData
+                    _this.yAxisType = 'value'
+                    _this.yAxisData = ''
+                }else{
+                    _this.xAxisType = 'value'
+                    _this.xAxisData = ''
+                    _this.yAxisType = 'category'
+                    _this.yAxisData = _this.barEchartsData.xAxisData
+                }
                 var option = {
                     tooltip: {
                         trigger: 'axis'
@@ -113,8 +128,8 @@
                         containLabel: true
                     },
                     xAxis: {
-                        type: 'category',
-                        data: _this.barEchartsData.xAxisData,
+                        type: _this.xAxisType,
+                        data: _this.xAxisData,
                         axisLine: {
                             show: _this.barEchartsData.xAxis.isShowLine,
                             lineStyle: {
@@ -137,7 +152,8 @@
                         }
                     },
                     yAxis: {
-                        type: 'value',
+                        type: _this.yAxisType,
+                        data: _this.yAxisData,
                         splitLine: {
                             show:_this.barEchartsData.yAxis.isShowSplit,
                             lineStyle: {

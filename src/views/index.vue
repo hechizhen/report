@@ -198,7 +198,8 @@
                                 color:'#D7D9E5',
                                 barWidth:11
                             },
-                        ]
+                        ],
+                        showType:0
                     }
                     let yearBarData={
                         id:'barIdYearSales',
@@ -224,7 +225,8 @@
                                 color:'#D7D9E5',
                                 barWidth:11
                             },
-                        ]
+                        ],
+                        showType:0
                     }
                     _this.salesBarData = {
                         monthBarData,
