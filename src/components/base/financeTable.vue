@@ -60,8 +60,8 @@
                 color:rgba(51,51,51,1);
            }
            .colRight{
-                text-align: left;
-                padding-left:50%;
+                text-align: right;
+                padding-right:30px;
                 span{
                     font-weight:bold;
                     color:rgba(51,51,51,1);
