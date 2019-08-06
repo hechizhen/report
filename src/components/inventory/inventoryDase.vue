@@ -1,22 +1,18 @@
 <template>
     <div class="inventoryDase">
         <div class="inventoryDase-left">
-            <span>{{inventoryTxt.inventoryDay}}</span>
+            <span>{{inventoryTxt.receivableAverage}}</span>
             <b>{{inventoryTxt.inventoryVal}}</b>
             <div class="left-txt">
-                    <div class="left-txt-title">
-                        <span>{{inventoryTxt.inventoryChain}}</span>
-                        <p>{{inventoryTxt.inventoryChainVal}}</p>
-                    </div>
-                    <div class="left-txt-title">
-                        <span>{{inventoryTxt.inventoryYear}}</span>
-                        <p>{{inventoryTxt.inventoryYearVal}}</p>
-                    </div>
+                <div class="left-txt-title" v-for="(item,index) in inventoryTxt.inventorycompare" :key="index">
+                    <span>{{item.name}}</span>
+                    <p>{{item.inventoryChainVal}}</p>
+                </div>
                 </div>
             <span class="shu"></span>
             </div>
         <div class="inventoryDase-right">
-            <barChart :barEchartsData="salesData.inventoryBarData"></barChart>
+            <barChart :barEchartsData="barData"></barChart>
         </div>
     </div>
 </template>
@@ -26,17 +22,21 @@
     export default {
         name: "inventoryDase",
         props:{
-            salesData:{
-                type:Object,
-            },
             inventoryTxt:{
+                type: Object,String
+            },
+            barData:{
                 type: Object
             }
         },
         components:{
             barChart
         },
+        watch:{
+
+        },
         mounted () {
+            console.log(this.inventoryTxt)
         },
     }
 </script>
@@ -104,6 +104,9 @@
                         color:rgba(255, 0, 72, 1);
                         margin-bottom: 0;
                         display: inline-block;
+                        font-size: 14px;
+                        margin-left: 5%;
+                        font-weight:600;
                     }
             }
         }

@@ -1,18 +1,16 @@
 <template>
-    <div>
         <div class="productLeft">
              <div class="productLeft-img">
                  <img :src="productdata.productimg">
              </div>
             <div class="productLeft-txt">
                 <p>{{productdata.name}}</p>
-                <span>{{productdata.sales}}</span>
+                <span>{{productdata.RatePin}}</span>
             </div>
             <div class="productLeft-btn">
-                <newButton :isGhost="true"></newButton>
+                <newButton  :buttonType="buttonType"  :isGhost="true" :defaultVal="productdata.btn"></newButton>
             </div>
         </div>
-    </div>
 </template>
 
 <script>
@@ -20,6 +18,14 @@
     export default {
         name: "productLeft",
         props:["productdata"],
+        data(){
+            return{
+                buttonType:""
+            }
+        },
+        mounted() {
+           // console.log(this.productdata.RatePin)
+        },
         components:{
             newButton
         }
@@ -73,77 +79,6 @@
                 font-family:PingFangSC-Regular;
                 font-weight:400;
                 color:rgba(255,255,255,1);
-            }
-        }
-    }
-    .pinRight{
-        width: 60%;
-        float: right;
-        margin-top: 6%;
-        .pinRight-centen{
-            width: 80%;
-            .product-centen {
-                margin-top: 19px;
-                transform-style: preserve-3d;
-                perspective: 200px;
-                span{
-                    font-size:12px;
-                    font-family:PingFangSC-Regular;
-                    font-weight:400;
-                    color:rgba(255,255,255,1);
-                    float: left;
-                }
-                .w {
-                    margin-left: 8%;
-                    text-align: left;
-                    height: 14px;
-                    background-color: #fff;
-                    position: relative;
-                    .q {
-                        position: absolute;
-                        top: 0;
-                        right: -50px;
-                        font-size: 14px;
-                        color: #fff;
-                    }
-                }
-            }
-        }
-    }
-    .commodityRight{
-        /*background-color: bisque;*/
-        width: 70%;
-        float: right;
-        .commodityR-centen {
-            width: 100%;
-            height: 250px;
-            .commodityR-title {
-                width: 284px;
-                height: 32px;
-                line-height: 32px;
-                background: rgba(126, 165, 254, 1);
-                border-radius: 6px;
-                margin-top: 10%;
-                display: inline-block;
-                .commodityR-title1 {
-                    float: left;
-                    width: 49%;
-                    text-align: center;
-                    span{
-                        font-size:16px;
-                        font-family:PingFangSC-Regular;
-                        font-weight:400;
-                        color:rgba(255,255,255,1);
-                    }
-                    p{
-                        color:rgba(255, 0, 72, 1);
-                        margin-bottom: 0;
-                        display: inline-block;
-                    }
-                }
-            }
-            .commodityR-base{
-
             }
         }
     }

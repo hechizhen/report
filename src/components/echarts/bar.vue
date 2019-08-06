@@ -2,12 +2,12 @@
 <template>
     <div class="bar">
         <div :id="barEchartsData.id" class="barChart">
-            
+
         </div>
     </div>
 </template>
 <script>
-  
+
     export default {
         name : 'bar',
         props:{
@@ -30,32 +30,32 @@
                         isShow:false
                     },
                     type:'xAxis',
-                    barData:[ 
+                    barData:[
                         {
                             name:'ABC',
                             data:[200,300,400,500,600],
                             color:'red',
                             barWidth:11,
                         },
-                        {
-                            name:'ABC11',
-                            data:[300,400,500,100,123],
-                            color:'blue',
-                            barWidth:11,
-                        },
-                        {
-                            name:'ABC33',
-                            data:[333,444,555,666,777],
-                            color:'yellow',
-                            barWidth:11,
-                        }
+                        // {
+                        //     name:'ABC11',
+                        //     data:[300,400,500,100,123],
+                        //     color:'blue',
+                        //     barWidth:11,
+                        // },
+                        // {
+                        //     name:'ABC33',
+                        //     data:[333,444,555,666,777],
+                        //     color:'yellow',
+                        //     barWidth:11,
+                        // }
                     ],
                     showType:0//0是柱状图横过来 1是竖起来
                 }
             }
         },
         components : {
-   
+
         },
         data () {
             return {
@@ -66,7 +66,7 @@
             }
         },
         mounted () {
-            var _this = this  
+            var _this = this
             let echarts = _this.$echarts;
             _this.myChart = echarts.init(document.getElementById(_this.barEchartsData.id))
             _this.setBarOptions()
@@ -187,16 +187,16 @@
             }
         },
         computed:{
-          
+
         },
         watch: {
            barEchartsData(val){
-                var _this = this  
+                var _this = this
                 _this.setBarOptions()
            }
         },
         distroyed: function () {
-            
+
         }
     }
 </script>
@@ -206,7 +206,7 @@
         height:100%;
         .barChart{
             width:100%;
-            height:100%;  
+            height:100%;
         }
     }
 </style>

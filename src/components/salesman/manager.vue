@@ -29,9 +29,11 @@
 				  	</div>
 				  </a-Col>
 				  <a-Col :span="12" class="managerCol">
+				  	<p>总人数(人)</p>
 				  	<p>人均产出(万元)</p>
 				  </a-Col>
 				  <a-Col :span="6" class="managerCol">
+				  	<p><span>{{salesmanData.perCapitaOutput}}</span></p>
 				  	<p>￥<span>{{salesmanData.perCapitaOutput}}</span></p>
 				  </a-Col>
 				</a-Row>
@@ -46,8 +48,8 @@
 				  	</div>
 				  </a-Col>
 				  <a-Col :span="12" class="managerCol">
-				  	<p>总业务员人数<span>{{salesmanData.totalNumber}}</span>人</p>
-				  	<p>业绩下滑人数<span>{{salesmanData.declinePerformance}}</span>人</p>
+				  	<p>总业务员人数(人)<span>{{salesmanData.totalNumber}}</span></p>
+				  	<p>业绩下滑人数(人)<span>{{salesmanData.declinePerformance}}</span></p>
 				  </a-Col>
 				  <a-Col :span="6" class="managerCol">
 				  	<p @click="glidingClick('下滑人员')">下滑人员</p>
@@ -141,6 +143,7 @@
 			    justify-content: center;
 			    flex-direction: column;
 			    p {
+			    	cursor: pointer;
 			    	margin: 0px;
 			    	width: 90px;
 			    	text-align: center;
@@ -155,6 +158,10 @@
 			    p:nth-child(2) {
 			    	margin-top: 6px;
 			    }
+				p:active {
+					color:rgba(255,255,255,1);
+					background:rgba(6,192,98,1);
+				}
 			}
 		} 
 		.produce {
@@ -169,7 +176,7 @@
 			    flex-direction: column;
 			    p {
 			    	margin: 0px;
-			    	font-size:16px;
+			    	font-size:14px;
 					font-family:PingFangSC-Medium;
 					font-weight:bold;
 					color:rgba(255,255,255,1);
@@ -177,9 +184,11 @@
 			}
 			.managerCol:nth-child(3) {
 				p {
-					font-size: 16px;
+					text-align: right;
+					padding-right: 40px;
+					font-size: 14px;
 					span {
-						font-size: 24px;
+						font-size: 16px;
 					}
 				}
 			}
@@ -214,6 +223,7 @@
 			    justify-content: center;
 			    flex-direction: column;
 			    p {
+			    	cursor: pointer;
 			    	margin: 0px;
 			    	width: 90px;
 			    	text-align: center;
@@ -225,6 +235,10 @@
 					font-weight:400;
 					color:rgba(255,255,255,1);
 			    }
+			    p:active {
+					color:rgba(255,255,255,1);
+					background:rgba(228,164,0,1);
+				}
 			}
 		}
 		.icon {

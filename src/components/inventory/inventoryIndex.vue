@@ -5,28 +5,28 @@
             <div class="table-head">
                 <div class="table-headtxt">
                     <span class="yuan">{{Money}}</span>
-                    <strong>{{inventoryaMount.amountTxt}}</strong>
-                    <p> <span>{{Money}}</span>{{inventoryaMount.amount}}</p>
+                    <strong>{{inventoryDetails.amountTxt}}</strong>
+                    <p> <span>{{Money}}</span>{{inventoryDetails.amount}}</p>
                     <span class="shu"></span>
                 </div>
                 <div class="table-headtxt">
                     <span class="yuan"></span>
-                    <strong>{{inventoryaMount.quantityInventory}}</strong>
-                    <p> <span></span>{{inventoryaMount.inventoryNumber}}</p>
+                    <strong>{{inventoryDetails.inventoryNumberTxt}}</strong>
+                    <p> <span></span>{{inventoryDetails.inventoryNumber}}</p>
                 </div>
             </div>
             <div class="table-dase">
-                <div class="table-base" v-for="(item,index) in inventoryaMount.noSales ":key="index">
-                    <span>{{item.txt}}</span>
-                    <span style="font-size:16px;font-family:PingFangSC-Semibold;font-weight:600;width: 74px">{{item.value}}</span>
+                <div class="table-base" v-for="(item,index) in inventoryDetails.noSalesDetail ":key="index">
+                    <span>{{item.name}}</span>
+                    <span style="font-size:16px;font-family:PingFangSC-Semibold;font-weight:600;width: 74px">{{item.NoSales}}</span>
                 </div>
                 <div class="tableLeft-btn">
-                    <newButton :defaultVal="inventoryaMount.noSalesbtn"></newButton>
+                    <newButton :defaultVal="inventoryDetails.noSalesbtn"></newButton>
                 </div>
             </div>
         </div>
-        <inventoryCenten :turnoverTxt="inventoryaMount.turnoverTxt" :turnover="inventoryaMount.turnover"></inventoryCenten>
-        <inventoryDase :inventoryTxt="inventoryData.inventoryTxt" :salesData="inventoryData" ></inventoryDase>
+        <inventoryCenten :turnoverTxt="inventoryDetails.turnoverTxt" :turnover="inventoryDetails.turnover"></inventoryCenten>
+        <inventoryDase :inventoryTxt="inventoryDay" :barData="inventoryDay.inventoryBarData" ></inventoryDase>
         </div>
         <core :coretype="'库存得分'" :coretext="87" :evaluate="'较好'"></core>
     </div>
@@ -39,6 +39,7 @@
     import  core from  '../core'
     export default {
         name: "inventoryIndex",
+        props:["inventoryDay","inventoryDetails","inventoryDayBar"],
         components:{
             inventoryCenten,
             inventoryDase,
@@ -48,74 +49,17 @@
         data(){
             return{
                 Money:"￥",
-                // 库存金额和周转次数
-                inventoryaMount:{
-                    amountTxt:"库存金额（万元）",
-                    amount:"295.99",
-                    quantityInventory:"库存件数（件）",
-                    inventoryNumber:"2049",
-                    noSales:[
-                        {
-                            txt:"6个月未销售商品金额（万元）",
-                            value:"￥321.06"
-                        },
-                        {
-                            txt:"6个月未销售商品数（件）",
-                            value:"21"
-                        }
-                    ],
-                    noSalesbtn:"无交易明细",
-                    turnoverTxt:"库存周转次数 ",
-                    turnover:"99次",
-                },
-
-                // 库存详细
-                inventoryData:{
-                    // 库存数据
-                    inventoryTxt:{
-                        inventoryDay:"库存可销天数（天）",
-                        inventoryVal:"234",
-                        inventoryChain:"环比增长：",
-                        inventoryChainVal:"46.03%",
-                        inventoryYear:"同比增长：",
-                        inventoryYearVal:"-23.23%",
-                    },
-                    //库存详细柱狀圖
-                    inventoryBarData:{
-                        id:'barIdinventory',
-                        xAxisData:["立白","立白","立白","立白","立白","立白"],
-                        xAxis:{
-                            isShowLine:false,
-                            isShowSplit:false,
-                            axisLabelColor:'#333',
-                        },
-                        yAxis:{
-                            isShowLine:false,
-                            isShowSplit:false,
-                            axisLabelColor:'#D7D9E5',
-                        },
-                        label:{
-                            isShow:true
-                        },
-                        type:'xAxis',
-                        barData:[
-                            {
-                                name:'ABC',
-                                data:[23,43,83,111,213,400],
-                                color:'#6BBCFF',
-                                barWidth:5
-                            },
-                        ],
-                        showType:0
-                    },
-                },
+                inventoryBar:[],
             }
         },
-        // props:{
-        //     salesData:{
-        //         type:Object,
-        //     }
-        // },
+        watch:{
+                inventoryDayBar(val){
+                 this.inventoryBar = val;
+    }
+        },
+         mounted() {
+                console.log(this.inventoryDayBar)
+         }
     }
 </script>
 

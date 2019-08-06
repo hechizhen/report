@@ -1,19 +1,43 @@
 <template>
     <div>
+        <div class="productLeft">
+            <div class="productLeft-img">
+                <img :src="commoditydata.productimg">
+            </div>
+            <div class="productLeft-txt">
+                <p>{{commoditydata.name}}</p>
+                <span>{{commoditydata.RatePin}}</span>
+            </div>
+            <div class="productLeft-btn">
+                <newButton :isGhost="true" :defaultVal="commoditydata.btn"  :buttonHandleClick="piebuttonHandleClick"></newButton>
+            </div>
+        </div>
         <div class="commodityRight">
             <div class="commodityR-centen">
-                <div class="commodityR-title"    >
+                <div class="commodityR-title"  >
                     <div class="commodityR-title1" v-for="(item,index) in commoditydata.commoditytitle" :key="index">
                         <span>{{item.name}}</span>
-                        <p>{{item.sales}}</p>
+                        <p>{{item.NoSales}}</p>
                     </div>
                 </div>
-                <div class="commodityR-base" v-for="(em,i) in commoditydata.commoditylink" :key="i">
+                <div class="commodityR-base" >
                     <div class="quan"></div>
-                    <span>{{em.name}}</span>
-                    <span style="font-size:16px;font-family:PingFangSC-Semibold;font-weight:600;">{{em.nunbers}}</span>
+                    <span>{{commoditydata.downGoods.name}}</span>
+                    <span style="font-size:16px;font-family:PingFangSC-Semibold;font-weight:600;">{{commoditydata.downGoods.NoSales}}</span>
                     <div class="productLeft-btn">
-                        <newButton :isGhost="true" :defaultVal="em.btn"></newButton>
+                        <newButton :isGhost="true" :defaultVal="commoditydata.downGoods.btn"
+                                   :buttonHandleClick="upbuttonHandleClick"
+                        ></newButton>
+                    </div>
+                </div>
+                <div class="commodityR-base" >
+                    <div class="quan"></div>
+                    <span>{{commoditydata.upGoods.name}}</span>
+                    <span style="font-size:16px;font-family:PingFangSC-Semibold;font-weight:600;">{{commoditydata.upGoods.NoSales}}</span>
+                    <div class="productLeft-btn">
+                        <newButton :isGhost="true" :defaultVal="commoditydata.upGoods.btn"
+                                   :buttonHandleClick="downbuttonHandleClick"
+                        ></newButton>
                     </div>
                 </div>
             </div>
@@ -34,38 +58,33 @@
     export default {
         name: "commodityRight",
         props:{
-            // commoditydata:{
-            //     type:Object
-            // }
+            commoditydata:{
+              type:Object
+            },
+            upraphy:{
+                type:Function
+            },
+            downraphy:{
+                type:Function
+            },
+            pieraphy:{
+                type:Function
+            },
         },
         data(){
             return{
-                commoditydata: {
-                    commoditytitle:[
-                        {
-                            name:"环比: ",
-                            sales:" -59%"
-                        },
-                        {
-                            name:"同比: ",
-                            sales:" -59%"
-                        }
-                    ],
-                    commoditylink:[
-                        {
-                            name:"销量增长商品数：",
-                            nunbers:"20个",
-                            btn:"下滑商品"
-                        },
-                        {
-                            name:"销量下滑商品数：",
-                            nunbers:"30个",
-                            btn:"增长商品"
-                        }
-                    ],
-                    commodityname:"总商品数",
-                    commoditysum:3445
-                }
+
+            }
+        },
+        methods:{
+            upbuttonHandleClick(val){
+                this.upraphy()
+            },
+            downbuttonHandleClick(val){
+                this.downraphy()
+            },
+            piebuttonHandleClick(val){
+                this.pieraphy()
             }
         },
         components:{
@@ -78,6 +97,55 @@
 </script>
 
 <style lang="less" scoped>
+    .productLeft{
+        width: 30%;
+        float: left;
+        .productLeft-img{
+            width: 46px;
+            height: 46px;
+            margin: auto;
+            margin-top: 38px;
+            img{
+                width: 100%;
+                height: 100%;
+            }
+        }
+        .productLeft-txt{
+            margin-top: 10px;
+            p{
+                width:71px;
+                font-size:14px;
+                font-family:PingFangSC-Medium;
+                font-weight:bold;
+                color:rgba(255,255,255,1);
+                margin: 0 auto;
+            }
+            span{
+                width:99px;
+                font-size:28px;
+                font-family:PingFangSC-Semibold;
+                font-weight:600;
+                color:rgba(255,216,110,1);
+                margin: 0 auto;
+                display: block;
+                margin-top: 12px;
+                text-align: center;
+            }
+        }
+        .productLeft-btn{
+            height:100%;
+            line-height: 26px;
+            margin: 22px  auto  51px;
+            text-align: center;
+            span{
+                width:48px;
+                font-size:12px;
+                font-family:PingFangSC-Regular;
+                font-weight:400;
+                color:rgba(255,255,255,1);
+            }
+        }
+    }
     .commodityRight{
         /*background-color: bisque;*/
         width: 70%;
@@ -85,6 +153,7 @@
         .commodityR-centen {
             width: 60%;
             float: left;
+            /*margin-bottom: 6.6%;*/
             .commodityR-title {
                 width: 80%;
                 line-height: 32px;

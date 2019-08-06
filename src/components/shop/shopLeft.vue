@@ -2,24 +2,34 @@
     <div class="shopLeft">
       <div class="shopLeft-centen" style="height: 178px;">
       <div class="shop-active">
-          <p>{{shopActives.ActiveStores}}<span>{{shopActives.ActiveStoresing}}</span></p>
-          <span>{{shopActives.Activestressum}}</span>
+          <p>{{shopActives.ActiveStoresTxt}}<span>{{shopActives.ActiveStoresing}}</span></p>
+          <span>{{shopActives.ActiveStores}}</span>
           <div class="productLeft-btn">
-              <span>{{shopActives.detailbtn}}</span>
+              <newButton :defaultVal="shopActives.detailbtn"
+              ></newButton>
           </div>
       </div>
       <div class="shop-data">
           <div class="shop-data-title" >
               <div class="shop-data-title1" v-for="(item,index) in shopActives.shopActiveTitle " :key="index"   >
                   <span>{{item.name}} </span>
-                  <p>{{item.sales}}</p>
+                  <p>{{item.NoSales}}</p>
               </div>
           </div>
-          <div class="shop-data-base" v-for="(t,i) in shopActives.shoplist " :key="i">
-              <span>{{t.name}}</span>
-              <span>{{t.sales}}</span>
+          <div class="shop-data-base" >
+              <span>{{ shopActives.downSales.name}}</span>
+              <span>{{ shopActives.downSales.NoSales}}</span>
               <div class="productLeft-btn">
-                  <newButton :defaultVal="t.btn"></newButton>
+                  <newButton :defaultVal="shopActives.downSales.btn" :buttonHandleClick="upbuttonHandleClick"
+                  ></newButton>
+              </div>
+          </div>
+          <div class="shop-data-base" >
+              <span>{{ shopActives.upSales.name}}</span>
+              <span>{{ shopActives.upSales.NoSales}}</span>
+              <div class="productLeft-btn">
+                  <newButton :defaultVal="shopActives.upSales.btn" :buttonHandleClick="downbuttonHandleClick"
+                  ></newButton>
               </div>
           </div>
       </div>
@@ -34,15 +44,36 @@
     import shopBase from  './shopBase'
     export default {
         name: "shopLeft",
-        props:["shopActives"],
+        props:{
+            shopActives:{
+                type:Object
+            },
+            upraphy:{
+                type:Function
+            },
+            downraphy:{
+                type:Function
+            }
+        },
         data(){
             return{
-                defaultVal:"无交易明细"
+                defaultVal:"无交易明细",
+                downData:"下滑门店",
+                upData:"增长门店",
+                unit:"单位：万元"
             }
         },
         components:{
             shopBase,
             newButton
+        },
+        methods:{
+            upbuttonHandleClick(val){
+                this.upraphy()
+            },
+            downbuttonHandleClick(val){
+                this.downraphy()
+            }
         }
     }
 </script>
@@ -81,20 +112,11 @@
             padding-top: 12px;
         }
         .productLeft-btn{
-            width: 72px;
             line-height: 26px;
             text-align: center;
-            border:1px solid rgba(255,255,255,1);
-            border-radius:6px;
             margin: auto;
             margin-top: 20px;
-            span{
-                width:48px;
-                font-size:12px;
-                font-family:PingFangSC-Regular;
-                font-weight:400;
-                color:rgba(255,255,255,1);
-            }
+
         }
     }
     .shop-data{

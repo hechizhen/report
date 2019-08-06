@@ -7,19 +7,17 @@
                  <img :src="shopData.shopImg" style="width: 100%;height: 100%">
              </div>
             <div class="title-txt">
-              <p>{{shopData.shopTitle}} <span style=" font-size:24px;">{{shopData.shopActiverate}}</span></p>
+              <p>{{StoresDetailed.shopTitle}} <span style=" font-size:24px;">{{StoresDetailed.StoreActivity}}</span></p>
             </div>
         </div>
         <div class="shop-centen-middle">
-            <shopLeft :shopActives="shopData.shopActiveData" ></shopLeft>
-            <shopRight :ActiveDetail="shopData.ActiveDetail"></shopRight>
+            <shopLeft :shopActives="StoresDetailed.shopActiveData" :upraphy="upraphy" :downraphy="downraphy"></shopLeft>
+            <shopRight :ActiveDetail="StoresDetailed.ActiveDetail"></shopRight>
         </div>
-        <!--<div class="shop-centen-dase">-->
-            <!--<shopBase></shopBase>-->
-            <!--<shopBase></shopBase>-->
-        <!--</div>-->
     </div>
     <core :coretype="'门店得分'" :coretext="87" :evaluate="'较好'"></core>
+    <shopChartUp v-if="upShow" :trendChartClick="upClick" ></shopChartUp>
+    <shopChartrDown v-if="downShow" :trendChartClick="downClick" ></shopChartrDown>
 </div>
 </template>
 
@@ -28,73 +26,18 @@
     import  shopLeft from './shopLeft'
     import  shopRight from './shopRight'
     import  core from  '../core'
-    // import  shopBase from  './shop/shopBase'
+    import shopChartUp from './shopChartUp'
+    import  shopChartrDown from  './shopChartrDown'
     export default {
         name: "shopIndex",
+        props:["StoresDetailed"],
         data(){
             return{
                 titName:"门店",
+                upShow: false,
+                downShow:false,
                 shopData:{
                     shopImg: require("../../assets/img/mendian.png"),
-                    shopTitle:"门店活跃率：",
-                    shopActiverate:"26.61%",
-                    shopActiveData: {
-                        ActiveStores:"活跃门店数",
-                        ActiveStoresing:"（家）",
-                        Activestressum:9999,
-                        detailbtn:"门店详情",
-                        shopActiveTitle:[
-                            {
-                                name:"环比: ",
-                                sales:" -59%"
-                            },
-                            {
-                                name:"同比: ",
-                                sales:" -59%"
-                            }
-                        ],
-                        shoplist:[
-                            {
-                                name:"销量下滑门店数（家）：",
-                                sales:"58.75%",
-                                btn:"下滑门店"
-                            },
-                            {
-                                name:"销量增长门店数（家）：",
-                                sales:"12%",
-                                btn:"增长门店"
-                            }
-                        ],
-                        shopDaseData:[
-                            {txt:"近3个月无交易门店数(家）：",value:"12"},
-                            {txt:"6个月无交易门店数(家）：",value:"20"}
-                        ]
-                    },
-                    ActiveDetail:{
-                        shopActiveDetail:[
-                            {
-                                ActiveStores:"门店单产",
-                                ActiveStoresing:"（万元）",
-                                Activestressum:3512,
-                            },
-                            {
-                                ActiveStores:"总门店数",
-                                ActiveStoresing:"（家）",
-                                Activestressum:3512,
-                            },
-                            {
-                                ActiveStores:"新增门店数",
-                                ActiveStoresing:"（家）",
-                                Activestressum:3512,
-                            }
-                        ],
-                        shopDaseData:[
-                            {txt:"3个月无交易门店应收欠款(万元) ：",value:"￥10.89"},
-                            {txt:"闭店应收账款（万元）：",value:"￥100.89"}
-                        ]
-                    }
-
-
                 },
             }
         },
@@ -102,8 +45,23 @@
             dataTitle,
             shopLeft,
             shopRight,
-            core
-            // shopBase
+            core,
+            shopChartUp,
+            shopChartrDown
+        },
+        methods:{
+            upraphy(){
+                this.upShow = true;
+            },
+            upClick(){
+                this.upShow = false;
+            },
+            downraphy(){
+                this.downShow = true;
+            },
+            downClick(){
+                this.downShow = false;
+            },
         }
     }
 </script>

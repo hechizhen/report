@@ -1,22 +1,25 @@
 <template>
-    <div class="cententindex" style="width: 100%;margin:4% 0 ">
+    <div class="cententindex" >
         <div class="product">
             <dataTitle :subtitlename="titName"></dataTitle>
             <div class="product-content">
                 <a-Row >
                     <a-Col :span="10">
-                        <productLeft :productdata="productData.productlist[0]"></productLeft>
-                        <productRight></productRight>
-
+                        <productLeft :productdata="CommodityTurnoverRate"></productLeft>
+                        <productRight ></productRight>
                     </a-Col>
                     <a-Col :span="13" :push="1">
-                        <productLeft  :productdata="productData.productlist[1]"></productLeft>
-                        <commodityRight :commoditydata="commoditydata"></commodityRight>
+                        <commodityRight :commoditydata="commoditydata" :upraphy="upraphy" :downraphy="downraphy" :pieraphy="pieraphy" ></commodityRight>
                     </a-Col>
                 </a-Row>
             </div>
         </div>
         <core :coretype="'产品得分'" :coretext="87" :evaluate="'较好'"></core>
+
+        <upproductChart v-if="upShow" :trendChartClick="upClick" ></upproductChart>
+        <downproductChart v-if="downShow" :trendChartClick="downClick" ></downproductChart>
+
+        <productChartPie v-if="pieShow" :trendChartClick="pieClick"></productChartPie>
     </div>
 </template>
 
@@ -26,84 +29,53 @@
     import  commodityRight from './commodityRight'
     import  dataTitle from '../dataTitle'
     import  core from  '../core'
+    import  upproductChart from  './upproductChart'
+    import  downproductChart from  './downproductChart'
+    import  productChartPie  from  './productChartPie'
     export default {
         name: "cententindex",
+        props:["CommodityTurnoverRate","commoditydata"],
         components:{
             productLeft,
             productRight,
             commodityRight,
             dataTitle,
-            core
+            core,
+            upproductChart,
+            downproductChart,
+            productChartPie
         },
         data(){
             return{
+                upShow: false,
+                downShow:false,
+                pieShow:false,
                 titName:"产品",
                 // 产品
-                productData:{
-                    productlist:[
-                        {
-                            productimg:  require("../../assets/img/dongxiao.png"),
-                            name:"商品动销率",
-                            sales:"58.75%",
-                            btn:"动销清单"
-                        },
-                        {
-                            productimg: require("../../assets/img/shangpinshu.png"),
-                            name:"动销商品数",
-                            sales:344,
-                            btn:"商品明细"
-                        }
-                    ],
-                    bardata:[
-                        {
-                            name:"立白",
-                            jindu:"88%",
-                            txt:88},
-                        {
-                            name:"立白",
-                            jindu:"68%",
-                            txt:68},
-                        {
-                            name:"立白",
-                            jindu:"58%",
-                            txt:58},
-                        {
-                            name:"立白",
-                            jindu:"48%",
-                            txt:48},
-                        {
-                            name:"立白",
-                            jindu:"38%",
-                            txt:38},
-                    ],
-                    commoditydata: {
-                        commoditytitle:[
-                            {
-                                name:"环比: ",
-                                sales:" -59%"
-                            },
-                            {
-                                name:"同比: ",
-                                sales:" -59%"
-                            }
-                        ],
-                        commoditylink:[
-                            {
-                                name:"销量增长商品数：",
-                                nunbers:"20个",
-                                btn:"下滑商品"
-                            },
-                            {
-                                name:"销量下滑商品数：",
-                                nunbers:"30个",
-                                btn:"增长商品"
-                            }
-                        ],
-                        commodityname:"总商品数",
-                        commoditysum:3445
-                    }
-                },
             }
+        },
+        methods:{
+            upraphy(){
+                this.upShow = true;
+            },
+            upClick(){
+                this.upShow = false;
+            },
+            downraphy(){
+                this.downShow = true;
+            },
+            downClick(){
+                this.downShow = false;
+            },
+            pieraphy(){
+                this.pieShow = true;
+            },
+            pieClick(){
+                this.pieShow = false;
+            },
+        },
+        mounted() {
+           console.log(this.CommodityTurnoverRate)
         }
     }
 </script>
@@ -119,6 +91,7 @@
                     background:rgba(105,151,255,1);
                     border:1px solid rgba(105,151,255,1);
                     border-radius:6px;
+                    height: 100%;
                 }
             }
         }
