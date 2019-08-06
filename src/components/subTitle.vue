@@ -65,6 +65,7 @@
 		margin: 0;
 	}
 	.subtitle_list li {
+		cursor: pointer;
 		float: left;
 		height: 30px;
 		line-height: 30px;
@@ -76,5 +77,12 @@
 		font-family:PingFangSC-Regular;
 		font-weight:400;
 		color:rgba(45,146,252,1);
+	}
+	.subtitle_list li:hover {
+		color:rgba(106,179,255,1);
+	}
+	.subtitle_list li:active {
+		color:rgba(45,146,252,1);
+		background:rgba(215,217,229,1);
 	}
 </style>

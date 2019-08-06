@@ -4,6 +4,7 @@
 			<div class="title">
 			   <div class="titleborder"></div>
 			   <div class="titletext">当月</div>
+			   <div class="titleclick" @click="topographyClick">走势图</div>
 			</div>
 			<div class="record">
 				<a-Row class="recordConten">
@@ -44,6 +45,9 @@
 			proportioData:{
 				type:Array,
 				default:[]
+			},
+			topography:{
+				type:Function
 			}
 		},
 		data(){
@@ -56,12 +60,16 @@
 				id:'pieId',
                 colorList:['#FF8352', '#E271DE', '#00FFFF', '#4AEAB0'],
                 labelType:1,
-                pieData:this.proportioData,
+                pieData:[],
                 radius:['40%', '60%'],
                 borderWidth:0,
 			}
 		},
-
+		methods:{
+			topographyClick(){
+				this.topography()
+			}
+		},
 		watch:{
             proportioData(val){
                 this.pieEchartsData = {
@@ -74,9 +82,6 @@
 			}
             }
         },
-		methods(){
-
-		},
 	}
 </script>
 <style lang="less" scoped>
@@ -108,6 +113,19 @@
 					font-family:PingFangSC-Medium;
 					font-weight:500;
 					color:rgba(51,51,51,1);
+	    		}
+	    		.titleclick {
+	    			cursor: pointer;
+	    			padding: 3px 0;
+	    			font-size:14px;
+					font-family:PingFangSC-Regular;
+					font-weight:400;
+					color:rgba(51,51,51,1);
+	    			margin-left: 6px;
+	    			width:68px;
+					text-align: center;
+					border:1px solid rgba(220,220,220,1);
+					border-radius:6px;
 	    		}
 			}
 			.record {
