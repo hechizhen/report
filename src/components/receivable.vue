@@ -8,21 +8,21 @@
                 <span class="fontStyle2">{{receivableData.receivableVal}}</span>
             </a-col>
         </a-row>
-        <a-row class="rowStyle1 bg1">
+        <a-row class="rowStyle bg1">
             <a-col :span="18" class="fontStyle1">{{receivableData.receivableMonth}}</a-col>
             <a-col :span="6" class="fontStyle1">
                 <span>{{receivableData.receivableMonthValUnit}}</span>
                 <span>{{receivableData.receivableMonthVal}}</span>
             </a-col>
         </a-row>
-        <a-row class="rowStyle1 bg1">
+        <a-row class="rowStyle bg1">
             <a-col :span="18" class="fontStyle1">{{receivableData.receivableAverage}}</a-col>
             <a-col :span="6" class="fontStyle1">{{receivableData.receivableAverageVal}}</a-col>
         </a-row>
-        <a-row class="rowStyle1 bg marginStyle">
+        <!-- <a-row class="rowStyle1 bg marginStyle">
             <a-col :span="18" class="fontStyle">{{receivableData.receivableDay}}</a-col>
             <a-col :span="6" class="fontStyle">{{receivableData.receivableDayVal}}</a-col>
-        </a-row>
+        </a-row> -->
     </div>
 </template>
 <script>
@@ -62,7 +62,7 @@
         width:95%;
         margin:0 auto;
         .rowStyle{
-            height:73px;
+            height:81px;
             width:100%;
             display:flex;
             align-items: center;

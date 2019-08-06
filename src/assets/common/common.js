@@ -318,6 +318,209 @@ export default{
         }
         return num1;
     };
+    //计算总和
+    Vue.prototype.sum =function(arr) {
+      return eval(arr.join("+"));
+    }
+  // 一帮卖评分计算   valArray：本月销量数组  valArray1：年累计销量数组
+    Vue.prototype.scoreProcess = function (valArray,valArray1) {
+      let list = []
+      let list1 = []
+      //本月销量
+      valArray.map(function(item,index){
+        if(item<=60){
+          list[index] = 0
+        }else
+        if(item>60 && item<=95){
+          list[index] = (item-60)*2
+        }else
+        if(item>95 && item<=100){
+          list[index] = 70+(item-95)*4
+        }else
+        if(item>100 && item<=120){
+          list[index] = 90+parseInt((item-100)/2)
+        }else
+        if(item>120){
+          list[index] = 100
+        }
+      })
+      //年累计销量
+      valArray1.map(function(item,index){
+        if(item<=60){
+          list1[index] = 0
+        }else
+        if(item>60 && item<=95){
+          list1[index] = (item-60)*2
+        }else
+        if(item>95 && item<=100){
+          list1[index] = 70+(item-95)*4
+        }else
+        if(item>100 && item<=120){
+          list1[index] = 90+parseInt((item-100)/2)
+        }else
+        if(item>120){
+          list1[index] = 100
+        }
+      })
+      let average = (this.sum(list)/valArray.length + this.sum(list1)/valArray1.length)/2
+      return average.toFixed(1)
+    };
+    // 二帮卖订单评分计算  上月环比：oldVal  本月环比：newVal
+    Vue.prototype.orderScoreProcess = function (oldVal,newVal) {
+      //环比
+      if(oldVal == newVal){
+          var score = 50
+      }else if(oldVal>newVal){
+          var score = 50 - parseInt((oldVal-newVal)/3)*5
+          score = score<=0 ? 0 : score
+      }else{
+          var score = 50 + parseInt((newVal-oldVal)/3)*5
+          score = score>=100 ? 100 : score
+      }
+      return score.toFixed(1)
+    };
+    // 二帮卖业务员评分计算  业务员达成：reach    人均产出：averageProduce  业务下滑人数占比：radio
+    Vue.prototype.salesManScoreProcess = function (reach,averageProduce,radio) {
+      //业务员达成
+      reach = reach>100 ? 100 : reach
+      console.log(reach)
+      console.log(radio)
+      //人均产出
+      if(averageProduce<=100000){
+        var produceScore = 0
+      }else
+      if(averageProduce>100000 && averageProduce<=130000){
+        var produceScore = parseInt((averageProduce-100000)/1000)*3
+      }else
+      if(averageProduce>130000 && averageProduce<=150000){
+        var produceScore = 60+parseInt((averageProduce-130000)/1000)*1.5
+      }else
+      if(averageProduce>150000 && averageProduce<=160000){
+        var produceScore = 90+parseInt((averageProduce-150000)/1000)*1
+      }else
+      if(averageProduce>160000){
+        var produceScore = 100
+      }
+      console.log(produceScore)
+      //业务下滑人数占比
+      if(radio<=0){
+        var salesRadio = 100
+      }else{
+        var salesRadio = 100-radio
+        console.log(salesRadio)
+        salesRadio = salesRadio<0 ? 0 : salesRadio
+      }
+      console.log(salesRadio)
+      let score = (reach+produceScore+salesRadio)/3
+      return score.toFixed(1)
+    };
+    // 二帮卖产品评分计算   动销率数组：valArray  动销商品数环比：oldVal,newVal 业务下滑人数占比：radio
+    Vue.prototype.productScoreProcess = function (valArray,oldVal,newVal,radio) {
+      //动销率
+      let list = []
+      valArray.map(function(item,index){
+        if(item<=30){
+          list[index] = 0
+        }else if(item>30 && item<=80){
+          list[index] = (item-30)*2
+        }else{
+          list[index] = 100
+        }
+      })
+      let average = this.sum(list)/valArray.length
+      console.log(average)
+      //动销商品数环比
+      let ChainRatio = this.orderScoreProcess(oldVal,newVal)
+      console.log(ChainRatio)
+      //业务下滑人数占比
+      if(radio<=0){
+        var salesRadio = 100
+      }else{
+        console.log(radio)
+        var salesRadio = 100-(100-radio)*2
+        salesRadio = salesRadio<0 ? 0 : salesRadio
+        console.log(salesRadio)
+      }
+      let score = (Number(average)+Number(ChainRatio)+Number(salesRadio))/3
+      return score.toFixed(1)
+    }
+    // 二帮卖门店评分计算    销量下滑门店占 当月无交易门店占比 3个月无交易门店占比：valArray  门店活跃率：activeRate  活跃门店数环比：oldVal newVal
+    Vue.prototype.storeScoreProcess = function (activeRate,oldVal,newVal,valArray) {
+      console.log(valArray)
+      //销量下滑门店占 当月无交易门店占比 3个月无交易门店占比
+      let list = []
+      valArray.map(function(item,index){
+        if(item<=0){
+          list[index] = 100
+        }else{
+          list[index] = 100-parseInt(100-item)*2
+          list[index] = list[index]<0 ? 0 : list[index]
+        }
+      })
+      let average = this.sum(list)/valArray.length
+      //门店活跃率
+      if(activeRate<=10){
+        var newActiveRate = 0
+      }else{
+        var newActiveRate = (activeRate-10)*2
+        newActiveRate = newActiveRate>100 ? 100 : newActiveRate
+      }
+      //活跃门店数环比
+      let chainRatio = this.orderScoreProcess(oldVal,newVal)
+      console.log(average)
+      console.log(chainRatio)
+      console.log(newActiveRate)
+      let score = (Number(average)+Number(chainRatio)+Number(newActiveRate))/3
+      return score.toFixed(1)
+    }
+    // 库存评分计算   6个月未销售商品金额占比 6个月未销售商品件数占比：valArray  库存可销天数：valArray1  库存周转率：turnoverRate  库存可销天数环比增长：valArray1 oldVal
+    Vue.prototype.stockScoreProcess = function (valArray,turnoverRate,valArray1,oldVal,newVal) {
+      //6个月未销售商品金额占比 6个月未销售商品件数占比
+      let list = []
+      valArray.map(function(item,index){
+        if(item==0){
+          list[index] = 100
+        }else{
+          list[index] = 100-(100-item)*5
+          list[index] = list[index]<0 ? 0 : list[index]
+        }
+      })
+      //库存可销天数
+      let list1 = []
+      valArray1.map(function(item,index){
+        if(item>=360){
+          list1[index] = 0
+        }else if(item>=60 && item<360){
+          list1[index] = parseInt((360-item)/3)
+          list1[index] = list1[index]>100 ? 100 : list1[index]
+        }else if(item<=5){
+          list1[index] = 100-parseInt((5-item)/0.1)*2
+          list1[index] = list1[index]<0 ? 0 : list1[index]
+        }
+      })
+      //库存周转率
+      if(turnoverRate<=1){
+        var stockRate =  0
+      }else{
+        var stockRate =  ((turnoverRate-1)/0.1)*2
+        stockRate = stockRate>100 ? 100 : stockRate
+      }
+      //库存可销天数环比增长
+      if(oldVal == newVal){
+        var stockDayRate = 50
+      }else if(oldVal<newVal){
+        var stockDayRate = 50 - (newVal-oldVal)
+      }
+      let average = this.sum(list)/valArray.length 
+      let average1 = this.sum(list1)/valArray1.length
+      console.log(average)
+      console.log(average1)
+      console.log(stockRate)
+      console.log()
+      let score =  (Number(average)+Number(average1)+Number(stockRate))/3
+      console.log(score)
+      return score.toFixed(1)
+    }
 
   /* 获取N天前的日期 不传为当日 */
   Vue.prototype.getDayStr = function (n) {

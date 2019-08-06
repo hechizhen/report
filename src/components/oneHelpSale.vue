@@ -6,25 +6,26 @@
                 <div class="oneHelpSaleTopLeft">
                     <p>本月</p>
                 </div>
-                <div class="oneHelpSaleTopMid">
-                    <a-progress type="circle" :percent="75"  :width="200" :showInfo="false" />
-                    <div class="oneHelpSaleTopMidSales">
-                        <div>
-                            <p>
-                                <i></i>
-                                <span class="salesTxt">下单金额（万）</span>
-                            </p>
-                            <p>
-                                <span class="sales">￥</span>
-                                <span class="salesMoney">{{salesData.sales}}</span>
-                            </p>
+                <div></div>
+                <div class="oneHelpSaleTopLeftBox" :style="{background:salesData.bgColor}">
+                    <div class="oneHelpSaleTopMid">
+                        <div class="oneHelpSaleTopMidSales">
+                            <div>
+                                <p>
+                                    <i></i>
+                                    <span class="salesTxt">下单金额（万）</span>
+                                </p>
+                                <p>
+                                    <span class="sales">￥</span>
+                                    <span class="salesMoney">{{salesData.sales}}</span>
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="oneHelpSaleTopRight">
-                    <p class="rightRadius"></p>
-                    <span class="rightTxt">总达成：</span>
-                    <span class="rightReach">{{salesData.reach}}</span>
+                    <div class="oneHelpSaleTopRight">
+                        <span class="rightTxt">总达成：</span>
+                        <span class="rightReach">{{salesData.reach}}</span>
+                    </div>
                 </div>
             </div>
             <div class="oneHelpSaleBottom">
@@ -97,7 +98,7 @@
                 flex-wrap: wrap;
                 .oneHelpSaleTopLeft{
                     height:100%;
-                    width:120px;
+                    width:15%;
                     p{
                         font-weight:500;
                         color:#333;
@@ -108,13 +109,25 @@
                         margin-top:28px;
                     }
                 }
+                .oneHelpSaleTopLeftBox{
+                    width:80%;
+                    height:170px;
+                    border-radius:6px;
+                    margin-top:20px;
+                    display: flex;
+                    flex-wrap: wrap;
+                }
                 .oneHelpSaleTopMid{
-                    height:100%;
-                    width:250px;
+                    border-radius:118px 118px 0 0;
+                    border:6px solid #fff;
+                    border-bottom:none;
+                    width:236px;
+                    height:118px;
                     position: relative;
                     display: flex;
                     align-items: center;
                     justify-content: center;
+                    margin:20px 5% 0 5%;
                     .oneHelpSaleTopMidSales{
                         position: absolute;
                         width:100%;
@@ -123,8 +136,9 @@
                         align-items: center;
                         justify-content: center;
                         text-align: center;
+                        padding-top:60px;
                         span{
-                            color:rgba(51,51,51,1);
+                            color:#fff;
                         }
                         .salesTxt{
                             font-size: 14px;
@@ -152,12 +166,12 @@
                     .rightTxt{
                         font-size:16px;
                         font-weight:500;
-                        color:rgba(160,165,177,1);
+                        color:#fff;
                     }
                     .rightReach{
                         font-size:18px;
                         font-weight:500;
-                        color:rgba(51,51,51,1);
+                        color:#fff;
                     }
                 }
             }

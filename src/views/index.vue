@@ -100,6 +100,32 @@
             this.indexDefaultDate = year +'/'+ month
         },
         mounted () {
+            let a = [100,80,70,40]
+            let b = [88,99,44,88]
+            console.log(this.scoreProcess(a,b))
+            let c = 23.5
+            let d = 33.5
+            console.log(this.orderScoreProcess(c,d))
+            let e = 23.5
+            let f = 120000
+            let g = 45
+            console.log(this.salesManScoreProcess(e,f,g))
+            let a1 = [22,66,77,99,88]
+            let b1 = 43
+            let c1 = 34
+            let d1 = 22
+            console.log(this.productScoreProcess(a1,b1,c1,d1))
+            let a2 = [22,66,77,99,88]
+            let b2 = 43
+            let c2 = [22,66,77,99,88]
+            let d2 = 67
+            let e2 = 67
+            console.log(this.stockScoreProcess(a2,b2,c2,d2,e2))
+            let a3 = 55
+            let b3 = 43
+            let c3 = 23
+            let d3 = [22,66,77,99,88]
+            console.log(this.storeScoreProcess(a3,b3,c3,d3))
             this.getOverViewData()
             this.getSalesData()
             this.getMonthSalesHistoryData()
@@ -154,10 +180,12 @@
                         monthData:{
                             sales:_this.dataProcess(data.monthSales,'money').num,
                             reach:_this.dataProcess(data.monthReach,'percent').num+_this.dataProcess(data.monthReach,'percent').num,
+                            bgColor:'#2D92FC'
                         },
                         yearData:{
                             sales:_this.dataProcess(data.yearSales,'money').num,
-                            reach:_this.dataProcess(data.yearReach,'percent').num+_this.dataProcess(data.yearReach,'percent').num
+                            reach:_this.dataProcess(data.yearReach,'percent').num+_this.dataProcess(data.yearReach,'percent').num,
+                            bgColor:'#FF9500'
                         }
                     }
                 })
