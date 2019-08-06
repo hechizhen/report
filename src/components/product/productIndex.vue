@@ -1,5 +1,5 @@
 <template>
-    <div class="cententindex" style="width: 100%;margin:4% 0 ">
+    <div class="cententindex" >
         <div class="product">
             <dataTitle :subtitlename="titName"></dataTitle>
             <div class="product-content">
@@ -11,12 +11,14 @@
                     </a-Col>
                     <a-Col :span="13" :push="1">
                         <productLeft  :productdata="commoditydata"></productLeft>
-                        <commodityRight :commoditydata="commoditydata" ></commodityRight>
+                        <commodityRight :commoditydata="commoditydata" :upraphy="upraphy" :downraphy="downraphy" ></commodityRight>
                     </a-Col>
                 </a-Row>
             </div>
         </div>
         <core :coretype="'产品得分'" :coretext="87" :evaluate="'较好'"></core>
+        <upproductChart v-if="upShow" :trendChartClick="upClick" ></upproductChart>
+        <downproductChart v-if="downShow" :trendChartClick="downClick" ></downproductChart>
     </div>
 </template>
 
@@ -26,6 +28,8 @@
     import  commodityRight from './commodityRight'
     import  dataTitle from '../dataTitle'
     import  core from  '../core'
+    import  upproductChart from  './upproductChart'
+    import  downproductChart from  './downproductChart'
     export default {
         name: "cententindex",
         props:["CommodityTurnoverRate","commoditydata"],
@@ -34,13 +38,31 @@
             productRight,
             commodityRight,
             dataTitle,
-            core
+            core,
+            upproductChart,
+            downproductChart
         },
         data(){
             return{
+                upShow: false,
+                downShow:false,
                 titName:"产品",
                 // 产品
             }
+        },
+        methods:{
+            upraphy(){
+                this.upShow = true;
+            },
+            upClick(){
+                this.upShow = false;
+            },
+            downraphy(){
+                this.downShow = true;
+            },
+            downClick(){
+                this.downShow = false;
+            },
         }
     }
 </script>

@@ -11,15 +11,13 @@
             </div>
         </div>
         <div class="shop-centen-middle">
-            <shopLeft :shopActives="StoresDetailed.shopActiveData" ></shopLeft>
+            <shopLeft :shopActives="StoresDetailed.shopActiveData" :upraphy="upraphy" :downraphy="downraphy"></shopLeft>
             <shopRight :ActiveDetail="StoresDetailed.ActiveDetail"></shopRight>
         </div>
-        <!--<div class="shop-centen-dase">-->
-            <!--<shopBase></shopBase>-->
-            <!--<shopBase></shopBase>-->
-        <!--</div>-->
     </div>
     <core :coretype="'门店得分'" :coretext="87" :evaluate="'较好'"></core>
+    <shopChartUp v-if="upShow" :trendChartClick="upClick" ></shopChartUp>
+    <shopChartrDown v-if="downShow" :trendChartClick="downClick" ></shopChartrDown>
 </div>
 </template>
 
@@ -28,13 +26,16 @@
     import  shopLeft from './shopLeft'
     import  shopRight from './shopRight'
     import  core from  '../core'
-    // import  shopBase from  './shop/shopBase'
+    import shopChartUp from './shopChartUp'
+    import  shopChartrDown from  './shopChartrDown'
     export default {
         name: "shopIndex",
         props:["StoresDetailed"],
         data(){
             return{
                 titName:"门店",
+                upShow: false,
+                downShow:false,
                 shopData:{
                     shopImg: require("../../assets/img/mendian.png"),
                 },
@@ -44,8 +45,23 @@
             dataTitle,
             shopLeft,
             shopRight,
-            core
-            // shopBase
+            core,
+            shopChartUp,
+            shopChartrDown
+        },
+        methods:{
+            upraphy(){
+                this.upShow = true;
+            },
+            upClick(){
+                this.upShow = false;
+            },
+            downraphy(){
+                this.downShow = true;
+            },
+            downClick(){
+                this.downShow = false;
+            },
         }
     }
 </script>

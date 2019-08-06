@@ -15,11 +15,20 @@
                   <p>{{item.NoSales}}</p>
               </div>
           </div>
-          <div class="shop-data-base" v-for="(t,i) in shopActives.shoplist " :key="i">
-              <span>{{t.name}}</span>
-              <span>{{t.NoSales}}</span>
+          <div class="shop-data-base" >
+              <span>{{ shopActives.downSales.name}}</span>
+              <span>{{ shopActives.downSales.NoSales}}</span>
               <div class="productLeft-btn">
-                  <newButton :defaultVal="t.btn"></newButton>
+                  <newButton :defaultVal="shopActives.downSales.btn" :buttonHandleClick="upbuttonHandleClick"
+                  ></newButton>
+              </div>
+          </div>
+          <div class="shop-data-base" >
+              <span>{{ shopActives.upSales.name}}</span>
+              <span>{{ shopActives.upSales.NoSales}}</span>
+              <div class="productLeft-btn">
+                  <newButton :defaultVal="shopActives.upSales.btn" :buttonHandleClick="downbuttonHandleClick"
+                  ></newButton>
               </div>
           </div>
       </div>
@@ -34,15 +43,36 @@
     import shopBase from  './shopBase'
     export default {
         name: "shopLeft",
-        props:["shopActives"],
+        props:{
+            shopActives:{
+                type:Object
+            },
+            upraphy:{
+                type:Function
+            },
+            downraphy:{
+                type:Function
+            }
+        },
         data(){
             return{
-                defaultVal:"无交易明细"
+                defaultVal:"无交易明细",
+                downData:"下滑门店",
+                upData:"增长门店",
+                unit:"单位：万元"
             }
         },
         components:{
             shopBase,
             newButton
+        },
+        methods:{
+            upbuttonHandleClick(val){
+                this.upraphy()
+            },
+            downbuttonHandleClick(val){
+                this.downraphy()
+            }
         }
     }
 </script>

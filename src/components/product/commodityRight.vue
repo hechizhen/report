@@ -8,12 +8,24 @@
                         <p>{{item.NoSales}}</p>
                     </div>
                 </div>
-                <div class="commodityR-base" v-for="(em,i) in commoditydata.commoditylink" :key="i">
+                <div class="commodityR-base" >
                     <div class="quan"></div>
-                    <span>{{em.name}}</span>
-                    <span style="font-size:16px;font-family:PingFangSC-Semibold;font-weight:600;">{{em.NoSales}}</span>
+                    <span>{{commoditydata.downGoods.name}}</span>
+                    <span style="font-size:16px;font-family:PingFangSC-Semibold;font-weight:600;">{{commoditydata.downGoods.NoSales}}</span>
                     <div class="productLeft-btn">
-                        <newButton :isGhost="true" :defaultVal="em.btn"></newButton>
+                        <newButton :isGhost="true" :defaultVal="commoditydata.downGoods.btn"
+                                   :buttonHandleClick="upbuttonHandleClick"
+                        ></newButton>
+                    </div>
+                </div>
+                <div class="commodityR-base" >
+                    <div class="quan"></div>
+                    <span>{{commoditydata.upGoods.name}}</span>
+                    <span style="font-size:16px;font-family:PingFangSC-Semibold;font-weight:600;">{{commoditydata.upGoods.NoSales}}</span>
+                    <div class="productLeft-btn">
+                        <newButton :isGhost="true" :defaultVal="commoditydata.upGoods.btn"
+                                   :buttonHandleClick="downbuttonHandleClick"
+                        ></newButton>
                     </div>
                 </div>
             </div>
@@ -33,10 +45,28 @@
     import  newButton from  '../base/newButton'
     export default {
         name: "commodityRight",
-        props:["commoditydata"],
+        props:{
+            commoditydata:{
+              type:Object
+            },
+            upraphy:{
+                type:Function
+            },
+            downraphy:{
+                type:Function
+            }
+        },
         data(){
             return{
 
+            }
+        },
+        methods:{
+            upbuttonHandleClick(val){
+                this.upraphy()
+            },
+            downbuttonHandleClick(val){
+                this.downraphy()
             }
         },
         components:{

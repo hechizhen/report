@@ -442,15 +442,13 @@
                         btn:"增长商品"
                     }
 
-                      _this.commoditydata = {
-                        commoditytitle:[
-                            goodsChainVal,
-                            goodsYearVal
-                        ],
-                            commoditylink:[
-                                downGoods,
-                                upGoods
-                        ],
+                          _this.commoditydata = {
+                            commoditytitle:[
+                                goodsChainVal,
+                                goodsYearVal
+                            ],
+                            downGoods,
+                            upGoods,
                             commodityname:"总商品数",
                             name:"动销商品数",
                             btn:"商品明细",
@@ -538,10 +536,8 @@
                                     AmountChainVal,  //环比数额
                                     AmountYearVal   //同比数额
                                 ],
-                                shoplist:[
                                     downSales,
-                                    upSales
-                                ],
+                                    upSales,
                                 shopDaseData:[
                                     noTrade,
                                     noTrades
