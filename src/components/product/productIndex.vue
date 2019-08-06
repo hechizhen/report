@@ -10,15 +10,17 @@
 
                     </a-Col>
                     <a-Col :span="13" :push="1">
-                        <productLeft  :productdata="commoditydata"></productLeft>
-                        <commodityRight :commoditydata="commoditydata" :upraphy="upraphy" :downraphy="downraphy" ></commodityRight>
+                        <commodityRight :commoditydata="commoditydata" :upraphy="upraphy" :downraphy="downraphy" :pieraphy="pieraphy" ></commodityRight>
                     </a-Col>
                 </a-Row>
             </div>
         </div>
         <core :coretype="'产品得分'" :coretext="87" :evaluate="'较好'"></core>
+
         <upproductChart v-if="upShow" :trendChartClick="upClick" ></upproductChart>
         <downproductChart v-if="downShow" :trendChartClick="downClick" ></downproductChart>
+
+        <productChartPie v-if="pieShow" :trendChartClick="pieClick"></productChartPie>
     </div>
 </template>
 
@@ -30,6 +32,7 @@
     import  core from  '../core'
     import  upproductChart from  './upproductChart'
     import  downproductChart from  './downproductChart'
+    import  productChartPie  from  './productChartPie'
     export default {
         name: "cententindex",
         props:["CommodityTurnoverRate","commoditydata"],
@@ -40,12 +43,14 @@
             dataTitle,
             core,
             upproductChart,
-            downproductChart
+            downproductChart,
+            productChartPie
         },
         data(){
             return{
                 upShow: false,
                 downShow:false,
+                pieShow:false,
                 titName:"产品",
                 // 产品
             }
@@ -62,6 +67,12 @@
             },
             downClick(){
                 this.downShow = false;
+            },
+            pieraphy(){
+                this.pieShow = true;
+            },
+            pieClick(){
+                this.pieShow = false;
             },
         }
     }
