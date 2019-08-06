@@ -8,7 +8,7 @@
                 <span>{{productdata.RatePin}}</span>
             </div>
             <div class="productLeft-btn">
-                <newButton :isGhost="true" :defaultVal="productdata.btn"></newButton>
+                <newButton  :buttonType="buttonType"  :isGhost="true" :defaultVal="productdata.btn"></newButton>
             </div>
         </div>
 </template>
@@ -18,6 +18,14 @@
     export default {
         name: "productLeft",
         props:["productdata"],
+        data(){
+            return{
+                buttonType:""
+            }
+        },
+        mounted() {
+           // console.log(this.productdata.RatePin)
+        },
         components:{
             newButton
         }

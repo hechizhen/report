@@ -21,7 +21,7 @@
         <shopIndex  :StoresDetailed="StoresDetailed"></shopIndex>
          <!--库存-->
         <second-title :titleName="inventoryTitle"></second-title>
-        <inventoryIndex  :inventoryDay="inventoryDay" :inventoryDetails="inventoryDetails"> </inventoryIndex>
+        <inventoryIndex  :inventoryDay="inventoryDay" :inventoryDetails="inventoryDetails" :inventoryDayBar="inventoryDay.inventoryBarData"> </inventoryIndex>
         <!-- 财务 -->
         <finance :financeData="financeData" :receivableData="receivableData" :overDueData="overDueData" :titleName="financeTitle"
         v-if="financeData.length!=0 && receivableData.length!=0 && overDueData.length!=0"></finance>
@@ -83,9 +83,9 @@
                 //库存金额，件数，可周转天数
                 inventoryDetails:"",
                 //库存可销天数
-                inventoryDay: '',
+                inventoryDay: "",
                 //库存可销天数折线图
-                inventoryBarData: '',
+                inventoryBarData: "",
                 requestHttpUrl: this.$store.state.requestHttpUrl,//接口请求地址
                 salesData: '',//本月/累计销量以及达成率
                 salesBarData: '',//一帮卖本月/年累计销量
@@ -400,13 +400,41 @@
                         console.log(res)
                         let data = res.data.data.data
                         console.log(data)
+                    let CommodityBarData = {
+                        id: 'barIdCommodity',
+                        xAxisData: data.commodityBarDataAxiax,
+                        xAxis: {
+                            isShowLine: false,
+                            isShowSplit: false,
+                            axisLabelColor: '#333',
+                        },
+                        yAxis: {
+                            isShowLine: false,
+                            isShowSplit: false,
+                            axisLabelColor: '#D7D9E5',
+                        },
+                        label: {
+                            isShow: true
+                        },
+                        type: 'xAxis',
+                        barData: [
+                            {
+                                name: 'ABC',
+                                data: data.pinData,
+                                color: '#6BBCFF',
+                                barWidth: 5
+                            },
+                        ],
+                        showType: 0
+                    }
                         _this.CommodityTurnoverRate = {
                                 productimg:require("../assets/img/dongxiao.png"),
                                 name:"商品动销率",
                                 RatePin:_this.dataProcess(data.RatePin, 'percent').num+_this.dataProcess(data.RatePin, 'percent').unit, //动销率
                                 btn:"动销清单",
+                                CommodityBarData
                         }
-                        console.log(_this.CommodityTurnoverRate)
+                        console.log(_this.CommodityTurnoverRate.CommodityBarData)
                     },
                 )
             },
@@ -619,34 +647,33 @@
                             inventoryChainVal: _this.dataProcess(data.inventoryYearVal, 'percent').num + _this.dataProcess(data.inventoryYearVal, 'percent').unit,
                         }
                         let inventoryBarData = {
-                            id: 'barIdinventory',
-                            xAxisData: data.BusinessAxiax,
-                            xAxis: {
-                                isShowLine: false,
-                                isShowSplit: false,
-                                axisLabelColor: '#333',
+                        id: 'barIdinventory',
+                        xAxisData: data.inventoryBarDataAxiax,
+                        xAxis: {
+                            isShowLine: false,
+                            isShowSplit: false,
+                            axisLabelColor: '#333',
+                        },
+                        yAxis: {
+                            isShowLine: false,
+                            isShowSplit: false,
+                            axisLabelColor: '#D7D9E5',
+                        },
+                        label: {
+                            isShow: true
+                        },
+                        type: 'xAxis',
+                        barData: [
+                            {
+                                name: 'ABC',
+                                data: data.dayData,
+                                color: '#6BBCFF',
+                                barWidth: 11
                             },
-                            yAxis: {
-                                isShowLine: false,
-                                isShowSplit: false,
-                                axisLabelColor: '#D7D9E5',
-                            },
-                            label: {
-                                isShow: true
-                            },
-                            type: 'xAxis',
-                            barData: [
-                                {
-                                    name: 'ABC',
-                                    data: data.dayData,
-                                    color: '#6BBCFF',
-                                    barWidth: 5
-                                },
-                            ],
-                            showType: 0
-
-                        }
-                    _this.inventoryDay = {
+                        ],
+                        showType: 0
+                    }
+                       _this.inventoryDay = {
                         inventorycompare: [
                             Chain,
                             Year
@@ -655,7 +682,7 @@
                         inventoryVal: _this.dataProcess(data.inventoryVal, 'day').num,
                         inventoryBarData
                     }
-                    console.log(_this.inventoryDay)
+                    console.log(_this.inventoryDay.inventoryBarData)
                     },
                 )
             },

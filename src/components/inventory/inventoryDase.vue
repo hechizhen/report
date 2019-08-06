@@ -32,6 +32,9 @@
         components:{
             barChart
         },
+        watch:{
+
+        },
         mounted () {
             console.log(this.inventoryTxt)
         },

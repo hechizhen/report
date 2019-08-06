@@ -6,8 +6,7 @@
                 <a-Row >
                     <a-Col :span="10">
                         <productLeft :productdata="CommodityTurnoverRate"></productLeft>
-                        <productRight  ></productRight>
-
+                        <productRight ></productRight>
                     </a-Col>
                     <a-Col :span="13" :push="1">
                         <commodityRight :commoditydata="commoditydata" :upraphy="upraphy" :downraphy="downraphy" :pieraphy="pieraphy" ></commodityRight>
@@ -74,6 +73,9 @@
             pieClick(){
                 this.pieShow = false;
             },
+        },
+        mounted() {
+           console.log(this.CommodityTurnoverRate)
         }
     }
 </script>
@@ -89,6 +91,7 @@
                     background:rgba(105,151,255,1);
                     border:1px solid rgba(105,151,255,1);
                     border-radius:6px;
+                    height: 100%;
                 }
             }
         }

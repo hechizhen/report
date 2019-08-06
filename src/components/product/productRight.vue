@@ -5,31 +5,31 @@
                 <div class="product-centen">
                     <span>立白</span>
                     <div class="w" v-bind:style="{ 'width': '88%'}">
-                        <div class="q">32.34%</div>
+                        <div class="q">88%</div>
                     </div>
                 </div>
                 <div class="product-centen">
-                    <span>立白</span>
-                    <div class="w" v-bind:style="{ 'width': '32.34%'}">
-                        <div class="q">32.34%</div>
+                    <span>好爸爸</span>
+                    <div class="w" v-bind:style="{ 'width': '70%'}">
+                        <div class="q">70%</div>
                     </div>
                 </div>
                 <div class="product-centen">
-                    <span>立白</span>
-                    <div class="w" v-bind:style="{ 'width': '32.34%'}">
-                        <div class="q">32.34%</div>
+                    <span>超威</span>
+                    <div class="w" v-bind:style="{ 'width': '50%'}">
+                        <div class="q">50%</div>
                     </div>
                 </div>
                 <div class="product-centen">
-                    <span>立白</span>
-                    <div class="w" v-bind:style="{ 'width': '32.34%'}">
-                        <div class="q">32.34%</div>
+                    <span>口腔</span>
+                    <div class="w" v-bind:style="{ 'width': '29%'}">
+                        <div class="q">29%</div>
                     </div>
                 </div>
                 <div class="product-centen">
-                    <span>立白</span>
-                    <div class="w" v-bind:style="{ 'width': '32.34%'}">
-                        <div class="q">32.34%</div>
+                    <span>晟美</span>
+                    <div class="w" v-bind:style="{ 'width': '88%'}">
+                        <div class="q">88%</div>
                     </div>
                 </div>
             </div>
@@ -67,7 +67,7 @@
                     float: left;
                 }
                 .w {
-                    margin-left: 8%;
+                    margin-left: 12%;
                     text-align: left;
                     height: 14px;
                     background-color: #fff;

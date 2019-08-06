@@ -5,7 +5,8 @@
           <p>{{shopActives.ActiveStoresTxt}}<span>{{shopActives.ActiveStoresing}}</span></p>
           <span>{{shopActives.ActiveStores}}</span>
           <div class="productLeft-btn">
-              <span>{{shopActives.detailbtn}}</span>
+              <newButton :defaultVal="shopActives.detailbtn"
+              ></newButton>
           </div>
       </div>
       <div class="shop-data">
@@ -111,20 +112,11 @@
             padding-top: 12px;
         }
         .productLeft-btn{
-            width: 72px;
             line-height: 26px;
             text-align: center;
-            border:1px solid rgba(255,255,255,1);
-            border-radius:6px;
             margin: auto;
             margin-top: 20px;
-            span{
-                width:48px;
-                font-size:12px;
-                font-family:PingFangSC-Regular;
-                font-weight:400;
-                color:rgba(255,255,255,1);
-            }
+
         }
     }
     .shop-data{

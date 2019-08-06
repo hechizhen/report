@@ -39,7 +39,7 @@
     import  core from  '../core'
     export default {
         name: "inventoryIndex",
-        props:["inventoryDay","inventoryDetails"],
+        props:["inventoryDay","inventoryDetails","inventoryDayBar"],
         components:{
             inventoryCenten,
             inventoryDase,
@@ -49,34 +49,17 @@
         data(){
             return{
                 Money:"￥",
-                // 库存金额和周转次数
-                // inventoryaMount:{
-                //     amountTxt:"库存金额（万元）",
-                //     amount:"295.99",
-                //     quantityInventory:"库存件数（件）",
-                //     inventoryNumber:"2049",
-                //     noSales:[
-                //         {
-                //             txt:"6个月未销售商品金额（万元）",
-                //             value:"￥321.06"
-                //         },
-                //         {
-                //             txt:"6个月未销售商品数（件）",
-                //             value:"21"
-                //         }
-                //     ],
-                //     noSalesbtn:"无交易明细",
-                //     turnoverTxt:"库存周转次数 ",
-                //     turnover:"99次",
-                // },
-
+                inventoryBar:[],
             }
         },
-        // props:{
-        //     salesData:{
-        //         type:Object,
-        //     }
-        // },
+        watch:{
+                inventoryDayBar(val){
+                 this.inventoryBar = val;
+    }
+        },
+         mounted() {
+                console.log(this.inventoryDayBar)
+         }
     }
 </script>
 
