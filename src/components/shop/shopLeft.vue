@@ -2,8 +2,8 @@
     <div class="shopLeft">
       <div class="shopLeft-centen" style="height: 178px;">
       <div class="shop-active">
-          <p>{{shopActives.ActiveStores}}<span>{{shopActives.ActiveStoresing}}</span></p>
-          <span>{{shopActives.Activestressum}}</span>
+          <p>{{shopActives.ActiveStoresTxt}}<span>{{shopActives.ActiveStoresing}}</span></p>
+          <span>{{shopActives.ActiveStores}}</span>
           <div class="productLeft-btn">
               <span>{{shopActives.detailbtn}}</span>
           </div>
@@ -12,12 +12,12 @@
           <div class="shop-data-title" >
               <div class="shop-data-title1" v-for="(item,index) in shopActives.shopActiveTitle " :key="index"   >
                   <span>{{item.name}} </span>
-                  <p>{{item.sales}}</p>
+                  <p>{{item.NoSales}}</p>
               </div>
           </div>
           <div class="shop-data-base" v-for="(t,i) in shopActives.shoplist " :key="i">
               <span>{{t.name}}</span>
-              <span>{{t.sales}}</span>
+              <span>{{t.NoSales}}</span>
               <div class="productLeft-btn">
                   <newButton :defaultVal="t.btn"></newButton>
               </div>
