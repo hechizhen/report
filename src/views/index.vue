@@ -16,9 +16,9 @@
         <!-- 二帮卖分析-业务员 -->
         <salesman :salesmanData="salesmanData"></salesman>
         <!-- 产品 -->
-        <productIndex ></productIndex>
+        <productIndex :CommodityTurnoverRate="CommodityTurnoverRate"  :commoditydata="commoditydata"></productIndex>
         <!--门店-->
-        <shopIndex></shopIndex>
+        <shopIndex  :StoresDetailed="StoresDetailed"></shopIndex>
          <!--库存-->
         <second-title :titleName="inventoryTitle"></second-title>
         <inventoryIndex  :inventoryDay="inventoryDay" :inventoryDetails="inventoryDetails"> </inventoryIndex>
@@ -74,6 +74,12 @@
                 receivableData: '',
                 //逾期账款
                 overDueData: '',
+                //产品-商品动销率
+               CommodityTurnoverRate:"",
+                //产品-动销商品数
+                commoditydata:"",
+                //门店活跃明细
+                StoresDetailed:"",
                 //库存金额，件数，可周转天数
                 inventoryDetails:"",
                 //库存可销天数
@@ -117,6 +123,9 @@
             this.getProportio()
             this.getDaysAvailableStock()
             this.getinventoryDetail()
+            this.getStoresDetailed()
+            this.getCommodityTurnoverRate()
+            this.getNumberMovingGoods()
         },
         methods: {
             //修改时间
@@ -130,6 +139,9 @@
                 this.getOverdueData()
                 this.getDaysAvailableStock()
                 this.getinventoryDetail()
+                this.getStoresDetailed()
+                this.getCommodityTurnoverRate()
+                this.getNumberMovingGoods()
             },
             //体检报告概览
             getOverViewData() {
@@ -375,6 +387,182 @@
                     _this.proportioData = proportioData;
                 })
             },
+            //产品-商品动销率
+            getCommodityTurnoverRate() {
+                var _this = this
+                this.$http({
+                    url: _this.requestHttpUrl + '/CommodityTurnoverRate',
+                    method: 'POST',
+                    data: {
+                        dateTime: _this.currentDate
+                    }
+                }).then(function (res) {
+                        console.log(res)
+                        let data = res.data.data.data
+                        console.log(data)
+                        _this.CommodityTurnoverRate = {
+                                productimg:require("../assets/img/dongxiao.png"),
+                                name:"商品动销率",
+                                RatePin:_this.dataProcess(data.RatePin, 'percent').num+_this.dataProcess(data.RatePin, 'percent').unit, //动销率
+                                btn:"动销清单",
+                        }
+                        console.log(_this.CommodityTurnoverRate)
+                    },
+                )
+            },
+            //产品-动销商品数
+            getNumberMovingGoods() {
+                var _this = this
+                this.$http({
+                    url: _this.requestHttpUrl + '/NumberMovingGoods',
+                    method: 'POST',
+                    data: {
+                        dateTime: _this.currentDate
+                    }
+                }).then(function (res) {
+                        console.log(res)
+                        let data = res.data.data.data
+                        console.log(data)
+                    let goodsChainVal = {
+                        name: "环比: ",
+                        NoSales: _this.dataProcess(data.chainval, 'percent').num + _this.dataProcess(data.chainval, 'percent').unit
+                    }
+                    let goodsYearVal = {
+                        name: "同比: ",
+                        NoSales: _this.dataProcess(data.yearval, 'percent').num + _this.dataProcess(data.yearval, 'percent').unit
+                    }
+                    let downGoods = {
+                        name:"销量增长商品数(个）:",
+                        NoSales:data.upGoods,
+                        btn:"下滑商品"
+                    }
+                    let upGoods = {
+                        name:"销量下滑商品数(个） ：",
+                        NoSales: data.downGoods,
+                        btn:"增长商品"
+                    }
+
+                      _this.commoditydata = {
+                        commoditytitle:[
+                            goodsChainVal,
+                            goodsYearVal
+                        ],
+                            commoditylink:[
+                                downGoods,
+                                upGoods
+                        ],
+                            commodityname:"总商品数",
+                            name:"动销商品数",
+                            btn:"商品明细",
+                             RatePin:data.NumberGoods,
+                            commoditysum:data.commoditysum,
+                            productimg: require("../assets/img/shangpinshu.png"),
+                    }
+                        console.log(_this.commoditydata)
+                    },
+                )
+            },
+            //门店活跃明细
+            getStoresDetailed() {
+                var _this = this
+                this.$http({
+                    url: _this.requestHttpUrl + '/StoresDetailed',
+                    method: 'POST',
+                    data: {
+                        dateTime: _this.currentDate
+                    }
+                }).then(function (res) {
+                        console.log(res)
+                        let data = res.data.data.data
+                        console.log(data)
+                        let AmountChainVal = {
+                            name: "环比: ",
+                            NoSales: _this.dataProcess(data.AmountChainVal, 'percent').num + _this.dataProcess(data.AmountChainVal, 'percent').unit
+                        }
+                        let AmountYearVal = {
+                            name: "同比: ",
+                            NoSales: _this.dataProcess(data.AmountYearVal, 'percent').num + _this.dataProcess(data.AmountYearVal, 'percent').unit
+                        }
+                        let downSales = {
+                            name:"销量下滑门店数（家）：",
+                            NoSales: _this.dataProcess(data.downSales, 'percent').num + _this.dataProcess(data.downSales, 'percent').unit,
+                            btn:"下滑门店"
+                        }
+                        let upSales = {
+                            name:"销量增长门店数（家）：",
+                            NoSales: _this.dataProcess(data.upSales, 'percent').num + _this.dataProcess(data.upSales, 'percent').unit,
+                            btn:"增长门店"
+                        }
+                        let noTrade = {
+                            name: "近3个月无交易门店数(家）： ",
+                            NoSales: data.noTrade
+                        }
+                        let noTrades = {
+                            name: "6个月无交易门店数(家）：",
+                            NoSales:data.noTrades
+                        }
+                        let ActivestresPer = {
+                            ActiveStores:"门店单产",
+                            ActiveStoresing:"（万元）",
+                            NoSales:data.ActivestresPer
+                          }
+                        let ActivestresSum = {
+                            ActiveStores:"总门店数",
+                            ActiveStoresing:"（家）",
+                            NoSales:data.ActivestresSum
+                        }
+                        let ActivestresnNew = {
+                            ActiveStores:"新增门店数",
+                            ActiveStoresing:"（家）",
+                            NoSales:data.ActivestresnNew
+                        }
+                        let nearnoTrade = {
+                            name: "3个月无交易门店应收欠款(万元)：",
+                            NoSales:  _this.dataProcess(data.nearnoTrade, 'money').num,
+                        }
+                        let nearnoTrades = {
+                        name: "闭店应收账款（万元）：",
+                        NoSales: _this.dataProcess(data.nearnoTrades, 'money').num,
+                    }
+
+
+                        _this.StoresDetailed = {
+                            shopTitle:"门店活跃率：",
+                            StoreActivity: _this.dataProcess(data.StoreActivity, 'percent').num,  //门店活跃率
+                            shopActiveData: {
+                                ActiveStoresTxt:"活跃门店数",
+                                ActiveStoresing:"（家）",
+                                ActiveStores:data.ActiveStores,  //门店活跃数
+                                detailbtn:"门店详情",
+                                shopActiveTitle: [
+                                    AmountChainVal,  //环比数额
+                                    AmountYearVal   //同比数额
+                                ],
+                                shoplist:[
+                                    downSales,
+                                    upSales
+                                ],
+                                shopDaseData:[
+                                    noTrade,
+                                    noTrades
+                                ]
+                            },
+                            ActiveDetail:{
+                                shopActiveDetail:[
+                                    ActivestresPer,
+                                    ActivestresSum,
+                                    ActivestresnNew
+                                ],
+                                shopDaseData:[
+                                    nearnoTrade,
+                                    nearnoTrades
+                                ]
+                            }
+                        }
+                        console.log(_this.StoresDetailed)
+                    },
+                )
+            },
             //库存明细金额件数明细
             getinventoryDetail() {
                 var _this = this
@@ -413,7 +601,7 @@
                     },
                 )
             },
-            //库存金额件数明细
+            //库存天数明细
             getDaysAvailableStock() {
                 var _this = this
                 this.$http({
@@ -476,9 +664,6 @@
                 )
             },
 
-
-
-            
             computed: {},
             watch: {},
             distroyed: function () {

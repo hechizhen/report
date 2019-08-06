@@ -3,8 +3,8 @@
     <div class="shopBase">
         <div class="commodityR-base" v-for="(item,index) in shopDaseData" :key="index">
             <div class="quan"></div>
-            <span>{{item.txt}}</span>
-            <p>{{item.value}}</p>
+            <span>{{item.name}}</span>
+            <p>{{item.NoSales}}</p>
         </div>
         <div class="productLeft-btn">
             <newButton :defaultVal="defaultVal"></newButton>

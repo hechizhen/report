@@ -26,7 +26,7 @@
             </div>
         </div>
         <inventoryCenten :turnoverTxt="inventoryDetails.turnoverTxt" :turnover="inventoryDetails.turnover"></inventoryCenten>
-        <inventoryDase :inventoryTxt="inventoryDay" ></inventoryDase>
+        <inventoryDase :inventoryTxt="inventoryDay" :barData="inventoryDay.inventoryBarData" ></inventoryDase>
         </div>
         <core :coretype="'库存得分'" :coretext="87" :evaluate="'较好'"></core>
     </div>
@@ -39,14 +39,7 @@
     import  core from  '../core'
     export default {
         name: "inventoryIndex",
-        props:{
-            inventoryDay:{
-                type:Object
-            },
-            inventoryDetails:{
-                type:Object
-            }
-        },
+        props:["inventoryDay","inventoryDetails"],
         components:{
             inventoryCenten,
             inventoryDase,

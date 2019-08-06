@@ -5,13 +5,13 @@
                 <div class="commodityR-title"    >
                     <div class="commodityR-title1" v-for="(item,index) in commoditydata.commoditytitle" :key="index">
                         <span>{{item.name}}</span>
-                        <p>{{item.sales}}</p>
+                        <p>{{item.NoSales}}</p>
                     </div>
                 </div>
                 <div class="commodityR-base" v-for="(em,i) in commoditydata.commoditylink" :key="i">
                     <div class="quan"></div>
                     <span>{{em.name}}</span>
-                    <span style="font-size:16px;font-family:PingFangSC-Semibold;font-weight:600;">{{em.nunbers}}</span>
+                    <span style="font-size:16px;font-family:PingFangSC-Semibold;font-weight:600;">{{em.NoSales}}</span>
                     <div class="productLeft-btn">
                         <newButton :isGhost="true" :defaultVal="em.btn"></newButton>
                     </div>
@@ -33,39 +33,10 @@
     import  newButton from  '../base/newButton'
     export default {
         name: "commodityRight",
-        props:{
-            // commoditydata:{
-            //     type:Object
-            // }
-        },
+        props:["commoditydata"],
         data(){
             return{
-                commoditydata: {
-                    commoditytitle:[
-                        {
-                            name:"环比: ",
-                            sales:" -59%"
-                        },
-                        {
-                            name:"同比: ",
-                            sales:" -59%"
-                        }
-                    ],
-                    commoditylink:[
-                        {
-                            name:"销量增长商品数：",
-                            nunbers:"20个",
-                            btn:"下滑商品"
-                        },
-                        {
-                            name:"销量下滑商品数：",
-                            nunbers:"30个",
-                            btn:"增长商品"
-                        }
-                    ],
-                    commodityname:"总商品数",
-                    commoditysum:3445
-                }
+
             }
         },
         components:{
@@ -85,6 +56,7 @@
         .commodityR-centen {
             width: 60%;
             float: left;
+            /*margin-bottom: 6.6%;*/
             .commodityR-title {
                 width: 80%;
                 line-height: 32px;

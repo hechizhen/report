@@ -12,7 +12,7 @@
             <span class="shu"></span>
             </div>
         <div class="inventoryDase-right">
-            <barChart :barEchartsData="inventoryTxt.inventoryBarData"></barChart>
+            <barChart :barEchartsData="barData"></barChart>
         </div>
     </div>
 </template>
@@ -23,6 +23,9 @@
         name: "inventoryDase",
         props:{
             inventoryTxt:{
+                type: Object,String
+            },
+            barData:{
                 type: Object
             }
         },
@@ -30,6 +33,7 @@
             barChart
         },
         mounted () {
+            console.log(this.inventoryTxt)
         },
     }
 </script>

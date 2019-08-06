@@ -3,7 +3,7 @@
         <div class="shopRight-title">
         <div class="shop-active" v-for="(item,index) in ActiveDetail.shopActiveDetail" :key="index">
             <p>{{item.ActiveStores}}<span>{{item.ActiveStoresing}}</span></p>
-            <span>{{item.Activestressum}}</span>
+            <span>{{item.NoSales}}</span>
         </div>
         </div>
         <shopBase :shopDaseData="ActiveDetail.shopDaseData" :defaultVal="defaultVal"></shopBase>
