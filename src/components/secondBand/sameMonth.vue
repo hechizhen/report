@@ -52,17 +52,28 @@
 			}
 		},
 		mounted(){
-			console.log('111111111111')
-			console.log(this.proportioData)
 			this.pieEchartsData = {
 				id:'pieId',
                 colorList:['#FF8352', '#E271DE', '#00FFFF', '#4AEAB0'],
                 labelType:1,
-                pieData:this.proportio,
+                pieData:this.proportioData,
                 radius:['40%', '60%'],
                 borderWidth:0,
 			}
 		},
+
+		watch:{
+            proportioData(val){
+                this.pieEchartsData = {
+				id:'pieId',
+                colorList:['#FF8352', '#E271DE', '#00FFFF', '#4AEAB0'],
+                labelType:1,
+                pieData:val,
+                radius:['40%', '60%'],
+                borderWidth:0,
+			}
+            }
+        },
 		methods(){
 
 		},
