@@ -2,34 +2,10 @@
     <div class="productRight">
         <div class="pinRight" >
             <div class="pinRight-centen">
-                <div class="product-centen">
-                    <span>立白</span>
-                    <div class="w" v-bind:style="{ 'width': '88%'}">
-                        <div class="q">88%</div>
-                    </div>
-                </div>
-                <div class="product-centen">
-                    <span>好爸爸</span>
-                    <div class="w" v-bind:style="{ 'width': '70%'}">
-                        <div class="q">70%</div>
-                    </div>
-                </div>
-                <div class="product-centen">
-                    <span>超威</span>
-                    <div class="w" v-bind:style="{ 'width': '50%'}">
-                        <div class="q">50%</div>
-                    </div>
-                </div>
-                <div class="product-centen">
-                    <span>口腔</span>
-                    <div class="w" v-bind:style="{ 'width': '29%'}">
-                        <div class="q">29%</div>
-                    </div>
-                </div>
-                <div class="product-centen">
-                    <span>晟美</span>
-                    <div class="w" v-bind:style="{ 'width': '88%'}">
-                        <div class="q">88%</div>
+                <div class="product-centen" v-for="(item) in dataTxt">
+                    <span>{{item.name}}</span>
+                    <div class="w" v-bind:style="{ 'width':item.txt}">
+                        <div class="q">{{item.txt}}</div>
                     </div>
                 </div>
             </div>
@@ -40,9 +16,25 @@
 <script>
     export default {
         name: "productRight",
+        props:["dataTxt"],
         data(){
             return{
-                productRight:false
+                productRight:false,
+                // dataTxt:[
+                //     {
+                //         name:"立白",
+                //         val:"48",
+                //     },
+                //     {
+                //         name:"立白",
+                //         val:"88",
+                //     },
+                //     {
+                //         name:"立白",
+                //         val:"88",
+                //     }
+                // ]
+
             }
         }
     }

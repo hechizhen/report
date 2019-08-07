@@ -402,41 +402,36 @@
                         console.log(res)
                         let data = res.data.data.data
                         console.log(data)
-                    let CommodityBarData = {
-                        id: 'barIdCommodity',
-                        xAxisData: data.commodityBarDataAxiax,
-                        xAxis: {
-                            isShowLine: false,
-                            isShowSplit: false,
-                            axisLabelColor: '#333',
-                        },
-                        yAxis: {
-                            isShowLine: false,
-                            isShowSplit: false,
-                            axisLabelColor: '#D7D9E5',
-                        },
-                        label: {
-                            isShow: true
-                        },
-                        type: 'xAxis',
-                        barData: [
-                            {
-                                name: 'ABC',
-                                data: data.pinData,
-                                color: '#6BBCFF',
-                                barWidth: 5
-                            },
-                        ],
-                        showType: 0
-                    }
+                        let val1 = {
+                            name: '立白',
+                            txt: _this.dataProcess(data.val1, 'percent').num + _this.dataProcess(data.val1, 'percent').unit,
+                        }
+                        let val2 = {
+                            name: '好爸爸',
+                            txt: _this.dataProcess(data.val2, 'percent').num + _this.dataProcess(data.val2, 'percent').unit,
+                        }
+                        let val3 = {
+                            name: '超威',
+                            txt: _this.dataProcess(data.val3, 'percent').num + _this.dataProcess(data.val3, 'percent').unit,
+                        }
+                        let val4 = {
+                            name: '口腔',
+                            txt: _this.dataProcess(data.val4, 'percent').num + _this.dataProcess(data.val4, 'percent').unit,
+                        }
+                        let val5 = {
+                            name: '晟美',
+                            txt: _this.dataProcess(data.val5, 'percent').num + _this.dataProcess(data.val5, 'percent').unit,
+                        }
                         _this.CommodityTurnoverRate = {
                                 productimg:require("../assets/img/dongxiao.png"),
                                 name:"商品动销率",
                                 RatePin:_this.dataProcess(data.RatePin, 'percent').num+_this.dataProcess(data.RatePin, 'percent').unit, //动销率
                                 btn:"动销清单",
-                                CommodityBarData
+                                dataTxt:[
+                                    val1,val2,val3,val4,val5
+                                     ]
                         }
-                        console.log(_this.CommodityTurnoverRate.CommodityBarData)
+                        console.log(_this.CommodityTurnoverRate)
                     },
                 )
             },
