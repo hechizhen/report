@@ -12,7 +12,7 @@
             //按钮样式
             buttonType:{
                 type:String,
-                default:''
+                default:'default'
             },
             //是否使用ghost
             isGhost:{

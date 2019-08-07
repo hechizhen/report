@@ -127,6 +127,12 @@
             this.getCommodityTurnoverRate()
             this.getNumberMovingGoods()
         },
+        computed: {
+
+        },
+        watch: {
+            
+        },
         methods: {
             //修改时间
             indexChangeDate(val) {
@@ -683,9 +689,6 @@
                     },
                 )
             },
-
-            computed: {},
-            watch: {},
             distroyed: function () {
 
             }

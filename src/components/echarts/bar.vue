@@ -13,7 +13,7 @@
         props:{
             barEchartsData:{
                 type:Object,
-                default:{
+                default: () => ({
                     id:'barId',
                     xAxisData:[1,2,3,4,5,6,7,8,9,10],
                     xAxis:{
@@ -51,7 +51,7 @@
                         // }
                     ],
                     showType:0//0是柱状图横过来 1是竖起来
-                }
+                })
             }
         },
         components : {

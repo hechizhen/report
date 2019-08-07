@@ -13,7 +13,7 @@
         props:{
             lineEchartsData:{
                 type:Object,
-                default:{
+                default: () => ({
                     id:'lineId',
                     xAxisData:[1,2,3,4,5,6,7,8,9,10],
                     lineData:[ 
@@ -33,7 +33,7 @@
                             color:'grey'
                         }
                     ]
-                }
+                })
             }
         },
         components : {

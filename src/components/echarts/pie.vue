@@ -13,7 +13,7 @@
         props:{
             pieEchartsData:{
                 type:Object,
-                default:{
+                default: () => ({
                     id:'pieId',
                     colorList:['#FF8352', '#E271DE', '#00FFFF', '#4AEAB0'],
                     labelType:1,
@@ -35,7 +35,11 @@
                             }],
                     radius:['40%', '60%'],
                     borderWidth:0,
-                }
+                })
+            },
+            //饼图点击事件
+            chartHandleClick:{
+                type:Function
             }
         },
         components : {
@@ -46,7 +50,6 @@
             }
         },
         mounted () {
-            console.log(this.pieEchartsData)
             var _this = this  
             let echarts = _this.$echarts;
             _this.myChart = echarts.init(document.getElementById(_this.pieEchartsData.id))
@@ -136,6 +139,10 @@
                     }]
                 };
                 this.myChart.setOption(option);
+                this.myChart.on('click', function eConfig(param){
+                        console.log(param)
+                        this.chartHandleClick(param.data.name)
+                });
             }
         },
         computed:{
