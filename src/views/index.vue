@@ -182,17 +182,21 @@
                         monthData:{
                             sales:_this.dataProcess(data.monthSales,'money').num,
                             reach:_this.dataProcess(data.monthReach,'percent').num+_this.dataProcess(data.monthReach,'percent').num,
-                            bgColor:'#2D92FC'
+                            bgColor:'#2D92FC',
+                            borderColor:'4px solid #2D92FC',
+                            titleName:'本月'
                         },
                         yearData:{
                             sales:_this.dataProcess(data.yearSales,'money').num,
                             reach:_this.dataProcess(data.yearReach,'percent').num+_this.dataProcess(data.yearReach,'percent').num,
-                            bgColor:'#FF9500'
+                            bgColor:'#FF9500',
+                            borderColor:'4px solid #FF9500',
+                            titleName:'年累计'
                         }
                     }
                 })
             },
-            //本月/年累计达成率历史趋势
+            //本月/年累计达成率柱状图
             getMonthSalesHistoryData() {
                 var _this = this
                 this.$http({
@@ -204,6 +208,16 @@
                 }).then(function (res) {
                     console.log(res)
                     let data = res.data.data.data
+                    let list = []
+                    let list1 = []
+                    data.monthData.map(function(item){
+                        item = _this.dataProcess(item,'percent').num
+                        list.push(item)
+                    })
+                    data.yearData.map(function(item){
+                        item = _this.dataProcess(item,'percent').num
+                        list1.push(item)
+                    })
                     let monthBarData = {
                         id: 'barIdMonthSales',
                         xAxisData: data.BusinessAxiax,
@@ -224,12 +238,17 @@
                         barData: [
                             {
                                 name: 'ABC',
-                                data: data.monthData,
+                                data: list,
                                 color: '#D7D9E5',
                                 barWidth: 11
                             },
                         ],
-                        showType: 0
+                        showType: 0,
+                        markLineList:{
+                            show:true,
+                            name:'平均',
+                            data:100,
+                        }
                     }
                     let yearBarData = {
                         id: 'barIdYearSales',
@@ -251,12 +270,17 @@
                         barData: [
                             {
                                 name: 'ABC',
-                                data: data.yearData,
+                                data: list1,
                                 color: '#D7D9E5',
                                 barWidth: 11
                             },
                         ],
-                        showType: 0
+                        showType: 0,
+                        markLineList:{
+                            show:true,
+                            name:'平均',
+                            data:100,
+                        }
                     }
                     _this.salesBarData = {
                         monthBarData,

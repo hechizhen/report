@@ -50,7 +50,10 @@
                         //     barWidth:11,
                         // }
                     ],
-                    showType:0//0是柱状图横过来 1是竖起来
+                    showType:0,//0横过来 1竖起来
+                    markLineList:{
+                        show:false
+                    }
                 })
             }
         },
@@ -66,6 +69,7 @@
             }
         },
         mounted () {
+            console.log(this.barEchartsData)
             var _this = this
             let echarts = _this.$echarts;
             _this.myChart = echarts.init(document.getElementById(_this.barEchartsData.id))
@@ -77,12 +81,45 @@
         methods: {
             setBarOptions(){
                 var _this = this
+                if(_this.barEchartsData.markLineList.show==true){
+                    var markLineObj={
+                        data: [{
+                            name:_this.barEchartsData.markLineList.name,
+                            yAxis:_this.barEchartsData.markLineList.data,
+                            symbol:'none',
+                            lineStyle: {
+                                normal: {
+                                    color: '#dcdcdc',
+                                    type: 'solid',
+                                    width: 1
+                                }
+                            },
+                            x: '',
+                            label: {
+                                normal: {
+                                    color: '#999',
+                                    position: 'end',
+                                    padding: [-12, 10, 0, -12],
+                                    formatter:function(params){
+                                        // return params.name+':'
+                                        // +params.value+markLineConfiguration.unit
+                                    },
+                                    fontSize:12,
+                                }
+                            },
+                            type: 'average'
+                        }]
+                    };
+                }else{
+                    var markLineObj={}
+                }
                 let seriesData = []
                 _this.barEchartsData.barData.map(function(item,index){
                     seriesData.push({
                         name: item.name,
                         type: 'bar',
                         data: item.data,
+                        markLine:markLineObj,
                         itemStyle:{
                             normal:{
                                 color: item.color,

@@ -8,7 +8,7 @@
                 <span class="fontStyle2">{{receivableData.receivableVal}}</span>
             </a-col>
         </a-row>
-        <a-row class="rowStyle bg1">
+        <a-row class="rowStyle bg1 borderBottom">
             <a-col :span="18" class="fontStyle1">{{receivableData.receivableMonth}}</a-col>
             <a-col :span="6" class="fontStyle1">
                 <span>{{receivableData.receivableMonthValUnit}}</span>
@@ -72,6 +72,9 @@
             height:43px;
             width:100%;
             line-height: 43px;
+        }
+        .borderBottom{
+            border-bottom:1px solid rgba(220,223,230,1);
         }
         .bg{
             background:rgba(107,188,255,1);

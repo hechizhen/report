@@ -160,11 +160,11 @@ export default{
                             }
                             var unit = '%'
                         } else {
-                            var num = (data * 100).toFixed(1)
+                            var num = (data * 100).toFixed(2)
                             var unit = '%'
                         }
                     } else {
-                        var num = (data * 100).toFixed(1)
+                        var num = (data * 100).toFixed(2)
                         var unit = '%'
                     }
                 } else if (type == 'day') {
@@ -467,9 +467,6 @@ export default{
       }
       //活跃门店数环比
       let chainRatio = this.orderScoreProcess(oldVal,newVal)
-      console.log(average)
-      console.log(chainRatio)
-      console.log(newActiveRate)
       let score = (Number(average)+Number(chainRatio)+Number(newActiveRate))/3
       return score.toFixed(1)
     }
@@ -513,12 +510,7 @@ export default{
       }
       let average = this.sum(list)/valArray.length 
       let average1 = this.sum(list1)/valArray1.length
-      console.log(average)
-      console.log(average1)
-      console.log(stockRate)
-      console.log()
       let score =  (Number(average)+Number(average1)+Number(stockRate))/3
-      console.log(score)
       return score.toFixed(1)
     }
 

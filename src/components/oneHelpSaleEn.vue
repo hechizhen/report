@@ -3,10 +3,10 @@
 		<second-title :titleName="titleName"></second-title>
 		<div class="oneHelpSaleEnBox">
 			<div class="oneHelpSaleEnBoxLeft">
-				<one-help-sale :salesData="salesData.monthData" :barData="barData.monthBarData"></one-help-sale>
+				<one-help-sale :salesData="salesData.monthData" :barData="barData.monthBarData" v-if="salesData.length!=0"></one-help-sale>
 			</div>
 			<div class="oneHelpSaleEnBoxRight">
-				<one-help-sale :salesData="salesData.yearData" :barData="barData.yearBarData"></one-help-sale>
+				<one-help-sale :salesData="salesData.yearData" :barData="barData.yearBarData" v-if="salesData.length!=0"></one-help-sale>
 			</div>
 		</div>
 		<core :coretype="coreData.coretype" :coretext="coreData.coretext" :evaluate="coreData.evaluate"></core>
@@ -43,8 +43,11 @@
 		},
 		data(){
 			return {
-
+				
 			}
+		},
+		mounted(){
+			console.log(this.barData)
 		},
 		methods:{
 

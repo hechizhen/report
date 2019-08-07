@@ -14,7 +14,7 @@ fs.open('./src/config/env.js', 'w', function (err, fd) {
 
 module.exports = merge(webpackBaseConfig, {
     output: {
-        publicPath: '/liveOperaton/',
+        publicPath: '/report/',
         filename: '[name].[hash].js',
         chunkFilename: '[name].[hash].chunk.js'
     },
@@ -39,7 +39,7 @@ module.exports = merge(webpackBaseConfig, {
         }),
         new HtmlWebpackPlugin({
             title:"体检报告",
-            filename: '../liveOperaton/index.html',
+            filename: '../report/index.html',
             template: './src/template/index.ejs',
             inject: false
         })

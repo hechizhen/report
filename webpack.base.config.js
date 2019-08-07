@@ -16,7 +16,7 @@ module.exports = {
 
     },
     output: {
-        path: path.join(__dirname, './liveOperaton')
+        path: path.join(__dirname, './report')
     },
     module: {
         rules: [

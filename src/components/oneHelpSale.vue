@@ -4,7 +4,7 @@
         <div class="oneHelpSaleBox">
             <div class="oneHelpSaleTop">
                 <div class="oneHelpSaleTopLeft">
-                    <p>本月</p>
+                    <p :style="{background:salesData.bgColor}"></p><p>{{salesData.titleName}}</p>
                 </div>
                 <div></div>
                 <div class="oneHelpSaleTopLeftBox" :style="{background:salesData.bgColor}">
@@ -99,13 +99,19 @@
                 .oneHelpSaleTopLeft{
                     height:100%;
                     width:15%;
-                    p{
+                    display: flex;
+                    p:first-child{
+                        width:4px;
+                        height:12px;
+                        border-radius:2px;
+                        margin-top: 32px;
+                        margin-left:12px;
+                    }
+                    p:nth-child(2){
                         font-weight:500;
                         color:#333;
-                        padding-left:10px;
+                        padding-left:5px;
                         font-size: 16px;
-                        border-left:4px solid #2D92FC;
-                        margin-left:10px;
                         margin-top:28px;
                     }
                 }
