@@ -21,7 +21,7 @@
 
         <productChartPie v-if="pieShow" :trendChartClick="pieClick" :pieEchartsData="pieEchartsData"
         ></productChartPie>
-        <productList  v-if="listShow"  :trendChartClick="listClick" ></productList>
+        <!--<productList  v-if="listShow"  :trendChartClick="listClick" ></productList>-->
     </div>
 </template>
 
@@ -34,7 +34,7 @@
     import  upproductChart from  './upproductChart'
     import  downproductChart from  './downproductChart'
     import  productChartPie  from  './productChartPie'
-    import  productList from  './productList'
+    // import  productList from  './productList'
     export default {
         name: "cententindex",
         props:["CommodityTurnoverRate","commoditydata","GoodsDetail"],
@@ -47,7 +47,7 @@
             upproductChart,
             downproductChart,
             productChartPie,
-            productList
+            // productList
         },
         data(){
             return{
@@ -56,7 +56,7 @@
                 upShow: false,
                 downShow:false,
                 pieShow:false,
-                listShow:true,
+                listShow:false,
                 titName:"产品",
                 // 产品
             }
@@ -79,12 +79,6 @@
             },
             pieClick(){
                 this.pieShow = false;
-            },
-            listraphy(){
-                this.listShow = true;
-            },
-            listClick(){
-                this.listShow = false;
             },
         },
         watch:{

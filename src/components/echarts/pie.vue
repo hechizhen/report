@@ -40,7 +40,7 @@
             //饼图点击事件
             chartHandleClick:{
                 type:Function
-            }
+            },
         },
         components : {
 
@@ -142,7 +142,7 @@
                 this.myChart.setOption(option);
                 this.myChart.on('click', function eConfig(param){
                         console.log(param)
-                        this.chartHandleClick(param.data.name)
+                        _this.chartHandleClick(param.data.name)
                 });
             }
         },
