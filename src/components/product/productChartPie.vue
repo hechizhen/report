@@ -13,7 +13,7 @@
                 </a-Row>
             </div>
             <div class="lineEcharts">
-                <pieEcharts></pieEcharts>
+                <pieEcharts :pieEchartsData="pieEchartsData" ></pieEcharts>
             </div>
         </div>
     </div>
@@ -28,14 +28,24 @@
         props:{
             trendChartClick:{
                 type:Function
-            }
+            },
+            pieEchartsData:{
+                type:Array,
+                default:[]
+            },
+            listraphy:{
+                type:Function
+            },
         },
 
         data(){
             return {
-
             }
         },
+        mounted(){
+        // console.log(this.listraphy)
+        },
+
         methods:{
             thendChartClicks(){
                 this.trendChartClick()

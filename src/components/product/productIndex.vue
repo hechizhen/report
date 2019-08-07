@@ -19,7 +19,9 @@
         <upproductChart v-if="upShow" :trendChartClick="upClick" ></upproductChart>
         <downproductChart v-if="downShow" :trendChartClick="downClick" ></downproductChart>
 
-        <productChartPie v-if="pieShow" :trendChartClick="pieClick"></productChartPie>
+        <productChartPie v-if="pieShow" :trendChartClick="pieClick" :pieEchartsData="pieEchartsData"
+        ></productChartPie>
+        <productList  v-if="listShow"  :trendChartClick="listClick" ></productList>
     </div>
 </template>
 
@@ -32,9 +34,10 @@
     import  upproductChart from  './upproductChart'
     import  downproductChart from  './downproductChart'
     import  productChartPie  from  './productChartPie'
+    import  productList from  './productList'
     export default {
         name: "cententindex",
-        props:["CommodityTurnoverRate","commoditydata"],
+        props:["CommodityTurnoverRate","commoditydata","GoodsDetail"],
         components:{
             productLeft,
             productRight,
@@ -43,13 +46,17 @@
             core,
             upproductChart,
             downproductChart,
-            productChartPie
+            productChartPie,
+            productList
         },
         data(){
             return{
+                goodsData:"",
+                pieEchartsData:{},
                 upShow: false,
                 downShow:false,
                 pieShow:false,
+                listShow:true,
                 titName:"产品",
                 // 产品
             }
@@ -73,9 +80,28 @@
             pieClick(){
                 this.pieShow = false;
             },
+            listraphy(){
+                this.listShow = true;
+            },
+            listClick(){
+                this.listShow = false;
+            },
+        },
+        watch:{
+            GoodsDetail(val){
+                this.goodsData = val;
+                this.pieEchartsData = {
+                    id:'pieEchartsId',
+                    colorList:['#66E3E2', '#89D6D7', '#8AD493', '#65BF6B',"#F2AB60","#F0D570","#8CA9F6","#AABBF7","#66D6FF","#9BDBEF","#61B8F6","#B4D8D0"],
+                    labelType:2,
+                    pieData:this.goodsData,
+                    radius:['100%', '5%'],
+                    borderWidth:0,
+                }
+            }
         },
         mounted() {
-           console.log(this.CommodityTurnoverRate)
+          // console.log(this.goodsData)
         }
     }
 </script>
