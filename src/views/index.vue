@@ -87,6 +87,7 @@
                 //库存可销天数折线图
                 inventoryBarData: "",
                 requestHttpUrl: this.$store.state.requestHttpUrl,//接口请求地址
+                testRequestHttpUrl: this.$store.state.testRequestHttpUrl,//接口请求地址
                 salesData: '',//本月/累计销量以及达成率
                 salesBarData: '',//一帮卖本月/年累计销量
                 oneHelpSaleScoreList: {//一帮卖评分
@@ -169,12 +170,20 @@
             //本月/年累计下单金额以及总达成
             getSalesData() {
                 var _this = this
+                var params = {
+                    "inputParam":{
+                        "date_dt":_this.currentDate
+                    },
+                    "outputCol":"monthSales,monthReach,yearSales,yearReach",
+                    "pageNum":1,
+                    "pageSize":1000,
+                    "serviceId":"inspect_report_sales_data",
+                    "orderCol":"monthSales"
+                }
                 this.$http({
-                    url: _this.requestHttpUrl + '/SalesData',
+                    url: _this.testRequestHttpUrl,
                     method: 'POST',
-                    data: {
-                        dateTime: _this.currentDate
-                    }
+                    data: params
                 }).then(function (res) {
                     console.log(res)
                     let data = res.data.data.data
@@ -208,19 +217,19 @@
                 }).then(function (res) {
                     console.log(res)
                     let data = res.data.data.data
-                    let list = []
-                    let list1 = []
-                    data.monthData.map(function(item){
-                        item = _this.dataProcess(item,'percent').num
-                        list.push(item)
-                    })
-                    data.yearData.map(function(item){
-                        item = _this.dataProcess(item,'percent').num
-                        list1.push(item)
+                    let monthData = []
+                    let yearData = []
+                    let Axiax = []
+                    data.map(function(item){
+                        Axiax.push(item.Axiax)
+                        item.monthData = _this.dataProcess(item.monthData,'percent').num
+                        item.yearData = _this.dataProcess(item.yearData,'percent').num
+                        monthData.push(item.monthData)
+                        yearData.push(item.yearData)
                     })
                     let monthBarData = {
                         id: 'barIdMonthSales',
-                        xAxisData: data.BusinessAxiax,
+                        xAxisData: Axiax,
                         xAxis: {
                             isShowLine: false,
                             isShowSplit: false,
@@ -238,7 +247,7 @@
                         barData: [
                             {
                                 name: 'ABC',
-                                data: list,
+                                data: monthData,
                                 color: '#D7D9E5',
                                 barWidth: 11
                             },
@@ -252,7 +261,7 @@
                     }
                     let yearBarData = {
                         id: 'barIdYearSales',
-                        xAxisData: data.BusinessAxiax,
+                        xAxisData: Axiax,
                         xAxis: {
                             isShowLine: false,
                             isShowSplit: false,
@@ -270,7 +279,7 @@
                         barData: [
                             {
                                 name: 'ABC',
-                                data: list1,
+                                data: yearData,
                                 color: '#D7D9E5',
                                 barWidth: 11
                             },

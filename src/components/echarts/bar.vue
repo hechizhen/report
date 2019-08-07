@@ -191,6 +191,9 @@
                     yAxis: {
                         type: _this.yAxisType,
                         data: _this.yAxisData,
+                        min:0,
+                        max:200,
+                        interval: 100000,
                         splitLine: {
                             show:_this.barEchartsData.yAxis.isShowSplit,
                             lineStyle: {
