@@ -13,7 +13,7 @@
         props:{
             pieEchartsData:{
                 type:Object,
-                default:{
+                default: () => ({
                     id:'pieId',
                     colorList:['#FF8352', '#E271DE', '#00FFFF', '#4AEAB0'],
                     labelType:1,
@@ -35,7 +35,7 @@
                             }],
                     radius:['40%', '60%'],
                     borderWidth:0,
-                }
+                })
             }
         },
         components : {

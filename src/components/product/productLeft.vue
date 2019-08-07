@@ -20,7 +20,7 @@
         props:["productdata"],
         data(){
             return{
-                buttonType:""
+                buttonType:"default"
             }
         },
         mounted() {
