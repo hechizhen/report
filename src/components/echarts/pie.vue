@@ -2,12 +2,12 @@
 <template>
     <div class="pie">
         <div :id="pieEchartsData.id" class="pieChart">
-            
+
         </div>
     </div>
 </template>
 <script>
-  
+
     export default {
         name : 'pie',
         props:{
@@ -40,17 +40,17 @@
             //饼图点击事件
             chartHandleClick:{
                 type:Function
-            }
+            },
         },
         components : {
-   
+
         },
         data () {
             return {
             }
         },
         mounted () {
-            var _this = this  
+            var _this = this
             let echarts = _this.$echarts;
             _this.myChart = echarts.init(document.getElementById(_this.pieEchartsData.id))
             _this.setPieOptions()
@@ -101,7 +101,8 @@
                             position: 'inside', //标签的位置
                             formatter: "{d}%",
                             textStyle: {
-                                color: '#fff',
+                                color: '#333333',
+                                fontSize:"14px",
                             }
                         },
                     }
@@ -141,23 +142,23 @@
                 this.myChart.setOption(option);
                 this.myChart.on('click', function eConfig(param){
                         console.log(param)
-                        this.chartHandleClick(param.data.name)
+                        _this.chartHandleClick(param.data.name)
                 });
             }
         },
         computed:{
-          
+
         },
         watch:{
             pieEchartsData(val){
-                var _this = this  
+                var _this = this
                 let echarts = _this.$echarts;
                 _this.myChart = echarts.init(document.getElementById(_this.pieEchartsData.id))
                 _this.setPieOptions()
             }
         },
         distroyed: function () {
-            
+
         }
     }
 </script>
@@ -167,7 +168,7 @@
         height:100%;
         .pieChart{
             width:100%;
-            height:100%;  
+            height:100%;
         }
     }
 </style>

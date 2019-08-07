@@ -16,7 +16,7 @@
         <!-- 二帮卖分析-业务员 -->
         <salesman :salesmanData="salesmanData"></salesman>
         <!-- 产品 -->
-        <productIndex :CommodityTurnoverRate="CommodityTurnoverRate"  :commoditydata="commoditydata"></productIndex>
+        <productIndex :CommodityTurnoverRate="CommodityTurnoverRate"  :commoditydata="commoditydata" :GoodsDetail="GoodsDetail"></productIndex>
         <!--门店-->
         <shopIndex  :StoresDetailed="StoresDetailed"></shopIndex>
          <!--库存-->
@@ -78,6 +78,8 @@
                CommodityTurnoverRate:"",
                 //产品-动销商品数
                 commoditydata:"",
+                //产品-动销商品明细-饼图
+                GoodsDetail:"",
                 //门店活跃明细
                 StoresDetailed:"",
                 //库存金额，件数，可周转天数
@@ -127,12 +129,13 @@
             this.getStoresDetailed()
             this.getCommodityTurnoverRate()
             this.getNumberMovingGoods()
+            this.getGoodsdetail()
         },
         computed: {
 
         },
         watch: {
-            
+
         },
         methods: {
             //修改时间
@@ -149,6 +152,7 @@
                 this.getStoresDetailed()
                 this.getCommodityTurnoverRate()
                 this.getNumberMovingGoods()
+                this.getGoodsdetail()
             },
             //体检报告概览
             getOverViewData() {
@@ -191,21 +195,17 @@
                         monthData:{
                             sales:_this.dataProcess(data.monthSales,'money').num,
                             reach:_this.dataProcess(data.monthReach,'percent').num+_this.dataProcess(data.monthReach,'percent').num,
-                            bgColor:'#2D92FC',
-                            borderColor:'4px solid #2D92FC',
-                            titleName:'本月'
+                            bgColor:'#2D92FC'
                         },
                         yearData:{
                             sales:_this.dataProcess(data.yearSales,'money').num,
                             reach:_this.dataProcess(data.yearReach,'percent').num+_this.dataProcess(data.yearReach,'percent').num,
-                            bgColor:'#FF9500',
-                            borderColor:'4px solid #FF9500',
-                            titleName:'年累计'
+                            bgColor:'#FF9500'
                         }
                     }
                 })
             },
-            //本月/年累计达成率柱状图
+            //本月/年累计达成率历史趋势
             getMonthSalesHistoryData() {
                 var _this = this
                 this.$http({
@@ -252,12 +252,7 @@
                                 barWidth: 11
                             },
                         ],
-                        showType: 0,
-                        markLineList:{
-                            show:true,
-                            name:'平均',
-                            data:100,
-                        }
+                        showType: 0
                     }
                     let yearBarData = {
                         id: 'barIdYearSales',
@@ -284,12 +279,7 @@
                                 barWidth: 11
                             },
                         ],
-                        showType: 0,
-                        markLineList:{
-                            show:true,
-                            name:'平均',
-                            data:100,
-                        }
+                        showType: 0
                     }
                     _this.salesBarData = {
                         monthBarData,
@@ -426,6 +416,7 @@
                 }).then(function (res) {
                     var proportioData = res.data.data;
                     _this.proportioData = proportioData;
+                    console.log(   _this.proportioData)
                 })
             },
             //产品-商品动销率
@@ -523,6 +514,21 @@
                         console.log(_this.commoditydata)
                     },
                 )
+            },
+            //产品-动销商品明细
+            getGoodsdetail() {
+                var _this = this
+                this.$http({
+                    url: _this.requestHttpUrl + '/GoodsDetail',
+                    method: 'POST',
+                    data: {
+                        dateTime: _this.currentDate
+                    }
+                }).then(function (res) {
+                    var Goods = res.data.data;
+                    _this.GoodsDetail = Goods;
+                    console.log(   _this.GoodsDetail)
+                })
             },
             //门店活跃明细
             getStoresDetailed() {
