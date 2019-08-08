@@ -4,8 +4,10 @@
         <div class="inventory-table">
             <div class="table-head">
                 <div class="table-headtxt">
+                    <div>
                     <span class="yuan">{{Money}}</span>
                     <strong>{{inventoryDetails.amountTxt}}</strong>
+                    </div>
                     <p> <span>{{Money}}</span>{{inventoryDetails.amount}}</p>
                     <span class="shu"></span>
                 </div>
@@ -117,10 +119,9 @@
             height:120px;
             background:linear-gradient(90deg,rgba(71,79,231,1),rgba(29,145,240,1),rgba(71,79,231,1));
             box-shadow:0px 2px 15px 0px rgba(255,182,2,0.13);
-            border-radius:10px;
+            border-radius:10px 10px 0 0;
             .table-headtxt{
                 width: 50%;
-                 height: 77%;
                 float: left;
                 margin-top: 5%;
                 padding-left: 20%;
@@ -163,8 +164,8 @@
                 width: 80%;
                 height: 44px;
                 line-height: 44px;
-                margin-left: 49px;
-                span {
+                margin-left: 10%;
+                   span {
                     line-height: 28px;
                     font-size:16px;
                     font-family:PingFangSC-Medium;

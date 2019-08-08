@@ -1,11 +1,13 @@
 <template>
-    <div class="productRight">
+    <div class="productRight" style="width: 70%;float: right;">
         <div class="pinRight" >
             <div class="pinRight-centen">
                 <div class="product-centen" v-for="(item) in dataTxt">
                     <span>{{item.name}}</span>
+                    <div class="breadth">
                     <div class="w" v-bind:style="{ 'width':item.txt}">
                         <div class="q">{{item.txt}}</div>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -44,14 +46,13 @@
 
 <style lang="less" scoped>
     .pinRight{
-        width: 60%;
+        width: 100%;
         float: right;
         margin-top: 6%;
         position: relative;
         .pinRight-centen{
-            width: 75%;
             .product-centen {
-                margin-top: 19px;
+                margin-top: 4%;
                 transform-style: preserve-3d;
                 perspective: 200px;
                 span{
@@ -63,10 +64,12 @@
                 }
                 .w {
                     margin-left: 12%;
+                    margin-right: 2%;
                     text-align: left;
                     height: 14px;
                     background-color: #fff;
                     position: relative;
+
                     .q {
                         position: absolute;
                         top: 0;
@@ -81,13 +84,16 @@
     .zreo{
         position: absolute;
         bottom: 11%;
-        left: 45%;
+        left: 35%;
         color: #fff;
     }
     .million{
         position: absolute;
         bottom: 11%;
-        right: 7%;
+        right: 9%;
         color: #fff;
+    }
+    .breadth{
+        width: 75%;
     }
 </style>

@@ -2,7 +2,7 @@
     <div class="inventoryDase">
         <div class="inventoryDase-left">
             <div style="margin-top: 4%">
-                <span style="margin-left: 5%">{{inventoryTxt.receivableAverage}}</span>
+                <span style="width: 60%;">{{inventoryTxt.receivableAverage}}</span>
                 <newButton :defaultVal="defaultVal"  :buttonHandleClick="buttonHandleClickinv"  ></newButton>
             </div>
             <b>{{inventoryTxt.inventoryVal}}</b>
@@ -87,7 +87,7 @@
     .inventoryDase-left{
         width: 30%;
         height: 100%;
-        margin-left: 15px;
+        margin-left: 3%;
         float: left;
         position: relative;
         span{
@@ -111,7 +111,7 @@
             text-align: center;
         }
         .left-txt{
-            width: 65%;
+            width: 80%;
             height:69px;
             background:rgba(238,240,245,1);
             margin: 10% auto;
@@ -151,6 +151,7 @@
             .newButton{
                 float: right;
                 margin-top: 2%;
+                margin-right: 5%;
             }
         }
         .bartu{

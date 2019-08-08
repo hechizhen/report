@@ -153,9 +153,9 @@
         .commodityR-centen {
             width: 60%;
             float: left;
-            /*margin-bottom: 6.6%;*/
+            text-align: center;
             .commodityR-title {
-                width: 80%;
+                width: 90%;
                 line-height: 32px;
                 background: rgba(126, 165, 254, 1);
                 border-radius: 6px;
@@ -179,9 +179,9 @@
                 }
             }
             .commodityR-base{
-                    width: 80%;
+                    width: 90%;
                     height: 12%;
-                    margin-top: 6%;
+                    margin: 6% auto;
                 .quan{
                     float: left;
                     width:12px;
@@ -189,7 +189,6 @@
                     border:4px solid rgba(255,255,255,1);
                     border-radius:50%;
                     margin-top: 3%;
-                    margin-right: 2%;
                 }
                 span{
                     line-height: 28px;
@@ -221,7 +220,7 @@
                 height: 165px;
                 border: 1px solid rgba(255, 255, 255, 1);
                 border-radius: 50%;
-                margin-top: 14%;
+                margin: 14%  auto;
                 position: relative;
 
                 .commodityRight-sumtxt {

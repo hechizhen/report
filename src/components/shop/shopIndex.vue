@@ -39,6 +39,10 @@
                 shopData:{
                     shopImg: require("../../assets/img/mendian.png"),
                 },
+                barEchartsDataUp:{},
+                barEchartsDataDown:{},
+                lityUpData:{},
+                lityDownData:{}
             }
         },
         components:{

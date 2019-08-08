@@ -30,9 +30,6 @@
             trendChartClick:{
                 type:Function
             },
-            indexname:{
-                type: Array
-            },
             barEchartsData:{
                 type:Function
             }

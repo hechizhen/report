@@ -804,11 +804,11 @@
                         }
                         let nearnoTrade = {
                             name: "3个月无交易门店应收欠款(万元)：",
-                            NoSales:  _this.dataProcess(data.nearnoTrade, 'money').num,
+                            NoSales: '￥'+ _this.dataProcess(data.nearnoTrade, 'money').num,
                         }
                         let nearnoTrades = {
                         name: "闭店应收账款（万元）：",
-                        NoSales: _this.dataProcess(data.nearnoTrades, 'money').num,
+                        NoSales: '￥'+_this.dataProcess(data.nearnoTrades, 'money').num,
                     }
 
 
@@ -930,7 +930,7 @@
                         console.log(data)
                         let SalesMoney = {
                             name: '6个月未销售商品金额(万元)',
-                            NoSales: _this.dataProcess(data.NoSalesMoney, 'money').num
+                            NoSales:'￥'+ _this.dataProcess(data.NoSalesMoney, 'money').num
                         }
                         let SalesSum = {
                             name: '6个月未销售商品数(件)',

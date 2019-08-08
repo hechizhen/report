@@ -54,6 +54,7 @@
                 color:rgba(152,162,180,1);
                 display: inline-block;
                 width: 70%;
+                white-space :  nowrap;
             }
             p{
                 font-size:16px;
@@ -65,9 +66,7 @@
             }
         }
         .productLeft-btn {
-            width:88px;
-            height:32px;
-            line-height: 26px;
+            width:10%;
             text-align: center;
             float: left;
             .newButton {

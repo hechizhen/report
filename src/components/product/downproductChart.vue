@@ -40,6 +40,9 @@
 
             }
         },
+        mounted(){
+          console.log(this.barEchartsData)
+        },
         methods:{
             thendChartClicks(){
                 this.trendChartClick()
