@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="table-dase">
-                <div class="table-base" v-for="(item,index) in inventoryDetails.noSalesDetail ":key="index">
+                <div class="table-base" v-for="(item,index) in inventoryDetails.noSalesDetail " :key="index">
                     <span>{{item.name}}</span>
                     <span style="font-size:16px;font-family:PingFangSC-Semibold;font-weight:600;width: 74px">{{item.NoSales}}</span>
                 </div>
