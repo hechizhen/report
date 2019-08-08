@@ -67,6 +67,12 @@
         }
     }
 </script>
+<style lang="less">
+.ant-progress-circle-trail{
+    stroke: #FD6691!important;
+    border:1px solid #fff;
+}
+</style>
 <style scoped lang="less">
     .overDue{
         width:80%;
@@ -126,9 +132,6 @@
                     font-size:20px;
                 }
             }
-        }
-        /deep/.ant-progress-circle-trail{
-            stroke: red!important;
         }
     }
 </style>

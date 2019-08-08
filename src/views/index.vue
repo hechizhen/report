@@ -14,7 +14,7 @@
         <!-- 帮卖分析-订单 -->
         <secondBand :orderAmountData="orderAmountData" :grossProfitData="grossProfitData" :grossInterestRateData="grossInterestRateData" :proportio="proportioData" :directionData="directionData"></secondBand>
         <!-- 二帮卖分析-业务员 -->
-        <salesman :salesmanData="salesmanData" :salesmanTrendData="salesmanTrendData"></salesman>
+        <salesman :salesmanData="salesmanData" :salesmanTrendData="salesmanTrendData" :salesmandownwardData="salesmandownwardData"></salesman>
         <!-- 产品 -->
         <productIndex :CommodityTurnoverRate="CommodityTurnoverRate"  :commoditydata="commoditydata" :GoodsDetail="GoodsDetail"></productIndex>
         <!--门店-->
@@ -107,7 +107,8 @@
                 grossInterestRateData: {},//毛利率
                 proportioData: [],  //占比数据
                 directionData:{}, //订单走势图
-                salesmanTrendData:{}  //业务员走势图
+                salesmanTrendData:{},  //业务员走势图
+                salesmandownwardData:{} //业务员下滑
             }
         },
         created() {
@@ -140,6 +141,7 @@
             this.getsalesmanTrend()
             this.getmarketableDayChart()
             this.getVariabilityIndex()
+            this.getsalesmandownward()
         },
         computed: {
 
@@ -164,7 +166,7 @@
                 this.getNumberMovingGoods()
                 this.getGoodsdetail()
                 this.getsalesmanTrend()
-                this.getalesmandownward()
+                this.getsalesmandownward()
                 this.getmarketableDayChart()
                 this.getVariabilityIndex()
             },
@@ -501,36 +503,26 @@
                 })
             },
             //业务员-下滑人员
-            getalesmandownward() {
+            getsalesmandownward() {
                 var _this = this
                 this.$http({
-                    url: _this.requestHttpUrl + '/alesmandownward',
+                    url: _this.requestHttpUrl + '/salesmandownward',
                     method: 'POST',
                     data: {
                         dateTime: _this.currentDate
                     }
                 }).then(function (res) {
-                    var salesmanTrendData = res.data.data,xAxisData=[],salesmanArr=[],seriesData=[],salesmanColor=['#009EE2','#E9A837','#00E2BF','#65E6F5'];
-                    salesmanTrendData.map(function(value){
-                        xAxisData.push(value.month)
+                    var salesmandownwardData = res.data.data,xAxisData=[],seriesData=[],lastMonth=[],sameMonth=[],difference=[],salesmandownwardObject={};
+                    salesmandownwardData.map(function(value){
+                        xAxisData.push(value.salesmanName);
+                        lastMonth.push(value.lastMonth) 
+                        sameMonth.push(value.sameMonth) 
+                        difference.push(value.difference) 
                     })
-                    salesmanTrendData[0].salesmanList.map(function(value){
-                        salesmanArr.push(value.name)
-                    })
-                    salesmanArr.map(function(value,index){
-                        var tempObjecd = {name:value,color:salesmanColor[index]},tempArr = [];
-                        salesmanTrendData.map(function(data){
-                           data.salesmanList.map(function(resdata){
-                                if(value == resdata.name){
-                                    tempArr.push(resdata.value)
-                                }
-                           })
-                        })
-                        tempObjecd.data = tempArr;
-                        seriesData.push(tempObjecd)
-                    })
-                    var tempsalesmanTrendData = {monthArr:xAxisData,seriesData:seriesData}
-                    _this.salesmanTrendData = tempsalesmanTrendData
+                    seriesData.push({name:'上月销售额',data:lastMonth,color:'#009EE2',barWidth:11},{name:'本月销售额',data:sameMonth,color:'#E9A837',barWidth:11},{name:'销售差额',data:difference,color:'#00E2BF',barWidth:11})
+                    salesmandownwardObject.xAxisData = xAxisData;
+                    salesmandownwardObject.seriesData = seriesData;
+                    _this.salesmandownwardData = salesmandownwardObject
                 })
             },
             //产品-商品动销率

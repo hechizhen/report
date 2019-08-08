@@ -62,7 +62,7 @@
             }
         },
         mounted () {
-            console.log(this.barData)
+            console.log(this.salesData)
         },
         methods: {
         },
