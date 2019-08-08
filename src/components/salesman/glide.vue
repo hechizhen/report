@@ -12,7 +12,7 @@
 				</a-Row>
 			</div>
 			<div class="lineEcharts">
-				<barEcharts :barEchartsData="barEchartsData"></barEcharts>
+				<barEcharts :barEchartsData="barEcharts"></barEcharts>
 			</div>
 		</div>
 	</div>
@@ -36,11 +36,11 @@
 
 		data(){
 			return {
-				barEchartsData:{}
+				barEcharts:{}
 			}
 		},
 		mounted () {
-			this.barEchartsData = {
+			this.barEcharts = {
                     id:'barId',
                     unit:'%',
                     xAxisData:this.salesmandownward.xAxisData,
@@ -72,7 +72,7 @@
 		},
 		watch:{
             salesmandownward(val){
-            	this.barEchartsData = {
+            	this.barEcharts = {
                     id:'barId',
                     unit:'%',
                     xAxisData:val.xAxisData,
