@@ -29,7 +29,7 @@
         props:{
             trendChartClick:{
                 type:Function
-            }
+            },
         },
 
         data(){

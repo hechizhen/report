@@ -21,7 +21,9 @@
         <shopIndex  :StoresDetailed="StoresDetailed" v-if="StoresDetailed.length!=0 "></shopIndex>
          <!--库存-->
         <second-title :titleName="inventoryTitle"></second-title>
-        <inventoryIndex  :inventoryDay="inventoryDay" :inventoryDetails="inventoryDetails" v-if="inventoryDay.length!=0 "> </inventoryIndex>
+        <inventoryIndex  :inventoryDay="inventoryDay" :inventoryDetails="inventoryDetails"
+                         :marketableDayChart="marketableDayChart"
+                         v-if="inventoryDay.length!=0 "> </inventoryIndex>
         <!-- 财务 -->
         <finance :financeData="financeData" :receivableData="receivableData" :overDueData="overDueData" :titleName="financeTitle"
         v-if="financeData.length!=0 && receivableData.length!=0 && overDueData.length!=0"></finance>
@@ -78,6 +80,8 @@
                CommodityTurnoverRate:"",
                 //产品-动销商品数
                 commoditydata:"",
+                //产品-动销商品数增长下滑商品
+                VariabilityIndex:"",
                 //产品-动销商品明细-饼图
                 GoodsDetail:"",
                 //门店活跃明细
@@ -86,6 +90,8 @@
                 inventoryDetails:"",
                 //库存可销天数
                 inventoryDay: "",
+                //库存-库存可销天数走势图
+                marketableDayChart:"",
                 requestHttpUrl: this.$store.state.requestHttpUrl,//接口请求地址
                 testRequestHttpUrl: this.$store.state.testRequestHttpUrl,//接口请求地址
                 salesData: '',//本月/累计销量以及达成率
@@ -130,8 +136,13 @@
             this.getCommodityTurnoverRate()
             this.getNumberMovingGoods()
             this.getGoodsdetail()
+<<<<<<< HEAD
             this.getdirection()
             this.getsalesmanTrend()
+=======
+            this.getmarketableDayChart()
+            this.getVariabilityIndex()
+>>>>>>> master
         },
         computed: {
 
@@ -155,8 +166,13 @@
                 this.getCommodityTurnoverRate()
                 this.getNumberMovingGoods()
                 this.getGoodsdetail()
+<<<<<<< HEAD
                 this.getsalesmanTrend()
                 this.getalesmandownward()
+=======
+                this.getmarketableDayChart()
+                this.getVariabilityIndex()
+>>>>>>> master
             },
             //体检报告概览
             getOverViewData() {
@@ -194,20 +210,21 @@
                     data: params
                 }).then(function (res) {
                     console.log(res)
-                    let data = res.data.data.data[0]
+                    let data = res.data.data.data
                     _this.salesData = {
                         monthData:{
                             sales:_this.dataProcess(data.monthSales,'money').num,
                             reach:_this.dataProcess(data.monthReach,'percent').num+_this.dataProcess(data.monthReach,'percent').unit,
-                            bgColor:'#2D92FC'
+                            bgColor:'#2D92FC',
+                            titleName:'本月'
                         },
                         yearData:{
                             sales:_this.dataProcess(data.yearSales,'money').num,
                             reach:_this.dataProcess(data.yearReach,'percent').num+_this.dataProcess(data.yearReach,'percent').unit,
-                            bgColor:'#FF9500'
+                            bgColor:'#FF9500',
+                            titleName:'年累计'
                         }
                     }
-                    console.log(_this.salesData)
                 })
             },
             //本月/年累计达成率历史趋势
@@ -235,6 +252,7 @@
                     let monthBarData = {
                         id: 'barIdMonthSales',
                         xAxisData: Axiax,
+                        unit:'%',
                         xAxis: {
                             isShowLine: false,
                             isShowSplit: false,
@@ -257,10 +275,15 @@
                                 barWidth: 11
                             },
                         ],
-                        showType: 0
+                        showType: 0,
+                        markLineList:{
+                            show:true,
+                            data:100,
+                        }
                     }
                     let yearBarData = {
                         id: 'barIdYearSales',
+                        unit:'%',
                         xAxisData: Axiax,
                         xAxis: {
                             isShowLine: false,
@@ -284,13 +307,17 @@
                                 barWidth: 11
                             },
                         ],
-                        showType: 0
+                        showType: 0,
+                        markLineList:{
+                            show:true,
+                            data:100, 
+                        }
                     }
                     _this.salesBarData = {
                         monthBarData,
                         yearBarData
                     }
-                    console.log(   _this.salesBarData)
+                    console.log(_this.salesBarData)
                 })
             },
             //财务报表数据
@@ -356,7 +383,8 @@
                         overDueValUnit: '￥',
                         overDueval: _this.dataProcess(data.overdueVal, 'money').num,
                         overDueRadioTxt: '逾期占比',
-                        overDueRadio: _this.dataProcess(data.overduePercent, 'percent').num + _this.dataProcess(data.overduePercent, 'percent').unit
+                        overDueRadio: _this.dataProcess(data.overduePercent, 'percent').num + _this.dataProcess(data.overduePercent, 'percent').unit,
+                        overDueRadioPercent: _this.dataProcess(data.overduePercent, 'percent').num
                     }
                 })
             },
@@ -607,6 +635,90 @@
                     },
                 )
             },
+            //产品-动销商品数增长下滑商品
+            getVariabilityIndex() {
+                var _this = this
+                this.$http({
+                    url: _this.requestHttpUrl + '/variabilityIndex',
+                    method: 'POST',
+                    data: {
+                        dateTime: _this.currentDate
+                    }
+                }).then(function (res) {
+                    console.log(res)
+                    let data = res.data.data.data
+                    let uphData = []
+                    let downData = []
+                    let Axiax = []
+                    data.map(function(item){
+                        Axiax.push(item.Axiax)
+                        item.uphData = _this.dataProcess(item.uphData,'money').num
+                        item.uphData1 = _this.dataProcess(item.uphData1,'money').num
+                        item.downData = _this.dataProcess(item.downData,'money').num
+                        uphData.push(item.uphData)
+                        downData.push(item.downData)
+                    })
+                    let monthBarData = {
+                        id: 'barIdMonthSales',
+                        xAxisData: Axiax,
+                        xAxis: {
+                            isShowLine: false,
+                            isShowSplit: false,
+                            axisLabelColor: '#333',
+                        },
+                        yAxis: {
+                            isShowLine: false,
+                            isShowSplit: false,
+                            axisLabelColor: '#D7D9E5',
+                        },
+                        label: {
+                            isShow: true
+                        },
+                        type: 'xAxis',
+                        barData: [
+                            {
+                                name: 'ABC',
+                                data: uphData,
+                                color: '#D7D9E5',
+                                barWidth: 11
+                            },
+                        ],
+                        showType: 0
+                    }
+                    let yearBarData = {
+                        id: 'barIdYearSales',
+                        xAxisData: Axiax,
+                        xAxis: {
+                            isShowLine: false,
+                            isShowSplit: false,
+                            axisLabelColor: '#333',
+                        },
+                        yAxis: {
+                            isShowLine: false,
+                            isShowSplit: false,
+                            axisLabelColor: '#D7D9E5',
+                        },
+                        label: {
+                            isShow: true
+                        },
+                        type: 'xAxis',
+                        barData: [
+                            {
+                                name: 'ABC',
+                                data: downData,
+                                color: '#D7D9E5',
+                                barWidth: 11
+                            },
+                        ],
+                        showType: 0
+                    }
+                    _this.VariabilityIndex = {
+                        monthBarData,
+                        yearBarData
+                    }
+                    console.log(   _this.VariabilityIndex)
+                })
+            },
             //产品-动销商品明细
             getGoodsdetail() {
                 var _this = this
@@ -827,6 +939,22 @@
                     console.log(_this.inventoryDay)
                     },
                 )
+            },
+            //库存-库存可销天数走势图
+            getmarketableDayChart() {
+                var _this = this
+                this.$http({
+                    url: _this.requestHttpUrl + '/marketableDayChart',
+                    method: 'POST',
+                    data: {
+                        dateTime: _this.currentDate
+                    }
+                }).then(function (res) {
+                    var marketableDay = res.data.data;
+                    _this.marketableDayChart = marketableDay;
+
+                    console.log(_this.marketableDayChart)
+                })
             },
             distroyed: function () {
 

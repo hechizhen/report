@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="overDueBottom">
-            <a-progress type="circle" :percent="75"  :width="126" :showInfo="false" />
+            <a-progress type="circle" :percent="overDueData.overDueRadioPercent" :successPercent="15"  :width="126" :showInfo="false" strokeColor="#6BBCFF" />
             <div class="overDueBox">
                 <div>
                     <p>
@@ -126,6 +126,9 @@
                     font-size:20px;
                 }
             }
+        }
+        /deep/.ant-progress-circle-trail{
+            stroke: red!important;
         }
     }
 </style>

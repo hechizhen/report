@@ -12,7 +12,7 @@
                 </a-Row>
             </div>
             <div class="lineEcharts">
-                <lineEcharts></lineEcharts>
+                <lineEcharts :lineEchartsData="lineEchartsData"></lineEcharts>
             </div>
         </div>
     </div>
@@ -27,6 +27,9 @@
         props:{
             trendChartClick:{
                 type:Function
+            },
+            lineEchartsData:{
+                type: Object
             }
         },
 
@@ -34,6 +37,9 @@
             return {
 
             }
+        },
+        mounted(){
+            console.log(this.lineEchartsData)
         },
         methods:{
             thendChartClick(){
