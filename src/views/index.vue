@@ -188,19 +188,20 @@
                     data: params
                 }).then(function (res) {
                     console.log(res)
-                    let data = res.data.data.data
+                    let data = res.data.data.data[0]
                     _this.salesData = {
                         monthData:{
                             sales:_this.dataProcess(data.monthSales,'money').num,
-                            reach:_this.dataProcess(data.monthReach,'percent').num+_this.dataProcess(data.monthReach,'percent').num,
+                            reach:_this.dataProcess(data.monthReach,'percent').num+_this.dataProcess(data.monthReach,'percent').unit,
                             bgColor:'#2D92FC'
                         },
                         yearData:{
                             sales:_this.dataProcess(data.yearSales,'money').num,
-                            reach:_this.dataProcess(data.yearReach,'percent').num+_this.dataProcess(data.yearReach,'percent').num,
+                            reach:_this.dataProcess(data.yearReach,'percent').num+_this.dataProcess(data.yearReach,'percent').unit,
                             bgColor:'#FF9500'
                         }
                     }
+                    console.log(_this.salesData)
                 })
             },
             //本月/年累计达成率历史趋势

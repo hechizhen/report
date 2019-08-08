@@ -139,34 +139,8 @@ export default{
                   }
                   var unit = "万"
                 } else if (type == 'percent') {
-                    var dataType = (data * 100).toString().indexOf(".")
-                    if (dataType != -1) {
-                        //获取小数点后面的位数
-                        var x = (data * 100).toString().split(".")[1].length
-                        //获取小数点后面的值
-                        var y = Number((data * 100).toString().split(".")[1])
-                        if (x == 2) {
-                            if (y == 0) {
-                                var num = (data * 100).toFixed(1)
-                            } else {
-                                var num = (data * 100).toFixed(2)
-                            }
-                            var unit = '%'
-                        } else if (x == 3) {
-                            if (y == 0) {
-                                var num = (data * 100).toFixed(1)
-                            } else {
-                                var num = (data * 100).toFixed(1)
-                            }
-                            var unit = '%'
-                        } else {
-                            var num = (data * 100).toFixed(2)
-                            var unit = '%'
-                        }
-                    } else {
-                        var num = (data * 100).toFixed(2)
-                        var unit = '%'
-                    }
+                  var num = (data * 100).toFixed(2)
+                  var unit = '%'
                 } else if (type == 'day') {
                     var num = this.formatCurrency((data / 1).toFixed(0))
                     var unit = '天'
