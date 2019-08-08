@@ -9,8 +9,10 @@
 				  		<img src="./../../assets/img/yewuyaun.png">
 				  	</div>
 				  </a-Col>
-				  <a-Col :span="12" class="managerCol">
+				  <a-Col :span="6" class="managerCol">
 				  	<p>业务员达成</p>
+				  </a-Col>
+				  <a-Col :span="6" class="managerCol">
 				  	<p>{{salesmanData.reached}}</p>
 				  </a-Col>
 				  <a-Col :span="6" class="managerCol">
@@ -139,6 +141,18 @@
 				}
 			}
 			.managerCol:nth-child(3)  {
+				display: flex;
+			    justify-content: center;
+			    flex-direction: column;
+			    p {
+			     	margin: 0px;
+				    font-size:16px;
+					font-family:PingFangSC-Medium;
+					font-weight:bold;
+					color:rgba(255,255,255,1);
+				}
+			}
+			.managerCol:nth-child(4)  {
 				display: flex;
 			    justify-content: center;
 			    flex-direction: column;
