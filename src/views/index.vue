@@ -136,13 +136,10 @@
             this.getCommodityTurnoverRate()
             this.getNumberMovingGoods()
             this.getGoodsdetail()
-<<<<<<< HEAD
             this.getdirection()
             this.getsalesmanTrend()
-=======
             this.getmarketableDayChart()
             this.getVariabilityIndex()
->>>>>>> master
         },
         computed: {
 
@@ -166,13 +163,10 @@
                 this.getCommodityTurnoverRate()
                 this.getNumberMovingGoods()
                 this.getGoodsdetail()
-<<<<<<< HEAD
                 this.getsalesmanTrend()
                 this.getalesmandownward()
-=======
                 this.getmarketableDayChart()
                 this.getVariabilityIndex()
->>>>>>> master
             },
             //体检报告概览
             getOverViewData() {
