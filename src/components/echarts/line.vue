@@ -41,10 +41,12 @@
         },
         data () {
             return {
-                
+
             }
         },
         mounted () {
+            console.log('22222222222222222')
+             console.log(this.lineEchartsData)
             var _this = this  
             let echarts = _this.$echarts;
             _this.myChart = echarts.init(document.getElementById(_this.lineEchartsData.id))
@@ -90,7 +92,7 @@
                     },
                     xAxis: {
                         type: 'category',
-                        data: [1,2,3,4,5,6,7,8,9,10],
+                        data: _this.lineEchartsData.xAxisData,
                         axisLine: {
                             lineStyle: {
                                 color: "#65E6F5"
@@ -127,7 +129,13 @@
           
         },
         watch: {
-           
+            lineEchartsData(val){
+                alert(1)
+                var _this = this  
+                let echarts = _this.$echarts;
+                _this.myChart = echarts.init(document.getElementById(_this.lineEchartsData.id))
+                _this.setLineOptions()
+            }
         },
         distroyed: function () {
             

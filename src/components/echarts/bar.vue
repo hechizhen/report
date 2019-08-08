@@ -38,18 +38,6 @@
                             color:'red',
                             barWidth:11,
                         },
-                        // {
-                        //     name:'ABC11',
-                        //     data:[300,400,500,100,123],
-                        //     color:'blue',
-                        //     barWidth:11,
-                        // },
-                        // {
-                        //     name:'ABC33',
-                        //     data:[333,444,555,666,777],
-                        //     color:'yellow',
-                        //     barWidth:11,
-                        // }
                     ],
                     showType:0,//0横过来 1竖起来
                     markLineList:{

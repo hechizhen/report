@@ -58,7 +58,7 @@
 		mounted(){
 			this.pieEchartsData = {
 				id:'pieId',
-                colorList:['#FF8352', '#E271DE', '#00FFFF', '#4AEAB0'],
+                colorList:['#365AF8','#FFC925','#7B8EFB','#34DF8E','#A3FC8A','#FF7C25'],
                 labelType:1,
                 pieData:[],
                 radius:['40%', '60%'],
@@ -74,7 +74,7 @@
             proportioData(val){
                 this.pieEchartsData = {
 				id:'pieId',
-                colorList:['#FF8352', '#E271DE', '#00FFFF', '#4AEAB0'],
+                colorList:['#365AF8','#FFC925','#7B8EFB','#34DF8E','#A3FC8A','#FF7C25'],
                 labelType:1,
                 pieData:val,
                 radius:['40%', '60%'],

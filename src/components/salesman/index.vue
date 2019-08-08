@@ -3,7 +3,7 @@
 		<subTitle :subtitlename="subtitlename" :listing="listing"></subTitle>
 		<manager :explicit="explicit" :salesmanData="salesmanData"></manager>
 		<core :coretype="'业务员得分'" :coretext="100" :evaluate="'较好'"></core>
-		<trendChart  v-if="echartsShow" :trendChartClick="trendChartClick"></trendChart>
+		<trendChart  v-if="echartsShow" :trendChartClick="trendChartClick" :lineEchartsData="direction"></trendChart>
 		<glide  v-if="glideShow" :trendChartClick="glideClick"></glide>
 		<contribution   v-if="contributionShow" :trendChartClick="contributionClick"></contribution>
 	</div>
@@ -29,6 +29,10 @@
 			salesmanData:{
 				type:Object,
 				default:{}
+			},
+			salesmanTrendData:{
+				type:Object,
+				default:{}
 			}
 		},
 		data(){
@@ -38,6 +42,7 @@
 				echartsShow:false,
 				glideShow:false,
 				contributionShow:false,
+				direction:{}
 			}
 		},
 		mounted(){
@@ -63,6 +68,15 @@
 				this.contributionShow = false;
 			}
 		},
+		watch:{
+            salesmanTrendData(val){
+            	this.direction = {
+                    id:'lineId',
+                    xAxisData:val.monthArr,
+                    lineData:val.seriesData
+            	}
+        	},
+        },
 		computd:{
 
 		},

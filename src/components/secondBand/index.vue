@@ -14,7 +14,7 @@
 		  </a-Col>
 		</a-Row>
 		<core :coretype="'二帮卖得分'" :coretext="100" :evaluate="'优秀'"></core>
-		<trendChart v-if="echartsShow" :trendChartClick="trendChartClick"></trendChart>
+		<trendChart v-if="echartsShow" :trendChartClick="trendChartClick" :lineEchartsData="lineEchartsData"></trendChart>
 	</div>
 </template>
 <script>
@@ -50,6 +50,10 @@
 			proportio:{
 				type:Array,
 				default:[]
+			},
+			directionData:{
+				type:Object,
+				default:{}
 			}
 		},
 		data(){
@@ -57,8 +61,9 @@
 				titleName:'二帮卖分析',
 				subtitlename:'订单',
 				listing:['订单详情'],
-				proportioData:[],
+				proportioData:this.proportio,
 				echartsShow: false,
+				lineEchartsData:{},
 			}
 		},
 		mounted(){
@@ -81,6 +86,19 @@
 		watch:{
             proportio(val){
                 this.proportioData = val;
+            },
+            directionData(val){
+                this.lineEchartsData = {
+                    id:'lineId',
+                    xAxisData:val.monthArr,
+                    lineData:[ 
+                        {
+                            name:'订单金额',
+                            data:val.seriesData,
+                            color:'#00E2BF'
+                        },
+                    ]
+                }
             }
         },
 		distroyed:{
