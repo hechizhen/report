@@ -27,7 +27,7 @@
         </div>
         <inventoryCenten :turnoverTxt="inventoryDetails.turnoverTxt" :turnover="inventoryDetails.turnover"></inventoryCenten>
         <inventoryDase v-if="inventoryDay.length!=0" :inventoryTxt="inventoryDay"
-                       :invtopography="invtopography"  :inventoryBarData="inventoryDay.inventoryBarData"
+                       :invtopography="invtopography"  :barData="inventoryDay.inventoryBarData"
         ></inventoryDase>
         </div>
         <core :coretype="'库存得分'" :coretext="87" :evaluate="'较好'"></core>
@@ -55,7 +55,7 @@
             return{
                 Money:"￥",
                 invechartsShow: false,
-                marketableDay:{},
+                marketableDay:[],
                 lineEchartsData:{},
             }
         },
@@ -110,7 +110,7 @@
     bottom: 10%;
 }
     .inventory-table{
-        width: 30%;
+        width: 35%;
         float: left;
         .table-head{
             width: 100%;

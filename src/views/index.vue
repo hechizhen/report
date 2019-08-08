@@ -306,7 +306,7 @@
                         showType: 0,
                         markLineList:{
                             show:true,
-                            data:100, 
+                            data:100,
                         }
                     }
                     _this.salesBarData = {
@@ -515,9 +515,9 @@
                     var salesmandownwardData = res.data.data,xAxisData=[],seriesData=[],lastMonth=[],sameMonth=[],difference=[],salesmandownwardObject={};
                     salesmandownwardData.map(function(value){
                         xAxisData.push(value.salesmanName);
-                        lastMonth.push(value.lastMonth) 
-                        sameMonth.push(value.sameMonth) 
-                        difference.push(value.difference) 
+                        lastMonth.push(value.lastMonth)
+                        sameMonth.push(value.sameMonth)
+                        difference.push(value.difference)
                     })
                     seriesData.push({name:'上月销售额',data:lastMonth,color:'#009EE2',barWidth:11},{name:'本月销售额',data:sameMonth,color:'#E9A837',barWidth:11},{name:'销售差额',data:difference,color:'#00E2BF',barWidth:11})
                     salesmandownwardObject.xAxisData = xAxisData;
@@ -886,9 +886,10 @@
                                 item.dayData = _this.dataProcess(item.dayData,'day').num
                                 inventoryData.push(item.dayData)
                         })
-                        let inventoryBarData = {
-                        id: 'inventorybarId',
-                        xAxisData:Axiax,
+                       let inventoryBarData = {
+                       id: 'barIdInventory',
+                       unit:'天',
+                        xAxisData: Axiax,
                         xAxis: {
                             isShowLine: false,
                             isShowSplit: false,
@@ -908,10 +909,14 @@
                                 name: 'ABC',
                                 data: inventoryData,
                                 color: '#6BBCFF',
-                                barWidth: 11
+                                barWidth: 6
                             },
                         ],
-                        showType: 0
+                        showType: 0,
+                           markLineList:{
+                               show:false,
+                               data:100,
+                           }
                     }
                        _this.inventoryDay = {
                         inventorycompare: [
