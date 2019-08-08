@@ -152,7 +152,7 @@
                         top: 'middle',
                         left: '3%',
                         right: '4%',
-                        height: '80%',
+                        height: '75%',
                         bottom:'3%',
                         containLabel: true
                     },

@@ -154,7 +154,7 @@
             }
         }
         .bartu{
-            height: 79%;
+            height: 77%;
         }
     }
 }
