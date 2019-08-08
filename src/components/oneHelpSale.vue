@@ -92,7 +92,7 @@
                 width:95%!important;
             }
             .oneHelpSaleTop{
-                height:250px;
+                height:212px;
                 width:100%;
                 display: flex;
                 flex-wrap: wrap;
@@ -183,16 +183,16 @@
             }
             .oneHelpSaleBottom{
                 width:100%;
-                height:176px;
+                height:215px;
                 .oneHelpSaleBottomTitle{
                     font-weight:500;
                     color:#333;
                     font-size: 16px;
                     margin-left:10px;
-                    line-height: 20px
+                    height: 30px;
                 }
                 .oneHelpSaleBottomContent{
-                    height:156px;
+                    height:185px;
                     width:100%;
                 }
             }

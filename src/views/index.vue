@@ -193,12 +193,14 @@
                         monthData:{
                             sales:_this.dataProcess(data.monthSales,'money').num,
                             reach:_this.dataProcess(data.monthReach,'percent').num+_this.dataProcess(data.monthReach,'percent').unit,
-                            bgColor:'#2D92FC'
+                            bgColor:'#2D92FC',
+                            titleName:'本月'
                         },
                         yearData:{
                             sales:_this.dataProcess(data.yearSales,'money').num,
                             reach:_this.dataProcess(data.yearReach,'percent').num+_this.dataProcess(data.yearReach,'percent').unit,
-                            bgColor:'#FF9500'
+                            bgColor:'#FF9500',
+                            titleName:'年累计'
                         }
                     }
                     console.log(_this.salesData)
@@ -229,6 +231,7 @@
                     let monthBarData = {
                         id: 'barIdMonthSales',
                         xAxisData: Axiax,
+                        unit:'%',
                         xAxis: {
                             isShowLine: false,
                             isShowSplit: false,
@@ -251,10 +254,15 @@
                                 barWidth: 11
                             },
                         ],
-                        showType: 0
+                        showType: 0,
+                        markLineList:{
+                            show:true,
+                            data:100,
+                        }
                     }
                     let yearBarData = {
                         id: 'barIdYearSales',
+                        unit:'%',
                         xAxisData: Axiax,
                         xAxis: {
                             isShowLine: false,
@@ -278,13 +286,17 @@
                                 barWidth: 11
                             },
                         ],
-                        showType: 0
+                        showType: 0,
+                        markLineList:{
+                            show:true,
+                            data:100, 
+                        }
                     }
                     _this.salesBarData = {
                         monthBarData,
                         yearBarData
                     }
-                    console.log(   _this.salesBarData)
+                    console.log(_this.salesBarData)
                 })
             },
             //财务报表数据
@@ -350,7 +362,8 @@
                         overDueValUnit: '￥',
                         overDueval: _this.dataProcess(data.overdueVal, 'money').num,
                         overDueRadioTxt: '逾期占比',
-                        overDueRadio: _this.dataProcess(data.overduePercent, 'percent').num + _this.dataProcess(data.overduePercent, 'percent').unit
+                        overDueRadio: _this.dataProcess(data.overduePercent, 'percent').num + _this.dataProcess(data.overduePercent, 'percent').unit,
+                        overDueRadioPercent: _this.dataProcess(data.overduePercent, 'percent').num
                     }
                 })
             },

@@ -15,6 +15,7 @@
                 type:Object,
                 default: () => ({
                     id:'barId',
+                    unit:'%',
                     xAxisData:[1,2,3,4,5,6,7,8,9,10],
                     xAxis:{
                         isShowLine:false,
@@ -89,7 +90,7 @@
                             symbol:'none',
                             lineStyle: {
                                 normal: {
-                                    color: '#dcdcdc',
+                                    color: '#D7D9E5',
                                     type: 'solid',
                                     width: 1
                                 }
@@ -97,9 +98,9 @@
                             x: '',
                             label: {
                                 normal: {
-                                    color: '#999',
-                                    position: 'end',
-                                    padding: [-12, 10, 0, -12],
+                                    color: '#D7D9E5',
+                                    position: 'start',
+                                    // padding: [-12, 10, 0, -12],
                                     formatter:function(params){
                                         // return params.name+':'
                                         // +params.value+markLineConfiguration.unit
@@ -129,7 +130,10 @@
                         label:{
                             normal:{
                                 show:_this.barEchartsData.label.isShow,
-                                position: 'top'
+                                position: 'top',
+                                formatter:function(params){
+                                    return params.value+_this.barEchartsData.unit
+                                }
                             }
                         }
                     })
@@ -160,13 +164,18 @@
                         top: 'middle',
                         left: '3%',
                         right: '4%',
-                        bottom: '3%',
                         height: '80%',
+                        bottom:'3%',
                         containLabel: true
                     },
                     xAxis: {
                         type: _this.xAxisType,
                         data: _this.xAxisData,
+                        min:0,
+                        max:function(value) {
+                            return value.max;
+                        },
+                        interval: 100000,
                         axisLine: {
                             show: _this.barEchartsData.xAxis.isShowLine,
                             lineStyle: {
@@ -192,7 +201,9 @@
                         type: _this.yAxisType,
                         data: _this.yAxisData,
                         min:0,
-                        max:200,
+                        max:function(value) {
+                            return value.max;
+                        },
                         interval: 100000,
                         splitLine: {
                             show:_this.barEchartsData.yAxis.isShowSplit,
@@ -230,10 +241,10 @@
 
         },
         watch: {
-           barEchartsData(val){
-                var _this = this
-                _this.setBarOptions()
-           }
+        //    barEchartsData(val){
+        //         var _this = this
+        //         _this.setBarOptions()
+        //    }
         },
         distroyed: function () {
 
