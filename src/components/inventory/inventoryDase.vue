@@ -2,7 +2,7 @@
     <div class="inventoryDase">
         <div class="inventoryDase-left">
             <div style="margin-top: 4%">
-                <span>{{inventoryTxt.receivableAverage}}</span>
+                <span style="margin-left: 5%">{{inventoryTxt.receivableAverage}}</span>
                 <newButton :defaultVal="defaultVal"  :buttonHandleClick="buttonHandleClickinv"  ></newButton>
             </div>
             <b>{{inventoryTxt.inventoryVal}}</b>
@@ -99,7 +99,7 @@
             height: 32px;
             line-height:32px;
             float: left;
-            margin-right: 10%;
+            margin-right: 5%;
         }
         b{
             font-size:32px;
@@ -114,7 +114,7 @@
             width: 65%;
             height:69px;
             background:rgba(238,240,245,1);
-            margin-top: 10%;
+            margin: 10% auto;
                 .left-txt-title {
                     float: left;
                     width: 100%;

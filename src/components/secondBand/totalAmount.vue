@@ -6,7 +6,7 @@
 			   <div class="titletext">{{titleName}}</div>
 			</div>
 			<div class="record">
-				<p><img src="./../../assets/img/dkw_jine.png">总下单金额{{titleName}}</p>
+				<p><img src="./../../assets/img/dkw_jine.png">下单总金额{{titleName}}</p>
 				<p>{{displayData.orderAmount}}</p>
 			</div>
 			<a-Row class="proportion">
@@ -18,7 +18,7 @@
 				</a-Col>
 				<a-Col :span="12"class="proportionitmes">
 				  	<div class="proportiondiv">
-				  		<p>毛利率{{titleName}}</p>
+				  		<p><img src="./../../assets/img/maol-icon-2.png">毛利率{{titleName}}</p>
 				  		<p>{{displayData.grossInterestRate}}</p>
 				  	</div>
 				</a-Col>

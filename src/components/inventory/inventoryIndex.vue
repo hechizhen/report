@@ -11,7 +11,7 @@
                 </div>
                 <div class="table-headtxt">
                     <span class="yuan"></span>
-                    <strong>{{inventoryDetails.inventoryNumberTxt}}</strong>
+                    <strong style="display: block;">{{inventoryDetails.inventoryNumberTxt}}</strong>
                     <p> <span></span>{{inventoryDetails.inventoryNumber}}</p>
                 </div>
             </div>
