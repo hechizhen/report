@@ -5,7 +5,7 @@
 		<core :coretype="'业务员得分'" :coretext="100" :evaluate="'较好'"></core>
 		<trendChart  v-if="echartsShow" :trendChartClick="trendChartClick" :lineEchartsData="direction"></trendChart>
 		<glide  v-if="glideShow" :trendChartClick="glideClick" :salesmandownward="salesmandownward"></glide>
-		<contribution   v-if="contributionShow" :trendChartClick="contributionClick"></contribution>
+		<contribution   v-if="contributionShow" :trendChartClick="contributionClick" :salesmanReached="salesmanReached"></contribution>
 	</div>
 </template>
 <script>
@@ -37,6 +37,10 @@
 			salesmandownwardData:{
 				type:Object,
 				default:{}
+			},
+			salesmanReachedData:{
+				type:Object,
+				default:{}
 			}
 		},
 		data(){
@@ -47,7 +51,8 @@
 				glideShow:false,
 				contributionShow:false,
 				direction:{},
-				salesmandownward:this.salesmandownwardData
+				salesmandownward:this.salesmandownwardData,
+				salesmanReached:this.salesmanReachedData
 			}
 		},
 		mounted(){
@@ -83,6 +88,9 @@
         	},
         	salesmandownwardData(val) {
         		this.salesmandownward = val
+        	},
+        	salesmanReachedData(val) {
+        		this.salesmanReached = val
         	}
         },
 		computd:{

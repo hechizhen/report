@@ -36,11 +36,7 @@
 
 		data(){
 			return {
-				barEcharts:{}
-			}
-		},
-		mounted () {
-			this.barEcharts = {
+				barEcharts:{
                     id:'barId',
                     unit:'%',
                     xAxisData:this.salesmandownward.xAxisData,
@@ -64,6 +60,9 @@
                         show:false
                     }
                 }
+			}
+		},
+		mounted () {
 		},
 		methods:{
 			thendChartClick(){

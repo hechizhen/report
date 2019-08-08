@@ -19,7 +19,7 @@
 				</a-Row>
 			</div>
 			<div class="lineEcharts" v-show="isswitched">
-				<barEcharts></barEcharts>
+				<barEcharts :barEchartsData="salesmanReachedData"></barEcharts>
 			</div>
 		</div>
 	</div>
@@ -34,6 +34,10 @@
 		props:{
 			trendChartClick:{
 				type:Function
+			},
+			salesmanReached:{
+				type:Object,
+				default:{}
 			}
 		},
 
@@ -41,6 +45,30 @@
 			return {
 				switchedIndex: 1,
 				isswitched:true,
+				salesmanReachedData:{
+                    id:'barId',
+                    unit:'%',
+                    xAxisData:this.salesmanReached.xAxisData,
+                    xAxis:{
+                        isShowLine:false,
+                        isShowSplit:false,
+                        axisLabelColor:'#333',
+                    },
+                    yAxis:{
+                        isShowLine:false,
+                        isShowSplit:false,
+                        axisLabelColor:'#333',
+                    },
+                    label:{
+                        isShow:false
+                    },
+                    type:'xAxis',
+                    barData:this.salesmanReached.seriesData,
+                    showType:1,//0横过来 1竖起来
+                    markLineList:{
+                        show:false
+                    }
+                }
 			}
 		},
 		methods:{
@@ -55,8 +83,36 @@
 					this.switchedIndex = 2;
 					this.isswitched = false;
 				}
-			}
-		}
+			},
+		},
+		watch:{
+            salesmanReached(val){
+            	this.salesmanReachedData = {
+                    id:'barId',
+                    unit:'%',
+                    xAxisData:val.xAxisData,
+                    xAxis:{
+                        isShowLine:false,
+                        isShowSplit:false,
+                        axisLabelColor:'#333',
+                    },
+                    yAxis:{
+                        isShowLine:false,
+                        isShowSplit:false,
+                        axisLabelColor:'#333',
+                    },
+                    label:{
+                        isShow:false
+                    },
+                    type:'xAxis',
+                    barData:val.seriesData,
+                    showType:1,//0横过来 1竖起来
+                    markLineList:{
+                        show:false
+                    }
+                }
+        	},
+        },
 	}
 </script>
 <style lang="less" scoped>
