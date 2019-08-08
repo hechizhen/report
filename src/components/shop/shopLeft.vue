@@ -5,7 +5,7 @@
           <p>{{shopActives.ActiveStoresTxt}}<span>{{shopActives.ActiveStoresing}}</span></p>
           <span>{{shopActives.ActiveStores}}</span>
           <div class="productLeft-btn">
-              <newButton :defaultVal="shopActives.detailbtn"
+              <newButton :defaultVal="shopActives.detailbtn" :isGhost="true"
               ></newButton>
           </div>
       </div>
@@ -176,5 +176,8 @@
         float: right;
         margin-top: 5%;
     }
+}
+.shopLeft .shop-data .shop-data-title .shop-data-title1:nth-child(2) p{
+    color: rgba(51, 51, 51, 1);
 }
 </style>

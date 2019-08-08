@@ -27,7 +27,7 @@
                     <a-Col :span="12" class="thendChartCol2">
                         <a-button>导出当前商品</a-button>
                         <a-button>导出全部商品</a-button>
-                        <span @click="thendChartClick">
+                        <span @click="thendChartClicks">
                         X</span>
                     </a-Col>
                 </a-Row>

@@ -59,7 +59,7 @@
         name: "commodityRight",
         props:{
             commoditydata:{
-              type:Object
+              type:Object,Array
             },
             upraphy:{
                 type:Function
@@ -242,5 +242,8 @@
                 }
             }
         }
+    }
+    .commodityRight .commodityR-centen .commodityR-title .commodityR-title1:nth-child(2) p{
+        color: #fff;
     }
 </style>

@@ -49,6 +49,9 @@
             shopChartUp,
             shopChartrDown
         },
+        watch:{
+
+        },
         methods:{
             upraphy(){
                 this.upShow = true;

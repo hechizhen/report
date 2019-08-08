@@ -17,11 +17,20 @@
         props:["ActiveDetail"],
         data(){
             return{
-                defaultVal:"应收明细"
+                defaultVal:"应收明细",
+                // detailData:"",
             }
         },
         components:{
             shopBase
+        },
+        watch:{
+            // ActiveDetail(val){
+            //   this.detailData = val
+            // }
+        },
+        mounted() {
+            // console.log(this.detailData)
         }
     }
 </script>

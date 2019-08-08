@@ -1,7 +1,10 @@
 <template>
     <div class="inventoryDase">
         <div class="inventoryDase-left">
-            <span>{{inventoryTxt.receivableAverage}}</span>
+            <div style="margin-top: 4%">
+                <span>{{inventoryTxt.receivableAverage}}</span>
+                <newButton :defaultVal="defaultVal"  :buttonHandleClick="buttonHandleClickinv"  ></newButton>
+            </div>
             <b>{{inventoryTxt.inventoryVal}}</b>
             <div class="left-txt">
                 <div class="left-txt-title" v-for="(item,index) in inventoryTxt.inventorycompare" :key="index">
@@ -12,31 +15,52 @@
             <span class="shu"></span>
             </div>
         <div class="inventoryDase-right">
+            <div class="btn">
+                <newButton :defaultVal="defaultValdown" ></newButton>
+            </div>
+            <div class="bartu">
             <barChart :barEchartsData="barData"></barChart>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
     import barChart from '../../components/echarts/bar'
+    import  newButton from  '../base/newButton'
     export default {
         name: "inventoryDase",
+        data(){
+            return{
+                defaultVal:"走势图",
+                defaultValdown:"库存详情"
+            }
+        },
         props:{
             inventoryTxt:{
                 type: Object,String
             },
             barData:{
                 type: Object
+            },
+            invtopography:{
+                type:Function
             }
         },
+        methods:{
+            buttonHandleClickinv(val){
+                this.invtopography()
+            },
+        },
         components:{
-            barChart
+            barChart,
+            newButton
         },
         watch:{
 
         },
         mounted () {
-            console.log(this.inventoryTxt)
+            console.log(this.barData)
         },
     }
 </script>
@@ -44,13 +68,14 @@
 <style lang="less" scoped>
 .shu{
     width:1px;
-    height:137px;
+    height:137px !important;
     border:1px solid rgba(229,229,229,1);
     float: right;
     margin-top: 5%;
     position: absolute;
     top: 10%;
     right: 0;
+    margin-right:0 !important;
 }
 .inventoryDase{
     width:50%;
@@ -66,39 +91,41 @@
         float: left;
         position: relative;
         span{
-            display: block;
+            display: inline-block;
             font-size:14px;
             font-family:PingFangSC-Medium;
             font-weight:500;
             color:rgba(51,51,51,1);
-            margin-top: 17px;
+            height: 32px;
+            line-height:32px;
+            float: left;
+            margin-right: 10%;
         }
         b{
-            font-size:28px;
+            font-size:32px;
             font-family:PingFangSC-Medium;
             font-weight:bold;
             color:rgba(29,145,240,1);
-            margin-top: 19px;
+            margin-top: 2%;
             display: block;
+            text-align: center;
         }
         .left-txt{
             width: 65%;
             height:69px;
             background:rgba(238,240,245,1);
-            margin-top: 39px;
+            margin-top: 10%;
                 .left-txt-title {
                     float: left;
                     width: 100%;
                     text-align: center;
                     display: flex;
-                    margin-top: 14px;
                     span{
                         font-size:14px;
                         font-family:PingFangSC-Regular;
                         font-weight:400;
                         color:#98A2B4;
                         margin-top: 0;
-                        margin-left: 6%;
                     }
                     p{
                         color:rgba(255, 0, 72, 1);
@@ -107,6 +134,7 @@
                         font-size: 14px;
                         margin-left: 5%;
                         font-weight:600;
+                        line-height: 32px;
                     }
             }
         }
@@ -117,6 +145,28 @@
         float: left;
         margin-left: 1%;
         /*background-color: bisque;*/
+        .btn{
+            height: 15%;
+            .newButton{
+                float: right;
+                margin-top: 2%;
+            }
+        }
+        .bartu{
+            height: 85%;
+        }
     }
+}
+ .ant-btn-default{
+    height: 20px;
+}
+.inventoryDase .inventoryDase-left .left-txt .left-txt-title:first-child{
+    margin-top: 2%;
+}
+.inventoryDase .inventoryDase-left .left-txt .left-txt-title:nth-child(2) p{
+    color: rgba(152, 162, 180, 1);
+}
+.inventoryDase .inventoryDase-left .left-txt .left-txt-title span:first-child{
+    margin-left: 6%;
 }
 </style>
