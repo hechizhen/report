@@ -1,9 +1,9 @@
 <template>
     <div class="dataTitle">
+        <div class="leftLine"></div>
         <div class="subtitle_content">{{subtitlename}}
         </div>
         <explain :explainList="explainSecondList" ></explain>
-
     </div>
 </template>
 
@@ -36,13 +36,18 @@
         align-items: center;
         position: relative;
     }
+    .leftLine{
+        width:6px;
+        height:20px;
+        background:rgba(45,146,252,1);
+        border-radius:3px;
+    }
     .subtitle_content {
         font-size:20px;
-        padding-left: 10px;
+        padding-left: 12px;
         font-family:PingFangSC-Medium;
         font-weight:500;
         color:rgba(51,51,51,1);
-        border-left: 6px solid #2D92FC;
     }
     .explain{
         height: 50%;

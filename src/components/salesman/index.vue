@@ -1,6 +1,6 @@
 <template>
 	<div class="bandSelling">
-		<subTitle :subtitlename="subtitlename" :listing="listing"></subTitle>
+		<subTitle :subtitlename="subtitlename" :listing="listing" :explainSecondList="explainSecondList"></subTitle>
 		<manager :explicit="explicit" :salesmanData="salesmanData"></manager>
 		<core :coretype="'业务员得分'" :coretext="100" :evaluate="'较好'"></core>
 		<trendChart  v-if="echartsShow" :trendChartClick="trendChartClick" :lineEchartsData="direction"></trendChart>
@@ -45,14 +45,25 @@
 		},
 		data(){
 			return {
-				subtitlename:'业务员',
+				subtitlename:'人员',
 				listing:[],
 				echartsShow:false,
 				glideShow:false,
 				contributionShow:false,
 				direction:{},
 				salesmandownward:this.salesmandownwardData,
-				salesmanReached:this.salesmanReachedData
+				salesmanReached:this.salesmanReachedData,
+				explainSecondList:{
+					imgType:3,
+					tableData:[
+						{title:'总人数：',data:'统计当月属于系统的账号数（在职用户）（去重）'},
+						{title:'总业务员数：',data:'统计当月在系统内业务员的用户数（去重）'},
+						{title:'业务员达成：',data:'统计当月业务员下单金额/业务员当月销量目标'},
+						{title:'业绩下滑人数：',data:'统计当月业务员下单金额与上个月下单金额有所降低的业务员人数'},
+						{title:'人均产出：',data:'统计当月下单金额/系统的账号数（在职用户）'},
+					],
+					titleName:'二帮卖分析-业务员指标解释'
+				}
 			}
 		},
 		mounted(){

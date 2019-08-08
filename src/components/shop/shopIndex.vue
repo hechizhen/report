@@ -147,8 +147,6 @@
 
 <style lang="less" scoped>
 .shopindex{
-    margin-top: 36px;
-    margin-bottom: 2%;
     height: 100%;
 }
 .shop-centen{
@@ -157,7 +155,6 @@
     background:rgba(255,255,255,1);
     border-radius:6px;
     margin: auto;
-    margin-bottom: 1%;
     .shop-centen-title{
         height:63px;
         line-height:63px;

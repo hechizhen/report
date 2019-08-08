@@ -16,7 +16,7 @@
 				  		<p>{{displayData.grossProfit}}</p>
 				  	</div>
 				</a-Col>
-				<a-Col :span="12"class="proportionitmes">
+				<a-Col :span="12" class="proportionitmes">
 				  	<div class="proportiondiv">
 				  		<p><img src="./../../assets/img/maol-icon-2.png">毛利率{{titleName}}</p>
 				  		<p>{{displayData.grossInterestRate}}</p>
@@ -26,7 +26,7 @@
 			<div class="brand">
 				<div class="brandtitle">下单{{titleName}}</div>
 				<ul class="cleatfix">
-					<li v-for="item in data">
+					<li v-for="(item,index) in data" :key="index">
 						<div>{{item.brand}}</div>
 						<div>{{item.value}}</div>
 					</li>
@@ -72,7 +72,6 @@
 		padding: 5px;
 		background:rgba(255,255,255,1);
 		border-radius:10px; 
-		margin-bottom: 20px;
 		.totalAmountcontent {
 			width: 100%;
 			height: 545px;
@@ -105,7 +104,7 @@
 				p {
 					margin: 0px;
 					img {
-						vertical-align:middle;
+						margin-bottom: 2px;
 						margin-right: 6px;
 					}
 				}
@@ -139,7 +138,7 @@
 							font-family:PingFangSC-Regular;
 							font-weight:bold;
 							img {
-								vertical-align:middle;
+								margin-bottom:2px;
 								margin-right: 6px;
 							}
 			    		}
@@ -157,7 +156,7 @@
 				height: 265px;
 				width: 100%;
 				.brandtitle {
-					height: 45px;
+					height: 32px;
 					font-size:16px;
 					font-family:PingFangSC-Semibold;
 					font-weight:600;
@@ -169,9 +168,9 @@
 					width: 100%;
 					li {
 						width: 33.33%;
-						height: 100px;
+						height: 106px;
 						float: left;
-						border-right: 1px solid #fff;
+						border-right: 2px solid #fff;
 						div:nth-child(1){
 							font-size:14px;
 							font-family:PingFangSC-Medium;
@@ -185,7 +184,7 @@
 						    justify-content: center;
 						}
 						div:nth-child(2){
-							height: 30px;
+							height: 36px;
 							font-size:12px;
 							font-family:PingFangSC-Semibold;
 							font-weight:600;

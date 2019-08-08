@@ -14,7 +14,9 @@
 				  	</div>
 				  </a-Col>
 				  <a-Col :span="12" class="thendChartCol2">
-				  	单位：万元  <span @click="thendChartClick">X</span>
+				  	单位：万元  <span @click="thendChartClick">
+						  <i class="iconfont icon-guanbi"></i>
+					  </span>
 				  </a-Col>
 				</a-Row>
 			</div>
@@ -128,9 +130,10 @@
 	    justify-content: center;
 		background-color: RGBA(69, 72, 90, 0.5);
 		.echarts {
-			height: 50%;
-			width: 50%;
+			height: 80%;
+			width: 90%;
 			background:rgba(255,255,255,1);
+			border-radius: 5px;
 			.title {
 				height: 10%;
 				width: 100%;
@@ -141,7 +144,7 @@
 				}
 				.thendChartCol1 {
 					height: 100%;
-					padding-left: 10px;
+					padding-left: 4%;
 					font-size:20px;
 					font-family:PingFangSC-Medium;
 					font-weight:500;
@@ -187,17 +190,19 @@
 					display: flex;
 					align-items: center;
 					font-size:16px;
-					font-family:PingFangSC-Regular;
 					font-weight:400;
 					color:rgba(51,51,51,1);
 					justify-content: flex-end;
-					padding-right: 40px;
+					padding-right: 10%;
 					span {
 						position: absolute;
 						top: 8px;
 						right: 8px;
 						color: rgba(180, 180, 180, 1);
 						cursor: pointer;
+					}
+					i{
+						font-size: 20px;
 					}
 				}
 			}

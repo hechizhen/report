@@ -9,7 +9,8 @@
                     </a-Col>
                     <a-Col :span="12" class="thendChartCol2">
                         <span @click="thendChartClicks">
-                        X</span>
+                            <i class="iconfont icon-guanbi"></i>
+                        </span>
                     </a-Col>
                 </a-Row>
             </div>
@@ -452,8 +453,8 @@
         justify-content: center;
         background-color: RGBA(69, 72, 90, 0.5);
         .echarts {
-            height: 50%;
-            width: 50%;
+            height: 80%;
+            width: 90%;
             background:rgba(255,255,255,1);
             .title {
                 height: 10%;
@@ -461,7 +462,6 @@
                 .thendChartRow {
                     height: 100%;
                     width: 100%;
-                    border-bottom: 1px solid rgba(210,210,210,1);
                 }
                 .thendChartCol1 {
                     height: 100%;

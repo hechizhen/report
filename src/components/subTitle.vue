@@ -1,18 +1,21 @@
 <template>
 	<div class="subtitle">
+		<div class="leftLine"></div>
 		<div class="subtitle_content">{{subtitlename}}</div>
 		<div class="subtitle_list">
 			<ul>
-				<li v-for="(item,index) in listing" @click="listingClick(item,index)">{{item}}</li>
+				<li v-for="(item,index) in listing" @click="listingClick(item,index)" :key="index">{{item}}</li>
 			</ul>
 		</div>
+		<explain :explainList="explainSecondList"></explain>
 	</div>
 </template>
 <script>
+	import explain from '../components/explain.vue'
 	export default {
 		name:'subtitle',
 		components:{
-
+			explain
 		},
 		props:{
 			// 副标题名称
@@ -26,6 +29,9 @@
 			},
 			explicit:{
 				type:Function,
+			},
+			explainSecondList:{
+				type:Object
 			}
 		},
 
@@ -46,16 +52,22 @@
 		height: 50px;
 		width: 100%;
 		display: flex;
-	    align-items: center;
+		align-items: center;
+		position: relative;
 	    /*justify-content: center;		*/
+	}
+	.leftLine{
+		width:6px;
+		height:20px;
+		background:rgba(45,146,252,1);
+		border-radius:3px;
 	}
 	.subtitle_content {
 		font-size:20px;
-		padding-left: 10px;
+		padding-left: 12px;
 		font-family:PingFangSC-Medium;
 		font-weight:500;
 		color:rgba(51,51,51,1);
-		border-left: 6px solid #2D92FC;
 	}
 	.subtitle_list {
 		margin-left: 15px;

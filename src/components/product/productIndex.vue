@@ -179,7 +179,6 @@
 
 <style lang="less" scoped>
     .product{
-        margin-bottom: 1%;
         .product-content{
             width: 100%;
             margin: 0 auto;

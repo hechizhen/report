@@ -8,17 +8,19 @@
                 </div>
                 <div></div>
                 <div class="oneHelpSaleTopLeftBox" :style="{background:salesData.bgColor}">
-                    <div class="oneHelpSaleTopMid">
-                        <div class="oneHelpSaleTopMidSales">
-                            <div>
-                                <p>
-                                    <i></i>
-                                    <span class="salesTxt">下单金额（万）</span>
-                                </p>
-                                <p>
-                                    <span class="sales">￥</span>
-                                    <span class="salesMoney">{{salesData.sales}}</span>
-                                </p>
+                    <div class="flexMid">
+                        <div class="oneHelpSaleTopMid">
+                            <div class="oneHelpSaleTopMidSales">
+                                <div>
+                                    <p>
+                                        <!-- <i class="iconfont icon-jinqian"></i> -->
+                                        <span class="salesTxt">下单金额（万）</span>
+                                    </p>
+                                    <p>
+                                        <span class="sales">￥</span>
+                                        <span class="salesMoney">{{salesData.sales}}</span>
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -123,38 +125,45 @@
                     display: flex;
                     flex-wrap: wrap;
                 }
-                .oneHelpSaleTopMid{
-                    border-radius:118px 118px 0 0;
-                    border:6px solid #fff;
-                    border-bottom:none;
-                    width:236px;
-                    height:118px;
-                    position: relative;
+                .flexMid{
+                    width:60%;
+                    height:100%;
                     display: flex;
                     align-items: center;
+                    text-align: center;
                     justify-content: center;
-                    margin:20px 5% 0 5%;
-                    .oneHelpSaleTopMidSales{
-                        position: absolute;
-                        width:100%;
-                        height:100%;
+                    .oneHelpSaleTopMid{
+                        border-radius:118px 118px 0 0;
+                        border:6px solid #fff;
+                        border-bottom:none;
+                        width:236px;
+                        height:118px;
+                        position: relative;
                         display: flex;
                         align-items: center;
                         justify-content: center;
-                        text-align: center;
-                        padding-top:60px;
-                        span{
-                            color:#fff;
-                        }
-                        .salesTxt{
-                            font-size: 14px;
-                        }
-                        .sales{
-                            font-size: 18px;
-                        }
-                        .salesMoney{
-                            font-size: 30px;
-                            font-weight: 600;
+                        .oneHelpSaleTopMidSales{
+                            position: absolute;
+                            width:100%;
+                            height:100%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            text-align: center;
+                            padding-top:60px;
+                            span{
+                                color:#fff;
+                            }
+                            .salesTxt{
+                                font-size: 14px;
+                            }
+                            .sales{
+                                font-size: 18px;
+                            }
+                            .salesMoney{
+                                font-size: 30px;
+                                font-weight: 600;
+                            }
                         }
                     }
                 }

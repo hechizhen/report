@@ -2,7 +2,7 @@
 <template>
     <div class="secondTitle">
         {{titleName}}
-        <explain :explainList="explainSecondList" ></explain>
+        <explain :explainList="explainSecondList" v-if="titleName!='二帮卖分析'"></explain>
     </div>
 </template>
 <script>

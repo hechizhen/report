@@ -34,9 +34,9 @@
                        :invtopography="invtopography"  :barData="inventoryDay.inventoryBarData"
         ></inventoryDase>
         </div>
-        <core :coretype="'库存得分'" :coretext="87" :evaluate="'较好'"></core>
         <inventoryChart v-if="invechartsShow" :trendChartClick="trendChartClick" :lineEchartsData="lineEchartsData"></inventoryChart>
     </div>
+    <core :coretype="'库存得分'" :coretext="87" :evaluate="'较好'"></core>
     </div>
 </template>
 
@@ -114,7 +114,6 @@
 .inventoryindex{
     width: 100%;
     height:220px;
-    margin-bottom: 4%;
 }
 .table-headtxt:last-child  .yuan{
     display: none !important;

@@ -104,11 +104,11 @@
         display: flex;
         flex-wrap: wrap;
         .headerTitle_left{
-            width:40%;
+            width:45%;
             height:100%;
         }
         .headerTitle_right{
-            width:60%;
+            width:55%;
             height:100%;
             display: flex;
             align-items: flex-end;
@@ -118,7 +118,6 @@
             padding-top:40px;
         }
         .paddingStyle1{
-            padding-top:10px;
             display: flex;
             align-items: center;
         }

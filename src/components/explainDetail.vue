@@ -99,7 +99,7 @@
 <style lang="less" scoped>
 	.explainDetail {
 		width:978px;
-		top:200px;
+		top:10%;;
 		left:0;
 		right:0;
 		margin:0 auto;

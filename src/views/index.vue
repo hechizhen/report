@@ -1,10 +1,10 @@
 
 <template>
     <div class="index">
-        <div class="title">
+        <!-- <div class="title">
             <p>体检报告</p>
             <i></i>
-        </div>
+        </div> -->
         <!-- 头部 -->
         <header-title :dealName="indexDealName" :score="indexScore" :summary="indexSummary" :defaultDate="indexDefaultDate" :changeDateHandle="indexChangeDate"></header-title>
         <!-- 一帮卖分析 -->
@@ -1051,7 +1051,7 @@
 <style scoped lang="less">
     .index{
        width:100%;
-       padding:0 20px 120px 20px;
+       padding:0 20px 50px 20px;
        background:#eaeff8;
        p{
            margin-bottom:0;

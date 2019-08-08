@@ -1,7 +1,7 @@
 <template>
 	<div class="bandSelling">
 		<secondTitle :titleName="titleName"></secondTitle>
-		<subTitle :subtitlename="subtitlename" :listing="listing" :explicit="explicit"></subTitle>
+		<subTitle :subtitlename="subtitlename" :listing="listing" :explicit="explicit"  :explainSecondList="explainSecondList"></subTitle>
 		<a-Row :gutter="23">
 		  <a-Col :span="10">
 		  	<sameMonth :orderAmountData="orderAmountData" :proportioData="proportioData" :topography="topography"></sameMonth>
@@ -64,6 +64,23 @@
 				proportioData:this.proportio,
 				echartsShow: false,
 				lineEchartsData:{},
+				explainSecondList:{
+					imgType:2,
+					tableData:[
+						{title:'下单金额：',data:'统计当月用户下单金额'},
+						{title:'下单金额环比：',data:'统计（当月下单金额-上个月下单金额）/上个月下单金额*100%'},
+						{title:'下单金额同比：',data:'统计（当月下单金额-去年同月下单金额）/去年同月下单金额*100%'},
+						{title:'立白下单金额占比：',data:'统计当月立白事业部下单金额/下单金额*100%'},
+						{title:'好爸爸下单金额占比：',data:'统计当月好爸爸事业部下单金额/下单金额*100%'},
+						{title:'超威下单金额占比：',data:'统计当月超威事业部下单金额/下单金额*100%'},
+						{title:'口腔下单金额占比：',data:'统计当月口腔事业部下单金额/下单金额*100%'},
+						{title:'晟美下单金额占比：',data:'统计当月晟美事业部下单金额/下单金额*100%'},
+						{title:'其他下单占比：',data:'统计当月其他事业部下单金额/下单金额*100%'},
+					],
+					span:7,
+					span2:17,
+					titleName:'二帮卖分析-订单指标解释'
+				}
 			}
 		},
 		mounted(){

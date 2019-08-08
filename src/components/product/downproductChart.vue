@@ -9,7 +9,8 @@
                     <a-Col :span="12" class="thendChartCol2">
                         单位：万元
                         <span @click="thendChartClicks">
-                        X</span>
+                            <i class="iconfont icon-guanbi"></i>
+                        </span>
                     </a-Col>
                 </a-Row>
             </div>
@@ -63,9 +64,10 @@
         justify-content: center;
         background-color: RGBA(69, 72, 90, 0.5);
         .echarts {
-            height: 50%;
-            width: 50%;
+            height: 80%;
+            width: 90%;
             background:rgba(255,255,255,1);
+            border-radius:5px;
             .title {
                 height: 10%;
                 width: 100%;
