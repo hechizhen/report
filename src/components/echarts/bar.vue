@@ -33,7 +33,7 @@
                     barData:[
                         {
                             name:'ABC',
-                            data:[200,300,400,500,600],
+                            data:[20,30,40,50,120],
                             color:'red',
                             barWidth:11,
                         },

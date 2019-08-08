@@ -26,9 +26,12 @@
             </div>
         </div>
         <inventoryCenten :turnoverTxt="inventoryDetails.turnoverTxt" :turnover="inventoryDetails.turnover"></inventoryCenten>
-        <inventoryDase :inventoryTxt="inventoryDay" :barData="inventoryDay.inventoryBarData" ></inventoryDase>
+        <inventoryDase v-if="inventoryDay.length!=0" :inventoryTxt="inventoryDay" :barData="inventoryDay.inventoryBarData"
+                       :invtopography="invtopography"
+        ></inventoryDase>
         </div>
         <core :coretype="'库存得分'" :coretext="87" :evaluate="'较好'"></core>
+        <inventoryChart v-if="invechartsShow" :trendChartClick="trendChartClick"></inventoryChart>
     </div>
 </template>
 
@@ -37,28 +40,40 @@
     import inventoryDase from './inventoryDase'
     import  newButton from  '../base/newButton'
     import  core from  '../core'
+    import  inventoryChart  from  './inventoryChart'
     export default {
         name: "inventoryIndex",
-        props:["inventoryDay","inventoryDetails","inventoryDayBar"],
+        props:["inventoryDay","inventoryDetails"],
         components:{
             inventoryCenten,
             inventoryDase,
             newButton,
-            core
+            core,
+            inventoryChart
         },
         data(){
             return{
                 Money:"￥",
-                inventoryBar:[],
+                invechartsShow: false,
+                // inventoryBar:{}
+            }
+        },
+        methods:{
+            invtopography(){
+                this.invechartsShow = true;
+            },
+            trendChartClick(){
+                this.invechartsShow = false;
             }
         },
         watch:{
-                inventoryDayBar(val){
-                 this.inventoryBar = val;
-    }
+                   // inventoryDay(val){
+                   // console.log(val)
+                   // this.inventoryBar = val;
+    // }
         },
          mounted() {
-                console.log(this.inventoryDayBar)
+               console.log(this.inventoryDay)
          }
     }
 </script>

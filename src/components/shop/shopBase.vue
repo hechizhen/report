@@ -61,6 +61,7 @@
                 font-weight:600;
                 margin-bottom: 0;
                 display: inline-block;
+                color: rgba(152, 162, 180, 1);
             }
         }
         .productLeft-btn {

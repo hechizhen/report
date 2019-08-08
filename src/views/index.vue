@@ -18,10 +18,10 @@
         <!-- 产品 -->
         <productIndex :CommodityTurnoverRate="CommodityTurnoverRate"  :commoditydata="commoditydata" :GoodsDetail="GoodsDetail"></productIndex>
         <!--门店-->
-        <shopIndex  :StoresDetailed="StoresDetailed"></shopIndex>
+        <shopIndex  :StoresDetailed="StoresDetailed" v-if="StoresDetailed.length!=0 "></shopIndex>
          <!--库存-->
         <second-title :titleName="inventoryTitle"></second-title>
-        <inventoryIndex  :inventoryDay="inventoryDay" :inventoryDetails="inventoryDetails" :inventoryDayBar="inventoryDay.inventoryBarData"> </inventoryIndex>
+        <inventoryIndex  :inventoryDay="inventoryDay" :inventoryDetails="inventoryDetails" v-if="inventoryDay.length!=0 "> </inventoryIndex>
         <!-- 财务 -->
         <finance :financeData="financeData" :receivableData="receivableData" :overDueData="overDueData" :titleName="financeTitle"
         v-if="financeData.length!=0 && receivableData.length!=0 && overDueData.length!=0"></finance>
@@ -86,8 +86,6 @@
                 inventoryDetails:"",
                 //库存可销天数
                 inventoryDay: "",
-                //库存可销天数折线图
-                inventoryBarData: "",
                 requestHttpUrl: this.$store.state.requestHttpUrl,//接口请求地址
                 testRequestHttpUrl: this.$store.state.testRequestHttpUrl,//接口请求地址
                 salesData: '',//本月/累计销量以及达成率
@@ -285,6 +283,7 @@
                         monthBarData,
                         yearBarData
                     }
+                    console.log(   _this.salesBarData)
                 })
             },
             //财务报表数据
@@ -487,12 +486,12 @@
                         NoSales: _this.dataProcess(data.yearval, 'percent').num + _this.dataProcess(data.yearval, 'percent').unit
                     }
                     let downGoods = {
-                        name:"销量增长商品数(个）:",
+                        name:"销量增长商品数(个）：",
                         NoSales:data.upGoods,
                         btn:"下滑商品"
                     }
                     let upGoods = {
-                        name:"销量下滑商品数(个） ：",
+                        name:"销量下滑商品数(个）：",
                         NoSales: data.downGoods,
                         btn:"增长商品"
                     }
@@ -553,12 +552,12 @@
                         }
                         let downSales = {
                             name:"销量下滑门店数（家）：",
-                            NoSales: _this.dataProcess(data.downSales, 'percent').num + _this.dataProcess(data.downSales, 'percent').unit,
+                            NoSales: data.downSales,
                             btn:"下滑门店"
                         }
                         let upSales = {
                             name:"销量增长门店数（家）：",
-                            NoSales: _this.dataProcess(data.upSales, 'percent').num + _this.dataProcess(data.upSales, 'percent').unit,
+                            NoSales: data.upSales,
                             btn:"增长门店"
                         }
                         let noTrade = {
@@ -596,7 +595,7 @@
 
                         _this.StoresDetailed = {
                             shopTitle:"门店活跃率：",
-                            StoreActivity: _this.dataProcess(data.StoreActivity, 'percent').num,  //门店活跃率
+                            StoreActivity: _this.dataProcess(data.StoreActivity, 'percent').num + _this.dataProcess(data.StoreActivity, 'percent').unit,  //门店活跃率
                             shopActiveData: {
                                 ActiveStoresTxt:"活跃门店数",
                                 ActiveStoresing:"（家）",
@@ -679,6 +678,7 @@
                 }).then(function (res) {
                         console.log(res)
                         let data = res.data.data.data
+                        let daydata = res.data.data.data.data
                         console.log(data)
                         let Chain = {
                             name: '环比增长:',
@@ -688,9 +688,16 @@
                             name: '同比增长:',
                             inventoryChainVal: _this.dataProcess(data.inventoryYearVal, 'percent').num + _this.dataProcess(data.inventoryYearVal, 'percent').unit,
                         }
+                        let inventoryData = []
+                        let Axiax = []
+                          daydata.map(function(item){
+                                Axiax.push(item.Axiax)
+                                item.dayData = _this.dataProcess(item.dayData,'day').num
+                                inventoryData.push(item.dayData)
+                        })
                         let inventoryBarData = {
-                        id: 'barIdinventory',
-                        xAxisData: data.inventoryBarDataAxiax,
+                        id: 'inventorybarId',
+                        xAxisData:Axiax,
                         xAxis: {
                             isShowLine: false,
                             isShowSplit: false,
@@ -708,7 +715,7 @@
                         barData: [
                             {
                                 name: 'ABC',
-                                data: data.dayData,
+                                data: inventoryData,
                                 color: '#6BBCFF',
                                 barWidth: 11
                             },
@@ -724,7 +731,7 @@
                         inventoryVal: _this.dataProcess(data.inventoryVal, 'day').num,
                         inventoryBarData
                     }
-                    console.log(_this.inventoryDay.inventoryBarData)
+                    console.log(_this.inventoryDay)
                     },
                 )
             },

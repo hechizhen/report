@@ -33,11 +33,11 @@
         },
         data () {
             return {
-                
+
             }
         },
         mounted () {
-          
+
         },
         methods: {
             buttonClick(val){
@@ -46,18 +46,18 @@
             }
         },
         computed:{
-          
+
         },
         watch: {
-           
+
         },
         distroyed: function () {
-            
+
         }
     }
 </script>
 <style scoped lang="less">
     .newButton{
-       
+
     }
 </style>
