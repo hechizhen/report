@@ -229,10 +229,12 @@
 
         },
         watch: {
-        //    barEchartsData(val){
-        //         var _this = this
-        //         _this.setBarOptions()
-        //    }
+            barEchartsData(val){
+                var _this = this
+                let echarts = _this.$echarts;
+                _this.myChart = echarts.init(document.getElementById(_this.barEchartsData.id))
+                _this.setBarOptions()
+           }
         },
         distroyed: function () {
 

@@ -4,7 +4,7 @@
 		<manager :explicit="explicit" :salesmanData="salesmanData"></manager>
 		<core :coretype="'业务员得分'" :coretext="100" :evaluate="'较好'"></core>
 		<trendChart  v-if="echartsShow" :trendChartClick="trendChartClick" :lineEchartsData="direction"></trendChart>
-		<glide  v-if="glideShow" :trendChartClick="glideClick"></glide>
+		<glide  v-if="glideShow" :trendChartClick="glideClick" :salesmandownward="salesmandownward"></glide>
 		<contribution   v-if="contributionShow" :trendChartClick="contributionClick"></contribution>
 	</div>
 </template>
@@ -33,6 +33,10 @@
 			salesmanTrendData:{
 				type:Object,
 				default:{}
+			},
+			salesmandownwardData:{
+				type:Object,
+				default:{}
 			}
 		},
 		data(){
@@ -42,7 +46,8 @@
 				echartsShow:false,
 				glideShow:false,
 				contributionShow:false,
-				direction:{}
+				direction:{},
+				salesmandownward:this.salesmandownwardData
 			}
 		},
 		mounted(){
@@ -76,6 +81,9 @@
                     lineData:val.seriesData
             	}
         	},
+        	salesmandownwardData(val) {
+        		this.salesmandownward = val
+        	}
         },
 		computd:{
 
