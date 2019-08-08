@@ -16,8 +16,8 @@
         </div>
     </div>
     <core :coretype="'门店得分'" :coretext="87" :evaluate="'较好'"></core>
-    <shopChartUp v-if="upShow" :trendChartClick="upClick" ></shopChartUp>
-    <shopChartrDown v-if="downShow" :trendChartClick="downClick" ></shopChartrDown>
+    <shopChartUp v-if="upShow" :trendChartClick="upClick" :barEchartsData="barEchartsDataUp" ></shopChartUp>
+    <shopChartrDown v-if="downShow" :trendChartClick="downClick"  :barEchartsData="barEchartsDataDown"></shopChartrDown>
 </div>
 </template>
 
@@ -30,7 +30,7 @@
     import  shopChartrDown from  './shopChartrDown'
     export default {
         name: "shopIndex",
-        props:["StoresDetailed"],
+        props:["StoresDetailed","upStoresData","downStoresData"],
         data(){
             return{
                 titName:"门店",
@@ -50,7 +50,62 @@
             shopChartrDown
         },
         watch:{
-
+            upStoresData(val){
+                console.log(val)
+                this.lityUpData = val;
+                this.barEchartsDataUp = {
+                    id:'barId',
+                    unit:'%',
+                    xAxisData:this.lityUpData.xAxisData,
+                    xAxis:{
+                        isShowLine:false,
+                        isShowSplit:false,
+                        axisLabelColor:'#333',
+                    },
+                    yAxis:{
+                        isShowLine:false,
+                        isShowSplit:false,
+                        axisLabelColor:'#333',
+                    },
+                    label:{
+                        isShow:false
+                    },
+                    type:'xAxis',
+                    barData:this.lityUpData.seriesData,
+                    showType:0,//0横过来 1竖起来
+                    markLineList:{
+                        show:false
+                    }
+                }
+            },
+            downStoresData(val){
+                console.log(val)
+                this.lityDownData = val;
+                this.barEchartsDataDown = {
+                    id:'barId',
+                    unit:'%',
+                    xAxisData:this.lityDownData.xAxisData,
+                    xAxis:{
+                        isShowLine:false,
+                        isShowSplit:false,
+                        axisLabelColor:'#333',
+                    },
+                    yAxis:{
+                        isShowLine:false,
+                        isShowSplit:false,
+                        axisLabelColor:'#333',
+                    },
+                    label:{
+                        isShow:false
+                    },
+                    type:'xAxis',
+                    barData:this.lityDownData.seriesData,
+                    showType:0,//0横过来 1竖起来
+                    markLineList:{
+                        show:false
+                    }
+                }
+            }
         },
         methods:{
             upraphy(){

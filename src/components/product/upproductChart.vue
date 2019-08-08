@@ -14,7 +14,7 @@
                 </a-Row>
             </div>
             <div class="lineEcharts">
-                <barEcharts></barEcharts>
+                <barEcharts :barEchartsData="barEchartsData"></barEcharts>
             </div>
         </div>
     </div>
@@ -32,6 +32,9 @@
             },
             indexname:{
                 type: Array
+            },
+            barEchartsData:{
+                type:Function
             }
         },
 

@@ -19,7 +19,7 @@
                 <newButton :defaultVal="defaultValdown" ></newButton>
             </div>
             <div class="bartu">
-            <barChart :barEchartsData="inventoryBarData"></barChart>
+             <barChart :barEchartsData="barData" ></barChart>
             </div>
         </div>
     </div>
@@ -40,7 +40,7 @@
             inventoryTxt:{
                 type: Object,String
             },
-            inventoryBarData:{
+            barData:{
                 type: Object
             },
             invtopography:{
@@ -78,7 +78,7 @@
     margin-right:0 !important;
 }
 .inventoryDase{
-    width:50%;
+    width:45%;
     height:208px;
     background:rgba(255,255,255,1);
     border-radius:10px;
@@ -146,14 +146,15 @@
         margin-left: 1%;
         /*background-color: bisque;*/
         .btn{
-            height: 15%;
+            height: 19%;
+            margin-bottom: 2%;
             .newButton{
                 float: right;
                 margin-top: 2%;
             }
         }
         .bartu{
-            height: 85%;
+            height: 79%;
         }
     }
 }

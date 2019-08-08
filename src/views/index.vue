@@ -14,11 +14,15 @@
         <!-- 帮卖分析-订单 -->
         <secondBand :orderAmountData="orderAmountData" :grossProfitData="grossProfitData" :grossInterestRateData="grossInterestRateData" :proportio="proportioData" :directionData="directionData"></secondBand>
         <!-- 二帮卖分析-业务员 -->
-        <salesman :salesmanData="salesmanData" :salesmanTrendData="salesmanTrendData"></salesman>
+        <salesman :salesmanData="salesmanData" :salesmanTrendData="salesmanTrendData" :salesmandownwardData="salesmandownwardData"></salesman>
         <!-- 产品 -->
-        <productIndex :CommodityTurnoverRate="CommodityTurnoverRate"  :commoditydata="commoditydata" :GoodsDetail="GoodsDetail"></productIndex>
+        <productIndex :CommodityTurnoverRate="CommodityTurnoverRate"  :commoditydata="commoditydata" :GoodsDetail="GoodsDetail"
+                      :VariabilityUpData="VariabilityUpData" :VariabilityDownData="VariabilityDownData"
+        ></productIndex>
         <!--门店-->
-        <shopIndex  :StoresDetailed="StoresDetailed" v-if="StoresDetailed.length!=0 "></shopIndex>
+        <shopIndex  :StoresDetailed="StoresDetailed" v-if="StoresDetailed.length!=0 "
+                    :upStoresData="upStoresData"  :downStoresData="downStoresData"
+        ></shopIndex>
          <!--库存-->
         <second-title :titleName="inventoryTitle"></second-title>
         <inventoryIndex  :inventoryDay="inventoryDay" :inventoryDetails="inventoryDetails"
@@ -80,12 +84,18 @@
                CommodityTurnoverRate:"",
                 //产品-动销商品数
                 commoditydata:"",
-                //产品-动销商品数增长下滑商品
-                VariabilityIndex:"",
+                //产品-动销商品数增长商品
+                VariabilityUpData:"",
+                //产品-动销商品数下滑商品
+                VariabilityDownData:"",
                 //产品-动销商品明细-饼图
                 GoodsDetail:"",
                 //门店活跃明细
                 StoresDetailed:"",
+                //门店-门店下滑门店
+                downStoresData:"",
+                //门店-门店下滑门店
+                upStoresData:"",
                 //库存金额，件数，可周转天数
                 inventoryDetails:"",
                 //库存可销天数
@@ -107,8 +117,8 @@
                 grossInterestRateData: {},//毛利率
                 proportioData: [],  //占比数据
                 directionData:{}, //订单走势图
-                salesmanTrendData:{}  //业务员走势图
-                
+                salesmanTrendData:{},  //业务员走势图
+                salesmandownwardData:{} //业务员下滑
             }
         },
         created() {
@@ -140,7 +150,11 @@
             this.getdirection()
             this.getsalesmanTrend()
             this.getmarketableDayChart()
-            this.getVariabilityIndex()
+            this.getVariabilityUp()
+            this.getVariabilityDown()
+            this.getsalesmandownward()
+            this.getDownStores()
+            this.geUpStores()
         },
         computed: {
 
@@ -165,9 +179,12 @@
                 this.getNumberMovingGoods()
                 this.getGoodsdetail()
                 this.getsalesmanTrend()
-                this.getalesmandownward()
+                this.getsalesmandownward()
                 this.getmarketableDayChart()
-                this.getVariabilityIndex()
+                this.getVariabilityUp()
+                this.getVariabilityDown()
+                this.getDownStores()
+                this.geUpStores()
             },
             //体检报告概览
             getOverViewData() {
@@ -305,7 +322,7 @@
                         showType: 0,
                         markLineList:{
                             show:true,
-                            data:100, 
+                            data:100,
                         }
                     }
                     _this.salesBarData = {
@@ -502,36 +519,26 @@
                 })
             },
             //业务员-下滑人员
-            getalesmandownward() {
+            getsalesmandownward() {
                 var _this = this
                 this.$http({
-                    url: _this.requestHttpUrl + '/alesmandownward',
+                    url: _this.requestHttpUrl + '/salesmandownward',
                     method: 'POST',
                     data: {
                         dateTime: _this.currentDate
                     }
                 }).then(function (res) {
-                    var salesmanTrendData = res.data.data,xAxisData=[],salesmanArr=[],seriesData=[],salesmanColor=['#009EE2','#E9A837','#00E2BF','#65E6F5'];
-                    salesmanTrendData.map(function(value){
-                        xAxisData.push(value.month)
+                    var salesmandownwardData = res.data.data,xAxisData=[],seriesData=[],lastMonth=[],sameMonth=[],difference=[],salesmandownwardObject={};
+                    salesmandownwardData.map(function(value){
+                        xAxisData.push(value.salesmanName);
+                        lastMonth.push(value.lastMonth)
+                        sameMonth.push(value.sameMonth)
+                        difference.push(value.difference)
                     })
-                    salesmanTrendData[0].salesmanList.map(function(value){
-                        salesmanArr.push(value.name)
-                    })
-                    salesmanArr.map(function(value,index){
-                        var tempObjecd = {name:value,color:salesmanColor[index]},tempArr = [];
-                        salesmanTrendData.map(function(data){
-                           data.salesmanList.map(function(resdata){
-                                if(value == resdata.name){
-                                    tempArr.push(resdata.value)
-                                }
-                           })
-                        })
-                        tempObjecd.data = tempArr;
-                        seriesData.push(tempObjecd)
-                    })
-                    var tempsalesmanTrendData = {monthArr:xAxisData,seriesData:seriesData}
-                    _this.salesmanTrendData = tempsalesmanTrendData
+                    seriesData.push({name:'上月销售额',data:lastMonth,color:'#009EE2',barWidth:11},{name:'本月销售额',data:sameMonth,color:'#E9A837',barWidth:11},{name:'销售差额',data:difference,color:'#00E2BF',barWidth:11})
+                    salesmandownwardObject.xAxisData = xAxisData;
+                    salesmandownwardObject.seriesData = seriesData;
+                    _this.salesmandownwardData = salesmandownwardObject
                 })
             },
             //产品-商品动销率
@@ -630,88 +637,72 @@
                     },
                 )
             },
-            //产品-动销商品数增长下滑商品
-            getVariabilityIndex() {
+            //产品-动销商品数增长商品
+            getVariabilityUp() {
                 var _this = this
                 this.$http({
-                    url: _this.requestHttpUrl + '/variabilityIndex',
+                    url: _this.requestHttpUrl + '/variabilityUp',
                     method: 'POST',
                     data: {
                         dateTime: _this.currentDate
                     }
                 }).then(function (res) {
-                    console.log(res)
-                    let data = res.data.data.data
-                    let uphData = []
-                    let downData = []
-                    let Axiax = []
-                    data.map(function(item){
-                        Axiax.push(item.Axiax)
-                        item.uphData = _this.dataProcess(item.uphData,'money').num
-                        item.uphData1 = _this.dataProcess(item.uphData1,'money').num
-                        item.downData = _this.dataProcess(item.downData,'money').num
-                        uphData.push(item.uphData)
-                        downData.push(item.downData)
+                    var VariabilityUpData = res.data.data,
+                        xAxisData=[],
+                        seriesData=[],
+                        lastMonth=[],
+                        sameMonth=[],
+                        difference=[],
+                        salesmandownwardObject={};
+                    VariabilityUpData.map(function(value){
+                        xAxisData.push(value.salesmanName);
+                        lastMonth.push(value.lastMonth)
+                        sameMonth.push(value.sameMonth)
+                        difference.push(value.difference)
                     })
-                    let monthBarData = {
-                        id: 'barIdMonthSales',
-                        xAxisData: Axiax,
-                        xAxis: {
-                            isShowLine: false,
-                            isShowSplit: false,
-                            axisLabelColor: '#333',
-                        },
-                        yAxis: {
-                            isShowLine: false,
-                            isShowSplit: false,
-                            axisLabelColor: '#D7D9E5',
-                        },
-                        label: {
-                            isShow: true
-                        },
-                        type: 'xAxis',
-                        barData: [
-                            {
-                                name: 'ABC',
-                                data: uphData,
-                                color: '#D7D9E5',
-                                barWidth: 11
-                            },
-                        ],
-                        showType: 0
+                    seriesData.push(
+                        {name:'上月销售额（万元）',data:lastMonth,color:'#2D92FC',barWidth:22},
+                        {name:'当月销售额（万元）',data:sameMonth,color:'#FFBD7B',barWidth:22},
+                        {name:'销售差额（万元）',data:difference,color:'#FE9600',barWidth:22})
+                    salesmandownwardObject.xAxisData = xAxisData;
+                    salesmandownwardObject.seriesData = seriesData;
+                    _this.VariabilityUpData = salesmandownwardObject
+                    console.log( _this.VariabilityUpData)
+
+                })
+            },
+            //产品-动销商品数下滑商品
+            getVariabilityDown() {
+                var _this = this
+                this.$http({
+                    url: _this.requestHttpUrl + '/variabilityDown',
+                    method: 'POST',
+                    data: {
+                        dateTime: _this.currentDate
                     }
-                    let yearBarData = {
-                        id: 'barIdYearSales',
-                        xAxisData: Axiax,
-                        xAxis: {
-                            isShowLine: false,
-                            isShowSplit: false,
-                            axisLabelColor: '#333',
-                        },
-                        yAxis: {
-                            isShowLine: false,
-                            isShowSplit: false,
-                            axisLabelColor: '#D7D9E5',
-                        },
-                        label: {
-                            isShow: true
-                        },
-                        type: 'xAxis',
-                        barData: [
-                            {
-                                name: 'ABC',
-                                data: downData,
-                                color: '#D7D9E5',
-                                barWidth: 11
-                            },
-                        ],
-                        showType: 0
-                    }
-                    _this.VariabilityIndex = {
-                        monthBarData,
-                        yearBarData
-                    }
-                    console.log(   _this.VariabilityIndex)
+                }).then(function (res) {
+                    var VariabilityUpData = res.data.data,
+                        xAxisData=[],
+                        seriesData=[],
+                        lastMonth=[],
+                        sameMonth=[],
+                        difference=[],
+                        salesmandownwardObject={};
+                    VariabilityUpData.map(function(value){
+                        xAxisData.push(value.salesmanName);
+                        lastMonth.push(value.lastMonth)
+                        sameMonth.push(value.sameMonth)
+                        difference.push(value.difference)
+                    })
+                    seriesData.push(
+                        {name:'上月销售额（万元）',data:lastMonth,color:'#2D92FC',barWidth:22},
+                        {name:'当月销售额（万元）',data:sameMonth,color:'#FFBD7B',barWidth:22},
+                        {name:'销售差额（万元）',data:difference,color:'#FE9600',barWidth:22})
+                    salesmandownwardObject.xAxisData = xAxisData;
+                    salesmandownwardObject.seriesData = seriesData;
+                    _this.VariabilityDownData = salesmandownwardObject
+                    console.log( _this.VariabilityDownData)
+
                 })
             },
             //产品-动销商品明细
@@ -828,6 +819,74 @@
                     },
                 )
             },
+            //门店-门店下滑商品
+            getDownStores() {
+                var _this = this
+                this.$http({
+                    url: _this.requestHttpUrl + '/downStores',
+                    method: 'POST',
+                    data: {
+                        dateTime: _this.currentDate
+                    }
+                }).then(function (res) {
+                    var VariabilityUpData = res.data.data,
+                        xAxisData=[],
+                        seriesData=[],
+                        lastMonth=[],
+                        sameMonth=[],
+                        difference=[],
+                        salesmandownwardObject={};
+                    VariabilityUpData.map(function(value){
+                        xAxisData.push(value.salesmanName);
+                        lastMonth.push(value.lastMonth)
+                        sameMonth.push(value.sameMonth)
+                        difference.push(value.difference)
+                    })
+                    seriesData.push(
+                        {name:'上月销售额（万元）',data:lastMonth,color:'#2D92FC',barWidth:22},
+                        {name:'当月销售额（万元）',data:sameMonth,color:'#FFBD7B',barWidth:22},
+                        {name:'销售差额（万元）',data:difference,color:'#FE9600',barWidth:22})
+                    salesmandownwardObject.xAxisData = xAxisData;
+                    salesmandownwardObject.seriesData = seriesData;
+                    _this.downStoresData = salesmandownwardObject
+                    console.log( _this.downStoresData)
+
+                })
+            },
+            //门店-门店增长商品
+            geUpStores() {
+                var _this = this
+                this.$http({
+                    url: _this.requestHttpUrl + '/upStores',
+                    method: 'POST',
+                    data: {
+                        dateTime: _this.currentDate
+                    }
+                }).then(function (res) {
+                    var VariabilityUpData = res.data.data,
+                        xAxisData=[],
+                        seriesData=[],
+                        lastMonth=[],
+                        sameMonth=[],
+                        difference=[],
+                        salesmandownwardObject={};
+                    VariabilityUpData.map(function(value){
+                        xAxisData.push(value.salesmanName);
+                        lastMonth.push(value.lastMonth)
+                        sameMonth.push(value.sameMonth)
+                        difference.push(value.difference)
+                    })
+                    seriesData.push(
+                        {name:'上月销售额（万元）',data:lastMonth,color:'#2D92FC',barWidth:22},
+                        {name:'当月销售额（万元）',data:sameMonth,color:'#FFBD7B',barWidth:22},
+                        {name:'销售差额（万元）',data:difference,color:'#FE9600',barWidth:22})
+                    salesmandownwardObject.xAxisData = xAxisData;
+                    salesmandownwardObject.seriesData = seriesData;
+                    _this.upStoresData = salesmandownwardObject
+                    console.log( _this.upStoresData)
+
+                })
+            },
             //库存明细金额件数明细
             getinventoryDetail() {
                 var _this = this
@@ -895,9 +954,10 @@
                                 item.dayData = _this.dataProcess(item.dayData,'day').num
                                 inventoryData.push(item.dayData)
                         })
-                        let inventoryBarData = {
-                        id: 'inventorybarId',
-                        xAxisData:Axiax,
+                       let inventoryBarData = {
+                       id: 'barIdInventory',
+                       unit:'天',
+                        xAxisData: Axiax,
                         xAxis: {
                             isShowLine: false,
                             isShowSplit: false,
@@ -917,10 +977,14 @@
                                 name: 'ABC',
                                 data: inventoryData,
                                 color: '#6BBCFF',
-                                barWidth: 11
+                                barWidth: 6
                             },
                         ],
-                        showType: 0
+                        showType: 0,
+                           markLineList:{
+                               show:false,
+                               data:100,
+                           }
                     }
                        _this.inventoryDay = {
                         inventorycompare: [

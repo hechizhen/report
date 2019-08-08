@@ -12,7 +12,7 @@
 				</a-Row>
 			</div>
 			<div class="lineEcharts">
-				<barEcharts></barEcharts>
+				<barEcharts :barEchartsData="barEcharts"></barEcharts>
 			</div>
 		</div>
 	</div>
@@ -27,19 +27,77 @@
 		props:{
 			trendChartClick:{
 				type:Function
+			},
+			salesmandownward:{
+				type:Object,
+				default:{}
 			}
 		},
 
 		data(){
 			return {
-
+				barEcharts:{}
 			}
+		},
+		mounted () {
+			this.barEcharts = {
+                    id:'barId',
+                    unit:'%',
+                    xAxisData:this.salesmandownward.xAxisData,
+                    xAxis:{
+                        isShowLine:false,
+                        isShowSplit:false,
+                        axisLabelColor:'#333',
+                    },
+                    yAxis:{
+                        isShowLine:false,
+                        isShowSplit:false,
+                        axisLabelColor:'#333',
+                    },
+                    label:{
+                        isShow:false
+                    },
+                    type:'xAxis',
+                    barData:this.salesmandownward.seriesData,
+                    showType:0,//0横过来 1竖起来
+                    markLineList:{
+                        show:false
+                    }
+                }
 		},
 		methods:{
 			thendChartClick(){
 				this.trendChartClick()
 			}
-		}
+		},
+		watch:{
+            salesmandownward(val){
+            	this.barEcharts = {
+                    id:'barId',
+                    unit:'%',
+                    xAxisData:val.xAxisData,
+                    xAxis:{
+                        isShowLine:false,
+                        isShowSplit:false,
+                        axisLabelColor:'#333',
+                    },
+                    yAxis:{
+                        isShowLine:false,
+                        isShowSplit:false,
+                        axisLabelColor:'#333',
+                    },
+                    label:{
+                        isShow:false
+                    },
+                    type:'xAxis',
+                    barData:val.seriesData,
+                    showType:0,//0横过来 1竖起来
+                    markLineList:{
+                        show:false
+                    }
+                }
+        	},
+        },
 	}
 </script>
 <style lang="less" scoped>

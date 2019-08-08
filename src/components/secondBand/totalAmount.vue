@@ -169,7 +169,7 @@
 					width: 100%;
 					li {
 						width: 33.33%;
-						height: 95px;
+						height: 100px;
 						float: left;
 						border-right: 1px solid #fff;
 						div:nth-child(1){
@@ -177,7 +177,7 @@
 							font-family:PingFangSC-Medium;
 							font-weight:500;
 							color:rgba(152,162,180,1);
-							height: 50px;
+							height: 70px;
 							width: 100%;
 							background:rgba(0,166,255,0.1);
 							display: flex;
@@ -185,7 +185,7 @@
 						    justify-content: center;
 						}
 						div:nth-child(2){
-							height: 45px;
+							height: 30px;
 							font-size:12px;
 							font-family:PingFangSC-Semibold;
 							font-weight:600;
