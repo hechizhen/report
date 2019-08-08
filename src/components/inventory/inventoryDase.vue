@@ -19,7 +19,7 @@
                 <newButton :defaultVal="defaultValdown" ></newButton>
             </div>
             <div class="bartu">
-            <barChart :barEchartsData="barData"></barChart>
+            <barChart :barEchartsData="inventoryBarData"></barChart>
             </div>
         </div>
     </div>
@@ -40,7 +40,7 @@
             inventoryTxt:{
                 type: Object,String
             },
-            barData:{
+            inventoryBarData:{
                 type: Object
             },
             invtopography:{
@@ -60,7 +60,7 @@
 
         },
         mounted () {
-            console.log(this.barData)
+            console.log(this.inventoryBarData)
         },
     }
 </script>
