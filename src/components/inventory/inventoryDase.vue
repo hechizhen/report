@@ -111,7 +111,7 @@
             text-align: center;
         }
         .left-txt{
-            width: 80%;
+            width: 90%;
             height:69px;
             background:rgba(238,240,245,1);
             margin: 10% auto;
@@ -169,6 +169,6 @@
     color: rgba(152, 162, 180, 1);
 }
 .inventoryDase .inventoryDase-left .left-txt .left-txt-title span:first-child{
-    margin-left: 6%;
+    margin-left: 20%;
 }
 </style>
