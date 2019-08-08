@@ -130,7 +130,6 @@
         },
         watch: {
             lineEchartsData(val){
-                alert(1)
                 var _this = this  
                 let echarts = _this.$echarts;
                 _this.myChart = echarts.init(document.getElementById(_this.lineEchartsData.id))
