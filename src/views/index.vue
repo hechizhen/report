@@ -198,7 +198,7 @@
                     data: params
                 }).then(function (res) {
                     console.log(res)
-                    let data = res.data.data.data
+                    let data = res.data.data.data[0]
                     _this.salesData = {
                         monthData:{
                             sales:_this.dataProcess(data.monthSales,'money').num,
