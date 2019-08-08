@@ -12,34 +12,46 @@
 				</a-Row>
 			</div>
 			<div class="lineEcharts">
-				<lineEcharts></lineEcharts>
+				<echartsline :lineEchartsData="direction"></echartsline>
 			</div>
 		</div>
 	</div>
 </template>
 <script>
-	import lineEcharts from "./../echarts/line.vue"
+	import echartsline from "./../echarts/line.vue" 
 	export default {
 		name:'thendChart',
 		components:{
-			lineEcharts
+			echartsline
 		},
 		props:{
 			trendChartClick:{
 				type:Function
+			},
+			lineEchartsData:{
+				type:Object,
+				default:{}
 			}
 		},
-
 		data(){
 			return {
-
+				direction:this.lineEchartsData,
 			}
+		},
+		mounted(){
+			console.log('111111111111111111111')
+			console.log(this.lineEchartsData)
 		},
 		methods:{
 			thendChartClick(){
 				this.trendChartClick()
-			}
-		}
+			},
+		},
+		watch:{
+            lineEchartsData(val){
+                this.direction = val;
+            }
+        },
 	}
 </script>
 <style lang="less" scoped>

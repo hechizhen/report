@@ -12,9 +12,9 @@
         v-if="salesData.length!=0 && salesBarData.length!=0" ></one-help-sale-en>
 
         <!-- 帮卖分析-订单 -->
-        <secondBand :orderAmountData="orderAmountData" :grossProfitData="grossProfitData" :grossInterestRateData="grossInterestRateData" :proportio="proportioData"></secondBand>
+        <secondBand :orderAmountData="orderAmountData" :grossProfitData="grossProfitData" :grossInterestRateData="grossInterestRateData" :proportio="proportioData" :directionData="directionData"></secondBand>
         <!-- 二帮卖分析-业务员 -->
-        <salesman :salesmanData="salesmanData"></salesman>
+        <salesman :salesmanData="salesmanData" :salesmanTrendData="salesmanTrendData"></salesman>
         <!-- 产品 -->
         <productIndex :CommodityTurnoverRate="CommodityTurnoverRate"  :commoditydata="commoditydata" :GoodsDetail="GoodsDetail"></productIndex>
         <!--门店-->
@@ -100,6 +100,8 @@
                 grossProfitData: {}, //毛利额
                 grossInterestRateData: {},//毛利率
                 proportioData: [],  //占比数据
+                directionData:{}, //订单走势图
+                salesmanTrendData:{}  //业务员走势图
             }
         },
         created() {
@@ -128,6 +130,8 @@
             this.getCommodityTurnoverRate()
             this.getNumberMovingGoods()
             this.getGoodsdetail()
+            this.getdirection()
+            this.getsalesmanTrend()
         },
         computed: {
 
@@ -151,6 +155,8 @@
                 this.getCommodityTurnoverRate()
                 this.getNumberMovingGoods()
                 this.getGoodsdetail()
+                this.getsalesmanTrend()
+                this.getalesmandownward()
             },
             //体检报告概览
             getOverViewData() {
@@ -416,6 +422,92 @@
                     var proportioData = res.data.data;
                     _this.proportioData = proportioData;
                     console.log(   _this.proportioData)
+                })
+            },
+            //二帮卖-订单走势图
+            getdirection() {
+                var _this = this
+                this.$http({
+                    url: _this.requestHttpUrl + '/direction',
+                    method: 'POST',
+                    data: {
+                        dateTime: _this.currentDate
+                    }
+                }).then(function (res) {
+                    var directionData = res.data.data,monthArr = [],seriesData=[],directionArr = {};
+                    directionData.map(function(value){
+                        monthArr.push(value.month)
+                        seriesData.push(value.value)
+                    })
+                    directionArr.monthArr = monthArr;
+                    directionArr.seriesData = seriesData;
+                    _this.directionData = directionArr;
+                })
+            },
+            //业务员-走势图
+            getsalesmanTrend() {
+                var _this = this
+                this.$http({
+                    url: _this.requestHttpUrl + '/salesmanTrend',
+                    method: 'POST',
+                    data: {
+                        dateTime: _this.currentDate
+                    }
+                }).then(function (res) {
+                    var salesmanTrendData = res.data.data,xAxisData=[],salesmanArr=[],seriesData=[],salesmanColor=['#009EE2','#E9A837','#00E2BF','#65E6F5'];
+                    salesmanTrendData.map(function(value){
+                        xAxisData.push(value.month)
+                    })
+                    salesmanTrendData[0].salesmanList.map(function(value){
+                        salesmanArr.push(value.name)
+                    })
+                    salesmanArr.map(function(value,index){
+                        var tempObjecd = {name:value,color:salesmanColor[index]},tempArr = [];
+                        salesmanTrendData.map(function(data){
+                           data.salesmanList.map(function(resdata){
+                                if(value == resdata.name){
+                                    tempArr.push(resdata.value)
+                                }
+                           })
+                        })
+                        tempObjecd.data = tempArr;
+                        seriesData.push(tempObjecd)
+                    })
+                    var tempsalesmanTrendData = {monthArr:xAxisData,seriesData:seriesData}
+                    _this.salesmanTrendData = tempsalesmanTrendData
+                })
+            },
+            //业务员-下滑人员
+            getalesmandownward() {
+                var _this = this
+                this.$http({
+                    url: _this.requestHttpUrl + '/alesmandownward',
+                    method: 'POST',
+                    data: {
+                        dateTime: _this.currentDate
+                    }
+                }).then(function (res) {
+                    var salesmanTrendData = res.data.data,xAxisData=[],salesmanArr=[],seriesData=[],salesmanColor=['#009EE2','#E9A837','#00E2BF','#65E6F5'];
+                    salesmanTrendData.map(function(value){
+                        xAxisData.push(value.month)
+                    })
+                    salesmanTrendData[0].salesmanList.map(function(value){
+                        salesmanArr.push(value.name)
+                    })
+                    salesmanArr.map(function(value,index){
+                        var tempObjecd = {name:value,color:salesmanColor[index]},tempArr = [];
+                        salesmanTrendData.map(function(data){
+                           data.salesmanList.map(function(resdata){
+                                if(value == resdata.name){
+                                    tempArr.push(resdata.value)
+                                }
+                           })
+                        })
+                        tempObjecd.data = tempArr;
+                        seriesData.push(tempObjecd)
+                    })
+                    var tempsalesmanTrendData = {monthArr:xAxisData,seriesData:seriesData}
+                    _this.salesmanTrendData = tempsalesmanTrendData
                 })
             },
             //产品-商品动销率

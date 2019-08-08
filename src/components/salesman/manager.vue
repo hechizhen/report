@@ -49,9 +49,13 @@
 				  		<img src="./../../assets/img/yewu.png">
 				  	</div>
 				  </a-Col>
-				  <a-Col :span="12" class="managerCol">
-				  	<p>总业务员人数(人)<span>{{salesmanData.totalNumber}}</span></p>
-				  	<p>业绩下滑人数(人)<span>{{salesmanData.declinePerformance}}</span></p>
+				  <a-Col :span="6" class="managerCol">
+				  	<p>总业务员人数(人)</p>
+				  	<p>业绩下滑人数(人)</p>
+				  </a-Col>
+				  <a-Col :span="6" class="managerCol">
+				  	<p>{{salesmanData.totalNumber}}</p>
+				  	<p>{{salesmanData.declinePerformance}}</p>
 				  </a-Col>
 				  <a-Col :span="6" class="managerCol">
 				  	<p @click="glidingClick('下滑人员')">下滑人员</p>
@@ -130,14 +134,10 @@
 			    flex-direction: column;
 			    p {
 			     	margin: 0px;
-				    font-size:16px;
+				    font-size:14px;
 					font-family:PingFangSC-Medium;
 					font-weight:bold;
 					color:rgba(255,255,255,1);
-				}
-				p:nth-child(2) {
-					margin-top: 6px;
-					font-size:24px;
 				}
 			}
 			.managerCol:nth-child(3)  {
@@ -146,7 +146,7 @@
 			    flex-direction: column;
 			    p {
 			     	margin: 0px;
-				    font-size:16px;
+				    font-size:14px;
 					font-family:PingFangSC-Medium;
 					font-weight:bold;
 					color:rgba(255,255,255,1);
@@ -232,7 +232,29 @@
 					font-size:14px;
 				}
 			}
-			.managerCol:nth-child(3)  {
+			.managerCol:nth-child(3) {
+				display: flex;
+			    justify-content: center;
+			    flex-direction: column;
+			    p {
+			    	width: 100%;
+			    	text-align: right;
+			    	padding-right: 20%;
+			     	margin: 0px;
+				    font-size:14px;
+					font-family:PingFangSC-Medium;
+					font-weight:bold;
+					color:rgba(255,255,255,1);
+					span {
+						margin-left: 6px;
+					}
+				}
+				p:nth-child(2) {
+					margin-top: 6px;
+					font-size:14px;
+				}
+			}
+			.managerCol:nth-child(4)  {
 				display: flex;
 			    justify-content: center;
 			    flex-direction: column;
@@ -248,6 +270,9 @@
 					font-family:PingFangSC-Regular;
 					font-weight:400;
 					color:rgba(255,255,255,1);
+			    }
+			    p:nth-child(2) {
+			    	margin-top: 6px;
 			    }
 			    p:active {
 					color:rgba(255,255,255,1);
