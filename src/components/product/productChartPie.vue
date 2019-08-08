@@ -422,7 +422,7 @@
             }
         },
         mounted(){
-     //   console.log(this.listraphy)
+       console.log(this.pieEchartsData)
         },
 
         methods:{

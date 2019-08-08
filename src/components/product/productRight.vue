@@ -10,6 +10,8 @@
                 </div>
             </div>
         </div>
+        <span class="zreo">0</span>
+        <span class="million">100%</span>
     </div>
 </template>
 
@@ -45,8 +47,9 @@
         width: 60%;
         float: right;
         margin-top: 6%;
+        position: relative;
         .pinRight-centen{
-            width: 80%;
+            width: 75%;
             .product-centen {
                 margin-top: 19px;
                 transform-style: preserve-3d;
@@ -74,5 +77,17 @@
                 }
             }
         }
+    }
+    .zreo{
+        position: absolute;
+        bottom: 11%;
+        left: 45%;
+        color: #fff;
+    }
+    .million{
+        position: absolute;
+        bottom: 11%;
+        right: 7%;
+        color: #fff;
     }
 </style>

@@ -26,12 +26,12 @@
             </div>
         </div>
         <inventoryCenten :turnoverTxt="inventoryDetails.turnoverTxt" :turnover="inventoryDetails.turnover"></inventoryCenten>
-        <inventoryDase v-if="inventoryDay.length!=0" :inventoryTxt="inventoryDay" :barData="inventoryDay.inventoryBarData"
-                       :invtopography="invtopography"
+        <inventoryDase v-if="inventoryDay.length!=0" :inventoryTxt="inventoryDay"
+                       :invtopography="invtopography"  :inventoryBarData="inventoryDay.inventoryBarData"
         ></inventoryDase>
         </div>
         <core :coretype="'库存得分'" :coretext="87" :evaluate="'较好'"></core>
-        <inventoryChart v-if="invechartsShow" :trendChartClick="trendChartClick"></inventoryChart>
+        <inventoryChart v-if="invechartsShow" :trendChartClick="trendChartClick" :lineEchartsData="lineEchartsData"></inventoryChart>
     </div>
 </template>
 
@@ -43,7 +43,7 @@
     import  inventoryChart  from  './inventoryChart'
     export default {
         name: "inventoryIndex",
-        props:["inventoryDay","inventoryDetails"],
+        props:["inventoryDay","inventoryDetails","marketableDayChart"],
         components:{
             inventoryCenten,
             inventoryDase,
@@ -55,7 +55,8 @@
             return{
                 Money:"￥",
                 invechartsShow: false,
-                // inventoryBar:{}
+                marketableDay:{},
+                lineEchartsData:{},
             }
         },
         methods:{
@@ -67,10 +68,15 @@
             }
         },
         watch:{
-                   // inventoryDay(val){
-                   // console.log(val)
-                   // this.inventoryBar = val;
-    // }
+            marketableDayChart(val) {
+                console.log(val)
+                this.marketableDay = val;
+                this.lineEchartsData = {
+                    id: 'lineIdMarketableDay',
+                    xAxisData: ["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"],
+                    lineData: this.marketableDay
+                }
+            }
         },
          mounted() {
                console.log(this.inventoryDay)

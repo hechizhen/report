@@ -92,10 +92,10 @@
                     radius:['100%', '5%'],
                     borderWidth:0,
                 }
-            }
+            },
         },
         mounted() {
-          // console.log(this.goodsData)
+          console.log(this.goodsData)
         }
     }
 </script>
