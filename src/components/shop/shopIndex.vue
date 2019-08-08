@@ -1,6 +1,6 @@
 <template>
 <div class="shopindex">
-    <dataTitle :subtitlename="titName"></dataTitle>
+    <dataTitle :subtitlename="titName" :explainSecondList="explainSecondList"></dataTitle>
     <div class="shop-centen">
         <div class="shop-centen-title">
              <div class="title-img">
@@ -42,7 +42,24 @@
                 barEchartsDataUp:{},
                 barEchartsDataDown:{},
                 lityUpData:{},
-                lityDownData:{}
+                lityDownData:{},
+                explainSecondList:{
+                    imgType:5,
+                    tableData:[
+                        {title:'总门店数：',data:'统计当前用户总有效门店数'},
+                        {title:'门店单产：',data:'统计当月下单金额/活跃门店数'},
+                        {title:'新增门店数：',data:'统计当月新增录入系统的门店数'},
+                        {title:'活跃门店数：',data:'统计当月有下单的有效门店数（去重）'},
+                        {title:'活跃门店率：',data:'统计当月有下单的有效门店数（去重）/总门店数'},
+                        {title:'活跃门店数环比：',data:'统计（当月活跃门店数-上个月活跃门店数）/上个月活跃门店数*100%'},
+                        {title:'活跃门店数同比：',data:'统计（当月活跃门店数-去年同月活跃门店数）/去年同月活跃门店数*100%'},
+                        {title:'销量下滑门店数 ：',data:'统计当月门店下单金额与近三个月月均门店下单金额有所降低的门店数（去重）'},
+                        {title:'销量增长门店数：',data:'统计当月门店下单金额与近三个月月均门店下单金额有所增长的门店数（去重）'},
+                    ],
+                    titleName:'二帮卖分析-门店指标解释',
+                    // span:6,
+                    // span2:18
+                }
             }
         },
         components:{

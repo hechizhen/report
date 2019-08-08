@@ -1,4 +1,6 @@
 <template>
+    <div>
+    <second-title :titleName="inventoryTitle" :explainSecondList="explainSecondList"></second-title>
     <div class="inventoryindex">
         <div style="width: 100%;height: 100%;">
         <div class="inventory-table">
@@ -35,6 +37,7 @@
         <core :coretype="'库存得分'" :coretext="87" :evaluate="'较好'"></core>
         <inventoryChart v-if="invechartsShow" :trendChartClick="trendChartClick" :lineEchartsData="lineEchartsData"></inventoryChart>
     </div>
+    </div>
 </template>
 
 <script>
@@ -43,6 +46,7 @@
     import  newButton from  '../base/newButton'
     import  core from  '../core'
     import  inventoryChart  from  './inventoryChart'
+    import  secondTitle from  '../secondTitle'
     export default {
         name: "inventoryIndex",
         props:["inventoryDay","inventoryDetails","marketableDayChart"],
@@ -51,14 +55,34 @@
             inventoryDase,
             newButton,
             core,
-            inventoryChart
+            inventoryChart,
+            secondTitle
         },
         data(){
             return{
                 Money:"￥",
+                inventoryTitle: '库存',//库存标题
                 invechartsShow: false,
                 marketableDay:[],
                 lineEchartsData:{},
+                explainSecondList:{
+                    imgType:6,
+                    tableData:[
+                        {title:'库存金额：',data:'取立购星对应总金额计算逻辑'},
+                        {title:'6个月未销售商品金额：',data:'统计6个月未创建订单的商品库存件数（含6个月份以上）'},
+                        {title:'库存件数：',data:'统计累计商品库存件数'},
+                        {title:'6个月未销售商品件数：',data:'统计6个月未创建订单的商品库存件数'},
+                        {title:'库存周转次数：',data:'统计360/库存可销天数'},
+                        {title:'库存可销天数：',data:'统计库存总数量/近3个月日均出货件数'},
+                        {title:'库存可销天数环比增长：',data:'统计（当月库存可销天数-上个月库存可销天数）/上个月库存可销天数*100%'},
+                        {title:'库存可销天数同比增长：',data:'统计（当月库存可销天数-去年同月库存可销天数）/去年同月库存可销天数*100%'},
+                        {title:'立白可销天数：',data:'统计立白事业部商品库存总数量/近3个月立白事业部商品日均出货的件数'},
+                        {title:'好爸爸可销天数：',data:'统计好爸爸事业部商品库存总数量/近3个月好爸爸事业部商品日均出货的件数'},
+                    ],
+                    titleName:'库存指标解释',
+                    span:6,
+                    span2:18
+                }
             }
         },
         methods:{

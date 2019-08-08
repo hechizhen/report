@@ -12,8 +12,8 @@
 			</div>
 		</div>
 		<a-row class="rowStyle" v-for="(item,index) in tableData" :key="index">
-			<a-col :span="5" class="leftCol" :style="{color:fontColor}">{{item.title}}</a-col>
-			<a-col :span="19" class="rightCol">{{item.data}}</a-col>
+			<a-col :span="span" class="leftCol" :style="{color:fontColor}">{{item.title}}</a-col>
+			<a-col :span="span2" class="rightCol">{{item.data}}</a-col>
 		</a-row>
 	</div>
 </template>
@@ -21,7 +21,7 @@
 	export default {
 		name:'explainDetail',
 		components:{
-			
+
 		},
 		props:{
 			//标题名称
@@ -33,6 +33,14 @@
 			imgType:{
 				type:Number,
 				default:1,
+			},
+			span:{
+				type:Number,
+				default:5
+			},
+			span2:{
+				type:Number,
+				default:19
 			},
 			//点击关闭
 			closeHandleClick:{

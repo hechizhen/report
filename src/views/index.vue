@@ -24,7 +24,6 @@
                     :upStoresData="upStoresData"  :downStoresData="downStoresData"
         ></shopIndex>
          <!--库存-->
-        <second-title :titleName="inventoryTitle"></second-title>
         <inventoryIndex  :inventoryDay="inventoryDay" :inventoryDetails="inventoryDetails"
                          :marketableDayChart="marketableDayChart"
                          v-if="inventoryDay.length!=0 "> </inventoryIndex>

@@ -1,7 +1,7 @@
 <template>
     <div class="cententindex" >
         <div class="product">
-            <dataTitle :subtitlename="titName"></dataTitle>
+            <dataTitle :subtitlename="titName" :explainSecondList="explainSecondList"></dataTitle>
             <div class="product-content">
                 <a-Row >
                     <a-Col :span="10">
@@ -61,8 +61,25 @@
                 downShow:false,
                 pieShow:false,
                 listShow:false,
-                titName:"产品",
-                // 产品
+                titName:"产品", // 产品
+                explainSecondList:{
+                    imgType:4,
+                    tableData:[
+                        {title:'商品动销率：',data:'统计当月订单商品的SKU数(去重)(只取立白)/有库存商品的SKU数(上月期末快照和当月期末快照去重)'},
+                        {title:'立白动销率：',data:'统计当月订单立白事业部商品的SKU数（去重）/立白事业部库存商品的SKU数'},
+                        {title:'好爸爸动销率：',data:'统计当月订单好爸爸事业部商品的SKU数（去重）/好爸爸事业部库存商品的SKU数'},
+                        {title:'超威动销率：',data:'统计当月订单超威商品的SKU数（去重）/超威库存商品的SKU数'},
+                        {title:'口腔动销率：',data:'统计当月订单口腔商品的SKU数（去重）/口腔库存商品的SKU数'},
+                        {title:'晟美动销率：',data:'统计当月订单晟美商品的SKU数（去重）/晟美库存商品的SKU数'},
+                        {title:'总商品数：',data:'统计当月库存商品总SKU数（去重）（上月期末快照和当月期末快照去重）'},
+                        {title:'动销商品数：',data:'统计当月商品下单SKU数（去重）'},
+                        {title:'动销商品数环比：',data:'统计（当月下单商品数-上个月下单商品数）/上个月下单商品数*100%'},
+                        {title:'动销商品数同比：',data:'统计（当月下单商品数-去年同月下单商品数）/去年同月下单商品数*100%'},
+                    ],
+                    titleName:'二帮卖分析-产品指标解释',
+                    span:6,
+                    span2:18
+                }
             }
         },
         methods:{

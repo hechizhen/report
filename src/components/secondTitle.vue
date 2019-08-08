@@ -2,7 +2,7 @@
 <template>
     <div class="secondTitle">
         {{titleName}}
-        <explain :explainList="explainSecondList"></explain>
+        <explain :explainList="explainSecondList" ></explain>
     </div>
 </template>
 <script>
@@ -25,22 +25,22 @@
         },
         data () {
             return {
-                
+
             }
         },
         mounted () {
-          
+
         },
         methods: {
         },
         computed:{
-          
+
         },
         watch: {
-           
+
         },
         distroyed: function () {
-            
+
         }
     }
 </script>

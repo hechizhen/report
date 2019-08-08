@@ -1,10 +1,14 @@
 <template>
     <div class="dataTitle">
-        <div class="subtitle_content">{{subtitlename}}</div>
+        <div class="subtitle_content">{{subtitlename}}
+        </div>
+        <explain :explainList="explainSecondList" ></explain>
+
     </div>
 </template>
 
 <script>
+    import explain from './explain'
     export default {
         name: "dataTitle",
         props: {
@@ -13,7 +17,14 @@
                 type: String,
                 default: '订单'
             },
+            explainSecondList:{
+                type:Object
+            }
+        },
+        components:{
+            explain
         }
+
     }
 </script>
 
@@ -23,7 +34,7 @@
         width: 100%;
         display: flex;
         align-items: center;
-        /*justify-content: center;		*/
+        position: relative;
     }
     .subtitle_content {
         font-size:20px;
@@ -32,6 +43,9 @@
         font-weight:500;
         color:rgba(51,51,51,1);
         border-left: 6px solid #2D92FC;
+    }
+    .explain{
+        height: 50%;
     }
 
 </style>

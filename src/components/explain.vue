@@ -6,7 +6,10 @@
 			</template>
 			<p class="explainTxt" @click="detailHandleClick">?</p>
 		</a-popover>
-		<explain-detail v-if="isShow" :closeHandleClick="closeHandleClick" :tableData="explainList.tableData" :imgType="explainList.imgType" :titleName="explainList.titleName"></explain-detail>
+		<explain-detail v-if="isShow" :closeHandleClick="closeHandleClick" :tableData="explainList.tableData"
+						:imgType="explainList.imgType" :titleName="explainList.titleName"
+						:span="explainList.span"  	:span2="explainList.span2"
+		></explain-detail>
 		<div class="trendChart" v-if="isShow"></div>
 	</div>
 </template>
