@@ -2,9 +2,11 @@
 <template>
     <div class="secondTitle">
         {{titleName}}
+        <explain :explainList="explainSecondList"></explain>
     </div>
 </template>
 <script>
+    import explain from '../components/explain.vue'
     export default {
         name : 'secondTitle',
         props:{
@@ -13,8 +15,13 @@
                 type:String,
                 default:'一帮卖分析'
             },
+            //数据集合
+            explainSecondList:{
+                type:Object
+            }
         },
         components : {
+            explain
         },
         data () {
             return {
@@ -43,5 +50,8 @@
         font-size:24px;
         font-weight:bold;
         color:rgba(51,51,51,1);
+        display: flex;
+        align-items: center;
+        position: relative;
     }
 </style>

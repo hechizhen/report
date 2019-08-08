@@ -108,6 +108,7 @@
                 proportioData: [],  //占比数据
                 directionData:{}, //订单走势图
                 salesmanTrendData:{}  //业务员走势图
+                
             }
         },
         created() {
