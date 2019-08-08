@@ -16,8 +16,8 @@
         </div>
         <core :coretype="'产品得分'" :coretext="87" :evaluate="'较好'"></core>
 
-        <upproductChart v-if="upShow" :trendChartClick="upClick" ></upproductChart>
-        <downproductChart v-if="downShow" :trendChartClick="downClick" ></downproductChart>
+        <upproductChart v-if="upShow" :trendChartClick="upClick"  :barEchartsData="barEchartsDataUp" ></upproductChart>  <!--下滑-->
+        <downproductChart v-if="downShow" :trendChartClick="downClick" :barEchartsData="barEchartsDataDown" ></downproductChart>  <!--增长-->
 
         <productChartPie v-if="pieShow" :trendChartClick="pieClick" :pieEchartsData="pieEchartsData"
         ></productChartPie>
@@ -37,7 +37,7 @@
     // import  productList from  './productList'
     export default {
         name: "cententindex",
-        props:["CommodityTurnoverRate","commoditydata","GoodsDetail"],
+        props:["CommodityTurnoverRate","commoditydata","GoodsDetail","VariabilityUpData","VariabilityDownData"],
         components:{
             productLeft,
             productRight,
@@ -52,7 +52,10 @@
         data(){
             return{
                 goodsData:"",
-                pieEchartsData:{},
+                lityUpData:{},
+                lityDownData:{},
+                // pieEchartsData:{},
+                // barEchartsData:{},
                 upShow: false,
                 downShow:false,
                 pieShow:false,
@@ -93,6 +96,62 @@
                     borderWidth:0,
                 }
             },
+            VariabilityUpData(val){
+                console.log(val)
+                this.lityUpData = val;
+                this.barEchartsDataUp = {
+                    id:'barId',
+                    unit:'%',
+                    xAxisData:this.lityUpData.xAxisData,
+                    xAxis:{
+                        isShowLine:false,
+                        isShowSplit:false,
+                        axisLabelColor:'#333',
+                    },
+                    yAxis:{
+                        isShowLine:false,
+                        isShowSplit:false,
+                        axisLabelColor:'#333',
+                    },
+                    label:{
+                        isShow:false
+                    },
+                    type:'xAxis',
+                    barData:this.lityUpData.seriesData,
+                    showType:0,//0横过来 1竖起来
+                    markLineList:{
+                        show:false
+                    }
+                }
+            },
+            VariabilityDownData(val){
+                console.log(val)
+                this.lityDownData = val;
+                this.barEchartsDataDown = {
+                    id:'barId',
+                    unit:'%',
+                    xAxisData:this.lityDownData.xAxisData,
+                    xAxis:{
+                        isShowLine:false,
+                        isShowSplit:false,
+                        axisLabelColor:'#333',
+                    },
+                    yAxis:{
+                        isShowLine:false,
+                        isShowSplit:false,
+                        axisLabelColor:'#333',
+                    },
+                    label:{
+                        isShow:false
+                    },
+                    type:'xAxis',
+                    barData:this.lityDownData.seriesData,
+                    showType:0,//0横过来 1竖起来
+                    markLineList:{
+                        show:false
+                    }
+                }
+            }
         },
         mounted() {
           console.log(this.goodsData)
