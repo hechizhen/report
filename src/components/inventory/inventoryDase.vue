@@ -116,12 +116,13 @@
             margin-top: 5%;
             display: block;
             text-align: center;
+            height: 27%;
         }
         .left-txt{
             width: 90%;
-            height:69px;
+            height: 36%;
             background:rgba(238,240,245,1);
-            margin: 12% auto;
+            margin: 0 auto;
                 .left-txt-title {
                     float: left;
                     width: 100%;
