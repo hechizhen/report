@@ -470,7 +470,7 @@
                     padding-left: 10px;
                     font-size:20px;
                     font-family:PingFangSC-Medium;
-                    font-weight:500;
+                    font-weight:700;
                     color:rgba(0,0,0,1);
                 }
                 .thendChartCol2 {
