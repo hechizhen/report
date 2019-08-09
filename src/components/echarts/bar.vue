@@ -36,7 +36,8 @@
                 type:Object,
                 default: () => ({
                     isShow:false,
-                    position:'top'
+                    position:'top',
+                    color:'#A0A5B1'
                 })
             },
             legendShow:{
@@ -169,7 +170,8 @@
                         label:{
                             normal:{
                                 show:_this.label.isShow,
-                                position: 'top',
+                                position: _this.label.position,
+                                color:_this.label.color,
                                 formatter:function(params){
                                     return params.value+_this.barEchartsData.unit
                                 }
