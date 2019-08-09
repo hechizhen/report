@@ -158,11 +158,13 @@
         width: 50%;
         float: left;
         height: 260px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         .commodityR-centen {
             width:100%;
             float: left;
             text-align: center;
-            margin: 13.5% auto;
             .commodityR-title {
                 width: 90%;
                 line-height: 32px;
@@ -194,7 +196,6 @@
                 width: 90%;
                 height: 34px;
                 margin: 6% auto;
-
                 .quan {
                     float: left;
                     width: 12px;
@@ -238,12 +239,14 @@
             float: left;
             width: 28%;
             height: 260px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             .commodityRight-sumbor {
                 width: 165px;
                 height: 165px;
                 border: 1px solid rgba(255, 255, 255, 1);
                 border-radius: 50%;
-                margin: 21%  auto;
                 position: relative;
 
                 .commodityRight-sumtxt {
