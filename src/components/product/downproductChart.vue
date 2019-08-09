@@ -8,7 +8,7 @@
                     </a-Col>
                     <a-Col :span="12" class="thendChartCol2">
                         单位：万元
-                        <newButton > </newButton>
+                        <newButton :defaultVal="defaultVal"> </newButton>
                         <span @click="thendChartClicks">
                             <i class="iconfont icon-guanbi"></i>
                         </span>
@@ -41,7 +41,7 @@
 
         data(){
             return {
-
+                defaultVal:"导出数据"
             }
         },
         mounted(){
@@ -99,7 +99,7 @@
                     font-weight:400;
                     color:rgba(51,51,51,1);
                     justify-content: flex-end;
-                    padding-right: 40px;
+                    padding-right: 10%;
                     span {
                         position: absolute;
                         top: 8px;
@@ -114,5 +114,8 @@
                 width: 100%;
             }
         }
+    }
+    .newButton{
+        padding-left: 6%;
     }
 </style>
