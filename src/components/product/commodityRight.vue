@@ -14,13 +14,11 @@
         </div>
         <div class="commodityRight">
             <div class="commodityR-centen">
-                <div class="commodityR-centen-one">
                 <div class="commodityR-title"  >
                     <div class="commodityR-title1" v-for="(item,index) in commoditydata.commoditytitle" :key="index">
                         <span>{{item.name}}</span>
                         <p>{{item.NoSales}}</p>
                     </div>
-                </div>
                 </div>
                 <div class="commodityR-base">
                     <div class="commodityR-baseone">
@@ -51,12 +49,12 @@
                     </div>
                 </div>
             </div>
-            <div class="commodityRight-sum">
-                <div class="commodityRight-sumbor">
-                    <div class="commodityRight-sumtxt">
+        </div>
+        <div class="commodityRight-sum">
+            <div class="commodityRight-sumbor">
+                <div class="commodityRight-sumtxt">
                     <p>{{commoditydata.commodityname}}</p>
                     <span>{{commoditydata.commoditysum}}</span>
-                    </div>
                 </div>
             </div>
         </div>
@@ -108,7 +106,7 @@
 
 <style lang="less" scoped>
     .productLeft{
-        width: 30%;
+        width: 22%;
         float: left;
         .productLeft-img{
             width: 46px;
@@ -156,85 +154,96 @@
             }
         }
     }
-    .commodityRight{
-        /*background-color: bisque;*/
-        width: 70%;
-        float: right;
+    .commodityRight {
+        width: 50%;
+        float: left;
+        height: 260px;
         .commodityR-centen {
-            width: 60%;
+            width:100%;
             float: left;
             text-align: center;
+            margin: 13.5% auto;
             .commodityR-title {
-                width: 94%;
+                width: 90%;
                 line-height: 32px;
                 background: rgba(126, 165, 254, 1);
                 border-radius: 6px;
                 display: inline-block;
+
                 .commodityR-title1 {
                     float: left;
                     width: 49%;
                     text-align: center;
-                    span{
-                        font-size:16px;
-                        font-family:PingFangSC-Regular;
-                        font-weight:400;
-                        color:rgba(255,255,255,1);
+
+                    span {
+                        font-size: 16px;
+                        font-family: PingFangSC-Regular;
+                        font-weight: 400;
+                        color: rgba(255, 255, 255, 1);
                     }
-                    p{
-                        color:rgba(255, 0, 72, 1);
+
+                    p {
+                        color: rgba(255, 0, 72, 1);
                         margin-bottom: 0;
                         display: inline-block;
                     }
                 }
             }
-            .commodityR-base{
-                    width: 94%;
-                    height: 36px;
-                    margin: 6% auto;
-                .quan{
+
+            .commodityR-base {
+                width: 90%;
+                height: 34px;
+                margin: 6% auto;
+
+                .quan {
                     float: left;
-                    width:12px;
-                    height:12px;
-                    border:4px solid rgba(255,255,255,1);
-                    border-radius:50%;
+                    width: 12px;
+                    height: 12px;
+                    border: 4px solid rgba(255, 255, 255, 1);
+                    border-radius: 50%;
                     display: inline-block;
                 }
-                span{
+
+                span {
                     line-height: 28px;
-                    font-size:14px;
-                    font-family:PingFangSC-Regular;
-                    font-weight:400;
-                    color:rgba(255,255,255,1);
+                    font-size: 14px;
+                    font-family: PingFangSC-Regular;
+                    font-weight: 400;
+                    color: rgba(255, 255, 255, 1);
                     padding-left: 4%;
                     display: inline-block;
                     width: 90%;
                     text-align: left;
                 }
-                .productLeft-btn{
+
+                .productLeft-btn {
                     width: 30%;
-                    height:100%;
+                    height: 100%;
                     line-height: 26px;
-                    text-align: center;
+                    text-align: right;
                     float: right;
-                    span{
-                        width:48px;
-                        font-size:12px;
-                        font-family:PingFangSC-Regular;
-                        font-weight:400;
-                        color:rgba(255,255,255,1);
+
+                    span {
+                        width: 48px;
+                        font-size: 12px;
+                        font-family: PingFangSC-Regular;
+                        font-weight: 400;
+                        color: rgba(255, 255, 255, 1);
                     }
                 }
             }
         }
+    }
         .commodityRight-sum{
-            float: right;
-            width: 40%;
+            float: left;
+            width: 28%;
+            height: 260px;
             .commodityRight-sumbor {
                 width: 165px;
                 height: 165px;
                 border: 1px solid rgba(255, 255, 255, 1);
                 border-radius: 50%;
-                margin: 14%  auto;
+                margin: 21%  auto;
                 position: relative;
 
                 .commodityRight-sumtxt {
@@ -254,8 +263,7 @@
                     }
                 }
             }
-        }
-    }
+      }
     .commodityRight .commodityR-centen .commodityR-title .commodityR-title1:nth-child(2) p{
         color: #fff;
     }
@@ -270,10 +278,5 @@
         float: left;
         display: flex;
         align-items: center;
-    }
-    .commodityR-centen-one{
-        height: 100px;
-        display: flex;
-        align-items: flex-end;
     }
 </style>

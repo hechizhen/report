@@ -130,6 +130,9 @@
     width: 100%;
     height:220px;
 }
+.commodityR-base:nth-child(2) .ant-col-6{
+    padding-left: 2%;
+}
 .table-headtxt:last-child  .yuan{
     display: none !important;
 }

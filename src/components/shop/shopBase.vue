@@ -2,13 +2,13 @@
 <div class="shopBase">
     <div style="height: 100%;float: left;width: 70%">
         <a-Row  class="commodityR-base" v-for="(item,index) in shopDaseData" :key="index">
-            <a-Col :span="20">
+            <a-Col :span="18">
                 <div class="onetxt">
                 <div class="quan"></div>
                 {{item.name}}
                 </div>
             </a-Col>
-            <a-Col :span="4">
+            <a-Col :span="6">
                 {{item.NoSales}}
             </a-Col>
         </a-Row>
@@ -49,6 +49,7 @@
         float: left;
         background:rgba(238,240,245,.5);
         border-radius:6px 6px 0px 0px;
+        padding-left: 3%;
         .commodityR-base {
             width: 100%;
             margin-bottom: 1%;
@@ -62,7 +63,7 @@
                 float: inherit;
             }
 
-            .ant-col-20{
+            .ant-col-18{
                 line-height: 28px;
                 font-size:16px;
                 font-family:PingFangSC-Medium;
@@ -71,7 +72,7 @@
                 display: inline-block;
                 width: 70%;
             }
-            .ant-col-4{
+            .ant-col-6{
                 line-height: 28px;
                 font-size:20px;
                 font-family:PingFangSC-Semibold;
