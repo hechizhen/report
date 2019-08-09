@@ -1,6 +1,9 @@
 <template>
     <div class="productRight">
-            <barChart :barEchartsData="CommodityBar"></barChart>
+            <barChart :barEchartsData="barData.config" :xAxis="barData.xAxis"
+                      :yAxis="barData.yAxis" :legendShow="barData.legendShow"
+                      :isShowMax="barData.isShowMax" :label="barData.label"
+            ></barChart>
     </div>
 </template>
 
@@ -9,7 +12,7 @@
     export default {
         name: "productRight",
         props:{
-            CommodityBar:{
+            barData:{
                 type:Object
             }
         },
@@ -32,6 +35,9 @@
         width: 60%;
         height: 260px !important;
         float: left;
+        /*.barChart >div canvas{*/
+            /*width: 90%;*/
+        /*}*/
 
     }
 </style>

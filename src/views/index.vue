@@ -680,37 +680,65 @@
                                 dayData.push(item.dayData)
                             })
                             let produnarData = {
-                                id: 'barIdProdun',
-                                xAxisData: Axiax,
-                                unit:'%',
-                                xAxis: {
-                                    isShowLine: false,
-                                    isShowSplit: false,
-                                    axisLabelColor: '#fff',
+                        config:{
+                            id: 'barIdProdun',
+                            unit:'%',
+                            xAxisData: Axiax,
+                            label: {
+                                isShow: true
+                            },
+                            type: 'xAxis',
+                            barData: [
+                                {
+                                    name: 'ABC',
+                                    data: dayData,
+                                    color: '#fff',
+                                    barWidth: 11
                                 },
-                                yAxis: {
-                                    isShowLine: false,
-                                    isShowSplit: false,
-                                    axisLabelColor: '#fff',
-                                },
-                                label: {
-                                    isShow: true
-                                },
-                                type: 'xAxis',
-                                barData: [
-                                    {
-                                        name: 'ABC',
-                                        data: dayData,
-                                        color: '#fff',
-                                        barWidth: 11
-                                    },
-                                ],
-                                showType: 1,
-                                markLineList:{
-                                    show:true,
-                                    data:100,
-                                },
+                            ],
+                            showType: 1,
+                            markLineList:{
+                                show:false,
+                                data:100,
                             }
+                        },
+                        label: {
+                            isShow: true,
+                            position:'right'
+                        },
+                        xAxis:{
+                            axisLine:{
+                                show:false,
+                                color:'#3699FF'
+                            },
+                            axisLabel:{
+                                show:true,
+                                color:'#fff',
+                                fontSize:12
+                            },
+                            splitLine:{
+                                show:false,
+                                color:'#fff'
+                            },
+                        },
+                        yAxis:{
+                            axisLine:{
+                                show:false,
+                                color:'#fff'
+                            },
+                            axisLabel:{
+                                show:true,
+                                color:'#fff',
+                                fontSize:12
+                            },
+                            splitLine:{
+                                show:false,
+                                color:'#fff'
+                            },
+                        },
+                        legendShow:false,
+                        isShowMax:true,
+                    }
                         _this.CommodityTurnoverRate = {
                                 productimg:require("../assets/img/dongxiao.png"),
                                 name:"商品动销率",

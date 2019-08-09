@@ -6,7 +6,7 @@
                 <a-Row >
                     <a-Col :span="10">
                         <productLeft :productdata="CommodityTurnoverRate"></productLeft>
-                        <productRight :CommodityBar="CommodityTurnoverRate.produnarData"  ></productRight>
+                        <productRight :barData="CommodityTurnoverRate.produnarData"  ></productRight>
                     </a-Col>
                     <a-Col :span="13" :push="1">
                         <commodityRight :commoditydata="commoditydata" :upraphy="upraphy" :downraphy="downraphy" :pieraphy="pieraphy" ></commodityRight>
