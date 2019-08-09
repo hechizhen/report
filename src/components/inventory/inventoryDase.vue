@@ -85,7 +85,7 @@
     margin-right:0 !important;
 }
 .inventoryDase{
-    width:45%;
+    width:46%;
     height:208px;
     background:rgba(255,255,255,1);
     border-radius:10px;
