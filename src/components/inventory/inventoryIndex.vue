@@ -79,6 +79,7 @@
                 invechartsShow: false,
                 marketableDay:[],
                 lineEchartsData:{},
+                defaultVal:"未销明细",
                 explainSecondList:{
                     imgType:6,
                     tableData:[

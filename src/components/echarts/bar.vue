@@ -154,7 +154,7 @@
                         })
                     })
                 }
-                
+
                 console.log(seriesData)
                 if(_this.barEchartsData.showType==0){
                     _this.xAxisType = 'category'
