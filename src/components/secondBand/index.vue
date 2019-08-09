@@ -7,10 +7,10 @@
 		  	<sameMonth :orderAmountData="orderAmountData" :proportioData="proportioData" :topography="topography"></sameMonth>
 		  </a-Col>
 		  <a-Col :span="7">
-		  	<totalAmount :titleName="'环比'" :displayData="grossProfitData"></totalAmount>
+		  	<totalAmount :titleName="'环比'" :displayData="grossProfitData" :totalAmountData="chainRatioData"></totalAmount>
 		  </a-Col>
 		  <a-Col :span="7">
-		  	<totalAmount :titleName="'同比'" :displayData="grossInterestRateData"></totalAmount>
+		  	<totalAmount :titleName="'同比'" :displayData="grossInterestRateData" :totalAmountData="placingOrdersYearData"></totalAmount>
 		  </a-Col>
 		</a-Row>
 		<core :coretype="'二帮卖得分'" :coretext="100" :evaluate="'优秀'"></core>
@@ -48,8 +48,8 @@
 				default:{}
 			},
 			proportio:{
-				type:Array,
-				default:[]
+				type:Object,
+				default:{}
 			},
 			directionData:{
 				type:Object,
@@ -61,7 +61,9 @@
 				titleName:'二帮卖分析',
 				subtitlename:'订单',
 				listing:['订单详情'],
-				proportioData:this.proportio,
+				proportioData:this.proportio.thoseArr,
+				chainRatioData:this.proportio.chainRatio,
+				placingOrdersYearData:this.proportio.placingOrdersYear,
 				echartsShow: false,
 				lineEchartsData:{},
 				explainSecondList:{
@@ -102,7 +104,9 @@
 		},
 		watch:{
             proportio(val){
-                this.proportioData = val;
+                this.proportioData = val.thoseArr;
+                this.chainRatioData = val.chainRatio;
+				this.placingOrdersYearData = val.placingOrdersYear;
             },
             directionData(val){
                 this.lineEchartsData = {

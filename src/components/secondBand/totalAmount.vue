@@ -26,8 +26,8 @@
 			<div class="brand">
 				<div class="brandtitle">下单{{titleName}}</div>
 				<ul class="cleatfix">
-					<li v-for="(item,index) in data" :key="index">
-						<div>{{item.brand}}</div>
+					<li v-for="(item,index) in totalAmountData" :key="index">
+						<div>{{item.name}}</div>
 						<div>{{item.value}}</div>
 					</li>
 				</ul>
@@ -49,6 +49,10 @@
 			displayData:{
 				type:Object,
 				default:{}
+			},
+			totalAmountData:{
+				type:Array,
+				default:[]
 			}
 		},
 		data(){

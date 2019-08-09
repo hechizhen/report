@@ -41,8 +41,6 @@
 			}
 		},
 		mounted(){
-			console.log('111111111111111111111')
-			console.log(this.lineEchartsData)
 		},
 		methods:{
 			thendChartClick(){

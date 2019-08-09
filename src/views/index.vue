@@ -115,7 +115,7 @@
                 orderAmountData: {}, //金额数据
                 grossProfitData: {}, //毛利额
                 grossInterestRateData: {},//毛利率
-                proportioData: [],  //占比数据
+                proportioData: {},  //占比数据
                 directionData:{}, //订单走势图
                 salesmanTrendData:{},  //业务员走势图
                 salesmandownwardData:{}, //业务员下滑
@@ -521,9 +521,16 @@
                         dateTime: _this.currentDate
                     }
                 }).then(function (res) {
-                    var proportioData = res.data.data;
-                    _this.proportioData = proportioData;
-                    console.log(   _this.proportioData)
+                    var proportioData = res.data.data,thoseArr = [],chainRatio=[],placingOrdersYear=[],proportio={};
+                    proportioData.map(function(item){
+                        thoseArr.push({name:item.name,value:item.amountMoney})
+                        chainRatio.push({name:item.name,value:item.chainRatio})
+                        placingOrdersYear.push({name:item.name,value:item.placingOrdersYear})
+                    })
+                    proportio.thoseArr = thoseArr;
+                    proportio.chainRatio = chainRatio;
+                    proportio.placingOrdersYear = placingOrdersYear;
+                    _this.proportioData = proportio;
                 })
             },
             //二帮卖-订单走势图
