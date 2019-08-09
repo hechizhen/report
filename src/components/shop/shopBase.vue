@@ -83,8 +83,9 @@
             }
         }
         .productLeft-btn {
-            width:13%;
+            width:27%;
             height:66px;
+            float: left;
             display:flex;
             justify-content: center;//子元素水平居中
             align-items: center;//子元素垂直居中
