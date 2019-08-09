@@ -220,12 +220,14 @@
                     "orderCol":"monthSales"
                 }
                 this.$http({
-                    url: _this.testRequestHttpUrl,
+                    url: _this.requestHttpUrl+'/SalesData',
                     method: 'POST',
-                    data: params
+                    data: {
+                        dateTime:_this.currentDate
+                    }
                 }).then(function (res) {
                     console.log(res)
-                    let data = res.data.data.data[0]
+                    let data = res.data.data.data
                     _this.salesData = {
                         monthData:{
                             sales:_this.dataProcess(data.monthSales,'money').num,
@@ -265,68 +267,119 @@
                         yearData.push(item.yearData)
                     })
                     let monthBarData = {
-                        id: 'barIdMonthSales',
-                        xAxisData: Axiax,
-                        unit:'%',
-                        xAxis: {
-                            isShowLine: false,
-                            isShowSplit: false,
-                            axisLabelColor: '#333',
-                        },
-                        yAxis: {
-                            isShowLine: false,
-                            isShowSplit: false,
-                            axisLabelColor: '#D7D9E5',
-                        },
-                        label: {
-                            isShow: true
-                        },
-                        type: 'xAxis',
-                        barData: [
-                            {
-                                name: 'ABC',
-                                data: monthData,
-                                color: '#D7D9E5',
-                                barWidth: 11
+                        config:{
+                            id: 'barIdMonthSales',
+                            xAxisData: Axiax,
+                            unit:'%',
+                            label: {
+                                isShow: true
                             },
-                        ],
-                        showType: 0,
-                        markLineList:{
-                            show:true,
-                            data:100,
-                        }
+                            type: 'xAxis',
+                            barData: [
+                                {
+                                    name: 'ABC',
+                                    data: monthData,
+                                    color: '#D7D9E5',
+                                    barWidth: 11
+                                },
+                            ],
+                            showType: 0,
+                            markLineList:{
+                                show:true,
+                                data:100,
+                            }
+                        },
+                        xAxis:{
+                            axisLine:{
+                                show:false,
+                                color:'#3699FF'
+                            },
+                            axisLabel:{
+                                show:true,
+                                color:'#333333',
+                                fontSize:12
+                            },
+                            splitLine:{
+                                show:false,
+                                color:'#CCCCCC'
+                            },
+                        },
+                        yAxis:{
+                            axisLine:{
+                                show:false,
+                                color:'#3699FF'
+                            },
+                            axisLabel:{
+                                show:true,
+                                color:'#D7D9E5',
+                                fontSize:12
+                            },
+                            splitLine:{
+                                show:false,
+                                color:'#CCCCCC'
+                            },
+                        },
+                        legendShow:false,
+                        isShowMax:true,
                     }
                     let yearBarData = {
-                        id: 'barIdYearSales',
-                        unit:'%',
-                        xAxisData: Axiax,
-                        xAxis: {
-                            isShowLine: false,
-                            isShowSplit: false,
-                            axisLabelColor: '#333',
-                        },
-                        yAxis: {
-                            isShowLine: false,
-                            isShowSplit: false,
-                            axisLabelColor: '#D7D9E5',
-                        },
-                        label: {
-                            isShow: true
-                        },
-                        type: 'xAxis',
-                        barData: [
-                            {
-                                name: 'ABC',
-                                data: yearData,
-                                color: '#D7D9E5',
-                                barWidth: 11
+                        config:{
+                            id: 'barIdYearSales',
+                            unit:'%',
+                            xAxisData: Axiax,
+                            label: {
+                                isShow: true
                             },
-                        ],
-                        showType: 0,
-                        markLineList:{
-                            show:true,
-                            data:100,
-                        }
+                            type: 'xAxis',
+                            legend:{
+                                show:false
+                            },
+                            barData: [
+                                {
+                                    name: 'ABC',
+                                    data: yearData,
+                                    color: '#D7D9E5',
+                                    barWidth: 11
+                                },
+                            ],
+                            showType: 0,
+                            markLineList:{
+                                show:true,
+                                data:100,
+                            }
+                        },
+                        xAxis:{
+                            axisLine:{
+                                show:false,
+                                color:'#3699FF'
+                            },
+                            axisLabel:{
+                                show:true,
+                                color:'#333333',
+                                fontSize:12
+                            },
+                            splitLine:{
+                                show:false,
+                                color:'#CCCCCC'
+                            },
+                        },
+                        yAxis:{
+                            axisLine:{
+                                show:false,
+                                color:'#3699FF'
+                            },
+                            axisLabel:{
+                                show:true,
+                                color:'#D7D9E5',
+                                fontSize:12
+                            },
+                            splitLine:{
+                                show:false,
+                                color:'#CCCCCC'
+                            },
+                        },
+                        legendShow:false,
+                        isShowMax:true,
                     }
                     _this.salesBarData = {
                         monthBarData,
@@ -538,10 +591,11 @@
                         sameMonth.push(value.sameMonth)
                         difference.push(value.difference)
                     })
-                    seriesData.push({name:'上月销售额',data:lastMonth,color:'#009EE2',barWidth:11},{name:'本月销售额',data:sameMonth,color:'#E9A837',barWidth:11},{name:'销售差额',data:difference,color:'#00E2BF',barWidth:11})
+                    seriesData.push({name:'上月销售额',data:lastMonth,color:'#009EE2',barWidth:20},{name:'本月销售额',data:sameMonth,color:'#E9A837',barWidth:20},{name:'销售差额',data:difference,color:'#00E2BF',barWidth:20})
                     salesmandownwardObject.xAxisData = xAxisData;
                     salesmandownwardObject.seriesData = seriesData;
                     _this.salesmandownwardData = salesmandownwardObject
+                    console.log(_this.salesmandownwardData)
                 })
             },
             //业务员-达成
@@ -559,9 +613,13 @@
                         xAxisData.push(value.salesmanName);
                         lastMonth.push(value.monthlysales)
                         sameMonth.push(value.monthlytarget)
-                        difference.push(value.reached)
+                        // difference.push(value.reached)
                     })
-                    seriesData.push({name:'当月销量',data:lastMonth,color:'#009EE2',barWidth:30},{name:'当月目标',data:sameMonth,color:'#E9A837',barWidth:30},{name:'达成率',data:difference,color:'#00E2BF',barWidth:30})
+                    seriesData.push(
+                        {name:'当月目标',data:sameMonth,color:'#85C1FF',barWidth:20},
+                        {name:'当月销量',data:lastMonth,color:'#2D92FC',barWidth:20},
+                        // {name:'达成率',data:difference,color:'#00E2BF',barWidth:20}
+                        )
                     salesmanReachedObject.xAxisData = xAxisData;
                     salesmanReachedObject.seriesData = seriesData;
                     _this.salesmanReachedData = salesmanReachedObject;

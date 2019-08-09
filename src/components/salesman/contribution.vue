@@ -21,7 +21,7 @@
 				</a-Row>
 			</div>
 			<div class="lineEcharts" v-show="isswitched">
-				<barEcharts :barEchartsData="salesmanReachedData"></barEcharts>
+				<barEcharts :barEchartsData="salesmanReachedData" :barType="salesmanReachedData.barType"></barEcharts>
 			</div>
 		</div>
 	</div>
@@ -48,29 +48,19 @@
 				switchedIndex: 1,
 				isswitched:true,
 				salesmanReachedData:{
-                    id:'barId',
-                    unit:'%',
-                    xAxisData:this.salesmanReached.xAxisData,
-                    xAxis:{
-                        isShowLine:true,
-                        isShowSplit:true,
-                        axisLabelColor:'#333',
-                    },
-                    yAxis:{
-                        isShowLine:true,
-                        isShowSplit:false,
-                        axisLabelColor:'#333',
-                    },
-                    label:{
-                        isShow:false
-                    },
-                    type:'xAxis',
-                    barData:this.salesmanReached.seriesData,
-                    showType:1,//0横过来 1竖起来
-                    markLineList:{
-                        show:false
-                    },
-                    stack:true,
+					id:'barSalesManId',
+					unit:'%',
+					xAxisData:this.salesmanReached.xAxisData,
+					label:{
+						isShow:false
+					},
+					type:'xAxis',
+					barData:this.salesmanReached.seriesData,
+					showType:1,//0横过来 1竖起来
+					markLineList:{
+						show:false
+					},
+					barType:1
                 }
 			}
 		},
@@ -112,8 +102,8 @@
                     showType:1,//0横过来 1竖起来
                     markLineList:{
                         show:false
-                    },
-                    stack:true,
+					},
+					barType:1
                 }
         	},
         },
