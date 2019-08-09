@@ -189,10 +189,10 @@
                         type: _this.xAxisType,
                         data: _this.xAxisData,
                         min:0,
-                        max:function(value) {
-                            return value.max;
-                        },
-                        interval: 100000,
+                        // max:function(value) {
+                        //     return value.max;
+                        // },
+                        // interval: 100000,
                         axisLine: {
                             show: _this.barEchartsData.xAxis.isShowLine,
                             lineStyle: {
@@ -218,10 +218,10 @@
                         type: _this.yAxisType,
                         data: _this.yAxisData,
                         min:0,
-                        max:function(value) {
-                            return value.max;
-                        },
-                        interval: 100000,
+                        // max:function(value) {
+                        //     return value.max;
+                        // },
+                        // interval: 100000,
                         splitLine: {
                             show:_this.barEchartsData.yAxis.isShowSplit,
                             lineStyle: {

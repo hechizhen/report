@@ -53,7 +53,7 @@
                     xAxisData:this.salesmanReached.xAxisData,
                     xAxis:{
                         isShowLine:true,
-                        isShowSplit:false,
+                        isShowSplit:true,
                         axisLabelColor:'#333',
                     },
                     yAxis:{
