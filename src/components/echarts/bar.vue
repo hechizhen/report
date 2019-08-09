@@ -166,36 +166,59 @@
                 let seriesData = []
                 let legendList = []
                 if(_this.barType==0){
-                    var barGap = 0
-                }else{
-                    var barGap = '-100%'
-                }
-                _this.barEchartsData.barData.map(function(item,index){
-                    legendList.push(item.name)
-                    seriesData.push({
-                        name: item.name,
-                        type: 'bar',
-                        data: item.data,
-                        barGap: barGap,
-                        markLine:markLineObj,
-                        barWidth:item.barWidth,
-                        itemStyle:{
-                            normal:{
-                                color: item.color,
+                    _this.barEchartsData.barData.map(function(item,index){
+                        legendList.push(item.name)
+                        seriesData.push({
+                            name: item.name,
+                            type: 'bar',
+                            data: item.data,
+                            markLine:markLineObj,
+                            barWidth:item.barWidth,
+                            itemStyle:{
+                                normal:{
+                                    color: item.color,
+                                },
                             },
-                        },
-                        label:{
-                            normal:{
-                                show:_this.label.isShow,
-                                position: _this.label.position,
-                                color:_this.label.color,
-                                formatter:function(params){
-                                    return params.value+_this.barEchartsData.unit
+                            label:{
+                                normal:{
+                                    show:_this.label.isShow,
+                                    position: _this.label.position,
+                                    color:_this.label.color,
+                                    formatter:function(params){
+                                        return params.value+_this.barEchartsData.unit
+                                    }
                                 }
                             }
-                        }
+                        })
                     })
-                })
+                }else{
+                    _this.barEchartsData.barData.map(function(item,index){
+                        legendList.push(item.name)
+                        seriesData.push({
+                            name: item.name,
+                            type: 'bar',
+                            data: item.data,
+                            stack: "总量",
+                            markLine:markLineObj,
+                            barWidth:item.barWidth,
+                            itemStyle:{
+                                normal:{
+                                    color: item.color,
+                                },
+                            },
+                            label:{
+                                normal:{
+                                    show:_this.label.isShow,
+                                    position: _this.label.position,
+                                    color:_this.label.color,
+                                    formatter:function(params){
+                                        return params.value+_this.barEchartsData.unit
+                                    }
+                                }
+                            }
+                        })
+                    })
+                }
                 if(_this.barEchartsData.showType==0){
                     _this.xAxisType = 'category'
                     _this.xAxisData = _this.barEchartsData.xAxisData
