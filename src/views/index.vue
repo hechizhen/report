@@ -784,7 +784,7 @@
                         btn:"下滑商品"
                     }
                     let upGoods = {
-                        name:"销量下滑商品数(个)：",
+                        name:"销量下滑商品数(个):",
                         NoSales: data.downGoods,
                         btn:"增长商品"
                     }
@@ -1178,11 +1178,11 @@
                             },
                             splitLine:{
                                 show:true,
-                                color:'#ccc'
+                                color:'#eeeeee'
                             },
                         },
                         legendShow:false,
-                        isShowMax:true,
+                        isShowMax:false,
                     }
                        _this.inventoryDay = {
                         inventorycompare: [

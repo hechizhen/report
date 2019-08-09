@@ -6,21 +6,21 @@
         <div class="inventory-table">
             <div class="table-head">
                 <div class="table-headtxt">
-                    <div style="text-align: center;height: 50%;display: flex;align-items: center;justify-content: center">
+                    <div class="table-headtxt-one">
                     <span class="yuan">{{Money}}</span>
                     <strong>{{inventoryDetails.amountTxt}}</strong>
                     </div>
-                    <div style="display: inline-block;width: 100%; text-align: center;height: 50%;">
+                    <div class="table-headtxt-two">
                     <p> <span>{{Money}}</span>{{inventoryDetails.amount}}</p>
                     </div>
                     <span class="shu"></span>
                 </div>
                 <div class="table-headtxt">
-                    <div style="text-align: center; height: 50%;display: flex;align-items: center;justify-content: center">
+                    <div class="table-headtxt-one">
                     <span class="yuan"></span>
                     <strong style="display: block;">{{inventoryDetails.inventoryNumberTxt}}</strong>
                     </div>
-                    <div style="display: inline-block;width: 100%;text-align:center;height: 50%;">
+                    <div class="table-headtxt-two">
                     <p> <span></span>{{inventoryDetails.inventoryNumber}}</p>
                     </div>
                 </div>
@@ -136,6 +136,12 @@
 .inventory-table .table-dase .table-base:first-child span{
     border-bottom: 1px solid rgba(229,229,229,1);
     padding-bottom: 2%;
+}
+.table-headtxt-one{
+    text-align: center; height: 50%;display: flex;align-items: center;justify-content: center
+}
+.table-headtxt-two{
+    display: inline-block;width: 100%;text-align:center;height: 50%;
 }
 .shu{
     width:1px;
@@ -253,8 +259,9 @@
     }
 }
 .productLeft-btn {
-    width:13%;
+    width:25%;
     height:88px;
+    float: left;
     display:flex;
     justify-content: center;//子元素水平居中
     align-items: center;//子元素垂直居中
