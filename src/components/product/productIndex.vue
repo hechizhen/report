@@ -61,7 +61,7 @@
                 downShow:false,
                 pieShow:false,
                 listShow:false,
-                titName:"产品", // 产品
+                titName:"商品", // 产品
                 explainSecondList:{
                     imgType:5,
                     tableData:[
