@@ -1,15 +1,34 @@
 <template>
 <div class="shopBase">
-    <div class="shopBase">
-        <div class="commodityR-base" v-for="(item,index) in shopDaseData" :key="index">
-            <div class="quan"></div>
-            <span>{{item.name}}</span>
-            <p>{{item.NoSales}}</p>
-        </div>
-        <div class="productLeft-btn">
-            <newButton :defaultVal="defaultVal"></newButton>
-        </div>
+    <div style="height: 100%;float: left;width: 70%">
+        <a-Row  class="commodityR-base" v-for="(item,index) in shopDaseData" :key="index">
+            <a-Col :span="20">
+                <div class="onetxt">
+                <div class="quan"></div>
+                {{item.name}}
+                </div>
+            </a-Col>
+            <a-Col :span="4">
+                {{item.NoSales}}
+            </a-Col>
+        </a-Row>
     </div>
+    <div class="productLeft-btn">
+    <newButton :defaultVal="defaultVal"></newButton>
+    </div>
+            <!--<a-Row>-->
+                <!--<div class="productLeft-btn">-->
+                    <!--<newButton :defaultVal="defaultVal"></newButton>-->
+                <!--</div>-->
+            <!--</a-Row>-->
+        <!--<div class="commodityR-base" v-for="(item,index) in shopDaseData" :key="index">-->
+            <!--<div class="quan"></div>-->
+            <!--<span>{{item.name}}</span>-->
+            <!--<p>{{item.NoSales}}</p>-->
+        <!--</div>-->
+        <!--<div class="productLeft-btn">-->
+            <!--<newButton :defaultVal="defaultVal"></newButton>-->
+        <!--</div>-->
 </div>
 </template>
 
@@ -30,34 +49,31 @@
         float: left;
         background:rgba(238,240,245,.5);
         border-radius:6px 6px 0px 0px;
-        margin-top: 1.2%;
         .commodityR-base {
-            width: 50%;
-            margin-left: 5%;
+            width: 100%;
             margin-bottom: 1%;
             float: left;
             .quan {
-                float: left;
                 width:10px;
                 height:10px;
                 border:2px solid rgba(152,162,180,1);
                 border-radius:50%;
-                margin-top: 2.2%;
-                margin-right: 1%;
+                display: inline-block;
+                float: inherit;
             }
 
-            span{
+            .ant-col-20{
                 line-height: 28px;
-                font-size:18px;
+                font-size:16px;
                 font-family:PingFangSC-Medium;
                 font-weight:500;
                 color:rgba(152,162,180,1);
                 display: inline-block;
                 width: 70%;
-                white-space :  nowrap;
             }
-            p{
-                font-size:16px;
+            .ant-col-4{
+                line-height: 28px;
+                font-size:20px;
                 font-family:PingFangSC-Semibold;
                 font-weight:600;
                 margin-bottom: 0;
@@ -66,11 +82,13 @@
             }
         }
         .productLeft-btn {
-            width:10%;
-            text-align: center;
-            float: left;
+            width:13%;
+            height:66px;
+            display:flex;
+            justify-content: center;//子元素水平居中
+            align-items: center;//子元素垂直居中
             .newButton {
-                margin-top: -18%;
+
                 span {
                     width: 48px;
                     font-size: 14px;
@@ -81,7 +99,8 @@
             }
         }
     }
-.shopBase:nth-child(2) .commodityR-base{
-      margin-left: 11%;
+    .onetxt{
+        text-align: left;
+        padding-left: 10%;
     }
 </style>

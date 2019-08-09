@@ -156,24 +156,23 @@
                         data: item.data,
                         barGap: barGap,
                         markLine:markLineObj,
+                        barWidth:item.barWidth,
                         itemStyle:{
                             normal:{
                                 color: item.color,
                             },
-                        },
-                        barWidth:item.barWidth,
-                        label:{
-                            normal:{
-                                show:_this.barEchartsData.label.isShow,
-                                position: 'top',
-                                formatter:function(params){
-                                    return params.value+_this.barEchartsData.unit
+                            label:{
+                                normal:{
+                                    show:_this.barEchartsData.label.isShow,
+                                    position: 'top',
+                                    formatter:function(params){
+                                        return params.value+_this.barEchartsData.unit
+                                    }
                                 }
                             }
                         }
                     })
                 })
-                console.log(seriesData)
                 if(_this.barEchartsData.showType==0){
                     _this.xAxisType = 'category'
                     _this.xAxisData = _this.barEchartsData.xAxisData
@@ -217,7 +216,7 @@
                         data: _this.xAxisData,
                         // min:_this.minData,
                         // max:_this.maxData,
-                        // interval: _this.intervalData,
+                        interval: _this.intervalData,
                         axisLine: {
                             show: _this.xAxis.axisLine.show,
                             lineStyle: {
@@ -244,7 +243,7 @@
                     yAxis: {
                         type: _this.yAxisType,
                         data: _this.yAxisData,
-                        // interval: _this.intervalData,
+                        interval: _this.intervalData,
                         splitLine: {
                             show:_this.yAxis.splitLine.show,
                             lineStyle: {

@@ -1,99 +1,37 @@
 <template>
-    <div class="productRight" style="width: 70%;float: right;">
-        <div class="pinRight" >
-            <div class="pinRight-centen">
-                <div class="product-centen" v-for="(item) in dataTxt">
-                    <span>{{item.name}}</span>
-                    <div class="breadth">
-                    <div class="w" v-bind:style="{ 'width':item.txt}">
-                        <div class="q">{{item.txt}}</div>
-                    </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <span class="zreo">0</span>
-        <span class="million">100%</span>
+    <div class="productRight">
+            <barChart :barEchartsData="CommodityBar"></barChart>
     </div>
 </template>
 
 <script>
+    import barChart from  '../echarts/bar'
     export default {
         name: "productRight",
-        props:["dataTxt"],
+        props:{
+            CommodityBar:{
+                type:Object
+            }
+        },
         data(){
             return{
                 productRight:false,
-                // dataTxt:[
-                //     {
-                //         name:"立白",
-                //         val:"48",
-                //     },
-                //     {
-                //         name:"立白",
-                //         val:"88",
-                //     },
-                //     {
-                //         name:"立白",
-                //         val:"88",
-                //     }
-                // ]
-
             }
+        },
+        components:{
+            barChart
+        },
+        mounted() {
+            console.log(this.CommodityBar)
         }
     }
 </script>
 
 <style lang="less" scoped>
-    .pinRight{
-        width: 100%;
-        float: right;
-        margin-top: 6%;
-        position: relative;
-        .pinRight-centen{
-            .product-centen {
-                margin-top: 4%;
-                transform-style: preserve-3d;
-                perspective: 200px;
-                span{
-                    font-size:12px;
-                    font-family:PingFangSC-Regular;
-                    font-weight:400;
-                    color:rgba(255,255,255,1);
-                    float: left;
-                }
-                .w {
-                    margin-left: 12%;
-                    margin-right: 2%;
-                    text-align: left;
-                    height: 14px;
-                    background-color: #fff;
-                    position: relative;
+    .productRight {
+        width: 60%;
+        height: 260px !important;
+        float: left;
 
-                    .q {
-                        position: absolute;
-                        top: 0;
-                        right: -50px;
-                        font-size: 14px;
-                        color: #fff;
-                    }
-                }
-            }
-        }
-    }
-    .zreo{
-        position: absolute;
-        bottom: 11%;
-        left: 35%;
-        color: #fff;
-    }
-    .million{
-        position: absolute;
-        bottom: 11%;
-        right: 9%;
-        color: #fff;
-    }
-    .breadth{
-        width: 75%;
     }
 </style>

@@ -49,11 +49,11 @@
 				  		<img src="./../../assets/img/yewu.png">
 				  	</div>
 				  </a-Col>
-				  <a-Col :span="6" class="managerCol">
+				  <a-Col :span="8" class="managerCol">
 				  	<p>总业务员人数(人)</p>
 				  	<p>业绩下滑人数(人)</p>
 				  </a-Col>
-				  <a-Col :span="6" class="managerCol">
+				  <a-Col :span="4" class="managerCol">
 				  	<p>{{salesmanData.totalNumber}}</p>
 				  	<p>{{salesmanData.declinePerformance}}</p>
 				  </a-Col>

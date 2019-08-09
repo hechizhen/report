@@ -6,7 +6,7 @@
                 <a-Row >
                     <a-Col :span="10">
                         <productLeft :productdata="CommodityTurnoverRate"></productLeft>
-                        <productRight :dataTxt="CommodityTurnoverRate.dataTxt" ></productRight>
+                        <productRight :CommodityBar="CommodityTurnoverRate.produnarData"  ></productRight>
                     </a-Col>
                     <a-Col :span="13" :push="1">
                         <commodityRight :commoditydata="commoditydata" :upraphy="upraphy" :downraphy="downraphy" :pieraphy="pieraphy" ></commodityRight>
@@ -169,10 +169,12 @@
                         show:false
                     }
                 }
-            }
+            },
+
         },
         mounted() {
-          console.log(this.goodsData)
+         // console.log(this.goodsData)
+          console.log(this.CommodityTurnoverRate)
         }
     }
 </script>

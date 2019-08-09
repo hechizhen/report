@@ -2,12 +2,12 @@
 <template>
     <div class="line">
         <div :id="lineEchartsData.id" class="lineChart">
-            
+
         </div>
     </div>
 </template>
 <script>
-  
+
     export default {
         name : 'pie',
         props:{
@@ -16,7 +16,7 @@
                 default: () => ({
                     id:'lineId',
                     xAxisData:[1,2,3,4,5,6,7,8,9,10],
-                    lineData:[ 
+                    lineData:[
                         {
                             name:'ABC',
                             data:[200,300,400,500,600],
@@ -75,7 +75,7 @@
             },
         },
         components : {
-   
+
         },
         data () {
             return {
@@ -84,7 +84,7 @@
         },
         mounted () {
              console.log(this.lineEchartsData)
-            var _this = this  
+            var _this = this
             let echarts = _this.$echarts;
             _this.myChart = echarts.init(document.getElementById(_this.lineEchartsData.id))
             _this.setLineOptions()
@@ -196,7 +196,7 @@
             }
         },
         computed:{
-          
+
         },
         watch: {
             // lineEchartsData(val){
@@ -207,7 +207,7 @@
             // }
         },
         distroyed: function () {
-            
+
         }
     }
 </script>
@@ -217,7 +217,7 @@
         height:100%;
         .lineChart{
             width:100%;
-            height:100%;  
+            height:100%;
         }
     }
 </style>
