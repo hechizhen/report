@@ -106,7 +106,7 @@
             },
             directionData(val){
                 this.lineEchartsData = {
-                    id:'lineId',
+                    id:'lineIdBand',
                     xAxisData:val.monthArr,
                     lineData:[ 
                         {
@@ -114,7 +114,7 @@
                             data:val.seriesData,
                             color:'#00E2BF'
                         },
-                    ]
+					],
                 }
             }
         },

@@ -32,9 +32,47 @@
                             data:[333,444,555,666,777],
                             color:'grey'
                         }
-                    ]
+                    ],
                 })
-            }
+            },
+            legendShow:{
+                type:Boolean,
+                default:true,
+            },
+            xAxis:{
+                default: () => ({
+                    axisLine:{
+                        show:true,
+                        color:'#3699FF'
+                    },
+                    axisLabel:{
+                        show:true,
+                        color:'#333333',
+                        fontSize:18
+                    },
+                    splitLine:{
+                        show:false,
+                        color:'#CCCCCC'
+                    },
+                })
+            },
+            yAxis:{
+                default: () => ({
+                    axisLine:{
+                        show:true,
+                        color:'#3699FF'
+                    },
+                    axisLabel:{
+                        show:true,
+                        color:'#333333',
+                        fontSize:18
+                    },
+                    splitLine:{
+                        show:true,
+                        color:'#CCCCCC'
+                    },
+                })
+            },
         },
         components : {
    
@@ -45,7 +83,6 @@
             }
         },
         mounted () {
-            console.log('22222222222222222')
              console.log(this.lineEchartsData)
             var _this = this  
             let echarts = _this.$echarts;
@@ -59,7 +96,9 @@
             setLineOptions(){
                 var _this = this
                 let seriesData = []
+                let legendList = []
                 _this.lineEchartsData.lineData.map(function(item,index){
+                    legendList.push(item.name)
                     seriesData.push({
                         name: item.name,
                         type: 'line',
@@ -77,46 +116,77 @@
                         trigger: 'axis'
                     },
                     legend: {
-                        color: ["#F58080", "#47D8BE", "#F9A589"],
-                        data: ['新报', '流失', '续费'],
-                        left: 'center',
-                        bottom: 'bottom'
+                        show:_this.legendShow,
+                        data: legendList,
+                        bottom: "5%",
+                        itemGap: 50,
+                        textStyle: {
+                            color: "#333333",
+                            fontSize:14
+                        }
                     },
                     grid: {
                         top: 'middle',
                         left: '3%',
                         right: '4%',
                         bottom: '3%',
-                        height: '80%',
+                        height: '75%',
                         containLabel: true
                     },
                     xAxis: {
                         type: 'category',
                         data: _this.lineEchartsData.xAxisData,
                         axisLine: {
+                            show: _this.xAxis.axisLine.show,
                             lineStyle: {
-                                color: "#65E6F5"
+                                color: _this.xAxis.axisLine.color
                             }
+                        },
+                        axisLabel:{
+                            show:_this.xAxis.axisLabel.show,
+                            textStyle:{
+                                color:_this.xAxis.axisLabel.color,
+                                fontSize:_this.xAxis.axisLabel.fontSize
+                            }
+                        },
+                        splitLine: {
+                            show: _this.xAxis.splitLine.show,
+                            lineStyle: {
+                                color: _this.xAxis.splitLine.color,
+                            }
+                        },
+                        axisTick:{
+                            show: false
                         }
                     },
                     yAxis: {
                         type: 'value',
-                        splitLine: {
-                            lineStyle: {
-                                type: 'solid',
-                                color: '#DDD'
-                            }
-                        },
-                        axisLine: {
-                            show: true,
-                            lineStyle: {
-                                color: "#65E6F5"
-                            },
-                        },
                         nameTextStyle: {
                             color: "#999"
                         },
                         splitArea: {
+                            show: false
+                        },
+                        axisLine: {
+                            show: _this.yAxis.axisLine.show,
+                            lineStyle: {
+                                color: _this.yAxis.axisLine.color,
+                            }
+                        },
+                        axisLabel:{
+                            show:_this.yAxis.axisLabel.show,
+                            textStyle:{
+                                color:_this.yAxis.axisLabel.color,
+                                fontSize:_this.yAxis.axisLabel.fontSize
+                            }
+                        },
+                        splitLine: {
+                            show: _this.yAxis.splitLine.show,
+                            lineStyle: {
+                                color: _this.yAxis.splitLine.color,
+                            }
+                        },
+                        axisTick:{
                             show: false
                         }
                     },
@@ -129,12 +199,12 @@
           
         },
         watch: {
-            lineEchartsData(val){
-                var _this = this  
-                let echarts = _this.$echarts;
-                _this.myChart = echarts.init(document.getElementById(_this.lineEchartsData.id))
-                _this.setLineOptions()
-            }
+            // lineEchartsData(val){
+            //     var _this = this  
+            //     let echarts = _this.$echarts;
+            //     _this.myChart = echarts.init(document.getElementById(_this.lineEchartsData.id))
+            //     _this.setLineOptions()
+            // }
         },
         distroyed: function () {
             

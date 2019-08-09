@@ -42,16 +42,6 @@
                     id:'barId',
                     unit:'%',
                     xAxisData:this.salesmandownward.xAxisData,
-                    xAxis:{
-                        isShowLine:false,
-                        isShowSplit:false,
-                        axisLabelColor:'#333',
-                    },
-                    yAxis:{
-                        isShowLine:false,
-                        isShowSplit:false,
-                        axisLabelColor:'#333',
-                    },
                     label:{
                         isShow:false
                     },

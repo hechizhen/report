@@ -17,16 +17,6 @@
                     id:'barId',
                     unit:'%',
                     xAxisData:[1,2,3,4,5,6,7,8,9,10],
-                    xAxis:{
-                        isShowLine:false,
-                        isShowSplit:false,
-                        axisLabelColor:'#333',
-                    },
-                    yAxis:{
-                        isShowLine:false,
-                        isShowSplit:false,
-                        axisLabelColor:'#333',
-                    },
                     label:{
                         isShow:false
                     },
@@ -42,9 +32,57 @@
                     showType:0,//0横过来 1竖起来
                     markLineList:{
                         show:false
-                    }
+                    },
                 })
-            }
+            },
+            legendShow:{
+                type:Boolean,
+                default: true
+            },
+            isShowMax:{
+                type:Boolean,
+                default: false
+            },
+            barType:{
+                type:Number,
+                default:0,
+            },
+            xAxis:{
+                type:Object,
+                default: () => ({
+                    axisLine:{
+                        show:true,
+                        color:'#3699FF'
+                    },
+                    axisLabel:{
+                        show:true,
+                        color:'#333333',
+                        fontSize:18
+                    },
+                    splitLine:{
+                        show:false,
+                        color:'#CCCCCC'
+                    },
+                }),
+            },
+            yAxis:{
+                type:Object,
+                default: () => ({
+                    axisLine:{
+                        show:true,
+                        color:'#3699FF'
+                    },
+                    axisLabel:{
+                        show:true,
+                        color:'#333333',
+                        fontSize:18
+                    },
+                    splitLine:{
+                        show:true,
+                        color:'#CCCCCC'
+                    },
+                }),
+            },
         },
         components : {
 
@@ -55,6 +93,7 @@
                 yAxisType:'',
                 xAxisData:'',
                 yAxisData:'',
+                intervalData:'',
             }
         },
         mounted () {
@@ -103,11 +142,19 @@
                     var markLineObj={}
                 }
                 let seriesData = []
+                let legendList = []
+                if(_this.barType==0){
+                    var barGap = 0
+                }else{
+                    var barGap = '-100%'
+                }
                 _this.barEchartsData.barData.map(function(item,index){
+                    legendList.push(item.name)
                     seriesData.push({
                         name: item.name,
                         type: 'bar',
                         data: item.data,
+                        barGap: barGap,
                         markLine:markLineObj,
                         itemStyle:{
                             normal:{
@@ -138,15 +185,24 @@
                     _this.yAxisType = 'category'
                     _this.yAxisData = _this.barEchartsData.xAxisData
                 }
+                if(_this.isShowMax){
+                    _this.intervalData = 10000
+                }else{
+                    _this.intervalData = ''
+                }
                 var option = {
                     tooltip: {
                         trigger: 'axis'
                     },
                     legend: {
-                        color: ["#F58080", "#47D8BE", "#F9A589"],
-                        data: ['新报', '流失', '续费'],
-                        left: 'center',
-                        bottom: 'bottom'
+                        show:_this.legendShow,
+                        data: legendList,
+                        bottom: "5%",
+                        itemGap: 50,
+                        textStyle: {
+                            color: "#333333",
+                            fontSize:14
+                        }
                     },
                     grid: {
                         top: 'middle',
@@ -159,26 +215,26 @@
                     xAxis: {
                         type: _this.xAxisType,
                         data: _this.xAxisData,
-                        min:0,
-                        max:function(value) {
-                            return value.max;
-                        },
-                        interval: 100000,
+                        // min:_this.minData,
+                        // max:_this.maxData,
+                        // interval: _this.intervalData,
                         axisLine: {
-                            show: _this.barEchartsData.xAxis.isShowLine,
+                            show: _this.xAxis.axisLine.show,
                             lineStyle: {
-                                color: "#65E6F5"
+                                color: _this.xAxis.axisLine.color,
                             }
                         },
                         axisLabel:{
+                            show:_this.xAxis.axisLabel.show,
                             textStyle:{
-                                color:_this.barEchartsData.xAxis.axisLabelColor
+                                color:_this.xAxis.axisLabel.color,
+                                fontSize:_this.xAxis.axisLabel.fontSize,
                             }
                         },
                         splitLine: {
-                            show: _this.barEchartsData.xAxis.isShowSplit,
+                            show: _this.xAxis.splitLine.show,
                             lineStyle: {
-                                color: '#DDD'
+                                color: _this.xAxis.splitLine.color,
                             }
                         },
                         axisTick:{
@@ -188,26 +244,24 @@
                     yAxis: {
                         type: _this.yAxisType,
                         data: _this.yAxisData,
-                        min:0,
-                        max:function(value) {
-                            return value.max;
-                        },
-                        interval: 100000,
+                        // interval: _this.intervalData,
                         splitLine: {
-                            show:_this.barEchartsData.yAxis.isShowSplit,
+                            show:_this.yAxis.splitLine.show,
                             lineStyle: {
-                                color: '#DDD'
+                                color: _this.yAxis.splitLine.color,
                             }
                         },
                         axisLabel:{
+                            show:_this.yAxis.axisLabel.show,
                             textStyle:{
-                                color:_this.barEchartsData.yAxis.axisLabelColor
+                                color:_this.yAxis.axisLabel.color,
+                                fontSize:_this.yAxis.axisLabel.fontSize,
                             }
                         },
                         axisLine: {
-                            show: _this.barEchartsData.yAxis.isShowLine,
+                            show: _this.yAxis.axisLine.show,
                             lineStyle: {
-                                color: "#65E6F5"
+                                color: _this.yAxis.axisLine.color,
                             },
                         },
                         nameTextStyle: {
@@ -218,7 +272,9 @@
                         },
                         axisTick:{
                             show: false
-                        }
+                        },
+                        // min:_this.minData,
+                        // max:_this.maxData,
                     },
                     series: seriesData
                 };

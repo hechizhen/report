@@ -33,7 +33,7 @@
             <div class="oneHelpSaleBottom">
                 <div class="oneHelpSaleBottomTitle">达成率</div>
                 <div class="oneHelpSaleBottomContent">
-                    <bar-chart :barEchartsData="barData"></bar-chart>
+                    <bar-chart :barEchartsData="barData.config" :xAxis="barData.xAxis" :yAxis="barData.yAxis" :legendShow="barData.legendShow" :isShowMax="barData.isShowMax"></bar-chart>
                 </div>
             </div>
         </div>
