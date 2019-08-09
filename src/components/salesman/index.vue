@@ -5,7 +5,7 @@
 		<core :coretype="'业务员得分'" :coretext="100" :evaluate="'较好'"></core>
 		<trendChart  v-if="echartsShow" :trendChartClick="trendChartClick" :lineEchartsData="direction"></trendChart>
 		<glide  v-if="glideShow" :trendChartClick="glideClick" :salesmandownward="salesmandownward"></glide>
-		<contribution   v-if="contributionShow" :trendChartClick="contributionClick" :salesmanReached="salesmanData"></contribution>
+		<contribution   v-if="contributionShow" :trendChartClick="contributionClick" :salesmanReached="salesmanReached" :salesmanContribution="salesmanContribution"></contribution>
 	</div>
 </template>
 <script>
@@ -58,7 +58,6 @@
 				salesmandownward:this.salesmandownwardData,
 				salesmanReached:this.salesmanReachedData,
 				salesmanContribution:this.salesmanContributionData,
-				salesmanData:this.salesmanReachedData,
 				explainSecondList:{
 					imgType:3,
 					tableData:[
@@ -73,7 +72,6 @@
 			}
 		},
 		mounted(){
-
 		},
 		methods:{
 			explicit(a){
@@ -93,13 +91,7 @@
 				this.glideShow = false;
 			},
 			contributionClick(a){
-				if(a == '达成'){
-					this.salesmanData = this.salesmanReached;
-				}else if(a == '贡献'){
-					this.salesmanData = this.salesmanContribution;
-				}else {
-					this.contributionShow = false;
-				}
+				this.contributionShow = false;
 			}
 		},
 		watch:{
@@ -114,11 +106,9 @@
         		this.salesmandownward = val
         	},
         	salesmanReachedData(val) {
-        		this.salesmanData= val;
         		this.salesmanReached = val
         	},
         	salesmanContributionData(val) {
-        		alert(1)
         		this.salesmanContribution = val
         	}
         },

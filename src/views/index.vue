@@ -644,16 +644,16 @@
                     salesmanContributionData.map(function(value){
                         xAxisData.push(value.salesmanName);
                         lastMonth.push(value.monthlysales)
-                        sameMonth.push(value.monthlytarget)
+                        sameMonth.push(value.totalMonthlySales)
                         // difference.push(value.reached)
                     })
                     seriesData.push(
                         {name:'当月目标',data:sameMonth,color:'#85C1FF',barWidth:20},
-                        {name:'当月销量',data:lastMonth,color:'#2D92FC',barWidth:20},
+                        {name:'当月总销量',data:lastMonth,color:'#2D92FC',barWidth:20},
                         // {name:'达成率',data:difference,color:'#00E2BF',barWidth:20}
                         )
-                    salesmanReachedObject.xAxisData = xAxisData;
-                    salesmanReachedObject.seriesData = seriesData;
+                    salesmanContributionObject.xAxisData = xAxisData;
+                    salesmanContributionObject.seriesData = seriesData;
                     _this.salesmanContributionData = salesmanContributionObject;
                 })
             },

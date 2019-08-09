@@ -20,8 +20,13 @@
 				  </a-Col>
 				</a-Row>
 			</div>
-			<div class="lineEcharts" v-show="isswitched">
-				<barEcharts :barEchartsData="salesmanReachedData" :barType="salesmanReachedData.barType" :xAxis="xAxis" :yAxis="yAxis"></barEcharts>
+			<div class="lineEcharts">
+				<div style="height:100%;width:100%" v-if="isswitched">
+					<barEcharts :barEchartsData="salesmanReachedData" :barType="salesmanReachedData.barType"></barEcharts>
+				</div>
+				<div style="height:100%;width:100%" v-if="!isswitched">
+					<barEcharts :barEchartsData="salesmanContributionData" :barType="salesmanContributionData.barType"></barEcharts>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -41,8 +46,14 @@
 				type:Object,
 				default:{}
 			},
+			salesmanContribution:{
+				type:Object,
+				default:{}
+			}
 		},
+		mounted(){
 
+		},
 		data(){
 			return {
 				switchedIndex: 1,
@@ -92,6 +103,21 @@
 	                    color:'#CCCCCC'
 	                },
 	            },
+	            salesmanContributionData:{
+					id:'barSalesManId',
+					unit:'%',
+					xAxisData:this.salesmanContribution.xAxisData,
+					label:{
+						isShow:false
+					},
+					type:'xAxis',
+					barData:this.salesmanContribution.seriesData,
+					showType:1,//0横过来 1竖起来
+					markLineList:{
+						show:false
+					},
+					barType:1
+                },
 			}
 		},
 		methods:{
@@ -106,11 +132,43 @@
 					this.switchedIndex = 2;
 					this.isswitched = false;
 				}
-				this.trendChartClick(a)
 			},
 		},
 		watch:{
-            
+            salesmanReached(value){
+            	this.salesmanReachedData = {
+					id:'barSalesManId',
+					unit:'%',
+					xAxisData:value.xAxisData,
+					label:{
+						isShow:false
+					},
+					type:'xAxis',
+					barData:value.seriesData,
+					showType:1,//0横过来 1竖起来
+					markLineList:{
+						show:false
+					},
+					barType:1
+                }
+            },
+            salesmanReached(value){
+            	this.salesmanContributionData = {
+					id:'barSalesManId',
+					unit:'%',
+					xAxisData:value.xAxisData,
+					label:{
+						isShow:false
+					},
+					type:'xAxis',
+					barData:value.seriesData,
+					showType:1,//0横过来 1竖起来
+					markLineList:{
+						show:false
+					},
+					barType:1
+                }
+            }
         },
 	}
 </script>
