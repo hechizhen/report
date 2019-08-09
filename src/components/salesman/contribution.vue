@@ -4,24 +4,24 @@
 			<div class="title">
 				<a-Row class="thendChartRow">
 				  <a-Col :span="12" class="thendChartCol1">
-				  	<div :class="{'active':switchedIndex == 1}" @click="switched(1)">
+				  	<div :class="{'active':switchedIndex == 1}" @click="switched('达成')">
 				  		<p>达成</p>
 				  		<p></p>
 				  	</div>
-				  	<div :class="{'active':switchedIndex == 2}" @click="switched(2)">
+				  	<div :class="{'active':switchedIndex == 2}" @click="switched('贡献')">
 				  		<p>贡献</p>
 				  		<p></p>
 				  	</div>
 				  </a-Col>
 				  <a-Col :span="12" class="thendChartCol2">
-				  	单位：万元  <span @click="thendChartClick">
+				  	单位：万元  <span @click="thendChartClick('关闭')">
 						  <i class="iconfont icon-guanbi"></i>
 					  </span>
 				  </a-Col>
 				</a-Row>
 			</div>
 			<div class="lineEcharts" v-show="isswitched">
-				<barEcharts :barEchartsData="salesmanReachedData" :barType="salesmanReachedData.barType"></barEcharts>
+				<barEcharts :barEchartsData="salesmanReachedData" :barType="salesmanReachedData.barType" :xAxis="xAxis" :yAxis="yAxis"></barEcharts>
 			</div>
 		</div>
 	</div>
@@ -40,7 +40,7 @@
 			salesmanReached:{
 				type:Object,
 				default:{}
-			}
+			},
 		},
 
 		data(){
@@ -61,51 +61,56 @@
 						show:false
 					},
 					barType:1
-                }
+                },
+                xAxis:{
+	                axisLine:{
+	                    show:true,
+	                    color:'#3699FF'
+	                },
+	                axisLabel:{
+	                    show:true,
+	                    color:'#333333',
+	                    fontSize:18
+	                },
+	                splitLine:{
+	                    show:true,
+	                    color:'#CCCCCC'
+	                },
+	            },
+	            yAxis:{
+	                axisLine:{
+	                    show:true,
+	                    color:'#3699FF'
+	                },
+	                axisLabel:{
+	                    show:true,
+	                    color:'#333333',
+	                    fontSize:18
+	                },
+	                splitLine:{
+	                    show:false,
+	                    color:'#CCCCCC'
+	                },
+	            },
 			}
 		},
 		methods:{
-			thendChartClick(){
-				this.trendChartClick()
+			thendChartClick(a){
+				this.trendChartClick(a)
 			},
 			switched(a){
-				if( a == 1){
+				if( a == '达成'){
 					this.switchedIndex = 1;
 					this.isswitched = true;
 				}else {
 					this.switchedIndex = 2;
 					this.isswitched = false;
 				}
+				this.trendChartClick(a)
 			},
 		},
 		watch:{
-            salesmanReached(val){
-            	this.salesmanReachedData = {
-                    id:'barId',
-                    unit:'%',
-                    xAxisData:val.xAxisData,
-                    xAxis:{
-                        isShowLine:true,
-                        isShowSplit:true,
-                        axisLabelColor:'#333',
-                    },
-                    yAxis:{
-                        isShowLine:true,
-                        isShowSplit:false,
-                        axisLabelColor:'#333',
-                    },
-                    label:{
-                        isShow:false
-                    },
-                    type:'xAxis',
-                    barData:val.seriesData,
-                    showType:1,//0横过来 1竖起来
-                    markLineList:{
-                        show:false
-					},
-					barType:1
-                }
-        	},
+            
         },
 	}
 </script>

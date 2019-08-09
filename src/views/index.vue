@@ -14,7 +14,7 @@
         <!-- 帮卖分析-订单 -->
         <secondBand :orderAmountData="orderAmountData" :grossProfitData="grossProfitData" :grossInterestRateData="grossInterestRateData" :proportio="proportioData" :directionData="directionData"></secondBand>
         <!-- 二帮卖分析-业务员 -->
-        <salesman :salesmanData="salesmanData" :salesmanTrendData="salesmanTrendData" :salesmandownwardData="salesmandownwardData" :salesmanReachedData="salesmanReachedData"></salesman>
+        <salesman :salesmanData="salesmanData" :salesmanTrendData="salesmanTrendData" :salesmandownwardData="salesmandownwardData" :salesmanReachedData="salesmanReachedData" :salesmanContributionData="salesmanContributionData"></salesman>
         <!-- 产品 -->
         <productIndex :CommodityTurnoverRate="CommodityTurnoverRate"  :commoditydata="commoditydata" :GoodsDetail="GoodsDetail"
                       :VariabilityUpData="VariabilityUpData" :VariabilityDownData="VariabilityDownData"
@@ -119,7 +119,8 @@
                 directionData:{}, //订单走势图
                 salesmanTrendData:{},  //业务员走势图
                 salesmandownwardData:{}, //业务员下滑
-                salesmanReachedData:{}  //业务员-达成
+                salesmanReachedData:{},  //业务员-达成
+                salesmanContributionData:{},//业务员-贡献
             }
         },
         created() {
@@ -157,6 +158,7 @@
             this.getDownStores()
             this.geUpStores()
             this.getSalesmanReached()
+            this.getSalesmanContribution()
         },
         computed: {
 
@@ -188,6 +190,7 @@
                 this.getDownStores()
                 this.geUpStores()
                 this.getSalesmanReached()
+                this.getSalesmanContribution()
             },
             //体检报告概览
             getOverViewData() {
@@ -625,6 +628,33 @@
                     salesmanReachedObject.xAxisData = xAxisData;
                     salesmanReachedObject.seriesData = seriesData;
                     _this.salesmanReachedData = salesmanReachedObject;
+                })
+            },
+            //业务员-贡献
+            getSalesmanContribution() {
+                var _this = this
+                this.$http({
+                    url: _this.requestHttpUrl + '/SalesmanContribution',
+                    method: 'POST',
+                    data: {
+                        dateTime: _this.currentDate
+                    }
+                }).then(function (res) {
+                    var salesmanContributionData = res.data.data,xAxisData=[],seriesData=[],lastMonth=[],sameMonth=[],difference=[],salesmanContributionObject={};
+                    salesmanContributionData.map(function(value){
+                        xAxisData.push(value.salesmanName);
+                        lastMonth.push(value.monthlysales)
+                        sameMonth.push(value.monthlytarget)
+                        // difference.push(value.reached)
+                    })
+                    seriesData.push(
+                        {name:'当月目标',data:sameMonth,color:'#85C1FF',barWidth:20},
+                        {name:'当月销量',data:lastMonth,color:'#2D92FC',barWidth:20},
+                        // {name:'达成率',data:difference,color:'#00E2BF',barWidth:20}
+                        )
+                    salesmanReachedObject.xAxisData = xAxisData;
+                    salesmanReachedObject.seriesData = seriesData;
+                    _this.salesmanContributionData = salesmanContributionObject;
                 })
             },
             //产品-商品动销率
