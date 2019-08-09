@@ -149,7 +149,7 @@
         }
     }
       .shop-data-base{
-            width: 90%;
+           width: 89%;
             height: 12%;
             margin-top: 2%;
             margin-left: 11%;
