@@ -8,6 +8,7 @@
                     </a-Col>
                     <a-Col :span="12" class="thendChartCol2">
                         单位：万元
+                        <newButton > </newButton>
                         <span @click="thendChartClicks">
                             <i class="iconfont icon-guanbi"></i>
                         </span>
@@ -22,10 +23,12 @@
 </template>
 <script>
     import barEcharts from "../echarts/bar"
+    import  newButton from  '../base/newButton'
     export default {
         name:'shopChartDown',
         components:{
-            barEcharts
+            barEcharts,
+            newButton
         },
         props:{
             trendChartClick:{
@@ -80,7 +83,7 @@
                     height: 100%;
                     display: flex;
                     align-items: center;
-                    padding-left: 10px;
+                    padding-left: 4%;
                     font-size:20px;
                     font-family:PingFangSC-Medium;
                     font-weight:700;
