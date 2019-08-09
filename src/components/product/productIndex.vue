@@ -63,7 +63,7 @@
                 listShow:false,
                 titName:"产品", // 产品
                 explainSecondList:{
-                    imgType:4,
+                    imgType:5,
                     tableData:[
                         {title:'商品动销率：',data:'统计当月订单商品的SKU数(去重)(只取立白)/有库存商品的SKU数(上月期末快照和当月期末快照去重)'},
                         {title:'立白动销率：',data:'统计当月订单立白事业部商品的SKU数（去重）/立白事业部库存商品的SKU数'},
@@ -107,6 +107,7 @@
                 this.goodsData = val;
                 this.pieEchartsData = {
                     id:'pieEchartsId',
+                    unit:this.goodsData.name,
                     colorList:['#66E3E2', '#89D6D7', '#8AD493', '#65BF6B',"#F2AB60","#F0D570","#8CA9F6","#AABBF7","#66D6FF","#9BDBEF","#61B8F6","#B4D8D0"],
                     labelType:2,
                     pieData:this.goodsData,
@@ -122,14 +123,14 @@
                     unit:'%',
                     xAxisData:this.lityUpData.xAxisData,
                     xAxis:{
-                        isShowLine:false,
+                        isShowLine:true,
                         isShowSplit:false,
-                        axisLabelColor:'#333',
+                        axisLabelColor:'#0092FE',
                     },
                     yAxis:{
-                        isShowLine:false,
-                        isShowSplit:false,
-                        axisLabelColor:'#333',
+                        isShowLine:true,
+                        isShowSplit:true,
+                        axisLabelColor:'#0092FE',
                     },
                     label:{
                         isShow:false
@@ -150,14 +151,14 @@
                     unit:'%',
                     xAxisData:this.lityDownData.xAxisData,
                     xAxis:{
-                        isShowLine:false,
+                        isShowLine:true,
                         isShowSplit:false,
-                        axisLabelColor:'#333',
+                        axisLabelColor:'#0092FE',
                     },
                     yAxis:{
-                        isShowLine:false,
-                        isShowSplit:false,
-                        axisLabelColor:'#333',
+                        isShowLine:true,
+                        isShowSplit:true,
+                        axisLabelColor:'#0092FE',
                     },
                     label:{
                         isShow:false

@@ -1068,7 +1068,7 @@
                         },
                         yAxis: {
                             isShowLine: false,
-                            isShowSplit: false,
+                            isShowSplit: true,
                             axisLabelColor: '#D7D9E5',
                         },
                         label: {
@@ -1080,7 +1080,7 @@
                                 name: 'ABC',
                                 data: inventoryData,
                                 color: '#6BBCFF',
-                                barWidth: 6
+                                barWidth: 11
                             },
                         ],
                         showType: 0,
