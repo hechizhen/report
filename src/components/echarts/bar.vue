@@ -11,18 +11,16 @@
     export default {
         name : 'bar',
         props:{
-            //柱状图数据
             barEchartsData:{
                 type:Object,
                 default: () => ({
-                    //id
                     id:'barId',
-                    //数据单位
                     unit:'%',
-                    //x轴单位
                     xAxisData:[1,2,3,4,5,6,7,8,9,10],
+                    label:{
+                        isShow:false
+                    },
                     type:'xAxis',
-                    //柱状图数据
                     barData:[
                         {
                             name:'ABC',
@@ -32,51 +30,35 @@
                         },
                     ],
                     showType:0,//0横过来 1竖起来
-                    //markline
                     markLineList:{
                         show:false
                     },
                 })
             },
-            //柱状图上方文字
-            label:{
-                type:Object,
-                default:()=>({
-                    isShow:false,
-                    position:'top'
-                })
-            },
-            //是否显示图标
             legendShow:{
                 type:Boolean,
                 default: true
             },
-            //是否显示最大值
             isShowMax:{
                 type:Boolean,
                 default: false
             },
-            //柱状图类型，平行或者重合 0平行 1重合
             barType:{
                 type:Number,
                 default:0,
             },
-            //x轴参数
             xAxis:{
                 type:Object,
                 default: () => ({
-                    //x轴
                     axisLine:{
                         show:true,
                         color:'#3699FF'
                     },
-                    //x轴字体
                     axisLabel:{
                         show:true,
                         color:'#333333',
                         fontSize:18
                     },
-                    //网格线
                     splitLine:{
                         show:false,
                         color:'#CCCCCC'
@@ -86,18 +68,15 @@
             yAxis:{
                 type:Object,
                 default: () => ({
-                    //y轴
                     axisLine:{
                         show:true,
                         color:'#3699FF'
                     },
-                    //y轴字体
                     axisLabel:{
                         show:true,
                         color:'#333333',
                         fontSize:18
                     },
-                    //网格线
                     splitLine:{
                         show:true,
                         color:'#CCCCCC'
@@ -185,8 +164,8 @@
                         },
                         label:{
                             normal:{
-                                show:_this.label.isShow,
-                                position: _this.label.position,
+                                show:_this.barEchartsData.label.isShow,
+                                position: 'top',
                                 formatter:function(params){
                                     return params.value+_this.barEchartsData.unit
                                 }
