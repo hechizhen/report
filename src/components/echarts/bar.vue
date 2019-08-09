@@ -17,9 +17,6 @@
                     id:'barId',
                     unit:'%',
                     xAxisData:[1,2,3,4,5,6,7,8,9,10],
-                    label:{
-                        isShow:false
-                    },
                     type:'xAxis',
                     barData:[
                         {
@@ -34,6 +31,10 @@
                         show:false
                     },
                 })
+            },
+            label:{
+                isShow:false,
+                position:'top'
             },
             legendShow:{
                 type:Boolean,
@@ -164,7 +165,7 @@
                         },
                         label:{
                             normal:{
-                                show:_this.barEchartsData.label.isShow,
+                                show:_this.label.isShow,
                                 position: 'top',
                                 formatter:function(params){
                                     return params.value+_this.barEchartsData.unit
