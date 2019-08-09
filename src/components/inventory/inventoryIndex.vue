@@ -146,6 +146,9 @@
 .table-headtxt-two{
     display: inline-block;width: 100%;text-align:center;height: 50%;
 }
+.inventory-table .table-head .table-headtxt:nth-child(2){
+    width: 49%;
+}
 .shu{
     width:1px;
     height:94px;
@@ -166,7 +169,7 @@
             border-radius:10px 10px 0 0;
             display: inline-block;
             .table-headtxt{
-                width: 50%;
+                width: 51%;
                 height: 100%;
                 float: left;
                 font-size:14px;
