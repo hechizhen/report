@@ -76,10 +76,10 @@
 				this.bgImage = require('../assets/img/salesManBg.png')
 				this.fontColor = '#0675F8'
 			}else if(this.imgType==4){
-				this.bgImage = require('../assets/img/productBg.png')
+				this.bgImage = require('../assets/img/storeBg.png')
 				this.fontColor = '#6029DE'
 			}else if(this.imgType==5){
-				this.bgImage = require('../assets/img/storeBg.png')
+				this.bgImage = require('../assets/img/productBg.png')
 				this.fontColor = '#00B0C9'
 			}else if(this.imgType==6){
 				this.bgImage = require('../assets/img/stockBg.png')

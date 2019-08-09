@@ -44,7 +44,7 @@
                 lityUpData:{},
                 lityDownData:{},
                 explainSecondList:{
-                    imgType:5,
+                    imgType:4,
                     tableData:[
                         {title:'总门店数：',data:'统计当前用户总有效门店数'},
                         {title:'门店单产：',data:'统计当月下单金额/活跃门店数'},
@@ -79,14 +79,14 @@
                     unit:'%',
                     xAxisData:this.lityUpData.xAxisData,
                     xAxis:{
-                        isShowLine:false,
+                        isShowLine:true,
                         isShowSplit:false,
-                        axisLabelColor:'#333',
+                        axisLabelColor:'#0092FE',
                     },
                     yAxis:{
-                        isShowLine:false,
-                        isShowSplit:false,
-                        axisLabelColor:'#333',
+                        isShowLine:true,
+                        isShowSplit:true,
+                        axisLabelColor:'#0092FE',
                     },
                     label:{
                         isShow:false
@@ -107,14 +107,14 @@
                     unit:'%',
                     xAxisData:this.lityDownData.xAxisData,
                     xAxis:{
-                        isShowLine:false,
+                        isShowLine:true,
                         isShowSplit:false,
-                        axisLabelColor:'#333',
+                        axisLabelColor:'#0092FE',
                     },
                     yAxis:{
-                        isShowLine:false,
-                        isShowSplit:false,
-                        axisLabelColor:'#333',
+                        isShowLine:true,
+                        isShowSplit:true,
+                        axisLabelColor:'#0092FE',
                     },
                     label:{
                         isShow:false
