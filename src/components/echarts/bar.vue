@@ -161,13 +161,13 @@
                             normal:{
                                 color: item.color,
                             },
-                            label:{
-                                normal:{
-                                    show:_this.barEchartsData.label.isShow,
-                                    position: 'top',
-                                    formatter:function(params){
-                                        return params.value+_this.barEchartsData.unit
-                                    }
+                        },
+                        label:{
+                            normal:{
+                                show:_this.barEchartsData.label.isShow,
+                                position: 'top',
+                                formatter:function(params){
+                                    return params.value+_this.barEchartsData.unit
                                 }
                             }
                         }
