@@ -23,7 +23,10 @@
                 <newButton :defaultVal="defaultValdown" ></newButton>
             </div>
             <div class="bartu">
-             <barChart :barEchartsData="barData" ></barChart>
+             <barChart :barEchartsData="barData.config" :xAxis="barData.xAxis"
+                       :yAxis="barData.yAxis" :legendShow="barData.legendShow"
+                       :isShowMax="barData.isShowMax" :label="barData.label"
+             ></barChart>
             </div>
         </div>
     </div>
@@ -64,7 +67,7 @@
 
         },
         mounted () {
-            console.log(this.inventoryBarData)
+            console.log(this.barData)
         },
     }
 </script>

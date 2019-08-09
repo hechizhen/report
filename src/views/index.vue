@@ -1117,37 +1117,65 @@
                                 item.dayData = _this.dataProcess(item.dayData,'day').num
                                 inventoryData.push(item.dayData)
                         })
-                       let inventoryBarData = {
-                       id: 'barIdInventory',
-                       unit:'天',
-                        xAxisData: Axiax,
-                        xAxis: {
-                            isShowLine: false,
-                            isShowSplit: false,
-                            axisLabelColor: '#333',
-                        },
-                        yAxis: {
-                            isShowLine: false,
-                            isShowSplit: true,
-                            axisLabelColor: '#D7D9E5',
+                    let inventoryBarData = {
+                        config:{
+                            id: 'barIdInventory',
+                            unit:'天',
+                            xAxisData: Axiax,
+                            label: {
+                                isShow: true
+                            },
+                            type: 'xAxis',
+                            barData: [
+                                {
+                                    name: 'ABC',
+                                    data: inventoryData,
+                                    color: '#3699FF',
+                                    barWidth: 11
+                                },
+                            ],
+                            showType: 0,
+                            markLineList:{
+                                show:false,
+                                data:100,
+                            }
                         },
                         label: {
-                            isShow: true
+                            isShow: true,
+                            position:'top'
                         },
-                        type: 'xAxis',
-                        barData: [
-                            {
-                                name: 'ABC',
-                                data: inventoryData,
-                                color: '#6BBCFF',
-                                barWidth: 11
+                        xAxis:{
+                            axisLine:{
+                                show:true,
+                                color:'#ccc'
                             },
-                        ],
-                        showType: 0,
-                           markLineList:{
-                               show:false,
-                               data:100,
-                           }
+                            axisLabel:{
+                                show:true,
+                                color:'#000',
+                                fontSize:12
+                            },
+                            splitLine:{
+                                show:false,
+                                color:'#ccc'
+                            },
+                        },
+                        yAxis:{
+                            axisLine:{
+                                show:false,
+                                color:'#ccc'
+                            },
+                            axisLabel:{
+                                show:true,
+                                color:'#333333',
+                                fontSize:12
+                            },
+                            splitLine:{
+                                show:true,
+                                color:'#ccc'
+                            },
+                        },
+                        legendShow:false,
+                        isShowMax:true,
                     }
                        _this.inventoryDay = {
                         inventorycompare: [
