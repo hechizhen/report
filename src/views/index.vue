@@ -271,9 +271,6 @@
                             id: 'barIdMonthSales',
                             xAxisData: Axiax,
                             unit:'%',
-                            label: {
-                                isShow: true
-                            },
                             type: 'xAxis',
                             barData: [
                                 {
@@ -288,6 +285,10 @@
                                 show:true,
                                 data:100,
                             }
+                        },
+                        label: {
+                            isShow: true,
+                            position:'top'
                         },
                         xAxis:{
                             axisLine:{
@@ -331,9 +332,6 @@
                                 isShow: true
                             },
                             type: 'xAxis',
-                            legend:{
-                                show:false
-                            },
                             barData: [
                                 {
                                     name: 'ABC',
@@ -347,6 +345,10 @@
                                 show:true,
                                 data:100,
                             }
+                        },
+                        label: {
+                            isShow: true,
+                            position:'top'
                         },
                         xAxis:{
                             axisLine:{

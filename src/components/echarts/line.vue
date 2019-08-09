@@ -14,8 +14,11 @@
             lineEchartsData:{
                 type:Object,
                 default: () => ({
+                    //id
                     id:'lineId',
+                    //x轴数据
                     xAxisData:[1,2,3,4,5,6,7,8,9,10],
+                    //折线图数据
                     lineData:[
                         {
                             name:'ABC',
@@ -35,38 +38,47 @@
                     ],
                 })
             },
+            //是否显示图例
             legendShow:{
                 type:Boolean,
                 default:true,
             },
+            //x轴数据
             xAxis:{
                 default: () => ({
+                    //x轴
                     axisLine:{
                         show:true,
                         color:'#3699FF'
                     },
+                    //x轴文字
                     axisLabel:{
                         show:true,
                         color:'#333333',
                         fontSize:18
                     },
+                    //网格线
                     splitLine:{
                         show:false,
                         color:'#CCCCCC'
                     },
                 })
             },
+            //y轴
             yAxis:{
                 default: () => ({
+                    //y轴
                     axisLine:{
                         show:true,
                         color:'#3699FF'
                     },
+                    //y轴文字
                     axisLabel:{
                         show:true,
                         color:'#333333',
                         fontSize:18
                     },
+                    //网格线
                     splitLine:{
                         show:true,
                         color:'#CCCCCC'
