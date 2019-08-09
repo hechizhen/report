@@ -208,7 +208,7 @@
                 if(_this.isShowMax){
                     _this.intervalData = 10000
                 }else{
-                    _this.intervalData = ''
+                    _this.intervalData = null
                 }
                 var option = {
                     tooltip: {

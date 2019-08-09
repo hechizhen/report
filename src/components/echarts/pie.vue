@@ -141,7 +141,6 @@
                 };
                 this.myChart.setOption(option);
                 this.myChart.on('click', function eConfig(param){
-                        console.log(param)
                         _this.chartHandleClick(param.data.name)
                 });
             }
@@ -150,12 +149,12 @@
 
         },
         watch:{
-            pieEchartsData(val){
-                var _this = this
-                let echarts = _this.$echarts;
-                _this.myChart = echarts.init(document.getElementById(_this.pieEchartsData.id))
-                _this.setPieOptions()
-            }
+            // pieEchartsData(val){
+            //     var _this = this
+            //     let echarts = _this.$echarts;
+            //     _this.myChart = echarts.init(document.getElementById(_this.pieEchartsData.id))
+            //     _this.setPieOptions()
+            // }
         },
         distroyed: function () {
 

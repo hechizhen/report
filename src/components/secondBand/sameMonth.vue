@@ -11,7 +11,7 @@
 					<a-Col :span="14" class="recordLeft">
 						<div><img style="margin-right:5px;" src="./../../assets/img/jine-icon.png">下单金额（万元）</div>
 						<div>(以创建订单日期统计)</div>
-						<div><span>￥</span>{{orderAmountData.orderAmountInteger}}<span>.{{orderAmountData.orderAmountDecimal}}</span></div>
+						<div><span>￥</span>{{orderAmountData.orderAmountInteger}}<span>{{orderAmountData.orderAmountDecimal}}</span></div>
 					</a-Col>
 					<a-Col :span="10" class="recordRight">
 						<div><img src="./../../assets/img/jine.png">毛利额（万元）</div>
@@ -57,7 +57,7 @@
 	                colorList:['#365AF8','#FFC925','#7B8EFB','#34DF8E','#A3FC8A','#FF7C25'],
 	                labelType:1,
 	                pieData:this.proportioData,
-	                radius:['40%', '60%'],
+	                radius:['35%', '70%'],
 	                borderWidth:0,
 				}
 			}
