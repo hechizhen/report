@@ -435,7 +435,7 @@
                     secondBandData.orderAmount = !secondBandData.orderAmount ? '--' : _this.dataProcess(secondBandData.orderAmount, 'money', 1).num;
                     // 下单金额数据
                     orderAmountData.orderAmountInteger = secondBandData.orderAmount.split(".")[0];
-                    orderAmountData.orderAmountDecimal = secondBandData.orderAmount.split(".")[1];
+                    orderAmountData.orderAmountDecimal = '.' + secondBandData.orderAmount.split(".")[1];
                     orderAmountData.grossProfit = !secondBandData.grossProfit ? '--' : _this.dataProcess(secondBandData.grossProfit, 'money', 1).num;
                     orderAmountData.grossInterestRate = !secondBandData.grossInterestRate ? '--' : _this.dataProcess(secondBandData.grossInterestRate, 'percent').num + '%';
                     // 环比数据

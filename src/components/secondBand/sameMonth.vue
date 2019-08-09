@@ -11,7 +11,7 @@
 				  <a-Col :span="14" class="recordLeft">
 				  	<div><img style="margin-right:5px;" src="./../../assets/img/jine-icon.png">下单金额（万元）</div>
 					<div>(以创建订单日期统计)</div>
-					<div><span>￥</span>{{orderAmountData.orderAmountInteger}}<span>.{{orderAmountData.orderAmountDecimal}}</span></div>
+					<div><span>￥</span>{{orderAmountData.orderAmountInteger}}<span>{{orderAmountData.orderAmountDecimal}}</span></div>
 				  </a-Col>
 				  <a-Col :span="10" class="recordRight">
 				  	<div><img src="./../../assets/img/jine.png">毛利额（万元）</div>
@@ -24,7 +24,7 @@
 			<div class="proportion">
 				<div class="proportion_title">占比</div>
 				<div class="proportion_echarts">
-					<pie :pieEchartsData="pieEchartsData1"></pie>
+					<pie :pieEchartsData="pieEchartsData"></pie>
 				</div>
 			</div>
 		</div>
@@ -52,30 +52,13 @@
 		},
 		data(){
 			return {
-				pieEchartsData1:{
-					id:'pieOrderId',
-					colorList:['#365AF8','#FFC925','#7B8EFB','#34DF8E','#A3FC8A','#FF7C25'],
-					labelType:1,
-					pieData:[
-						{
-							value: 2154,
-							name: 'TV'
-						}, {
-							value: 3854,
-							name: '盒子'
-						}, {
-							value: 3854,
-							name: '基础盒子'
-						}, {
-							value: 3515,
-							name: '高级盒子'
-						}, {
-							value: 3515,
-							name: 'PC'
-						}
-					],
-					radius:['35%', '70%'],
-					borderWidth:0,
+				pieEchartsData : {
+					id:'pieId',
+	                colorList:['#365AF8','#FFC925','#7B8EFB','#34DF8E','#A3FC8A','#FF7C25'],
+	                labelType:1,
+	                pieData:this.proportioData,
+	                radius:['40%', '60%'],
+	                borderWidth:0,
 				}
 			}
 		},
