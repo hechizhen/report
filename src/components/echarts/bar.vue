@@ -33,8 +33,11 @@
                 })
             },
             label:{
-                isShow:false,
-                position:'top'
+                type:Object,
+                default: () => ({
+                    isShow:false,
+                    position:'top'
+                })
             },
             legendShow:{
                 type:Boolean,
