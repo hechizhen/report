@@ -8,7 +8,8 @@
                 <span>{{productdata.RatePin}}</span>
             </div>
             <div class="productLeft-btn">
-                <newButton  :buttonType="buttonType"  :isGhost="true" :defaultVal="productdata.btn"></newButton>
+                <newButton  :buttonType="buttonType"  :type="primary"
+                            :isGhost="true" :defaultVal="productdata.btn"></newButton>
             </div>
         </div>
 </template>

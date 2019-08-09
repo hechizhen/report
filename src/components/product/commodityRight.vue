@@ -14,11 +14,13 @@
         </div>
         <div class="commodityRight">
             <div class="commodityR-centen">
+                <div class="commodityR-centen-one">
                 <div class="commodityR-title"  >
                     <div class="commodityR-title1" v-for="(item,index) in commoditydata.commoditytitle" :key="index">
                         <span>{{item.name}}</span>
                         <p>{{item.NoSales}}</p>
                     </div>
+                </div>
                 </div>
                 <div class="commodityR-base">
                     <div class="commodityR-baseone">
@@ -163,11 +165,10 @@
             float: left;
             text-align: center;
             .commodityR-title {
-                width: 90%;
+                width: 94%;
                 line-height: 32px;
                 background: rgba(126, 165, 254, 1);
                 border-radius: 6px;
-                margin-top: 17%;
                 display: inline-block;
                 .commodityR-title1 {
                     float: left;
@@ -187,8 +188,8 @@
                 }
             }
             .commodityR-base{
-                    width: 90%;
-                    height: 34px;
+                    width: 94%;
+                    height: 36px;
                     margin: 6% auto;
                 .quan{
                     float: left;
@@ -196,6 +197,7 @@
                     height:12px;
                     border:4px solid rgba(255,255,255,1);
                     border-radius:50%;
+                    display: inline-block;
                 }
                 span{
                     line-height: 28px;
@@ -204,6 +206,9 @@
                     font-weight:400;
                     color:rgba(255,255,255,1);
                     padding-left: 4%;
+                    display: inline-block;
+                    width: 90%;
+                    text-align: left;
                 }
                 .productLeft-btn{
                     width: 30%;
@@ -265,5 +270,10 @@
         float: left;
         display: flex;
         align-items: center;
+    }
+    .commodityR-centen-one{
+        height: 100px;
+        display: flex;
+        align-items: flex-end;
     }
 </style>
