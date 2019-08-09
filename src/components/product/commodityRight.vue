@@ -20,20 +20,28 @@
                         <p>{{item.NoSales}}</p>
                     </div>
                 </div>
-                <div class="commodityR-base" >
+                <div class="commodityR-base">
+                    <div class="commodityR-baseone">
                     <div class="quan"></div>
                     <span>{{commoditydata.downGoods.name}}</span>
+                    </div>
+                    <div class="commodityR-basetwo">
                     <span style="font-size:16px;font-family:PingFangSC-Semibold;font-weight:600;">{{commoditydata.downGoods.NoSales}}</span>
+                    </div>
                     <div class="productLeft-btn">
                         <newButton :isGhost="true" :defaultVal="commoditydata.downGoods.btn"
                                    :buttonHandleClick="upbuttonHandleClick"
                         ></newButton>
                     </div>
                 </div>
-                <div class="commodityR-base" >
+                <div class="commodityR-base">
+                    <div class="commodityR-baseone">
                     <div class="quan"></div>
                     <span>{{commoditydata.upGoods.name}}</span>
+                    </div>
+                    <div class="commodityR-basetwo">
                     <span style="font-size:16px;font-family:PingFangSC-Semibold;font-weight:600;">{{commoditydata.upGoods.NoSales}}</span>
+                    </div>
                     <div class="productLeft-btn">
                         <newButton :isGhost="true" :defaultVal="commoditydata.upGoods.btn"
                                    :buttonHandleClick="downbuttonHandleClick"
@@ -180,7 +188,7 @@
             }
             .commodityR-base{
                     width: 90%;
-                    height: 12%;
+                    height: 34px;
                     margin: 6% auto;
                 .quan{
                     float: left;
@@ -188,7 +196,6 @@
                     height:12px;
                     border:4px solid rgba(255,255,255,1);
                     border-radius:50%;
-                    margin-top: 3%;
                 }
                 span{
                     line-height: 28px;
@@ -196,8 +203,10 @@
                     font-family:PingFangSC-Regular;
                     font-weight:400;
                     color:rgba(255,255,255,1);
+                    padding-left: 4%;
                 }
                 .productLeft-btn{
+                    width: 30%;
                     height:100%;
                     line-height: 26px;
                     text-align: center;
@@ -244,5 +253,17 @@
     }
     .commodityRight .commodityR-centen .commodityR-title .commodityR-title1:nth-child(2) p{
         color: #fff;
+    }
+    .commodityR-baseone{
+        width: 60%;
+        float: left;
+        display: flex;
+        align-items: center;
+    }
+    .commodityR-basetwo{
+        width: 10%;
+        float: left;
+        display: flex;
+        align-items: center;
     }
 </style>

@@ -6,26 +6,40 @@
         <div class="inventory-table">
             <div class="table-head">
                 <div class="table-headtxt">
-                    <div>
+                    <div style="text-align: center;height: 50%;display: flex;align-items: center;justify-content: center">
                     <span class="yuan">{{Money}}</span>
                     <strong>{{inventoryDetails.amountTxt}}</strong>
                     </div>
+                    <div style="display: inline-block;width: 100%; text-align: center;height: 50%;">
                     <p> <span>{{Money}}</span>{{inventoryDetails.amount}}</p>
+                    </div>
                     <span class="shu"></span>
                 </div>
                 <div class="table-headtxt">
+                    <div style="text-align: center; height: 50%;display: flex;align-items: center;justify-content: center">
                     <span class="yuan"></span>
                     <strong style="display: block;">{{inventoryDetails.inventoryNumberTxt}}</strong>
+                    </div>
+                    <div style="display: inline-block;width: 100%;text-align:center;height: 50%;">
                     <p> <span></span>{{inventoryDetails.inventoryNumber}}</p>
+                    </div>
                 </div>
             </div>
             <div class="table-dase">
-                <div class="table-base" v-for="(item,index) in inventoryDetails.noSalesDetail " :key="index">
-                    <span>{{item.name}}</span>
-                    <span style="font-size:16px;font-family:PingFangSC-Semibold;font-weight:600;width: 74px">{{item.NoSales}}</span>
+                <div style="height: 100%;float: left;width: 75%">
+                    <a-Row  class="commodityR-base" v-for="(item,index) in inventoryDetails.noSalesDetail" :key="index">
+                        <a-Col :span="18">
+                            <div class="onetxt" style="text-align: left; padding-left: 10%">
+                                {{item.name}}
+                            </div>
+                        </a-Col>
+                        <a-Col :span="6">
+                            {{item.NoSales}}
+                        </a-Col>
+                    </a-Row>
                 </div>
-                <div class="tableLeft-btn">
-                    <newButton :defaultVal="inventoryDetails.noSalesbtn"></newButton>
+                <div class="productLeft-btn">
+                    <newButton :defaultVal="defaultVal"></newButton>
                 </div>
             </div>
         </div>
@@ -118,9 +132,6 @@
 .table-headtxt:last-child  .yuan{
     display: none !important;
 }
-.inventory-table .table-head .table-headtxt:first-child{
-    padding-left: 10%;
-}
 .inventory-table .table-dase .table-base:first-child span{
     border-bottom: 1px solid rgba(229,229,229,1);
     padding-bottom: 2%;
@@ -139,15 +150,15 @@
         float: left;
         .table-head{
             width: 100%;
-            height:120px;
+            height: 115px;
             background:linear-gradient(90deg,rgba(71,79,231,1),rgba(29,145,240,1),rgba(71,79,231,1));
             box-shadow:0px 2px 15px 0px rgba(255,182,2,0.13);
             border-radius:10px 10px 0 0;
+            display: inline-block;
             .table-headtxt{
                 width: 50%;
+                height: 100%;
                 float: left;
-                margin-top: 5%;
-                padding-left: 20%;
                 font-size:14px;
                 font-family:PingFangSC-Medium;
                 font-weight:500;
@@ -163,13 +174,11 @@
                     text-align: center;
                 }
                 p{
-                    display: flex;
+                    display: inline-block;
                     line-height: 33px;
-                    margin-top: 21px;
-                    font-size: 28px;
+                    font-size: 30px;
                     font-weight: bold;
                     margin-bottom: 0;
-                    float: left;
                     span{
                         font-size: 18px;
                     }
@@ -218,4 +227,48 @@
                 }
         }
     }
+.commodityR-base {
+    width: 100%;
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .ant-col-18{
+        font-size:14px;
+        font-family:PingFangSC-Medium;
+        font-weight:500;
+        color:rgba(51,51,51,1);
+       display: inline-block;
+        width: 70%;
+    }
+    .ant-col-6{
+        line-height: 44px;
+        font-size:18px;
+        font-family:PingFangSC-Semibold;
+        font-weight:600;
+        margin-bottom: 0;
+        display: inline-block;
+        color:rgba(51,51,51,1);
+    }
+}
+.productLeft-btn {
+    width:13%;
+    height:88px;
+    display:flex;
+    justify-content: center;//子元素水平居中
+    align-items: center;//子元素垂直居中
+    .newButton {
+
+        span {
+            width: 48px;
+            font-size: 14px;
+            font-family: PingFangSC-Regular;
+            font-weight: 600;
+            color: rgba(51, 51, 51, 1);
+        }
+    }
+}
+.commodityR-base:nth-child(2) .ant-col-4{
+    padding-left: 2%;
+}
 </style>

@@ -628,20 +628,20 @@
                         let data = res.data.data.data
                         console.log(data)
                     let goodsChainVal = {
-                        name: "环比: ",
+                        name: "环比:",
                         NoSales: _this.dataProcess(data.chainval, 'percent').num + _this.dataProcess(data.chainval, 'percent').unit
                     }
                     let goodsYearVal = {
-                        name: "同比: ",
+                        name: "同比:",
                         NoSales: _this.dataProcess(data.yearval, 'percent').num + _this.dataProcess(data.yearval, 'percent').unit
                     }
                     let downGoods = {
-                        name:"销量增长商品数(个）：",
+                        name:"销量增长商品数(个):",
                         NoSales:data.upGoods,
                         btn:"下滑商品"
                     }
                     let upGoods = {
-                        name:"销量下滑商品数(个）：",
+                        name:"销量下滑商品数(个)：",
                         NoSales: data.downGoods,
                         btn:"增长商品"
                     }
@@ -688,9 +688,9 @@
                         difference.push(value.difference)
                     })
                     seriesData.push(
-                        {name:'上月销售额（万元）',data:lastMonth,color:'#2D92FC',barWidth:22},
-                        {name:'当月销售额（万元）',data:sameMonth,color:'#FFBD7B',barWidth:22},
-                        {name:'销售差额（万元）',data:difference,color:'#FE9600',barWidth:22})
+                        {name:'上月销售额(万元)',data:lastMonth,color:'#2D92FC',barWidth:22},
+                        {name:'当月销售额(万元)',data:sameMonth,color:'#FFBD7B',barWidth:22},
+                        {name:'销售差额(万元)',data:difference,color:'#FE9600',barWidth:22})
                     salesmandownwardObject.xAxisData = xAxisData;
                     salesmandownwardObject.seriesData = seriesData;
                     _this.VariabilityUpData = salesmandownwardObject
@@ -722,9 +722,9 @@
                         difference.push(value.difference)
                     })
                     seriesData.push(
-                        {name:'上月销售额（万元）',data:lastMonth,color:'#2D92FC',barWidth:22},
-                        {name:'当月销售额（万元）',data:sameMonth,color:'#FFBD7B',barWidth:22},
-                        {name:'销售差额（万元）',data:difference,color:'#FE9600',barWidth:22})
+                        {name:'上月销售额(万元)',data:lastMonth,color:'#2D92FC',barWidth:22},
+                        {name:'当月销售额(万元)',data:sameMonth,color:'#FFBD7B',barWidth:22},
+                        {name:'销售差额(万元)',data:difference,color:'#FE9600',barWidth:22})
                     salesmandownwardObject.xAxisData = xAxisData;
                     salesmandownwardObject.seriesData = seriesData;
                     _this.VariabilityDownData = salesmandownwardObject
@@ -769,54 +769,54 @@
                             NoSales: _this.dataProcess(data.AmountYearVal, 'percent').num + _this.dataProcess(data.AmountYearVal, 'percent').unit
                         }
                         let downSales = {
-                            name:"销量下滑门店数（家）：",
+                            name:"销量下滑门店数(家):",
                             NoSales: data.downSales,
                             btn:"下滑门店"
                         }
                         let upSales = {
-                            name:"销量增长门店数（家）：",
+                            name:"销量增长门店数(家):",
                             NoSales: data.upSales,
                             btn:"增长门店"
                         }
                         let noTrade = {
-                            name: "近3个月无交易门店数(家）： ",
+                            name: "近3个月无交易门店数(家): ",
                             NoSales: data.noTrade
                         }
                         let noTrades = {
-                            name: "6个月无交易门店数(家）：",
+                            name: "6个月无交易门店数(家):",
                             NoSales:data.noTrades
                         }
                         let ActivestresPer = {
                             ActiveStores:"门店单产",
-                            ActiveStoresing:"（万元）",
+                            ActiveStoresing:"(万元)",
                             NoSales:data.ActivestresPer
                           }
                         let ActivestresSum = {
                             ActiveStores:"总门店数",
-                            ActiveStoresing:"（家）",
+                            ActiveStoresing:"(家)",
                             NoSales:data.ActivestresSum
                         }
                         let ActivestresnNew = {
                             ActiveStores:"新增门店数",
-                            ActiveStoresing:"（家）",
+                            ActiveStoresing:"(家)",
                             NoSales:data.ActivestresnNew
                         }
                         let nearnoTrade = {
-                            name: "3个月无交易门店应收欠款(万元)：",
+                            name: "3个月无交易门店应收欠款(万元):",
                             NoSales: '￥'+ _this.dataProcess(data.nearnoTrade, 'money').num,
                         }
                         let nearnoTrades = {
-                        name: "闭店应收账款（万元）：",
+                        name: "闭店应收账款(万元):",
                         NoSales: '￥'+_this.dataProcess(data.nearnoTrades, 'money').num,
                     }
 
 
                         _this.StoresDetailed = {
-                            shopTitle:"门店活跃率：",
+                            shopTitle:"门店活跃率:",
                             StoreActivity: _this.dataProcess(data.StoreActivity, 'percent').num + _this.dataProcess(data.StoreActivity, 'percent').unit,  //门店活跃率
                             shopActiveData: {
                                 ActiveStoresTxt:"活跃门店数",
-                                ActiveStoresing:"（家）",
+                                ActiveStoresing:"(家)",
                                 ActiveStores:data.ActiveStores,  //门店活跃数
                                 detailbtn:"门店详情",
                                 shopActiveTitle: [
@@ -870,9 +870,9 @@
                         difference.push(value.difference)
                     })
                     seriesData.push(
-                        {name:'上月销售额（万元）',data:lastMonth,color:'#2D92FC',barWidth:22},
-                        {name:'当月销售额（万元）',data:sameMonth,color:'#FFBD7B',barWidth:22},
-                        {name:'销售差额（万元）',data:difference,color:'#FE9600',barWidth:22})
+                        {name:'上月销售额(万元)',data:lastMonth,color:'#2D92FC',barWidth:22},
+                        {name:'当月销售额(万元)',data:sameMonth,color:'#FFBD7B',barWidth:22},
+                        {name:'销售差额(万元)',data:difference,color:'#FE9600',barWidth:22})
                     salesmandownwardObject.xAxisData = xAxisData;
                     salesmandownwardObject.seriesData = seriesData;
                     _this.downStoresData = salesmandownwardObject
@@ -904,9 +904,9 @@
                         difference.push(value.difference)
                     })
                     seriesData.push(
-                        {name:'上月销售额（万元）',data:lastMonth,color:'#2D92FC',barWidth:22},
-                        {name:'当月销售额（万元）',data:sameMonth,color:'#FFBD7B',barWidth:22},
-                        {name:'销售差额（万元）',data:difference,color:'#FE9600',barWidth:22})
+                        {name:'上月销售额(万元)',data:lastMonth,color:'#2D92FC',barWidth:22},
+                        {name:'当月销售额(万元)',data:sameMonth,color:'#FFBD7B',barWidth:22},
+                        {name:'销售差额(万元)',data:difference,color:'#FE9600',barWidth:22})
                     salesmandownwardObject.xAxisData = xAxisData;
                     salesmandownwardObject.seriesData = seriesData;
                     _this.upStoresData = salesmandownwardObject
@@ -941,9 +941,9 @@
                                 SalesSum
                             ],
                             noSalesbtn:"无交易明细",
-                            amountTxt:"库存金额（万元）",
+                            amountTxt:"库存金额(万元)",
                             amount: _this.dataProcess(data.amount, 'money').num,  //库存金额
-                            inventoryNumberTxt:"库存件数（件）",
+                            inventoryNumberTxt:"库存件数(件)",
                             inventoryNumber:data.inventoryNumber,  //库存件数
                             turnoverTxt:"库存周转次数",
                             turnover:data.turnover,  //库存周转次数
@@ -1018,7 +1018,7 @@
                             Chain,
                             Year
                         ],
-                        receivableAverage: '库存可销天数（天） ',
+                        receivableAverage: '库存可销天数(天) ',
                         inventoryVal: _this.dataProcess(data.inventoryVal, 'day').num,
                         inventoryBarData
                     }
