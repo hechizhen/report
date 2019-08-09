@@ -42,7 +42,8 @@
                     showType:0,//0横过来 1竖起来
                     markLineList:{
                         show:false
-                    }
+                    },
+                    stack:false,
                 })
             }
         },
@@ -103,29 +104,57 @@
                     var markLineObj={}
                 }
                 let seriesData = []
-                _this.barEchartsData.barData.map(function(item,index){
-                    seriesData.push({
-                        name: item.name,
-                        type: 'bar',
-                        data: item.data,
-                        markLine:markLineObj,
-                        itemStyle:{
-                            normal:{
-                                color: item.color,
+                if(!_this.barEchartsData.stack){
+                    _this.barEchartsData.barData.map(function(item,index){
+                        seriesData.push({
+                            name: item.name,
+                            type: 'bar',
+                            data: item.data,
+                            markLine:markLineObj,
+                            itemStyle:{
+                                normal:{
+                                    color: item.color,
+                                },
                             },
-                        },
-                        barWidth:item.barWidth,
-                        label:{
-                            normal:{
-                                show:_this.barEchartsData.label.isShow,
-                                position: 'top',
-                                formatter:function(params){
-                                    return params.value+_this.barEchartsData.unit
+                            barWidth:item.barWidth,
+                            label:{
+                                normal:{
+                                    show:_this.barEchartsData.label.isShow,
+                                    position: 'top',
+                                    formatter:function(params){
+                                        return params.value+_this.barEchartsData.unit
+                                    }
                                 }
                             }
-                        }
+                        })
                     })
-                })
+                }else {
+                    _this.barEchartsData.barData.map(function(item,index){
+                        seriesData.push({
+                            name: item.name,
+                            type: 'bar',
+                            data: item.data,
+                            stack:'销量',
+                            markLine:markLineObj,
+                            itemStyle:{
+                                normal:{
+                                    color: item.color,
+                                },
+                            },
+                            barWidth:item.barWidth,
+                            label:{
+                                normal:{
+                                    show:_this.barEchartsData.label.isShow,
+                                    position: 'top',
+                                    formatter:function(params){
+                                        return params.value+_this.barEchartsData.unit
+                                    }
+                                }
+                            }
+                        })
+                    })
+                }
+                
                 console.log(seriesData)
                 if(_this.barEchartsData.showType==0){
                     _this.xAxisType = 'category'

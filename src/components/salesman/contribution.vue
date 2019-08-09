@@ -52,12 +52,12 @@
                     unit:'%',
                     xAxisData:this.salesmanReached.xAxisData,
                     xAxis:{
-                        isShowLine:false,
+                        isShowLine:true,
                         isShowSplit:false,
                         axisLabelColor:'#333',
                     },
                     yAxis:{
-                        isShowLine:false,
+                        isShowLine:true,
                         isShowSplit:false,
                         axisLabelColor:'#333',
                     },
@@ -69,7 +69,8 @@
                     showType:1,//0横过来 1竖起来
                     markLineList:{
                         show:false
-                    }
+                    },
+                    stack:true,
                 }
 			}
 		},
@@ -94,12 +95,12 @@
                     unit:'%',
                     xAxisData:val.xAxisData,
                     xAxis:{
-                        isShowLine:false,
-                        isShowSplit:false,
+                        isShowLine:true,
+                        isShowSplit:true,
                         axisLabelColor:'#333',
                     },
                     yAxis:{
-                        isShowLine:false,
+                        isShowLine:true,
                         isShowSplit:false,
                         axisLabelColor:'#333',
                     },
@@ -111,7 +112,8 @@
                     showType:1,//0横过来 1竖起来
                     markLineList:{
                         show:false
-                    }
+                    },
+                    stack:true,
                 }
         	},
         },

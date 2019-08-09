@@ -560,12 +560,10 @@
                         sameMonth.push(value.monthlytarget)
                         difference.push(value.reached)
                     })
-                    seriesData.push({name:'当月销量',data:lastMonth,color:'#009EE2',barWidth:11},{name:'当月目标',data:sameMonth,color:'#E9A837',barWidth:11},{name:'达成率',data:difference,color:'#00E2BF',barWidth:11})
+                    seriesData.push({name:'当月销量',data:lastMonth,color:'#009EE2',barWidth:30},{name:'当月目标',data:sameMonth,color:'#E9A837',barWidth:30},{name:'达成率',data:difference,color:'#00E2BF',barWidth:30})
                     salesmanReachedObject.xAxisData = xAxisData;
                     salesmanReachedObject.seriesData = seriesData;
                     _this.salesmanReachedData = salesmanReachedObject;
-                    console.log('222222222222222222222')
-                    console.log(_this.salesmanReachedData)
                 })
             },
             //产品-商品动销率
