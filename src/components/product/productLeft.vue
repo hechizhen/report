@@ -41,7 +41,7 @@
             width: 46px;
             height: 46px;
             margin: auto;
-            margin-top: 30%;
+            margin-top: 17%;
             img{
                 width: 100%;
                 height: 100%;
