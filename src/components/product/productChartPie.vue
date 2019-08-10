@@ -29,32 +29,21 @@
                         <a-button>导出当前商品</a-button>
                         <a-button>导出全部商品</a-button>
                         <span @click="thendChartClicks">
-                        X</span>
+                            <i class="iconfont icon-guanbi"></i>
+                        </span>
                     </a-Col>
                 </a-Row>
             </div>
             <div class="lineEcharts">
                 <div class="lineEcharts-left">
-                    <div class="lineEcharts-box">
-                        <div>
-                            <input type="radio" name="radios" value="立白洗衣粉" v-model="param"><label>立白洗衣粉</label>
-                        </div>
-                        <div>
-                            <input type="radio" name="radios" value="立白洗洁精" v-model="param"><label>立白洗洁精</label>
-                        </div>
-                        <div>
-                            <input type="radio" name="radios" value="立白洗衣液" v-model="param"><label>立白洗衣液</label>
-                        </div>
-                        <div>
-                            <input type="radio" name="radios" value="好爸爸" v-model="param"><label>好爸爸</label>
-                        </div>
-                        <div>
-                            <input type="radio" name="radios" value="消杀" v-model="param"><label>消杀</label>
-                        </div>
-                        <div>
-                            <input type="radio" name="radios" value="家居" v-model="param"><label>家居</label>
-                        </div>
-                    </div>
+                    <a-radio-group @change="onChange" v-model="value">
+                        <a-radio class="radioStyle" :value="1">立白洗衣粉</a-radio>
+                        <a-radio class="radioStyle" :value="2">立白洗洁精</a-radio>
+                        <a-radio class="radioStyle" :value="3">立白洗衣液</a-radio>
+                        <a-radio class="radioStyle" :value="4">好爸爸</a-radio>
+                        <a-radio class="radioStyle" :value="5">消杀</a-radio>
+                        <a-radio class="radioStyle" :value="6">家居</a-radio>
+                    </a-radio-group>
                 </div>
                 <div class="lineEcharts-right">
                     <div class="partyTable">
@@ -84,281 +73,6 @@
                             </tr>
                         </table>
                         <div class="packagimgtable">
-                            <table  border="0" cellpadding="0" cellspacing="0" >
-                                <tr>
-                                    <td>
-                                        <div>7920176920176</div>
-                                    </td>
-                                    <td>
-                                        <div>立白 </div>
-                                    </td>
-                                    <td>
-                                        <div>立白洗衣粉 </div>
-                                    </td>
-                                    <td>
-                                        <div>xxxxxxxxx </div>
-                                    </td>
-                                    <td>
-                                        <div>xxxxxxxxx </div>
-                                    </td>
-                                    <td>
-                                        <div>xxxxxxxxx </div>
-                                    </td>
-                                    <td>
-                                        <div>xxxxxxxxx </div>
-                                    </td>
-                                </tr>
-                            </table>
-                            <table  border="0" cellpadding="0" cellspacing="0" >
-                                <tr>
-                                    <td>
-                                        <div>7920176920176</div>
-                                    </td>
-                                    <td>
-                                        <div>立白 </div>
-                                    </td>
-                                    <td>
-                                        <div>立白洗衣粉 </div>
-                                    </td>
-                                    <td>
-                                        <div>xxxxxxxxx </div>
-                                    </td>
-                                    <td>
-                                        <div>xxxxxxxxx </div>
-                                    </td>
-                                    <td>
-                                        <div>xxxxxxxxx </div>
-                                    </td>
-                                    <td>
-                                        <div>xxxxxxxxx </div>
-                                    </td>
-                                </tr>
-                            </table>
-                            <table  border="0" cellpadding="0" cellspacing="0" >
-                                <tr>
-                                    <td>
-                                        <div>7920176920176</div>
-                                    </td>
-                                    <td>
-                                        <div>立白 </div>
-                                    </td>
-                                    <td>
-                                        <div>立白洗衣粉 </div>
-                                    </td>
-                                    <td>
-                                        <div>xxxxxxxxx </div>
-                                    </td>
-                                    <td>
-                                        <div>xxxxxxxxx </div>
-                                    </td>
-                                    <td>
-                                        <div>xxxxxxxxx </div>
-                                    </td>
-                                    <td>
-                                        <div>xxxxxxxxx </div>
-                                    </td>
-                                </tr>
-                            </table>
-                            <table  border="0" cellpadding="0" cellspacing="0" >
-                                <tr>
-                                    <td>
-                                        <div>7920176920176</div>
-                                    </td>
-                                    <td>
-                                        <div>立白 </div>
-                                    </td>
-                                    <td>
-                                        <div>立白洗衣粉 </div>
-                                    </td>
-                                    <td>
-                                        <div>xxxxxxxxx </div>
-                                    </td>
-                                    <td>
-                                        <div>xxxxxxxxx </div>
-                                    </td>
-                                    <td>
-                                        <div>xxxxxxxxx </div>
-                                    </td>
-                                    <td>
-                                        <div>xxxxxxxxx </div>
-                                    </td>
-                                </tr>
-                            </table>
-                            <table  border="0" cellpadding="0" cellspacing="0" >
-                                <tr>
-                                    <td>
-                                        <div>7920176920176</div>
-                                    </td>
-                                    <td>
-                                        <div>立白 </div>
-                                    </td>
-                                    <td>
-                                        <div>立白洗衣粉 </div>
-                                    </td>
-                                    <td>
-                                        <div>xxxxxxxxx </div>
-                                    </td>
-                                    <td>
-                                        <div>xxxxxxxxx </div>
-                                    </td>
-                                    <td>
-                                        <div>xxxxxxxxx </div>
-                                    </td>
-                                    <td>
-                                        <div>xxxxxxxxx </div>
-                                    </td>
-                                </tr>
-                            </table>
-                            <table  border="0" cellpadding="0" cellspacing="0" >
-                                <tr>
-                                    <td>
-                                        <div>7920176920176</div>
-                                    </td>
-                                    <td>
-                                        <div>立白 </div>
-                                    </td>
-                                    <td>
-                                        <div>立白洗衣粉 </div>
-                                    </td>
-                                    <td>
-                                        <div>xxxxxxxxx </div>
-                                    </td>
-                                    <td>
-                                        <div>xxxxxxxxx </div>
-                                    </td>
-                                    <td>
-                                        <div>xxxxxxxxx </div>
-                                    </td>
-                                    <td>
-                                        <div>xxxxxxxxx </div>
-                                    </td>
-                                </tr>
-                            </table>
-                            <table  border="0" cellpadding="0" cellspacing="0" >
-                                <tr>
-                                    <td>
-                                        <div>7920176920176</div>
-                                    </td>
-                                    <td>
-                                        <div>立白 </div>
-                                    </td>
-                                    <td>
-                                        <div>立白洗衣粉 </div>
-                                    </td>
-                                    <td>
-                                        <div>xxxxxxxxx </div>
-                                    </td>
-                                    <td>
-                                        <div>xxxxxxxxx </div>
-                                    </td>
-                                    <td>
-                                        <div>xxxxxxxxx </div>
-                                    </td>
-                                    <td>
-                                        <div>xxxxxxxxx </div>
-                                    </td>
-                                </tr>
-                            </table>
-                            <table  border="0" cellpadding="0" cellspacing="0" >
-                                <tr>
-                                    <td>
-                                        <div>7920176920176</div>
-                                    </td>
-                                    <td>
-                                        <div>立白 </div>
-                                    </td>
-                                    <td>
-                                        <div>立白洗衣粉 </div>
-                                    </td>
-                                    <td>
-                                        <div>xxxxxxxxx </div>
-                                    </td>
-                                    <td>
-                                        <div>xxxxxxxxx </div>
-                                    </td>
-                                    <td>
-                                        <div>xxxxxxxxx </div>
-                                    </td>
-                                    <td>
-                                        <div>xxxxxxxxx </div>
-                                    </td>
-                                </tr>
-                            </table>
-                            <table  border="0" cellpadding="0" cellspacing="0" >
-                                <tr>
-                                    <td>
-                                        <div>7920176920176</div>
-                                    </td>
-                                    <td>
-                                        <div>立白 </div>
-                                    </td>
-                                    <td>
-                                        <div>立白洗衣粉 </div>
-                                    </td>
-                                    <td>
-                                        <div>xxxxxxxxx </div>
-                                    </td>
-                                    <td>
-                                        <div>xxxxxxxxx </div>
-                                    </td>
-                                    <td>
-                                        <div>xxxxxxxxx </div>
-                                    </td>
-                                    <td>
-                                        <div>xxxxxxxxx </div>
-                                    </td>
-                                </tr>
-                            </table>
-                            <table  border="0" cellpadding="0" cellspacing="0" >
-                                <tr>
-                                    <td>
-                                        <div>7920176920176</div>
-                                    </td>
-                                    <td>
-                                        <div>立白 </div>
-                                    </td>
-                                    <td>
-                                        <div>立白洗衣粉 </div>
-                                    </td>
-                                    <td>
-                                        <div>xxxxxxxxx </div>
-                                    </td>
-                                    <td>
-                                        <div>xxxxxxxxx </div>
-                                    </td>
-                                    <td>
-                                        <div>xxxxxxxxx </div>
-                                    </td>
-                                    <td>
-                                        <div>xxxxxxxxx </div>
-                                    </td>
-                                </tr>
-                            </table>
-                            <table  border="0" cellpadding="0" cellspacing="0" >
-                                <tr>
-                                    <td>
-                                        <div>7920176920176</div>
-                                    </td>
-                                    <td>
-                                        <div>立白 </div>
-                                    </td>
-                                    <td>
-                                        <div>立白洗衣粉 </div>
-                                    </td>
-                                    <td>
-                                        <div>xxxxxxxxx </div>
-                                    </td>
-                                    <td>
-                                        <div>xxxxxxxxx </div>
-                                    </td>
-                                    <td>
-                                        <div>xxxxxxxxx </div>
-                                    </td>
-                                    <td>
-                                        <div>xxxxxxxxx </div>
-                                    </td>
-                                </tr>
-                            </table>
                             <table  border="0" cellpadding="0" cellspacing="0" >
                                 <tr>
                                     <td>
@@ -419,7 +133,8 @@
         data(){
             return {
                 listShows:false,
-                pieShows:true
+                pieShows:true,
+                value: 1,
             }
         },
         mounted(){
@@ -436,7 +151,10 @@
             },
             slital(){
                 alert(1111)
-            }
+            },
+            onChange (e) {
+                console.log('radio checked', e.target.value)
+            },
         }
     }
 </script>
@@ -456,6 +174,7 @@
             height: 80%;
             width: 90%;
             background:rgba(255,255,255,1);
+            border-radius:5px;
             .title {
                 height: 10%;
                 width: 100%;
@@ -498,9 +217,17 @@
                 width: 100%;
             }
         }
+        .radioStyle{
+            height: 60px;
+            line-height: 60px;
+            text-align:left;
+            width:100%;
+            padding-left:5%;
+        }
         .lists {
             height: 90%;
             width: 90%;
+            border-radius:5px;
             background:rgba(255,255,255,1);
             .title {
                 height: 10%;
@@ -508,7 +235,6 @@
                 .thendChartRow {
                     height: 100%;
                     width: 100%;
-                    border-bottom: 1px solid rgba(210,210,210,1);
                 }
                 .thendChartCol1 {
                     height: 100%;
