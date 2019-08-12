@@ -18,6 +18,7 @@
     <core :coretype="'门店得分'" :coretext="87" :evaluate="'较好'"></core>
     <shopChartUp v-if="upShow" :trendChartClick="upClick" :barEchartsData="barEchartsDataUp" ></shopChartUp>
     <shopChartrDown v-if="downShow" :trendChartClick="downClick"  :barEchartsData="barEchartsDataDown"></shopChartrDown>
+    <loading-data :isShow="isShow"></loading-data>
 </div>
 </template>
 
@@ -28,6 +29,7 @@
     import  core from  '../core'
     import shopChartUp from './shopChartUp'
     import  shopChartrDown from  './shopChartrDown'
+    import loadingData from '../base/loadingData'
     export default {
         name: "shopIndex",
         props:["StoresDetailed","upStoresData","downStoresData"],
@@ -39,6 +41,7 @@
                 shopData:{
                     shopImg: require("../../assets/img/mendian.png"),
                 },
+                // isShow:true,
                 barEchartsDataUp:{},
                 barEchartsDataDown:{},
                 lityUpData:{},
@@ -68,7 +71,8 @@
             shopRight,
             core,
             shopChartUp,
-            shopChartrDown
+            shopChartrDown,
+            loadingData
         },
         watch:{
             upStoresData(val){
@@ -148,6 +152,7 @@
 <style lang="less" scoped>
 .shopindex{
     height: 100%;
+    position: relative;
 }
 .shop-centen{
     width: 100%;

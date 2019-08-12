@@ -42,6 +42,7 @@
                     <newButton :defaultVal="defaultVal"></newButton>
                 </div>
             </div>
+            <loading-data :isShow="isShow"></loading-data>
         </div>
         <inventoryCenten :turnoverTxt="inventoryDetails.turnoverTxt" :turnover="inventoryDetails.turnover"></inventoryCenten>
         <inventoryDase v-if="inventoryDay.length!=0" :inventoryTxt="inventoryDay"
@@ -61,6 +62,7 @@
     import  core from  '../core'
     import  inventoryChart  from  './inventoryChart'
     import  secondTitle from  '../secondTitle'
+    import loadingData from '../base/loadingData'
     export default {
         name: "inventoryIndex",
         props:["inventoryDay","inventoryDetails","marketableDayChart"],
@@ -70,13 +72,15 @@
             newButton,
             core,
             inventoryChart,
-            secondTitle
+            secondTitle,
+            loadingData
         },
         data(){
             return{
                 Money:"￥",
                 inventoryTitle: '库存',//库存标题
                 invechartsShow: false,
+                // isShow:true,
                 marketableDay:[],
                 lineEchartsData:{},
                 defaultVal:"未销明细",
@@ -128,7 +132,7 @@
 <style lang="less" scoped>
 .inventoryindex{
     width: 100%;
-    height:220px;
+    height:210px;
 }
 .commodityR-base:nth-child(2) .ant-col-6{
     padding-left: 2%;
@@ -166,6 +170,7 @@
     .inventory-table{
         width: 35%;
         float: left;
+        position: relative;
         .table-head{
             width: 100%;
             height: 120px;

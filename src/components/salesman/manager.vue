@@ -21,6 +21,7 @@
 				  </a-Col>
 				</a-Row>
 		  	</div>
+			  <loading-data :isShow="isShow"></loading-data>
 		  </a-Col>
 		  <a-Col :span="8" class="managerCol">
 		  	<div  class="produce">
@@ -40,6 +41,7 @@
 				  </a-Col>
 				</a-Row>
 		  	</div>
+			  <loading-data :isShow="isShow"></loading-data>
 		  </a-Col>
 		  <a-Col :span="8" class="managerCol">
 		  	<div  class="compare">
@@ -62,15 +64,17 @@
 				  </a-Col>
 				</a-Row>
 		  	</div>
+			  <loading-data :isShow="isShow"></loading-data>
 		  </a-Col>
 		</a-Row>
 	</div>
 </template>
 <script>
+	import loadingData from '../base/loadingData'
 	export default {
 		name:'manager',
 		components:{
-
+			loadingData
 		},
 		props:{
 			explicit:{
@@ -83,7 +87,7 @@
 		},
 		data(){
 			return {
-
+				// isShow:true,
 			}
 		},
 		mounted(){

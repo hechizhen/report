@@ -112,7 +112,7 @@
                 this.lineEchartsData = {
                     id:'lineIdBand',
                     xAxisData:val.monthArr,
-                    lineData:[ 
+                    lineData:[
                         {
                             name:'订单金额',
                             data:val.seriesData,

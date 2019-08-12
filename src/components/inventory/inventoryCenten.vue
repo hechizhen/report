@@ -6,13 +6,23 @@
                  <span>{{turnover}}</span>
              </div>
          </div>
+        <loading-data :isShow="isShow"></loading-data>
     </div>
 </template>
 
 <script>
+    import loadingData from '../base/loadingData'
     export default {
         name: "inventoryCenten",
-        props:["turnoverTxt","turnover"]
+        props:["turnoverTxt","turnover"],
+        data(){
+            return{
+                // isShow:true
+            }
+        },
+        components:{
+            loadingData
+        }
     }
 </script>
 
@@ -24,6 +34,7 @@
     border-radius:10px;
     float: left;
     margin-left: 1%;
+    position: relative;
     .inventoryCenten-bor{
         width:180px;
         height:180px;

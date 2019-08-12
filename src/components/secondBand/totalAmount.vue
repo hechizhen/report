@@ -33,13 +33,15 @@
 				</ul>
 			</div>
 		</div>
+		<loading-data :isShow="isShow"></loading-data>
 	</div>
 </template>
 <script>
+	import loadingData from '../base/loadingData'
 	export default {
 		name:'samaMonth',
 		components:{
-
+			loadingData
 		},
 		props:{
 			titleName:{
@@ -57,6 +59,7 @@
 		},
 		data(){
 			return {
+				// isShow:true,
 				data:[{brand:"立白",value:'0.5%'},{brand:"立白",value:'0.5%'},
 				{brand:"立白",value:'0.5%'},{brand:"立白",value:'0.5%'},
 				{brand:"立白",value:'0.5%'},{brand:"立白",value:'0.5%'},]
@@ -75,7 +78,7 @@
 		width: 100%;
 		padding: 5px;
 		background:rgba(255,255,255,1);
-		border-radius:10px; 
+		border-radius:10px;
 		.totalAmountcontent {
 			width: 100%;
 			height: 545px;
@@ -168,7 +171,7 @@
 				}
 				ul {
 					margin: 0px;
-					padding: 0px; 
+					padding: 0px;
 					width: 100%;
 					li {
 						width: 33.33%;
@@ -197,7 +200,7 @@
 							align-items: center;
 						    justify-content: center;
 						}
-					} 
+					}
 					li:nth-child(3n) {
 						border-right: none;
 					}

@@ -19,16 +19,19 @@
                 <barEcharts :barEchartsData="barEchartsData"></barEcharts>
             </div>
         </div>
+        <loading-data :isShow="isShow"></loading-data>
     </div>
 </template>
 <script>
     import barEcharts from "../echarts/bar"
     import  newButton from  '../base/newButton'
+    import loadingData from '../base/loadingData'
     export default {
         name:'shopChartDown',
         components:{
             barEcharts,
-            newButton
+            newButton,
+            loadingData
         },
         props:{
             trendChartClick:{
@@ -41,7 +44,8 @@
 
         data(){
             return {
-                defaultVal:"导出数据"
+                defaultVal:"导出数据",
+                // isShow:true,
             }
         },
         mounted(){

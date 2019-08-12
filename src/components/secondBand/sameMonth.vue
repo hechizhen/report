@@ -28,14 +28,18 @@
 				</div>
 			</div>
 		</div>
+		<loading-data :isShow="isShow"></loading-data>
 	</div>
 </template>
 <script>
-	import pie from "./../echarts/pie.vue" 
+	import pie from "./../echarts/pie.vue"
+	import loadingData from '../base/loadingData'
 	export default {
 		name:'samaMonth',
 		components:{
-			pie
+			pie,
+			loadingData,
+
 		},
 		props:{
 			orderAmountData:{
@@ -52,6 +56,7 @@
 		},
 		data(){
 			return {
+				// isShow:true,
 				pieEchartsData : {
 					id:'pieId',
 	                colorList:['#365AF8','#FFC925','#7B8EFB','#34DF8E','#A3FC8A','#FF7C25'],
@@ -88,7 +93,8 @@
 		width: 100%;
 		padding: 5px;
 		background:rgba(255,255,255,1);
-		border-radius:10px; 
+		border-radius:10px;
+		position: relative;
 		.sameMonthcontent {
 			width: 100%;
 			height: 545px;
@@ -139,7 +145,7 @@
 						div {
 							font-family:PingFangSC-Regular;
 							font-weight:400;
-							color:rgba(255,255,255,1);		
+							color:rgba(255,255,255,1);
 						}
 						div:nth-child(1) {
 							height: 35%;

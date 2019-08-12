@@ -29,18 +29,21 @@
              ></barChart>
             </div>
         </div>
+        <loading-data :isShow="isShow"></loading-data>
     </div>
 </template>
 
 <script>
     import barChart from '../../components/echarts/bar'
     import  newButton from  '../base/newButton'
+    import loadingData from '../base/loadingData'
     export default {
         name: "inventoryDase",
         data(){
             return{
                 defaultVal:"走势图",
-                defaultValdown:"库存详情"
+                defaultValdown:"库存详情",
+                // isShow:true,
             }
         },
         props:{
@@ -61,7 +64,8 @@
         },
         components:{
             barChart,
-            newButton
+            newButton,
+            loadingData
         },
         watch:{
 
@@ -92,6 +96,7 @@
     border-radius:10px;
     float: left;
     margin-left: 1%;
+    position: relative;
     .inventoryDase-left{
         width: 38%;
         height: 100%;

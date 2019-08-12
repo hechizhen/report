@@ -108,14 +108,17 @@
                 </div>
             </div>
         </div>
+        <loading-data :isShow="isShow"></loading-data>
     </div>
 </template>
 <script>
     import pieEcharts from "../echarts/pie"
+    import loadingData from '../base/loadingData'
     export default {
         name:'shopChartDown',
         components:{
-            pieEcharts
+            pieEcharts,
+            loadingData
         },
         props:{
             trendChartClick:{
@@ -135,6 +138,7 @@
                 listShows:false,
                 pieShows:true,
                 value: 1,
+                // isShow:true,
             }
         },
         mounted(){
