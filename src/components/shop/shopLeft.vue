@@ -1,6 +1,6 @@
 <template>
     <div class="shopLeft">
-      <div class="shopLeft-centen" style="height: 202px;">
+      <div class="shopLeft-centen" style="height: 180px;">
       <div class="shop-active">
           <p>{{shopActives.ActiveStoresTxt}}<span>{{shopActives.ActiveStoresing}}</span></p>
           <span>{{shopActives.ActiveStores}}</span>
@@ -92,7 +92,7 @@
         color:rgba(255,255,255,1);
         text-align: center;
         float: left;
-        margin-left: 3%;
+        margin-left: 6%;
         p{
             width: 79%;
             margin-left: 10%;
@@ -124,12 +124,10 @@
         float: left;
       .shop-data-title {
         width: 90%;
-        line-height: 32px;
+        line-height: 41px;
         background:rgba(238,240,245,1);
         border-radius:6px;
-        margin-top: 7%;
-        margin-left: 10%;
-        margin-bottom:12px ;
+        margin: 3% 0 3% 7%;
         display: inline-block;
         .shop-data-title1 {
             float: left;
@@ -152,7 +150,7 @@
            width: 89%;
             height: 12%;
             margin-top: 2%;
-            margin-left: 11%;
+            margin-left: 8%;
             span{
                 line-height: 28px;
                 font-size:14px;

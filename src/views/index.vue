@@ -8,11 +8,11 @@
         <!-- 头部 -->
         <header-title :dealName="indexDealName" :score="indexScore" :summary="indexSummary" :defaultDate="indexDefaultDate" :changeDateHandle="indexChangeDate"></header-title>
         <!-- 一帮卖分析 -->
-        <one-help-sale-en :titleName="oneHelpSaleTitle" :monthSalesData="monthSalesData" :monthBarData="monthBarData"  :coreData="oneHelpSaleScoreList" 
+        <one-help-sale-en :titleName="oneHelpSaleTitle" :monthSalesData="monthSalesData" :monthBarData="monthBarData"  :coreData="oneHelpSaleScoreList"
         :yearSalesData="yearSalesData" :yearBarData="yearBarData" :monthShow="oneHelpSaleMonthShow" :yearShow="oneHelpSaleYearShow"
         v-if="monthBarData.length!=0 && monthSalesData.length!=0 && yearSalesData.length!=0 && yearBarData.length!=0"></one-help-sale-en>
 
-        <!-- 帮卖分析-订单 -->
+        <!-- 二帮卖分析-订单 -->
         <secondBand :orderAmountData="orderAmountData" :grossProfitData="grossProfitData" :grossInterestRateData="grossInterestRateData" :proportio="proportioData" :directionData="directionData"></secondBand>
         <!-- 二帮卖分析-业务员 -->
         <salesman :salesmanData="salesmanData" :salesmanTrendData="salesmanTrendData" :salesmandownwardData="salesmandownwardData" :salesmanReachedData="salesmanReachedData" :salesmanContributionData="salesmanContributionData"></salesman>
@@ -256,7 +256,7 @@
                         data: params,
                     })
                 }
-                
+
                 this.$http.all([getMonthData(), getYearData()])
                     .then(this.$http.spread((salesMonth, salesYear) => {
                         //同时请求 本月和累计的销量数据
@@ -1113,7 +1113,7 @@
                             inventoryNumberTxt:"库存件数(件)",
                             inventoryNumber:data.inventoryNumber,  //库存件数
                             turnoverTxt:"库存周转次数",
-                            turnover:data.turnover,  //库存周转次数
+                            turnover:data.turnover+'次',  //库存周转次数
                         }
                         console.log(_this.inventoryDetails)
                     },
@@ -1162,7 +1162,10 @@
                                     name: 'ABC',
                                     data: inventoryData,
                                     color: '#3699FF',
-                                    barWidth: 11
+                                    barWidth: 11,
+                                    textStyle: {
+                                        color: "#000"
+                                    },
                                 },
                             ],
                             showType: 0,
@@ -1173,7 +1176,10 @@
                         },
                         label: {
                             isShow: true,
-                            position:'top'
+                            position:'top',
+                            color: "#000",
+                            fontWeight: "bolder",
+
                         },
                         xAxis:{
                             axisLine:{

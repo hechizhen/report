@@ -1,4 +1,3 @@
-
 <template>
     <div class="finance">
         <second-title :titleName="titleName" :explainSecondList="explainSecondList"></second-title>
@@ -80,7 +79,7 @@
             }
         },
         mounted () {
-          
+
         },
         methods: {
             //门店收益
@@ -93,13 +92,13 @@
             }
         },
         computed:{
-          
+
         },
         watch: {
-           
+
         },
         distroyed: function () {
-            
+
         }
     }
 </script>

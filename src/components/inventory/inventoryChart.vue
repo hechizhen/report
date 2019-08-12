@@ -17,14 +17,17 @@
                 <lineEcharts :lineEchartsData="lineEchartsData"></lineEcharts>
             </div>
         </div>
+        <loading-data :isShow="isShow"></loading-data>
     </div>
 </template>
 <script>
     import lineEcharts from "./../echarts/line.vue"
+    import loadingData from '../base/loadingData'
     export default {
         name:'thendChart',
         components:{
-            lineEcharts
+            lineEcharts,
+            loadingData
         },
         props:{
             trendChartClick:{
@@ -37,7 +40,7 @@
 
         data(){
             return {
-
+                isShow:false
             }
         },
         mounted(){

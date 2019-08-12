@@ -52,7 +52,6 @@
         padding-left: 3%;
         .commodityR-base {
             width: 100%;
-            margin-bottom: 1%;
             float: left;
             .quan {
                 width:10px;
@@ -64,16 +63,15 @@
             }
 
             .ant-col-18{
-                line-height: 28px;
+                line-height: 44px;
                 font-size:16px;
                 font-family:PingFangSC-Medium;
                 font-weight:500;
                 color:rgba(152,162,180,1);
                 display: inline-block;
-                width: 70%;
             }
             .ant-col-6{
-                line-height: 28px;
+                line-height: 44px;
                 font-size:20px;
                 font-family:PingFangSC-Semibold;
                 font-weight:600;
@@ -83,8 +81,8 @@
             }
         }
         .productLeft-btn {
-            width:27%;
-            height:66px;
+            width:30%;
+            height:88px;
             float: left;
             display:flex;
             justify-content: center;//子元素水平居中
@@ -104,5 +102,8 @@
     .onetxt{
         text-align: left;
         padding-left: 10%;
+    }
+  .shopLeft .shopBase .productLeft-btn{
+        justify-content: left;
     }
 </style>

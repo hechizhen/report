@@ -7,9 +7,11 @@
                     <a-Col :span="10">
                         <productLeft :productdata="CommodityTurnoverRate"></productLeft>
                         <productRight :barData="CommodityTurnoverRate.produnarData"  ></productRight>
+                        <loading-data :isShow="productisShow"></loading-data>
                     </a-Col>
                     <a-Col :span="13" :push="1">
                         <commodityRight :commoditydata="commoditydata" :upraphy="upraphy" :downraphy="downraphy" :pieraphy="pieraphy" ></commodityRight>
+                        <loading-data :isShow="commodityisShow"></loading-data>
                     </a-Col>
                 </a-Row>
             </div>
@@ -34,7 +36,7 @@
     import  upproductChart from  './upproductChart'
     import  downproductChart from  './downproductChart'
     import  productChartPie  from  './productChartPie'
-    // import  productList from  './productList'
+    import loadingData from '../base/loadingData'
     export default {
         name: "cententindex",
         props:["CommodityTurnoverRate","commoditydata","GoodsDetail","VariabilityUpData","VariabilityDownData"],
@@ -47,7 +49,7 @@
             upproductChart,
             downproductChart,
             productChartPie,
-            // productList
+            loadingData
         },
         data(){
             return{
@@ -61,6 +63,8 @@
                 downShow:false,
                 pieShow:false,
                 listShow:false,
+                // productisShow:true,
+                // commodityisShow:true,
                 titName:"商品", // 产品
                 explainSecondList:{
                     imgType:5,
@@ -187,16 +191,18 @@
             margin: 0 auto;
             .ant-row{
                 .ant-col-10{
-                    background:rgba(105,151,255,1);
+                    background:rgba(67,159,255,1);
                     border:1px solid rgba(105,151,255,1);
                     border-radius:6px;
                     height: 100%;
+                    position: relative;
                 }
                 .ant-col-13{
-                    background:rgba(105,151,255,1);
+                    background:rgba(67,159,255,1);
                     border:1px solid rgba(105,151,255,1);
                     border-radius:6px;
                     height: 100%;
+                    position: relative;
                 }
             }
         }

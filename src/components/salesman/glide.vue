@@ -17,14 +17,17 @@
 				<barEcharts :barEchartsData="barEcharts"></barEcharts>
 			</div>
 		</div>
+		<loading-data :isShow="isShow"></loading-data>
 	</div>
 </template>
 <script>
 	import barEcharts from "./../echarts/bar.vue"
+	import loadingData from '../base/loadingData'
 	export default {
 		name:'thendChart',
 		components:{
-			barEcharts
+			barEcharts,
+			loadingData
 		},
 		props:{
 			trendChartClick:{
@@ -38,6 +41,7 @@
 
 		data(){
 			return {
+				// isShow:true,
 				barEcharts:{
                     id:'barId',
                     unit:'%',

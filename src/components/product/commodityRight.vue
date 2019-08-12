@@ -282,4 +282,7 @@
         align-items: center;
         text-align: left;
     }
+    .commodityRight .commodityR-centen .commodityR-base:last-child{
+        margin: 2% auto 0;
+    }
 </style>
