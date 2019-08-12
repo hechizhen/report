@@ -137,7 +137,7 @@
 			    p {
 			     	margin: 0px;
 				    font-size:14px;
-					font-family:PingFangSC-Medium;
+					font-family:PingF	angSC-Medium;
 					font-weight:bold;
 					color:rgba(255,255,255,1);
 				}
@@ -179,7 +179,7 @@
 					background:rgba(6,192,98,1);
 				}
 			}
-		} 
+		}
 		.produce {
 			width: 100%;
 			height: 100%;

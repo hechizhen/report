@@ -4,6 +4,7 @@
         <div class="shop-active" v-for="(item,index) in ActiveDetail.shopActiveDetail" :key="index">
             <p>{{item.ActiveStores}}<span>{{item.ActiveStoresing}}</span></p>
             <span>{{item.NoSales}}</span>
+            <p class="btn">门店详情</p>
         </div>
         </div>
         <shopBase :shopDaseData="ActiveDetail.shopDaseData" :defaultVal="defaultVal"></shopBase>
@@ -18,11 +19,12 @@
         data(){
             return{
                 defaultVal:"应收明细",
+                defaultVal1:"门店详情",
                 // detailData:"",
             }
         },
         components:{
-            shopBase
+            shopBase,
         },
         watch:{
             // ActiveDetail(val){
@@ -45,7 +47,7 @@
             height:202px;
         }
         .shop-active {
-            width: 18%;
+            width: 20%;
             height: 165px;
             background:linear-gradient(90deg,rgba(0,166,255,1),rgba(140,93,255,1));
             border-radius: 6px;
@@ -58,8 +60,8 @@
                 display: grid;
                 font-size: 14px;
                 font-weight: 500;
-                padding-top: 34px;
-                padding-bottom:25px;
+                padding-top: 20%;
+                padding-bottom:5%;
                 margin-bottom: 0;
                 span{
                     font-size: 14px;
@@ -69,6 +71,19 @@
             span {
                 font-size: 26px;
                 font-weight: 600;
+            }
+            .btn{
+                cursor: pointer;
+                width: 90px;
+                text-align: center;
+                padding: 6px 0;
+                border: 1px solid #fff;
+                border-radius: 3px;
+                font-size: 14px;
+                font-family: PingFangSC-Regular;
+                font-weight: 400;
+                color: #fff;
+                margin: 10% auto 0;
             }
 
             .productLeft-btn {
@@ -95,5 +110,14 @@
     }
     .shop-active:last-child{
         background:linear-gradient(90deg,rgba(251,112,67,1),rgba(252,79,153,1));
+    }
+    .newButton{
+        margin-top: 11%;
+    }
+    .shopRight .shop-active:first-child .btn{
+        display: none;
+    }
+    .shopRight .shop-active:nth-child(2) .btn{
+        display: none;
     }
 </style>

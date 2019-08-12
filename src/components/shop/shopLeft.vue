@@ -84,7 +84,7 @@
     float: left;
 
     .shop-active{
-        width:15%;
+        width:17%;
         height:165px;
         background:rgba(0,166,255,1);
         border-radius:6px;
@@ -92,7 +92,7 @@
         color:rgba(255,255,255,1);
         text-align: center;
         float: left;
-        margin-left: 5%;
+        margin-left: 3%;
         p{
             width: 79%;
             margin-left: 10%;

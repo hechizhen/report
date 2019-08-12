@@ -206,19 +206,18 @@
                 }
 
                 span {
-                    line-height: 28px;
+                    line-height: 34px;
                     font-size: 14px;
                     font-family: PingFangSC-Regular;
                     font-weight: 400;
                     color: rgba(255, 255, 255, 1);
                     padding-left: 4%;
                     display: inline-block;
-                    width: 90%;
-                    text-align: left;
+                    width: 100%;
                 }
 
                 .productLeft-btn {
-                    width: 30%;
+                    width: 26%;
                     height: 100%;
                     line-height: 26px;
                     text-align: right;
@@ -277,7 +276,7 @@
         align-items: center;
     }
     .commodityR-basetwo{
-        width: 10%;
+        width: 14%;
         float: left;
         display: flex;
         align-items: center;
