@@ -181,13 +181,6 @@
         height: 75%;
         float: left;
     }
-    /*.shop-centen-dase{*/
-        /*width: 100%;*/
-        /*height: 68px;*/
-        /*background:rgba(238,240,245,1);*/
-        /*opacity:0.5;*/
-        /*border-radius:6px 6px 0px 0px;*/
-        /*float: left;*/
-    /*}*/
+
 }
 </style>

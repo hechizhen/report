@@ -99,7 +99,7 @@
                         normal: {
                             show: true,
                             position: 'inside', //标签的位置
-                            formatter: "{d}%",
+                            formatter: "{b}\n{d}%",
                             textStyle: {
                                 color: '#333333',
                                 fontSize:"14px",
