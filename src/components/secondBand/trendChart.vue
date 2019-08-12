@@ -17,14 +17,17 @@
 				<echartsline :lineEchartsData="direction"></echartsline>
 			</div>
 		</div>
+		<loading-data :isShow="isShow"></loading-data>
 	</div>
 </template>
 <script>
-	import echartsline from "./../echarts/line.vue" 
+	import echartsline from "./../echarts/line.vue"
+	import loadingData from '../base/loadingData'
 	export default {
 		name:'thendChart',
 		components:{
-			echartsline
+			echartsline,
+			loadingData
 		},
 		props:{
 			trendChartClick:{
@@ -38,6 +41,7 @@
 		data(){
 			return {
 				direction:this.lineEchartsData,
+				// isShow:true
 			}
 		},
 		mounted(){
