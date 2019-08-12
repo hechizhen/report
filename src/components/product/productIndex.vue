@@ -21,7 +21,7 @@
         <upproductChart v-if="upShow" :trendChartClick="upClick"  :barEchartsData="barEchartsDataUp" ></upproductChart>  <!--下滑-->
         <downproductChart v-if="downShow" :trendChartClick="downClick" :barEchartsData="barEchartsDataDown" ></downproductChart>  <!--增长-->
 
-        <productChartPie v-if="pieShow" :trendChartClick="pieClick" :pieEchartsData="pieEchartsData"
+        <productChartPie v-if="pieShow" :trendChartClick="pieClick" :pieEchartsData="pieEchartsData" :tableData="productTableData"
         ></productChartPie>
         <!--<productList  v-if="listShow"  :trendChartClick="listClick" ></productList>-->
     </div>
@@ -39,7 +39,7 @@
     import loadingData from '../base/loadingData'
     export default {
         name: "cententindex",
-        props:["CommodityTurnoverRate","commoditydata","GoodsDetail","VariabilityUpData","VariabilityDownData"],
+        props:["CommodityTurnoverRate","commoditydata","GoodsDetail","VariabilityUpData","VariabilityDownData","productTableData"],
         components:{
             productLeft,
             productRight,

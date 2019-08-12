@@ -46,6 +46,11 @@
                     </a-radio-group>
                 </div>
                 <div class="lineEcharts-right">
+                    <a-table :columns="tableData.columns" :dataSource="tableData.data" bordered  v-if="tableData.length!=0">
+                        <template slot="name" slot-scope="text">
+                            {{text}}
+                        </template>
+                    </a-table>
                 </div>
             </div>
         </div>
@@ -55,11 +60,13 @@
 <script>
     import pieEcharts from "../echarts/pie"
     import loadingData from '../base/loadingData'
+    import newButton from '../base/newButton.vue'
     export default {
         name:'shopChartDown',
         components:{
             pieEcharts,
-            loadingData
+            loadingData,
+            newButton
         },
         props:{
             trendChartClick:{
@@ -72,6 +79,9 @@
             listraphy:{
                 type:Function
             },
+            tableData:{
+                type:Object
+            }
         },
 
         data(){
@@ -83,7 +93,7 @@
             }
         },
         mounted(){
-       console.log(this.pieEchartsData)
+            console.log(this.pieEchartsData)
         },
 
         methods:{
@@ -236,8 +246,8 @@
                     }
                 }
                 .lineEcharts-right{
-                    width: 88%;
-                    float: right;
+                    width: 82%;
+                    float: left;
                 }
             }
         }

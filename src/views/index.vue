@@ -20,7 +20,7 @@
         <salesman :salesmanData="salesmanData" :salesmanTrendData="salesmanTrendData" :salesmandownwardData="salesmandownwardData" :salesmanReachedData="salesmanReachedData" :salesmanContributionData="salesmanContributionData"></salesman>
         <!-- 产品 -->
         <productIndex :CommodityTurnoverRate="CommodityTurnoverRate"  :commoditydata="commoditydata" :GoodsDetail="GoodsDetail"
-                      :VariabilityUpData="VariabilityUpData" :VariabilityDownData="VariabilityDownData"
+                      :VariabilityUpData="VariabilityUpData" :VariabilityDownData="VariabilityDownData" :productTableData="productTableData"
                       v-if="CommodityTurnoverRate.length!=0"
         ></productIndex>
         <!--门店-->
@@ -128,6 +128,7 @@
                 salesmandownwardData:{}, //业务员下滑
                 salesmanReachedData:{},  //业务员-达成
                 salesmanContributionData:{},//业务员-贡献
+                productTableData:'',//产品列表数据
             }
         },
         created() {
@@ -166,6 +167,7 @@
             this.geUpStores()
             this.getSalesmanReached()
             this.getSalesmanContribution()
+            this.getProductTableData()
         },
         computed: {
 
@@ -197,6 +199,7 @@
                 this.geUpStores()
                 this.getSalesmanReached()
                 this.getSalesmanContribution()
+                this.getProductTableData()
             },
             //体检报告概览
             getOverViewData() {
@@ -222,16 +225,26 @@
                 _this.oneHelpSaleYearShow = true
                 function getMonthData(){
                     var params = {
+                        // "inputParam":
+                        //     {
+                        //         "data_mon":_this.currentDate,
+                        //         "data_type":"当月",
+                        //         "dealer_id":"ff8080816c0b0669016c416c850a4149"
+                        //     },
+                        // "outputCol":"data_mon,data_type,dealer_id,money,obj_money,liby_money,liby_obj_money,kispa_money,kispa_obj_money,cheerwin_money,cheerwin_obj_money,oral_money,oral_obj_money,shengmei_money,shengmei_obj_money,strategic_money,strategic_obj_money",
+                        // "pageNum":1,
+                        // "pageSize":1000,
+                        // "serviceId":"service_rp_tjbg_sales_order"
                         "inputParam":
                             {
                                 "data_mon":_this.currentDate,
-                                "data_type":"当月",
-                                "dealer_id":"ff8080816c0b0669016c416c850a4149"
+                                "data_type":"当月"
                             },
-                        "outputCol":"data_mon,data_type,dealer_id,money,obj_money,liby_money,liby_obj_money,kispa_money,kispa_obj_money,cheerwin_money,cheerwin_obj_money,oral_money,oral_obj_money,shengmei_money,shengmei_obj_money,strategic_money,strategic_obj_money",
+                        "outputCol":"data_mon,data_type,dealer_id,money,target_money,liby_money,liby_target_money,kispa_money,kispa_target_money,cheerwin_money,cheerwin_target_money,oral_money,oral_target_money,shengmei_money,shengmei_target_money,strategic_money,strategic_target_money",
                         "pageNum":1,
                         "pageSize":1000,
-                        "serviceId":"service_rp_tjbg_sales_order"
+                        "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                        "serviceId":"service_tjbg01_sales"
                     }
                     return _this.$http({
                         url: _this.testRequestHttpUrl,
@@ -244,13 +257,13 @@
                         "inputParam":
                             {
                                 "data_mon":_this.currentDate,
-                                "data_type":"累计",
-                                "dealer_id":"ff8080816c0b0669016c416c850a4149"
+                                "data_type":"累计"
                             },
-                        "outputCol":"data_mon,data_type,dealer_id,money,obj_money,liby_money,liby_obj_money,kispa_money,kispa_obj_money,cheerwin_money,cheerwin_obj_money,oral_money,oral_obj_money,shengmei_money,shengmei_obj_money,strategic_money,strategic_obj_money",
+                        "outputCol":"data_mon,data_type,dealer_id,money,target_money,liby_money,liby_target_money,kispa_money,kispa_target_money,cheerwin_money,cheerwin_target_money,oral_money,oral_target_money,shengmei_money,shengmei_target_money,strategic_money,strategic_target_money",
                         "pageNum":1,
                         "pageSize":1000,
-                        "serviceId":"service_rp_tjbg_sales_order"
+                        "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                        "serviceId":"service_tjbg01_sales"
                     }
                     return _this.$http({
                         url: _this.testRequestHttpUrl,
@@ -269,15 +282,15 @@
                          //本月下单金额达成率
                     _this.monthSalesData = {
                         sales:_this.dataProcess(salesMonthData.money,'money').num,
-                        reach:_this.getReachPercent(salesMonthData.money,salesMonthData.obj_money)+'%',
+                        reach:_this.getReachPercent(salesMonthData.money,salesMonthData.target_money)+'%',
                         bgColor:'#2D92FC',
                         titleName:'本月'
                     }
                     //本月达成率历史趋势
                     let barDataMonth = [
-                        _this.getReachPercent(salesMonthData.liby_money,salesMonthData.liby_obj_money),_this.getReachPercent(salesMonthData.kispa_money,salesMonthData.kispa_obj_money),
-                        _this.getReachPercent(salesMonthData.cheerwin_money,salesMonthData.cheerwin_obj_money),_this.getReachPercent(salesMonthData.oral_money,salesMonthData.oral_obj_money),
-                        _this.getReachPercent(salesMonthData.shengmei_money,salesMonthData.shengmei_obj_money),_this.getReachPercent(salesMonthData.strategic_money,salesMonthData.strategic_obj_money)
+                        _this.getReachPercent(salesMonthData.liby_money,salesMonthData.liby_target_money),_this.getReachPercent(salesMonthData.kispa_money,salesMonthData.kispa_target_money),
+                        _this.getReachPercent(salesMonthData.cheerwin_money,salesMonthData.cheerwin_target_money),_this.getReachPercent(salesMonthData.oral_money,salesMonthData.oral_target_money),
+                        _this.getReachPercent(salesMonthData.shengmei_money,salesMonthData.shengmei_target_money),_this.getReachPercent(salesMonthData.strategic_money,salesMonthData.strategic_target_money)
                     ]
                     let Axiax = ['立白','好爸爸','超威','口腔','晟美','战略品']
                     _this.monthBarData = {
@@ -340,15 +353,15 @@
                      //本月下单金额达成率
                     _this.yearSalesData = {
                         sales:_this.dataProcess(salesYearData.money,'money').num,
-                        reach:_this.getReachPercent(salesYearData.money,salesYearData.obj_money)+'%',
+                        reach:_this.getReachPercent(salesYearData.money,salesYearData.target_money)+'%',
                         bgColor:'#FF9500',
                         titleName:'年累计'
                     }
                     //本月达成率历史趋势
                     let barDataYear = [
-                        _this.getReachPercent(salesYearData.liby_money,salesYearData.liby_obj_money),_this.getReachPercent(salesYearData.kispa_money,salesYearData.kispa_obj_money),
-                        _this.getReachPercent(salesYearData.cheerwin_money,salesYearData.cheerwin_obj_money),_this.getReachPercent(salesYearData.oral_money,salesYearData.oral_obj_money),
-                        _this.getReachPercent(salesYearData.shengmei_money,salesYearData.shengmei_obj_money),_this.getReachPercent(salesYearData.strategic_money,salesYearData.strategic_obj_money)
+                        _this.getReachPercent(salesYearData.liby_money,salesYearData.liby_target_money),_this.getReachPercent(salesYearData.kispa_money,salesYearData.kispa_target_money),
+                        _this.getReachPercent(salesYearData.cheerwin_money,salesYearData.cheerwin_target_money),_this.getReachPercent(salesYearData.oral_money,salesYearData.oral_target_money),
+                        _this.getReachPercent(salesYearData.shengmei_money,salesYearData.shengmei_target_money),_this.getReachPercent(salesYearData.strategic_money,salesYearData.strategic_target_money)
                     ]
                     _this.yearBarData = {
                         config:{
@@ -785,6 +798,54 @@
                         console.log(_this.CommodityTurnoverRate)
                     },
                 )
+            },
+            //产品-列表数据
+            getProductTableData(){
+                var _this = this
+                this.$http({
+                    url: _this.requestHttpUrl + '/commodityDetail',
+                    method: 'POST',
+                    data: {
+                        dateTime: _this.currentDate
+                    }
+                }).then(function (res) {
+                    console.log(res)
+                    let data = res.data.data.data
+                    let tablecColumns = [
+                        {
+                            title:'商品编码',
+                            dataIndex:'code'
+                        },
+                        {
+                            title:'事业部',
+                            dataIndex:'business'
+                        },
+                        {
+                            title:'品类',
+                            dataIndex:'category'
+                        },
+                        {
+                            title:'系列',
+                            dataIndex:'series'
+                        },
+                        {
+                            title:'商品名称',
+                            dataIndex:'name'
+                        },
+                        {
+                            title:'销量',
+                            dataIndex:'sales'
+                        },
+                        {
+                            title:'销量占比',
+                            dataIndex:'salesPercent'
+                        },
+                    ]
+                    _this.productTableData = {
+                        data:data,
+                        columns:tablecColumns
+                    }
+                })
             },
             //产品-动销商品数
             getNumberMovingGoods() {

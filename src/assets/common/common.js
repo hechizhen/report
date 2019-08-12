@@ -648,7 +648,22 @@ export default{
         return firstValue - secondValue; //升序
       };
     }
-
+   //导出的方法
+   Vue.prototype.exportHandleClick =function(tableHeaderTxt,tableHeaderKey,tableData,tableName) {
+    require.ensure([], () => {
+        const { export_json_to_excel } = require('../../excel/Export2Excel.js');
+        const tHeader = tableHeaderTxt
+        // 上面设置Excel的表格第一行的标题
+        const filterVal = tableHeaderKey
+        // 上面的index、nickName、name是tableData里对象的属性
+        const list = tableData;  //把data里的tableData存到list
+        const data = this.formatJson(filterVal, list);
+        export_json_to_excel(tHeader, data, tableName);
+    })
+  }
+  Vue.prototype.formatJson = function(filterVal, jsonData) {
+      return jsonData.map(v => filterVal.map(j => v[j]))
+  }
 }};
 
 var multiTableData = function(handlerArray,tableTitleColNum,colIndexArray){
