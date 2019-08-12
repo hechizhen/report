@@ -19,6 +19,7 @@
     // import lineEchart from '../components/echarts/line.vue'
     // import barEchart from '../components/echarts/bar.vue'
     import reportTable from '../components/base/reportTable.vue'
+    var _this = this;
     export default {
         name : 'index',
         components : {
@@ -29,6 +30,8 @@
         },
         data () {
             return {
+                 //参数
+                params:["立白洗衣粉","月","立白市场部","立白市场部"],
                 //搜索文字以及条件
                 searchList:[
                     {
@@ -40,11 +43,39 @@
                         type:'select',
                         list:['年','月']
                     },
+                    {
+                        name:'时间类型',
+                        type:'selectModel',
+                        list:[],
+                        params:{
+                            "serviceId":"data_core_bo1",
+                            "inputParam":{
+                                "saleType":"自营"
+                            },
+                            "outputCol":"bo1",
+                            "orderCol":"bo1 desc",
+                            "pageSize":10000,
+                            "pageNum":1
+                        }
+                    },
+                    {
+                        name:'时间类型',
+                        type:'selectModel',
+                        list:[],
+                        params:{
+                            "serviceId":"data_core_bo1",
+                            "inputParam":{
+                                "saleType":"自营"
+                            },
+                            "outputCol":"bo1",
+                            "orderCol":"bo1 desc",
+                            "pageSize":10000,
+                            "pageNum":1
+                        }
+                    },
                 ],
-                //参数
-                params:['立白洗衣粉','月'],
                 //接口参数
-                interfaceParams:'',
+                interfaceParams: '',
                 //数据处理以及表头
                 tableHeaderTxt:[
                     {txt:'事业部',unit:false},
@@ -52,21 +83,23 @@
                     {txt:'目标',unit:'money',unit1:'tenth'},
                     {txt:'达成率',unit:'percent',unit1:''},
                     {txt:'同比',unit:'percent',unit1:''},
-                ]
+                ],
             }
+        },
+        created(){
         },
         mounted () {
             this.interfaceParams = {
-                "serviceId":"data_saleDay_year_month_brand",
-                "inputParam":{
-                    "DATETYPE":this.params[1],
-                    "DATA_DT":"201908"
-                },
-                "outputCol":"ZNBO1_TEXT,SALE_SL,SALE_MB,SALE_DCL,Y2Y_PRECENT",
-                "orderCol":"orderNum",
-                "pageSize":100,
-                "pageNum":1
-            }
+                    "serviceId":"data_saleDay_year_month_brand",
+                    "inputParam":{
+                        "DATETYPE":this.params[1],
+                        "DATA_DT":"201908"
+                    },
+                    "outputCol":"ZNBO1_TEXT,SALE_SL,SALE_MB,SALE_DCL,Y2Y_PRECENT",
+                    "orderCol":"orderNum",
+                    "pageSize":100,
+                    "pageNum":1
+                }
         },
         methods: {
             //点击搜索

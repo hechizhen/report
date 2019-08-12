@@ -5,7 +5,10 @@
             <div class="title" v-for="(parentItem,parentIndex) in searchList" :key="parentIndex">
                 <span>{{parentItem.name}}:</span>
                 <a-input  placeholder="default size" style="width:60%;" v-model="inputVal[parentIndex]" v-if="parentItem.type=='input'" />
-                <a-select  v-model="inputVal[parentIndex]" :defaultValue="parentItem.list[0]" style="width:60%;" v-if="parentItem.type=='select'">
+                <a-select  v-model="inputVal[parentIndex]"  style="width:60%;" v-if="parentItem.type=='select'">
+                    <a-select-option :value="childItem" v-for="(childItem,childIndex) in parentItem.list" :key="childIndex">{{childItem}}</a-select-option>
+                </a-select>
+                <a-select  v-model="inputVal[parentIndex]"  style="width:60%;" v-if="parentItem.type=='selectModel'">
                     <a-select-option :value="childItem" v-for="(childItem,childIndex) in parentItem.list" :key="childIndex">{{childItem}}</a-select-option>
                 </a-select>
             </div>
@@ -67,16 +70,20 @@
                 tableData:'',//列表数据
                 tableColmns:'',//表头数据
                 requestHttpUrl:this.$store.state.testRequestHttpUrl,//接口请求地址
+                requestHttpUrl1:'http://dccuat.liby.com.cn/hanadcc/queryData',//接口请求地址
                  //表头key
                 tableHeaderKey:'',
                 //表头文字
                 tableHeaderTxt:'',
                 //参数
-                newInterfaceParams:this.interfaceParams
+                newInterfaceParams:this.interfaceParams,
+                requestList:'',
+                params:'',
             }
         },
         mounted () {
             this.getTableData()
+            this.getSelectData()
         },
         methods: {
             //点击查询
@@ -140,6 +147,38 @@
                     console.log(_this.tableData)
                 })
             },
+
+            getSelectData(){
+                var _this = this
+                let requestList = []
+                _this.searchList.map(function(item,index){
+                    if(item.type=='selectModel'){
+                        _this.$http({
+                            url: _this.requestHttpUrl1,
+                            method: 'POST',
+                            data: item.params
+                        }).then(function (res) {
+                            console.log(res)
+                            let data = res.data.data.data
+                            let list = []
+                            data.map(function (item, index) {
+                                list.push(item[0])
+                            })
+                            requestList.push(list)
+                        })
+                    }else{
+                        requestList.push('')
+                    }
+                })
+                setTimeout(function(){
+                    _this.searchList.map(function(item,index){
+                        if(item.type=='selectModel'){
+                            _this.searchList[index].list=requestList[index]
+                        }
+                    })
+                },3000)
+                console.log(_this.searchList)
+            }
         },
         computed:{
 
