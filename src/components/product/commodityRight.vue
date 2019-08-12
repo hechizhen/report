@@ -166,7 +166,7 @@
             float: left;
             text-align: center;
             .commodityR-title {
-                width: 90%;
+                width: 100%;
                 line-height: 32px;
                 background: rgba(126, 165, 254, 1);
                 border-radius: 6px;
@@ -195,7 +195,7 @@
             .commodityR-base {
                 width: 90%;
                 height: 34px;
-                margin: 6% auto;
+                margin: 6% auto 0;
                 .quan {
                     float: left;
                     width: 12px;
@@ -217,7 +217,7 @@
                 }
 
                 .productLeft-btn {
-                    width: 26%;
+                    width: 28%;
                     height: 100%;
                     line-height: 26px;
                     text-align: right;
@@ -270,7 +270,7 @@
         color: #fff;
     }
     .commodityR-baseone{
-        width: 60%;
+        width: 58%;
         float: left;
         display: flex;
         align-items: center;
@@ -280,5 +280,6 @@
         float: left;
         display: flex;
         align-items: center;
+        text-align: left;
     }
 </style>
