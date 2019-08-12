@@ -24,7 +24,7 @@
 			<div class="proportion">
 				<div class="proportion_title">占比</div>
 				<div class="proportion_echarts">
-					<pie :pieEchartsData="pieEchartsData"></pie>
+					<pie :pieEchartsData="pieEchartsData" v-if="pieEchartsData.length!=0"></pie>
 				</div>
 			</div>
 		</div>
@@ -57,17 +57,18 @@
 		data(){
 			return {
 				// isShow:true,
-				pieEchartsData : {
-					id:'pieId',
-	                colorList:['#365AF8','#FFC925','#7B8EFB','#34DF8E','#A3FC8A','#FF7C25'],
-	                labelType:1,
-	                pieData:this.proportioData,
-	                radius:['35%', '70%'],
-	                borderWidth:0,
-				}
+				pieEchartsData : ''
 			}
 		},
 		mounted(){
+			this.pieEchartsData = {
+				id:'pieSalesManId',
+				colorList:['#365AF8','#FFC925','#7B8EFB','#34DF8E','#A3FC8A','#FF7C25'],
+				labelType:1,
+				pieData:this.proportioData,
+				radius:['35%', '70%'],
+				borderWidth:0,
+			}
 		},
 		methods:{
 			topographyClick(){
@@ -75,16 +76,16 @@
 			}
 		},
 		watch:{
-            proportioData(val){
-                this.pieEchartsData = {
-				id:'pieId',
-                colorList:['#365AF8','#FFC925','#7B8EFB','#34DF8E','#A3FC8A','#FF7C25'],
-                labelType:1,
-                pieData:val,
-                radius:['40%', '60%'],
-                borderWidth:0,
-			}
-            }
+            // proportioData(val){
+            //     this.pieSalesManId = {
+			// 		id:'pieId',
+			// 		colorList:['#365AF8','#FFC925','#7B8EFB','#34DF8E','#A3FC8A','#FF7C25'],
+			// 		labelType:1,
+			// 		pieData:val,
+			// 		radius:['40%', '60%'],
+			// 		borderWidth:0,
+			// 	}
+            // }
         },
 	}
 </script>

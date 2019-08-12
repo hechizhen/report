@@ -4,7 +4,7 @@
 		<subTitle :subtitlename="subtitlename" :listing="listing" :explicit="explicit"  :explainSecondList="explainSecondList"></subTitle>
 		<a-Row :gutter="23">
 		  <a-Col :span="10">
-		  	<sameMonth :orderAmountData="orderAmountData" :proportioData="proportioData" :topography="topography"></sameMonth>
+		  	<sameMonth :orderAmountData="orderAmountData" :proportioData="proportioData" :topography="topography" v-if="proportioData.length!=0"></sameMonth>
 		  </a-Col>
 		  <a-Col :span="7">
 		  	<totalAmount :titleName="'环比'" :displayData="grossProfitData" :totalAmountData="chainRatioData"></totalAmount>
