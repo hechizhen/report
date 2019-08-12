@@ -44,7 +44,7 @@
         float: left;
         /*margin-left: 9%;*/
         .shopRight-title{
-            height:202px;
+            height:180px;
         }
         .shop-active {
             width: 20%;

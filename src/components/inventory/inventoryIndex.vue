@@ -29,7 +29,7 @@
                 <div style="height: 100%;float: left;width: 75%">
                     <a-Row  class="commodityR-base" v-for="(item,index) in inventoryDetails.noSalesDetail" :key="index">
                         <a-Col :span="18">
-                            <div class="onetxt" style="text-align: left; padding-left: 10%">
+                            <div class="onetxt">
                                 {{item.name}}
                             </div>
                         </a-Col>
@@ -158,6 +158,11 @@
     right: 0;
     bottom: 10%;
 }
+.onetxt{
+    text-align: left;
+    margin-left: 4%;
+    border-bottom: 1px solid #E5E5E5;
+}
     .inventory-table{
         width: 35%;
         float: left;
@@ -184,6 +189,7 @@
                     display: inline-block;
                     border-radius: 50%;
                     text-align: center;
+                    margin-right: 2%;
                 }
                 p{
                     display: inline-block;
@@ -249,8 +255,9 @@
         font-family:PingFangSC-Medium;
         font-weight:500;
         color:rgba(51,51,51,1);
-       display: inline-block;
+        display: inline-block;
         width: 70%;
+        line-height: 44px;
     }
     .ant-col-6{
         line-height: 44px;
@@ -260,6 +267,7 @@
         margin-bottom: 0;
         display: inline-block;
         color:rgba(51,51,51,1);
+        border-bottom: 1px solid #E5E5E5;
     }
 }
 .productLeft-btn {
@@ -270,7 +278,6 @@
     justify-content: center;//子元素水平居中
     align-items: center;//子元素垂直居中
     .newButton {
-
         span {
             width: 48px;
             font-size: 14px;

@@ -187,13 +187,13 @@
             margin: 0 auto;
             .ant-row{
                 .ant-col-10{
-                    background:rgba(105,151,255,1);
+                    background:rgba(67,159,255,1);
                     border:1px solid rgba(105,151,255,1);
                     border-radius:6px;
                     height: 100%;
                 }
                 .ant-col-13{
-                    background:rgba(105,151,255,1);
+                    background:rgba(67,159,255,1);
                     border:1px solid rgba(105,151,255,1);
                     border-radius:6px;
                     height: 100%;
