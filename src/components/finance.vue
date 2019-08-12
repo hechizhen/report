@@ -15,6 +15,7 @@
             <div class="financeRight">
                 <over-due :overDueData="overDueData"></over-due>
             </div>
+            <loading-data :isShow="isShow"></loading-data>
         </div>
     </div>
 </template>
@@ -24,6 +25,7 @@
     import overDue from '../components/overDue.vue'
     import newButton from '../components/base/newButton.vue'
     import secondTitle from '../components/secondTitle.vue'
+    import loadingData from './base/loadingData'
     export default {
         name : 'finance',
         props:{
@@ -49,10 +51,12 @@
             receivable,
             overDue,
             newButton,
-            secondTitle
+            secondTitle,
+            loadingData
         },
         data () {
             return {
+                // isShow:true,
                 //按钮样式
                 buttonDeafult:{
                     buttonType:'primary',

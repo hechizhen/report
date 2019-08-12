@@ -113,15 +113,13 @@
             }
         },
         watch:{
-            marketableDayChart(val) {
-                console.log(val)
-                this.marketableDay = val;
+            marketableDayChart(val){
                 this.lineEchartsData = {
-                    id: 'lineIdMarketableDay',
-                    xAxisData: ["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"],
-                    lineData: this.marketableDay
+                    id:'lineId',
+                    xAxisData:val.monthArr,
+                    lineData:val.seriesData
                 }
-            }
+            },
         },
          mounted() {
                console.log(this.inventoryDay)

@@ -13,7 +13,9 @@
         v-if="monthBarData.length!=0 && monthSalesData.length!=0 && yearSalesData.length!=0 && yearBarData.length!=0"></one-help-sale-en>
 
         <!-- 二帮卖分析-订单 -->
-        <secondBand :orderAmountData="orderAmountData" :grossProfitData="grossProfitData" :grossInterestRateData="grossInterestRateData" :proportio="proportioData" :directionData="directionData"></secondBand>
+        <secondBand :orderAmountData="orderAmountData" :grossProfitData="grossProfitData" :grossInterestRateData="grossInterestRateData"
+                    :proportio="proportioData" :directionData="directionData"
+        ></secondBand>
         <!-- 二帮卖分析-业务员 -->
         <salesman :salesmanData="salesmanData" :salesmanTrendData="salesmanTrendData" :salesmandownwardData="salesmandownwardData" :salesmanReachedData="salesmanReachedData" :salesmanContributionData="salesmanContributionData"></salesman>
         <!-- 产品 -->
@@ -120,7 +122,7 @@
                 orderAmountData: {}, //金额数据
                 grossProfitData: {}, //毛利额
                 grossInterestRateData: {},//毛利率
-                proportioData: {},  //占比数据
+                proportioData: "",  //占比数据
                 directionData:{}, //订单走势图
                 salesmanTrendData:{},  //业务员走势图
                 salesmandownwardData:{}, //业务员下滑
@@ -547,7 +549,7 @@
                 }).then(function (res) {
                     var proportioData = res.data.data,thoseArr = [],chainRatio=[],placingOrdersYear=[],proportio={};
                     proportioData.map(function(item){
-                        thoseArr.push({name:item.name,value:item.amountMoney})
+                        thoseArr.push({name:item.name,value:item.value})
                         chainRatio.push({name:item.name,value:item.chainRatio})
                         placingOrdersYear.push({name:item.name,value:item.placingOrdersYear})
                     })
@@ -555,6 +557,7 @@
                     proportio.chainRatio = chainRatio;
                     proportio.placingOrdersYear = placingOrdersYear;
                     _this.proportioData = proportio;
+                    console.log(_this.proportioData)
                 })
             },
             //二帮卖-订单走势图
@@ -608,6 +611,8 @@
                     })
                     var tempsalesmanTrendData = {monthArr:xAxisData,seriesData:seriesData}
                     _this.salesmanTrendData = tempsalesmanTrendData
+                    console.log( _this.salesmanTrendData)
+
                 })
             },
             //业务员-下滑人员
@@ -1237,8 +1242,28 @@
                         dateTime: _this.currentDate
                     }
                 }).then(function (res) {
-                    var marketableDay = res.data.data;
-                    _this.marketableDayChart = marketableDay;
+                    var marketableDayChart = res.data.data,xAxisData=[],salesmanArr=[],seriesData=[],
+                        salesmanColor=['#EAB90D','#F07132','#00E2BF','#D14BDD','#009ADC','#25D5EA'];
+                    marketableDayChart.map(function(value){
+                            xAxisData.push(value.month)
+                        })
+                    marketableDayChart[0].salesmanList.map(function(value){
+                            salesmanArr.push(value.name)
+                        })
+                        salesmanArr.map(function(value,index){
+                            var tempObjecd = {name:value,color:salesmanColor[index]},tempArr = [];
+                            marketableDayChart.map(function(data){
+                                data.salesmanList.map(function(resdata){
+                                    if(value == resdata.name){
+                                        tempArr.push(resdata.value)
+                                    }
+                                })
+                            })
+                            tempObjecd.data = tempArr;
+                            seriesData.push(tempObjecd)
+                        })
+                        var tempsalesmanTrendData = {monthArr:xAxisData,seriesData:seriesData}
+                        _this.marketableDayChart = tempsalesmanTrendData
 
                     console.log(_this.marketableDayChart)
                 })
