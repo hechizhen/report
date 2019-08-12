@@ -46,65 +46,6 @@
                     </a-radio-group>
                 </div>
                 <div class="lineEcharts-right">
-                    <div class="partyTable">
-                        <table border="0" cellpadding="0" cellspacing="0" class="tabletitle">
-                            <tr>
-                                <td>
-                                    <div>商品编码</div>
-                                </td>
-                                <td>
-                                    <div>事业部</div>
-                                </td>
-                                <td>
-                                    <div>品类</div>
-                                </td>
-                                <td>
-                                    <div>系列</div>
-                                </td>
-                                <td>
-                                    <div>商品名称</div>
-                                </td>
-                                <td>
-                                    <div>销量（元）</div>
-                                </td>
-                                <td>
-                                    <div>销售占比</div>
-                                </td>
-                            </tr>
-                        </table>
-                        <div class="packagimgtable">
-                            <table  border="0" cellpadding="0" cellspacing="0" >
-                                <tr>
-                                    <td>
-                                        <div>7920176920176</div>
-                                    </td>
-                                    <td>
-                                        <div>立白 </div>
-                                    </td>
-                                    <td>
-                                        <div>立白洗衣粉 </div>
-                                    </td>
-                                    <td>
-                                        <div>xxxxxxxxx </div>
-                                    </td>
-                                    <td>
-                                        <div>xxxxxxxxx </div>
-                                    </td>
-                                    <td>
-                                        <div>xxxxxxxxx </div>
-                                    </td>
-                                    <td>
-                                        <div>xxxxxxxxx </div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="partybotm">
-                            <span>当前显示12个商品/共42个商品  第2页/共5页</span>
-                            <p>共100条</p>
-                            <a-pagination showQuickJumper :defaultCurrent="2" :total="50" @change="onChange" />
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -333,8 +274,6 @@
                     width: 100%;
                     td {
                         width: 10%;
-                    }
-                    div {
                         height: 50px;
                         line-height: 50px;
                         display: flex;
@@ -345,6 +284,9 @@
                         align-items: center;
                         justify-content: center;
                         border:1px solid rgba(220,220,220,1);
+                        float: left;
+                    }
+                    div {
                         span {
                             color: #D7DBEF;
                         }

@@ -59,7 +59,7 @@
 </script>
 <style scoped lang="less">
     .receivable{
-        width:95%;
+        width:90%;
         margin:0 auto;
         .rowStyle{
             height:81px;

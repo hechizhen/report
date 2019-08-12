@@ -10,109 +10,79 @@
         <div style="width:500px;height:500px;">
             <bar-echart></bar-echart>
         </div> -->
-        <report-table :searchList="dataList" :tablecColumns="tablecColumns" :tableData="tableData" v-if="tableData.length!=0 && tablecColumns.length!=0" :serachClick="serachHandleClick" :exportClick="exportHandleClick"></report-table>
+        <report-table :searchList="searchList" :serachClick="serachHandleClick" :defaultList="params" :interfaceParams="interfaceParams" 
+        :tableHeader="tableHeaderTxt" v-if="interfaceParams!=''"></report-table>
     </div>
 </template>
 <script>
-    import pieEchart from '../components/echarts/pie.vue'
-    import lineEchart from '../components/echarts/line.vue'
-    import barEchart from '../components/echarts/bar.vue'
+    // import pieEchart from '../components/echarts/pie.vue'
+    // import lineEchart from '../components/echarts/line.vue'
+    // import barEchart from '../components/echarts/bar.vue'
     import reportTable from '../components/base/reportTable.vue'
     export default {
         name : 'index',
         components : {
-            pieEchart,
-            lineEchart,
-            barEchart,
+            // pieEchart,
+            // lineEchart,
+            // barEchart,
             reportTable
         },
         data () {
             return {
-                tableData:'',
-                tableColmns:'',
-                requestHttpUrl:this.$store.state.requestHttpUrl,
-                dataList:['类型'],
-                params:['立白洗衣粉']
+                //搜索文字以及条件
+                searchList:[
+                    {
+                        name:'类型',
+                        type:'input',
+                    },
+                    {
+                        name:'时间类型',
+                        type:'select',
+                        list:['年','月']
+                    },
+                ],
+                //参数
+                params:['立白洗衣粉','月'],
+                //接口参数
+                interfaceParams:'',
+                //数据处理以及表头
+                tableHeaderTxt:[
+                    {txt:'事业部',unit:false},
+                    {txt:'销量',unit:'money',unit1:'tenth'},
+                    {txt:'目标',unit:'money',unit1:'tenth'},
+                    {txt:'达成率',unit:'percent',unit1:''},
+                    {txt:'同比',unit:'percent',unit1:''},
+                ]
             }
         },
         mounted () {
-            this.getSalesData()
+            this.interfaceParams = {
+                "serviceId":"data_saleDay_year_month_brand",
+                "inputParam":{
+                    "DATETYPE":this.params[1],
+                    "DATA_DT":"201908"
+                },
+                "outputCol":"ZNBO1_TEXT,SALE_SL,SALE_MB,SALE_DCL,Y2Y_PRECENT",
+                "orderCol":"orderNum",
+                "pageSize":100,
+                "pageNum":1
+            }
         },
         methods: {
             //点击搜索
             serachHandleClick(item){
                 this.params=item
-                this.getSalesData()
-            },
-            //导出的方法
-            exportHandleClick() {
-                require.ensure([], () => {
-                    const { export_json_to_excel } = require('../excel/Export2Excel');
-                    const tHeader = ['编码', '事业部', '品类', '系列', '名称', '销量', '销量占比'];
-                    // 上面设置Excel的表格第一行的标题
-                    const filterVal = ['code', 'business', 'category', 'series', 'name', 'sales', 'salesPercent'];
-                    // 上面的index、nickName、name是tableData里对象的属性
-                    const list = this.tableData;  //把data里的tableData存到list
-                    const data = this.formatJson(filterVal, list);
-                    export_json_to_excel(tHeader, data, '列表excel');
-                })
-            },
-            formatJson(filterVal, jsonData) {
-                return jsonData.map(v => filterVal.map(j => v[j]))
-            },
-            getSalesData() {
-                var _this = this
-                var params = {
+                this.interfaceParams = {
+                    "serviceId":"data_saleDay_year_month_brand",
                     "inputParam":{
-                        "date_dt":_this.currentDate
+                        "DATETYPE":this.params[1],
+                        "DATA_DT":"201908"
                     },
-                    "outputCol":"monthSales,monthReach,yearSales,yearReach",
-                    "pageNum":1,
-                    "pageSize":1000,
-                    "serviceId":"inspect_report_sales_data",
-                    "orderCol":"monthSales"
+                    "outputCol":"ZNBO1_TEXT,SALE_SL,SALE_MB,SALE_DCL,Y2Y_PRECENT",
+                    "orderCol":"orderNum",
+                    "pageSize":100,
+                    "pageNum":1
                 }
-                this.$http({
-                    url: _this.requestHttpUrl+'/commodityDetail',
-                    method: 'POST',
-                    data: {
-                        type:_this.params[0]
-                    }
-                }).then(function (res) {
-                    console.log(res)
-                    let data = res.data.data.data
-                    _this.tableData = data
-                    _this.tablecColumns = [
-                        {
-                            title: '编码',
-                            dataIndex: 'code',
-                        },
-                        {
-                            title: '事业部',
-                            dataIndex: 'business',
-                        },
-                        {
-                            title: '品类',
-                            dataIndex: 'category',
-                        },
-                        {
-                            title: '系列',
-                            dataIndex: 'series',
-                        },
-                        {
-                            title: '名称',
-                            dataIndex: 'name',
-                        },
-                        {
-                            title: '销量',
-                            dataIndex: 'sales',
-                        },
-                        {
-                            title: '销量占比',
-                            dataIndex: 'salesPercent',
-                        },
-                    ]
-                })
             },
         },
         computed:{

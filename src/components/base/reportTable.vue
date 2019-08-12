@@ -2,17 +2,19 @@
 <template>
     <div class="reportTable">
         <div class="titleBox">
-            <div class="title" v-for="(item,index) in searchList" :key="index">
-                <span>{{item}}:</span>
-                <a-input  placeholder="default size" style="width:60%;" v-model="inputVal[index]"/>
+            <div class="title" v-for="(parentItem,parentIndex) in searchList" :key="parentIndex">
+                <span>{{parentItem.name}}:</span>
+                <a-input  placeholder="default size" style="width:60%;" v-model="inputVal[parentIndex]" v-if="parentItem.type=='input'" />
+                <a-select  v-model="inputVal[parentIndex]" :defaultValue="parentItem.list[0]" style="width:60%;" v-if="parentItem.type=='select'">
+                    <a-select-option :value="childItem" v-for="(childItem,childIndex) in parentItem.list" :key="childIndex">{{childItem}}</a-select-option>
+                </a-select>
             </div>
-            <!-- <a-input v-for="(item,index) in searchList" :key="index" placeholder="default size" :value="value[index]" /> -->
             <div class="title">
                 <new-button :defaultVal="searchButton.defaultVal" :buttonType="searchButton.buttonType" :buttonHandleClick="searchHandleClick"></new-button>
                 <new-button :defaultVal="exportButton.defaultVal" :buttonType="exportButton.buttonType" :buttonHandleClick="exportHandleClick"></new-button>
             </div>
         </div>
-        <a-table :columns="tablecColumns" :dataSource="tableData" bordered>
+        <a-table :columns="tablecColumns" :dataSource="tableData" bordered :rowKey='tableData.SALE_DCL' v-if="tableData.length!=0">
             <template slot="name" slot-scope="text">
                 {{text}}
             </template>
@@ -24,53 +26,27 @@
     export default {
         name : 'reportTable',
         props:{
+            //查询值
             searchList:{
                 type:Array,
                 default:()=>['bo1','bo2','bo3','bo4']
-            },
-            tableData:{
-                type:Array,
-                default:()=>[
-                    {
-                        key: '1',
-                        name: 'John Brown',
-                        money: '￥300,000.00',
-                        address: 'New York No. 1 Lake Park',
-                    }, {
-                        key: '2',
-                        name: 'Jim Green',
-                        money: '￥1,256,000.00',
-                        address: 'London No. 1 Lake Park',
-                    }, {
-                        key: '3',
-                        name: 'Joe Black',
-                        money: '￥120,000.00',
-                        address: 'Sidney No. 1 Lake Park',
-                    }
-                ]
-            },
-            tablecColumns:{
-                type:Array,
-                default:()=>[
-                    {
-                        title: 'Name',
-                        dataIndex: 'name',
-                    }, {
-                        title: 'Cash Assets',
-                        dataIndex: 'money',
-                    }, {
-                        title: 'Address',
-                        dataIndex: 'address',
-                    }
-                ]
             },
             //点击搜索
             serachClick:{
                 type:Function
             },
-            //点击导出
-            exportClick:{
-                type:Function
+            //抬头
+            tableHeader:{
+                type:Array
+            },
+            //默认值
+            defaultList:{
+                type:Array,
+                defalut:()=>['bo1','bo2','bo3','bo4']
+            },
+            //接口参数
+            interfaceParams:{
+                type:Object
             }
         },
         components : {
@@ -87,28 +63,92 @@
                 exportButton:{
                     defaultVal:'导出数据',
                 },
-                inputVal:[]
+                inputVal:this.defaultList,
+                tableData:'',//列表数据
+                tableColmns:'',//表头数据
+                requestHttpUrl:this.$store.state.testRequestHttpUrl,//接口请求地址
+                 //表头key
+                tableHeaderKey:'',
+                //表头文字
+                tableHeaderTxt:'',
+                //参数
+                newInterfaceParams:this.interfaceParams
             }
         },
         mounted () {
-
+            this.getTableData()
         },
         methods: {
             //点击查询
             searchHandleClick(){
-                console.log(this.inputVal)
                 this.serachClick(this.inputVal)
             },
-            //点击导出
-            exportHandleClick(){
-                this.exportClick()
-            }
+             //导出的方法
+            exportHandleClick() {
+                require.ensure([], () => {
+                    const { export_json_to_excel } = require('../../excel/Export2Excel.js');
+                    const tHeader = this.tableHeaderTxt
+                    // 上面设置Excel的表格第一行的标题
+                    const filterVal = this.tableHeaderKey
+                    // 上面的index、nickName、name是tableData里对象的属性
+                    const list = this.tableData;  //把data里的tableData存到list
+                    const data = this.formatJson(filterVal, list);
+                    export_json_to_excel(tHeader, data, '列表excel');
+                })
+            },
+            formatJson(filterVal, jsonData) {
+                return jsonData.map(v => filterVal.map(j => v[j]))
+            },
+            getTableData() {
+                var _this = this
+                this.$http({
+                    url: _this.requestHttpUrl,
+                    method: 'POST',
+                    data: _this.newInterfaceParams
+                }).then(function (res) {
+                    //表头key值
+                    _this.tableHeaderKey = _this.interfaceParams.outputCol.split(',')
+                    //表头文字
+                    let header = []
+                    _this.tableHeader.map(function(item){
+                        header.push(item.txt)
+                    })
+                    _this.tableHeaderTxt = header
+                    let list =[]
+                    //遍历表头文字
+                    _this.tableHeaderTxt.map(function(parentItem){
+                        list.push({title:parentItem,dataIndex:''})
+                    })
+                    //遍历表头key值
+                    _this.tableHeaderKey.map(function(childItem,index){
+                        list[index].dataIndex = childItem
+                    })
+                    //获取表格表头格式
+                    _this.tablecColumns = list
+                    let data = res.data.data.data
+                    //表格数据处理
+                    data.map(function(parentItem){
+                        _this.tableHeaderKey.map(function(childItem,index){
+                            if(_this.tableHeader[index].unit){
+                                parentItem[childItem] = _this.dataProcess(parentItem[childItem],_this.tableHeader[index].unit,_this.tableHeader[index].unit1).num+
+                                _this.dataProcess(parentItem[childItem],_this.tableHeader[index].unit,_this.tableHeader[index].unit1).unit
+                            }
+                        })
+                    })
+                    //获取表格数据
+                    _this.tableData = data
+                    console.log(_this.tableData)
+                })
+            },
         },
         computed:{
 
         },
         watch: {
-
+            interfaceParams(val){
+                this.newInterfaceParams=val
+                this.getTableData()
+            }
         },
         distroyed: function () {
 
@@ -125,6 +165,7 @@
             width:100%;
             display:flex;
             flex-wrap:wrap;
+            padding: 10px 0;
             .title{
                 height:40px;
                 width:20%;

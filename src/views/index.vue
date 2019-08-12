@@ -226,7 +226,7 @@
                                 "data_type":"当月",
                                 "dealer_id":"ff8080816c0b0669016c416c850a4149"
                             },
-                        "outputCol":"data_mon,data_type,dealer_id,dealer_code,dealer_name,money,obj_money,liby_money,liby_obj_money,kispa_money,kispa_obj_money,cheerwin_money,cheerwin_obj_money,oral_money,oral_obj_money,shengmei_money,shengmei_obj_money,strategic_money,strategic_obj_money",
+                        "outputCol":"data_mon,data_type,dealer_id,money,obj_money,liby_money,liby_obj_money,kispa_money,kispa_obj_money,cheerwin_money,cheerwin_obj_money,oral_money,oral_obj_money,shengmei_money,shengmei_obj_money,strategic_money,strategic_obj_money",
                         "pageNum":1,
                         "pageSize":1000,
                         "serviceId":"service_rp_tjbg_sales_order"
@@ -245,7 +245,7 @@
                                 "data_type":"累计",
                                 "dealer_id":"ff8080816c0b0669016c416c850a4149"
                             },
-                        "outputCol":"data_mon,data_type,dealer_id,dealer_code,dealer_name,money,obj_money,liby_money,liby_obj_money,kispa_money,kispa_obj_money,cheerwin_money,cheerwin_obj_money,oral_money,oral_obj_money,shengmei_money,shengmei_obj_money,strategic_money,strategic_obj_money",
+                        "outputCol":"data_mon,data_type,dealer_id,money,obj_money,liby_money,liby_obj_money,kispa_money,kispa_obj_money,cheerwin_money,cheerwin_obj_money,oral_money,oral_obj_money,shengmei_money,shengmei_obj_money,strategic_money,strategic_obj_money",
                         "pageNum":1,
                         "pageSize":1000,
                         "serviceId":"service_rp_tjbg_sales_order"
