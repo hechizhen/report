@@ -185,6 +185,7 @@
                                     position: _this.label.position,
                                     color:_this.label.color,
                                     formatter:function(params){
+                                        console.log(params)
                                         return params.value+_this.barEchartsData.unit
                                     }
                                 }
@@ -237,7 +238,14 @@
                 }
                 var option = {
                     tooltip: {
-                        trigger: 'axis'
+                        trigger: 'axis',
+                        formatter:function(params){
+                            console.log(params)
+                            if(params[0].value==''){
+                                params[0].value='--'
+                            }
+                            return params[0].name+':'+params[0].value+_this.barEchartsData.unit
+                        }
                     },
                     legend: {
                         show:_this.legendShow,

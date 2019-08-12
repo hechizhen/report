@@ -24,6 +24,7 @@ Vue.prototype.$http = axios
 Vue.use(animated);
 Vue.use(common);
 
+axios.defaults.baseURL = 'http://dccuat.liby.com.cn/hanadcc/queryByPage'; 
 // 路由配置
 const RouterConfig = {
     // mode: 'history',

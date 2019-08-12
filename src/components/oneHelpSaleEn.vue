@@ -3,10 +3,10 @@
 		<second-title :titleName="titleName" :explainSecondList="explainSecondList"></second-title>
 		<div class="oneHelpSaleEnBox">
 			<div class="oneHelpSaleEnBoxLeft">
-				<one-help-sale :salesData="salesData.monthData" :barData="barData.monthBarData" v-if="salesData.length!=0"></one-help-sale>
+				<one-help-sale :salesData="monthSalesData" :barData="monthBarData" v-if="monthSalesData.length!=0 && monthBarData.length!=0"></one-help-sale>
 			</div>
 			<div class="oneHelpSaleEnBoxRight">
-				<one-help-sale :salesData="salesData.yearData" :barData="barData.yearBarData" v-if="salesData.length!=0"></one-help-sale>
+				<one-help-sale :salesData="yearSalesData" :barData="yearBarData" v-if="yearSalesData.length!=0 && yearBarData.length!=0"></one-help-sale>
 			</div>
 		</div>
 		<core :coretype="coreData.coretype" :coretext="coreData.coretext" :evaluate="coreData.evaluate"></core>
@@ -28,12 +28,20 @@
 			titleName:{
 				type:String
 			},
-			//一帮卖本月/累计销量
-            salesData:{
+			//一帮卖本月销量
+            monthSalesData:{
                 type:Object,
             },
-            //达成率柱状图数据
-            barData:{
+			//一帮卖累计销量
+            yearSalesData:{
+                type:Object,
+            },
+            //本月达成率柱状图数据
+            monthBarData:{
+                type:Object
+			},
+            //累计达成率柱状图数据
+            yearBarData:{
                 type:Object
 			},
 			//评分组件
@@ -60,7 +68,7 @@
 			}
 		},
 		mounted(){
-			console.log(this.barData)
+			console.log(this.yearBarData)
 		},
 		methods:{
 

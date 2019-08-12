@@ -123,6 +123,15 @@ export default{
     //   return value* 1
     // }
   };
+  //获取达成率
+  Vue.prototype.getReachPercent = function(a,b){
+    if(b!=0 && b!=null){
+      var reach = ((a/b)*100).toFixed(2)
+    }else{
+      var reach = '--'
+    }
+    return reach
+  }
   // 数据处理
     Vue.prototype.dataProcess = function (data,type,decimal) {
         if(data !== "" && data !== null) {

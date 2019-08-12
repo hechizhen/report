@@ -64,7 +64,7 @@
             }
         },
         mounted () {
-            console.log(this.salesData)
+            console.log(this.barData)
         },
         methods: {
         },

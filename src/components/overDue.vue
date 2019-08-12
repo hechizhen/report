@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="overDueBottom">
-            <a-progress type="circle" :percent="overDueData.overDueRadioPercent" :successPercent="15"  :width="126" :showInfo="false" strokeColor="#6BBCFF" />
+            <a-progress type="circle" :percent="Number(overDueData.overDueRadioPercent)" :successPercent="15"  :width="126" :showInfo="false" strokeColor="#6BBCFF" />
             <div class="overDueBox">
                 <div>
                     <p>
