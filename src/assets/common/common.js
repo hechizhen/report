@@ -128,7 +128,7 @@ export default{
     if(b!=0 && b!=null){
       var reach = ((a/b)*100).toFixed(2)
     }else{
-      var reach = '--'
+      var reach = ''
     }
     return reach
   }

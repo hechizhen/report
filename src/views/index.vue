@@ -9,7 +9,7 @@
         <header-title :dealName="indexDealName" :score="indexScore" :summary="indexSummary" :defaultDate="indexDefaultDate" :changeDateHandle="indexChangeDate"></header-title>
         <!-- 一帮卖分析 -->
         <one-help-sale-en :titleName="oneHelpSaleTitle" :monthSalesData="monthSalesData" :monthBarData="monthBarData"  :coreData="oneHelpSaleScoreList" 
-        :yearSalesData="yearSalesData" :yearBarData="yearBarData"
+        :yearSalesData="yearSalesData" :yearBarData="yearBarData" :monthShow="oneHelpSaleMonthShow" :yearShow="oneHelpSaleYearShow"
         v-if="monthBarData.length!=0 && monthSalesData.length!=0 && yearSalesData.length!=0 && yearBarData.length!=0"></one-help-sale-en>
 
         <!-- 帮卖分析-订单 -->
@@ -111,9 +111,11 @@
                 yearBarData: '',//本月/累计销量以及达成率
                 oneHelpSaleScoreList: {//一帮卖评分
                     coretype: '一帮卖得分',
-                    coretext: 100,
-                    evaluate: '优秀'
+                    coretext: '',
+                    evaluate: ''
                 },
+                oneHelpSaleMonthShow:false,
+                oneHelpSaleYearShow:false,
                 salesmanData: {},//业务员数据
                 orderAmountData: {}, //金额数据
                 grossProfitData: {}, //毛利额
@@ -135,11 +137,11 @@
             this.currentDate = year + '' + month
             //获取当前默认显示年月
             this.indexDefaultDate = year + '/' + month
+
         },
         mounted() {
             this.getOverViewData()
-            this.getMonthSalesData()
-            this.getYearSalesData()
+            this.getOneHelpSalesData()
             this.getFinanceTableData()
             this.getReceivableData()
             this.getOverdueData()
@@ -174,9 +176,7 @@
             indexChangeDate(val) {
                 this.currentDate = val
                 this.getOverViewData()
-                this.getMonthSalesData()
-                this.getYearSalesData()
-                // this.getMonthSalesHistoryData()
+                this.getOneHelpSalesData()
                 this.getFinanceTableData()
                 this.getReceivableData()
                 this.getOverdueData()
@@ -213,40 +213,69 @@
                     _this.indexSummary = data.summary
                 })
             },
-            //本月下单金额以及总达成 以及本月大达成率
-            getMonthSalesData() {
+            //本月累计下单金额以及总达成 以及本月累计达成率
+            getOneHelpSalesData() {
                 var _this = this
-                 var params = {
-                    "inputParam":
-                    {
-                        "data_mon":_this.currentDate,
-                        "data_type":"当月",
-                        "dealer_id":"ff8080816c0b0669016c416c850a4149"
-                    },
-                    "outputCol":"data_mon,data_type,dealer_id,dealer_code,dealer_name,money,obj_money,liby_money,liby_obj_money,kispa_money,kispa_obj_money,cheerwin_money,cheerwin_obj_money,oral_money,oral_obj_money,shengmei_money,shengmei_obj_money,strategic_money,strategic_obj_money",
-                    "pageNum":1,
-                    "pageSize":1000,
-                    "serviceId":"service_rp_tjbg_sales_order"
+                _this.oneHelpSaleMonthShow = true
+                _this.oneHelpSaleYearShow = true
+                function getMonthData(){
+                    var params = {
+                        "inputParam":
+                            {
+                                "data_mon":_this.currentDate,
+                                "data_type":"当月",
+                                "dealer_id":"ff8080816c0b0669016c416c850a4149"
+                            },
+                        "outputCol":"data_mon,data_type,dealer_id,dealer_code,dealer_name,money,obj_money,liby_money,liby_obj_money,kispa_money,kispa_obj_money,cheerwin_money,cheerwin_obj_money,oral_money,oral_obj_money,shengmei_money,shengmei_obj_money,strategic_money,strategic_obj_money",
+                        "pageNum":1,
+                        "pageSize":1000,
+                        "serviceId":"service_rp_tjbg_sales_order"
+                    }
+                    return _this.$http({
+                        url: _this.testRequestHttpUrl,
+                        method: 'POST',
+                        data: params,
+                    })
                 }
-                this.$http({
-                    url: _this.testRequestHttpUrl,
-                    method: 'POST',
-                    data: params,
-                }).then(function (res) {
-                    console.log(res)
-                    let data = res.data.data.data[0]
-                    //本月下单金额达成率
+                function getYearData(){
+                    var params = {
+                        "inputParam":
+                            {
+                                "data_mon":_this.currentDate,
+                                "data_type":"累计",
+                                "dealer_id":"ff8080816c0b0669016c416c850a4149"
+                            },
+                        "outputCol":"data_mon,data_type,dealer_id,dealer_code,dealer_name,money,obj_money,liby_money,liby_obj_money,kispa_money,kispa_obj_money,cheerwin_money,cheerwin_obj_money,oral_money,oral_obj_money,shengmei_money,shengmei_obj_money,strategic_money,strategic_obj_money",
+                        "pageNum":1,
+                        "pageSize":1000,
+                        "serviceId":"service_rp_tjbg_sales_order"
+                    }
+                    return _this.$http({
+                        url: _this.testRequestHttpUrl,
+                        method: 'POST',
+                        data: params,
+                    })
+                }
+                
+                this.$http.all([getMonthData(), getYearData()])
+                    .then(this.$http.spread((salesMonth, salesYear) => {
+                        //同时请求 本月和累计的销量数据
+                        console.log(salesMonth)
+                        console.log(salesYear)
+                        let salesMonthData = salesMonth.data.data.data[0]
+                        let salesYearData = salesYear.data.data.data[0]
+                         //本月下单金额达成率
                     _this.monthSalesData = {
-                            sales:_this.dataProcess(data.money,'money').num,
-                            reach:_this.getReachPercent(data.money,data.obj_money)+'%',
-                            bgColor:'#2D92FC',
-                            titleName:'本月'
+                        sales:_this.dataProcess(salesMonthData.money,'money').num,
+                        reach:_this.getReachPercent(salesMonthData.money,salesMonthData.obj_money)+'%',
+                        bgColor:'#2D92FC',
+                        titleName:'本月'
                     }
                     //本月达成率历史趋势
-                    let barData = [
-                        _this.getReachPercent(data.liby_money,data.liby_obj_money),_this.getReachPercent(data.kispa_money,data.kispa_obj_money),
-                        _this.getReachPercent(data.cheerwin_money,data.cheerwin_obj_money),_this.getReachPercent(data.oral_money,data.oral_obj_money),
-                        _this.getReachPercent(data.shengmei_money,data.shengmei_obj_money),_this.getReachPercent(data.strategic_money,data.strategic_obj_money)
+                    let barDataMonth = [
+                        _this.getReachPercent(salesMonthData.liby_money,salesMonthData.liby_obj_money),_this.getReachPercent(salesMonthData.kispa_money,salesMonthData.kispa_obj_money),
+                        _this.getReachPercent(salesMonthData.cheerwin_money,salesMonthData.cheerwin_obj_money),_this.getReachPercent(salesMonthData.oral_money,salesMonthData.oral_obj_money),
+                        _this.getReachPercent(salesMonthData.shengmei_money,salesMonthData.shengmei_obj_money),_this.getReachPercent(salesMonthData.strategic_money,salesMonthData.strategic_obj_money)
                     ]
                     let Axiax = ['立白','好爸爸','超威','口腔','晟美','战略品']
                     _this.monthBarData = {
@@ -258,7 +287,7 @@
                             barData: [
                                 {
                                     name: '达成率',
-                                    data: barData,
+                                    data: barDataMonth,
                                     color: '#D7D9E5',
                                     barWidth: 11
                                 },
@@ -306,45 +335,19 @@
                         legendShow:false,
                         isShowMax:true,
                     }
-                })
-            },
-            //年累计下单金额以及总达成 以及本月大达成率
-            getYearSalesData() {
-                var _this = this
-                 var params = {
-                    "inputParam":
-                    {
-                        // "data_mon":,
-                        "data_mon":_this.currentDate,
-                        "data_type":"累计",
-                        "dealer_id":"ff8080816c0b0669016c416c850a4149"
-                    },
-                    "outputCol":"data_mon,data_type,dealer_id,dealer_code,dealer_name,money,obj_money,liby_money,liby_obj_money,kispa_money,kispa_obj_money,cheerwin_money,cheerwin_obj_money,oral_money,oral_obj_money,shengmei_money,shengmei_obj_money,strategic_money,strategic_obj_money",
-                    "pageNum":1,
-                    "pageSize":1000,
-                    "serviceId":"service_rp_tjbg_sales_order"
-                }
-                this.$http({
-                    url: _this.testRequestHttpUrl,
-                    method: 'POST',
-                    data: params,
-                }).then(function (res) {
-                    console.log(res)
-                    let data = res.data.data.data[0]
-                    //本月下单金额达成率
+                     //本月下单金额达成率
                     _this.yearSalesData = {
-                        sales:_this.dataProcess(data.money,'money').num,
-                        reach:_this.getReachPercent(data.money,data.obj_money)+'%',
+                        sales:_this.dataProcess(salesYearData.money,'money').num,
+                        reach:_this.getReachPercent(salesYearData.money,salesYearData.obj_money)+'%',
                         bgColor:'#FF9500',
                         titleName:'年累计'
                     }
                     //本月达成率历史趋势
-                    let barData = [
-                        _this.getReachPercent(data.liby_money,data.liby_obj_money),_this.getReachPercent(data.kispa_money,data.kispa_obj_money),
-                        _this.getReachPercent(data.cheerwin_money,data.cheerwin_obj_money),_this.getReachPercent(data.oral_money,data.oral_obj_money),
-                        _this.getReachPercent(data.shengmei_money,data.shengmei_obj_money),_this.getReachPercent(data.strategic_money,data.strategic_obj_money)
+                    let barDataYear = [
+                        _this.getReachPercent(salesYearData.liby_money,salesYearData.liby_obj_money),_this.getReachPercent(salesYearData.kispa_money,salesYearData.kispa_obj_money),
+                        _this.getReachPercent(salesYearData.cheerwin_money,salesYearData.cheerwin_obj_money),_this.getReachPercent(salesYearData.oral_money,salesYearData.oral_obj_money),
+                        _this.getReachPercent(salesYearData.shengmei_money,salesYearData.shengmei_obj_money),_this.getReachPercent(salesYearData.strategic_money,salesYearData.strategic_obj_money)
                     ]
-                    let Axiax = ['立白','好爸爸','超威','口腔','晟美','战略品']
                     _this.yearBarData = {
                         config:{
                             id: 'barIdYearSales',
@@ -354,7 +357,7 @@
                             barData: [
                                 {
                                     name: '达成率',
-                                    data: barData,
+                                    data: barDataYear,
                                     color: '#D7D9E5',
                                     barWidth: 11
                                 },
@@ -402,8 +405,17 @@
                         legendShow:false,
                         isShowMax:true,
                     }
-                    console.log(_this.yearBarData)
-                })
+                    console.log(barDataYear)
+                    console.log(barDataMonth)
+                    let score = _this.scoreProcess(barDataYear,barDataMonth)
+                    _this.oneHelpSaleScoreList={//一帮卖评分
+                        coretype: '一帮卖得分',
+                        coretext: score,
+                        evaluate: '优秀'
+                    }
+                    _this.oneHelpSaleMonthShow = false
+                    _this.oneHelpSaleYearShow = false
+                }));
             },
             //财务报表数据
             getFinanceTableData() {

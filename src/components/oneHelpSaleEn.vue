@@ -3,10 +3,10 @@
 		<second-title :titleName="titleName" :explainSecondList="explainSecondList"></second-title>
 		<div class="oneHelpSaleEnBox">
 			<div class="oneHelpSaleEnBoxLeft">
-				<one-help-sale :salesData="monthSalesData" :barData="monthBarData" v-if="monthSalesData.length!=0 && monthBarData.length!=0"></one-help-sale>
+				<one-help-sale :salesData="monthSalesData" :barData="monthBarData" :isShow="monthShow" v-if="monthSalesData.length!=0 && monthBarData.length!=0"></one-help-sale>
 			</div>
 			<div class="oneHelpSaleEnBoxRight">
-				<one-help-sale :salesData="yearSalesData" :barData="yearBarData" v-if="yearSalesData.length!=0 && yearBarData.length!=0"></one-help-sale>
+				<one-help-sale :salesData="yearSalesData" :barData="yearBarData" :isShow="yearShow" v-if="yearSalesData.length!=0 && yearBarData.length!=0"></one-help-sale>
 			</div>
 		</div>
 		<core :coretype="coreData.coretype" :coretext="coreData.coretext" :evaluate="coreData.evaluate"></core>
@@ -47,6 +47,14 @@
 			//评分组件
 			coreData:{
 				type:Object
+			},
+			//月数据laoding
+			monthShow:{
+				type:Boolean
+			},
+			//年数据loading
+			yearShow:{
+				type:Boolean
 			}
 		},
 		data(){

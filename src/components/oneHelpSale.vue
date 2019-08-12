@@ -37,11 +37,13 @@
                 </div>
             </div>
         </div>
+        <loading-data :isShow="isShow"></loading-data>
     </div>
 </template>
 <script>
     import pieChart from '../components/echarts/pie.vue'
     import barChart from '../components/echarts/bar.vue'
+    import loadingData from '../components/base/loadingData.vue'
     export default {
         name : 'oneHelpSale',           
         props:{
@@ -52,12 +54,17 @@
             //达成率柱状图数据
             barData:{
                 type:Object
+            },
+            isShow:{
+                type:Boolean,
+                default:false,
             }
         },
         components : {
             pieChart,
             barChart,
-            core
+            core,
+            loadingData
         },
         data () {
             return {
@@ -82,6 +89,8 @@
 <style scoped lang="less">
     .oneHelpSale{
         width:100%;
+        position: relative;
+        height:426px;
         .oneHelpSaleBox{
             background:rgba(255,255,255,1);
             border-radius:6px;
