@@ -168,7 +168,7 @@
             .commodityR-title {
                 width: 100%;
                 line-height: 32px;
-                background: rgba(126, 165, 254, 1);
+                background: rgba(255,255,255,0.2);
                 border-radius: 6px;
                 display: inline-block;
 
