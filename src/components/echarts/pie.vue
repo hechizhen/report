@@ -87,6 +87,7 @@
                 if(_this.pieEchartsData.labelType==1){
                     var labelStyle= {
                         normal: {
+                            padding: [0,-55,45,-55],
                             textStyle: {
                                 fontSize: 12 * scale,
                             },
@@ -154,8 +155,8 @@
                         },
                         labelLine: {
                             normal: {
-                                length: 30 * scale,
-                                length2: 20,
+                                length: 10 * scale,
+                                length2: 60,
                                 lineStyle: {
                                     color: '#C3C6CD'
                                 }
