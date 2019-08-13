@@ -496,6 +496,28 @@ export default{
       let score =  (Number(average)+Number(average1)+Number(stockRate))/3
       return score.toFixed(1)
     }
+    //一帮卖评价文字
+    Vue.prototype.oneHelpSaleEvaluate = function(monthReach,yearReach,monthStrategy,yearStrategy){
+      if(monthReach>=1.1 && yearReach>=1.1 && monthStrategy>=1 && yearStrategy>=1){
+        var evaluateTxt = '很好'
+        var describeTxt = '集团进货目标全面达成，品类进货均衡，表现优秀。'
+      }else if(monthReach>=1 && yearReach>=1){
+        var evaluateTxt = '较好'
+        var describeTxt = '集团进货目标总量达成，部分品类未达成，需留意品类结构发展。'
+      }else if(monthReach>=1 || yearReach>=1){
+        var evaluateTxt = '一般'
+        var describeTxt = '集团进货目标未全部达成，仍需努力。'
+      }else if(monthReach>=0.95&&monthReach<1 && yearReach>=0.95&&yearReach<1){
+        var evaluateTxt = '较差'
+        var describeTxt = '本月、累计两个总量达成率均超过95%，低于100%。'
+      }else{
+        var evaluateTxt = '很差'
+        var describeTxt = '集团进货目标未达成，亟待改善。'
+      }
+      return{
+        evaluateTxt,describeTxt
+      }
+    }
 
   /* 获取N天前的日期 不传为当日 */
   Vue.prototype.getDayStr = function (n) {

@@ -56,8 +56,13 @@
         }
     }
 </script>
-<style scoped lang="less">
+<style lang="less">
     .newButton{
-
+        // .ant-btn{
+        //     color:#333!important
+        // }
+        // .ant-btn-primary{
+        //     color:#fff!important
+        // }
     }
 </style>

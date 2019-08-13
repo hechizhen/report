@@ -17,11 +17,14 @@
                 <new-button :defaultVal="exportButton.defaultVal" :buttonType="exportButton.buttonType" :buttonHandleClick="exportHandleClick"></new-button>
             </div>
         </div>
-        <a-table :columns="tablecColumns" :dataSource="tableData" bordered :rowKey='tableData.SALE_DCL' v-if="tableData.length!=0">
+        <a-table :columns="tablecColumns" :dataSource="tableData" bordered :rowKey='tableData.SALE_DCL' :pagination="false" v-if="tableData.length!=0">
             <template slot="name" slot-scope="text">
                 {{text}}
             </template>
         </a-table>
+        <div class="paginationTable">
+            <a-pagination showQuickJumper :defaultCurrent="1" :total="totalSize" :defaultPageSize="defaultSize" @change="onChange" />
+        </div>
     </div>
 </template>
 <script>
@@ -42,11 +45,6 @@
             tableHeader:{
                 type:Array
             },
-            //默认值
-            defaultList:{
-                type:Array,
-                defalut:()=>['bo1','bo2','bo3','bo4']
-            },
             //接口参数
             interfaceParams:{
                 type:Object
@@ -66,7 +64,7 @@
                 exportButton:{
                     defaultVal:'导出数据',
                 },
-                inputVal:this.defaultList,
+                inputVal:'',
                 tableData:'',//列表数据
                 tableColmns:'',//表头数据
                 requestHttpUrl:this.$store.state.testRequestHttpUrl,//接口请求地址
@@ -79,13 +77,26 @@
                 newInterfaceParams:this.interfaceParams,
                 requestList:'',
                 params:'',
+                totalSize:'',//数据总条数
+                defaultSize:'',//数据条数/页
             }
+        },
+        created(){
+            var _this = this
+            let list = []
+            _this.searchList.map(function(item){
+                list.push(item.defaultParam)
+            })
+            _this.inputVal = list
         },
         mounted () {
             this.getTableData()
             this.getSelectData()
         },
         methods: {
+            onChange(pageNumber) {
+                console.log('Page: ', pageNumber);
+            },
             //点击查询
             searchHandleClick(){
                 this.serachClick(this.inputVal)
@@ -113,6 +124,9 @@
                     method: 'POST',
                     data: _this.newInterfaceParams
                 }).then(function (res) {
+                    let pageData = res.data.data
+                    _this.totalSize = pageData.totalSize
+                    _this.defaultSize = pageData.pageSize
                     //表头key值
                     _this.tableHeaderKey = _this.interfaceParams.outputCol.split(',')
                     //表头文字
@@ -219,6 +233,11 @@
             flex-wrap: wrap;
             padding:20px 0 ;
             justify-content: flex-start;
+        }
+        .paginationTable{
+            width:100%;
+            text-align: right;
+            padding:20px 0;
         }
     }
 </style>

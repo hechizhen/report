@@ -30,18 +30,18 @@
         },
         data () {
             return {
-                 //参数
-                params:["立白洗衣粉","月","立白市场部","立白市场部"],
                 //搜索文字以及条件
                 searchList:[
                     {
                         name:'类型',
                         type:'input',
+                        defaultParam:'立白洗衣粉'
                     },
                     {
                         name:'时间类型',
                         type:'select',
-                        list:['年','月']
+                        list:['年','月'],
+                        defaultParam:'月'
                     },
                     {
                         name:'时间类型',
@@ -56,7 +56,8 @@
                             "orderCol":"bo1 desc",
                             "pageSize":10000,
                             "pageNum":1
-                        }
+                        },
+                        defaultParam:'立白市场部'
                     },
                     {
                         name:'时间类型',
@@ -71,7 +72,8 @@
                             "orderCol":"bo1 desc",
                             "pageSize":10000,
                             "pageNum":1
-                        }
+                        },
+                        defaultParam:'立白市场部'
                     },
                 ],
                 //接口参数
@@ -92,7 +94,7 @@
             this.interfaceParams = {
                     "serviceId":"data_saleDay_year_month_brand",
                     "inputParam":{
-                        "DATETYPE":this.params[1],
+                        "DATETYPE":this.searchList[1].defaultParam,
                         "DATA_DT":"201908"
                     },
                     "outputCol":"ZNBO1_TEXT,SALE_SL,SALE_MB,SALE_DCL,Y2Y_PRECENT",
