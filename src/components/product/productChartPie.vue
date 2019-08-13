@@ -15,7 +15,7 @@
                 </a-Row>
             </div>
             <div class="lineEcharts">
-                <pieEcharts :pieEchartsData="pieEchartsData"  :chartHandleClick="chartHandleClick" ></pieEcharts>
+                <pieEcharts :pieEchartsData="pieEchartsData.config" :position="pieEchartsData.position" :legendShow="pieEchartsData.legendShow" :chartHandleClick="chartHandleClick" ></pieEcharts>
             </div>
         </div>
 

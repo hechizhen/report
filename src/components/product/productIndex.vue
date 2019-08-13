@@ -110,13 +110,17 @@
             GoodsDetail(val){
                 this.goodsData = val;
                 this.pieEchartsData = {
-                    id:'pieEchartsId',
-                    unit:this.goodsData.name,
-                    colorList:['#66E3E2', '#89D6D7', '#8AD493', '#65BF6B',"#F2AB60","#F0D570","#8CA9F6","#AABBF7","#66D6FF","#9BDBEF","#61B8F6","#B4D8D0"],
-                    labelType:2,
-                    pieData:this.goodsData,
-                    radius:['100%', '5%'],
-                    borderWidth:0,
+                    config:{
+                        id:'pieEchartsId',
+                        unit:this.goodsData.name,
+                        colorList:['#66E3E2', '#89D6D7', '#8AD493', '#65BF6B',"#F2AB60","#F0D570","#8CA9F6","#AABBF7","#66D6FF","#9BDBEF","#61B8F6","#B4D8D0"],
+                        labelType:2,
+                        pieData:this.goodsData,
+                        radius:['80%', '5%'],
+                        borderWidth:0,
+                    },
+                    position:['50%','40%'],
+                    legendShow:true
                 }
             },
             VariabilityUpData(val){

@@ -37,10 +37,19 @@
                     borderWidth:0,
                 })
             },
+            //是否显示图标
+            legendShow:{
+                type:Boolean,
+                default: false
+            },
             //饼图点击事件
             chartHandleClick:{
                 type:Function
             },
+            position:{
+                type:Array,
+                default:()=>['50%','50%']
+            }
         },
         components : {
 
@@ -102,7 +111,7 @@
                             formatter: "{b}\n{d}%",
                             textStyle: {
                                 color: '#333333',
-                                fontSize:"14px",
+                                fontSize:14,
                             }
                         },
                     }
@@ -113,12 +122,28 @@
                         },
                     }
                 }
+                let legendList=[]
+                _this.pieEchartsData.pieData.map(function(item){
+                    legendList.push(item.name)
+                })
                 var option = {
+                    legend:{
+                        show:_this.legendShow,
+                        data:legendList,
+                        itemGap: 10,
+                        textStyle: {
+                            color: "#333333",
+                            fontSize:14
+                        },
+                        bottom:'8%',
+                    },
                     series: [{
-                        name: '在线数量',
+                        name: '',
                         type: 'pie',
                         radius: _this.pieEchartsData.radius,
                         hoverAnimation: true,
+                        minAngle:25,
+                        center: _this.position,
                         color: _this.pieEchartsData.colorList,
                         label: labelStyle,
                         itemStyle: { //图形样式
