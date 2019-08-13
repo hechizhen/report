@@ -193,7 +193,7 @@
             }
 
             .commodityR-base {
-                width: 90%;
+                width: 100%;
                 height: 34px;
                 margin: 6% auto 0;
                 .quan {
@@ -242,8 +242,8 @@
             justify-content: center;
             align-items: center;
             .commodityRight-sumbor {
-                width: 165px;
-                height: 165px;
+                width: 130px;
+                height: 130px;
                 border: 1px solid rgba(255, 255, 255, 1);
                 border-radius: 50%;
                 position: relative;
@@ -251,7 +251,7 @@
                 .commodityRight-sumtxt {
                     position: absolute;
                     top: 30%;
-                    left: 30%;
+                    left: 25%;
                     font-family: PingFangSC-Medium;
                     font-weight: bold;
                     color: rgba(255, 255, 255, 1);

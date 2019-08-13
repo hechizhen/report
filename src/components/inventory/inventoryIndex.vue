@@ -279,7 +279,7 @@
     height:88px;
     float: left;
     display:flex;
-    justify-content: center;//子元素水平居中
+    /*justify-content: center;//子元素水平居中*/
     align-items: center;//子元素垂直居中
     .newButton {
         span {

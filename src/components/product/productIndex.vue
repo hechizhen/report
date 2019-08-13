@@ -22,6 +22,7 @@
         <downproductChart v-if="downShow" :trendChartClick="downClick" :barEchartsData="barEchartsDataDown" :isShow="NumberGoodsUpBar"></downproductChart>  <!--增长-->
 
         <productChartPie v-if="pieShow" :trendChartClick="pieClick" :pieEchartsData="pieEchartsData" :tableData="productTableData"
+                        :NumberGoodsPie="NumberGoodsPie" :NumberGoodsList="NumberGoodsList"
         ></productChartPie>
         <!--<productList  v-if="listShow"  :trendChartClick="listClick" ></productList>-->
     </div>
@@ -40,7 +41,8 @@
     export default {
         name: "cententindex",
         props:["CommodityTurnoverRate","commoditydata","GoodsDetail","NumberGoods","CommodityRate",
-            "VariabilityUpData","VariabilityDownData","productTableData","NumberGoodsDownBar","NumberGoodsUpBar"],
+            "VariabilityUpData","VariabilityDownData","productTableData","NumberGoodsDownBar","NumberGoodsUpBar",
+             "NumberGoodsPie","NumberGoodsList"],
         components:{
             productLeft,
             productRight,

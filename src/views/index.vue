@@ -27,7 +27,7 @@
         <productIndex :CommodityTurnoverRate="CommodityTurnoverRate"  :commoditydata="commoditydata" :GoodsDetail="GoodsDetail"
                       :VariabilityUpData="VariabilityUpData" :VariabilityDownData="VariabilityDownData" :productTableData="productTableData"
                       :NumberGoods="NumberGoods"  :CommodityRate="CommodityRate"  :NumberGoodsDownBar="NumberGoodsDownBar" :NumberGoodsUpBar="NumberGoodsUpBar"
-                      v-if="CommodityTurnoverRate.length!=0"
+                      :NumberGoodsPie="NumberGoodsPie" :NumberGoodsList="NumberGoodsList" v-if="CommodityTurnoverRate.length!=0"
         ></productIndex>
         <!--门店-->
         <shopIndex  :StoresDetailed="StoresDetailed" v-if="StoresDetailed.length!=0 "  :isShow="StoreisShow"
@@ -136,6 +136,7 @@
                 CommodityRate:false,        //商品动销率
                 NumberGoods:false,          //动销商品数
                 NumberGoodsPie:false,       //动销商品数饼图
+                NumberGoodsList:false,       //动销商品数表格
                 NumberGoodsUpBar:false,     //动销商品增长
                 NumberGoodsDownBar:false,   //动销商品下降
                 upStoresBar:false,          //门店增长
@@ -862,6 +863,7 @@
             //产品-列表数据
             getProductTableData(){
                 var _this = this
+                _this.NumberGoodsList = true
                 this.$http({
                     url: _this.requestHttpUrl + '/commodityDetail',
                     method: 'POST',
@@ -905,6 +907,7 @@
                         data:data,
                         columns:tablecColumns
                     }
+                    _this.NumberGoodsList = false
                 })
             },
             //产品-动销商品数

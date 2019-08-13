@@ -115,7 +115,7 @@
             line-height: 26px;
             text-align: center;
             margin: auto;
-            margin-top: 20px;
+            margin-top: 10%;
 
         }
     }

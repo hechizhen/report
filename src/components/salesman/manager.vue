@@ -21,7 +21,6 @@
 				  </a-Col>
 				</a-Row>
 		  	</div>
-			  <loading-data :isShow="isShow"></loading-data>
 		  </a-Col>
 		  <a-Col :span="8" class="managerCol">
 		  	<div  class="produce">
@@ -41,7 +40,6 @@
 				  </a-Col>
 				</a-Row>
 		  	</div>
-			  <loading-data :isShow="isShow"></loading-data>
 		  </a-Col>
 		  <a-Col :span="8" class="managerCol">
 		  	<div  class="compare">
@@ -64,9 +62,9 @@
 				  </a-Col>
 				</a-Row>
 		  	</div>
-			  <loading-data :isShow="isShow"></loading-data>
 		  </a-Col>
 		</a-Row>
+		<loading-data :isShow="isShow"></loading-data>
 	</div>
 </template>
 <script>
@@ -123,6 +121,7 @@
 		background:rgba(255,255,255,1);
 		border-radius:10px;
 		padding: 15px 10px;
+		position: relative;
 		.managerRow {
 			width: 100%;
 			height: 100%;

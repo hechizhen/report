@@ -17,6 +17,7 @@
             <div class="lineEcharts">
                 <pieEcharts :pieEchartsData="pieEchartsData.config" :position="pieEchartsData.position" :legendShow="pieEchartsData.legendShow" :chartHandleClick="chartHandleClick" ></pieEcharts>
             </div>
+            <loading-data :isShow="NumberGoodsPie"></loading-data>
         </div>
 
         <!--表格-->
@@ -53,8 +54,8 @@
                     </a-table>
                 </div>
             </div>
+            <loading-data :isShow="NumberGoodsList"></loading-data>
         </div>
-        <loading-data :isShow="isShow"></loading-data>
     </div>
 </template>
 <script>
@@ -81,6 +82,14 @@
             },
             tableData:{
                 type:Object
+            },
+            NumberGoodsPie:{
+                type:Boolean,
+                default: false
+            },
+            NumberGoodsList:{
+                type:Boolean,
+                default: false
             }
         },
 
