@@ -36,6 +36,10 @@
 			salesmandownward:{
 				type:Object,
 				default:{}
+			},
+			isShow:{
+				type:Boolean,
+				default:false,
 			}
 		},
 

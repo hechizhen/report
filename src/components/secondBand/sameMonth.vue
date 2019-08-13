@@ -52,6 +52,10 @@
 			},
 			topography:{
 				type:Function
+			},
+			isShow:{
+				type:Boolean,
+				default:false,
 			}
 		},
 		data(){

@@ -4,17 +4,17 @@
 		<subTitle :subtitlename="subtitlename" :listing="listing" :explicit="explicit"  :explainSecondList="explainSecondList"></subTitle>
 		<a-Row :gutter="23">
 		  <a-Col :span="10">
-		  	<sameMonth :orderAmountData="orderAmountData" :proportioData="proportioData" :topography="topography" v-if="proportioData.length!=0"></sameMonth>
+		  	<sameMonth :orderAmountData="orderAmountData" :proportioData="proportioData" :topography="topography" :isShow="towHelpSaleMonthShow" v-if="proportioData.length!=0"></sameMonth>
 		  </a-Col>
 		  <a-Col :span="7">
-		  	<totalAmount :titleName="'环比'" :displayData="grossProfitData" :totalAmountData="chainRatioData"></totalAmount>
+		  	<totalAmount :titleName="'环比'" :displayData="grossProfitData" :totalAmountData="chainRatioData" :isShow="towHelProportion"></totalAmount>
 		  </a-Col>
 		  <a-Col :span="7">
-		  	<totalAmount :titleName="'同比'" :displayData="grossInterestRateData" :totalAmountData="placingOrdersYearData"></totalAmount>
+		  	<totalAmount :titleName="'同比'" :displayData="grossInterestRateData" :totalAmountData="placingOrdersYearData" :isShow="towHelYoy"></totalAmount>
 		  </a-Col>
 		</a-Row>
 		<core :coretype="'二帮卖得分'" :coretext="100" :evaluate="'优秀'"></core>
-		<trendChart v-if="echartsShow" :trendChartClick="trendChartClick" :lineEchartsData="lineEchartsData"></trendChart>
+		<trendChart v-if="echartsShow" :trendChartClick="trendChartClick" :lineEchartsData="lineEchartsData" :isShow="towHelpSaleMonthLineShow"></trendChart>
 	</div>
 </template>
 <script>
@@ -54,6 +54,22 @@
 			directionData:{
 				type:Object,
 				default:{}
+			},
+			towHelpSaleMonthShow:{
+				type:Boolean,
+				default:false,
+			},
+			towHelProportion:{
+				type:Boolean,
+				default:false,
+			},
+			towHelYoy:{
+				type:Boolean,
+				default:false,
+			},
+			towHelpSaleMonthLineShow:{
+				type:Boolean,
+				default:false
 			}
 		},
 		data(){

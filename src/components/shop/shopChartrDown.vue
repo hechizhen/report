@@ -39,6 +39,10 @@
             },
             barEchartsData:{
                 type: Function
+            },
+            isShow:{
+                type:Boolean,
+                default:false,
             }
         },
 

@@ -44,6 +44,10 @@
             //标题名字
             titleName:{
                 type:String
+            },
+            isShow:{
+                type:Boolean,
+                default:false,
             }
         },
         components : {
