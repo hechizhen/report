@@ -1,11 +1,13 @@
 <template>
 	<div class="bandSelling">
 		<subTitle :subtitlename="subtitlename" :listing="listing" :explainSecondList="explainSecondList"></subTitle>
-		<manager :explicit="explicit" :salesmanData="salesmanData"></manager>
+		<manager :explicit="explicit" :salesmanData="salesmanData" :isShow="isShow"></manager>
 		<core :coretype="'业务员得分'" :coretext="100" :evaluate="'较好'"></core>
-		<trendChart  v-if="echartsShow" :trendChartClick="trendChartClick" :lineEchartsData="direction"></trendChart>
-		<glide  v-if="glideShow" :trendChartClick="glideClick" :salesmandownward="salesmandownward"></glide>
-		<contribution   v-if="contributionShow" :trendChartClick="contributionClick" :salesmanReached="salesmanReached" :salesmanContribution="salesmanContribution"></contribution>
+		<trendChart  v-if="echartsShow" :trendChartClick="trendChartClick" :lineEchartsData="direction" :isShow="salesmanTrendPie"></trendChart>
+		<glide  v-if="glideShow" :trendChartClick="glideClick" :salesmandownward="salesmandownward" :isShow="salesmandownwardBar"></glide>
+		<contribution   v-if="contributionShow" :trendChartClick="contributionClick" :salesmanReached="salesmanReached" :salesmanContribution="salesmanContribution"
+						:salesmanContributionBar="salesmanContributionBar"  :salesmanReachedBar="salesmanReachedBar"
+		></contribution>
 	</div>
 </template>
 <script>
@@ -45,7 +47,27 @@
 			salesmanContributionData:{
 				type:Object,
 				default:{}
-			}
+			},
+			isShow:{
+				type:Boolean,
+				default:false,
+			},
+			salesmanContributionBar:{
+				type:Boolean,
+				default:false,
+			},
+			salesmanReachedBar:{
+				type:Boolean,
+				default:false,
+			},
+			salesmandownwardBar:{
+				type:Boolean,
+				default:false,
+			},
+			salesmanTrendPie:{
+				type:Boolean,
+				default:false,
+			},
 		},
 		data(){
 			return {
@@ -85,7 +107,7 @@
 			},
 			trendChartClick(a){
 				this.echartsShow = false;
-				
+
 			},
 			glideClick(){
 				this.glideShow = false;
@@ -121,5 +143,5 @@
 	}
 </script>
 <style lang="less" scoped>
-	
+
 </style>

@@ -23,13 +23,14 @@
 			<div class="lineEcharts">
 				<div style="height:100%;width:100%" v-if="isswitched">
 					<barEcharts :barEchartsData="salesmanReachedData" :barType="salesmanReachedData.barType"></barEcharts>
+					<loading-data :isShow="salesmanReachedBar"></loading-data>
 				</div>
 				<div style="height:100%;width:100%" v-if="!isswitched">
 					<barEcharts :barEchartsData="salesmanContributionData" :barType="salesmanContributionData.barType"></barEcharts>
+					<loading-data :isShow="salesmanContributionBar"></loading-data>
 				</div>
 			</div>
 		</div>
-		<loading-data :isShow="isShow"></loading-data>
 	</div>
 </template>
 <script>
@@ -52,7 +53,16 @@
 			salesmanContribution:{
 				type:Object,
 				default:{}
-			}
+			},
+			salesmanContributionBar:{
+				type:Boolean,
+				default:false,
+			},
+			salesmanReachedBar:{
+				type:Boolean,
+				default:false,
+			},
+
 		},
 		mounted(){
 

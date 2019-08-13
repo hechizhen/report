@@ -55,6 +55,10 @@
             },
             invtopography:{
                 type:Function
+            },
+            isShow:{
+                type:Boolean,
+                default:false,
             }
         },
         methods:{

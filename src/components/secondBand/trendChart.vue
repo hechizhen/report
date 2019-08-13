@@ -36,6 +36,10 @@
 			lineEchartsData:{
 				type:Object,
 				default:{}
+			},
+			isShow:{
+				type:Boolean,
+				default:false,
 			}
 		},
 		data(){

@@ -42,14 +42,14 @@
                     <newButton :defaultVal="defaultVal"></newButton>
                 </div>
             </div>
-            <loading-data :isShow="isShow"></loading-data>
+            <loading-data :isShow="stockAmount"></loading-data>
         </div>
-        <inventoryCenten :turnoverTxt="inventoryDetails.turnoverTxt" :turnover="inventoryDetails.turnover"></inventoryCenten>
-        <inventoryDase v-if="inventoryDay.length!=0" :inventoryTxt="inventoryDay"
+        <inventoryCenten :turnoverTxt="inventoryDetails.turnoverTxt" :turnover="inventoryDetails.turnover" :isShow="InventoryTurnover"></inventoryCenten>
+        <inventoryDase v-if="inventoryDay.length!=0" :inventoryTxt="inventoryDay" :isShow="DaysAvailableStock"
                        :invtopography="invtopography"  :barData="inventoryDay.inventoryBarData"
         ></inventoryDase>
         </div>
-        <inventoryChart v-if="invechartsShow" :trendChartClick="trendChartClick" :lineEchartsData="lineEchartsData"></inventoryChart>
+        <inventoryChart v-if="invechartsShow" :trendChartClick="trendChartClick" :lineEchartsData="lineEchartsData" :isShow="marketableDayLine"></inventoryChart>
     </div>
     <core :coretype="'库存得分'" :coretext="87" :evaluate="'较好'"></core>
     </div>
@@ -65,7 +65,8 @@
     import loadingData from '../base/loadingData'
     export default {
         name: "inventoryIndex",
-        props:["inventoryDay","inventoryDetails","marketableDayChart"],
+        props:["inventoryDay","inventoryDetails","marketableDayChart","DaysAvailableStock","InventoryTurnover",
+            "stockAmount","marketableDayLine"],
         components:{
             inventoryCenten,
             inventoryDase,

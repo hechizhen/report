@@ -14,26 +14,32 @@
 
         <!-- 二帮卖分析-订单 -->
         <secondBand :orderAmountData="orderAmountData" :grossProfitData="grossProfitData" :grossInterestRateData="grossInterestRateData"
-                    :proportio="proportioData" :directionData="directionData"
+                    :proportio="proportioData" :directionData="directionData" :towHelYoy="towHelYoy" :towHelProportion="towHelProportion"
+                    :towHelpSaleMonthShow="towHelpSaleMonthShow" :towHelpSaleMonthLineShow="towHelpSaleMonthLineShow"
         ></secondBand>
         <!-- 二帮卖分析-业务员 -->
-        <salesman :salesmanData="salesmanData" :salesmanTrendData="salesmanTrendData" :salesmandownwardData="salesmandownwardData" :salesmanReachedData="salesmanReachedData" :salesmanContributionData="salesmanContributionData"></salesman>
-        <!-- 产品 -->
+        <salesman :salesmanData="salesmanData" :salesmanTrendData="salesmanTrendData" :salesmandownwardData="salesmandownwardData"
+                  :salesmanReachedData="salesmanReachedData" :salesmanContributionData="salesmanContributionData" :isShow="salesmanReached"
+                  :salesmanReachedBar="salesmanReachedBar" :salesmanContributionBar="salesmanContributionBar" :salesmandownwardBar="salesmandownwardBar"
+                  :salesmanTrendPie="salesmanTrendPie"
+        ></salesman>
+        <!-- 商品 -->
         <productIndex :CommodityTurnoverRate="CommodityTurnoverRate"  :commoditydata="commoditydata" :GoodsDetail="GoodsDetail"
                       :VariabilityUpData="VariabilityUpData" :VariabilityDownData="VariabilityDownData" :productTableData="productTableData"
+                      :NumberGoods="NumberGoods"  :CommodityRate="CommodityRate"  :NumberGoodsDownBar="NumberGoodsDownBar" :NumberGoodsUpBar="NumberGoodsUpBar"
                       v-if="CommodityTurnoverRate.length!=0"
         ></productIndex>
         <!--门店-->
-        <shopIndex  :StoresDetailed="StoresDetailed" v-if="StoresDetailed.length!=0 "
-                    :upStoresData="upStoresData"  :downStoresData="downStoresData"
+        <shopIndex  :StoresDetailed="StoresDetailed" v-if="StoresDetailed.length!=0 "  :isShow="StoreisShow"
+                    :upStoresData="upStoresData"  :downStoresData="downStoresData"  :downStoresBar="downStoresBar"   :upStoresBar="upStoresBar"
         ></shopIndex>
          <!--库存-->
-        <inventoryIndex  :inventoryDay="inventoryDay" :inventoryDetails="inventoryDetails"
-                         :marketableDayChart="marketableDayChart"
-                         v-if="inventoryDay.length!=0 "> </inventoryIndex>
+        <inventoryIndex  :inventoryDay="inventoryDay" :inventoryDetails="inventoryDetails" :marketableDayChart="marketableDayChart"
+                         :DaysAvailableStock="DaysAvailableStock" :InventoryTurnover="InventoryTurnover" :stockAmount="stockAmount"
+                         :marketableDayLine="marketableDayLine"   v-if="inventoryDay.length!=0 "> </inventoryIndex>
         <!-- 财务 -->
         <finance :financeData="financeData" :receivableData="receivableData" :overDueData="overDueData" :titleName="financeTitle"
-        v-if="financeData.length!=0 && receivableData.length!=0 && overDueData.length!=0"></finance>
+        v-if="financeData.length!=0 && receivableData.length!=0 && overDueData.length!=0" :isShow="financeIsShow"></finance>
     </div>
 </template>
 <script>
@@ -118,6 +124,28 @@
                 },
                 oneHelpSaleMonthShow:false,
                 oneHelpSaleYearShow:false,
+                towHelpSaleMonthShow:false,  //二帮卖当月
+                towHelpSaleMonthLineShow:false, //二帮卖当月走势图
+                towHelProportion:false,     //二帮卖占比
+                towHelYoy:false,            //二帮卖同比
+                salesmanReached:false,      //二帮卖人员
+                salesmanReachedBar:false,   //业务员-达成
+                salesmanContributionBar:false, //业务员-贡献
+                salesmandownwardBar:false,  //业务员下滑
+                salesmanTrendPie:false,     //业务员走势图
+                CommodityRate:false,        //商品动销率
+                NumberGoods:false,          //动销商品数
+                NumberGoodsPie:false,       //动销商品数饼图
+                NumberGoodsUpBar:false,     //动销商品增长
+                NumberGoodsDownBar:false,   //动销商品下降
+                upStoresBar:false,          //门店增长
+                downStoresBar:false,         //门店下降
+                marketableDayLine:false,     //库存可销天数走势图
+                StoreisShow:false,          //二帮卖门店
+                stockAmount:false,          //库存金额
+                InventoryTurnover:false,    //库存周转次数
+                DaysAvailableStock:false,   //库存可销天数
+                financeIsShow:false,        //财务
                 salesmanData: {},//业务员数据
                 orderAmountData: {}, //金额数据
                 grossProfitData: {}, //毛利额
@@ -435,6 +463,7 @@
             //财务报表数据
             getFinanceTableData() {
                 var _this = this
+                _this.financeIsShow = true
                 this.$http({
                     url: _this.requestHttpUrl + '/financeTableData',
                     method: 'POST',
@@ -450,11 +479,13 @@
                         list.push({name: item.name, val: item.val})
                     })
                     _this.financeData = list
+                    _this.financeIsShow = false
                 })
             },
             //应收账款
             getReceivableData() {
                 var _this = this
+                _this.financeIsShow = true
                 this.$http({
                     url: _this.requestHttpUrl + '/receivableData',
                     method: 'POST',
@@ -476,11 +507,13 @@
                         receivableDay: '应收账款周转天数（天）',
                         receivableDayVal: _this.dataProcess(data.receivableDayVal, 'day').num,
                     }
+                    _this.financeIsShow = false
                 })
             },
             //逾期欠款
             getOverdueData() {
                 var _this = this
+                _this.financeIsShow = true
                 this.$http({
                     url: _this.requestHttpUrl + '/overdueData',
                     method: 'POST',
@@ -498,11 +531,13 @@
                         overDueRadio: _this.dataProcess(data.overduePercent, 'percent').num + _this.dataProcess(data.overduePercent, 'percent').unit,
                         overDueRadioPercent: _this.dataProcess(data.overduePercent, 'percent').num
                     }
+                    _this.financeIsShow = false
                 })
             },
             //二帮卖-业务员数据
             getsalesman() {
                 var _this = this
+                _this.salesmanReached = true
                 this.$http({
                     url: _this.requestHttpUrl + '/Salesman',
                     method: 'POST',
@@ -516,11 +551,15 @@
                     salesmanData.totalNumber = !salesmanData.totalNumber ? '--' : _this.dataProcess(salesmanData.totalNumber, 'day').num;
                     salesmanData.declinePerformance = !salesmanData.declinePerformance ? '--' : _this.dataProcess(salesmanData.declinePerformance, 'day').num;
                     _this.salesmanData = salesmanData;
+                    _this.salesmanReached = false
                 })
             },
             //二帮卖-订单
             getsecondBand() {
                 var _this = this
+                _this.towHelpSaleMonthShow = true
+                _this.towHelProportion = true
+                _this.towHelYoy = true
                 this.$http({
                     url: _this.requestHttpUrl + '/Analysis',
                     method: 'POST',
@@ -548,11 +587,17 @@
                     _this.orderAmountData = orderAmountData;
                     _this.grossProfitData = grossProfitData;
                     _this.grossInterestRateData = grossInterestRateData;
+                    _this.towHelpSaleMonthShow = false
+                    _this.towHelProportion = false
+                    _this.towHelYoy = false
                 })
             },
             //二帮卖-订单占比
             getProportio() {
                 var _this = this
+                _this.towHelpSaleMonthShow = true
+                _this.towHelProportion = true
+                _this.towHelYoy = true
                 this.$http({
                     url: _this.requestHttpUrl + '/Proportion',
                     method: 'POST',
@@ -570,12 +615,16 @@
                     proportio.chainRatio = chainRatio;
                     proportio.placingOrdersYear = placingOrdersYear;
                     _this.proportioData = proportio;
+                    _this.towHelpSaleMonthShow = false
+                    _this.towHelProportion = false
+                    _this.towHelYoy = false
                     console.log(_this.proportioData)
                 })
             },
             //二帮卖-订单走势图
             getdirection() {
                 var _this = this
+                _this.towHelpSaleMonthLineShow = true
                 this.$http({
                     url: _this.requestHttpUrl + '/direction',
                     method: 'POST',
@@ -591,11 +640,13 @@
                     directionArr.monthArr = monthArr;
                     directionArr.seriesData = seriesData;
                     _this.directionData = directionArr;
+                    _this.towHelpSaleMonthLineShow = false
                 })
             },
             //业务员-走势图
             getsalesmanTrend() {
                 var _this = this
+                _this.salesmanTrendPie = true
                 this.$http({
                     url: _this.requestHttpUrl + '/salesmanTrend',
                     method: 'POST',
@@ -624,6 +675,7 @@
                     })
                     var tempsalesmanTrendData = {monthArr:xAxisData,seriesData:seriesData}
                     _this.salesmanTrendData = tempsalesmanTrendData
+                    _this.salesmanTrendPie = false
                     console.log( _this.salesmanTrendData)
 
                 })
@@ -631,6 +683,7 @@
             //业务员-下滑人员
             getsalesmandownward() {
                 var _this = this
+                _this.salesmandownwardBar = true
                 this.$http({
                     url: _this.requestHttpUrl + '/salesmandownward',
                     method: 'POST',
@@ -649,12 +702,14 @@
                     salesmandownwardObject.xAxisData = xAxisData;
                     salesmandownwardObject.seriesData = seriesData;
                     _this.salesmandownwardData = salesmandownwardObject
+                    _this.salesmandownwardBar = false
                     console.log(_this.salesmandownwardData)
                 })
             },
             //业务员-达成
             getSalesmanReached() {
                 var _this = this
+                _this.salesmanReachedBar = true
                 this.$http({
                     url: _this.requestHttpUrl + '/SalesmanReached',
                     method: 'POST',
@@ -677,11 +732,13 @@
                     salesmanReachedObject.xAxisData = xAxisData;
                     salesmanReachedObject.seriesData = seriesData;
                     _this.salesmanReachedData = salesmanReachedObject;
+                    _this.salesmanReachedBar = false
                 })
             },
             //业务员-贡献
             getSalesmanContribution() {
                 var _this = this
+                _this.salesmanContributionBar = true
                 this.$http({
                     url: _this.requestHttpUrl + '/SalesmanContribution',
                     method: 'POST',
@@ -704,11 +761,13 @@
                     salesmanContributionObject.xAxisData = xAxisData;
                     salesmanContributionObject.seriesData = seriesData;
                     _this.salesmanContributionData = salesmanContributionObject;
+                    _this.salesmanContributionBar = false
                 })
             },
             //产品-商品动销率
             getCommodityTurnoverRate() {
                 var _this = this
+                _this.CommodityRate = true
                 this.$http({
                     url: _this.requestHttpUrl + '/CommodityTurnoverRate',
                     method: 'POST',
@@ -795,6 +854,7 @@
                                 btn:"动销清单",
                                 produnarData
                         }
+                        _this.CommodityRate = false
                         console.log(_this.CommodityTurnoverRate)
                     },
                 )
@@ -850,6 +910,7 @@
             //产品-动销商品数
             getNumberMovingGoods() {
                 var _this = this
+                _this.NumberGoods = true
                 this.$http({
                     url: _this.requestHttpUrl + '/NumberMovingGoods',
                     method: 'POST',
@@ -893,6 +954,7 @@
                             commoditysum:data.commoditysum,
                             productimg: require("../assets/img/shangpinshu.png"),
                     }
+                        _this.NumberGoods = false
                         console.log(_this.commoditydata)
                     },
                 )
@@ -900,6 +962,7 @@
             //产品-动销商品数增长商品
             getVariabilityUp() {
                 var _this = this
+                _this.NumberGoodsUpBar = true
                 this.$http({
                     url: _this.requestHttpUrl + '/variabilityUp',
                     method: 'POST',
@@ -927,6 +990,7 @@
                     salesmandownwardObject.xAxisData = xAxisData;
                     salesmandownwardObject.seriesData = seriesData;
                     _this.VariabilityUpData = salesmandownwardObject
+                    _this.NumberGoodsUpBar = false
                     console.log( _this.VariabilityUpData)
 
                 })
@@ -934,6 +998,7 @@
             //产品-动销商品数下滑商品
             getVariabilityDown() {
                 var _this = this
+                _this.NumberGoodsDownBar = true
                 this.$http({
                     url: _this.requestHttpUrl + '/variabilityDown',
                     method: 'POST',
@@ -961,6 +1026,7 @@
                     salesmandownwardObject.xAxisData = xAxisData;
                     salesmandownwardObject.seriesData = seriesData;
                     _this.VariabilityDownData = salesmandownwardObject
+                    _this.NumberGoodsDownBar = false
                     console.log( _this.VariabilityDownData)
 
                 })
@@ -968,6 +1034,7 @@
             //产品-动销商品明细
             getGoodsdetail() {
                 var _this = this
+                _this.NumberGoodsPie = true
                 this.$http({
                     url: _this.requestHttpUrl + '/GoodsDetail',
                     method: 'POST',
@@ -977,12 +1044,14 @@
                 }).then(function (res) {
                     var Goods = res.data.data;
                     _this.GoodsDetail = Goods;
+                    _this.NumberGoodsPie = false
                     console.log(   _this.GoodsDetail)
                 })
             },
             //门店活跃明细
             getStoresDetailed() {
                 var _this = this
+                _this.StoreisShow = true
                 this.$http({
                     url: _this.requestHttpUrl + '/StoresDetailed',
                     method: 'POST',
@@ -1075,6 +1144,7 @@
                                 ]
                             }
                         }
+                        _this.StoreisShow = false
                         console.log(_this.StoresDetailed)
                     },
                 )
@@ -1082,6 +1152,7 @@
             //门店-门店下滑商品
             getDownStores() {
                 var _this = this
+                _this.downStoresBar = true
                 this.$http({
                     url: _this.requestHttpUrl + '/downStores',
                     method: 'POST',
@@ -1109,6 +1180,7 @@
                     salesmandownwardObject.xAxisData = xAxisData;
                     salesmandownwardObject.seriesData = seriesData;
                     _this.downStoresData = salesmandownwardObject
+                    _this.downStoresBar = false
                     console.log( _this.downStoresData)
 
                 })
@@ -1116,6 +1188,7 @@
             //门店-门店增长商品
             geUpStores() {
                 var _this = this
+                _this.upStoresBar = true
                 this.$http({
                     url: _this.requestHttpUrl + '/upStores',
                     method: 'POST',
@@ -1143,6 +1216,7 @@
                     salesmandownwardObject.xAxisData = xAxisData;
                     salesmandownwardObject.seriesData = seriesData;
                     _this.upStoresData = salesmandownwardObject
+                    _this.upStoresBar = false
                     console.log( _this.upStoresData)
 
                 })
@@ -1150,6 +1224,8 @@
             //库存明细金额件数明细
             getinventoryDetail() {
                 var _this = this
+                _this.stockAmount = true
+                _this.InventoryTurnover = true
                 this.$http({
                     url: _this.requestHttpUrl + '/inventoryDetail',
                     method: 'POST',
@@ -1181,6 +1257,8 @@
                             turnoverTxt:"库存周转次数",
                             turnover:data.turnover+'次',  //库存周转次数
                         }
+                    _this.stockAmount = false
+                    _this.InventoryTurnover = false
                         console.log(_this.inventoryDetails)
                     },
                 )
@@ -1188,6 +1266,7 @@
             //库存天数明细
             getDaysAvailableStock() {
                 var _this = this
+                _this.DaysAvailableStock = true
                 this.$http({
                     url: _this.requestHttpUrl + '/DaysAvailableStock',
                     method: 'POST',
@@ -1289,6 +1368,7 @@
                         inventoryVal: _this.dataProcess(data.inventoryVal, 'day').num,
                         inventoryBarData
                     }
+                    _this.DaysAvailableStock = false
                     console.log(_this.inventoryDay)
                     },
                 )
@@ -1296,6 +1376,7 @@
             //库存-库存可销天数走势图
             getmarketableDayChart() {
                 var _this = this
+                _this.marketableDayLine = true
                 this.$http({
                     url: _this.requestHttpUrl + '/marketableDayChart',
                     method: 'POST',
@@ -1325,7 +1406,7 @@
                         })
                         var tempsalesmanTrendData = {monthArr:xAxisData,seriesData:seriesData}
                         _this.marketableDayChart = tempsalesmanTrendData
-
+                        _this.marketableDayLine = false
                     console.log(_this.marketableDayChart)
                 })
             },

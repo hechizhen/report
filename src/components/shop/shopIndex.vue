@@ -16,8 +16,8 @@
         </div>
     </div>
     <core :coretype="'门店得分'" :coretext="87" :evaluate="'较好'"></core>
-    <shopChartUp v-if="upShow" :trendChartClick="upClick" :barEchartsData="barEchartsDataUp" ></shopChartUp>
-    <shopChartrDown v-if="downShow" :trendChartClick="downClick"  :barEchartsData="barEchartsDataDown"></shopChartrDown>
+    <shopChartUp v-if="upShow" :trendChartClick="upClick" :barEchartsData="barEchartsDataUp" :isShow="upStoresBar"></shopChartUp>
+    <shopChartrDown v-if="downShow" :trendChartClick="downClick"  :barEchartsData="barEchartsDataDown" :isShow="downStoresBar"></shopChartrDown>
     <loading-data :isShow="isShow"></loading-data>
 </div>
 </template>
@@ -32,7 +32,7 @@
     import loadingData from '../base/loadingData'
     export default {
         name: "shopIndex",
-        props:["StoresDetailed","upStoresData","downStoresData"],
+        props:["StoresDetailed","upStoresData","downStoresData","isShow","downStoresBar","upStoresBar"],
         data(){
             return{
                 titName:"门店",

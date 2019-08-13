@@ -14,7 +14,7 @@
     import loadingData from '../base/loadingData'
     export default {
         name: "inventoryCenten",
-        props:["turnoverTxt","turnover"],
+        props:["turnoverTxt","turnover","isShow"],
         data(){
             return{
                 // isShow:true

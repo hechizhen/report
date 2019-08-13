@@ -55,6 +55,10 @@
 			totalAmountData:{
 				type:Array,
 				default:[]
+			},
+			isShow:{
+				type:Boolean,
+				default:false,
 			}
 		},
 		data(){

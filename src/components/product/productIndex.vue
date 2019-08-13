@@ -7,19 +7,19 @@
                     <a-Col :span="10">
                         <productLeft :productdata="CommodityTurnoverRate"></productLeft>
                         <productRight :barData="CommodityTurnoverRate.produnarData"  ></productRight>
-                        <loading-data :isShow="productisShow"></loading-data>
+                        <loading-data :isShow="CommodityRate"></loading-data>
                     </a-Col>
                     <a-Col :span="13" :push="1">
                         <commodityRight :commoditydata="commoditydata" :upraphy="upraphy" :downraphy="downraphy" :pieraphy="pieraphy" ></commodityRight>
-                        <loading-data :isShow="commodityisShow"></loading-data>
+                        <loading-data :isShow="NumberGoods"></loading-data>
                     </a-Col>
                 </a-Row>
             </div>
         </div>
         <core :coretype="'产品得分'" :coretext="87" :evaluate="'较好'"></core>
 
-        <upproductChart v-if="upShow" :trendChartClick="upClick"  :barEchartsData="barEchartsDataUp" ></upproductChart>  <!--下滑-->
-        <downproductChart v-if="downShow" :trendChartClick="downClick" :barEchartsData="barEchartsDataDown" ></downproductChart>  <!--增长-->
+        <upproductChart v-if="upShow" :trendChartClick="upClick"  :barEchartsData="barEchartsDataUp" :isShow="NumberGoodsDownBar"></upproductChart>  <!--下滑-->
+        <downproductChart v-if="downShow" :trendChartClick="downClick" :barEchartsData="barEchartsDataDown" :isShow="NumberGoodsUpBar"></downproductChart>  <!--增长-->
 
         <productChartPie v-if="pieShow" :trendChartClick="pieClick" :pieEchartsData="pieEchartsData" :tableData="productTableData"
         ></productChartPie>
@@ -39,7 +39,8 @@
     import loadingData from '../base/loadingData'
     export default {
         name: "cententindex",
-        props:["CommodityTurnoverRate","commoditydata","GoodsDetail","VariabilityUpData","VariabilityDownData","productTableData"],
+        props:["CommodityTurnoverRate","commoditydata","GoodsDetail","NumberGoods","CommodityRate",
+            "VariabilityUpData","VariabilityDownData","productTableData","NumberGoodsDownBar","NumberGoodsUpBar"],
         components:{
             productLeft,
             productRight,
