@@ -66,6 +66,7 @@
                 loadingShow:false,
                 maxHeight:'500',
                 tableLoading:false,
+                pageNumber:1
             }
         },
         created(){
@@ -77,7 +78,8 @@
             //分页
             onChange(pageNumber) {
                 console.log('Page: ', pageNumber);
-                this.newInterfaceParams.pageNum = pageNumber
+                _this.pageNumber = pageNumber
+                this.newInterfaceParams.pageNum = _this.pageNumber
                 this.getTableData()
             },
             //点击关闭
@@ -114,7 +116,11 @@
                     _this.totalSize = res.data.data.data.length
                     _this.defaultSize = pageData.pageSize
                     //表头key值
-                    _this.tableHeaderKey = _this.newInterfaceParams.outputCol.split(',')
+                    let keyValue = _this.newInterfaceParams.outputCol.split(',')
+                    console.log(keyValue)
+                    let numArray = ['numberId']
+                    _this.tableHeaderKey = numArray.concat(keyValue)
+                    console.log(_this.tableHeaderKey)
                     //表头文字
                     let header = []
                     _this.tableHeader.map(function(item){
@@ -135,7 +141,8 @@
                     _this.tablecColumns = list
                     let data = res.data.data.data
                     //表格数据处理
-                    data.map(function(parentItem){
+                    data.map(function(parentItem,parentIndex){
+                        parentItem.numberId = (_this.pageNumber-1)*_this.defaultSize+parentIndex+1
                         _this.tableHeaderKey.map(function(childItem,index){
                             if(_this.tableHeader[index].unit){
                                 parentItem[childItem] = _this.dataProcess(parentItem[childItem],_this.tableHeader[index].unit,_this.tableHeader[index].unit1).num

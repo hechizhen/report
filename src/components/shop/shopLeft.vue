@@ -1,6 +1,6 @@
 <template>
     <div class="shopLeft">
-      <div class="shopLeft-centen" style="height: 180px;">
+      <div class="shopLeft-centen">
       <div class="shop-active">
           <p>{{shopActives.ActiveStoresTxt}}<span>{{shopActives.ActiveStoresing}}</span></p>
           <span>{{shopActives.ActiveStores}}</span>
@@ -97,7 +97,11 @@
 .shopLeft{
     width: 51%;
     float: left;
-
+    .shopLeft-centen{
+        height: 196px;
+        display: flex;
+        align-items: center;
+    }
     .shop-active{
         width:17%;
         height:165px;

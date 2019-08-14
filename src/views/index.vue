@@ -1170,13 +1170,25 @@
             getDownStores() {
                 var _this = this
                 _this.downStoresBar = true
+                var params = {
+                    "inputParam":
+                        {
+                            "data_mon":_this.currentDate,
+                            "money_type":"上升",
+                            "data_type":"当月"
+                        },
+                    "outputCol":"dealer_id,data_mon,data_type,emp_name,emp_phone,store_name,store_contact,store_phone,store_address,money,mon3_avg_m_money,dif_money",
+                    "pageNum":1,
+                    "pageSize":1000,
+                    "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                    "serviceId":"service_tjbg02_store_sales_change"
+                }
                 this.$http({
-                    url: _this.requestHttpUrl + '/downStores',
+                    url: _this.testRequestHttpUrl,
                     method: 'POST',
-                    data: {
-                        dateTime: _this.currentDate
-                    }
+                    data: params
                 }).then(function (res) {
+                    console.log(res)
                     var VariabilityUpData = res.data.data,
                         xAxisData=[],
                         seriesData=[],
@@ -1437,7 +1449,7 @@
                         params:{
                             "inputParam":
                                 {
-                                    "data_mon":this.currentDate,
+                                    "data_mon":_this.currentDate,
                                     "data_type":"当月"
                                 },
                             "outputCol":"emp_name,emp_phone,store_name,store_contact,store_phone,money,money_rate,sale_goods_cnt,sale_goods_cnt_lm",
@@ -1447,6 +1459,7 @@
                             "serviceId":"service_tjbg02_store_active"
                         },
                         header:[
+                            {txt:'序号',unit:false},
                             {txt:'业务员姓名',unit:false},
                             {txt:'业务员电话',unit:false},
                             {txt:'门店店名',unit:false},
@@ -1473,6 +1486,7 @@
                             "serviceId":"service_tjbg02_store_create"
                         },
                         header:[
+                            {txt:'序号',unit:false},
                             {txt:'业务员姓名',unit:false},
                             {txt:'联系电话',unit:false},
                             {txt:'门店名称',unit:false},
@@ -1480,6 +1494,34 @@
                             {txt:'门店老板电话',unit:false},
                             {txt:'门店地址',unit:false},
                             {txt:'新增门店数（家）',unit:'day'},
+                        ]
+                    },
+                    //无交易门店应收账款明细
+                    noDealDetail:{
+                        params:{
+                            "inputParam":
+                                {
+                                    "data_mon":_this.currentDate,
+                                    "data_type":"当月"
+                                },
+                            "outputCol":"emp_name,emp_phone,store_name,store_contact,store_phone,store_address,store_status,last_order_time,unsale_days,debt_money",
+                            "pageNum":1,
+                            "pageSize":1000,
+                            "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                            "serviceId":"service_tjbg02_store_unsale"
+                        },
+                        header:[
+                            {txt:'序号',unit:false},
+                            {txt:'业务员姓名',unit:false},
+                            {txt:'联系电话',unit:false},
+                            {txt:'门店名称',unit:false},
+                            {txt:'门店老板姓名',unit:false},
+                            {txt:'门店老板电话',unit:false},
+                            {txt:'门店地址',unit:false},
+                            {txt:'是否开业',unit:false},
+                            {txt:'最近交易时间',unit:false},
+                            {txt:'无交易时长（天）',unit:'day'},
+                            {txt:'应收账款（元）',unit:'money'},
                         ]
                     }
                 }

@@ -12,7 +12,7 @@
         </div>
         <div class="shop-centen-middle">
             <shopLeft :shopActives="StoresDetailed.shopActiveData" :upraphy="upraphy" :downraphy="downraphy" :tableData="tableData.activeStoreDetail"></shopLeft>
-            <shopRight :ActiveDetail="StoresDetailed.ActiveDetail" :tableData="tableData.addStoreDetail"></shopRight>
+            <shopRight :ActiveDetail="StoresDetailed.ActiveDetail" :tableData="tableData.addStoreDetail" :dealTableData="tableData.noDealDetail"></shopRight>
         </div>
     </div>
     <core :coretype="'门店得分'" :coretext="87" :evaluate="'较好'"></core>
