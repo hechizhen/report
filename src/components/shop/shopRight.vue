@@ -4,27 +4,38 @@
         <div class="shop-active" v-for="(item,index) in ActiveDetail.shopActiveDetail" :key="index">
             <p>{{item.ActiveStores}}<span>{{item.ActiveStoresing}}</span></p>
             <span>{{item.NoSales}}</span>
-            <p class="btn">门店详情</p>
+            <new-button v-if="index==2" :defaultVal="detailHandleList.defaultVal" :buttonType="detailHandleList.buttonType" :isGhost="detailHandleList.isGhost" :buttonHandleClick="detailHandleClick"></new-button>
         </div>
         </div>
         <shopBase :shopDaseData="ActiveDetail.shopDaseData" :defaultVal="defaultVal"></shopBase>
+        <public-table v-if="isShowDetail" :close="closePopup" :tableHeader="tableData.header" :interfaceParams="tableData.params"></public-table>
     </div>
 </template>
 
 <script>
     import shopBase from './shopBase'
+    import newButton from '../base/newButton.vue'
+    import publicTable from '../base/publicTable.vue'
     export default {
         name: "shopRight",
-        props:["ActiveDetail"],
+        props:["ActiveDetail","tableData"],
         data(){
             return{
                 defaultVal:"应收明细",
-                defaultVal1:"门店详情",
                 // detailData:"",
+                //按钮样式
+                detailHandleList:{
+                    defaultVal:'门店详情',
+                    isGhost:true,
+                    buttonType:'default'
+                },
+                isShowDetail:false
             }
         },
         components:{
             shopBase,
+            newButton,
+            publicTable
         },
         watch:{
             // ActiveDetail(val){
@@ -33,6 +44,16 @@
         },
         mounted() {
             // console.log(this.detailData)
+        },
+        methods:{
+            //点击详情
+            detailHandleClick(){
+                this.isShowDetail = true
+            },
+            //点击关闭
+            closePopup(){
+                this.isShowDetail = false
+            }
         }
     }
 </script>

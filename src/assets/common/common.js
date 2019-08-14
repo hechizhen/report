@@ -133,7 +133,7 @@ export default{
     return reach
   }
   // 数据处理
-    Vue.prototype.dataProcess = function (data,type,decimal) {
+    Vue.prototype.dataProcess = function (data,type) {
         if(data !== "" && data !== null) {
             // if (data.indexOf(",") != -1) {
             var reg = /^-?[0-9]+.?[0-9]*/;//是否为数字
@@ -141,11 +141,7 @@ export default{
             //如果是数字
             if (reg.test(data)) {
                 if (type == 'money') {
-                  if(decimal == 1){
-                    var num = this.formatCurrency((data / 10000).toFixed(2))
-                  }else {
-                    var num = this.formatCurrency((data / 10000).toFixed(0))
-                  }
+                  var num = this.formatCurrency((data / 10000).toFixed(2))
                   var unit = "万"
                 } else if (type == 'percent') {
                   var num = (data * 100).toFixed(2)

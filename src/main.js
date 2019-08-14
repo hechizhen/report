@@ -15,6 +15,11 @@ Vue.use(Antd)
 
 import Blob from './excel/Blob.js'
 import Export2Excel from './excel/Export2Excel.js'
+
+import iView from 'iview';
+import 'iview/dist/styles/iview.css';
+Vue.use(iView);
+
 // import Jquery from 'jquery'
 Vue.use(VueRouter);
 // Vue.use($);
