@@ -572,7 +572,6 @@
                      if(res.data.code == '200'){
                         var secondBandData = res.data.data.data[0],thatMonth = {},chainratio = {},yearOnYear = {};
                         // 当月数据
-                        console.log(secondBandData)
                         thatMonth.money = !secondBandData.money ? '--' : _this.dataProcess(secondBandData.money, 'money', 1).num;  //本月下单金额
                         if(!secondBandData.money ){
                             thatMonth.moneyInteger = thatMonth.money.split(".")[0];   //本月下单金额整数部分
@@ -1556,7 +1555,17 @@
                         ]
                     }
                 }
-            }
+            },
+            //计算环比/同比
+            getHandle(molecule,denominator,num){
+                var tempObj;
+                if(!denominator){
+                    tempObj = '--';
+                }else {
+                    tempObj = ((molecule-denominator)/denominator).toFixed(num)+'%';
+                }
+                return tempObj
+            },
         }
     }
 </script>
