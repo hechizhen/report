@@ -8,7 +8,7 @@
                     </a-Col>
                     <a-Col :span="12" class="thendChartCol2">
                         单位：万元
-                        <newButton :defaultVal="defaultVal"> </newButton>
+                        <newButton :defaultVal="defaultVal" :buttonHandleClick="exportData"> </newButton>
                         <span @click="thendChartClick">
                             <i class="iconfont icon-guanbi"></i>
                         </span>
@@ -16,7 +16,7 @@
                 </a-Row>
             </div>
             <div class="lineEcharts">
-                <barEcharts :barEchartsData="barEcharts"></barEcharts>
+                <barEcharts :barEchartsData="VariabilityUp"></barEcharts>
             </div>
         </div>
         <loading-data :isShow="isShow"></loading-data>
@@ -43,31 +43,41 @@
             isShow:{
                 type:Boolean,
                 default:false,
+            },
+            //导出数据
+            raiseExportData:{
+                type:Object,
             }
+        },
+        mounted(){
+            console.log(this.raiseExportData)
         },
 
         data(){
             return {
                 defaultVal:"导出数据",
-                barEcharts:{
-                    id:'barIdUp',
-                    unit:'%',
-                    xAxisData:this.VariabilityUp.xAxisData,
-                    label:{
-                        isShow:false
-                    },
-                    type:'xAxis',
-                    barData:this.VariabilityUp.seriesData,
-                    showType:0,//0横过来 1竖起来
-                    markLineList:{
-                        show:false
-                    }
-                }
+                // barEcharts:{
+                //     id:'barIdUp',
+                //     unit:'%',
+                //     xAxisData:this.VariabilityUp.xAxisData,
+                //     label:{
+                //         isShow:false
+                //     },
+                //     type:'xAxis',
+                //     barData:this.VariabilityUp.seriesData,
+                //     showType:0,//0横过来 1竖起来
+                //     markLineList:{
+                //         show:false
+                //     }
+                // }
             }
         },
         methods:{
             thendChartClick(){
                 this.trendChartClick()
+            },
+            exportData(){
+                this.exportHandleClick(this.raiseExportData.tableHeaderTxt,this.raiseExportData.tableHeaderKey,this.raiseExportData.tableData,this.raiseExportData.tableName)
             }
         }
     }

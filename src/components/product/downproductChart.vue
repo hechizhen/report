@@ -16,7 +16,7 @@
                 </a-Row>
             </div>
             <div class="lineEcharts">
-                <barEcharts :barEchartsData="barEcharts"></barEcharts>
+                <barEcharts :barEchartsData="VariabilityDown"></barEcharts>
             </div>
         </div>
         <loading-data :isShow="isShow"></loading-data>
@@ -49,20 +49,7 @@
         data(){
             return {
                 defaultVal:"导出数据",
-                barEcharts:{
-                    id:'barIdUp',
-                    unit:'%',
-                    xAxisData:this.VariabilityDown.xAxisData,
-                    label:{
-                        isShow:false
-                    },
-                    type:'xAxis',
-                    barData:this.VariabilityDown.seriesData,
-                    showType:0,//0横过来 1竖起来
-                    markLineList:{
-                        show:false
-                    }
-                }
+
             }
         },
         methods:{
