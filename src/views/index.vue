@@ -89,7 +89,7 @@
                 //逾期账款
                 overDueData: '',
                 //产品-商品动销率
-               CommodityTurnoverRate:"",
+                CommodityTurnoverRate:"",
                 //产品-动销商品数
                 commoditydata:"",
                 //产品-动销商品数增长商品
@@ -261,8 +261,10 @@
             //本月累计下单金额以及总达成 以及本月累计达成率
             getOneHelpSalesData() {
                 var _this = this
+                //显示laoding状态
                 _this.oneHelpSaleMonthShow = true
                 _this.oneHelpSaleYearShow = true
+                //获取一帮卖销量本月数据
                 function getMonthData(){
                     var params = {
                         "inputParam":
@@ -277,11 +279,12 @@
                         "serviceId":"service_tjbg01_sales"
                     }
                     return _this.$http({
-                        url: _this.testRequestHttpUrl,
+                        url: _this.testRequestHttpUrl+'?v=oneHelpSalesMonth',
                         method: 'POST',
                         data: params,
                     })
                 }
+                //获取一帮卖销量年累计数据
                 function getYearData(){
                     var params = {
                         "inputParam":
@@ -296,176 +299,188 @@
                         "serviceId":"service_tjbg01_sales"
                     }
                     return _this.$http({
-                        url: _this.testRequestHttpUrl,
+                        url: _this.testRequestHttpUrl+'?v=oneHelpSalesYear',
                         method: 'POST',
                         data: params,
                     })
                 }
-
+                //合并请求 同时请求 本月和累计的销量数据
                 this.$http.all([getMonthData(), getYearData()])
                     .then(this.$http.spread((salesMonth, salesYear) => {
-                        //同时请求 本月和累计的销量数据
-                        console.log(salesMonth)
-                        console.log(salesYear)
-                        let salesMonthData = salesMonth.data.data.data[0]
-                        let salesYearData = salesYear.data.data.data[0]
-                         //本月下单金额达成率
-                    _this.monthSalesData = {
-                        sales:_this.dataProcess(salesMonthData.money,'money').num,
-                        reach:_this.getReachPercent(salesMonthData.money,salesMonthData.target_money)+'%',
-                        bgColor:'#2D92FC',
-                        titleName:'本月'
-                    }
-                    //本月达成率历史趋势
-                    let barDataMonth = [
-                        _this.getReachPercent(salesMonthData.liby_money,salesMonthData.liby_target_money),_this.getReachPercent(salesMonthData.kispa_money,salesMonthData.kispa_target_money),
-                        _this.getReachPercent(salesMonthData.cheerwin_money,salesMonthData.cheerwin_target_money),_this.getReachPercent(salesMonthData.oral_money,salesMonthData.oral_target_money),
-                        _this.getReachPercent(salesMonthData.shengmei_money,salesMonthData.shengmei_target_money),_this.getReachPercent(salesMonthData.strategic_money,salesMonthData.strategic_target_money)
-                    ]
-                    let Axiax = ['立白','好爸爸','超威','口腔','晟美','战略品']
-                    _this.monthBarData = {
-                        config:{
-                            id: 'barIdMonthSales',
-                            xAxisData: Axiax,
-                            unit:'%',
-                            type: 'xAxis',
-                            barData: [
-                                {
-                                    name: '达成率',
-                                    data: barDataMonth,
-                                    color: '#D7D9E5',
-                                    barWidth: 11
+                        //判断月销量是否为空
+                        if(salesMonth.data.data.data.length!=0){
+                            var salesMonthData = salesMonth.data.data.data[0]
+                        }else{
+                            var salesMonthData=''
+                        }
+                        //本月下单金额达成率
+                        _this.monthSalesData = {
+                            sales:_this.dataProcess(salesMonthData.money,'money','tenth').num,
+                            reach:_this.getReachPercent(salesMonthData.money,salesMonthData.target_money)+'%',
+                            bgColor:'#2D92FC',
+                            titleName:'本月'
+                        }
+                        //本月柱状图数据
+                        var barDataMonth = [
+                            _this.getReachPercent(salesMonthData.liby_money,salesMonthData.liby_target_money),_this.getReachPercent(salesMonthData.kispa_money,salesMonthData.kispa_target_money),
+                            _this.getReachPercent(salesMonthData.cheerwin_money,salesMonthData.cheerwin_target_money),_this.getReachPercent(salesMonthData.oral_money,salesMonthData.oral_target_money),
+                            _this.getReachPercent(salesMonthData.shengmei_money,salesMonthData.shengmei_target_money),_this.getReachPercent(salesMonthData.strategic_money,salesMonthData.strategic_target_money)
+                        ]
+                        //柱状图x轴数据
+                        let Axiax = ['立白','好爸爸','超威','口腔','晟美','战略品']
+                        //年累计达成率历史趋势
+                        _this.monthBarData = {
+                            config:{
+                                id: 'barIdMonthSales',
+                                xAxisData: Axiax,
+                                unit:'%',
+                                type: 'xAxis',
+                                barData: [
+                                    {
+                                        name: '达成率',
+                                        data: barDataMonth,
+                                        color: '#D7D9E5',
+                                        barWidth: 11
+                                    },
+                                ],
+                                showType: 0,
+                                markLineList:{
+                                    show:true,
+                                    data:100,
+                                }
+                            },
+                            label: {
+                                isShow: true,
+                                position:'top'
+                            },
+                            xAxis:{
+                                axisLine:{
+                                    show:false,
+                                    color:'#3699FF'
                                 },
-                            ],
-                            showType: 0,
-                            markLineList:{
-                                show:true,
-                                data:100,
-                            }
-                        },
-                        label: {
-                            isShow: true,
-                            position:'top'
-                        },
-                        xAxis:{
-                            axisLine:{
-                                show:false,
-                                color:'#3699FF'
-                            },
-                            axisLabel:{
-                                show:true,
-                                color:'#333333',
-                                fontSize:12
-                            },
-                            splitLine:{
-                                show:false,
-                                color:'#CCCCCC'
-                            },
-                        },
-                        yAxis:{
-                            axisLine:{
-                                show:false,
-                                color:'#3699FF'
-                            },
-                            axisLabel:{
-                                show:true,
-                                color:'#D7D9E5',
-                                fontSize:12
-                            },
-                            splitLine:{
-                                show:false,
-                                color:'#CCCCCC'
-                            },
-                        },
-                        legendShow:false,
-                        isShowMax:true,
-                    }
-                     //本月下单金额达成率
-                    _this.yearSalesData = {
-                        sales:_this.dataProcess(salesYearData.money,'money').num,
-                        reach:_this.getReachPercent(salesYearData.money,salesYearData.target_money)+'%',
-                        bgColor:'#FF9500',
-                        titleName:'年累计'
-                    }
-                    //本月达成率历史趋势
-                    let barDataYear = [
-                        _this.getReachPercent(salesYearData.liby_money,salesYearData.liby_target_money),_this.getReachPercent(salesYearData.kispa_money,salesYearData.kispa_target_money),
-                        _this.getReachPercent(salesYearData.cheerwin_money,salesYearData.cheerwin_target_money),_this.getReachPercent(salesYearData.oral_money,salesYearData.oral_target_money),
-                        _this.getReachPercent(salesYearData.shengmei_money,salesYearData.shengmei_target_money),_this.getReachPercent(salesYearData.strategic_money,salesYearData.strategic_target_money)
-                    ]
-                    _this.yearBarData = {
-                        config:{
-                            id: 'barIdYearSales',
-                            xAxisData: Axiax,
-                            unit:'%',
-                            type: 'xAxis',
-                            barData: [
-                                {
-                                    name: '达成率',
-                                    data: barDataYear,
-                                    color: '#D7D9E5',
-                                    barWidth: 11
+                                axisLabel:{
+                                    show:true,
+                                    color:'#333333',
+                                    fontSize:12
                                 },
-                            ],
-                            showType: 0,
-                            markLineList:{
-                                show:true,
-                                data:100,
-                            }
-                        },
-                        label: {
-                            isShow: true,
-                            position:'top'
-                        },
-                        xAxis:{
-                            axisLine:{
-                                show:false,
-                                color:'#3699FF'
+                                splitLine:{
+                                    show:false,
+                                    color:'#CCCCCC'
+                                },
                             },
-                            axisLabel:{
-                                show:true,
-                                color:'#333333',
-                                fontSize:12
+                            yAxis:{
+                                axisLine:{
+                                    show:false,
+                                    color:'#3699FF'
+                                },
+                                axisLabel:{
+                                    show:true,
+                                    color:'#D7D9E5',
+                                    fontSize:12
+                                },
+                                splitLine:{
+                                    show:false,
+                                    color:'#CCCCCC'
+                                },
                             },
-                            splitLine:{
-                                show:false,
-                                color:'#CCCCCC'
+                            legendShow:false,
+                            isShowMax:true,
+                        }
+                        //判断年销量是否为空
+                        if(salesYear.data.data.data.length!=0){
+                            var salesYearData = salesYear.data.data.data[0]
+                        }else{
+                            var salesYearData = ''
+                        }
+                        //年累计下单金额达成率
+                        _this.yearSalesData = {
+                            sales:_this.dataProcess(salesYearData.money,'money','tenth').num,
+                            reach:_this.getReachPercent(salesYearData.money,salesYearData.target_money)+'%',
+                            bgColor:'#FF9500',
+                            titleName:'年累计'
+                        }
+                        //年累计柱状图数据
+                        var barDataYear = [
+                            _this.getReachPercent(salesYearData.liby_money,salesYearData.liby_target_money),_this.getReachPercent(salesYearData.kispa_money,salesYearData.kispa_target_money),
+                            _this.getReachPercent(salesYearData.cheerwin_money,salesYearData.cheerwin_target_money),_this.getReachPercent(salesYearData.oral_money,salesYearData.oral_target_money),
+                            _this.getReachPercent(salesYearData.shengmei_money,salesYearData.shengmei_target_money),_this.getReachPercent(salesYearData.strategic_money,salesYearData.strategic_target_money)
+                        ]
+                        //年累计达成率历史趋势
+                        _this.yearBarData = {
+                            config:{
+                                id: 'barIdYearSales',
+                                xAxisData: Axiax,
+                                unit:'%',
+                                type: 'xAxis',
+                                barData: [
+                                    {
+                                        name: '达成率',
+                                        data: barDataYear,
+                                        color: '#D7D9E5',
+                                        barWidth: 11
+                                    },
+                                ],
+                                showType: 0,
+                                markLineList:{
+                                    show:true,
+                                    data:100,
+                                }
                             },
-                        },
-                        yAxis:{
-                            axisLine:{
-                                show:false,
-                                color:'#3699FF'
+                            label: {
+                                isShow: true,
+                                position:'top'
                             },
-                            axisLabel:{
-                                show:true,
-                                color:'#D7D9E5',
-                                fontSize:12
+                            xAxis:{
+                                axisLine:{
+                                    show:false,
+                                    color:'#3699FF'
+                                },
+                                axisLabel:{
+                                    show:true,
+                                    color:'#333333',
+                                    fontSize:12
+                                },
+                                splitLine:{
+                                    show:false,
+                                    color:'#CCCCCC'
+                                },
                             },
-                            splitLine:{
-                                show:false,
-                                color:'#CCCCCC'
+                            yAxis:{
+                                axisLine:{
+                                    show:false,
+                                    color:'#3699FF'
+                                },
+                                axisLabel:{
+                                    show:true,
+                                    color:'#D7D9E5',
+                                    fontSize:12
+                                },
+                                splitLine:{
+                                    show:false,
+                                    color:'#CCCCCC'
+                                },
                             },
-                        },
-                        legendShow:false,
-                        isShowMax:true,
+                            legendShow:false,
+                            isShowMax:true,
+                        }
+                        let score = _this.scoreProcess(barDataYear,barDataMonth)
+                        _this.oneHelpSaleScoreList={//一帮卖评分
+                            coretype: '一帮卖得分',
+                            coretext: score,
+                            evaluate: '优秀'
+                        }
+                        //隐藏laoding状态
+                        _this.oneHelpSaleMonthShow = false
+                        _this.oneHelpSaleYearShow = false
                     }
-                    console.log(barDataYear)
-                    console.log(barDataMonth)
-                    let score = _this.scoreProcess(barDataYear,barDataMonth)
-                    _this.oneHelpSaleScoreList={//一帮卖评分
-                        coretype: '一帮卖得分',
-                        coretext: score,
-                        evaluate: '优秀'
-                    }
-                    _this.oneHelpSaleMonthShow = false
-                    _this.oneHelpSaleYearShow = false
-                }));
+                ));
             },
             //财务模块概览本数据
             getFinanceOverviewData() {
                 var _this = this
+                //显示laoding状态
                 _this.financeIsShow = true
+                //财务概览接口参数
                 var params = {
                     "inputParam": 
                     {
@@ -473,7 +488,7 @@
                         "data_type":"当月"
                     },
                         "isReturnTotalSize": "Y",
-                        "outputCol": "dealer_id,data_mon,data_type,in_money,cost_money,gross_money,factory_money,out_money,profit_money,debt_money,receipt_money,avg_receipt_age,receipt_days,overdue_money,overdue_rate",
+                        "outputCol": "dealer_id,data_mon,data_type,in_money,cost_money,gross_money,factory_money,out_money,profit_money,debt_money,receipt_money,avg_receipt_age,overdue_money,overdue_rate",
                         "pageNum": 1,
                         "pageSize": 1000,
                         "serviceId": "service_tjbg02_finace",
@@ -484,7 +499,6 @@
                     method: 'POST',
                     data: params
                 }).then(function (res) {
-                    console.log(res)
                     let data = res.data.data.data[0]
                     //财务报表数据
                     let list = [
@@ -500,24 +514,23 @@
                     _this.receivableData = {
                         receivableTxt: '应收欠款（万元）',
                         receivableValUnit: '￥',
-                        receivableVal: _this.dataProcess(data.debt_money, 'money').num,
+                        receivableVal: _this.dataProcess(data.debt_money, 'money','tenth').num,
                         receivableMonth: '当月已收（万元）',
                         receivableMonthValUnit: '￥',
-                        receivableMonthVal: _this.dataProcess(data.receipt_money, 'money').num,
+                        receivableMonthVal: _this.dataProcess(data.receipt_money, 'money','tenth').num,
                         receivableAverage: '平均账龄（天数）',
                         receivableAverageVal: _this.dataProcess(data.avg_receipt_age, 'day').num,
-                        receivableDay: '应收账款周转天数（天）',
-                        receivableDayVal: _this.dataProcess(data.receipt_days, 'day').num,
                     }
                     //逾期欠款数据
                     _this.overDueData = {
                         overDueTxt: '逾期账款(万元）',
                         overDueValUnit: '￥',
-                        overDueval: _this.dataProcess(data.overdue_money, 'money').num,
+                        overDueval: _this.dataProcess(data.overdue_money, 'money','tenth').num,
                         overDueRadioTxt: '逾期占比',
                         overDueRadio: _this.dataProcess(data.overdue_rate, 'percent').num + _this.dataProcess(data.overdue_rate, 'percent').unit,
                         overDueRadioPercent: _this.dataProcess(data.overdue_rate, 'percent').num
                     }
+                    //隐藏laoding状态
                     _this.financeIsShow = false
                 })
             },
@@ -787,7 +800,6 @@
                     _this.salesmanContributionBar = false
                 })
             },
-
             //产品-商品动销率，商品动销数
             getCommodityTurnoverRate() {
                 var _this = this
@@ -1118,10 +1130,10 @@
                     console.log(_this.PinListDetail)
                 })
             },
-
-            //门店活跃明细
+            //门店模块概览
             getStoresDetailed() {
                 var _this = this
+                //显示loading状态
                 _this.StoreisShow = true
                 var params = {
                     "inputParam":
@@ -1140,93 +1152,89 @@
                     method: 'POST',
                     data: params
                 }).then(function (res) {
-                        console.log(res)
-                        let data = res.data.data.data[0]
-                        console.log(data)
-                        let AmountChainVal = {
-                            name: "环比: ",
-                            NoSales: _this.dataProcess(data.active_store_cnt_mom, 'percent').num + _this.dataProcess(data.active_store_cnt_mom, 'percent').unit
+                    let data = res.data.data.data[0]
+                    let AmountChainVal = {
+                        name: "环比: ",
+                        NoSales: _this.dataProcess(data.active_store_cnt_mom, 'percent').num + _this.dataProcess(data.active_store_cnt_mom, 'percent').unit
+                    }
+                    let AmountYearVal = {
+                        name: "同比: ",
+                        NoSales: _this.dataProcess(data.active_store_cnt_yoy, 'percent').num + _this.dataProcess(data.active_store_cnt_yoy, 'percent').unit
+                    }
+                    let downSales = {
+                        name:"销量下滑门店数(家):",
+                        NoSales: data.sale_drop_store_cnt,
+                        btn:"下滑门店"
+                    }
+                    let upSales = {
+                        name:"销量增长门店数(家):",
+                        NoSales: data.sale_raise_store_cnt,
+                        btn:"增长门店"
+                    }
+                    let noTrade = {
+                        name: "近3个月无交易门店数(家): ",
+                        NoSales: data.mon3_unsale_store_cnt
+                    }
+                    let noTrades = {
+                        name: "6个月无交易门店数(家):",
+                        NoSales:data.mon6_unsale_store_cnt
+                    }
+                    let ActivestresPer = {
+                        ActiveStores:"门店单产",
+                        ActiveStoresing:"(万元)",
+                        NoSales:_this.dataProcess(data.store_avg_money, 'money').num,
                         }
-                        let AmountYearVal = {
-                            name: "同比: ",
-                            NoSales: _this.dataProcess(data.active_store_cnt_yoy, 'percent').num + _this.dataProcess(data.active_store_cnt_yoy, 'percent').unit
-                        }
-                        let downSales = {
-                            name:"销量下滑门店数(家):",
-                            NoSales: data.sale_drop_store_cnt,
-                            btn:"下滑门店"
-                        }
-                        let upSales = {
-                            name:"销量增长门店数(家):",
-                            NoSales: data.sale_raise_store_cnt,
-                            btn:"增长门店"
-                        }
-                        let noTrade = {
-                            name: "近3个月无交易门店数(家): ",
-                            NoSales: data.mon3_unsale_store_cnt
-                        }
-                        let noTrades = {
-                            name: "6个月无交易门店数(家):",
-                            NoSales:data.mon6_unsale_store_cnt
-                        }
-                        let ActivestresPer = {
-                            ActiveStores:"门店单产",
-                            ActiveStoresing:"(万元)",
-                            NoSales:_this.dataProcess(data.store_avg_money, 'money').num,
-                          }
-                        let ActivestresSum = {
-                            ActiveStores:"总门店数",
-                            ActiveStoresing:"(家)",
-                            NoSales:data.store_cnt
-                        }
-                        let ActivestresnNew = {
-                            ActiveStores:"新增门店数",
-                            ActiveStoresing:"(家)",
-                            NoSales:data.new_store_cnt
-                        }
-                        let nearnoTrade = {
-                            name: "3个月无交易门店应收欠款(万元):",
-                            NoSales: '￥'+ _this.dataProcess(data.mon3_unsale_store_dept_money, 'money').num,
-                        }
-                        let nearnoTrades = {
+                    let ActivestresSum = {
+                        ActiveStores:"总门店数",
+                        ActiveStoresing:"(家)",
+                        NoSales:data.store_cnt
+                    }
+                    let ActivestresnNew = {
+                        ActiveStores:"新增门店数",
+                        ActiveStoresing:"(家)",
+                        NoSales:data.new_store_cnt
+                    }
+                    let nearnoTrade = {
+                        name: "3个月无交易门店应收欠款(万元):",
+                        NoSales: '￥'+ _this.dataProcess(data.mon3_unsale_store_dept_money, 'money').num,
+                    }
+                    let nearnoTrades = {
                         name: "闭店应收账款(万元):",
                         NoSales: '￥'+_this.dataProcess(data.close_store_dept_money, 'money').num,
                     }
-
-
-                        _this.StoresDetailed = {
-                            shopTitle:"门店活跃率:",
-                            StoreActivity: _this.dataProcess(data.active_store_rate, 'percent').num + _this.dataProcess(data.active_store_rate, 'percent').unit,  //门店活跃率
-                            shopActiveData: {
-                                ActiveStoresTxt:"活跃门店数",
-                                ActiveStoresing:"(家)",
-                                ActiveStores:data.active_store_cnt,  //门店活跃数
-                                detailbtn:"门店详情",
-                                shopActiveTitle: [
-                                    AmountChainVal,  //环比数额
-                                    AmountYearVal   //同比数额
-                                ],
-                                    downSales,
-                                    upSales,
-                                shopDaseData:[
-                                    noTrade,
-                                    noTrades
-                                ]
-                            },
-                            ActiveDetail:{
-                                shopActiveDetail:[
-                                    ActivestresPer,
-                                    ActivestresSum,
-                                    ActivestresnNew
-                                ],
-                                shopDaseData:[
-                                    nearnoTrade,
-                                    nearnoTrades
-                                ]
-                            }
+                    _this.StoresDetailed = {
+                        shopTitle:"门店活跃率:",
+                        StoreActivity: _this.dataProcess(data.active_store_rate, 'percent').num + _this.dataProcess(data.active_store_rate, 'percent').unit,  //门店活跃率
+                        shopActiveData: {
+                            ActiveStoresTxt:"活跃门店数",
+                            ActiveStoresing:"(家)",
+                            ActiveStores:data.active_store_cnt,  //门店活跃数
+                            detailbtn:"门店详情",
+                            shopActiveTitle: [
+                                AmountChainVal,  //环比数额
+                                AmountYearVal   //同比数额
+                            ],
+                                downSales,
+                                upSales,
+                            shopDaseData:[
+                                noTrade,
+                                noTrades
+                            ]
+                        },
+                        ActiveDetail:{
+                            shopActiveDetail:[
+                                ActivestresPer,
+                                ActivestresSum,
+                                ActivestresnNew
+                            ],
+                            shopDaseData:[
+                                nearnoTrade,
+                                nearnoTrades
+                            ]
                         }
-                        _this.StoreisShow = false
-                        console.log(_this.StoresDetailed)
+                    }
+                    _this.StoreisShow = false
+                    console.log(_this.StoresDetailed)
                     },
                 )
             },
@@ -1583,8 +1591,6 @@
                     },
                 )
             },
-            
-
             //库存-库存可销天数走势图
             getmarketableDayChart() {
                 var _this = this
@@ -1769,6 +1775,7 @@
                         ]
                     },
                 }
+
             },
             //计算环比/同比
             getHandle(molecule,denominator,num){

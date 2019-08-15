@@ -97,11 +97,11 @@
             font-weight:bold;
         }
         /deep/.ant-col-18{
-            padding-left:10px;
+            padding-left:21px;
         }
         /deep/.ant-col-6{
             text-align: right;
-            padding-right:15px;
+            padding-right:21px;
         }
         .marginStyle{
             margin-top:31px;
