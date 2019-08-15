@@ -37,6 +37,10 @@
             //逾期账款数据
             overDueData:{
                 type:Object
+            },
+            //逾期明细点击事件
+            overDueClick:{
+                type:Function
             }
         },
         components : {
@@ -53,7 +57,7 @@
         methods: {
             //逾期明细
             detailHandleClick(){
-
+                this.overDueClick()
             }
         },
         computed:{

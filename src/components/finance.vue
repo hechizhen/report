@@ -13,9 +13,10 @@
                 <receivable :receivableData="receivableData"></receivable>
             </div>
             <div class="financeRight">
-                <over-due :overDueData="overDueData"></over-due>
+                <over-due :overDueData="overDueData" :overDueClick="overDueHandleClick"></over-due>
             </div>
             <loading-data :isShow="isShow"></loading-data>
+            <public-table v-if="isShowDetail" :close="closePopup" :tableHeader="tableData.header" :interfaceParams="tableData.params"></public-table>
         </div>
     </div>
 </template>
@@ -26,6 +27,7 @@
     import newButton from '../components/base/newButton.vue'
     import secondTitle from '../components/secondTitle.vue'
     import loadingData from './base/loadingData'
+    import publicTable from './base/publicTable.vue'
     export default {
         name : 'finance',
         props:{
@@ -48,6 +50,10 @@
             isShow:{
                 type:Boolean,
                 default:false,
+            },
+            //逾期明细表格数据
+            tableData:{
+                type:Object
             }
         },
         components : {
@@ -56,7 +62,8 @@
             overDue,
             newButton,
             secondTitle,
-            loadingData
+            loadingData,
+            publicTable
         },
         data () {
             return {
@@ -83,7 +90,8 @@
 						{title:'逾期占比：',data:'统计累计逾期金额/应收欠款'},
 					],
 					titleName:'财务指标解释'
-				}
+                },
+                isShowDetail:false
             }
         },
         mounted () {
@@ -97,6 +105,14 @@
             //人均效能
             personHandleClick(){
 
+            },
+            //关闭逾期明细
+            closePopup(){
+                this.isShowDetail = false
+            },
+            //打开逾期明细
+            overDueHandleClick(){
+                this.isShowDetail = true
             }
         },
         computed:{

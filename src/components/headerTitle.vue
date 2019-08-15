@@ -120,6 +120,7 @@
         .paddingStyle1{
             display: flex;
             align-items: center;
+            margin-top:10px;
         }
         .spanFont{
             color:#45485A

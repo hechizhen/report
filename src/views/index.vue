@@ -37,7 +37,8 @@
                          :marketableDayLine="marketableDayLine"   v-if="inventoryDay.length!=0 "> </inventoryIndex>
         <!-- 财务 -->
         <finance :financeData="financeData" :receivableData="receivableData" :overDueData="overDueData" :titleName="financeTitle"
-        v-if="financeData.length!=0 && receivableData.length!=0 && overDueData.length!=0" :isShow="financeIsShow"></finance>
+        v-if="financeData.length!=0 && receivableData.length!=0 && overDueData.length!=0" :isShow="financeIsShow"
+        :tableData="financeDetailTableData.overdueDetail"></finance>
     </div>
 </template>
 <script>
@@ -155,6 +156,8 @@
                 productTableData:'',//产品列表数据
                 //活跃门店二级表格数据
                 storeDetailTableData:'',
+                //财务模块二级表格数据
+                financeDetailTableData:'',
                 //门店增长下滑导出数据
                 storeExportData:{
                     //增长导出数据
@@ -188,9 +191,7 @@
             this.getsalesmanTrend()
             this.getOverViewData()
             this.getOneHelpSalesData()
-            this.getFinanceTableData()
-            this.getReceivableData()
-            this.getOverdueData()
+            this.getFinanceOverviewData()
             this.getsalesman()
             this.getsecondBand()
             this.getDaysAvailableStock()
@@ -222,9 +223,7 @@
                 this.currentDate = val
                 this.getOverViewData()
                 this.getOneHelpSalesData()
-                this.getFinanceTableData()
-                this.getReceivableData()
-                this.getOverdueData()
+                this.getFinanceOverviewData()
                 this.getDaysAvailableStock()
                 this.getinventoryDetail()
                 this.getStoresDetailed()
@@ -463,76 +462,61 @@
                     _this.oneHelpSaleYearShow = false
                 }));
             },
-            //财务报表数据
-            getFinanceTableData() {
+            //财务模块概览本数据
+            getFinanceOverviewData() {
                 var _this = this
                 _this.financeIsShow = true
-                this.$http({
-                    url: _this.requestHttpUrl + '/financeTableData',
-                    method: 'POST',
-                    data: {
-                        dateTime: _this.currentDate
+                var params = {
+                    "inputParam": 
+                    {
+                        "data_mon":_this.currentDate,
+                        "data_type":"当月"
+                    },
+                        "isReturnTotalSize": "Y",
+                        "outputCol": "dealer_id,data_mon,data_type,in_money,cost_money,gross_money,factory_money,out_money,profit_money,debt_money,receipt_money,avg_receipt_age,receipt_days,overdue_money,overdue_rate",
+                        "pageNum": 1,
+                        "pageSize": 1000,
+                        "serviceId": "service_tjbg02_finace",
+                        "whereCndt": {"dealer_id":"='ff8080816a5a381e016a5dd9f23838b0'"}
                     }
+                this.$http({
+                    url: _this.testRequestHttpUrl + '?v=finance',
+                    method: 'POST',
+                    data: params
                 }).then(function (res) {
                     console.log(res)
-                    let data = res.data.data.data
-                    let list = []
-                    data.map(function (item, index) {
-                        item.val = _this.dataProcess(item.val, 'money').num
-                        list.push({name: item.name, val: item.val})
-                    })
+                    let data = res.data.data.data[0]
+                    //财务报表数据
+                    let list = [
+                        {name:'收入（万元）',val:_this.dataProcess(data.in_money, 'money','tenth').num},
+                        {name:'成本（万元）',val:_this.dataProcess(data.cost_money, 'money','tenth').num},
+                        {name:'毛利（万元）',val:_this.dataProcess(data.gross_money, 'money','tenth').num},
+                        {name:'厂家费用（万元）',val:_this.dataProcess(data.factory_money, 'money','tenth').num},
+                        {name:'支出费用（万元）',val:_this.dataProcess(data.out_money, 'money','tenth').num},
+                        {name:'利润（万元）',val:_this.dataProcess(data.profit_money, 'money','tenth').num}
+                    ]
                     _this.financeData = list
-                    _this.financeIsShow = false
-                })
-            },
-            //应收账款
-            getReceivableData() {
-                var _this = this
-                _this.financeIsShow = true
-                this.$http({
-                    url: _this.requestHttpUrl + '/receivableData',
-                    method: 'POST',
-                    data: {
-                        dateTime: _this.currentDate
-                    }
-                }).then(function (res) {
-                    console.log(res)
-                    let data = res.data.data.data
+                    //应收欠款数据
                     _this.receivableData = {
                         receivableTxt: '应收欠款（万元）',
                         receivableValUnit: '￥',
-                        receivableVal: _this.dataProcess(data.receivableVal, 'money').num,
+                        receivableVal: _this.dataProcess(data.debt_money, 'money').num,
                         receivableMonth: '当月已收（万元）',
                         receivableMonthValUnit: '￥',
-                        receivableMonthVal: _this.dataProcess(data.monthReceivableVal, 'money').num,
+                        receivableMonthVal: _this.dataProcess(data.receipt_money, 'money').num,
                         receivableAverage: '平均账龄（天数）',
-                        receivableAverageVal: _this.dataProcess(data.averageAge, 'day').num,
+                        receivableAverageVal: _this.dataProcess(data.avg_receipt_age, 'day').num,
                         receivableDay: '应收账款周转天数（天）',
-                        receivableDayVal: _this.dataProcess(data.receivableDayVal, 'day').num,
+                        receivableDayVal: _this.dataProcess(data.receipt_days, 'day').num,
                     }
-                    _this.financeIsShow = false
-                })
-            },
-            //逾期欠款
-            getOverdueData() {
-                var _this = this
-                _this.financeIsShow = true
-                this.$http({
-                    url: _this.requestHttpUrl + '/overdueData',
-                    method: 'POST',
-                    data: {
-                        dateTime: _this.currentDate
-                    }
-                }).then(function (res) {
-                    console.log(res)
-                    let data = res.data.data.data
+                    //逾期欠款数据
                     _this.overDueData = {
                         overDueTxt: '逾期账款(万元）',
                         overDueValUnit: '￥',
-                        overDueval: _this.dataProcess(data.overdueVal, 'money').num,
+                        overDueval: _this.dataProcess(data.overdue_money, 'money').num,
                         overDueRadioTxt: '逾期占比',
-                        overDueRadio: _this.dataProcess(data.overduePercent, 'percent').num + _this.dataProcess(data.overduePercent, 'percent').unit,
-                        overDueRadioPercent: _this.dataProcess(data.overduePercent, 'percent').num
+                        overDueRadio: _this.dataProcess(data.overdue_rate, 'percent').num + _this.dataProcess(data.overdue_rate, 'percent').unit,
+                        overDueRadioPercent: _this.dataProcess(data.overdue_rate, 'percent').num
                     }
                     _this.financeIsShow = false
                 })
@@ -1282,10 +1266,12 @@
                         let raiseDifference = []//增长门店差异销售额
                         raiseList.map(function(item,index){
                             item.numberId = index+1
-                            raisexAxisData.push(item.store_name)
-                            raiseLastMonth.push(item.mon3_avg_m_money)
-                            raiseSameMonth.push(item.money)
-                            raiseDifference.push(item.dif_money)
+                            if(index<5){
+                                raisexAxisData.push(item.store_name)
+                                raiseLastMonth.push(item.mon3_avg_m_money)
+                                raiseSameMonth.push(item.money)
+                                raiseDifference.push(item.dif_money)
+                            }
                         })
                         _this.storeExportData.raiseData.tableData = raiseList
                         //增长门店柱状图数据
@@ -1333,10 +1319,12 @@
                         let downDifference = []//下滑门店差异销售额
                         downList.map(function(item,index){
                             item.numberId = index+1
-                            downxAxisData.push(item.store_name)
-                            downLastMonth.push(item.mon3_avg_m_money)
-                            downSameMonth.push(item.money)
-                            downDifference.push(item.dif_money)
+                            if(index<5){
+                                downxAxisData.push(item.store_name)
+                                downLastMonth.push(item.mon3_avg_m_money)
+                                downSameMonth.push(item.money)
+                                downDifference.push(item.dif_money)
+                            }
                         })
                         _this.storeExportData.downData.tableData = downList
                         //下滑门店柱状图数据
@@ -1686,6 +1674,36 @@
                             {txt:'应收账款（元）',unit:'money'},
                         ]
                     }
+                }
+                //财务模块二级列表数据
+                _this.financeDetailTableData = {
+                    //逾期明细
+                    overdueDetail:{
+                        params:{
+                            "inputParam": 
+                            {
+                                "data_mon":_this.currentDate,
+                                "data_type":"当月"
+                            },
+                            "isReturnTotalSize": "Y",
+                            "outputCol": "emp_name,emp_phone,store_name,store_concat,store_phone,receivable_time,overdue_days,overdue_money",
+                            "pageNum": 1,
+                            "pageSize": 100,
+                            "serviceId": "service_tjbg02_finace_overdue_dtl",
+                            "whereCndt": {"dealer_id":"='ff8080816a5a381e016a5dd9f23838b0'"}
+                        },
+                        header:[
+                            {txt:'序号',unit:false},
+                            {txt:'业务员名称',unit:false},
+                            {txt:'业务员电话',unit:false},
+                            {txt:'门店店名',unit:false},
+                            {txt:'门店老板姓名',unit:false},
+                            {txt:'门店老板联系方式',unit:false},
+                            {txt:'约定交款日',unit:false},
+                            {txt:'逾期时长(天）',unit:'day'},
+                            {txt:'逾期金额（元）',unit:'money'},
+                        ]
+                    },
                 }
             },
             //计算环比/同比
