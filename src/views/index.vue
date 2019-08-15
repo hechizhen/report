@@ -208,6 +208,7 @@
             this.getSalesmanContribution()
             this.getProductTableData()
             this.getDetailTableData()
+            this.getPinListing()
         },
         computed: {
 
@@ -239,6 +240,7 @@
                 this.getSalesmanContribution()
                 this.getProductTableData()
                 this.getDetailTableData()
+                this.getPinListing()
             },
             //体检报告概览
             getOverViewData() {
@@ -801,6 +803,7 @@
                     _this.salesmanContributionBar = false
                 })
             },
+
             //产品-商品动销率，商品动销数
             getCommodityTurnoverRate() {
                 var _this = this
@@ -987,16 +990,26 @@
                     _this.NumberGoodsList = false
                 })
             },
-            //产品-动销商品数增长商品
+            //产品-动销商品数下滑商品
             getVariabilityUp() {
                 var _this = this
                 _this.NumberGoodsUpBar = true
+                var params = {
+                    "inputParam":{
+                        "data_mon":_this.currentDate,
+                        "data_type":"当月",
+                        "money_type":"下滑",
+                    },
+                    "outputCol":"dealer_id,data_mon,data_type,bo1,bo2,bo3,goods_id,money,money_lm,sub_money",
+                    "pageNum":1,
+                    "pageSize":1000,
+                    "whereCndt":{"dealer_id":"='ff8080816b82b53d016bbb1bd5746d71'"},
+                    "serviceId":"service_tjbg02_goods_sales_change"
+                }
                 this.$http({
                     url: _this.requestHttpUrl + '/variabilityUp',
                     method: 'POST',
-                    data: {
-                        dateTime: _this.currentDate
-                    }
+                    data: params
                 }).then(function (res) {
                     var VariabilityUpData = res.data.data,
                         xAxisData=[],
@@ -1023,16 +1036,26 @@
 
                 })
             },
-            //产品-动销商品数下滑商品
+            //产品-动销商品数上升商品
             getVariabilityDown() {
                 var _this = this
                 _this.NumberGoodsDownBar = true
+                var params = {
+                    "inputParam":{
+                        "data_mon":_this.currentDate,
+                        "data_type":"当月",
+                        "money_type":"上升",
+                    },
+                    "outputCol":"dealer_id,data_mon,data_type,bo1,bo2,bo3,goods_id,money,money_lm,sub_money",
+                    "pageNum":1,
+                    "pageSize":1000,
+                    "whereCndt":{"dealer_id":"='ff8080816b82b53d016bbb1bd5746d71'"},
+                    "serviceId":"service_tjbg02_goods_sales_change"
+                }
                 this.$http({
                     url: _this.requestHttpUrl + '/variabilityDown',
                     method: 'POST',
-                    data: {
-                        dateTime: _this.currentDate
-                    }
+                    data: params
                 }).then(function (res) {
                     var VariabilityUpData = res.data.data,
                         xAxisData=[],
@@ -1063,6 +1086,17 @@
             getGoodsdetail() {
                 var _this = this
                 _this.NumberGoodsPie = true
+                var params = {
+                    "inputParam":{
+                        "data_mon":_this.currentDate,
+                        "data_type":"当月",
+                    },
+                    "outputCol":"dealer_id,data_mon,data_type,bo1,bo2,bo3,goods_id,money,ratio_rate,money_yoy,money_mom,gross_money_rate,gross_money_mom,gross_money_yoy",
+                    "pageNum":1,
+                    "pageSize":1000,
+                    "whereCndt":{"dealer_id":"='ff8080816b82b53d016bbb1bd5746d71'"},
+                    "serviceId":"service_tjbg02_goods_sales_dtl"
+                }
                 this.$http({
                     url: _this.requestHttpUrl + '/GoodsDetail',
                     method: 'POST',
@@ -1073,9 +1107,34 @@
                     var Goods = res.data.data;
                     _this.GoodsDetail = Goods;
                     _this.NumberGoodsPie = false
-                    console.log(   _this.GoodsDetail)
+                    console.log(_this.GoodsDetail)
                 })
             },
+            //产品-动销清单
+            getPinListing(){
+                var _this = this
+                var params = {
+                    "inputParam":{
+                        "data_mon":_this.currentDate,
+                        "data_type":"当月",
+                    },
+                    "outputCol":"dealer_id,data_mon,data_type,bo1_name,bo2_name,bo3_name,goods_name,order_qty,stock_qty,sale_rate",
+                    "pageNum":1,
+                    "pageSize":1000,
+                    "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                    "serviceId":"service_tjbg02_goods_stock_sales"
+                }
+                this.$http({
+                    url: _this.requestHttpUrl + '?v=PinListDetail',
+                    method: 'POST',
+                    data: params
+                }).then(function (res) {
+                    var PinList = res.data.data;
+                    _this.PinListDetail = PinList;
+                    console.log(_this.PinListDetail)
+                })
+            },
+
             //门店活跃明细
             getStoresDetailed() {
                 var _this = this
@@ -1363,6 +1422,20 @@
                 var _this = this
                 _this.stockAmount = true
                 _this.InventoryTurnover = true
+                var params = {
+                    "inputParam": {
+                        "data_mon":_this.currentDate,
+                        "data_type": "当月"
+                    },
+                    "isReturnTotalSize": "Y",
+                    "outputCol": "dealer_id,data_mon,data_type,money,qty,mon6_unsale_money,non6_unsale_qty,turnover_rate,saledays,saledays_mon,saledays_yoy,liby_saledays,kispa_saledays,cheerwin_saledays,shengmei_saledays,oral_saledays,wonderland_saledays",
+                    "pageNum": 1,
+                    "pageSize": 1000,
+                    "serviceId": "service_tjbg02_stock",
+                    "whereCndt": {
+                        "dealer_id": "='ff8080816a194910016a43b00eeb3a75'"
+                    }
+                }
                 this.$http({
                     url: _this.requestHttpUrl + '/inventoryDetail',
                     method: 'POST',
@@ -1404,6 +1477,18 @@
             getDaysAvailableStock() {
                 var _this = this
                 _this.DaysAvailableStock = true
+                var params = {
+                    "inputParam": {
+                        "data_mon":_this.currentDate,
+                        "data_type":"当月"
+                    },
+                    "isReturnTotalSize": "Y",
+                    "outputCol": "dealer_id,data_mon,data_type,bo1_name,bo2_name,bo3_name,goods_name,saledays",
+                    "pageNum": 1,
+                    "pageSize": 1000,
+                    "serviceId": "service_tjbg02_stock_saledays",
+                    "whereCndt": {"dealer_id":"='ff8080816a194910016a43b00eeb3a75'"}
+                }
                 this.$http({
                     url: _this.requestHttpUrl + '/DaysAvailableStock',
                     method: 'POST',
@@ -1510,6 +1595,8 @@
                     },
                 )
             },
+            
+
             //库存-库存可销天数走势图
             getmarketableDayChart() {
                 var _this = this

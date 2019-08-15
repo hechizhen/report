@@ -4,19 +4,19 @@
             <div class="title">
                 <a-Row class="thendChartRow">
                     <a-Col :span="12" class="thendChartCol1">
-                        增长商品
+                        下滑商品
                     </a-Col>
                     <a-Col :span="12" class="thendChartCol2">
                         单位：万元
                         <newButton :defaultVal="defaultVal"> </newButton>
-                        <span @click="thendChartClicks">
+                        <span @click="thendChartClick">
                             <i class="iconfont icon-guanbi"></i>
                         </span>
                     </a-Col>
                 </a-Row>
             </div>
             <div class="lineEcharts">
-                <barEcharts :barEchartsData="barEchartsData"></barEcharts>
+                <barEcharts :barEchartsData="barEcharts"></barEcharts>
             </div>
         </div>
         <loading-data :isShow="isShow"></loading-data>
@@ -27,7 +27,7 @@
     import  newButton from  '../base/newButton'
     import loadingData from '../base/loadingData'
     export default {
-        name:'shopChartDown',
+        name:'shopChart',
         components:{
             barEcharts,
             newButton,
@@ -37,8 +37,8 @@
             trendChartClick:{
                 type:Function
             },
-            barEchartsData:{
-                type:Function
+            VariabilityDown:{
+                type:Object
             },
             isShow:{
                 type:Boolean,
@@ -49,14 +49,24 @@
         data(){
             return {
                 defaultVal:"导出数据",
-                // isShow:true,
+                barEcharts:{
+                    id:'barIdUp',
+                    unit:'%',
+                    xAxisData:this.VariabilityDown.xAxisData,
+                    label:{
+                        isShow:false
+                    },
+                    type:'xAxis',
+                    barData:this.VariabilityDown.seriesData,
+                    showType:0,//0横过来 1竖起来
+                    markLineList:{
+                        show:false
+                    }
+                }
             }
         },
-        mounted(){
-          console.log(this.barEchartsData)
-        },
         methods:{
-            thendChartClicks(){
+            thendChartClick(){
                 this.trendChartClick()
             }
         }
@@ -78,7 +88,6 @@
             height: 80%;
             width: 90%;
             background:rgba(255,255,255,1);
-            border-radius:5px;
             .title {
                 height: 10%;
                 width: 100%;

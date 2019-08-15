@@ -16,7 +16,7 @@
                 </a-Row>
             </div>
             <div class="lineEcharts">
-                <barEcharts :barEchartsData="barEchartsData"></barEcharts>
+                <barEcharts :barEchartsData="barEcharts"></barEcharts>
             </div>
         </div>
         <loading-data :isShow="isShow"></loading-data>
@@ -37,8 +37,8 @@
             trendChartClick:{
                 type:Function
             },
-            barEchartsData:{
-                type:Function
+            VariabilityUp:{
+                type:Object
             },
             isShow:{
                 type:Boolean,
@@ -49,7 +49,20 @@
         data(){
             return {
                 defaultVal:"导出数据",
-                // isShow:true,
+                barEcharts:{
+                    id:'barIdUp',
+                    unit:'%',
+                    xAxisData:this.VariabilityUp.xAxisData,
+                    label:{
+                        isShow:false
+                    },
+                    type:'xAxis',
+                    barData:this.VariabilityUp.seriesData,
+                    showType:0,//0横过来 1竖起来
+                    markLineList:{
+                        show:false
+                    }
+                }
             }
         },
         methods:{
