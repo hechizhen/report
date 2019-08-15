@@ -4,13 +4,13 @@
 		<subTitle :subtitlename="subtitlename" :listing="listing" :explicit="explicit"  :explainSecondList="explainSecondList"></subTitle>
 		<a-Row :gutter="23">
 		  <a-Col :span="10">
-		  	<sameMonth :orderAmountData="orderAmountData" :proportioData="proportioData" :topography="topography" :isShow="towHelpSaleMonthShow" v-if="proportioData.length!=0"></sameMonth>
+		  	<sameMonth :orderAmountData="orderAmountData.thatMonth" :topography="topography" :isShow="towHelpSaleMonthShow"></sameMonth>
 		  </a-Col>
 		  <a-Col :span="7">
-		  	<totalAmount :titleName="'环比'" :displayData="grossProfitData" :totalAmountData="chainRatioData" :isShow="towHelProportion"></totalAmount>
+		  	<totalAmount :displayData="orderAmountData.chainratio" :isShow="towHelProportion"></totalAmount>
 		  </a-Col>
 		  <a-Col :span="7">
-		  	<totalAmount :titleName="'同比'" :displayData="grossInterestRateData" :totalAmountData="placingOrdersYearData" :isShow="towHelYoy"></totalAmount>
+		  	<totalAmount :displayData="orderAmountData.yearOnYear" :isShow="towHelYoy"></totalAmount>
 		  </a-Col>
 		</a-Row>
 		<core :coretype="'二帮卖得分'" :coretext="100" :evaluate="'优秀'"></core>
@@ -36,18 +36,6 @@
 		},
 		props:{
 			orderAmountData:{
-				type:Object,
-				default:{}
-			},
-			grossProfitData:{
-				type:Object,
-				default:{}
-			},
-			grossInterestRateData:{
-				type:Object,
-				default:{}
-			},
-			proportio:{
 				type:Object,
 				default:{}
 			},
@@ -77,9 +65,6 @@
 				titleName:'二帮卖分析',
 				subtitlename:'订单',
 				listing:['订单详情'],
-				proportioData:this.proportio.thoseArr,
-				chainRatioData:this.proportio.chainRatio,
-				placingOrdersYearData:this.proportio.placingOrdersYear,
 				echartsShow: false,
 				lineEchartsData:{},
 				explainSecondList:{
@@ -97,12 +82,12 @@
 					],
 					span:7,
 					span2:17,
-					titleName:'二帮卖分析-订单指标解释'
+					titleName:'二帮卖分析-订单指标解释',
 				}
 			}
 		},
 		mounted(){
-
+			
 		},
 		methods:{
 			explicit(a,b){
@@ -119,11 +104,6 @@
 
 		},
 		watch:{
-            proportio(val){
-                this.proportioData = val.thoseArr;
-                this.chainRatioData = val.chainRatio;
-				this.placingOrdersYearData = val.placingOrdersYear;
-            },
             directionData(val){
                 this.lineEchartsData = {
                     id:'lineIdBand',

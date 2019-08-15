@@ -13,9 +13,8 @@
         v-if="monthBarData.length!=0 && monthSalesData.length!=0 && yearSalesData.length!=0 && yearBarData.length!=0"></one-help-sale-en>
 
         <!-- 二帮卖分析-订单 -->
-        <secondBand :orderAmountData="orderAmountData" :proportio="proportioData" :directionData="directionData" :towHelYoy="towHelYoy" :towHelProportion="towHelProportion"
-                    :towHelpSaleMonthShow="towHelpSaleMonthShow" :towHelpSaleMonthLineShow="towHelpSaleMonthLineShow"
-        ></secondBand>
+        <secondBand :orderAmountData="orderAmountData" :directionData="directionData" :towHelYoy="towHelYoy" :towHelProportion="towHelProportion"
+                    :towHelpSaleMonthShow="towHelpSaleMonthShow" :towHelpSaleMonthLineShow="towHelpSaleMonthLineShow" v-if="orderAmountData"></secondBand>
         <!-- 二帮卖分析-业务员 -->
         <salesman :salesmanData="salesmanData" :salesmanTrendData="salesmanTrendData" :salesmandownwardData="salesmandownwardData"
                   :salesmanReachedData="salesmanReachedData" :salesmanContributionData="salesmanContributionData" :isShow="salesmanReached"
@@ -148,8 +147,7 @@
                 DaysAvailableStock:false,   //库存可销天数
                 financeIsShow:false,        //财务
                 salesmanData: {},//业务员数据
-                orderAmountData: {}, //金额数据
-                proportioData: "",  //占比数据
+                orderAmountData: '', //金额数据
                 directionData:{}, //订单走势图
                 salesmanTrendData:{},  //业务员走势图
                 salesmandownwardData:{}, //业务员下滑
@@ -573,7 +571,7 @@
                         var secondBandData = res.data.data.data[0],thatMonth = {},chainratio = {},yearOnYear = {};
                         // 当月数据
                         thatMonth.money = !secondBandData.money ? '--' : _this.dataProcess(secondBandData.money, 'money', 1).num;  //本月下单金额
-                        if(!secondBandData.money ){
+                        if(secondBandData.money){
                             thatMonth.moneyInteger = thatMonth.money.split(".")[0];   //本月下单金额整数部分
                             thatMonth.moneyDecimal = '.' + thatMonth.money.split(".")[1];//本月下单金额小数部分
                         }else {
@@ -582,13 +580,22 @@
                         }
                         thatMonth.gross_money = !secondBandData.gross_money ? '--' : _this.dataProcess(secondBandData.gross_money, 'money', 1).num; //毛利额
                         thatMonth.gross_money_rate = !secondBandData.gross_money_rate ? '--' : _this.dataProcess(secondBandData.gross_money_rate, 'percent').num + '%'; //毛利率
-                        thatMonth.list = [{name:'立白',value:!secondBandData.liby_money ? 0 : secondBandData.liby_money},
+                        var list = [{name:'立白',value:!secondBandData.liby_money ? 0 : secondBandData.liby_money},
                             {name:'好爸爸',value:!secondBandData.kispa_money ? 0 : secondBandData.kispa_money},
                             {name:'超威',value:!secondBandData.cheerwin_money ? 0 : secondBandData.cheerwin_money},
                             {name:'口腔',value:!secondBandData.oral_money ? 0 : secondBandData.oral_money},
                             {name:'晟美',value:!secondBandData.shengmei_money ? 0 : secondBandData.shengmei_money},
                             {name:'其他',value:!secondBandData.other_money ? 0 : secondBandData.other_money}]
+                        thatMonth.list = {
+                            id:'pieSalesManId',
+                            colorList:['#365AF8','#FFC925','#7B8EFB','#34DF8E','#A3FC8A','#FF7C25'],
+                            labelType:1,
+                            pieData:list,
+                            radius:['35%', '70%'],
+                            borderWidth:0,
+                        }    
                         // 环比数据
+                        chainratio.name = '环比';
                         chainratio.moneymonthly = _this.getHandle(secondBandData.money,secondBandData.money_lm,2);
                         chainratio.grossmoneymonthly = _this.getHandle(secondBandData.gross_money,secondBandData.gross_money_lm,2);
                         chainratio.rossmoneyratemonthly = _this.getHandle(secondBandData.gross_money_rate,secondBandData.gross_money_rate_lm,2);
@@ -598,7 +605,8 @@
                             {name:'口腔',value: _this.getHandle(secondBandData.oral_money,secondBandData.oral_money_lm,2)},
                             {name:'晟美',value: _this.getHandle(secondBandData.shengmei_money,secondBandData.shengmei_money_lm,2)},
                             {name:'其他',value: _this.getHandle(secondBandData.other_money,secondBandData.other_money_lm,2)}]
-                            // 同比数据
+                        // 同比数据
+                        yearOnYear.name = '同比';
                         yearOnYear.moneymonthly = _this.getHandle(secondBandData.money,secondBandData.money_ly,2);
                         yearOnYear.grossmoneymonthly = _this.getHandle(secondBandData.gross_money,secondBandData.gross_money_ly,2);
                         yearOnYear.rossmoneyratemonthly = _this.getHandle(secondBandData.gross_money_rate,secondBandData.gross_money_rate_ly,2);
@@ -615,35 +623,6 @@
                         _this.towHelProportion = false
                         _this.towHelYoy = false    
                      }   
-                })
-            },
-            //二帮卖-订单占比
-            getProportio() {
-                var _this = this
-                _this.towHelpSaleMonthShow = true
-                _this.towHelProportion = true
-                _this.towHelYoy = true
-                this.$http({
-                    url: _this.requestHttpUrl + '/Proportion',
-                    method: 'POST',
-                    data: {
-                        dateTime: _this.currentDate
-                    }
-                }).then(function (res) {
-                    var proportioData = res.data.data,thoseArr = [],chainRatio=[],placingOrdersYear=[],proportio={};
-                    proportioData.map(function(item){
-                        thoseArr.push({name:item.name,value:item.value})
-                        chainRatio.push({name:item.name,value:item.chainRatio})
-                        placingOrdersYear.push({name:item.name,value:item.placingOrdersYear})
-                    })
-                    proportio.thoseArr = thoseArr;
-                    proportio.chainRatio = chainRatio;
-                    proportio.placingOrdersYear = placingOrdersYear;
-                    _this.proportioData = proportio;
-                    _this.towHelpSaleMonthShow = false
-                    _this.towHelProportion = false
-                    _this.towHelYoy = false
-                    console.log(_this.proportioData)
                 })
             },
             //二帮卖-订单走势图
