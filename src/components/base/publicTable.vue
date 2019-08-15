@@ -9,7 +9,7 @@
             </div>
             <Table :height="maxHeight" :columns="tablecColumns" :data="tableData" border  v-if="tableData.length!=0" :loading="tableLoading"></Table>
             <div class="paginationTable">
-                <Page :total="totalSize" :current="1" :page-size="defaultSize" show-elevator v-if="totalSize!='' && defaultSize!=''" on-change="onChange" />
+                <Page :total="totalSize" :current="1" :page-size="defaultSize" show-elevator v-if="totalSize!='' && defaultSize!=''" @on-change="onChange" />
             </div>
         </div>
     </div>
@@ -77,8 +77,8 @@
         methods: {
             //分页
             onChange(pageNumber) {
-                _this.pageNumber = pageNumber
-                this.newInterfaceParams.pageNum = _this.pageNumber
+                this.pageNumber = pageNumber
+                this.newInterfaceParams.pageNum = this.pageNumber
                 this.getTableData()
             },
             //点击关闭
