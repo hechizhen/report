@@ -780,7 +780,6 @@
                     data: params
                 }).then(function (res) {
                     if(res.data.code == '200'){
-                        alert(1)
                         // 达成
                         var salesmanReachedData = res.data.data.data,xAxisData=[],seriesData=[],lastMonth=[],sameMonth=[],difference=[],salesmanReachedObject={},contributionseriesData=[],contributionlastMonth=[],contributiondifference = [],salesmanContributionObject={};
                         salesmanReachedData.map(function(value){
