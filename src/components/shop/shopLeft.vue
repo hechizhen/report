@@ -20,7 +20,7 @@
               <span>{{ shopActives.downSales.name}}</span>
               <span>{{ shopActives.downSales.NoSales}}</span>
               <div class="productLeft-btn">
-                  <newButton :defaultVal="shopActives.downSales.btn" :buttonHandleClick="upbuttonHandleClick"
+                  <newButton :defaultVal="shopActives.downSales.btn" :buttonHandleClick="downbuttonHandleClick"
                   ></newButton>
               </div>
           </div>
@@ -28,15 +28,16 @@
               <span>{{ shopActives.upSales.name}}</span>
               <span>{{ shopActives.upSales.NoSales}}</span>
               <div class="productLeft-btn">
-                  <newButton :defaultVal="shopActives.upSales.btn" :buttonHandleClick="downbuttonHandleClick"
+                  <newButton :defaultVal="shopActives.upSales.btn" :buttonHandleClick="upbuttonHandleClick"
                   ></newButton>
               </div>
           </div>
       </div>
         <span class="shu"></span>
       </div>
-         <shopBase :shopDaseData="shopActives.shopDaseData" :defaultVal="defaultVal"></shopBase>
+         <shopBase :shopDaseData="shopActives.shopDaseData" :defaultVal="defaultVal" :detailHandleClick="tradeDetailHandleClick"></shopBase>
          <public-table v-if="isShowDetail" :close="closePopup" :tableHeader="tableData.header" :interfaceParams="tableData.params"></public-table>
+         <public-table v-if="isShowTrade" :close="closePopupTrade" :tableHeader="tradeTableData.header" :interfaceParams="tradeTableData.params"></public-table>
     </div>
 </template>
 
@@ -58,6 +59,12 @@
             },
             tableData:{
                 type:Object
+            },
+            tradeTableData:{
+                type:Object
+            },
+            exportData:{
+                type:Object
             }
         },
         data(){
@@ -66,7 +73,8 @@
                 downData:"下滑门店",
                 upData:"增长门店",
                 unit:"单位：万元",
-                isShowDetail:false
+                isShowDetail:false,
+                isShowTrade:false,
             }
         },
         components:{
@@ -88,6 +96,14 @@
             //关闭弹窗
             closePopup(){
                 this.isShowDetail = false
+            },
+            //点击无交易明细
+            tradeDetailHandleClick(){
+                this.isShowTrade = true
+            },
+            //关闭无交易明细
+            closePopupTrade(){
+                this.isShowTrade = false
             }
         }
     }

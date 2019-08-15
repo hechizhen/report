@@ -667,6 +667,10 @@ export default{
       };
     }
    //导出的方法
+  //  tableHeaderTxt：表头文字
+  //  tableHeaderKey：接口key值，和表头文字对应
+  //  tableData：表格数据
+  //  tableName：导出excel名称
    Vue.prototype.exportHandleClick =function(tableHeaderTxt,tableHeaderKey,tableData,tableName) {
     require.ensure([], () => {
         const { export_json_to_excel } = require('../../excel/Export2Excel.js');

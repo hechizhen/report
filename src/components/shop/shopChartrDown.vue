@@ -4,11 +4,11 @@
             <div class="title">
                 <a-Row class="thendChartRow">
                     <a-Col :span="12" class="thendChartCol1">
-                       增长门店
+                       下滑门店
                     </a-Col>
                     <a-Col :span="12" class="thendChartCol2">
                         单位：万元
-                        <newButton :defaultVal="defaultVal"> </newButton>
+                        <newButton :defaultVal="defaultVal" :buttonHandleClick="exportData"> </newButton>
                         <span @click="thendChartClicks">
                             <i class="iconfont icon-guanbi"></i>
                         </span>
@@ -43,6 +43,9 @@
             isShow:{
                 type:Boolean,
                 default:false,
+            },
+            downExportData:{
+                type:Object
             }
         },
 
@@ -59,6 +62,9 @@
         methods:{
             thendChartClicks(){
                 this.trendChartClick()
+            },
+            exportData(){
+                this.exportHandleClick(this.downExportData.tableHeaderTxt,this.downExportData.tableHeaderKey,this.downExportData.tableData,this.downExportData.tableName)
             }
         }
     }

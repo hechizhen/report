@@ -77,7 +77,6 @@
         methods: {
             //分页
             onChange(pageNumber) {
-                console.log('Page: ', pageNumber);
                 _this.pageNumber = pageNumber
                 this.newInterfaceParams.pageNum = _this.pageNumber
                 this.getTableData()
@@ -111,16 +110,13 @@
                     method: 'POST',
                     data: _this.newInterfaceParams
                 }).then(function (res) {
-                    console.log(res)
                     let pageData = res.data.data
-                    _this.totalSize = res.data.data.data.length
+                    _this.totalSize = res.data.data.totalSize
                     _this.defaultSize = pageData.pageSize
                     //表头key值
                     let keyValue = _this.newInterfaceParams.outputCol.split(',')
-                    console.log(keyValue)
                     let numArray = ['numberId']
                     _this.tableHeaderKey = numArray.concat(keyValue)
-                    console.log(_this.tableHeaderKey)
                     //表头文字
                     let header = []
                     _this.tableHeader.map(function(item){
@@ -136,7 +132,6 @@
                     _this.tableHeaderKey.map(function(childItem,index){
                         list[index].key = childItem
                     })
-                    console.log(list)
                     //获取表格表头格式
                     _this.tablecColumns = list
                     let data = res.data.data.data
@@ -152,7 +147,6 @@
                     //获取表格数据
                     _this.tableData = data
                     _this.loadingShow=false
-                    console.log(_this.tableData)
                 })
             },
         },

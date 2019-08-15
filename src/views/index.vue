@@ -30,9 +30,9 @@
                       :NumberGoodsPie="NumberGoodsPie" :NumberGoodsList="NumberGoodsList" v-if="CommodityTurnoverRate.length!=0"
         ></productIndex>
         <!--门店-->
-        <shopIndex  :StoresDetailed="StoresDetailed" v-if="StoresDetailed.length!=0 && storeDetailTableData!=''"  :isShow="StoreisShow"
+        <shopIndex  :StoresDetailed="StoresDetailed" v-if="StoresDetailed.length!=0 && storeDetailTableData!='' && upStoresData!=''"  :isShow="StoreisShow"
                     :upStoresData="upStoresData"  :downStoresData="downStoresData"  :downStoresBar="downStoresBar"   :upStoresBar="upStoresBar"
-                    :tableData="storeDetailTableData"
+                    :tableData="storeDetailTableData" :exportData="storeExportData"
         ></shopIndex>
          <!--库存-->
         <inventoryIndex  :inventoryDay="inventoryDay" :inventoryDetails="inventoryDetails" :marketableDayChart="marketableDayChart"
@@ -161,6 +161,23 @@
                 productTableData:'',//产品列表数据
                 //活跃门店二级表格数据
                 storeDetailTableData:'',
+                //门店增长下滑导出数据
+                storeExportData:{
+                    //增长导出数据
+                    raiseData:{
+                        tableHeaderTxt:'',
+                        tableHeaderKey:'',
+                        tableData:'',
+                        tableName:''
+                    },
+                    //下滑导出数据
+                    downData:{
+                        tableHeaderTxt:'',
+                        tableHeaderKey:'',
+                        tableData:'',
+                        tableName:''
+                    },
+                },
             }
         },
         created() {
@@ -194,8 +211,7 @@
             this.getVariabilityUp()
             this.getVariabilityDown()
             this.getsalesmandownward()
-            this.getDownStores()
-            this.geUpStores()
+            this.getRaiseDownStores()
             this.getSalesmanReached()
             this.getSalesmanContribution()
             this.getProductTableData()
@@ -227,8 +243,7 @@
                 this.getmarketableDayChart()
                 this.getVariabilityUp()
                 this.getVariabilityDown()
-                this.getDownStores()
-                this.geUpStores()
+                this.getRaiseDownStores()
                 this.getSalesmanReached()
                 this.getSalesmanContribution()
                 this.getProductTableData()
@@ -1166,89 +1181,176 @@
                     },
                 )
             },
-            //门店-门店下滑商品
-            getDownStores() {
+            //门店-门店下滑/增长商品
+            getRaiseDownStores() {
                 var _this = this
                 _this.downStoresBar = true
-                var params = {
-                    "inputParam":
-                        {
-                            "data_mon":_this.currentDate,
-                            "money_type":"上升",
-                            "data_type":"当月"
-                        },
-                    "outputCol":"dealer_id,data_mon,data_type,emp_name,emp_phone,store_name,store_contact,store_phone,store_address,money,mon3_avg_m_money,dif_money",
-                    "pageNum":1,
-                    "pageSize":1000,
-                    "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
-                    "serviceId":"service_tjbg02_store_sales_change"
-                }
-                this.$http({
-                    url: _this.testRequestHttpUrl,
-                    method: 'POST',
-                    data: params
-                }).then(function (res) {
-                    console.log(res)
-                    var VariabilityUpData = res.data.data,
-                        xAxisData=[],
-                        seriesData=[],
-                        lastMonth=[],
-                        sameMonth=[],
-                        difference=[],
-                        salesmandownwardObject={};
-                    VariabilityUpData.map(function(value){
-                        xAxisData.push(value.salesmanName);
-                        lastMonth.push(value.lastMonth)
-                        sameMonth.push(value.sameMonth)
-                        difference.push(value.difference)
-                    })
-                    seriesData.push(
-                        {name:'上月销售额(万元)',data:lastMonth,color:'#2D92FC',barWidth:22},
-                        {name:'当月销售额(万元)',data:sameMonth,color:'#FFBD7B',barWidth:22},
-                        {name:'销售差额(万元)',data:difference,color:'#FE9600',barWidth:22})
-                    salesmandownwardObject.xAxisData = xAxisData;
-                    salesmandownwardObject.seriesData = seriesData;
-                    _this.downStoresData = salesmandownwardObject
-                    _this.downStoresBar = false
-                    console.log( _this.downStoresData)
-
-                })
-            },
-            //门店-门店增长商品
-            geUpStores() {
-                var _this = this
                 _this.upStoresBar = true
-                this.$http({
-                    url: _this.requestHttpUrl + '/upStores',
-                    method: 'POST',
-                    data: {
-                        dateTime: _this.currentDate
+                //下滑门店数据
+                function getDownData(){
+                    var params = {
+                        "inputParam":
+                            {
+                                "data_mon":_this.currentDate,
+                                "money_type":"下滑",
+                                "data_type":"当月"
+                            },
+                        "outputCol":"emp_name,emp_phone,store_name,store_contact,store_phone,store_address,money,mon3_avg_m_money,dif_money",
+                        "pageNum":1,
+                        "pageSize":1000,
+                        "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                        "serviceId":"service_tjbg02_store_sales_change"
                     }
-                }).then(function (res) {
-                    var VariabilityUpData = res.data.data,
-                        xAxisData=[],
-                        seriesData=[],
-                        lastMonth=[],
-                        sameMonth=[],
-                        difference=[],
-                        salesmandownwardObject={};
-                    VariabilityUpData.map(function(value){
-                        xAxisData.push(value.salesmanName);
-                        lastMonth.push(value.lastMonth)
-                        sameMonth.push(value.sameMonth)
-                        difference.push(value.difference)
+                    _this.storeExportData.raiseData = {
+                        //增长门店导出数据
+                        tableHeaderTxt:['序号','业务员姓名','联系电话','门店名称','门店老板姓名','门店老板电话','门店地址','月均销量（元）','当月销量（元）','差额（元）'],
+                        tableHeaderKey:params.outputCol,
+                        tableData:'',
+                        tableName:'增长门店'
+                    }
+                    return _this.$http({
+                        url: _this.testRequestHttpUrl+'?v=raiseStore',
+                        method: 'POST',
+                        data: params,
                     })
-                    seriesData.push(
-                        {name:'上月销售额(万元)',data:lastMonth,color:'#2D92FC',barWidth:22},
-                        {name:'当月销售额(万元)',data:sameMonth,color:'#FFBD7B',barWidth:22},
-                        {name:'销售差额(万元)',data:difference,color:'#FE9600',barWidth:22})
-                    salesmandownwardObject.xAxisData = xAxisData;
-                    salesmandownwardObject.seriesData = seriesData;
-                    _this.upStoresData = salesmandownwardObject
-                    _this.upStoresBar = false
-                    console.log( _this.upStoresData)
-
-                })
+                }
+                //增长门店数据
+                function getRaiseData(){
+                    var params = {
+                        "inputParam":
+                            {
+                                "data_mon":_this.currentDate,
+                                "money_type":"上升",
+                                "data_type":"当月"
+                            },
+                        "outputCol":"emp_name,emp_phone,store_name,store_contact,store_phone,store_address,money,mon3_avg_m_money,dif_money",
+                        "pageNum":1,
+                        "pageSize":1000,
+                        "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                        "serviceId":"service_tjbg02_store_sales_change"
+                    }
+                    _this.storeExportData.downData={
+                        //下滑门店导出数据
+                        tableHeaderTxt:['序号','业务员姓名','联系电话','门店名称','门店老板姓名','门店老板电话','门店地址','月均销量（元）','当月销量（元）','差额（元）'],
+                        tableHeaderKey:params.outputCol,
+                        tableData:'',
+                        tableName:'下滑门店'
+                    }
+                    return _this.$http({
+                        url: _this.testRequestHttpUrl+'?v=downStore',
+                        method: 'POST',
+                        data: params,
+                    })
+                }
+                this.$http.all([getRaiseData(), getDownData()])
+                    .then(this.$http.spread((raiseData, downData) => {
+                        console.log(raiseData)
+                        //增长门店数据
+                        let raiseList = raiseData.data.data.data
+                        let raisexAxisData = []//增长门店x轴
+                        let raiseLastMonth = []//增长门店月平均销售额
+                        let raiseSameMonth = []//增长门店当月销售额
+                        let raiseDifference = []//增长门店差异销售额
+                        raiseList.map(function(item,index){
+                            item.numberId = index+1
+                            raisexAxisData.push(item.store_name)
+                            raiseLastMonth.push(item.mon3_avg_m_money)
+                            raiseSameMonth.push(item.money)
+                            raiseDifference.push(item.dif_money)
+                        })
+                        _this.storeExportData.raiseData.tableData = raiseList
+                        //增长门店柱状图数据
+                        let raiseBarData = {
+                                //id
+                                id:'barRaiseId',
+                                //数据单位
+                                unit:'万元',
+                                //x轴单位
+                                xAxisData:raisexAxisData,
+                                type:'xAxis',
+                                //柱状图数据
+                                barData:[
+                                    {
+                                        name:'月均销售额(万元)',
+                                        data:raiseLastMonth,
+                                        color:'#2D92FC',
+                                        barWidth:22,
+                                    },
+                                    {
+                                        name:'当月销售额(万元)',
+                                        data:raiseSameMonth,
+                                        color:'#FFBD7B',
+                                        barWidth:22,
+                                    },
+                                    {
+                                        name:'销售差额(万元)',
+                                        data:raiseDifference,
+                                        color:'#FE9600',
+                                        barWidth:22,
+                                    },
+                                ],
+                                showType:0,//0横过来 1竖起来
+                                //markline
+                                markLineList:{
+                                    show:false
+                                },
+                        }
+                        _this.upStoresData = raiseBarData
+                        //下滑门店数据
+                        let downList = downData.data.data.data
+                        let downxAxisData = []//下滑门店x轴
+                        let downLastMonth = []//下滑门店月平均销售额
+                        let downSameMonth = []//下滑门店当月销售额
+                        let downDifference = []//下滑门店差异销售额
+                        downList.map(function(item,index){
+                            item.numberId = index+1
+                            downxAxisData.push(item.store_name)
+                            downLastMonth.push(item.mon3_avg_m_money)
+                            downSameMonth.push(item.money)
+                            downDifference.push(item.dif_money)
+                        })
+                        _this.storeExportData.downData.tableData = downList
+                        //下滑门店柱状图数据
+                        let downBarData = {
+                                //id
+                                id:'barDownId',
+                                //数据单位
+                                unit:'万元',
+                                //x轴单位
+                                xAxisData:downxAxisData,
+                                type:'xAxis',
+                                //柱状图数据
+                                barData:[
+                                    {
+                                        name:'月均销售额(万元)',
+                                        data:downLastMonth,
+                                        color:'#2D92FC',
+                                        barWidth:22,
+                                    },
+                                    {
+                                        name:'当月销售额(万元)',
+                                        data:downSameMonth,
+                                        color:'#FFBD7B',
+                                        barWidth:22,
+                                    },
+                                    {
+                                        name:'销售差额(万元)',
+                                        data:downDifference,
+                                        color:'#FE9600',
+                                        barWidth:22,
+                                    },
+                                ],
+                                showType:0,//0横过来 1竖起来
+                                //markline
+                                markLineList:{
+                                    show:false
+                                },
+                        }
+                        _this.downStoresData = downBarData
+                        _this.downStoresBar = false
+                        _this.upStoresBar = false
+                    })
+                )
             },
             //库存明细金额件数明细
             getinventoryDetail() {
@@ -1450,8 +1552,9 @@
                             "inputParam":
                                 {
                                     "data_mon":_this.currentDate,
-                                    "data_type":"当月"
+                                    "data_type":"当月",
                                 },
+                            "isReturnTotalSize": "Y",
                             "outputCol":"emp_name,emp_phone,store_name,store_contact,store_phone,money,money_rate,sale_goods_cnt,sale_goods_cnt_lm",
                             "pageNum":1,
                             "pageSize":100,
@@ -1477,11 +1580,12 @@
                             "inputParam":
                                 {
                                     "data_mon":this.currentDate,
-                                    "data_type":"当月"
+                                    "data_type":"当月",
                                 },
+                            "isReturnTotalSize": "Y",
                             "outputCol":"emp_name,emp_phone,store_name,store_contact,store_phone,store_address,new_store_cnt",
                             "pageNum":1,
-                            "pageSize":1000,
+                            "pageSize":100,
                             "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
                             "serviceId":"service_tjbg02_store_create"
                         },
@@ -1496,17 +1600,46 @@
                             {txt:'新增门店数（家）',unit:'day'},
                         ]
                     },
+                    //无交易明细
+                    noTradeData:{
+                        params:{
+                            "inputParam":
+                                {
+                                    "data_mon":_this.currentDate,
+                                    "data_type":"当月",
+                                },
+                            "isReturnTotalSize": "Y",
+                            "outputCol":"emp_name,emp_phone,store_name,store_contact,store_phone,store_address,last_order_time,last_order_money,unsale_days",
+                            "pageNum":1,
+                            "pageSize":100,
+                            "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                            "serviceId":"service_tjbg02_store_unsale"
+                        },
+                        header:[
+                            {txt:'序号',unit:false},
+                            {txt:'业务员姓名',unit:false},
+                            {txt:'联系电话',unit:false},
+                            {txt:'门店名称',unit:false},
+                            {txt:'门店老板姓名',unit:false},
+                            {txt:'门店老板电话',unit:false},
+                            {txt:'门店地址',unit:false},
+                            {txt:'最近交易时间',unit:false},
+                            {txt:'最近交易金额（元）',unit:'day'},
+                            {txt:'无交易时长（天）',unit:'money'},
+                        ]
+                    },
                     //无交易门店应收账款明细
                     noDealDetail:{
                         params:{
                             "inputParam":
                                 {
                                     "data_mon":_this.currentDate,
-                                    "data_type":"当月"
+                                    "data_type":"当月",
                                 },
+                            "isReturnTotalSize": "Y",
                             "outputCol":"emp_name,emp_phone,store_name,store_contact,store_phone,store_address,store_status,last_order_time,unsale_days,debt_money",
                             "pageNum":1,
-                            "pageSize":1000,
+                            "pageSize":100,
                             "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
                             "serviceId":"service_tjbg02_store_unsale"
                         },

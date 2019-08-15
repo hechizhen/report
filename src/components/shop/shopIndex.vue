@@ -11,13 +11,13 @@
             </div>
         </div>
         <div class="shop-centen-middle">
-            <shopLeft :shopActives="StoresDetailed.shopActiveData" :upraphy="upraphy" :downraphy="downraphy" :tableData="tableData.activeStoreDetail"></shopLeft>
+            <shopLeft :shopActives="StoresDetailed.shopActiveData" :upraphy="upraphy" :downraphy="downraphy" :tableData="tableData.activeStoreDetail" :tradeTableData="tableData.noTradeData"></shopLeft>
             <shopRight :ActiveDetail="StoresDetailed.ActiveDetail" :tableData="tableData.addStoreDetail" :dealTableData="tableData.noDealDetail"></shopRight>
         </div>
     </div>
     <core :coretype="'门店得分'" :coretext="87" :evaluate="'较好'"></core>
-    <shopChartUp v-if="upShow" :trendChartClick="upClick" :barEchartsData="barEchartsDataUp" :isShow="upStoresBar"></shopChartUp>
-    <shopChartrDown v-if="downShow" :trendChartClick="downClick"  :barEchartsData="barEchartsDataDown" :isShow="downStoresBar"></shopChartrDown>
+    <shopChartUp v-if="upShow" :trendChartClick="upClick" :barEchartsData="upStoresData" :isShow="upStoresBar" :raiseExportData="exportData.raiseData"></shopChartUp>
+    <shopChartrDown v-if="downShow" :trendChartClick="downClick"  :barEchartsData="downStoresData" :isShow="downStoresBar" :downExportData="exportData.downData"></shopChartrDown>
     <loading-data :isShow="isShow"></loading-data>
 </div>
 </template>
@@ -32,7 +32,7 @@
     import loadingData from '../base/loadingData'
     export default {
         name: "shopIndex",
-        props:["StoresDetailed","upStoresData","downStoresData","isShow","downStoresBar","upStoresBar",'tableData'],
+        props:["StoresDetailed","upStoresData","downStoresData","isShow","downStoresBar","upStoresBar",'tableData',"exportData"],
         data(){
             return{
                 titName:"门店",
@@ -75,65 +75,10 @@
             loadingData
         },
         mounted(){
-            console.log(this.tableData)
+            console.log(this.upStoresData)
+            console.log(this.downStoresData)
         },
         watch:{
-            upStoresData(val){
-                console.log(val)
-                this.lityUpData = val;
-                this.barEchartsDataUp = {
-                    id:'barId',
-                    unit:'%',
-                    xAxisData:this.lityUpData.xAxisData,
-                    xAxis:{
-                        isShowLine:true,
-                        isShowSplit:false,
-                        axisLabelColor:'#0092FE',
-                    },
-                    yAxis:{
-                        isShowLine:true,
-                        isShowSplit:true,
-                        axisLabelColor:'#0092FE',
-                    },
-                    label:{
-                        isShow:false
-                    },
-                    type:'xAxis',
-                    barData:this.lityUpData.seriesData,
-                    showType:0,//0横过来 1竖起来
-                    markLineList:{
-                        show:false
-                    }
-                }
-            },
-            downStoresData(val){
-                console.log(val)
-                this.lityDownData = val;
-                this.barEchartsDataDown = {
-                    id:'barId',
-                    unit:'%',
-                    xAxisData:this.lityDownData.xAxisData,
-                    xAxis:{
-                        isShowLine:true,
-                        isShowSplit:false,
-                        axisLabelColor:'#0092FE',
-                    },
-                    yAxis:{
-                        isShowLine:true,
-                        isShowSplit:true,
-                        axisLabelColor:'#0092FE',
-                    },
-                    label:{
-                        isShow:false
-                    },
-                    type:'xAxis',
-                    barData:this.lityDownData.seriesData,
-                    showType:0,//0横过来 1竖起来
-                    markLineList:{
-                        show:false
-                    }
-                }
-            }
         },
         methods:{
             upraphy(){
