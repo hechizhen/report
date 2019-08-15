@@ -3,30 +3,30 @@
 		<div class="totalAmountcontent">
 			<div class="title">
 			   <div class="titleborder"></div>
-			   <div class="titletext">{{titleName}}</div>
+			   <div class="titletext">{{displayData.name}}</div>
 			</div>
 			<div class="record">
-				<p><img src="./../../assets/img/dkw_jine.png">下单总金额{{titleName}}</p>
-				<p>{{displayData.orderAmount}}</p>
+				<p><img src="./../../assets/img/dkw_jine.png">下单总金额{{displayData.name}}</p>
+				<p>{{displayData.moneymonthly}}</p>
 			</div>
 			<a-Row class="proportion">
 				<a-Col :span="12" class="proportionitmes">
 				  	<div class="proportiondiv">
-				  		<p><img src="./../../assets/img/jine.png">毛利额{{titleName}}</p>
-				  		<p>{{displayData.grossProfit}}</p>
+				  		<p><img src="./../../assets/img/jine.png">毛利额{{displayData.name}}</p>
+				  		<p>{{displayData.grossmoneymonthly}}</p>
 				  	</div>
 				</a-Col>
 				<a-Col :span="12" class="proportionitmes">
 				  	<div class="proportiondiv">
-				  		<p><img src="./../../assets/img/maol-icon-2.png">毛利率{{titleName}}</p>
-				  		<p>{{displayData.grossInterestRate}}</p>
+				  		<p><img src="./../../assets/img/maol-icon-2.png">毛利率{{displayData.name}}</p>
+				  		<p>{{displayData.rossmoneyratemonthly}}</p>
 				  	</div>
 				</a-Col>
 			</a-Row>
 			<div class="brand">
-				<div class="brandtitle">下单{{titleName}}</div>
+				<div class="brandtitle">下单{{displayData.name}}</div>
 				<ul class="cleatfix">
-					<li v-for="(item,index) in totalAmountData" :key="index">
+					<li v-for="(item,index) in displayData.list" :key="index">
 						<div>{{item.name}}</div>
 						<div>{{item.value}}</div>
 					</li>
@@ -44,17 +44,9 @@
 			loadingData
 		},
 		props:{
-			titleName:{
-				type:String,
-				default:'环比'
-			},
 			displayData:{
 				type:Object,
 				default:{}
-			},
-			totalAmountData:{
-				type:Array,
-				default:[]
 			},
 			isShow:{
 				type:Boolean,
@@ -63,16 +55,13 @@
 		},
 		data(){
 			return {
-				// isShow:true,
-				data:[{brand:"立白",value:'0.5%'},{brand:"立白",value:'0.5%'},
-				{brand:"立白",value:'0.5%'},{brand:"立白",value:'0.5%'},
-				{brand:"立白",value:'0.5%'},{brand:"立白",value:'0.5%'},]
+				
 			}
 		},
 		mounted(){
 
 		},
-		methods(){
+		methods:{
 
 		},
 	}

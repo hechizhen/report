@@ -13,7 +13,7 @@
 				  	<p>业务员达成</p>
 				  </a-Col>
 				  <a-Col :span="6" class="managerCol">
-				  	<p>{{salesmanData.reached}}</p>
+				  	<p>{{salesmanData.emp_rate}}</p>
 				  </a-Col>
 				  <a-Col :span="6" class="managerCol">
 				  	<p @click="concludeClick('达成与贡献')">达成与贡献</p>
@@ -35,8 +35,8 @@
 				  	<p>人均产出(万元)</p>
 				  </a-Col>
 				  <a-Col :span="6" class="managerCol">
-				  	<p><span>{{salesmanData.perCapitaOutput}}</span></p>
-				  	<p>￥<span>{{salesmanData.perCapitaOutput}}</span></p>
+				  	<p><span>{{salesmanData.emp_cnt}}</span></p>
+				  	<p>￥<span>{{salesmanData.emp_avg_money}}</span></p>
 				  </a-Col>
 				</a-Row>
 		  	</div>
@@ -54,8 +54,8 @@
 				  	<p>业绩下滑人数(人)</p>
 				  </a-Col>
 				  <a-Col :span="4" class="managerCol">
-				  	<p>{{salesmanData.totalNumber}}</p>
-				  	<p>{{salesmanData.declinePerformance}}</p>
+				  	<p>{{salesmanData.emp_cnt}}</p>
+				  	<p>{{salesmanData.emp_drop_cnt}}</p>
 				  </a-Col>
 				  <a-Col :span="6" class="managerCol">
 				  	<p @click="glidingClick('下滑人员')">下滑人员</p>

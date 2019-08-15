@@ -13,16 +13,13 @@
         v-if="monthBarData.length!=0 && monthSalesData.length!=0 && yearSalesData.length!=0 && yearBarData.length!=0"></one-help-sale-en>
 
         <!-- 二帮卖分析-订单 -->
-        <secondBand :orderAmountData="orderAmountData" :grossProfitData="grossProfitData" :grossInterestRateData="grossInterestRateData"
-                    :proportio="proportioData" :directionData="directionData" :towHelYoy="towHelYoy" :towHelProportion="towHelProportion"
-                    :towHelpSaleMonthShow="towHelpSaleMonthShow" :towHelpSaleMonthLineShow="towHelpSaleMonthLineShow"
-        ></secondBand>
+        <secondBand :orderAmountData="orderAmountData" :directionData="directionData" :towHelYoy="towHelYoy" :towHelProportion="towHelProportion"
+                    :towHelpSaleMonthShow="towHelpSaleMonthShow" :towHelpSaleMonthLineShow="towHelpSaleMonthLineShow" v-if="orderAmountData"></secondBand>
         <!-- 二帮卖分析-业务员 -->
         <salesman :salesmanData="salesmanData" :salesmanTrendData="salesmanTrendData" :salesmandownwardData="salesmandownwardData"
                   :salesmanReachedData="salesmanReachedData" :salesmanContributionData="salesmanContributionData" :isShow="salesmanReached"
                   :salesmanReachedBar="salesmanReachedBar" :salesmanContributionBar="salesmanContributionBar" :salesmandownwardBar="salesmandownwardBar"
-                  :salesmanTrendPie="salesmanTrendPie"
-        ></salesman>
+                  :salesmanTrendPie="salesmanTrendPie"></salesman>
         <!-- 商品 -->
         <productIndex :CommodityTurnoverRate="CommodityTurnoverRate"  :commoditydata="commoditydata" :GoodsDetail="GoodsDetail"
                       :VariabilityUpData="VariabilityUpData" :VariabilityDownData="VariabilityDownData" :productTableData="productTableData"
@@ -149,10 +146,7 @@
                 DaysAvailableStock:false,   //库存可销天数
                 financeIsShow:false,        //财务
                 salesmanData: {},//业务员数据
-                orderAmountData: {}, //金额数据
-                grossProfitData: {}, //毛利额
-                grossInterestRateData: {},//毛利率
-                proportioData: "",  //占比数据
+                orderAmountData: '', //金额数据
                 directionData:{}, //订单走势图
                 salesmanTrendData:{},  //业务员走势图
                 salesmandownwardData:{}, //业务员下滑
@@ -548,20 +542,32 @@
             getsalesman() {
                 var _this = this
                 _this.salesmanReached = true
+                var params = {
+                    "inputParam":
+                        {
+                            "data_mon":_this.currentDate,
+                            "data_type":"累计"
+                        },
+                    "outputCol":"dealer_id,data_mon,data_type,emp_rate,emp_avg_money,emp_cnt,emp_drop_cnt",
+                    "pageNum":1,
+                    "pageSize":1000,
+                    "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                    "serviceId":"service_tjbg02_emp"
+                }
                 this.$http({
-                    url: _this.requestHttpUrl + '/Salesman',
+                    url: _this.testRequestHttpUrl + '?v=salesman',
                     method: 'POST',
-                    data: {
-                        dateTime: _this.currentDate
-                    }
+                    data: params
                 }).then(function (res) {
-                    var salesmanData = res.data.data[0];
-                    salesmanData.reached = !salesmanData.reached ? '--' : _this.dataProcess(salesmanData.reached, 'percent', 1).num + '%';
-                    salesmanData.perCapitaOutput = !salesmanData.perCapitaOutput ? '--' : _this.dataProcess(salesmanData.perCapitaOutput, 'money').num;
-                    salesmanData.totalNumber = !salesmanData.totalNumber ? '--' : _this.dataProcess(salesmanData.totalNumber, 'day').num;
-                    salesmanData.declinePerformance = !salesmanData.declinePerformance ? '--' : _this.dataProcess(salesmanData.declinePerformance, 'day').num;
-                    _this.salesmanData = salesmanData;
-                    _this.salesmanReached = false
+                    if(res.data.code == '200'){
+                        var salesmanData = res.data.data.data[0];
+                        salesmanData.emp_rate = !salesmanData.emp_rate ? '--' : _this.dataProcess(salesmanData.emp_rate, 'percent', 1).num + '%'; //业务员达成
+                        salesmanData.emp_cnt = !salesmanData.emp_cnt ? '--' : _this.dataProcess(salesmanData.emp_cnt, 'day').num;   //总人数
+                        salesmanData.emp_avg_money = !salesmanData.emp_avg_money ? '--' : _this.dataProcess(salesmanData.emp_avg_money, 'money').num;  //人均产出
+                        salesmanData.emp_drop_cnt = !salesmanData.emp_drop_cnt ? '--' : _this.dataProcess(salesmanData.emp_drop_cnt, 'day').num;  //下滑人数
+                        _this.salesmanData = salesmanData;
+                        _this.salesmanReached = false
+                    }
                 })
             },
             //二帮卖-订单
@@ -570,65 +576,79 @@
                 _this.towHelpSaleMonthShow = true
                 _this.towHelProportion = true
                 _this.towHelYoy = true
+                var params = {
+                    "inputParam":
+                        {
+                            "data_mon":_this.currentDate,
+                            "data_type":"当月"
+                        },
+                    "outputCol":"data_mon,dealer_id,data_type,dealer_code,dealer_name,money,liby_money,kispa_money,cheerwin_money,oral_money,shengmei_money,other_money,money_lm,liby_money_lm,kispa_money_lm,cheerwin_money_lm,oral_money_lm,shengmei_money_lm,other_money_lm,money_ly,liby_money_ly,kispa_money_ly,cheerwin_money_ly,oral_money_ly,shengmei_money_ly,other_money_ly,gross_money,gross_money_rate,gross_money_lm,gross_money_mom,gross_money_rate_mom,gross_money_ly,gross_money_yoy,gross_money_rate_yoy",
+                    "pageNum":1,
+                    "pageSize":1000,
+                    "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                    "serviceId":"service_tjbg02_sales_order"
+                }
                 this.$http({
-                    url: _this.requestHttpUrl + '/Analysis',
+                    url: _this.testRequestHttpUrl + '?v=analysis',
                     method: 'POST',
-                    data: {
-                        dateTime: _this.currentDate
-                    }
+                    data: params
                 }).then(function (res) {
-                    var secondBandData = res.data.data[0], orderAmountData = {}, grossProfitData = {},
-                        grossInterestRateData = {};
-                    secondBandData.orderAmount = !secondBandData.orderAmount ? '--' : _this.dataProcess(secondBandData.orderAmount, 'money', 1).num;
-                    // 下单金额数据
-                    orderAmountData.orderAmountInteger = secondBandData.orderAmount.split(".")[0];
-                    orderAmountData.orderAmountDecimal = '.' + secondBandData.orderAmount.split(".")[1];
-                    orderAmountData.grossProfit = !secondBandData.grossProfit ? '--' : _this.dataProcess(secondBandData.grossProfit, 'money', 1).num;
-                    orderAmountData.grossInterestRate = !secondBandData.grossInterestRate ? '--' : _this.dataProcess(secondBandData.grossInterestRate, 'percent').num + '%';
-                    // 环比数据
-                    grossProfitData.orderAmount = !secondBandData.orderAmountRatio ? '--' : _this.dataProcess(secondBandData.orderAmountRatio, 'percent').num + '%';
-                    grossProfitData.grossProfit = !secondBandData.grossProfitRatio ? '--' : _this.dataProcess(secondBandData.grossProfitRatio, 'percent').num + '%';
-                    grossProfitData.grossInterestRate = !secondBandData.grossInterestRateRatio ? '--' : _this.dataProcess(secondBandData.grossInterestRateRatio, 'percent').num + '%';
-                    // 同比数据
-                    grossInterestRateData.orderAmount = !secondBandData.orderAmountTerms ? '--' : _this.dataProcess(secondBandData.orderAmountTerms, 'percent').num + '%';
-                    grossInterestRateData.grossProfit = !secondBandData.grossProfitTerms ? '--' : _this.dataProcess(secondBandData.grossProfitTerms, 'percent').num + '%';
-                    grossInterestRateData.grossInterestRate = !secondBandData.grossInterestRateTerms ? '--' : _this.dataProcess(secondBandData.grossInterestRateTerms, 'percent').num + '%';
-
-                    _this.orderAmountData = orderAmountData;
-                    _this.grossProfitData = grossProfitData;
-                    _this.grossInterestRateData = grossInterestRateData;
-                    _this.towHelpSaleMonthShow = false
-                    _this.towHelProportion = false
-                    _this.towHelYoy = false
-                })
-            },
-            //二帮卖-订单占比
-            getProportio() {
-                var _this = this
-                _this.towHelpSaleMonthShow = true
-                _this.towHelProportion = true
-                _this.towHelYoy = true
-                this.$http({
-                    url: _this.requestHttpUrl + '/Proportion',
-                    method: 'POST',
-                    data: {
-                        dateTime: _this.currentDate
-                    }
-                }).then(function (res) {
-                    var proportioData = res.data.data,thoseArr = [],chainRatio=[],placingOrdersYear=[],proportio={};
-                    proportioData.map(function(item){
-                        thoseArr.push({name:item.name,value:item.value})
-                        chainRatio.push({name:item.name,value:item.chainRatio})
-                        placingOrdersYear.push({name:item.name,value:item.placingOrdersYear})
-                    })
-                    proportio.thoseArr = thoseArr;
-                    proportio.chainRatio = chainRatio;
-                    proportio.placingOrdersYear = placingOrdersYear;
-                    _this.proportioData = proportio;
-                    _this.towHelpSaleMonthShow = false
-                    _this.towHelProportion = false
-                    _this.towHelYoy = false
-                    console.log(_this.proportioData)
+                     if(res.data.code == '200'){
+                        var secondBandData = res.data.data.data[0],thatMonth = {},chainratio = {},yearOnYear = {};
+                        // 当月数据
+                        thatMonth.money = !secondBandData.money ? '--' : _this.dataProcess(secondBandData.money, 'money', 1).num;  //本月下单金额
+                        if(secondBandData.money){
+                            thatMonth.moneyInteger = thatMonth.money.split(".")[0];   //本月下单金额整数部分
+                            thatMonth.moneyDecimal = '.' + thatMonth.money.split(".")[1];//本月下单金额小数部分
+                        }else {
+                            thatMonth.moneyInteger = '--';   //本月下单金额整数部分
+                            thatMonth.moneyDecimal = '--';//本月下单金额小数部分
+                        }
+                        thatMonth.gross_money = !secondBandData.gross_money ? '--' : _this.dataProcess(secondBandData.gross_money, 'money', 1).num; //毛利额
+                        thatMonth.gross_money_rate = !secondBandData.gross_money_rate ? '--' : _this.dataProcess(secondBandData.gross_money_rate, 'percent').num + '%'; //毛利率
+                        var list = [{name:'立白',value:!secondBandData.liby_money ? 0 : secondBandData.liby_money},
+                            {name:'好爸爸',value:!secondBandData.kispa_money ? 0 : secondBandData.kispa_money},
+                            {name:'超威',value:!secondBandData.cheerwin_money ? 0 : secondBandData.cheerwin_money},
+                            {name:'口腔',value:!secondBandData.oral_money ? 0 : secondBandData.oral_money},
+                            {name:'晟美',value:!secondBandData.shengmei_money ? 0 : secondBandData.shengmei_money},
+                            {name:'其他',value:!secondBandData.other_money ? 0 : secondBandData.other_money}]
+                        thatMonth.list = {
+                            id:'pieSalesManId',
+                            colorList:['#365AF8','#FFC925','#7B8EFB','#34DF8E','#A3FC8A','#FF7C25'],
+                            labelType:1,
+                            pieData:list,
+                            radius:['35%', '70%'],
+                            borderWidth:0,
+                        }    
+                        // 环比数据
+                        chainratio.name = '环比';
+                        chainratio.moneymonthly = _this.getHandle(secondBandData.money,secondBandData.money_lm,2);
+                        chainratio.grossmoneymonthly = _this.getHandle(secondBandData.gross_money,secondBandData.gross_money_lm,2);
+                        chainratio.rossmoneyratemonthly = _this.getHandle(secondBandData.gross_money_rate,secondBandData.gross_money_rate_lm,2);
+                        chainratio.list = [{name:'立白',value:_this.getHandle(secondBandData.liby_money,secondBandData.liby_money_lm,2)},
+                            {name:'好爸爸',value: _this.getHandle(secondBandData.kispa_money,secondBandData.kispa_money_lm,2)},
+                            {name:'超威',value: _this.getHandle(secondBandData.cheerwin_money,secondBandData.cheerwin_money_lm,2)},
+                            {name:'口腔',value: _this.getHandle(secondBandData.oral_money,secondBandData.oral_money_lm,2)},
+                            {name:'晟美',value: _this.getHandle(secondBandData.shengmei_money,secondBandData.shengmei_money_lm,2)},
+                            {name:'其他',value: _this.getHandle(secondBandData.other_money,secondBandData.other_money_lm,2)}]
+                        // 同比数据
+                        yearOnYear.name = '同比';
+                        yearOnYear.moneymonthly = _this.getHandle(secondBandData.money,secondBandData.money_ly,2);
+                        yearOnYear.grossmoneymonthly = _this.getHandle(secondBandData.gross_money,secondBandData.gross_money_ly,2);
+                        yearOnYear.rossmoneyratemonthly = _this.getHandle(secondBandData.gross_money_rate,secondBandData.gross_money_rate_ly,2);
+                        yearOnYear.list = [{name:'立白',value:_this.getHandle(secondBandData.liby_money,secondBandData.liby_money_ly,2)},
+                            {name:'好爸爸',value: _this.getHandle(secondBandData.kispa_money,secondBandData.kispa_money_ly,2)},
+                            {name:'超威',value: _this.getHandle(secondBandData.cheerwin_money,secondBandData.cheerwin_money_ly,2)},
+                            {name:'口腔',value: _this.getHandle(secondBandData.oral_money,secondBandData.oral_money_ly,2)},
+                            {name:'晟美',value: _this.getHandle(secondBandData.shengmei_money,secondBandData.shengmei_money_ly,2)},
+                            {name:'其他',value: _this.getHandle(secondBandData.other_money,secondBandData.other_money_ly,2)}]
+                        _this.orderAmountData = {thatMonth:thatMonth,chainratio:chainratio,yearOnYear:yearOnYear}
+                        console.log('5555555555555555555555555555')
+                        console.log(_this.orderAmountData)
+                        _this.towHelpSaleMonthShow = false
+                        _this.towHelProportion = false
+                        _this.towHelYoy = false    
+                     }   
                 })
             },
             //二帮卖-订单走势图
@@ -1658,7 +1678,17 @@
                         ]
                     }
                 }
-            }
+            },
+            //计算环比/同比
+            getHandle(molecule,denominator,num){
+                var tempObj;
+                if(!denominator){
+                    tempObj = '--';
+                }else {
+                    tempObj = ((molecule-denominator)/denominator).toFixed(num)+'%';
+                }
+                return tempObj
+            },
         }
     }
 </script>

@@ -11,20 +11,20 @@
 					<a-Col :span="14" class="recordLeft">
 						<div><img style="margin-right:5px;" src="./../../assets/img/jine-icon.png">下单金额（万元）</div>
 						<div>(以创建订单日期统计)</div>
-						<div><span>￥</span>{{orderAmountData.orderAmountInteger}}<span>{{orderAmountData.orderAmountDecimal}}</span></div>
+						<div><span>￥</span>{{orderAmountData.moneyInteger}}<span>{{orderAmountData.moneyDecimal}}</span></div>
 					</a-Col>
 					<a-Col :span="10" class="recordRight">
 						<div><img src="./../../assets/img/jine.png">毛利额（万元）</div>
-						<div><span>￥</span>{{orderAmountData.grossProfit}}</div>
+						<div><span>￥</span>{{orderAmountData.gross_money}}</div>
 						<div><img src="./../../assets/img/maoli-icon.png">毛利率</div>
-						<div>{{orderAmountData.grossInterestRate}}</div>
+						<div>{{orderAmountData.gross_money_rate}}</div>
 					</a-Col>
 				</a-Row>
 			</div>
 			<div class="proportion">
 				<div class="proportion_title">占比</div>
 				<div class="proportion_echarts">
-					<pie :pieEchartsData="pieEchartsData" v-if="pieEchartsData.length!=0"></pie>
+					<pie :pieEchartsData="pieEcharts"></pie>
 				</div>
 			</div>
 		</div>
@@ -44,11 +44,6 @@
 		props:{
 			orderAmountData:{
 				type:Object,
-				default:{}
-			},
-			proportioData:{
-				type:Array,
-				default:[]
 			},
 			topography:{
 				type:Function
@@ -60,19 +55,11 @@
 		},
 		data(){
 			return {
-				// isShow:true,
-				pieEchartsData : ''
+				pieEcharts:this.orderAmountData.list
 			}
 		},
 		mounted(){
-			this.pieEchartsData = {
-				id:'pieSalesManId',
-				colorList:['#365AF8','#FFC925','#7B8EFB','#34DF8E','#A3FC8A','#FF7C25'],
-				labelType:1,
-				pieData:this.proportioData,
-				radius:['35%', '70%'],
-				borderWidth:0,
-			}
+
 		},
 		methods:{
 			topographyClick(){
@@ -80,16 +67,11 @@
 			}
 		},
 		watch:{
-            // proportioData(val){
-            //     this.pieSalesManId = {
-			// 		id:'pieId',
-			// 		colorList:['#365AF8','#FFC925','#7B8EFB','#34DF8E','#A3FC8A','#FF7C25'],
-			// 		labelType:1,
-			// 		pieData:val,
-			// 		radius:['40%', '60%'],
-			// 		borderWidth:0,
-			// 	}
-            // }
+			orderAmountData(val){
+				console.log('111111111111')
+				console.log(val)
+				this.pieEcharts = val.list
+			}
         },
 	}
 </script>
