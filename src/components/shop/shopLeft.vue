@@ -1,11 +1,11 @@
 <template>
     <div class="shopLeft">
-      <div class="shopLeft-centen" style="height: 180px;">
+      <div class="shopLeft-centen">
       <div class="shop-active">
           <p>{{shopActives.ActiveStoresTxt}}<span>{{shopActives.ActiveStoresing}}</span></p>
           <span>{{shopActives.ActiveStores}}</span>
           <div class="productLeft-btn">
-              <newButton :defaultVal="shopActives.detailbtn" :isGhost="true"
+              <newButton :defaultVal="shopActives.detailbtn" :isGhost="true" :buttonHandleClick="storeDetailHandleClick"
               ></newButton>
           </div>
       </div>
@@ -36,12 +36,14 @@
         <span class="shu"></span>
       </div>
          <shopBase :shopDaseData="shopActives.shopDaseData" :defaultVal="defaultVal"></shopBase>
+         <public-table v-if="isShowDetail" :close="closePopup" :tableHeader="tableData.header" :interfaceParams="tableData.params"></public-table>
     </div>
 </template>
 
 <script>
     import  newButton from  '../base/newButton'
     import shopBase from  './shopBase'
+    import publicTable from '../base/publicTable.vue'
     export default {
         name: "shopLeft",
         props:{
@@ -53,6 +55,9 @@
             },
             downraphy:{
                 type:Function
+            },
+            tableData:{
+                type:Object
             }
         },
         data(){
@@ -60,12 +65,14 @@
                 defaultVal:"无交易明细",
                 downData:"下滑门店",
                 upData:"增长门店",
-                unit:"单位：万元"
+                unit:"单位：万元",
+                isShowDetail:false
             }
         },
         components:{
             shopBase,
-            newButton
+            newButton,
+            publicTable
         },
         methods:{
             upbuttonHandleClick(val){
@@ -73,6 +80,14 @@
             },
             downbuttonHandleClick(val){
                 this.downraphy()
+            },
+            //点击门店详情
+            storeDetailHandleClick(){
+                this.isShowDetail = true
+            },
+            //关闭弹窗
+            closePopup(){
+                this.isShowDetail = false
             }
         }
     }
@@ -82,7 +97,11 @@
 .shopLeft{
     width: 51%;
     float: left;
-
+    .shopLeft-centen{
+        height: 196px;
+        display: flex;
+        align-items: center;
+    }
     .shop-active{
         width:17%;
         height:165px;

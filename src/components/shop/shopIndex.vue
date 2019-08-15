@@ -11,8 +11,8 @@
             </div>
         </div>
         <div class="shop-centen-middle">
-            <shopLeft :shopActives="StoresDetailed.shopActiveData" :upraphy="upraphy" :downraphy="downraphy"></shopLeft>
-            <shopRight :ActiveDetail="StoresDetailed.ActiveDetail"></shopRight>
+            <shopLeft :shopActives="StoresDetailed.shopActiveData" :upraphy="upraphy" :downraphy="downraphy" :tableData="tableData.activeStoreDetail"></shopLeft>
+            <shopRight :ActiveDetail="StoresDetailed.ActiveDetail" :tableData="tableData.addStoreDetail" :dealTableData="tableData.noDealDetail"></shopRight>
         </div>
     </div>
     <core :coretype="'门店得分'" :coretext="87" :evaluate="'较好'"></core>
@@ -32,7 +32,7 @@
     import loadingData from '../base/loadingData'
     export default {
         name: "shopIndex",
-        props:["StoresDetailed","upStoresData","downStoresData","isShow","downStoresBar","upStoresBar"],
+        props:["StoresDetailed","upStoresData","downStoresData","isShow","downStoresBar","upStoresBar",'tableData'],
         data(){
             return{
                 titName:"门店",
@@ -73,6 +73,9 @@
             shopChartUp,
             shopChartrDown,
             loadingData
+        },
+        mounted(){
+            console.log(this.tableData)
         },
         watch:{
             upStoresData(val){

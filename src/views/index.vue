@@ -13,8 +13,7 @@
         v-if="monthBarData.length!=0 && monthSalesData.length!=0 && yearSalesData.length!=0 && yearBarData.length!=0"></one-help-sale-en>
 
         <!-- 二帮卖分析-订单 -->
-        <secondBand :orderAmountData="orderAmountData" :grossProfitData="grossProfitData" :grossInterestRateData="grossInterestRateData"
-                    :proportio="proportioData" :directionData="directionData" :towHelYoy="towHelYoy" :towHelProportion="towHelProportion"
+        <secondBand :orderAmountData="orderAmountData" :proportio="proportioData" :directionData="directionData" :towHelYoy="towHelYoy" :towHelProportion="towHelProportion"
                     :towHelpSaleMonthShow="towHelpSaleMonthShow" :towHelpSaleMonthLineShow="towHelpSaleMonthLineShow"
         ></secondBand>
         <!-- 二帮卖分析-业务员 -->
@@ -30,8 +29,9 @@
                       :NumberGoodsPie="NumberGoodsPie" :NumberGoodsList="NumberGoodsList" v-if="CommodityTurnoverRate.length!=0"
         ></productIndex>
         <!--门店-->
-        <shopIndex  :StoresDetailed="StoresDetailed" v-if="StoresDetailed.length!=0 "  :isShow="StoreisShow"
+        <shopIndex  :StoresDetailed="StoresDetailed" v-if="StoresDetailed.length!=0 && storeDetailTableData!=''"  :isShow="StoreisShow"
                     :upStoresData="upStoresData"  :downStoresData="downStoresData"  :downStoresBar="downStoresBar"   :upStoresBar="upStoresBar"
+                    :tableData="storeDetailTableData"
         ></shopIndex>
          <!--库存-->
         <inventoryIndex  :inventoryDay="inventoryDay" :inventoryDetails="inventoryDetails" :marketableDayChart="marketableDayChart"
@@ -149,8 +149,6 @@
                 financeIsShow:false,        //财务
                 salesmanData: {},//业务员数据
                 orderAmountData: {}, //金额数据
-                grossProfitData: {}, //毛利额
-                grossInterestRateData: {},//毛利率
                 proportioData: "",  //占比数据
                 directionData:{}, //订单走势图
                 salesmanTrendData:{},  //业务员走势图
@@ -158,6 +156,8 @@
                 salesmanReachedData:{},  //业务员-达成
                 salesmanContributionData:{},//业务员-贡献
                 productTableData:'',//产品列表数据
+                //活跃门店二级表格数据
+                storeDetailTableData:'',
             }
         },
         created() {
@@ -169,7 +169,6 @@
             this.currentDate = year + '' + month
             //获取当前默认显示年月
             this.indexDefaultDate = year + '/' + month
-
         },
         mounted() {
             this.getOverViewData()
@@ -197,6 +196,7 @@
             this.getSalesmanReached()
             this.getSalesmanContribution()
             this.getProductTableData()
+            this.getDetailTableData()
         },
         computed: {
 
@@ -229,6 +229,7 @@
                 this.getSalesmanReached()
                 this.getSalesmanContribution()
                 this.getProductTableData()
+                this.getDetailTableData()
             },
             //体检报告概览
             getOverViewData() {
@@ -254,16 +255,6 @@
                 _this.oneHelpSaleYearShow = true
                 function getMonthData(){
                     var params = {
-                        // "inputParam":
-                        //     {
-                        //         "data_mon":_this.currentDate,
-                        //         "data_type":"当月",
-                        //         "dealer_id":"ff8080816c0b0669016c416c850a4149"
-                        //     },
-                        // "outputCol":"data_mon,data_type,dealer_id,money,obj_money,liby_money,liby_obj_money,kispa_money,kispa_obj_money,cheerwin_money,cheerwin_obj_money,oral_money,oral_obj_money,shengmei_money,shengmei_obj_money,strategic_money,strategic_obj_money",
-                        // "pageNum":1,
-                        // "pageSize":1000,
-                        // "serviceId":"service_rp_tjbg_sales_order"
                         "inputParam":
                             {
                                 "data_mon":_this.currentDate,
@@ -561,36 +552,70 @@
                 _this.towHelpSaleMonthShow = true
                 _this.towHelProportion = true
                 _this.towHelYoy = true
+                var params = {
+                    "inputParam":
+                        {
+                            "data_mon":_this.currentDate,
+                            "data_type":"当月"
+                        },
+                    "outputCol":"data_mon,dealer_id,data_type,dealer_code,dealer_name,money,liby_money,kispa_money,cheerwin_money,oral_money,shengmei_money,other_money,money_lm,liby_money_lm,kispa_money_lm,cheerwin_money_lm,oral_money_lm,shengmei_money_lm,other_money_lm,money_ly,liby_money_ly,kispa_money_ly,cheerwin_money_ly,oral_money_ly,shengmei_money_ly,other_money_ly,gross_money,gross_money_rate,gross_money_lm,gross_money_mom,gross_money_rate_mom,gross_money_ly,gross_money_yoy,gross_money_rate_yoy",
+                    "pageNum":1,
+                    "pageSize":1000,
+                    "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                    "serviceId":"service_tjbg02_sales_order"
+                }
                 this.$http({
-                    url: _this.requestHttpUrl + '/Analysis',
+                    url: _this.testRequestHttpUrl + '?v=analysis',
                     method: 'POST',
-                    data: {
-                        dateTime: _this.currentDate
-                    }
+                    data: params
                 }).then(function (res) {
-                    var secondBandData = res.data.data[0], orderAmountData = {}, grossProfitData = {},
-                        grossInterestRateData = {};
-                    secondBandData.orderAmount = !secondBandData.orderAmount ? '--' : _this.dataProcess(secondBandData.orderAmount, 'money', 1).num;
-                    // 下单金额数据
-                    orderAmountData.orderAmountInteger = secondBandData.orderAmount.split(".")[0];
-                    orderAmountData.orderAmountDecimal = '.' + secondBandData.orderAmount.split(".")[1];
-                    orderAmountData.grossProfit = !secondBandData.grossProfit ? '--' : _this.dataProcess(secondBandData.grossProfit, 'money', 1).num;
-                    orderAmountData.grossInterestRate = !secondBandData.grossInterestRate ? '--' : _this.dataProcess(secondBandData.grossInterestRate, 'percent').num + '%';
-                    // 环比数据
-                    grossProfitData.orderAmount = !secondBandData.orderAmountRatio ? '--' : _this.dataProcess(secondBandData.orderAmountRatio, 'percent').num + '%';
-                    grossProfitData.grossProfit = !secondBandData.grossProfitRatio ? '--' : _this.dataProcess(secondBandData.grossProfitRatio, 'percent').num + '%';
-                    grossProfitData.grossInterestRate = !secondBandData.grossInterestRateRatio ? '--' : _this.dataProcess(secondBandData.grossInterestRateRatio, 'percent').num + '%';
-                    // 同比数据
-                    grossInterestRateData.orderAmount = !secondBandData.orderAmountTerms ? '--' : _this.dataProcess(secondBandData.orderAmountTerms, 'percent').num + '%';
-                    grossInterestRateData.grossProfit = !secondBandData.grossProfitTerms ? '--' : _this.dataProcess(secondBandData.grossProfitTerms, 'percent').num + '%';
-                    grossInterestRateData.grossInterestRate = !secondBandData.grossInterestRateTerms ? '--' : _this.dataProcess(secondBandData.grossInterestRateTerms, 'percent').num + '%';
-
-                    _this.orderAmountData = orderAmountData;
-                    _this.grossProfitData = grossProfitData;
-                    _this.grossInterestRateData = grossInterestRateData;
-                    _this.towHelpSaleMonthShow = false
-                    _this.towHelProportion = false
-                    _this.towHelYoy = false
+                     if(res.data.code == '200'){
+                        var secondBandData = res.data.data.data[0],thatMonth = {},chainratio = {},yearOnYear = {};
+                        // 当月数据
+                        console.log(secondBandData)
+                        thatMonth.money = !secondBandData.money ? '--' : _this.dataProcess(secondBandData.money, 'money', 1).num;  //本月下单金额
+                        if(!secondBandData.money ){
+                            thatMonth.moneyInteger = thatMonth.money.split(".")[0];   //本月下单金额整数部分
+                            thatMonth.moneyDecimal = '.' + thatMonth.money.split(".")[1];//本月下单金额小数部分
+                        }else {
+                            thatMonth.moneyInteger = '--';   //本月下单金额整数部分
+                            thatMonth.moneyDecimal = '--';//本月下单金额小数部分
+                        }
+                        thatMonth.gross_money = !secondBandData.gross_money ? '--' : _this.dataProcess(secondBandData.gross_money, 'money', 1).num; //毛利额
+                        thatMonth.gross_money_rate = !secondBandData.gross_money_rate ? '--' : _this.dataProcess(secondBandData.gross_money_rate, 'percent').num + '%'; //毛利率
+                        thatMonth.list = [{name:'立白',value:!secondBandData.liby_money ? 0 : secondBandData.liby_money},
+                            {name:'好爸爸',value:!secondBandData.kispa_money ? 0 : secondBandData.kispa_money},
+                            {name:'超威',value:!secondBandData.cheerwin_money ? 0 : secondBandData.cheerwin_money},
+                            {name:'口腔',value:!secondBandData.oral_money ? 0 : secondBandData.oral_money},
+                            {name:'晟美',value:!secondBandData.shengmei_money ? 0 : secondBandData.shengmei_money},
+                            {name:'其他',value:!secondBandData.other_money ? 0 : secondBandData.other_money}]
+                        // 环比数据
+                        chainratio.moneymonthly = _this.getHandle(secondBandData.money,secondBandData.money_lm,2);
+                        chainratio.grossmoneymonthly = _this.getHandle(secondBandData.gross_money,secondBandData.gross_money_lm,2);
+                        chainratio.rossmoneyratemonthly = _this.getHandle(secondBandData.gross_money_rate,secondBandData.gross_money_rate_lm,2);
+                        chainratio.list = [{name:'立白',value:_this.getHandle(secondBandData.liby_money,secondBandData.liby_money_lm,2)},
+                            {name:'好爸爸',value: _this.getHandle(secondBandData.kispa_money,secondBandData.kispa_money_lm,2)},
+                            {name:'超威',value: _this.getHandle(secondBandData.cheerwin_money,secondBandData.cheerwin_money_lm,2)},
+                            {name:'口腔',value: _this.getHandle(secondBandData.oral_money,secondBandData.oral_money_lm,2)},
+                            {name:'晟美',value: _this.getHandle(secondBandData.shengmei_money,secondBandData.shengmei_money_lm,2)},
+                            {name:'其他',value: _this.getHandle(secondBandData.other_money,secondBandData.other_money_lm,2)}]
+                            // 同比数据
+                        yearOnYear.moneymonthly = _this.getHandle(secondBandData.money,secondBandData.money_ly,2);
+                        yearOnYear.grossmoneymonthly = _this.getHandle(secondBandData.gross_money,secondBandData.gross_money_ly,2);
+                        yearOnYear.rossmoneyratemonthly = _this.getHandle(secondBandData.gross_money_rate,secondBandData.gross_money_rate_ly,2);
+                        yearOnYear.list = [{name:'立白',value:_this.getHandle(secondBandData.liby_money,secondBandData.liby_money_ly,2)},
+                            {name:'好爸爸',value: _this.getHandle(secondBandData.kispa_money,secondBandData.kispa_money_ly,2)},
+                            {name:'超威',value: _this.getHandle(secondBandData.cheerwin_money,secondBandData.cheerwin_money_ly,2)},
+                            {name:'口腔',value: _this.getHandle(secondBandData.oral_money,secondBandData.oral_money_ly,2)},
+                            {name:'晟美',value: _this.getHandle(secondBandData.shengmei_money,secondBandData.shengmei_money_ly,2)},
+                            {name:'其他',value: _this.getHandle(secondBandData.other_money,secondBandData.other_money_ly,2)}]
+                        _this.orderAmountData = {thatMonth:thatMonth,chainratio:chainratio,yearOnYear:yearOnYear}
+                        console.log('5555555555555555555555555555')
+                        console.log(_this.orderAmountData)
+                        _this.towHelpSaleMonthShow = false
+                        _this.towHelProportion = false
+                        _this.towHelYoy = false    
+                     }   
                 })
             },
             //二帮卖-订单占比
@@ -769,94 +794,104 @@
             getCommodityTurnoverRate() {
                 var _this = this
                 _this.CommodityRate = true
+                var params = {
+                    "inputParam":
+                        {
+                            "data_mon":_this.currentDate,
+                            "data_type":"当月"
+                        },
+                    "outputCol":"dealer_id,data_mon,data_type,stock_sale_rate,stock_sale_goods_cnt,goods_cnt,stock_sale_goods_cnt_mom,stock_sale_goods_cnt_yoy,sales_raise_goods_cnt,sales_drop_goods_cnt,liby_stock_sale_rate,kispa_stock_sale_rate,cheerwin_stock_sale_rate,oral_stock_sale_rate,shengmei_stock_sale_rate",
+                    "pageNum":1,
+                    "pageSize":1000,
+                    "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                    "serviceId":"service_tjbg02_goods"
+                }
                 this.$http({
-                    url: _this.requestHttpUrl + '/CommodityTurnoverRate',
+                    url: _this.testRequestHttpUrl+'?v=produceOverview',
                     method: 'POST',
-                    data: {
-                        dateTime: _this.currentDate
-                    }
+                    data: params
                 }).then(function (res) {
                         console.log(res)
                         let data = res.data.data.data
-                        let  databar = res.data.data.data.data
-                            console.log(data)
-                            console.log(databar)
-                            let dayData = []
-                            let Axiax = []
-                            databar.map(function(item){
-                                Axiax.push(item.Axiax)
-                                item.dayData = _this.dataProcess(item.dayData,'percent').num
-                                dayData.push(item.dayData)
-                            })
-                            let produnarData = {
-                        config:{
-                            id: 'barIdProdun',
-                            unit:'%',
-                            xAxisData: Axiax,
-                            label: {
-                                isShow: true
-                            },
-                            type: 'xAxis',
-                            barData: [
-                                {
-                                    name: 'ABC',
-                                    data: dayData,
-                                    color: '#fff',
-                                    barWidth: 11
-                                },
-                            ],
-                            showType: 1,
-                            markLineList:{
-                                show:false,
-                                data:100,
-                            }
-                        },
-                        label: {
-                            isShow: true,
-                            position:'right'
-                        },
-                        xAxis:{
-                            axisLine:{
-                                show:false,
-                                color:'#3699FF'
-                            },
-                            axisLabel:{
-                                show:true,
-                                color:'#fff',
-                                fontSize:12
-                            },
-                            splitLine:{
-                                show:false,
-                                color:'#fff'
-                            },
-                        },
-                        yAxis:{
-                            axisLine:{
-                                show:false,
-                                color:'#fff'
-                            },
-                            axisLabel:{
-                                show:true,
-                                color:'#fff',
-                                fontSize:12
-                            },
-                            splitLine:{
-                                show:false,
-                                color:'#fff'
-                            },
-                        },
-                        legendShow:false,
-                        isShowMax:true,
-                    }
-                        _this.CommodityTurnoverRate = {
-                                productimg:require("../assets/img/dongxiao.png"),
-                                name:"商品动销率",
-                                RatePin:_this.dataProcess(data.RatePin, 'percent').num+_this.dataProcess(data.RatePin, 'percent').unit, //动销率
-                                btn:"动销清单",
-                                produnarData
-                        }
-                        _this.CommodityRate = false
-                        console.log(_this.CommodityTurnoverRate)
+                        // let  databar = res.data.data.data.data
+                        console.log(data)
+                        // console.log(databar)
+                        let dayData = []
+                        let Axiax = []
+                        // databar.map(function(item){
+                        //     Axiax.push(item.Axiax)
+                        //     item.dayData = _this.dataProcess(item.dayData,'percent').num
+                        //     dayData.push(item.dayData)
+                        // })
+                        // let produnarData = {
+                        //     config:{
+                        //         id: 'barIdProdun',
+                        //         unit:'%',
+                        //         xAxisData: Axiax,
+                        //         label: {
+                        //             isShow: true
+                        //         },
+                        //         type: 'xAxis',
+                        //         barData: [
+                        //             {
+                        //                 name: 'ABC',
+                        //                 data: dayData,
+                        //                 color: '#fff',
+                        //                 barWidth: 11
+                        //             },
+                        //         ],
+                        //         showType: 1,
+                        //         markLineList:{
+                        //             show:false,
+                        //             data:100,
+                        //         }
+                        //     },
+                        //     label: {
+                        //         isShow: true,
+                        //         position:'right'
+                        //     },
+                        //     xAxis:{
+                        //         axisLine:{
+                        //             show:false,
+                        //             color:'#3699FF'
+                        //         },
+                        //         axisLabel:{
+                        //             show:true,
+                        //             color:'#fff',
+                        //             fontSize:12
+                        //         },
+                        //         splitLine:{
+                        //             show:false,
+                        //             color:'#fff'
+                        //         },
+                        //     },
+                        //     yAxis:{
+                        //         axisLine:{
+                        //             show:false,
+                        //             color:'#fff'
+                        //         },
+                        //         axisLabel:{
+                        //             show:true,
+                        //             color:'#fff',
+                        //             fontSize:12
+                        //         },
+                        //         splitLine:{
+                        //             show:false,
+                        //             color:'#fff'
+                        //         },
+                        //     },
+                        //     legendShow:false,
+                        //     isShowMax:true,
+                        // }
+                        // _this.CommodityTurnoverRate = {
+                        //         productimg:require("../assets/img/dongxiao.png"),
+                        //         name:"商品动销率",
+                        //         RatePin:_this.dataProcess(data.RatePin, 'percent').num+_this.dataProcess(data.RatePin, 'percent').unit, //动销率
+                        //         btn:"动销清单",
+                        //         produnarData
+                        // }
+                        // _this.CommodityRate = false
+                        // console.log(_this.CommodityTurnoverRate)
                     },
                 )
             },
@@ -1055,74 +1090,84 @@
             getStoresDetailed() {
                 var _this = this
                 _this.StoreisShow = true
+                var params = {
+                    "inputParam":
+                        {
+                            "data_mon":_this.currentDate,
+                            "data_type":"当月"
+                        },
+                    "outputCol":"dealer_id,data_mon,data_type,active_store_cnt,active_store_cnt_mom,active_store_cnt_yoy,sale_drop_store_cnt,sale_raise_store_cnt,unsale_store_cnt,mon3_unsale_store_cnt,mon3_unsale_store_dept_money,close_store_dept_money,store_avg_money,store_cnt,new_store_cnt,active_store_rate,mon6_unsale_store_cnt",
+                    "pageNum":1,
+                    "pageSize":1000,
+                    "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                    "serviceId":"service_tjbg02_store"
+                }
                 this.$http({
-                    url: _this.requestHttpUrl + '/StoresDetailed',
+                    url: _this.testRequestHttpUrl+'?v=storeActivity',
                     method: 'POST',
-                    data: {
-                        dateTime: _this.currentDate
-                    }
+                    data: params
                 }).then(function (res) {
                         console.log(res)
-                        let data = res.data.data.data
+                        let data = res.data.data.data[0]
                         console.log(data)
                         let AmountChainVal = {
                             name: "环比: ",
-                            NoSales: _this.dataProcess(data.AmountChainVal, 'percent').num + _this.dataProcess(data.AmountChainVal, 'percent').unit
+                            NoSales: _this.dataProcess(data.active_store_cnt_mom, 'percent').num + _this.dataProcess(data.active_store_cnt_mom, 'percent').unit
                         }
                         let AmountYearVal = {
                             name: "同比: ",
-                            NoSales: _this.dataProcess(data.AmountYearVal, 'percent').num + _this.dataProcess(data.AmountYearVal, 'percent').unit
+                            NoSales: _this.dataProcess(data.active_store_cnt_yoy, 'percent').num + _this.dataProcess(data.active_store_cnt_yoy, 'percent').unit
                         }
                         let downSales = {
                             name:"销量下滑门店数(家):",
-                            NoSales: data.downSales,
+                            NoSales: data.sale_drop_store_cnt,
                             btn:"下滑门店"
                         }
                         let upSales = {
                             name:"销量增长门店数(家):",
-                            NoSales: data.upSales,
+                            NoSales: data.sale_raise_store_cnt,
                             btn:"增长门店"
                         }
                         let noTrade = {
                             name: "近3个月无交易门店数(家): ",
-                            NoSales: data.noTrade
+                            NoSales: data.mon3_unsale_store_cnt
                         }
                         let noTrades = {
                             name: "6个月无交易门店数(家):",
-                            NoSales:data.noTrades
+                            NoSales:data.mon6_unsale_store_cnt
                         }
                         let ActivestresPer = {
                             ActiveStores:"门店单产",
                             ActiveStoresing:"(万元)",
-                            NoSales:data.ActivestresPer
+                            NoSales:_this.dataProcess(data.store_avg_money, 'money').num,
                           }
                         let ActivestresSum = {
                             ActiveStores:"总门店数",
                             ActiveStoresing:"(家)",
-                            NoSales:data.ActivestresSum
+                            NoSales:data.store_cnt
                         }
                         let ActivestresnNew = {
                             ActiveStores:"新增门店数",
                             ActiveStoresing:"(家)",
-                            NoSales:data.ActivestresnNew
+                            NoSales:data.new_store_cnt
                         }
                         let nearnoTrade = {
                             name: "3个月无交易门店应收欠款(万元):",
-                            NoSales: '￥'+ _this.dataProcess(data.nearnoTrade, 'money').num,
+                            NoSales: '￥'+ _this.dataProcess(data.mon3_unsale_store_dept_money, 'money').num,
                         }
                         let nearnoTrades = {
                         name: "闭店应收账款(万元):",
-                        NoSales: '￥'+_this.dataProcess(data.nearnoTrades, 'money').num,
+                        NoSales: '￥'+_this.dataProcess(data.close_store_dept_money, 'money').num,
                     }
 
 
                         _this.StoresDetailed = {
                             shopTitle:"门店活跃率:",
-                            StoreActivity: _this.dataProcess(data.StoreActivity, 'percent').num + _this.dataProcess(data.StoreActivity, 'percent').unit,  //门店活跃率
+                            StoreActivity: _this.dataProcess(data.active_store_rate, 'percent').num + _this.dataProcess(data.active_store_rate, 'percent').unit,  //门店活跃率
                             shopActiveData: {
                                 ActiveStoresTxt:"活跃门店数",
                                 ActiveStoresing:"(家)",
-                                ActiveStores:data.ActiveStores,  //门店活跃数
+                                ActiveStores:data.active_store_cnt,  //门店活跃数
                                 detailbtn:"门店详情",
                                 shopActiveTitle: [
                                     AmountChainVal,  //环比数额
@@ -1156,13 +1201,25 @@
             getDownStores() {
                 var _this = this
                 _this.downStoresBar = true
+                var params = {
+                    "inputParam":
+                        {
+                            "data_mon":_this.currentDate,
+                            "money_type":"上升",
+                            "data_type":"当月"
+                        },
+                    "outputCol":"dealer_id,data_mon,data_type,emp_name,emp_phone,store_name,store_contact,store_phone,store_address,money,mon3_avg_m_money,dif_money",
+                    "pageNum":1,
+                    "pageSize":1000,
+                    "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                    "serviceId":"service_tjbg02_store_sales_change"
+                }
                 this.$http({
-                    url: _this.requestHttpUrl + '/downStores',
+                    url: _this.testRequestHttpUrl,
                     method: 'POST',
-                    data: {
-                        dateTime: _this.currentDate
-                    }
+                    data: params
                 }).then(function (res) {
+                    console.log(res)
                     var VariabilityUpData = res.data.data,
                         xAxisData=[],
                         seriesData=[],
@@ -1413,8 +1470,92 @@
                     console.log(_this.marketableDayChart)
                 })
             },
-            distroyed: function () {
-
+            //获取二级页面表格数据
+            getDetailTableData(){
+                //门店数据列表数据
+                var _this = this
+                _this.storeDetailTableData = {
+                    //活跃门店详情
+                    activeStoreDetail:{
+                        params:{
+                            "inputParam":
+                                {
+                                    "data_mon":_this.currentDate,
+                                    "data_type":"当月"
+                                },
+                            "outputCol":"emp_name,emp_phone,store_name,store_contact,store_phone,money,money_rate,sale_goods_cnt,sale_goods_cnt_lm",
+                            "pageNum":1,
+                            "pageSize":100,
+                            "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                            "serviceId":"service_tjbg02_store_active"
+                        },
+                        header:[
+                            {txt:'序号',unit:false},
+                            {txt:'业务员姓名',unit:false},
+                            {txt:'业务员电话',unit:false},
+                            {txt:'门店店名',unit:false},
+                            {txt:'门店老板姓名',unit:false},
+                            {txt:'门店老板联系方式',unit:false},
+                            {txt:'当月销量（元）',unit:'money'},
+                            {txt:'当月销量占比',unit:'percent'},
+                            {txt:'当月门店销售SKU数量',unit:'day'},
+                            {txt:'上月门店销售SKU数量',unit:'day'},
+                        ]
+                    },
+                    //新增门店详情
+                    addStoreDetail:{
+                        params:{
+                            "inputParam":
+                                {
+                                    "data_mon":this.currentDate,
+                                    "data_type":"当月"
+                                },
+                            "outputCol":"emp_name,emp_phone,store_name,store_contact,store_phone,store_address,new_store_cnt",
+                            "pageNum":1,
+                            "pageSize":1000,
+                            "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                            "serviceId":"service_tjbg02_store_create"
+                        },
+                        header:[
+                            {txt:'序号',unit:false},
+                            {txt:'业务员姓名',unit:false},
+                            {txt:'联系电话',unit:false},
+                            {txt:'门店名称',unit:false},
+                            {txt:'门店老板姓名',unit:false},
+                            {txt:'门店老板电话',unit:false},
+                            {txt:'门店地址',unit:false},
+                            {txt:'新增门店数（家）',unit:'day'},
+                        ]
+                    },
+                    //无交易门店应收账款明细
+                    noDealDetail:{
+                        params:{
+                            "inputParam":
+                                {
+                                    "data_mon":_this.currentDate,
+                                    "data_type":"当月"
+                                },
+                            "outputCol":"emp_name,emp_phone,store_name,store_contact,store_phone,store_address,store_status,last_order_time,unsale_days,debt_money",
+                            "pageNum":1,
+                            "pageSize":1000,
+                            "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                            "serviceId":"service_tjbg02_store_unsale"
+                        },
+                        header:[
+                            {txt:'序号',unit:false},
+                            {txt:'业务员姓名',unit:false},
+                            {txt:'联系电话',unit:false},
+                            {txt:'门店名称',unit:false},
+                            {txt:'门店老板姓名',unit:false},
+                            {txt:'门店老板电话',unit:false},
+                            {txt:'门店地址',unit:false},
+                            {txt:'是否开业',unit:false},
+                            {txt:'最近交易时间',unit:false},
+                            {txt:'无交易时长（天）',unit:'day'},
+                            {txt:'应收账款（元）',unit:'money'},
+                        ]
+                    }
+                }
             }
         }
     }

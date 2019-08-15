@@ -4,27 +4,40 @@
         <div class="shop-active" v-for="(item,index) in ActiveDetail.shopActiveDetail" :key="index">
             <p>{{item.ActiveStores}}<span>{{item.ActiveStoresing}}</span></p>
             <span>{{item.NoSales}}</span>
-            <p class="btn">门店详情</p>
+            <new-button v-if="index==2" :defaultVal="detailHandleList.defaultVal" :buttonType="detailHandleList.buttonType" :isGhost="detailHandleList.isGhost" :buttonHandleClick="detailHandleClick"></new-button>
         </div>
         </div>
-        <shopBase :shopDaseData="ActiveDetail.shopDaseData" :defaultVal="defaultVal"></shopBase>
+        <shopBase :shopDaseData="ActiveDetail.shopDaseData" :defaultVal="defaultVal" :detailHandleClick="dealHandleClick"></shopBase>
+        <public-table v-if="isShowDetail" :close="closePopup" :tableHeader="tableData.header" :interfaceParams="tableData.params"></public-table>
+        <public-table v-if="isShowreceivable" :close="dealClosePopup"  :tableHeader="dealTableData.header" :interfaceParams="dealTableData.params"></public-table>
     </div>
 </template>
 
 <script>
     import shopBase from './shopBase'
+    import newButton from '../base/newButton.vue'
+    import publicTable from '../base/publicTable.vue'
     export default {
         name: "shopRight",
-        props:["ActiveDetail"],
+        props:["ActiveDetail","tableData","dealTableData"],
         data(){
             return{
                 defaultVal:"应收明细",
-                defaultVal1:"门店详情",
-                // detailData:"",
+                // detailData:"",l
+                //按钮样式
+                detailHandleList:{
+                    defaultVal:'门店详情',
+                    isGhost:true,
+                    buttonType:'default'
+                },
+                isShowDetail:false,
+                isShowreceivable:false
             }
         },
         components:{
             shopBase,
+            newButton,
+            publicTable
         },
         watch:{
             // ActiveDetail(val){
@@ -33,6 +46,24 @@
         },
         mounted() {
             // console.log(this.detailData)
+        },
+        methods:{
+            //打开新增门店详情
+            detailHandleClick(){
+                this.isShowDetail = true
+            },
+            //关闭新增门店详情
+            closePopup(){
+                this.isShowDetail = false
+            },
+            //关闭应收明细
+            dealClosePopup(){
+                this.isShowreceivable = false
+            },
+            //打开应收明细
+            dealHandleClick(){
+                this.isShowreceivable = true
+            }
         }
     }
 </script>
@@ -44,7 +75,9 @@
         float: left;
         /*margin-left: 9%;*/
         .shopRight-title{
-            height:180px;
+            height: 196px;
+            display: flex;
+            align-items: center;
         }
         .shop-active {
             width: 20%;

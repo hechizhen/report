@@ -14,7 +14,7 @@
         </a-Row>
     </div>
     <div class="productLeft-btn">
-    <newButton :defaultVal="defaultVal"></newButton>
+        <newButton :defaultVal="defaultVal" :buttonHandleClick="detailHandleClick"></newButton>
     </div>
             <!--<a-Row>-->
                 <!--<div class="productLeft-btn">-->
@@ -34,12 +34,20 @@
 
 <script>
     import  newButton from  '../base/newButton'
+    import publicTable from '../base/publicTable.vue'
     export default {
         name: "shopBase",
-        props:["shopDaseData","defaultVal"],
+        props:["shopDaseData","defaultVal","detailHandleClick"],
         components:{
-            newButton
-        }
+            newButton,
+            publicTable
+        },
+        mounted(){
+
+        },
+        methods:{
+
+        },
     }
 </script>
 
