@@ -185,6 +185,7 @@
             this.indexDefaultDate = year + '/' + month
         },
         mounted() {
+            this.getsalesmanTrend()
             this.getOverViewData()
             this.getOneHelpSalesData()
             this.getFinanceTableData()
@@ -192,7 +193,6 @@
             this.getOverdueData()
             this.getsalesman()
             this.getsecondBand()
-            this.getProportio()
             this.getDaysAvailableStock()
             this.getinventoryDetail()
             this.getStoresDetailed()
@@ -200,7 +200,6 @@
             this.getNumberMovingGoods()
             this.getGoodsdetail()
             this.getdirection()
-            this.getsalesmanTrend()
             this.getmarketableDayChart()
             this.getVariabilityUp()
             this.getVariabilityDown()
@@ -676,13 +675,23 @@
             //业务员-走势图
             getsalesmanTrend() {
                 var _this = this
-                _this.salesmanTrendPie = true
+                _this.salesmanTrendPie = true;
+                var params = {
+                    "inputParam":
+                        {
+                            "data_mon":_this.currentDate,
+                            "data_type":"当月"
+                        },
+                    "outputCol":"dealer_id,data_mon,data_type,emp_name,emp_phone,emp_money,emp_target_money,emp_rate,emp_money_rate,gross_money,gross_rate",
+                    "pageNum":1,
+                    "pageSize":1000,
+                    "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                    "serviceId":"service_tjbg02_emp_rate"
+                }
                 this.$http({
-                    url: _this.requestHttpUrl + '/salesmanTrend',
+                    url: _this.testRequestHttpUrl + '?v=salesmanTrend',
                     method: 'POST',
-                    data: {
-                        dateTime: _this.currentDate
-                    }
+                    data: params
                 }).then(function (res) {
                     var salesmanTrendData = res.data.data,xAxisData=[],salesmanArr=[],seriesData=[],salesmanColor=['#009EE2','#E9A837','#00E2BF','#65E6F5'];
                     salesmanTrendData.map(function(value){
