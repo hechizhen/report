@@ -206,7 +206,6 @@
             this.getsalesmandownward()
             this.getRaiseDownStores()
             this.getSalesmanReached()
-            this.getSalesmanContribution()
             this.getProductTableData()
             this.getDetailTableData()
             this.getPinListing()
@@ -236,7 +235,6 @@
                 this.getVariabilityDown()
                 this.getRaiseDownStores()
                 this.getSalesmanReached()
-                this.getSalesmanContribution()
                 this.getProductTableData()
                 this.getDetailTableData()
                 this.getPinListing()
@@ -529,9 +527,9 @@
                     "inputParam":
                         {
                             "data_mon":_this.currentDate,
-                            "data_type":"累计"
+                            "data_type":"当月"
                         },
-                    "outputCol":"dealer_id,data_mon,data_type,emp_rate,emp_avg_money,emp_cnt,emp_drop_cnt",
+                    "outputCol":"dealer_id,data_mon,data_type,emp_rate,emp_avg_money,emp_cnt,emp_drop_cnt,all_cnt",
                     "pageNum":1,
                     "pageSize":1000,
                     "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
@@ -545,9 +543,10 @@
                     if(res.data.code == '200'){
                         var salesmanData = res.data.data.data[0];
                         salesmanData.emp_rate = !salesmanData.emp_rate ? '--' : _this.dataProcess(salesmanData.emp_rate, 'percent', 1).num + '%'; //业务员达成
-                        salesmanData.emp_cnt = !salesmanData.emp_cnt ? '--' : _this.dataProcess(salesmanData.emp_cnt, 'day').num;   //总人数
+                        salesmanData.emp_cnt = !salesmanData.emp_cnt ? '--' : _this.dataProcess(salesmanData.emp_cnt, 'day').num;   //业务员人数
                         salesmanData.emp_avg_money = !salesmanData.emp_avg_money ? '--' : _this.dataProcess(salesmanData.emp_avg_money, 'money').num;  //人均产出
                         salesmanData.emp_drop_cnt = !salesmanData.emp_drop_cnt ? '--' : _this.dataProcess(salesmanData.emp_drop_cnt, 'day').num;  //下滑人数
+                        salesmanData.all_cnt = !salesmanData.all_cnt ? '--' : _this.dataProcess(salesmanData.all_cnt, 'day').num;  //下滑人数
                         _this.salesmanData = salesmanData;
                         _this.salesmanReached = false
                     }
@@ -637,18 +636,29 @@
             //二帮卖-订单走势图
             getdirection() {
                 var _this = this
-                _this.towHelpSaleMonthLineShow = true
+                _this.towHelpSaleMonthLineShow = true;
+                var params = {
+                    "inputParam":
+                        {
+                            "data_mon":_this.currentDate,
+                            "data_type":"全年"
+                        },
+                    "outputCol":"data_mon,dealer_id,data_type,dealer_code,dealer_name,money,liby_money,kispa_money,cheerwin_money,oral_money,shengmei_money,other_money,money_lm,liby_money_lm,kispa_money_lm,cheerwin_money_lm,oral_money_lm,shengmei_money_lm,other_money_lm,money_ly,liby_money_ly,kispa_money_ly,cheerwin_money_ly,oral_money_ly,shengmei_money_ly,other_money_ly,gross_money,gross_money_rate,gross_money_lm,gross_money_mom,gross_money_rate_mom,gross_money_ly,gross_money_yoy,gross_money_rate_yoy",
+                    "pageNum":1,
+                    "pageSize":1000,
+                    "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                    "serviceId":"service_tjbg02_sales_order"
+                }
                 this.$http({
-                    url: _this.requestHttpUrl + '/direction',
+                    url: _this.testRequestHttpUrl + '?v=direction',
                     method: 'POST',
-                    data: {
-                        dateTime: _this.currentDate
-                    }
+                    data: params
                 }).then(function (res) {
-                    var directionData = res.data.data,monthArr = [],seriesData=[],directionArr = {};
+
+                    var directionData = res.data.data.data,monthArr = [],seriesData=[],directionArr = {};
                     directionData.map(function(value){
-                        monthArr.push(value.month)
-                        seriesData.push(value.value)
+                        monthArr.push(value.data_mon)
+                        seriesData.push(value.money)
                     })
                     directionArr.monthArr = monthArr;
                     directionArr.seriesData = seriesData;
@@ -664,7 +674,7 @@
                     "inputParam":
                         {
                             "data_mon":_this.currentDate,
-                            "data_type":"当月"
+                            "data_type":"全年"
                         },
                     "outputCol":"dealer_id,data_mon,data_type,emp_name,emp_phone,emp_money,emp_target_money,emp_rate,emp_money_rate,gross_money,gross_rate",
                     "pageNum":1,
@@ -677,29 +687,36 @@
                     method: 'POST',
                     data: params
                 }).then(function (res) {
-                    var salesmanTrendData = res.data.data,xAxisData=[],salesmanArr=[],seriesData=[],salesmanColor=['#009EE2','#E9A837','#00E2BF','#65E6F5'];
+                    var salesmanTrendData = res.data.data.data,xAxisData=[],salesmanArr=[],seriesData=[],salesmanColor=['#009EE2','#E9A837','#00E2BF','#65E6F5'];
                     salesmanTrendData.map(function(value){
-                        xAxisData.push(value.month)
-                    })
-                    salesmanTrendData[0].salesmanList.map(function(value){
-                        salesmanArr.push(value.name)
+                        if(xAxisData.length==0){
+                          xAxisData.push(value.data_mon);
+                        }else{
+                          if(xAxisData.indexOf(value.data_mon) == -1){
+                            xAxisData.push(value.data_mon);
+                          }
+                        }
+                        if(salesmanArr.length==0){
+                          salesmanArr.push(value.emp_name);
+                        }else{
+                          if(salesmanArr.indexOf(value.emp_name) == -1){
+                            salesmanArr.push(value.emp_name);
+                          }
+                        }
                     })
                     salesmanArr.map(function(value,index){
                         var tempObjecd = {name:value,color:salesmanColor[index]},tempArr = [];
                         salesmanTrendData.map(function(data){
-                           data.salesmanList.map(function(resdata){
-                                if(value == resdata.name){
-                                    tempArr.push(resdata.value)
-                                }
-                           })
+                           if(value == data.emp_name){
+                                tempArr.push(!data.emp_rate ? 0 : _this.dataProcess(data.emp_rate, 'percent').num)
+                            }
                         })
                         tempObjecd.data = tempArr;
                         seriesData.push(tempObjecd)
                     })
                     var tempsalesmanTrendData = {monthArr:xAxisData,seriesData:seriesData}
                     _this.salesmanTrendData = tempsalesmanTrendData
-                    _this.salesmanTrendPie = false
-                    console.log( _this.salesmanTrendData)
+                    _this.salesmanTrendPie = false;
 
                 })
             },
@@ -707,84 +724,97 @@
             getsalesmandownward() {
                 var _this = this
                 _this.salesmandownwardBar = true
+                var params = {
+                    "inputParam":{
+                        "data_mon":_this.currentDate,
+                        "data_type":"当月"
+                    },
+                    "outputCol":"dealer_id,data_mon,data_type,emp_name,money,money_lm,dif_money",
+                    "pageNum":1,
+                    "pageSize":1000,
+                    "groupbyCol":['data_mon,dealer_id'],
+                    "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                    "serviceId":"service_tjbg02_emp_drop"
+                }
                 this.$http({
-                    url: _this.requestHttpUrl + '/salesmandownward',
+                    url: _this.testRequestHttpUrl + '?v=salesmandownward',
                     method: 'POST',
-                    data: {
-                        dateTime: _this.currentDate
-                    }
+                    data: params
                 }).then(function (res) {
-                    var salesmandownwardData = res.data.data,xAxisData=[],seriesData=[],lastMonth=[],sameMonth=[],difference=[],salesmandownwardObject={};
-                    salesmandownwardData.map(function(value){
-                        xAxisData.push(value.salesmanName);
-                        lastMonth.push(value.lastMonth)
-                        sameMonth.push(value.sameMonth)
-                        difference.push(value.difference)
-                    })
-                    seriesData.push({name:'上月销售额',data:lastMonth,color:'#009EE2',barWidth:20},{name:'本月销售额',data:sameMonth,color:'#E9A837',barWidth:20},{name:'销售差额',data:difference,color:'#00E2BF',barWidth:20})
-                    salesmandownwardObject.xAxisData = xAxisData;
-                    salesmandownwardObject.seriesData = seriesData;
-                    _this.salesmandownwardData = salesmandownwardObject
-                    _this.salesmandownwardBar = false
-                    console.log(_this.salesmandownwardData)
+                    if(res.data.code == '200'){
+                        var salesmandownwardData = res.data.data.data,xAxisData=[],seriesData=[],lastMonth=[],sameMonth=[],difference=[],salesmandownwardObject={};
+                        salesmandownwardData.map(function(value){
+                            xAxisData.push(value.emp_name);
+                            lastMonth.push(value.money_lm)
+                            sameMonth.push(value.money)
+                            difference.push(value.dif_money)
+                        })
+                        seriesData.push({name:'上月销售额',data:lastMonth,color:'#009EE2',barWidth:20},{name:'本月销售额',data:sameMonth,color:'#E9A837',barWidth:20},{name:'销售差额',data:difference,color:'#00E2BF',barWidth:20})
+                        salesmandownwardObject.xAxisData = xAxisData;
+                        salesmandownwardObject.seriesData = seriesData;
+                        _this.salesmandownwardData = salesmandownwardObject
+                        _this.salesmandownwardBar = false
+                        console.log(_this.salesmandownwardData)
+                    }
                 })
             },
-            //业务员-达成
+            //业务员-达成-贡献
             getSalesmanReached() {
                 var _this = this
-                _this.salesmanReachedBar = true
+                _this.salesmanReachedBar = true;
+                _this.salesmanContributionBar = true;
+                var params = {
+                    "inputParam":{
+                        "data_mon":_this.currentDate,
+                        "data_type":"当月"
+                    },
+                    "outputCol":"dealer_id,data_mon,data_type,emp_name,emp_phone,emp_money,emp_target_money,emp_rate,emp_money_rate,gross_money,gross_rate,dealer_money",
+                    "pageNum":1,
+                    "pageSize":1000,
+                    "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                    "serviceId":"service_tjbg02_emp_rate"
+                }
                 this.$http({
-                    url: _this.requestHttpUrl + '/SalesmanReached',
+                    url: _this.testRequestHttpUrl + '?v=salesmanReached',
                     method: 'POST',
-                    data: {
-                        dateTime: _this.currentDate
-                    }
+                    data: params
                 }).then(function (res) {
-                    var salesmanReachedData = res.data.data,xAxisData=[],seriesData=[],lastMonth=[],sameMonth=[],difference=[],salesmanReachedObject={};
-                    salesmanReachedData.map(function(value){
-                        xAxisData.push(value.salesmanName);
-                        lastMonth.push(value.monthlysales)
-                        sameMonth.push(value.monthlytarget)
-                        // difference.push(value.reached)
-                    })
-                    seriesData.push(
-                        {name:'当月目标',data:sameMonth,color:'#85C1FF',barWidth:20},
-                        {name:'当月销量',data:lastMonth,color:'#2D92FC',barWidth:20},
-                        // {name:'达成率',data:difference,color:'#00E2BF',barWidth:20}
-                        )
-                    salesmanReachedObject.xAxisData = xAxisData;
-                    salesmanReachedObject.seriesData = seriesData;
-                    _this.salesmanReachedData = salesmanReachedObject;
-                    _this.salesmanReachedBar = false
-                })
-            },
-            //业务员-贡献
-            getSalesmanContribution() {
-                var _this = this
-                _this.salesmanContributionBar = true
-                this.$http({
-                    url: _this.requestHttpUrl + '/SalesmanContribution',
-                    method: 'POST',
-                    data: {
-                        dateTime: _this.currentDate
+                    if(res.data.code == '200'){
+                        alert(1)
+                        // 达成
+                        var salesmanReachedData = res.data.data.data,xAxisData=[],seriesData=[],lastMonth=[],sameMonth=[],difference=[],salesmanReachedObject={},contributionseriesData=[],contributionlastMonth=[],contributiondifference = [],salesmanContributionObject={};
+                        salesmanReachedData.map(function(value){
+                            xAxisData.push(value.emp_name);
+                            lastMonth.push(value.emp_target_money)
+                            sameMonth.push(value.emp_money)
+                            difference.push(value.emp_rate)
+                            contributionlastMonth.push(value.dealer_money)
+                            contributiondifference.push(value.emp_money_rate)
+                        })
+                        seriesData.push(
+                            {name:'当月目标',data:sameMonth,color:'#85C1FF',barWidth:20},
+                            {name:'当月销量',data:lastMonth,color:'#2D92FC',barWidth:20},
+                            {name:'达成率',data:difference,color:'#fff',barWidth:0},
+                            )
+                        salesmanReachedObject.xAxisData = xAxisData;
+                        salesmanReachedObject.seriesData = seriesData;
+                        _this.salesmanReachedData = salesmanReachedObject;
+                        _this.salesmanReachedBar = false
+                        // 贡献
+                        contributionseriesData.push(
+                            {name:'当月销量',data:sameMonth,color:'#85C1FF',barWidth:20},
+                            {name:'当月总销量',data:contributionlastMonth,color:'#2D92FC',barWidth:20},
+                            {name:'贡献率',data:contributiondifference,color:'#fff',barWidth:0}
+                            )
+                        salesmanContributionObject.xAxisData = xAxisData;
+                        salesmanContributionObject.seriesData = contributionseriesData;
+                        _this.salesmanContributionData = salesmanContributionObject;
+                        _this.salesmanContributionBar = false
+
+                        console.log('1111111111111111')
+                        console.log(_this.salesmanReachedData)
+                        console.log(_this.salesmanContributionData)
                     }
-                }).then(function (res) {
-                    var salesmanContributionData = res.data.data,xAxisData=[],seriesData=[],lastMonth=[],sameMonth=[],difference=[],salesmanContributionObject={};
-                    salesmanContributionData.map(function(value){
-                        xAxisData.push(value.salesmanName);
-                        lastMonth.push(value.monthlysales)
-                        sameMonth.push(value.totalMonthlySales)
-                        // difference.push(value.reached)
-                    })
-                    seriesData.push(
-                        {name:'当月目标',data:sameMonth,color:'#85C1FF',barWidth:20},
-                        {name:'当月总销量',data:lastMonth,color:'#2D92FC',barWidth:20},
-                        // {name:'达成率',data:difference,color:'#00E2BF',barWidth:20}
-                        )
-                    salesmanContributionObject.xAxisData = xAxisData;
-                    salesmanContributionObject.seriesData = seriesData;
-                    _this.salesmanContributionData = salesmanContributionObject;
-                    _this.salesmanContributionBar = false
                 })
             },
 
