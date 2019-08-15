@@ -39,7 +39,7 @@
                     </a-Row>
                 </div>
                 <div class="productLeft-btn">
-                    <newButton :defaultVal="defaultVal"></newButton>
+                    <newButton :defaultVal="defaultVal" :buttonHandleClick="storeDetailHandleClick" ></newButton>
                 </div>
             </div>
             <loading-data :isShow="stockAmount"></loading-data>
@@ -49,6 +49,7 @@
                        :invtopography="invtopography"  :barData="inventoryDay.inventoryBarData"
         ></inventoryDase>
         </div>
+        <public-table v-if="isShowDetail" :close="closePopup" :tableHeader="tableData.header" :interfaceParams="tableData.params"></public-table>
         <inventoryChart v-if="invechartsShow" :trendChartClick="trendChartClick" :lineEchartsData="lineEchartsData" :isShow="marketableDayLine"></inventoryChart>
     </div>
     <core :coretype="'库存得分'" :coretext="87" :evaluate="'较好'"></core>
@@ -63,10 +64,11 @@
     import  inventoryChart  from  './inventoryChart'
     import  secondTitle from  '../secondTitle'
     import loadingData from '../base/loadingData'
+    import publicTable from '../base/publicTable.vue'
     export default {
         name: "inventoryIndex",
         props:["inventoryDay","inventoryDetails","marketableDayChart","DaysAvailableStock","InventoryTurnover",
-            "stockAmount","marketableDayLine"],
+            "stockAmount","marketableDayLine","tableData"],
         components:{
             inventoryCenten,
             inventoryDase,
@@ -74,14 +76,15 @@
             core,
             inventoryChart,
             secondTitle,
-            loadingData
+            loadingData,
+            publicTable
         },
         data(){
             return{
                 Money:"￥",
                 inventoryTitle: '库存',//库存标题
                 invechartsShow: false,
-                // isShow:true,
+                isShowDetail:false,
                 marketableDay:[],
                 lineEchartsData:{},
                 defaultVal:"未销明细",
@@ -111,7 +114,14 @@
             },
             trendChartClick(){
                 this.invechartsShow = false;
-            }
+            },
+            storeDetailHandleClick(){
+                this.isShowDetail = true
+                // alert(111)
+            },
+            closePopup(){
+                this.isShowDetail = false
+            },
         },
         watch:{
             marketableDayChart(val){
@@ -123,7 +133,7 @@
             },
         },
          mounted() {
-               console.log(this.inventoryDay)
+               console.log(this.tableData)
          }
     }
 </script>

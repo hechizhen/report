@@ -8,27 +8,40 @@
                 <span>{{productdata.RatePin}}</span>
             </div>
             <div class="productLeft-btn">
-                <newButton  :buttonType="buttonType"
+                <newButton  :buttonType="buttonType"  :buttonHandleClick="storeDetailHandleClick"
                             :isGhost="true" :defaultVal="productdata.btn"></newButton>
             </div>
+            <public-table v-if="isShowDetail" :close="closePopup" :tableHeader="tableData.header" :interfaceParams="tableData.params"></public-table>
         </div>
 </template>
 
 <script>
     import  newButton from  '../base/newButton'
+    import publicTable from '../base/publicTable.vue'
     export default {
         name: "productLeft",
-        props:["productdata"],
+        props:["productdata","listClick","tableData"],
         data(){
             return{
-                buttonType:"default"
+                buttonType:"default",
+                isShowDetail:false,
             }
         },
+        methods:{
+            storeDetailHandleClick(){
+                this.isShowDetail = true
+            },
+            closePopup(){
+                this.isShowDetail = false
+            },
+
+        },
         mounted() {
-           // console.log(this.productdata.RatePin)
+           console.log(this.tableData)
         },
         components:{
-            newButton
+            newButton,
+            publicTable
         }
     }
 </script>

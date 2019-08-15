@@ -5,7 +5,8 @@
             <div class="product-content">
                 <a-Row >
                     <a-Col :span="10">
-                        <productLeft :productdata="CommodityTurnoverRate"></productLeft>
+                        <productLeft :productdata="CommodityTurnoverRate" :listClick="listClick"
+                                     :tableData="tableData.getPinListing"> </productLeft>
                         <productRight :barData="CommodityTurnoverRate.produnarData"  ></productRight>
                         <loading-data :isShow="CommodityRate"></loading-data>
                     </a-Col>
@@ -18,8 +19,12 @@
         </div>
         <core :coretype="'产品得分'" :coretext="87" :evaluate="'较好'"></core>
 
-        <upproductChart v-if="upShow" :trendChartClick="upClick"  :VariabilityUp="VariabilityUp" :isShow="NumberGoodsDownBar"></upproductChart>  <!--下滑-->
-        <downproductChart v-if="downShow" :trendChartClick="downClick" :VariabilityDown="VariabilityDown" :isShow="NumberGoodsUpBar"></downproductChart>  <!--增长-->
+        <upproductChart v-if="upShow" :trendChartClick="upClick"  :VariabilityUp="VariabilityUp"
+                        :raiseExportData="exportData.raiseData"
+                        :isShow="NumberGoodsDownBar"></upproductChart>  <!--下滑-->
+        <downproductChart v-if="downShow" :trendChartClick="downClick" :VariabilityDown="VariabilityDown"
+                          :downExportData="exportData.downData"
+                          :isShow="NumberGoodsUpBar"></downproductChart>  <!--增长-->
 
         <productChartPie v-if="pieShow" :trendChartClick="pieClick" :GoodsDetailPie="GoodsDetailPie" :tableData="productTableData"
                         :NumberGoodsPie="NumberGoodsPie" :NumberGoodsList="NumberGoodsList"
@@ -41,8 +46,8 @@
     export default {
         name: "cententindex",
         props:["CommodityTurnoverRate","commoditydata","GoodsDetail","NumberGoods","CommodityRate",
-            "VariabilityUpData","VariabilityDownData","productTableData","NumberGoodsDownBar","NumberGoodsUpBar",
-             "NumberGoodsPie","NumberGoodsList"],
+            "upproStoresData","prodownStoresData","productTableData","NumberGoodsDownBar","NumberGoodsUpBar",
+             "NumberGoodsPie","NumberGoodsList","tableData","exportData"],
         components:{
             productLeft,
             productRight,
@@ -57,8 +62,8 @@
         data(){
             return{
                 goodsData:"",
-                VariabilityUp:this.VariabilityUpData,
-                VariabilityDown:this.VariabilityDownData,
+                VariabilityUp:this.upproStoresData,
+                VariabilityDown:this.prodownStoresData,
                 GoodsDetailPie:this.GoodsDetail,
                 pieEchartsData:{},
                 barEchartsDataDown:{},
@@ -67,6 +72,7 @@
                 downShow:false,
                 pieShow:false,
                 listShow:false,
+                isShowDetail:false,
                 // productisShow:true,
                 // commodityisShow:true,
                 titName:"商品", // 产品
@@ -109,22 +115,32 @@
             pieClick(){
                 this.pieShow = false;
             },
+            listClick(){
+                this.isShowDetail = true;
+            },
+            listClicks(){
+                this.upShow = false;
+            }
+
         },
         watch:{
             GoodsDetail(val){
               this.GoodsDetailPie =val
             },
-            VariabilityUpData(val){
+            upproStoresData(val){
                this.VariabilityUp = val
+                console.log(val)
             },
-            VariabilityDownData(val){
+            prodownStoresData(val){
                this.VariabilityDown = val
             },
 
         },
         mounted() {
          // console.log(this.goodsData)
-          console.log(this.VariabilityUpData)
+          console.log(this.tableData)
+            console.log(this.upproStoresData)
+            console.log(this.prodownStoresData)
         }
     }
 </script>

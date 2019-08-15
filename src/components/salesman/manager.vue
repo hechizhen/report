@@ -35,7 +35,7 @@
 				  	<p>人均产出(万元)</p>
 				  </a-Col>
 				  <a-Col :span="6" class="managerCol">
-				  	<p><span>{{salesmanData.emp_cnt}}</span></p>
+				  	<p><span>{{salesmanData.all_cnt}}</span></p>
 				  	<p>￥<span>{{salesmanData.emp_avg_money}}</span></p>
 				  </a-Col>
 				</a-Row>
