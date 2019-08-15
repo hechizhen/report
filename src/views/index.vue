@@ -198,7 +198,6 @@
             this.getinventoryDetail()
             this.getStoresDetailed()
             this.getCommodityTurnoverRate()
-            this.getNumberMovingGoods()
             this.getGoodsdetail()
             this.getdirection()
             this.getmarketableDayChart()
@@ -210,6 +209,7 @@
             this.getSalesmanContribution()
             this.getProductTableData()
             this.getDetailTableData()
+            this.getPinListing()
         },
         computed: {
 
@@ -228,7 +228,6 @@
                 this.getinventoryDetail()
                 this.getStoresDetailed()
                 this.getCommodityTurnoverRate()
-                this.getNumberMovingGoods()
                 this.getGoodsdetail()
                 this.getsalesmanTrend()
                 this.getsalesmandownward()
@@ -240,6 +239,7 @@
                 this.getSalesmanContribution()
                 this.getProductTableData()
                 this.getDetailTableData()
+                this.getPinListing()
             },
             //体检报告概览
             getOverViewData() {
@@ -602,7 +602,7 @@
                             pieData:list,
                             radius:['35%', '70%'],
                             borderWidth:0,
-                        }    
+                        }
                         // 环比数据
                         chainratio.name = '环比';
                         chainratio.moneymonthly = _this.getHandle(secondBandData.money,secondBandData.money_lm,2);
@@ -630,8 +630,8 @@
                         console.log(_this.orderAmountData)
                         _this.towHelpSaleMonthShow = false
                         _this.towHelProportion = false
-                        _this.towHelYoy = false    
-                     }   
+                        _this.towHelYoy = false
+                     }
                 })
             },
             //二帮卖-订单走势图
@@ -787,20 +787,20 @@
                     _this.salesmanContributionBar = false
                 })
             },
-            //产品-商品动销率
+
+            //产品-商品动销率，商品动销数
             getCommodityTurnoverRate() {
                 var _this = this
                 _this.CommodityRate = true
                 var params = {
-                    "inputParam":
-                        {
-                            "data_mon":_this.currentDate,
-                            "data_type":"当月"
-                        },
+                    "inputParam":{
+                        "data_mon":"201907",
+                        "data_type":"当月"
+                    },
                     "outputCol":"dealer_id,data_mon,data_type,stock_sale_rate,stock_sale_goods_cnt,goods_cnt,stock_sale_goods_cnt_mom,stock_sale_goods_cnt_yoy,sales_raise_goods_cnt,sales_drop_goods_cnt,liby_stock_sale_rate,kispa_stock_sale_rate,cheerwin_stock_sale_rate,oral_stock_sale_rate,shengmei_stock_sale_rate",
                     "pageNum":1,
                     "pageSize":1000,
-                    "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                    "whereCndt":{"dealer_id":"='ff8080816b82b53d016bbb1bd5746d71'"},
                     "serviceId":"service_tjbg02_goods"
                 }
                 this.$http({
@@ -808,87 +808,119 @@
                     method: 'POST',
                     data: params
                 }).then(function (res) {
-                        console.log(res)
-                        let data = res.data.data.data
-                        // let  databar = res.data.data.data.data
+                        //  console.log(res)
+                        let data = res.data.data.data[0]
                         console.log(data)
-                        // console.log(databar)
-                        let dayData = []
-                        let Axiax = []
-                        // databar.map(function(item){
-                        //     Axiax.push(item.Axiax)
-                        //     item.dayData = _this.dataProcess(item.dayData,'percent').num
-                        //     dayData.push(item.dayData)
-                        // })
-                        // let produnarData = {
-                        //     config:{
-                        //         id: 'barIdProdun',
-                        //         unit:'%',
-                        //         xAxisData: Axiax,
-                        //         label: {
-                        //             isShow: true
-                        //         },
-                        //         type: 'xAxis',
-                        //         barData: [
-                        //             {
-                        //                 name: 'ABC',
-                        //                 data: dayData,
-                        //                 color: '#fff',
-                        //                 barWidth: 11
-                        //             },
-                        //         ],
-                        //         showType: 1,
-                        //         markLineList:{
-                        //             show:false,
-                        //             data:100,
-                        //         }
-                        //     },
-                        //     label: {
-                        //         isShow: true,
-                        //         position:'right'
-                        //     },
-                        //     xAxis:{
-                        //         axisLine:{
-                        //             show:false,
-                        //             color:'#3699FF'
-                        //         },
-                        //         axisLabel:{
-                        //             show:true,
-                        //             color:'#fff',
-                        //             fontSize:12
-                        //         },
-                        //         splitLine:{
-                        //             show:false,
-                        //             color:'#fff'
-                        //         },
-                        //     },
-                        //     yAxis:{
-                        //         axisLine:{
-                        //             show:false,
-                        //             color:'#fff'
-                        //         },
-                        //         axisLabel:{
-                        //             show:true,
-                        //             color:'#fff',
-                        //             fontSize:12
-                        //         },
-                        //         splitLine:{
-                        //             show:false,
-                        //             color:'#fff'
-                        //         },
-                        //     },
-                        //     legendShow:false,
-                        //     isShowMax:true,
-                        // }
-                        // _this.CommodityTurnoverRate = {
-                        //         productimg:require("../assets/img/dongxiao.png"),
-                        //         name:"商品动销率",
-                        //         RatePin:_this.dataProcess(data.RatePin, 'percent').num+_this.dataProcess(data.RatePin, 'percent').unit, //动销率
-                        //         btn:"动销清单",
-                        //         produnarData
-                        // }
-                        // _this.CommodityRate = false
-                        // console.log(_this.CommodityTurnoverRate)
+                        let goodsChainVal = {
+                            name: "环比:",
+                            NoSales: _this.dataProcess(data.stock_sale_goods_cnt_mom, 'percent').num + _this.dataProcess(data.stock_sale_goods_cnt_mom, 'percent').unit
+                        }
+                        let goodsYearVal = {
+                            name: "同比:",
+                            NoSales: _this.dataProcess(data.stock_sale_goods_cnt_yoy, 'percent').num + _this.dataProcess(data.stock_sale_goods_cnt_yoy, 'percent').unit
+                        }
+                        let downGoods = {
+                            name:"销量增长商品数(个):",
+                            NoSales:data.sales_drop_goods_cnt,
+                            btn:"下滑商品"
+                        }
+                        let upGoods = {
+                            name:"销量下滑商品数(个):",
+                            NoSales: data.sales_raise_goods_cnt,
+                            btn:"增长商品"
+                        }
+
+                        _this.commoditydata = {
+                            commoditytitle:[
+                                goodsChainVal,
+                                goodsYearVal
+                            ],
+                            downGoods,
+                            upGoods,
+                            commodityname:"总商品数",
+                            name:"动销商品数",
+                            btn:"商品明细",
+                            RatePin:data.stock_sale_goods_cnt,
+                            commoditysum:data.goods_cnt,
+                            productimg: require("../assets/img/shangpinshu.png"),
+                        }
+                        //产品动销率树状图
+                        let barDataMonth = [
+                            _this.dataProcess(data.liby_stock_sale_rate, 'percent').num,_this.dataProcess(data.kispa_stock_sale_rate, 'percent').num,
+                            _this.dataProcess(data.cheerwin_stock_sale_rate, 'percent').num,_this.dataProcess(data.oral_stock_sale_rate, 'percent').num,
+                            _this.dataProcess(data.shengmei_stock_sale_rate, 'percent').num
+                        ]
+                        let Axiax = ['立白','好爸爸','超威','口腔','晟美']
+                        let produnarData = {
+                            config:{
+                                id: 'barIdProdun',
+                                unit:'%',
+                                xAxisData: Axiax,
+                                label: {
+                                    isShow: true
+                                },
+                                type: 'xAxis',
+                                barData: [
+                                    {
+                                        name: 'ABC',
+                                        data: barDataMonth,
+                                        color: '#fff',
+                                        barWidth: 11
+                                    },
+                                ],
+                                showType: 1,
+                                markLineList:{
+                                    show:false,
+                                    data:100,
+                                }
+                            },
+                            label: {
+                                isShow: true,
+                                position:'right'
+                            },
+                            xAxis:{
+                                axisLine:{
+                                    show:false,
+                                    color:'#3699FF'
+                                },
+                                axisLabel:{
+                                    show:true,
+                                    color:'#fff',
+                                    fontSize:12
+                                },
+                                splitLine:{
+                                    show:false,
+                                    color:'#fff'
+                                },
+                            },
+                            yAxis:{
+                                axisLine:{
+                                    show:false,
+                                    color:'#fff'
+                                },
+                                axisLabel:{
+                                    show:true,
+                                    color:'#fff',
+                                    fontSize:12
+                                },
+                                splitLine:{
+                                    show:false,
+                                    color:'#fff'
+                                },
+                            },
+                            legendShow:false,
+                            isShowMax:true,
+                        }
+                        _this.CommodityTurnoverRate = {
+                            productimg:require("../assets/img/dongxiao.png"),
+                            name:"商品动销率",
+                            RatePin:_this.dataProcess(data.stock_sale_rate, 'percent').num+_this.dataProcess(data.stock_sale_rate, 'percent').unit, //动销率
+                            btn:"动销清单",
+                            produnarData
+                        }
+                        _this.CommodityRate = false
+                        console.log(_this.CommodityTurnoverRate)
+                        console.log(_this.commoditydata)
                     },
                 )
             },
@@ -942,68 +974,26 @@
                     _this.NumberGoodsList = false
                 })
             },
-            //产品-动销商品数
-            getNumberMovingGoods() {
-                var _this = this
-                _this.NumberGoods = true
-                this.$http({
-                    url: _this.requestHttpUrl + '/NumberMovingGoods',
-                    method: 'POST',
-                    data: {
-                        dateTime: _this.currentDate
-                    }
-                }).then(function (res) {
-                        console.log(res)
-                        let data = res.data.data.data
-                        console.log(data)
-                    let goodsChainVal = {
-                        name: "环比:",
-                        NoSales: _this.dataProcess(data.chainval, 'percent').num + _this.dataProcess(data.chainval, 'percent').unit
-                    }
-                    let goodsYearVal = {
-                        name: "同比:",
-                        NoSales: _this.dataProcess(data.yearval, 'percent').num + _this.dataProcess(data.yearval, 'percent').unit
-                    }
-                    let downGoods = {
-                        name:"销量增长商品数(个):",
-                        NoSales:data.upGoods,
-                        btn:"下滑商品"
-                    }
-                    let upGoods = {
-                        name:"销量下滑商品数(个):",
-                        NoSales: data.downGoods,
-                        btn:"增长商品"
-                    }
-
-                          _this.commoditydata = {
-                            commoditytitle:[
-                                goodsChainVal,
-                                goodsYearVal
-                            ],
-                            downGoods,
-                            upGoods,
-                            commodityname:"总商品数",
-                            name:"动销商品数",
-                            btn:"商品明细",
-                             RatePin:data.NumberGoods,
-                            commoditysum:data.commoditysum,
-                            productimg: require("../assets/img/shangpinshu.png"),
-                    }
-                        _this.NumberGoods = false
-                        console.log(_this.commoditydata)
-                    },
-                )
-            },
-            //产品-动销商品数增长商品
+            //产品-动销商品数下滑商品
             getVariabilityUp() {
                 var _this = this
                 _this.NumberGoodsUpBar = true
+                var params = {
+                    "inputParam":{
+                        "data_mon":_this.currentDate,
+                        "data_type":"当月",
+                        "money_type":"下滑",
+                    },
+                    "outputCol":"dealer_id,data_mon,data_type,bo1,bo2,bo3,goods_id,money,money_lm,sub_money",
+                    "pageNum":1,
+                    "pageSize":1000,
+                    "whereCndt":{"dealer_id":"='ff8080816b82b53d016bbb1bd5746d71'"},
+                    "serviceId":"service_tjbg02_goods_sales_change"
+                }
                 this.$http({
                     url: _this.requestHttpUrl + '/variabilityUp',
                     method: 'POST',
-                    data: {
-                        dateTime: _this.currentDate
-                    }
+                    data: params
                 }).then(function (res) {
                     var VariabilityUpData = res.data.data,
                         xAxisData=[],
@@ -1030,16 +1020,26 @@
 
                 })
             },
-            //产品-动销商品数下滑商品
+            //产品-动销商品数上升商品
             getVariabilityDown() {
                 var _this = this
                 _this.NumberGoodsDownBar = true
+                var params = {
+                    "inputParam":{
+                        "data_mon":_this.currentDate,
+                        "data_type":"当月",
+                        "money_type":"上升",
+                    },
+                    "outputCol":"dealer_id,data_mon,data_type,bo1,bo2,bo3,goods_id,money,money_lm,sub_money",
+                    "pageNum":1,
+                    "pageSize":1000,
+                    "whereCndt":{"dealer_id":"='ff8080816b82b53d016bbb1bd5746d71'"},
+                    "serviceId":"service_tjbg02_goods_sales_change"
+                }
                 this.$http({
                     url: _this.requestHttpUrl + '/variabilityDown',
                     method: 'POST',
-                    data: {
-                        dateTime: _this.currentDate
-                    }
+                    data: params
                 }).then(function (res) {
                     var VariabilityUpData = res.data.data,
                         xAxisData=[],
@@ -1070,6 +1070,17 @@
             getGoodsdetail() {
                 var _this = this
                 _this.NumberGoodsPie = true
+                var params = {
+                    "inputParam":{
+                        "data_mon":_this.currentDate,
+                        "data_type":"当月",
+                    },
+                    "outputCol":"dealer_id,data_mon,data_type,bo1,bo2,bo3,goods_id,money,ratio_rate,money_yoy,money_mom,gross_money_rate,gross_money_mom,gross_money_yoy",
+                    "pageNum":1,
+                    "pageSize":1000,
+                    "whereCndt":{"dealer_id":"='ff8080816b82b53d016bbb1bd5746d71'"},
+                    "serviceId":"service_tjbg02_goods_sales_dtl"
+                }
                 this.$http({
                     url: _this.requestHttpUrl + '/GoodsDetail',
                     method: 'POST',
@@ -1080,9 +1091,34 @@
                     var Goods = res.data.data;
                     _this.GoodsDetail = Goods;
                     _this.NumberGoodsPie = false
-                    console.log(   _this.GoodsDetail)
+                    console.log(_this.GoodsDetail)
                 })
             },
+            //产品-动销清单
+            getPinListing(){
+                var _this = this
+                var params = {
+                    "inputParam":{
+                        "data_mon":_this.currentDate,
+                        "data_type":"当月",
+                    },
+                    "outputCol":"dealer_id,data_mon,data_type,bo1_name,bo2_name,bo3_name,goods_name,order_qty,stock_qty,sale_rate",
+                    "pageNum":1,
+                    "pageSize":1000,
+                    "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                    "serviceId":"service_tjbg02_goods_stock_sales"
+                }
+                this.$http({
+                    url: _this.requestHttpUrl + '?v=PinListDetail',
+                    method: 'POST',
+                    data: params
+                }).then(function (res) {
+                    var PinList = res.data.data;
+                    _this.PinListDetail = PinList;
+                    console.log(_this.PinListDetail)
+                })
+            },
+
             //门店活跃明细
             getStoresDetailed() {
                 var _this = this
@@ -1374,6 +1410,20 @@
                 var _this = this
                 _this.stockAmount = true
                 _this.InventoryTurnover = true
+                var params = {
+                    "inputParam": {
+                        "data_mon":_this.currentDate,
+                        "data_type": "当月"
+                    },
+                    "isReturnTotalSize": "Y",
+                    "outputCol": "dealer_id,data_mon,data_type,money,qty,mon6_unsale_money,non6_unsale_qty,turnover_rate,saledays,saledays_mon,saledays_yoy,liby_saledays,kispa_saledays,cheerwin_saledays,shengmei_saledays,oral_saledays,wonderland_saledays",
+                    "pageNum": 1,
+                    "pageSize": 1000,
+                    "serviceId": "service_tjbg02_stock",
+                    "whereCndt": {
+                        "dealer_id": "='ff8080816a194910016a43b00eeb3a75'"
+                    }
+                }
                 this.$http({
                     url: _this.requestHttpUrl + '/inventoryDetail',
                     method: 'POST',
@@ -1415,6 +1465,18 @@
             getDaysAvailableStock() {
                 var _this = this
                 _this.DaysAvailableStock = true
+                var params = {
+                    "inputParam": {
+                        "data_mon":_this.currentDate,
+                        "data_type":"当月"
+                    },
+                    "isReturnTotalSize": "Y",
+                    "outputCol": "dealer_id,data_mon,data_type,bo1_name,bo2_name,bo3_name,goods_name,saledays",
+                    "pageNum": 1,
+                    "pageSize": 1000,
+                    "serviceId": "service_tjbg02_stock_saledays",
+                    "whereCndt": {"dealer_id":"='ff8080816a194910016a43b00eeb3a75'"}
+                }
                 this.$http({
                     url: _this.requestHttpUrl + '/DaysAvailableStock',
                     method: 'POST',
@@ -1521,6 +1583,8 @@
                     },
                 )
             },
+            
+
             //库存-库存可销天数走势图
             getmarketableDayChart() {
                 var _this = this

@@ -18,10 +18,10 @@
         </div>
         <core :coretype="'产品得分'" :coretext="87" :evaluate="'较好'"></core>
 
-        <upproductChart v-if="upShow" :trendChartClick="upClick"  :barEchartsData="barEchartsDataUp" :isShow="NumberGoodsDownBar"></upproductChart>  <!--下滑-->
-        <downproductChart v-if="downShow" :trendChartClick="downClick" :barEchartsData="barEchartsDataDown" :isShow="NumberGoodsUpBar"></downproductChart>  <!--增长-->
+        <upproductChart v-if="upShow" :trendChartClick="upClick"  :VariabilityUp="VariabilityUp" :isShow="NumberGoodsDownBar"></upproductChart>  <!--下滑-->
+        <downproductChart v-if="downShow" :trendChartClick="downClick" :VariabilityDown="VariabilityDown" :isShow="NumberGoodsUpBar"></downproductChart>  <!--增长-->
 
-        <productChartPie v-if="pieShow" :trendChartClick="pieClick" :pieEchartsData="pieEchartsData" :tableData="productTableData"
+        <productChartPie v-if="pieShow" :trendChartClick="pieClick" :GoodsDetailPie="GoodsDetailPie" :tableData="productTableData"
                         :NumberGoodsPie="NumberGoodsPie" :NumberGoodsList="NumberGoodsList"
         ></productChartPie>
         <!--<productList  v-if="listShow"  :trendChartClick="listClick" ></productList>-->
@@ -57,8 +57,9 @@
         data(){
             return{
                 goodsData:"",
-                lityUpData:{},
-                lityDownData:{},
+                VariabilityUp:this.VariabilityUpData,
+                VariabilityDown:this.VariabilityDownData,
+                GoodsDetailPie:this.GoodsDetail,
                 pieEchartsData:{},
                 barEchartsDataDown:{},
                 barEchartsDataUp:{},
@@ -111,82 +112,19 @@
         },
         watch:{
             GoodsDetail(val){
-                this.goodsData = val;
-                this.pieEchartsData = {
-                    config:{
-                        id:'pieEchartsId',
-                        unit:this.goodsData.name,
-                        colorList:['#66E3E2', '#89D6D7', '#8AD493', '#65BF6B',"#F2AB60","#F0D570","#8CA9F6","#AABBF7","#66D6FF","#9BDBEF","#61B8F6","#B4D8D0"],
-                        labelType:2,
-                        pieData:this.goodsData,
-                        radius:['80%', '5%'],
-                        borderWidth:0,
-                    },
-                    position:['50%','40%'],
-                    legendShow:true
-                }
+              this.GoodsDetailPie =val
             },
             VariabilityUpData(val){
-                console.log(val)
-                this.lityUpData = val;
-                this.barEchartsDataUp = {
-                    id:'barId',
-                    unit:'%',
-                    xAxisData:this.lityUpData.xAxisData,
-                    xAxis:{
-                        isShowLine:true,
-                        isShowSplit:false,
-                        axisLabelColor:'#0092FE',
-                    },
-                    yAxis:{
-                        isShowLine:true,
-                        isShowSplit:true,
-                        axisLabelColor:'#0092FE',
-                    },
-                    label:{
-                        isShow:false
-                    },
-                    type:'xAxis',
-                    barData:this.lityUpData.seriesData,
-                    showType:0,//0横过来 1竖起来
-                    markLineList:{
-                        show:false
-                    }
-                }
+               this.VariabilityUp = val
             },
             VariabilityDownData(val){
-                console.log(val)
-                this.lityDownData = val;
-                this.barEchartsDataDown = {
-                    id:'barId',
-                    unit:'%',
-                    xAxisData:this.lityDownData.xAxisData,
-                    xAxis:{
-                        isShowLine:true,
-                        isShowSplit:false,
-                        axisLabelColor:'#0092FE',
-                    },
-                    yAxis:{
-                        isShowLine:true,
-                        isShowSplit:true,
-                        axisLabelColor:'#0092FE',
-                    },
-                    label:{
-                        isShow:false
-                    },
-                    type:'xAxis',
-                    barData:this.lityDownData.seriesData,
-                    showType:0,//0横过来 1竖起来
-                    markLineList:{
-                        show:false
-                    }
-                }
+               this.VariabilityDown = val
             },
 
         },
         mounted() {
          // console.log(this.goodsData)
-          console.log(this.CommodityTurnoverRate)
+          console.log(this.VariabilityUpData)
         }
     }
 </script>
