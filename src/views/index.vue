@@ -19,8 +19,7 @@
         <salesman :salesmanData="salesmanData" :salesmanTrendData="salesmanTrendData" :salesmandownwardData="salesmandownwardData"
                   :salesmanReachedData="salesmanReachedData" :salesmanContributionData="salesmanContributionData" :isShow="salesmanReached"
                   :salesmanReachedBar="salesmanReachedBar" :salesmanContributionBar="salesmanContributionBar" :salesmandownwardBar="salesmandownwardBar"
-                  :salesmanTrendPie="salesmanTrendPie"
-        ></salesman>
+                  :salesmanTrendPie="salesmanTrendPie"></salesman>
         <!-- 商品 -->
         <productIndex :CommodityTurnoverRate="CommodityTurnoverRate"  :commoditydata="commoditydata" :GoodsDetail="GoodsDetail"
                       :VariabilityUpData="VariabilityUpData" :VariabilityDownData="VariabilityDownData" :productTableData="productTableData"
@@ -528,20 +527,32 @@
             getsalesman() {
                 var _this = this
                 _this.salesmanReached = true
+                var params = {
+                    "inputParam":
+                        {
+                            "data_mon":_this.currentDate,
+                            "data_type":"累计"
+                        },
+                    "outputCol":"dealer_id,data_mon,data_type,emp_rate,emp_avg_money,emp_cnt,emp_drop_cnt",
+                    "pageNum":1,
+                    "pageSize":1000,
+                    "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                    "serviceId":"service_tjbg02_emp"
+                }
                 this.$http({
-                    url: _this.requestHttpUrl + '/Salesman',
+                    url: _this.testRequestHttpUrl + '?v=salesman',
                     method: 'POST',
-                    data: {
-                        dateTime: _this.currentDate
-                    }
+                    data: params
                 }).then(function (res) {
-                    var salesmanData = res.data.data[0];
-                    salesmanData.reached = !salesmanData.reached ? '--' : _this.dataProcess(salesmanData.reached, 'percent', 1).num + '%';
-                    salesmanData.perCapitaOutput = !salesmanData.perCapitaOutput ? '--' : _this.dataProcess(salesmanData.perCapitaOutput, 'money').num;
-                    salesmanData.totalNumber = !salesmanData.totalNumber ? '--' : _this.dataProcess(salesmanData.totalNumber, 'day').num;
-                    salesmanData.declinePerformance = !salesmanData.declinePerformance ? '--' : _this.dataProcess(salesmanData.declinePerformance, 'day').num;
-                    _this.salesmanData = salesmanData;
-                    _this.salesmanReached = false
+                    if(res.data.code == '200'){
+                        var salesmanData = res.data.data.data[0];
+                        salesmanData.emp_rate = !salesmanData.emp_rate ? '--' : _this.dataProcess(salesmanData.emp_rate, 'percent', 1).num + '%'; //业务员达成
+                        salesmanData.emp_cnt = !salesmanData.emp_cnt ? '--' : _this.dataProcess(salesmanData.emp_cnt, 'day').num;   //总人数
+                        salesmanData.emp_avg_money = !salesmanData.emp_avg_money ? '--' : _this.dataProcess(salesmanData.emp_avg_money, 'money').num;  //人均产出
+                        salesmanData.emp_drop_cnt = !salesmanData.emp_drop_cnt ? '--' : _this.dataProcess(salesmanData.emp_drop_cnt, 'day').num;  //下滑人数
+                        _this.salesmanData = salesmanData;
+                        _this.salesmanReached = false
+                    }
                 })
             },
             //二帮卖-订单
