@@ -192,7 +192,6 @@
             this.getOverdueData()
             this.getsalesman()
             this.getsecondBand()
-            this.getProportio()
             this.getDaysAvailableStock()
             this.getinventoryDetail()
             this.getStoresDetailed()
