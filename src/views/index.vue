@@ -20,7 +20,7 @@
         <salesman :salesmanData="salesmanData" :salesmanTrendData="salesmanTrendData" :salesmandownwardData="salesmandownwardData"
                   :salesmanReachedData="salesmanReachedData" :salesmanContributionData="salesmanContributionData" :isShow="salesmanReached"
                   :salesmanReachedBar="salesmanReachedBar" :salesmanContributionBar="salesmanContributionBar" :salesmandownwardBar="salesmandownwardBar"
-                  :salesmanTrendPie="salesmanTrendPie"></salesman>
+                  :salesmanTrendPie="salesmanTrendPie" :ownwardExportData="ownwardExportData"></salesman>
         <!-- 商品 -->
         <productIndex :CommodityTurnoverRate="CommodityTurnoverRate"  :commoditydata="commoditydata" :GoodsDetail="GoodsDetail"
                       :prodownStoresData="prodownStoresData" :upproStoresData="upproStoresData" :productTableData="productTableData"
@@ -155,6 +155,12 @@
                 directionData:{}, //订单走势图
                 salesmanTrendData:{},  //业务员走势图
                 salesmandownwardData:{}, //业务员下滑
+                ownwardExportData:{
+                    tableHeaderTxt:'',
+                    tableHeaderKey:'',
+                    tableData:'',
+                    tableName:''
+                },
                 salesmanReachedData:{},  //业务员-达成
                 salesmanContributionData:{},//业务员-贡献
                 productTableData:'',//产品列表数据
@@ -737,7 +743,7 @@
                     "inputParam":
                         {
                             "data_mon":_this.currentDate,
-                            "data_type":"全年"
+                            "data_type":"13"
                         },
                     "outputCol":"dealer_id,data_mon,data_type,emp_name,emp_phone,emp_money,emp_target_money,emp_rate,emp_money_rate,gross_money,gross_rate",
                     "pageNum":1,
@@ -808,12 +814,13 @@
                     data: params
                 }).then(function (res) {
                     if(res.data.code == '200'){
-                        var salesmandownwardData = res.data.data.data,xAxisData=[],seriesData=[],lastMonth=[],sameMonth=[],difference=[],salesmandownwardObject={};
-                        salesmandownwardData.map(function(value){
+                        var salesmandownwardData = res.data.data.data,xAxisData=[],seriesData=[],lastMonth=[],sameMonth=[],difference=[],salesmandownwardObject={},exportData=[];
+                        salesmandownwardData.map(function(value,index){
                             xAxisData.push(value.emp_name);
                             lastMonth.push(value.money_lm)
                             sameMonth.push(value.money)
                             difference.push(value.dif_money)
+                            exportData.push({index:index+1,emp_name:value.emp_name,money:value.money,money_lm:value.money_lm,dif_money:value.dif_money})
                         })
                         seriesData.push({name:'上月销售额',data:lastMonth,color:'#009EE2',barWidth:20},{name:'本月销售额',data:sameMonth,color:'#E9A837',barWidth:20},{name:'销售差额',data:difference,color:'#00E2BF',barWidth:20})
                         salesmandownwardObject.xAxisData = xAxisData;
@@ -821,6 +828,13 @@
                         _this.salesmandownwardData = salesmandownwardObject
                         _this.salesmandownwardBar = false
                         console.log(_this.salesmandownwardData)
+
+                        _this.ownwardExportData = {
+                            tableHeaderTxt:['序号','业务员','本月销售额','上月销售额','销售差额'],
+                            tableHeaderKey:['index','emp_name','money','money_lm','dif_money'],
+                            tableData:exportData,
+                            tableName:'下滑业务员'
+                        }
                     }
                 })
             },
@@ -1129,12 +1143,15 @@
                         "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
                         "serviceId":"service_tjbg02_goods_sales_change"
                             }
+                    let keyValue = params.outputCol.split(',')
+                    let numArray = ['numberId']
+                    _this.tableHeaderKey = numArray.concat(keyValue)
                     _this.ProExportData.proraiseData = {
                         //下滑产品导出数据
                         tableHeaderTxt:['序号','商品编码','商品名称','上月销量（元）','当月销量（元）','差额（元）'],
-                        tableHeaderKey:params.outputCol,
                         tableData:'',
-                        tableName:'下滑商品'
+                        tableName:'下滑商品',
+                        tableHeaderKey:numArray.concat(keyValue)
                     }
                     return _this.$http({
                         url: _this.testRequestHttpUrl+'?v=variabilityDown',
@@ -1157,12 +1174,15 @@
                         "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
                         "serviceId":"service_tjbg02_goods_sales_change"
                     }
-                    _this.ProExportData.prodownData={
+                    let keyValue = params.outputCol.split(',')
+                    let numArray = ['numberId']
+                    _this.tableHeaderKey = numArray.concat(keyValue)
+                    _this.ProExportData.proraiseData = {
                         //增长产品导出数据
                         tableHeaderTxt:['序号','商品编码','商品名称','上月销量（元）','当月销量（元）','差额（元）'],
-                        tableHeaderKey:params.outputCol,
                         tableData:'',
-                        tableName:'增长商品'
+                        tableName:'增长商品',
+                        tableHeaderKey:numArray.concat(keyValue)
                     }
                     return _this.$http({
                         url: _this.testRequestHttpUrl+'?v=variabilityUp',
@@ -1189,7 +1209,7 @@
                                 raiseDifference.push(item.dif_money)
                             })
                             _this.ProExportData.proraiseData.tableData = proraiseList
-                            console.log( _this.ProExportData.proraiseData.tableData)
+                            console.log( _this.ProExportData.proraiseData)
                             //增长产品柱状图数据
                             let raiseBarData = {
                                 //id
@@ -1319,33 +1339,6 @@
                     console.log(_this.GoodsDetail)
                 })
             },
-
-            // //产品-动销清单
-            // getPinListing(){
-            //     var _this = this
-            //     var params = {
-            //         "inputParam":{
-            //             "data_mon":_this.currentDate,
-            //             "data_type":"当月",
-            //             "bo_typ":'品类'
-            //         },
-            //         "outputCol":"dealer_id,data_mon,data_type,bo1_name,bo2_name,bo3_name,goods_name,order_qty,stock_qty,sale_rate",
-            //         "pageNum":1,
-            //         "pageSize":1000,
-            //         "whereCndt":{"dealer_id":"='ff8080816a194910016a43b00eeb3a75'"},
-            //         "serviceId":"service_tjbg02_goods_stock_sales"
-            //     }
-            //     this.$http({
-            //         url: _this.testRequestHttpUrl + '?v=PinListDetail',
-            //         method: 'POST',
-            //         data: params
-            //     }).then(function (res) {
-            //         var PinList = res.data.data;
-            //         _this.PinListDetail = PinList;
-            //         console.log(_this.PinListDetail)
-            //     })
-            // },
-
             //门店模块概览
             getStoresDetailed() {
                 var _this = this
@@ -1781,7 +1774,7 @@
                 var params = {
                     "inputParam": {
                         "data_mon":"201907",
-                        "data_type":"全年"
+                        "data_type":"13"
                     },
                     "isReturnTotalSize": "Y",
                     "outputCol": "dealer_id,data_mon,data_type,money,qty,mon6_unsale_money,non6_unsale_qty,turnover_rate,saledays,saledays_mon,saledays_yoy,liby_saledays,kispa_saledays,cheerwin_saledays,shengmei_saledays,oral_saledays,wonderland_saledays",
@@ -1830,7 +1823,6 @@
                     console.log(_this.marketableDayChart)
                 })
             },
-
             //获取二级页面表格数据
             getDetailTableData(){
                 //门店数据列表数据

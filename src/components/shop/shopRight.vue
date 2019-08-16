@@ -145,7 +145,10 @@
         background:linear-gradient(90deg,rgba(251,112,67,1),rgba(252,79,153,1));
     }
     .newButton{
-        margin-top: 11%;
+        margin-top: 7%;
+    }
+    .shopRight .shop-active:first-child{
+        margin-left: 3% !important;
     }
     .shopRight .shop-active:first-child .btn{
         display: none;

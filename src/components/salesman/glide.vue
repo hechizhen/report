@@ -7,9 +7,9 @@
 				  	下滑人员
 				  </a-Col>
 				  <a-Col :span="12" class="thendChartCol2">
-				  	单位：万元  <span @click="thendChartClick">
-						  <i class="iconfont icon-guanbi"></i>
-					  </span>
+				  	<div>单位：万元</div>
+					<div @click="thendChartClick('导出')">导出数据</div>
+				  	<span @click="thendChartClick('关闭')"><i class="iconfont icon-guanbi"></i></span>
 				  </a-Col>
 				</a-Row>
 			</div>
@@ -65,8 +65,8 @@
 		mounted () {
 		},
 		methods:{
-			thendChartClick(){
-				this.trendChartClick()
+			thendChartClick(a){
+				this.trendChartClick(a)
 			}
 		},
 		watch:{
@@ -145,6 +145,11 @@
 					color:rgba(51,51,51,1);
 					justify-content: flex-end;
 					padding-right: 10%;
+					div:nth-child(2) {
+						padding: 4px 20px;
+						border: 1px solid #ccc;
+						margin-left: 6%;
+					}
 					span {
 						position: absolute;
 						top: 8px;

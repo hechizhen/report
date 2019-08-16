@@ -157,7 +157,7 @@
             line-height: 26px;
             text-align: center;
             margin: auto;
-            margin-top: 10%;
+            margin-top: 20%;
 
         }
     }
@@ -165,7 +165,7 @@
         width: 70%;
         float: left;
       .shop-data-title {
-        width: 90%;
+        width: 80%;
         line-height: 41px;
         background:rgba(238,240,245,1);
         border-radius:6px;
@@ -189,7 +189,7 @@
         }
     }
       .shop-data-base{
-           width: 89%;
+           width: 79%;
             height: 12%;
             margin-top: 2%;
             margin-left: 8%;
