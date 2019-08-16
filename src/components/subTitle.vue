@@ -27,7 +27,7 @@
 				type:Array,
 				default:["订单详情"],
 			},
-			explicit:{
+			detailHandleClick:{
 				type:Function,
 			},
 			explainSecondList:{
@@ -41,8 +41,8 @@
 			}
 		},
 		methods:{
-			listingClick(a,b){
-				this.explicit(a,b)
+			listingClick(){
+				this.detailHandleClick()
 			}
 		}
 	}

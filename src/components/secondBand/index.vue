@@ -1,7 +1,7 @@
 <template>
 	<div class="bandSelling">
 		<secondTitle :titleName="titleName"></secondTitle>
-		<subTitle :subtitlename="subtitlename" :listing="listing" :explicit="explicit"  :explainSecondList="explainSecondList"></subTitle>
+		<subTitle :subtitlename="subtitlename" :listing="listing" :detailHandleClick="detailHandleClick"  :explainSecondList="explainSecondList"></subTitle>
 		<a-Row :gutter="23">
 		  <a-Col :span="10">
 		  	<sameMonth :orderAmountData="orderAmountData.thatMonth" :isShow="towHelpSaleMonthShow"></sameMonth>
@@ -20,6 +20,7 @@
 		  	</a-Row>
 		  </a-Col>
 		</a-Row>
+		<public-table v-if="isShowDetail" :close="closePopup" :tableHeader="tableData.header" :interfaceParams="tableData.params"></public-table>
 		<core :coretype="'二帮卖得分'" :coretext="100" :evaluate="'优秀'"></core>
 	</div>
 </template>
@@ -30,6 +31,7 @@
 	import totalAmount from "./totalAmount.vue"
 	import core from "./../core.vue"
 	import trendChart from "./trendChart.vue"
+	import publicTable from '../base/publicTable.vue'
 	export default {
 		name:'index',
 		components:{
@@ -38,7 +40,8 @@
 			sameMonth,
 			totalAmount,
 			core,
-			trendChart
+			trendChart,
+			publicTable
 		},
 		props:{
 			orderAmountData:{
@@ -64,6 +67,9 @@
 			towHelpSaleMonthLineShow:{
 				type:Boolean,
 				default:false
+			},
+			tableData:{
+				type:Array
 			}
 		},
 		data(){
@@ -72,6 +78,7 @@
 				subtitlename:'订单',
 				listing:['订单详情'],
 				lineEchartsData:"",
+				isShowDetail:false,
 				explainSecondList:{
 					imgType:2,
 					tableData:[
@@ -92,11 +99,19 @@
 			}
 		},
 		mounted(){
-			
+		console.log(this.tableData)
 		},
 		methods:{
 			explicit(a,b){
 
+			},
+			//打开订单明细
+			detailHandleClick(){
+				this.isShowDetail = true
+			},
+			//关闭订单明细
+			closePopup(){
+				this.isShowDetail = false
 			},
 		},
 		computd:{

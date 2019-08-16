@@ -47,65 +47,62 @@
     import loadingData from '../base/loadingData'
     export default {
         name: "cententindex",
-        // props:["CommodityTurnoverRate","commoditydata","GoodsDetail","NumberGoods","CommodityRate",
-        //     "upproStoresData","prodownStoresData","productTableData","NumberGoodsDownBar","NumberGoodsUpBar",
-        //      "NumberGoodsPie","NumberGoodsList","tableData","exportData","homeChartHandleClick"],
              props:{
-                 CommodityTurnoverRate:{
+                 CommodityTurnoverRate:{   //商品动销率概览数据
+                     type:Array
+                 },
+                 commoditydata:{    //动销商品数概览数据
+                     type:Array
+                 },
+                 GoodsDetail:{      //商品饼图数据
                      type:Object
                  },
-                 commoditydata:{
+                 NumberGoods:{    //动销商品数概览加载效果
+                     type:Boolean
+                 },
+                 CommodityRate:{    //商品动销率概览加载效果
+                     type:Boolean
+                 },
+                 upproStoresData:{   //增长商品数据
                      type:Object
                  },
-                 GoodsDetail:{
+                 prodownStoresData:{   //下滑商品数据
                      type:Object
                  },
-                 NumberGoods:{
+                 productTableData:{   //产品-列表数据
+                     type:Array
+                 },
+                 NumberGoodsDownBar:{  //下滑商品加载效果
+                     type:Boolean
+                 },
+                 NumberGoodsUpBar:{  //增长商品加载效果
+                     type:Boolean
+                 },
+                 NumberGoodsPie:{   //饼图加载效果
+                     type:Boolean
+                 },
+                 NumberGoodsList:{   //动销商品数表格加载效果
+                     type:Array
+                 },
+                 tableData:{   //动销清单表格
+                     type:Array
+                 },
+                 exportData:{     //树状图导出数据
                      type:Object
                  },
-                 CommodityRate:{
-                     type:Object
-                 },
-                 upproStoresData:{
-                     type:Object
-                 },
-                 prodownStoresData:{
-                     type:Object
-                 },
-                 productTableData:{
-                     type:Object
-                 },
-                 NumberGoodsDownBar:{
-                     type:Object
-                 },
-                 NumberGoodsUpBar:{
-                     type:Object
-                 },
-                 NumberGoodsPie:{
-                     type:Object
-                 },
-                 NumberGoodsList:{
-                     type:Object
-                 },
-                 tableData:{
-                     type:Object
-                 },
-                 exportData:{
-                     type:Object
-                 },
-                 homeChartHandleClick:{
+                 homeChartHandleClick:{  //切换时间触发函数
                      type:Function
                  },
-                 homePageNumChange:{
+                 homePageNumChange:{    //切换时间触发函数
                      type:Function
                  },
-                 homeCheckValChange:{
+                 homeCheckValChange:{    //切换时间触发函数
                      type:Function
                  },
-                 homeExportClick:{
+                 homeExportClick:{   //切换时间触发函数
                      type:Function
                  },
-                 detailExport:{
+                 detailExport:{     //导出表格数据
                      type:Object
                  }
              },
@@ -158,27 +155,35 @@
             }
         },
         methods:{
+            //打开下滑树状图
             upraphy(){
                 this.upShow = true;
             },
+            //关闭下滑树状图
             upClick(){
                 this.upShow = false;
             },
+            //打开增长树状图
             downraphy(){
                 this.downShow = true;
             },
+            //关闭增长树状图
             downClick(){
                 this.downShow = false;
             },
+            //打开饼图
             pieraphy(){
                 this.pieShow = true;
             },
+            //关闭饼图
             pieClick(){
                 this.pieShow = false;
             },
+            //打开动销清单表格
             listClick(){
                 this.isShowDetail = true;
             },
+            //关闭动销清单表格
             listClicks(){
                 this.upShow = false;
             },

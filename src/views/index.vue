@@ -14,7 +14,8 @@
 
         <!-- 二帮卖分析-订单 -->
         <secondBand :orderAmountData="orderAmountData" :directionData="directionData" :towHelYoy="towHelYoy" :towHelProportion="towHelProportion"
-                    :towHelpSaleMonthShow="towHelpSaleMonthShow" :towHelpSaleMonthLineShow="towHelpSaleMonthLineShow" v-if="orderAmountData"></secondBand>
+                    :towHelpSaleMonthShow="towHelpSaleMonthShow" :towHelpSaleMonthLineShow="towHelpSaleMonthLineShow"
+                    :tableData="twoDetailTableData.getPinListing"  v-if="orderAmountData"></secondBand>
         <!-- 二帮卖分析-业务员 -->
         <salesman :salesmanData="salesmanData" :salesmanTrendData="salesmanTrendData" :salesmandownwardData="salesmandownwardData"
                   :salesmanReachedData="salesmanReachedData" :salesmanContributionData="salesmanContributionData" :isShow="salesmanReached"
@@ -32,7 +33,7 @@
         <!--门店-->
         <shopIndex  :StoresDetailed="StoresDetailed" v-if="StoresDetailed.length!=0 && storeDetailTableData!='' && upStoresData!=''"  :isShow="StoreisShow"
                     :upStoresData="upStoresData"  :downStoresData="downStoresData"  :downStoresBar="downStoresBar"   :upStoresBar="upStoresBar"
-                    :tableData="storeDetailTableData" :exportData="storeExportData" 
+                    :tableData="storeDetailTableData" :exportData="storeExportData"
         ></shopIndex>
          <!--库存-->
         <inventoryIndex  :inventoryDay="inventoryDay" :inventoryDetails="inventoryDetails" :marketableDayChart="marketableDayChart"
@@ -159,10 +160,12 @@
                 productTableData:'',//产品列表数据
                 //活跃门店二级表格数据
                 storeDetailTableData:'',
-                //财务模块二级表格数据
-                financeDetailTableData:'',
                 //产品清单二级表格数据
                 proDetailTableData:'',
+                //财务模块二级表格数据
+                financeDetailTableData:'',
+                //二帮卖订单列表数据
+                twoDetailTableData:'',
                 //库存明细二级表格数据
                 invDetailTableData:'',
                 //门店增长下滑导出数据
@@ -234,7 +237,6 @@
             this.getSalesmanReached()
             this.getProductTableData()
             this.getDetailTableData()
-            this.getPinListing()
         },
         computed: {
 
@@ -264,7 +266,6 @@
                 this.getSalesmanReached()
                 this.getProductTableData()
                 this.getDetailTableData()
-                this.getPinListing()
             },
             detailChartHandleClick(item){
                 console.log(item)
@@ -273,7 +274,7 @@
                 this.getProductExportData()
             },
             homeCheckValChange(item){
-                this.categoryName = item 
+                this.categoryName = item
                 this.getProductTableData()
                 this.getProductExportData()
             },
@@ -1106,7 +1107,7 @@
                         category:_this.categoryList
                     }
                     _this.NumberGoodsList = false
-                    console.log(_this.GoodsDetail)
+                    console.log(_this.productTableData)
                 })
             },
             //产品-产品下滑/增长商品
@@ -1288,19 +1289,15 @@
                 var _this = this
                 _this.NumberGoodsPie = true
                 var params = {
-                    "inputParam":
-                    {
+                    "inputParam":{
                         "data_mon":_this.currentDate,
                         "data_type":"当月",
-                        "bo_type":"品类"
+                        "bo_type":'品类'
                     },
-                    "outputCol":"  dealer_id,data_mon,data_type,bo1_name,bo2_name,bo3_name,goods_name,money,ratio_rate,money_mom,money_yoy,gross_rate,gross_money_yoy,gross_money_mom",
+                    "outputCol":"dealer_id,data_mon,data_type,bo1_name,bo2_name,bo3_name,goods_name,money,ratio_rate,money_mom,money_yoy,gross_rate,gross_money_yoy,gross_money_mom",
                     "pageNum":1,
                     "pageSize":1000,
                     "whereCndt":{"dealer_id":"='ff8080816a194910016a43b00eeb3a75'"},
-                    "groupByCol":["bo1_name","bo2_name"],
-                    // "whereCndt":{"dealer_id":"='ff8080816a194910016a43b00eeb3a75'","bo2_name":"='消杀类'"},
-                    // "groupByCol":["bo1_name","bo2_name","bo3_name","goods_name"],
                     "serviceId":"service_tjbg02_sales_order_dtl"
                 }
                 this.$http({
@@ -2064,7 +2061,7 @@
                                 "data_mon":_this.currentDate,
                                 "data_type":"当月",
                             },
-                            "outputCol":"dealer_id,data_mon,data_type,bo1,bo2,bo3,goods_name,money,ratio_rate,money_mom,money_yoy,gross_rate,gross_money_yoy,gross_money_mom",
+                            "outputCol":"bo1_name,bo2_name,bo2_money,ratio_rate,money_mom,money_yoy,gross_rate,gross_money_yoy,gross_money_mom",
                             "pageNum":1,
                             "pageSize":1000,
                             "whereCndt":{"dealer_id":"='ff8080816a194910016a43b00eeb3a75'"},
