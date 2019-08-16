@@ -122,8 +122,8 @@
                     coretext: '',
                     evaluate: ''
                 },
-                oneHelpSaleMonthShow:false,
-                oneHelpSaleYearShow:false,
+                oneHelpSaleMonthShow:false,  //一帮卖分析当月
+                oneHelpSaleYearShow:false,  //一帮卖分析年累计
                 towHelpSaleMonthShow:false,  //二帮卖当月
                 towHelpSaleMonthLineShow:false, //二帮卖当月走势图
                 towHelProportion:false,     //二帮卖占比
