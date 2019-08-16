@@ -4,20 +4,23 @@
 			<div class="title">
 			   <div class="titleborder"></div>
 			   <div class="titletext">当月</div>
-			   <div class="titleclick" @click="topographyClick">走势图</div>
 			</div>
 			<div class="record">
 				<a-Row class="recordConten">
-					<a-Col :span="14" class="recordLeft">
+					<a-Col :span="24" class="recordLeft">
 						<div><img style="margin-right:5px;" src="./../../assets/img/jine-icon.png">下单金额（万元）</div>
 						<div>(以创建订单日期统计)</div>
 						<div><span>￥</span>{{orderAmountData.moneyInteger}}<span>{{orderAmountData.moneyDecimal}}</span></div>
 					</a-Col>
-					<a-Col :span="10" class="recordRight">
-						<div><img src="./../../assets/img/jine.png">毛利额（万元）</div>
-						<div><span>￥</span>{{orderAmountData.gross_money}}</div>
-						<div><img src="./../../assets/img/maoli-icon.png">毛利率</div>
-						<div>{{orderAmountData.gross_money_rate}}</div>
+				</a-Row>
+			</div>
+			<div class="grossProfit">
+				<a-Row>
+					<a-Col :span="12" class="recordLeft">
+						<div><img src="./../../assets/img/jine.png">毛利额(万元)<span>￥</span>{{orderAmountData.gross_money}}</div>
+					</a-Col>
+					<a-Col :span="12" class="recordRight">
+						<div><img src="./../../assets/img/maoli-icon.png">毛利率<span>{{orderAmountData.gross_money_rate}}</span></div>
 					</a-Col>
 				</a-Row>
 			</div>
@@ -45,9 +48,6 @@
 			orderAmountData:{
 				type:Object,
 			},
-			topography:{
-				type:Function
-			},
 			isShow:{
 				type:Boolean,
 				default:false,
@@ -62,9 +62,6 @@
 
 		},
 		methods:{
-			topographyClick(){
-				this.topography()
-			}
 		},
 		watch:{
 			orderAmountData(val){
@@ -84,7 +81,7 @@
 		position: relative;
 		.sameMonthcontent {
 			width: 100%;
-			height: 545px;
+			height: 735px;
 			border:4px solid #00A6FF;
 			border-radius:10px;
 			padding: 0 20px;
@@ -157,41 +154,49 @@
 							}
 						}
 					}
-					.recordRight {
-						height: 100%;
+				}
+			}
+			.grossProfit {
+					.recordLeft {
+						height: 85px;
+						text-align: center;
+						padding-top: 30px;
 						div {
-							font-family:PingFangSC-Medium;
-							font-weight:500;
-							height: 25%;
-							display: flex;
-						    align-items: center;
-							color:rgba(152,162,180,1);
-							span {
-								font-size:12px;
-							}
-							img {
-								vertical-align:middle;
-								margin-right: 6px;
-							}
-						}
-						div:nth-child(1),
-						div:nth-child(3) {
-							margin-left: 20%;
-						}
-						div:nth-child(2),
-						div:nth-child(4) {
 							font-size:20px;
 							font-family:PingFangSC-Medium;
-							font-weight:bold;
+							font-weight:500;
 							color:rgba(51,51,51,1);
-						    justify-content: center;
+							span {
+								margin-left: 10px;
+								font-size:12px;
+								font-family:PingFangSC-Medium;
+								font-weight:bold;
+								color:rgba(51,51,51,1);
+							}
+						}
+					}
+					.recordRight {
+						height: 85px;
+						text-align: center;
+						padding-top: 30px;
+						div {
+							font-size:20px;
+							font-family:PingFangSC-Medium;
+							font-weight:500;
+							color:rgba(51,51,51,1);
+							span {
+								margin-left: 10px;
+								font-size:20px;
+								font-family:PingFangSC-Medium;
+								font-weight:500;
+								color:rgba(51,51,51,1);
+							}
 						}
 					}
 				}
-			}
 			.proportion {
 				width: 100%;
-				height: 345px;
+				height: 500px;
 				.proportion_title {
 					width: 100%;
 					height: 45px;
@@ -203,7 +208,7 @@
 				}
 				.proportion_echarts {
 					width: 100%;
-					height: 300px;
+					height: 400px;
 				}
 			}
 		}

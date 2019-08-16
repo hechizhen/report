@@ -659,8 +659,6 @@
                             {name:'晟美',value: _this.getHandle(secondBandData.shengmei_money,secondBandData.shengmei_money_ly,2)},
                             {name:'其他',value: _this.getHandle(secondBandData.other_money,secondBandData.other_money_ly,2)}]
                         _this.orderAmountData = {thatMonth:thatMonth,chainratio:chainratio,yearOnYear:yearOnYear}
-                        console.log('5555555555555555555555555555')
-                        console.log(_this.orderAmountData)
                         _this.towHelpSaleMonthShow = false
                         _this.towHelProportion = false
                         _this.towHelYoy = false
@@ -677,10 +675,12 @@
                             "data_mon":_this.currentDate,
                             "data_type":"全年"
                         },
+
                     "outputCol":"data_mon,dealer_id,data_type,dealer_code,dealer_name,money,liby_money,kispa_money,cheerwin_money,oral_money,shengmei_money,other_money,money_lm,liby_money_lm,kispa_money_lm,cheerwin_money_lm,oral_money_lm,shengmei_money_lm,other_money_lm,money_ly,liby_money_ly,kispa_money_ly,cheerwin_money_ly,oral_money_ly,shengmei_money_ly,other_money_ly,gross_money,gross_money_rate,gross_money_lm,gross_money_mom,gross_money_rate_mom,gross_money_ly,gross_money_yoy,gross_money_rate_yoy",
                     "pageNum":1,
                     "pageSize":1000,
-                    "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                    "groupByCol":["dealer_id","data_mon"],
+                    "whereCndt":{"dealer_id":"='ff8080816b82b53d016bbb1bd5746d71'"},
                     "serviceId":"service_tjbg02_sales_order"
                 }
                 this.$http({
@@ -713,6 +713,7 @@
                     "outputCol":"dealer_id,data_mon,data_type,emp_name,emp_phone,emp_money,emp_target_money,emp_rate,emp_money_rate,gross_money,gross_rate",
                     "pageNum":1,
                     "pageSize":1000,
+                    "groupByCol":["dealer_id","data_mon","emp_id"],
                     "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
                     "serviceId":"service_tjbg02_emp_rate"
                 }
@@ -766,7 +767,7 @@
                     "outputCol":"dealer_id,data_mon,data_type,emp_name,money,money_lm,dif_money",
                     "pageNum":1,
                     "pageSize":1000,
-                    "groupbyCol":['data_mon,dealer_id'],
+                    "groupByCol":["dealer_id","data_mon","emp_id"],
                     "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
                     "serviceId":"service_tjbg02_emp_drop"
                 }
@@ -805,6 +806,7 @@
                     "outputCol":"dealer_id,data_mon,data_type,emp_name,emp_phone,emp_money,emp_target_money,emp_rate,emp_money_rate,gross_money,gross_rate,dealer_money",
                     "pageNum":1,
                     "pageSize":1000,
+                    "groupByCol":["dealer_id","data_mon","emp_id"],
                     "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
                     "serviceId":"service_tjbg02_emp_rate"
                 }

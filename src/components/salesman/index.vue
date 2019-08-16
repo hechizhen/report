@@ -14,7 +14,7 @@
 	import subTitle from "./../subTitle.vue"
 	import manager from "./manager.vue"
 	import core from "./../core.vue"
-	import trendChart from "./../secondBand/trendChart.vue"
+	import trendChart from "./trendChart.vue"
 	import glide from "./glide.vue"
 	import contribution from "./contribution.vue"
 	export default {

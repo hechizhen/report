@@ -4,17 +4,23 @@
 		<subTitle :subtitlename="subtitlename" :listing="listing" :explicit="explicit"  :explainSecondList="explainSecondList"></subTitle>
 		<a-Row :gutter="23">
 		  <a-Col :span="10">
-		  	<sameMonth :orderAmountData="orderAmountData.thatMonth" :topography="topography" :isShow="towHelpSaleMonthShow"></sameMonth>
+		  	<sameMonth :orderAmountData="orderAmountData.thatMonth" :isShow="towHelpSaleMonthShow"></sameMonth>
 		  </a-Col>
-		  <a-Col :span="7">
-		  	<totalAmount :displayData="orderAmountData.chainratio" :isShow="towHelProportion"></totalAmount>
-		  </a-Col>
-		  <a-Col :span="7">
-		  	<totalAmount :displayData="orderAmountData.yearOnYear" :isShow="towHelYoy"></totalAmount>
+		  <a-Col :span="14">
+		  	<a-Row :gutter="20">
+		  		<a-Col :span="12">
+				  	<totalAmount :displayData="orderAmountData.chainratio" :isShow="towHelProportion"></totalAmount>
+				</a-Col>
+				<a-Col :span="12">
+				  	<totalAmount :displayData="orderAmountData.yearOnYear" :isShow="towHelYoy"></totalAmount>
+				</a-Col>
+				<a-Col :span="24">
+				  	<trendChart :lineEchartsData="lineEchartsData" :isShow="towHelpSaleMonthLineShow" v-if="lineEchartsData"></trendChart>
+				</a-Col>
+		  	</a-Row>
 		  </a-Col>
 		</a-Row>
 		<core :coretype="'二帮卖得分'" :coretext="100" :evaluate="'优秀'"></core>
-		<trendChart v-if="echartsShow" :trendChartClick="trendChartClick" :lineEchartsData="lineEchartsData" :isShow="towHelpSaleMonthLineShow"></trendChart>
 	</div>
 </template>
 <script>
@@ -65,8 +71,7 @@
 				titleName:'二帮卖分析',
 				subtitlename:'订单',
 				listing:['订单详情'],
-				echartsShow: false,
-				lineEchartsData:{},
+				lineEchartsData:"",
 				explainSecondList:{
 					imgType:2,
 					tableData:[
@@ -93,18 +98,13 @@
 			explicit(a,b){
 
 			},
-			topography(){
-				this.echartsShow = true;
-			},
-			trendChartClick(){
-				this.echartsShow = false;
-			}
 		},
 		computd:{
 
 		},
 		watch:{
             directionData(val){
+            	alert(1)
                 this.lineEchartsData = {
                     id:'lineIdBand',
                     xAxisData:val.monthArr,

@@ -4,10 +4,12 @@
 			<div class="title">
 				<a-Row class="thendChartRow">
 				  <a-Col :span="12" class="thendChartCol1">
-				  	订单走势图
+				  	走势图
 				  </a-Col>
 				  <a-Col :span="12" class="thendChartCol2">
-				  	单位：万元
+				  	单位：万元  <span @click="thendChartClick">
+						  <i class="iconfont icon-guanbi"></i>
+					  </span>
 				  </a-Col>
 				</a-Row>
 			</div>
@@ -62,42 +64,50 @@
 </script>
 <style lang="less" scoped>
 	.thendChart {
-		margin-top:24px;
-		height: 260px;
+		position: fixed;
+		left: 0px;
+		top: 0px;
+		z-index: 10;
+		height: 100%;
 		width: 100%;
+		display: flex;
+	    align-items: center;
+	    justify-content: center;
+		background-color: RGBA(69, 72, 90, 0.5);
 		.echarts {
-			height: 100%;
-			width: 100%;
+			height: 70%;
+			width: 80%;
 			background:rgba(255,255,255,1);
 			border-radius: 5px;
 			.title {
-				height: 15%;
+				height: 10%;
 				width: 100%;
 				.thendChartRow {
 					height: 100%;
 					width: 100%;
+					border-bottom: 1px solid rgba(210,210,210,1);
 				}
 				.thendChartCol1 {
 					height: 100%;
 					display: flex;
 					align-items: center;
 					padding-left: 4%;
-					font-size:16px;
-					font-family:PingFangSC-Regular;
-					font-weight:400;
-					color:rgba(51,51,51,1);
+					font-size:20px;
+					font-family:PingFangSC-Medium;
+					font-weight:500;
+					color:rgba(0,0,0,1);
 				}
 				.thendChartCol2 {
 					position: relative;
 					height: 100%;
 					display: flex;
 					align-items: center;
-					nt-size:14px;
+					font-size:16px;
 					font-family:PingFangSC-Regular;
 					font-weight:400;
 					color:rgba(51,51,51,1);
 					justify-content: flex-end;
-					padding-right: 5%;
+					padding-right: 10%;
 					span {
 						position: absolute;
 						top: 8px;
@@ -111,7 +121,7 @@
 				}
 			}
 			.lineEcharts {
-				height: 85%;
+				height: 90%;
 				width: 100%;
 			}
 		}
