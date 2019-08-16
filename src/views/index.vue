@@ -898,17 +898,17 @@
                         }
 
                         _this.commoditydata = {
-                            commoditytitle:[
+                            commoditytitle:[  //环比同比数据
                                 goodsChainVal,
                                 goodsYearVal
                             ],
-                            downGoods,
-                            upGoods,
+                            downGoods,  //销量增长商品数
+                            upGoods,   //销量下滑商品数
                             commodityname:"总商品数",
                             name:"动销商品数",
                             btn:"商品明细",
-                            RatePin:data.stock_sale_goods_cnt,
-                            commoditysum:data.goods_cnt,
+                            RatePin:data.stock_sale_goods_cnt,  //动销商品数
+                            commoditysum:data.goods_cnt,   //总商品数
                             productimg: require("../assets/img/shangpinshu.png"),
                         }
                         //产品动销率树状图
@@ -981,7 +981,7 @@
                         _this.CommodityTurnoverRate = {
                             productimg:require("../assets/img/dongxiao.png"),
                             name:"商品动销率",
-                            RatePin:_this.dataProcess(data.stock_sale_rate, 'percent').num+_this.dataProcess(data.stock_sale_rate, 'percent').unit, //动销率
+                            RatePin:_this.dataProcess(data.stock_sale_rate, 'percent').num+_this.dataProcess(data.stock_sale_rate, 'percent').unit, //商品动销率
                             btn:"动销清单",
                             produnarData
                         }
@@ -1667,7 +1667,7 @@
                         isShowMax:false,
                     }
                         _this.inventoryDetails = {
-                            noSalesDetail: [
+                            noSalesDetail: [  //6个月未销售商品金额,6个月未销售商品数
                                 SalesMoney,
                                 SalesSum
                             ],
@@ -1680,17 +1680,17 @@
                             turnover:_this.dataProcess(data.turnover_rate, 'day').num+'次',  //库存周转次数
                         }
                         _this.inventoryDay = {
-                        inventorycompare: [
+                        inventorycompare: [  //同比环比数据
                             Chain,
                             Year
                         ],
                         receivableAverage: '库存件数可销天数（天）  ',
-                        inventoryVal: _this.dataProcess(data.saledays, 'day').num,
+                        inventoryVal: _this.dataProcess(data.saledays, 'day').num,  //库存件数可销天数
                          inventoryBarData
                     }
                         _this.stockAmount = false
                         _this.InventoryTurnover = false
-                        _this.DaysAvailableStock = false
+                        _this.DaysAvailableStock = false   //库存加载页面效果
                         console.log(_this.inventoryDetails)
                         console.log(_this.inventoryDay.inventoryBarData)
                     },
