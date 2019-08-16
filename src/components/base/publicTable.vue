@@ -4,6 +4,11 @@
         <div class="publicBox">
             <loading-data :isShow="loadingShow"></loading-data>
             <div class="titleBox">
+                <div class="buttonGroup" v-if="buttonGroup.show">
+                    <a-radio-group :defaultValue="buttonGroup.list[0]" buttonStyle="solid" @change="changeDimension">
+                        <a-radio-button v-for="(item,index) in buttonGroup.list" :key="index" :value="item">{{item}}</a-radio-button>
+                    </a-radio-group>
+                </div>
                 <new-button :defaultVal="exportButton.defaultVal" :buttonType="exportButton.buttonType" :buttonHandleClick="exportHandleClick" style="margin-right:2%;"></new-button>
                 <new-button :defaultVal="returnButton.defaultVal" :buttonType="returnButton.buttonType" :buttonHandleClick="returnHandleClick"></new-button>
             </div>
@@ -31,6 +36,14 @@
             //关闭弹窗
             close:{
                 type:Function
+            },
+            //多维度单选
+            buttonGroup:{
+                type:Object,
+                default:()=>({
+                    show:false,
+                    list:['a','b','c']
+                })
             }
         },
         components : {
@@ -79,6 +92,12 @@
             onChange(pageNumber) {
                 this.pageNumber = pageNumber
                 this.newInterfaceParams.pageNum = this.pageNumber
+                this.getTableData()
+            },
+            //选择维度
+            changeDimension(item){
+                console.log(item.target.value)
+                this.newInterfaceParams.inputParam.bo_type = item.target.value
                 this.getTableData()
             },
             //点击关闭
@@ -187,6 +206,10 @@
             align-items: center;
             justify-content: flex-end;
             padding: 10px 0;
+            .buttonGroup{
+                position: absolute;
+                left:20px;
+            }
         }
         .buttonList{
             width:100%;
