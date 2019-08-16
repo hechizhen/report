@@ -49,6 +49,11 @@
                 type:Boolean,
                 default:true,
             },
+            //数据过滤模式
+            dataZoomShow:{
+                type:Boolean,
+                default:false
+            },
             //x轴数据
             xAxis:{
                 default: () => ({
@@ -152,12 +157,33 @@
                             fontSize:14
                         }
                     },
+                    dataZoom: [{
+                        show: _this.dataZoomShow,
+                        height: 12,
+                        xAxisIndex: [
+                            0
+                        ],
+                        bottom:'8%',
+                        start: 10,
+                        end: 90,
+                        handleIcon: 'path://M306.1,413c0,2.2-1.8,4-4,4h-59.8c-2.2,0-4-1.8-4-4V200.8c0-2.2,1.8-4,4-4h59.8c2.2,0,4,1.8,4,4V413z',
+                        handleSize: '110%',
+                        handleStyle:{
+                            color:"#d3dee5",
+
+                        },
+                        textStyle:{
+                            color:"#418eff"},
+                        borderColor:"#90979c"
+                        }, {
+                        type: "inside",
+                    }],
                     grid: {
                         top: 'middle',
                         left: '3%',
                         right: '4%',
                         bottom: '3%',
-                        height: '80%',
+                        height: '70%',
                         containLabel: true
                     },
                     xAxis: {
