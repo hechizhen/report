@@ -57,11 +57,11 @@
             <public-table v-if="isShowreceivable" :close="dealClosePopup" :tableHeader="tableData.getInvDayListing.header"
                           :buttonGroup="buttonGroup" :interfaceParams="tableData.getInvDayListing.params"></public-table>
              <!--折线图-->
-            <inventoryChart v-if="invechartsShow" :trendChartClick="trendChartClick" :lineEchartsData="lineEchartsData" :isShow="marketableDayLine"></inventoryChart>
+            <!-- <inventoryChart v-if="invechartsShow" :trendChartClick="trendChartClick" :lineEchartsData="marketableDayLine" :isShow="marketableDayLine"></inventoryChart> -->
     </div>
         <!--走势图line-->
         <div class="bartu">
-            <trendChart></trendChart>
+            <trendChart  :lineEchartsData="marketableDayChart" v-if="marketableDayChart.length != 0"></trendChart>
         </div>
     <core :coretype="'库存得分'" :coretext="87" :evaluate="'较好'"></core>
     </div>
@@ -76,7 +76,7 @@
     import  secondTitle from  '../secondTitle'
     import loadingData from '../base/loadingData'
     import publicTable from '../base/publicTable.vue'
-    import trendChart from  '../secondBand/trendChart'
+    import trendChart from  './trendChart'
     export default {
         name: "inventoryIndex",
         props:["inventoryDay","inventoryDetails","marketableDayChart","DaysAvailableStock","InventoryTurnover",

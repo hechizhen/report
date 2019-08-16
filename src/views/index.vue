@@ -35,7 +35,7 @@
          <!--库存-->
         <inventoryIndex  :inventoryDay="inventoryDay" :inventoryDetails="inventoryDetails" :marketableDayChart="marketableDayChart"
                          :DaysAvailableStock="DaysAvailableStock" :InventoryTurnover="InventoryTurnover" :stockAmount="stockAmount"
-                         :marketableDayLine="marketableDayLine"   v-if="inventoryDay.length!=0 " :tableData="invDetailTableData" > </inventoryIndex>
+                         :marketableDayLine="marketableDayLine"   v-if="inventoryDay.length!=0 && marketableDayChart.length != 0" :tableData="invDetailTableData" > </inventoryIndex>
         <!-- 财务 -->
         <finance :financeData="financeData" :receivableData="receivableData" :overDueData="overDueData" :titleName="financeTitle"
         v-if="financeData.length!=0 && receivableData.length!=0 && overDueData.length!=0" :isShow="financeIsShow"
@@ -1727,19 +1727,21 @@
                                 xAxisData.push(value.data_mon);
                             }
                         }
-                        if(salesmanArr.length==0){
-                            salesmanArr.push(value.emp_name);
-                        }else{
-                            if(salesmanArr.indexOf(value.emp_name) == -1){
-                                salesmanArr.push(value.emp_name);
-                            }
-                        }
                     })
+                    salesmanArr.push('立白','好爸爸','超威','口腔','晟美');
                     salesmanArr.map(function(value,index){
                         var tempObjecd = {name:value,color:salesmanColor[index]},tempArr = [];
                         salesmanTrendData.map(function(data){
-                            if(value == data.emp_name){
-                                tempArr.push(!data.emp_rate ? 0 : _this.dataProcess(data.emp_rate, 'percent').num)
+                            if(value == '立白'){
+                                tempArr.push(!data.liby_saledays ? 0 : _this.dataProcess(data.liby_saledays, 'day').num)
+                            }else if(value == '好爸爸'){
+                                tempArr.push(!data.kispa_saledays ? 0 : _this.dataProcess(data.kispa_saledays, 'day').num)
+                            }else if(value == '超威'){
+                                tempArr.push(!data.cheerwin_saledays ? 0 : _this.dataProcess(data.cheerwin_saledays, 'day').num)
+                            }else if(value == '口腔'){
+                                tempArr.push(!data.oral_saledays ? 0 : _this.dataProcess(data.oral_saledays, 'day').num)
+                            }else if(value == '晟美'){
+                                tempArr.push(!data.shengmei_saledays ? 0 : _this.dataProcess(data.shengmei_saledays, 'day').num)
                             }
                         })
                         tempObjecd.data = tempArr;

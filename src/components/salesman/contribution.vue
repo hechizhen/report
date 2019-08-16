@@ -22,11 +22,11 @@
 			</div>
 			<div class="lineEcharts">
 				<div style="height:100%;width:100%" v-if="isswitched">
-					<barEcharts :barEchartsData="salesmanReachedData" :barType="salesmanReachedData.barType"></barEcharts>
+					<barEcharts :barEchartsData="salesmanReachedData" :barType="salesmanReachedData.barType" :dataZoomShow="true"></barEcharts>
 					<loading-data :isShow="salesmanReachedBar"></loading-data>
 				</div>
 				<div style="height:100%;width:100%" v-if="!isswitched">
-					<barEcharts :barEchartsData="salesmanContributionData" :barType="salesmanContributionData.barType"></barEcharts>
+					<barEcharts :barEchartsData="salesmanContributionData" :barType="salesmanContributionData.barType" :dataZoomShow="true"></barEcharts>
 					<loading-data :isShow="salesmanContributionBar"></loading-data>
 				</div>
 			</div>
