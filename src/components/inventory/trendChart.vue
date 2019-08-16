@@ -72,7 +72,6 @@
 		},
 		watch:{
             lineEchartsData(val){
-            	alert(2)
                 this.direction = val;
             }
         },

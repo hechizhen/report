@@ -322,7 +322,7 @@
                         "outputCol":"data_mon,data_type,dealer_id,money,target_money,liby_money,liby_target_money,kispa_money,kispa_target_money,cheerwin_money,cheerwin_target_money,oral_money,oral_target_money,shengmei_money,shengmei_target_money,strategic_money,strategic_target_money",
                         "pageNum":1,
                         "pageSize":1000,
-                        "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                        "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
                         "serviceId":"service_tjbg01_sales"
                     }
                     return _this.$http({
@@ -342,7 +342,7 @@
                         "outputCol":"data_mon,data_type,dealer_id,money,target_money,liby_money,liby_target_money,kispa_money,kispa_target_money,cheerwin_money,cheerwin_target_money,oral_money,oral_target_money,shengmei_money,shengmei_target_money,strategic_money,strategic_target_money",
                         "pageNum":1,
                         "pageSize":1000,
-                        "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                        "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
                         "serviceId":"service_tjbg01_sales"
                     }
                     return _this.$http({
@@ -539,7 +539,7 @@
                         "pageNum": 1,
                         "pageSize": 1000,
                         "serviceId": "service_tjbg02_finace",
-                        "whereCndt": {"dealer_id":"='ff8080816a5a381e016a5dd9f23838b0'"}
+                        "whereCndt": {"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"}
                     }
                 this.$http({
                     url: _this.testRequestHttpUrl + '?v=finance',
@@ -594,7 +594,7 @@
                     "outputCol":"dealer_id,data_mon,data_type,emp_rate,emp_avg_money,emp_cnt,emp_drop_cnt,all_cnt",
                     "pageNum":1,
                     "pageSize":1000,
-                    "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                    "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
                     "serviceId":"service_tjbg02_emp"
                 }
                 this.$http({
@@ -629,7 +629,7 @@
                     "outputCol":"data_mon,dealer_id,data_type,dealer_code,dealer_name,money,liby_money,kispa_money,cheerwin_money,oral_money,shengmei_money,other_money,money_lm,liby_money_lm,kispa_money_lm,cheerwin_money_lm,oral_money_lm,shengmei_money_lm,other_money_lm,money_ly,liby_money_ly,kispa_money_ly,cheerwin_money_ly,oral_money_ly,shengmei_money_ly,other_money_ly,gross_money,gross_money_rate,gross_money_lm,gross_money_mom,gross_money_rate_mom,gross_money_ly,gross_money_yoy,gross_money_rate_yoy",
                     "pageNum":1,
                     "pageSize":1000,
-                    "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                    "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
                     "serviceId":"service_tjbg02_sales_order"
                 }
                 this.$http({
@@ -701,14 +701,14 @@
                     "inputParam":
                         {
                             "data_mon":_this.currentDate,
-                            "data_type":"全年"
+                            "data_type":'13'
                         },
 
                     "outputCol":"data_mon,dealer_id,data_type,dealer_code,dealer_name,money,liby_money,kispa_money,cheerwin_money,oral_money,shengmei_money,other_money,money_lm,liby_money_lm,kispa_money_lm,cheerwin_money_lm,oral_money_lm,shengmei_money_lm,other_money_lm,money_ly,liby_money_ly,kispa_money_ly,cheerwin_money_ly,oral_money_ly,shengmei_money_ly,other_money_ly,gross_money,gross_money_rate,gross_money_lm,gross_money_mom,gross_money_rate_mom,gross_money_ly,gross_money_yoy,gross_money_rate_yoy",
                     "pageNum":1,
                     "pageSize":1000,
                     "groupByCol":["dealer_id","data_mon"],
-                    "whereCndt":{"dealer_id":"='ff8080816b82b53d016bbb1bd5746d71'"},
+                    "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
                     "serviceId":"service_tjbg02_sales_order"
                 }
                 this.$http({
@@ -743,7 +743,7 @@
                     "pageNum":1,
                     "pageSize":1000,
                     "groupByCol":["dealer_id","data_mon","emp_id"],
-                    "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                    "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
                     "serviceId":"service_tjbg02_emp_rate"
                 }
                 this.$http({
@@ -799,7 +799,7 @@
                     "pageNum":1,
                     "pageSize":1000,
                     "groupByCol":["dealer_id","data_mon","emp_id"],
-                    "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                    "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
                     "serviceId":"service_tjbg02_emp_drop"
                 }
                 this.$http({
@@ -838,7 +838,7 @@
                     "pageNum":1,
                     "pageSize":1000,
                     "groupByCol":["dealer_id","data_mon","emp_id"],
-                    "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                    "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
                     "serviceId":"service_tjbg02_emp_rate"
                 }
                 this.$http({
@@ -895,7 +895,7 @@
                     "outputCol":"dealer_id,data_mon,data_type,stock_sale_rate,stock_sale_goods_cnt,goods_cnt,stock_sale_goods_cnt_mom,stock_sale_goods_cnt_yoy,sales_raise_goods_cnt,sales_drop_goods_cnt,liby_stock_sale_rate,kispa_stock_sale_rate,cheerwin_stock_sale_rate,oral_stock_sale_rate,shengmei_stock_sale_rate",
                     "pageNum":1,
                     "pageSize":1000,
-                    "whereCndt":{"dealer_id":"='ff8080816a194910016a43b00eeb3a75'"},
+                    "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
                     "serviceId":"service_tjbg02_goods"
                 }
                 this.$http({
@@ -1033,7 +1033,7 @@
                     "pageNum":_this.productPageNum,
                     "isReturnTotalSize": "Y",
                     "pageSize":_this.exportPageSize,
-                    "whereCndt":{"dealer_id":"='ff8080816a194910016a43b00eeb3a75'","bo2_name":"='"+_this.categoryName+"'"},
+                    "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'","bo2_name":"='"+_this.categoryName+"'"},
                     "groupByCol":["bo1_name","bo2_name","bo3_name","goods_name"],
                     "serviceId":"service_tjbg02_sales_order_dtl"
                 }
@@ -1076,7 +1076,7 @@
                     "pageNum":_this.productPageNum,
                     "isReturnTotalSize": "Y",
                     "pageSize":1000,
-                    "whereCndt":{"dealer_id":"='ff8080816a194910016a43b00eeb3a75'","bo2_name":"='"+_this.categoryName+"'"},
+                    "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'","bo2_name":"='"+_this.categoryName+"'"},
                     "groupByCol":["bo1_name","bo2_name","bo3_name","goods_name"],
                     "serviceId":"service_tjbg02_sales_order_dtl"
                 }
@@ -1126,7 +1126,7 @@
                         "outputCol":"bo1_name,goods_name,money_lm,money,dif_money",
                         "pageNum":1,
                         "pageSize":1000,
-                        "whereCndt":{"dealer_id":"='ff8080816afa1fe1016b0b2cb8b36354'"},
+                        "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
                         "serviceId":"service_tjbg02_goods_sales_change"
                             }
                     _this.ProExportData.proraiseData = {
@@ -1154,7 +1154,7 @@
                         "outputCol":"bo1_name,goods_name,money,money_lm,dif_money",
                         "pageNum":1,
                         "pageSize":1000,
-                        "whereCndt":{"dealer_id":"='ff8080816b5166a9016b53ad8ec324c9'"},
+                        "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
                         "serviceId":"service_tjbg02_goods_sales_change"
                     }
                     _this.ProExportData.prodownData={
@@ -1298,7 +1298,7 @@
                     "outputCol":"dealer_id,data_mon,data_type,bo1_name,bo2_name,bo3_name,goods_name,money,ratio_rate,money_mom,money_yoy,gross_rate,gross_money_yoy,gross_money_mom",
                     "pageNum":1,
                     "pageSize":1000,
-                    "whereCndt":{"dealer_id":"='ff8080816a194910016a43b00eeb3a75'"},
+                    "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
                     "serviceId":"service_tjbg02_sales_order_dtl"
                 }
                 this.$http({
@@ -1360,7 +1360,7 @@
                     "outputCol":"dealer_id,data_mon,data_type,active_store_cnt,active_store_cnt_mom,active_store_cnt_yoy,sale_drop_store_cnt,sale_raise_store_cnt,unsale_store_cnt,mon3_unsale_store_cnt,mon3_unsale_store_dept_money,close_store_dept_money,store_avg_money,store_cnt,new_store_cnt,active_store_rate,mon6_unsale_store_cnt",
                     "pageNum":1,
                     "pageSize":1000,
-                    "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                    "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
                     "serviceId":"service_tjbg02_store"
                 }
                 this.$http({
@@ -1471,7 +1471,7 @@
                         "outputCol":"emp_name,emp_phone,store_name,store_contact,store_phone,store_address,money,mon3_avg_m_money,dif_money",
                         "pageNum":1,
                         "pageSize":1000,
-                        "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                        "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
                         "serviceId":"service_tjbg02_store_sales_change"
                     }
                     _this.storeExportData.raiseData = {
@@ -1645,7 +1645,7 @@
                     "pageNum": 1,
                     "pageSize": 10,
                     "serviceId": "service_tjbg02_stock",
-                    "whereCndt": {"dealer_id":"='ff8080816a194910016a43b00eeb3a75'"}
+                    "whereCndt": {"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"}
                 }
                 this.$http({
                     url: _this.testRequestHttpUrl + '?v=inventoryDetail',
@@ -1788,7 +1788,7 @@
                     "pageNum": 1,
                     "pageSize": 10,
                     "serviceId": "service_tjbg02_stock",
-                    "whereCndt": {"dealer_id":"='ff8080816a194910016a43b00eeb3a75'"}
+                    "whereCndt": {"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"}
                 }
                 this.$http({
                     url: _this.testRequestHttpUrl + '?v=marketableDayChart',
@@ -1848,7 +1848,7 @@
                             "outputCol":"emp_name,emp_phone,store_name,store_contact,store_phone,money,money_rate,sale_goods_cnt,sale_goods_cnt_lm",
                             "pageNum":1,
                             "pageSize":100,
-                            "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                            "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
                             "serviceId":"service_tjbg02_store_active"
                         },
                         header:[
@@ -1876,7 +1876,7 @@
                             "outputCol":"emp_name,emp_phone,store_name,store_contact,store_phone,store_address,new_store_cnt",
                             "pageNum":1,
                             "pageSize":100,
-                            "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                            "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
                             "serviceId":"service_tjbg02_store_create"
                         },
                         header:[
@@ -1902,7 +1902,7 @@
                             "outputCol":"emp_name,emp_phone,store_name,store_contact,store_phone,store_address,last_order_time,last_order_money,unsale_days",
                             "pageNum":1,
                             "pageSize":100,
-                            "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                            "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
                             "serviceId":"service_tjbg02_store_unsale"
                         },
                         header:[
@@ -1930,7 +1930,7 @@
                             "outputCol":"emp_name,emp_phone,store_name,store_contact,store_phone,store_address,store_status,last_order_time,unsale_days,debt_money",
                             "pageNum":1,
                             "pageSize":100,
-                            "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                            "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
                             "serviceId":"service_tjbg02_store_unsale"
                         },
                         header:[
@@ -1961,7 +1961,7 @@
                             "outputCol":"bo1_name,bo2_name,order_qty,stock_qty,sale_rate",
                             "pageNum":1,
                             "pageSize":1000,
-                            "whereCndt":{"dealer_id":"='ff8080816a194910016a43b00eeb3a75'"},
+                            "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
                             "serviceId":"service_tjbg02_goods_stock_sales"
                         },
                         header:[
@@ -1988,7 +1988,7 @@
                             "pageNum": 1,
                             "pageSize": 10,
                             "serviceId": "service_tjbg02_stock_unsale",
-                            "whereCndt": {"dealer_id": "='ff8080816a194910016a43b00eeb3a75'"}
+                            "whereCndt": {"dealer_id": "='ff80808169c93eb80169d6a73cc02d04'"}
                         },
                         header: [
                             {txt: '序号', unit: false},
@@ -2013,7 +2013,7 @@
                             "pageNum": 1,
                             "pageSize": 10,
                             "serviceId": "service_tjbg02_stock_saledays",
-                            "whereCndt": {"dealer_id": "='ff8080816a194910016a43b00eeb3a75'"}
+                            "whereCndt": {"dealer_id": "='ff80808169c93eb80169d6a73cc02d04'"}
                         },
                         header: [
                             {txt: '序号', unit: false},
@@ -2038,7 +2038,7 @@
                             "pageNum": 1,
                             "pageSize": 100,
                             "serviceId": "service_tjbg02_finace_overdue_dtl",
-                            "whereCndt": {"dealer_id":"='ff8080816a5a381e016a5dd9f23838b0'"}
+                            "whereCndt": {"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"}
                         },
                         header:[
                             {txt:'序号',unit:false},
@@ -2065,7 +2065,7 @@
                             "outputCol":"bo1_name,bo2_name,bo2_money,ratio_rate,money_mom,money_yoy,gross_rate,gross_money_yoy,gross_money_mom",
                             "pageNum":1,
                             "pageSize":1000,
-                            "whereCndt":{"dealer_id":"='ff8080816a194910016a43b00eeb3a75'"},
+                            "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
                             "serviceId":"service_tjbg02_sales_order_dtl"
                         },
                         header:[
