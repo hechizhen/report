@@ -44,6 +44,10 @@
                     show:false,
                     list:['a','b','c']
                 })
+            },
+            //多维度单选点击
+            selectButtonClick:{
+                type:Function
             }
         },
         components : {
@@ -97,8 +101,7 @@
             //选择维度
             changeDimension(item){
                 console.log(item.target.value)
-                this.newInterfaceParams.inputParam.bo_type = item.target.value
-                this.getTableData()
+                this.selectButtonClick(item.target.value)
             },
             //点击关闭
             returnHandleClick(){
