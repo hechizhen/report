@@ -20,7 +20,7 @@
         <salesman :salesmanData="salesmanData" :salesmanTrendData="salesmanTrendData" :salesmandownwardData="salesmandownwardData"
                   :salesmanReachedData="salesmanReachedData" :salesmanContributionData="salesmanContributionData" :isShow="salesmanReached"
                   :salesmanReachedBar="salesmanReachedBar" :salesmanContributionBar="salesmanContributionBar" :salesmandownwardBar="salesmandownwardBar"
-                  :salesmanTrendPie="salesmanTrendPie"></salesman>
+                  :salesmanTrendPie="salesmanTrendPie" :ownwardExportData="ownwardExportData"></salesman>
         <!-- 商品 -->
         <productIndex :CommodityTurnoverRate="CommodityTurnoverRate"  :commoditydata="commoditydata" :GoodsDetail="GoodsDetail"
                       :prodownStoresData="prodownStoresData" :upproStoresData="upproStoresData" :productTableData="productTableData"
@@ -155,6 +155,12 @@
                 directionData:{}, //订单走势图
                 salesmanTrendData:{},  //业务员走势图
                 salesmandownwardData:{}, //业务员下滑
+                ownwardExportData:{
+                    tableHeaderTxt:'',
+                    tableHeaderKey:'',
+                    tableData:'',
+                    tableName:''
+                },
                 salesmanReachedData:{},  //业务员-达成
                 salesmanContributionData:{},//业务员-贡献
                 productTableData:'',//产品列表数据
@@ -701,7 +707,7 @@
                     "inputParam":
                         {
                             "data_mon":_this.currentDate,
-                            "data_type":"全年"
+                            "data_type":"13"
                         },
 
                     "outputCol":"data_mon,dealer_id,data_type,dealer_code,dealer_name,money,liby_money,kispa_money,cheerwin_money,oral_money,shengmei_money,other_money,money_lm,liby_money_lm,kispa_money_lm,cheerwin_money_lm,oral_money_lm,shengmei_money_lm,other_money_lm,money_ly,liby_money_ly,kispa_money_ly,cheerwin_money_ly,oral_money_ly,shengmei_money_ly,other_money_ly,gross_money,gross_money_rate,gross_money_lm,gross_money_mom,gross_money_rate_mom,gross_money_ly,gross_money_yoy,gross_money_rate_yoy",
@@ -737,7 +743,7 @@
                     "inputParam":
                         {
                             "data_mon":_this.currentDate,
-                            "data_type":"全年"
+                            "data_type":"13"
                         },
                     "outputCol":"dealer_id,data_mon,data_type,emp_name,emp_phone,emp_money,emp_target_money,emp_rate,emp_money_rate,gross_money,gross_rate",
                     "pageNum":1,
@@ -808,12 +814,13 @@
                     data: params
                 }).then(function (res) {
                     if(res.data.code == '200'){
-                        var salesmandownwardData = res.data.data.data,xAxisData=[],seriesData=[],lastMonth=[],sameMonth=[],difference=[],salesmandownwardObject={};
-                        salesmandownwardData.map(function(value){
+                        var salesmandownwardData = res.data.data.data,xAxisData=[],seriesData=[],lastMonth=[],sameMonth=[],difference=[],salesmandownwardObject={},exportData=[];
+                        salesmandownwardData.map(function(value,index){
                             xAxisData.push(value.emp_name);
                             lastMonth.push(value.money_lm)
                             sameMonth.push(value.money)
                             difference.push(value.dif_money)
+                            exportData.push({index:index+1,emp_name:value.emp_name,money:value.money,money_lm:value.money_lm,dif_money:value.dif_money})
                         })
                         seriesData.push({name:'上月销售额',data:lastMonth,color:'#009EE2',barWidth:20},{name:'本月销售额',data:sameMonth,color:'#E9A837',barWidth:20},{name:'销售差额',data:difference,color:'#00E2BF',barWidth:20})
                         salesmandownwardObject.xAxisData = xAxisData;
@@ -821,6 +828,13 @@
                         _this.salesmandownwardData = salesmandownwardObject
                         _this.salesmandownwardBar = false
                         console.log(_this.salesmandownwardData)
+
+                        _this.ownwardExportData = {
+                            tableHeaderTxt:['序号','业务员','本月销售额','上月销售额','销售差额'],
+                            tableHeaderKey:['index','emp_name','money','money_lm','dif_money'],
+                            tableData:exportData,
+                            tableName:'下滑业务员'
+                        }
                     }
                 })
             },
@@ -1760,7 +1774,7 @@
                 var params = {
                     "inputParam": {
                         "data_mon":"201907",
-                        "data_type":"全年"
+                        "data_type":"13"
                     },
                     "isReturnTotalSize": "Y",
                     "outputCol": "dealer_id,data_mon,data_type,money,qty,mon6_unsale_money,non6_unsale_qty,turnover_rate,saledays,saledays_mon,saledays_yoy,liby_saledays,kispa_saledays,cheerwin_saledays,shengmei_saledays,oral_saledays,wonderland_saledays",

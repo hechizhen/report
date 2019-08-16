@@ -14,9 +14,9 @@
 				  	</div>
 				  </a-Col>
 				  <a-Col :span="12" class="thendChartCol2">
-				  	单位：万元  <span @click="thendChartClick('关闭')">
-						  <i class="iconfont icon-guanbi"></i>
-					  </span>
+				  			<div>单位：万元</div>  
+				  			<div>导出数据</div>
+				  			<span @click="thendChartClick('关闭')"><i class="iconfont icon-guanbi"></i></span>
 				  </a-Col>
 				</a-Row>
 			</div>

@@ -6,8 +6,7 @@
 		<trendChart  v-if="echartsShow" :trendChartClick="trendChartClick" :lineEchartsData="direction" :isShow="salesmanTrendPie"></trendChart>
 		<glide  v-if="glideShow" :trendChartClick="glideClick" :salesmandownward="salesmandownward" :isShow="salesmandownwardBar"></glide>
 		<contribution   v-if="contributionShow" :trendChartClick="contributionClick" :salesmanReached="salesmanReached" :salesmanContribution="salesmanContribution"
-						:salesmanContributionBar="salesmanContributionBar"  :salesmanReachedBar="salesmanReachedBar"
-		></contribution>
+						:salesmanContributionBar="salesmanContributionBar"  :salesmanReachedBar="salesmanReachedBar"></contribution>
 	</div>
 </template>
 <script>
@@ -45,6 +44,10 @@
 				default:{}
 			},
 			salesmanContributionData:{
+				type:Object,
+				default:{}
+			},
+			ownwardExportData:{
 				type:Object,
 				default:{}
 			},
@@ -109,8 +112,13 @@
 				this.echartsShow = false;
 
 			},
-			glideClick(){
-				this.glideShow = false;
+			glideClick(a){
+				if(a == '关闭'){
+					this.glideShow = false;
+				}else {
+					console.log(this.ownwardExportData)
+					this.exportHandleClick(this.ownwardExportData.tableHeaderTxt,this.ownwardExportData.tableHeaderKey,this.ownwardExportData.tableData,this.ownwardExportData.tableName)	
+				}
 			},
 			contributionClick(a){
 				this.contributionShow = false;
