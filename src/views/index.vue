@@ -1059,12 +1059,12 @@
                         "whereCndt":{"dealer_id":"='ff8080816b5166a9016b53ad8ec324c9'"},
                         "serviceId":"service_tjbg02_goods_sales_change"
                             }
-                    _this.ProExportData.raiseData = {
-                        //下滑门店导出数据
+                    _this.ProExportData.proraiseData = {
+                        //下滑产品导出数据
                         tableHeaderTxt:['序号','商品编码','商品名称','上月销量（元）','当月销量（元）','差额（元）'],
                         tableHeaderKey:params.outputCol,
                         tableData:'',
-                        tableName:'下滑门店'
+                        tableName:'下滑商品'
                     }
                     return _this.$http({
                         url: _this.testRequestHttpUrl+'?v=variabilityDown',
@@ -1087,12 +1087,12 @@
                         "whereCndt":{"dealer_id":"='ff8080816b5166a9016b53ad8ec324c9'"},
                         "serviceId":"service_tjbg02_goods_sales_change"
                     }
-                    _this.ProExportData.downData={
+                    _this.ProExportData.prodownData={
                         //增长产品导出数据
                         tableHeaderTxt:['序号','商品编码','商品名称','上月销量（元）','当月销量（元）','差额（元）'],
                         tableHeaderKey:params.outputCol,
                         tableData:'',
-                        tableName:'下滑门店'
+                        tableName:'增长商品'
                     }
                     return _this.$http({
                         url: _this.testRequestHttpUrl+'?v=variabilityUp',
@@ -1118,7 +1118,7 @@
                                 raiseSameMonth.push(item.money_lm)
                                 raiseDifference.push(item.dif_money)
                             })
-                            _this.ProExportData.raiseData.tableData = proraiseList
+                            _this.ProExportData.proraiseData.tableData = proraiseList
                             //增长产品柱状图数据
                             let raiseBarData = {
                                 //id
@@ -1169,7 +1169,7 @@
                                 downSameMonth.push(item.money_lm)
                                 downDifference.push(item.dif_money)
                             })
-                            _this.ProExportData.downData.tableData = downList
+                            _this.ProExportData.prodownData.tableData = downList
                             //下滑产品柱状图数据
                             let downBarData = {
                                 //id
