@@ -79,8 +79,29 @@
     import trendChart from  './trendChart'
     export default {
         name: "inventoryIndex",
-        props:["inventoryDay","inventoryDetails","marketableDayChart","DaysAvailableStock","InventoryTurnover",
-            "stockAmount","marketableDayLine","tableData"],
+        props:{
+            inventoryDay:{   //库存主页面概览
+                type:Object
+            },
+            inventoryDetails:{   //库存主页面概览
+                type:Array
+            },
+            marketableDayChart:{    //库存走势图数据
+                type:Object
+            },
+            DaysAvailableStock:{      //库存可销天数加载效果
+                type:Boolean
+            },
+            InventoryTurnover:{        //库存周转次数加载效果
+                type:Boolean
+            },
+            stockAmount:{           //库存金额加载效果
+                type:Boolean
+            },
+            tableData:{
+                type:Array    //表格数据
+            },
+        },
         components:{
             inventoryCenten,
             inventoryDase,

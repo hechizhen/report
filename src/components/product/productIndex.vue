@@ -133,12 +133,12 @@
             },
             prodownStoresData(val){
                this.VariabilityDown = val
+                console.log(val)
             },
 
         },
         mounted() {
-         // console.log(this.goodsData)
-          console.log(this.tableData)
+            console.log(this.tableData)
             console.log(this.upproStoresData)
             console.log(this.prodownStoresData)
         }

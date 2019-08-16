@@ -32,7 +32,32 @@
     import loadingData from '../base/loadingData'
     export default {
         name: "shopIndex",
-        props:["StoresDetailed","upStoresData","downStoresData","isShow","downStoresBar","upStoresBar",'tableData',"exportData"],
+        props:{
+            StoresDetailed:{  //门店概览数据
+                type:Object
+            },
+            upStoresData:{  //增长bar数据
+                type:Array
+            },
+            downStoresData:{   //下滑bar数据
+                type:Array
+            },
+            // isShow:{
+            //     type:Object
+            // },
+            downStoresBar:{     //下滑bar加载效果
+                type:Boolean
+            },
+            upStoresBar:{     //下滑bar加载效果
+                type:Boolean
+            },
+            tableData:{     //表格数据
+                type:Array
+            },
+            exportData:{   //导出表格函数
+                type:Array
+            },
+        },
         data(){
             return{
                 titName:"门店",
