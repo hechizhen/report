@@ -340,7 +340,7 @@
     }
     .bartu{
         margin-top: 3%;
-        height:296px;
+        height:100%;
         background:rgba(255,255,255,1);
         border-radius:10px;
     }

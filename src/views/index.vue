@@ -1129,12 +1129,15 @@
                         "whereCndt":{"dealer_id":"='ff8080816afa1fe1016b0b2cb8b36354'"},
                         "serviceId":"service_tjbg02_goods_sales_change"
                             }
+                    let keyValue = params.outputCol.split(',')
+                    let numArray = ['numberId']
+                    _this.tableHeaderKey = numArray.concat(keyValue)
                     _this.ProExportData.proraiseData = {
                         //下滑产品导出数据
                         tableHeaderTxt:['序号','商品编码','商品名称','上月销量（元）','当月销量（元）','差额（元）'],
-                        tableHeaderKey:params.outputCol,
                         tableData:'',
-                        tableName:'下滑商品'
+                        tableName:'下滑商品',
+                        tableHeaderKey:numArray.concat(keyValue)
                     }
                     return _this.$http({
                         url: _this.testRequestHttpUrl+'?v=variabilityDown',
@@ -1157,12 +1160,15 @@
                         "whereCndt":{"dealer_id":"='ff8080816b5166a9016b53ad8ec324c9'"},
                         "serviceId":"service_tjbg02_goods_sales_change"
                     }
-                    _this.ProExportData.prodownData={
+                    let keyValue = params.outputCol.split(',')
+                    let numArray = ['numberId']
+                    _this.tableHeaderKey = numArray.concat(keyValue)
+                    _this.ProExportData.proraiseData = {
                         //增长产品导出数据
                         tableHeaderTxt:['序号','商品编码','商品名称','上月销量（元）','当月销量（元）','差额（元）'],
-                        tableHeaderKey:params.outputCol,
                         tableData:'',
-                        tableName:'增长商品'
+                        tableName:'增长商品',
+                        tableHeaderKey:numArray.concat(keyValue)
                     }
                     return _this.$http({
                         url: _this.testRequestHttpUrl+'?v=variabilityUp',
@@ -1189,7 +1195,7 @@
                                 raiseDifference.push(item.dif_money)
                             })
                             _this.ProExportData.proraiseData.tableData = proraiseList
-                            console.log( _this.ProExportData.proraiseData.tableData)
+                            console.log( _this.ProExportData.proraiseData)
                             //增长产品柱状图数据
                             let raiseBarData = {
                                 //id
