@@ -75,6 +75,13 @@
                 unit:"单位：万元",
                 isShowDetail:false,
                 isShowTrade:false,
+                buttonGroup:{
+                    type:Object,
+                    default:()=>({
+                        show:true,
+                        list:['品类','系列','商品']
+                    })
+                }
             }
         },
         components:{

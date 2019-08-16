@@ -867,7 +867,7 @@
                     "outputCol":"dealer_id,data_mon,data_type,stock_sale_rate,stock_sale_goods_cnt,goods_cnt,stock_sale_goods_cnt_mom,stock_sale_goods_cnt_yoy,sales_raise_goods_cnt,sales_drop_goods_cnt,liby_stock_sale_rate,kispa_stock_sale_rate,cheerwin_stock_sale_rate,oral_stock_sale_rate,shengmei_stock_sale_rate",
                     "pageNum":1,
                     "pageSize":1000,
-                    "whereCndt":{"dealer_id":"='ff8080816b82b53d016bbb1bd5746d71'"},
+                    "whereCndt":{"dealer_id":"='ff8080816afa1fe1016b0b2cb8b36354'"},
                     "serviceId":"service_tjbg02_goods"
                 }
                 this.$http({
@@ -1047,15 +1047,17 @@
                 //下滑产品数据
                 function getProDownData(){
                     var params = {
-                        "inputParam":{
-                            "data_mon":_this.currentDate,
-                            "data_type":"当月",
-                            "money_type":"下滑",
-                        },
-                        "outputCol":"dealer_id,data_mon,data_type,bo1,bo2,bo3,goods_id,money,money_lm,sub_money",
+                    "inputParam":{
+                        "data_mon":"201907",
+                        "data_type":"当月",
+                        "money_type":"下滑",
+                        "bo_type":"商品"
+                    }
+                    ,"outputCol":"dealer_id,data_mon,data_type,bo1_name,bo2_name,bo3_name,goods_name,money,money_lm,dif_money",
                         "pageNum":1,
                         "pageSize":1000,
-                        "whereCndt":{"dealer_id":"='ff8080816b82b53d016bbb1bd5746d71'"},
+                        "groupByCol":["dealer_id","data_mon"],
+                        "whereCndt":{"dealer_id":"='ff8080816b5166a9016b53ad8ec324c9'"},
                         "serviceId":"service_tjbg02_goods_sales_change"
                             }
                     _this.ProExportData.raiseData = {
@@ -1071,7 +1073,7 @@
                         data: params,
                     })
                 }
-                //增长门店数据
+                //增长产品数据
                 function getProRaiseData(){
                     var params = {
                         "inputParam":
@@ -1087,7 +1089,7 @@
                         "serviceId":"service_tjbg02_goods_sales_change"
                     }
                     _this.ProExportData.downData={
-                        //增长门店导出数据
+                        //增长产品导出数据
                         tableHeaderTxt:['序号','商品编码','商品名称','上月销量（元）','当月销量（元）','差额（元）'],
                         tableHeaderKey:params.outputCol,
                         tableData:'',
@@ -1103,7 +1105,7 @@
                     .then(this.$http.spread((proraiseData, prodownData) => {
                             console.log(proraiseData)
                             console.log(prodownData)
-                            //增长门店数据
+                            //增长产品数据
                             let proraiseList = proraiseData.data.data. data
                             console.log(proraiseList)
                             let raisexAxisData = []//增长门店x轴
@@ -1118,7 +1120,7 @@
                                 raiseDifference.push(item.sub_money)
                             })
                             _this.ProExportData.raiseData.tableData = proraiseList
-                            //增长门店柱状图数据
+                            //增长产品柱状图数据
                             let raiseBarData = {
                                 //id
                                 id:'barRaiseId',
@@ -1155,7 +1157,7 @@
                                 },
                             }
                             _this.upproStoresData = raiseBarData
-                            //下滑门店数据
+                            //下滑产品数据
                             let downList = prodownData.data.data.data
                             let downxAxisData = []//下滑门店x轴
                             let downLastMonth = []//下滑门店月平均销售额
@@ -1169,7 +1171,7 @@
                                 downDifference.push(item.sub_money)
                             })
                             _this.ProExportData.downData.tableData = downList
-                            //下滑门店柱状图数据
+                            //下滑产品柱状图数据
                             let downBarData = {
                                 //id
                                 id:'barDownId',
@@ -1218,14 +1220,14 @@
                 _this.NumberGoodsPie = true
                 var params = {
                     "inputParam":{
-                        "data_mon":_this.currentDate,
+                        "data_mon":'201907',
                         "data_type":"当月",
                         "bo_type":"商品",
                     },
                     "outputCol":"dealer_id,data_mon,data_type,bo1,bo2,bo3,goods_id,money,ratio_rate,money_yoy,money_mom,gross_money_rate,gross_money_mom,gross_money_yoy",
                     "pageNum":1,
                     "pageSize":1000,
-                    "whereCndt":{"dealer_id":"='ff8080816b82b53d016bbb1bd5746d71'"},
+                    "whereCndt":{"dealer_id":"='ff8080816a194910016a43b00eeb3a75'"},
                     "serviceId":"service_tjbg02_goods_sales_dtl"
                 }
                 this.$http({
@@ -1239,30 +1241,33 @@
                     console.log(_this.GoodsDetail)
                 })
             },
-            //产品-动销清单
-            getPinListing(){
-                var _this = this
-                var params = {
-                    "inputParam":{
-                        "data_mon":_this.currentDate,
-                        "data_type":"当月",
-                    },
-                    "outputCol":"dealer_id,data_mon,data_type,bo1_name,bo2_name,bo3_name,goods_name,order_qty,stock_qty,sale_rate",
-                    "pageNum":1,
-                    "pageSize":1000,
-                    "whereCndt":{"dealer_id":"='ff8080816a194910016a43b00eeb3a75'"},
-                    "serviceId":"service_tjbg02_goods_stock_sales"
-                }
-                this.$http({
-                    url: _this.testRequestHttpUrl + '?v=PinListDetail',
-                    method: 'POST',
-                    data: params
-                }).then(function (res) {
-                    var PinList = res.data.data;
-                    _this.PinListDetail = PinList;
-                    console.log(_this.PinListDetail)
-                })
-            },
+
+            // //产品-动销清单
+            // getPinListing(){
+            //     var _this = this
+            //     var params = {
+            //         "inputParam":{
+            //             "data_mon":_this.currentDate,
+            //             "data_type":"当月",
+            //             "bo_typ":'品类'
+            //         },
+            //         "outputCol":"dealer_id,data_mon,data_type,bo1_name,bo2_name,bo3_name,goods_name,order_qty,stock_qty,sale_rate",
+            //         "pageNum":1,
+            //         "pageSize":1000,
+            //         "whereCndt":{"dealer_id":"='ff8080816a194910016a43b00eeb3a75'"},
+            //         "serviceId":"service_tjbg02_goods_stock_sales"
+            //     }
+            //     this.$http({
+            //         url: _this.testRequestHttpUrl + '?v=PinListDetail',
+            //         method: 'POST',
+            //         data: params
+            //     }).then(function (res) {
+            //         var PinList = res.data.data;
+            //         _this.PinListDetail = PinList;
+            //         console.log(_this.PinListDetail)
+            //     })
+            // },
+
             //门店模块概览
             getStoresDetailed() {
                 var _this = this
@@ -1863,6 +1868,7 @@
                         ]
                     },
                 }
+                //产品数据列表数据
                 _this.proDetailTableData={
                     //产品动销清单明细
                     getPinListing:{
@@ -1870,6 +1876,7 @@
                             "inputParam":{
                                 "data_mon":_this.currentDate,
                                 "data_type":"当月",
+                                "bo_type":'品类'
                             },
                             "outputCol":"bo1_name,bo2_name,order_qty,stock_qty,sale_rate",
                             "pageNum":1,
@@ -1887,6 +1894,7 @@
                         ]
                     }
                 }
+                //库存数据列表数据
                 _this.invDetailTableData= {
                     //库存明细
                     getPinListing: {
@@ -1918,7 +1926,7 @@
                             "inputParam": {
                                 "data_mon": _this.currentDate,
                                 "data_type": "当月",
-                                "partition": "bo1_name"
+                                "partition": "bo2_name"
                             },
                             "isReturnTotalSize": "Y",
                             "outputCol": "bo1_name,bo2_name,saledays",
@@ -1964,6 +1972,37 @@
                             {txt:'逾期金额（元）',unit:'money'},
                         ]
                     },
+                }
+                    //二帮卖订单列表数据
+                _this.twoDetailTableData={
+                    //二帮卖订单明细
+                    getPinListing:{
+                        params : {
+                            "inputParam":{
+                                "data_mon":_this.currentDate,
+                                "data_type":"当月",
+                            },
+                            "outputCol":"dealer_id,data_mon,data_type,bo1,bo2,bo3,goods_name,money,ratio_rate,money_mom,money_yoy,gross_rate,gross_money_yoy,gross_money_mom",
+                            "pageNum":1,
+                            "pageSize":1000,
+                            "whereCndt":{"dealer_id":"='ff8080816a194910016a43b00eeb3a75'"},
+                            "serviceId":"service_tjbg02_sales_order_dtl"
+                        },
+                        header:[
+                            {txt:'序号',unit:false},
+                            {txt:'事业部',unit:false},
+                            {txt:'品类',unit:false},
+                            {txt:'品类下单金额（元）',unit:'money'},
+                            {txt:'占比',unit:'percent'},
+                            {txt:'环比',unit:'percent'},
+                            {txt:'同比',unit:'percent'},
+                            {txt:'毛利额（元）',unit:'percent'},
+                            {txt:'毛利率',unit:'percent'},
+                            {txt:'毛利额环比',unit:'percent'},
+                            {txt:'毛利额同比',unit:'percent'},
+
+                        ]
+                    }
                 }
 
             },

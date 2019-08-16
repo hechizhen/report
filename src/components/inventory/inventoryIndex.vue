@@ -54,7 +54,8 @@
             <!--库存明细-->
             <public-table v-if="isShowDetail" :close="closePopup" :tableHeader="tableData.getPinListing.header" :interfaceParams="tableData.getPinListing.params"></public-table>
            <!--库存可销天数-->
-            <public-table v-if="isShowreceivable" :close="dealClosePopup" :tableHeader="tableData.getInvDayListing.header" :interfaceParams="tableData.getInvDayListing.params"></public-table>
+            <public-table v-if="isShowreceivable" :close="dealClosePopup" :tableHeader="tableData.getInvDayListing.header"
+                          :buttonGroup="buttonGroup" :interfaceParams="tableData.getInvDayListing.params"></public-table>
              <!--折线图-->
             <inventoryChart v-if="invechartsShow" :trendChartClick="trendChartClick" :lineEchartsData="lineEchartsData" :isShow="marketableDayLine"></inventoryChart>
     </div>
@@ -100,6 +101,10 @@
                 isShowreceivable:false,
                 marketableDay:[],
                 defaultVal:"未销明细",
+                buttonGroup:{   //切换维度按钮
+                    show:true,
+                    list:['品类','系列','商品']
+                },
                 explainSecondList:{
                     imgType:6,
                     tableData:[
@@ -124,7 +129,6 @@
             //打开库存明细
             detailHandleClick(){
                 this.isShowDetail = true
-                alert(111)
             },
             //关闭库存明细
             closePopup(){
@@ -137,7 +141,6 @@
             //打开可销天数明细
             dealHandleClick(){
                 this.isShowreceivable = true
-                alert(111)
             }
         },
         watch:{

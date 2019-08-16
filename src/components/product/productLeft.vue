@@ -11,7 +11,9 @@
                 <newButton  :buttonType="buttonType"  :buttonHandleClick="storeDetailHandleClick"
                             :isGhost="true" :defaultVal="productdata.btn"></newButton>
             </div>
-            <public-table v-if="isShowDetail" :close="closePopup" :tableHeader="tableData.header" :interfaceParams="tableData.params"></public-table>
+            <public-table v-if="isShowDetail" :close="closePopup" :tableHeader="tableData.header" :interfaceParams="tableData.params"
+                            :buttonGroup="buttonGroup"
+            ></public-table>
         </div>
 </template>
 
@@ -25,6 +27,11 @@
             return{
                 buttonType:"default",
                 isShowDetail:false,
+                //多维度单选
+                buttonGroup:{
+                    show:true,
+                    list:['品类','系列','商品']
+                },
             }
         },
         methods:{
