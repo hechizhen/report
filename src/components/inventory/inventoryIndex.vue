@@ -54,13 +54,14 @@
             <!--库存明细-->
             <public-table v-if="isShowDetail" :close="closePopup" :tableHeader="tableData.getPinListing.header" :interfaceParams="tableData.getPinListing.params"></public-table>
            <!--库存可销天数-->
-            <public-table v-if="isShowreceivable" :close="dealClosePopup" :tableHeader="tableData.getInvDayListing.header" :interfaceParams="tableData.getInvDayListing.params"></public-table>
+            <public-table v-if="isShowreceivable" :close="dealClosePopup" :tableHeader="tableData.getInvDayListing.header"
+                          :buttonGroup="buttonGroup" :interfaceParams="tableData.getInvDayListing.params"></public-table>
              <!--折线图-->
-            <inventoryChart v-if="invechartsShow" :trendChartClick="trendChartClick" :lineEchartsData="lineEchartsData" :isShow="marketableDayLine"></inventoryChart>
+            <!-- <inventoryChart v-if="invechartsShow" :trendChartClick="trendChartClick" :lineEchartsData="marketableDayLine" :isShow="marketableDayLine"></inventoryChart> -->
     </div>
         <!--走势图line-->
         <div class="bartu">
-            <trendChart></trendChart>
+            <trendChart  :lineEchartsData="marketableDayChart" v-if="marketableDayChart.length != 0"></trendChart>
         </div>
     <core :coretype="'库存得分'" :coretext="87" :evaluate="'较好'"></core>
     </div>
@@ -75,11 +76,32 @@
     import  secondTitle from  '../secondTitle'
     import loadingData from '../base/loadingData'
     import publicTable from '../base/publicTable.vue'
-    import trendChart from  '../secondBand/trendChart'
+    import trendChart from  './trendChart'
     export default {
         name: "inventoryIndex",
-        props:["inventoryDay","inventoryDetails","marketableDayChart","DaysAvailableStock","InventoryTurnover",
-            "stockAmount","marketableDayLine","tableData"],
+        props:{
+            inventoryDay:{   //库存主页面概览
+                type:Object
+            },
+            inventoryDetails:{   //库存主页面概览
+                type:Array
+            },
+            marketableDayChart:{    //库存走势图数据
+                type:Object
+            },
+            DaysAvailableStock:{      //库存可销天数加载效果
+                type:Boolean
+            },
+            InventoryTurnover:{        //库存周转次数加载效果
+                type:Boolean
+            },
+            stockAmount:{           //库存金额加载效果
+                type:Boolean
+            },
+            tableData:{
+                type:Array    //表格数据
+            },
+        },
         components:{
             inventoryCenten,
             inventoryDase,
@@ -100,6 +122,10 @@
                 isShowreceivable:false,
                 marketableDay:[],
                 defaultVal:"未销明细",
+                buttonGroup:{   //切换维度按钮
+                    show:true,
+                    list:['品类','系列','商品']
+                },
                 explainSecondList:{
                     imgType:6,
                     tableData:[
@@ -124,7 +150,6 @@
             //打开库存明细
             detailHandleClick(){
                 this.isShowDetail = true
-                alert(111)
             },
             //关闭库存明细
             closePopup(){
@@ -137,7 +162,6 @@
             //打开可销天数明细
             dealHandleClick(){
                 this.isShowreceivable = true
-                alert(111)
             }
         },
         watch:{

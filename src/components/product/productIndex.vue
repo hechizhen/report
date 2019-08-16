@@ -211,6 +211,7 @@
             },
             prodownStoresData(val){
                this.VariabilityDown = val
+                console.log(val)
             },
         },
         mounted() {

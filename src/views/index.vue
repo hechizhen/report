@@ -37,7 +37,7 @@
          <!--库存-->
         <inventoryIndex  :inventoryDay="inventoryDay" :inventoryDetails="inventoryDetails" :marketableDayChart="marketableDayChart"
                          :DaysAvailableStock="DaysAvailableStock" :InventoryTurnover="InventoryTurnover" :stockAmount="stockAmount"
-                         :marketableDayLine="marketableDayLine"   v-if="inventoryDay.length!=0 " :tableData="invDetailTableData" > </inventoryIndex>
+                         :marketableDayLine="marketableDayLine"   v-if="inventoryDay.length!=0 && marketableDayChart.length != 0" :tableData="invDetailTableData" > </inventoryIndex>
         <!-- 财务 -->
         <finance :financeData="financeData" :receivableData="receivableData" :overDueData="overDueData" :titleName="financeTitle"
         v-if="financeData.length!=0 && receivableData.length!=0 && overDueData.length!=0" :isShow="financeIsShow"
@@ -604,7 +604,7 @@
                         var salesmanData = res.data.data.data[0];
                         salesmanData.emp_rate = !salesmanData.emp_rate ? '--' : _this.dataProcess(salesmanData.emp_rate, 'percent', 1).num + '%'; //业务员达成
                         salesmanData.emp_cnt = !salesmanData.emp_cnt ? '--' : _this.dataProcess(salesmanData.emp_cnt, 'day').num;   //业务员人数
-                        salesmanData.emp_avg_money = !salesmanData.emp_avg_money ? '--' : _this.dataProcess(salesmanData.emp_avg_money, 'money').num;  //人均产出
+                        salesmanData.emp_avg_money = !salesmanData.emp_avg_money ? '--' : _this.dataProcess(salesmanData.emp_avg_money, 'money','tenth').num;  //人均产出
                         salesmanData.emp_drop_cnt = !salesmanData.emp_drop_cnt ? '--' : _this.dataProcess(salesmanData.emp_drop_cnt, 'day').num;  //下滑人数
                         salesmanData.all_cnt = !salesmanData.all_cnt ? '--' : _this.dataProcess(salesmanData.all_cnt, 'day').num;  //下滑人数
                         _this.salesmanData = salesmanData;
@@ -638,7 +638,7 @@
                      if(res.data.code == '200'){
                         var secondBandData = res.data.data.data[0],thatMonth = {},chainratio = {},yearOnYear = {};
                         // 当月数据
-                        thatMonth.money = !secondBandData.money ? '--' : _this.dataProcess(secondBandData.money, 'money', 1).num;  //本月下单金额
+                        thatMonth.money = !secondBandData.money ? '--' : _this.dataProcess(secondBandData.money, 'money', 'tenth').num;  //本月下单金额
                         if(secondBandData.money){
                             thatMonth.moneyInteger = thatMonth.money.split(".")[0];   //本月下单金额整数部分
                             thatMonth.moneyDecimal = '.' + thatMonth.money.split(".")[1];//本月下单金额小数部分
@@ -646,7 +646,7 @@
                             thatMonth.moneyInteger = '--';   //本月下单金额整数部分
                             thatMonth.moneyDecimal = '--';//本月下单金额小数部分
                         }
-                        thatMonth.gross_money = !secondBandData.gross_money ? '--' : _this.dataProcess(secondBandData.gross_money, 'money', 1).num; //毛利额
+                        thatMonth.gross_money = !secondBandData.gross_money ? '--' : _this.dataProcess(secondBandData.gross_money, 'money','tenth').num; //毛利额
                         thatMonth.gross_money_rate = !secondBandData.gross_money_rate ? '--' : _this.dataProcess(secondBandData.gross_money_rate, 'percent').num + '%'; //毛利率
                         var list = [{name:'立白',value:!secondBandData.liby_money ? 0 : secondBandData.liby_money},
                             {name:'好爸爸',value:!secondBandData.kispa_money ? 0 : secondBandData.kispa_money},
@@ -906,11 +906,11 @@
                         console.log(data)
                         let goodsChainVal = {
                             name: "环比:",
-                            NoSales: _this.dataProcess(data.stock_sale_goods_cnt_mom, 'percent').num + _this.dataProcess(data.stock_sale_goods_cnt_mom, 'percent').unit
+                            NoSales: _this.getHandle(data.stock_sale_goods_cnt_mom, data.stock_sale_goods_cnt_mom,2)
                         }
                         let goodsYearVal = {
                             name: "同比:",
-                            NoSales: _this.dataProcess(data.stock_sale_goods_cnt_yoy, 'percent').num + _this.dataProcess(data.stock_sale_goods_cnt_yoy, 'percent').unit
+                            NoSales: _this.getHandle(data.stock_sale_goods_cnt_yoy,data.stock_sale_goods_cnt_yoy,2)
                         }
                         let downGoods = {
                             name:"销量增长商品数(个):",
@@ -924,17 +924,17 @@
                         }
 
                         _this.commoditydata = {
-                            commoditytitle:[
+                            commoditytitle:[  //环比同比数据
                                 goodsChainVal,
                                 goodsYearVal
                             ],
-                            downGoods,
-                            upGoods,
+                            downGoods,  //销量增长商品数
+                            upGoods,   //销量下滑商品数
                             commodityname:"总商品数",
                             name:"动销商品数",
                             btn:"商品明细",
-                            RatePin:data.stock_sale_goods_cnt,
-                            commoditysum:data.goods_cnt,
+                            RatePin:data.stock_sale_goods_cnt,  //动销商品数
+                            commoditysum:data.goods_cnt,   //总商品数
                             productimg: require("../assets/img/shangpinshu.png"),
                         }
                         //产品动销率树状图
@@ -1007,7 +1007,7 @@
                         _this.CommodityTurnoverRate = {
                             productimg:require("../assets/img/dongxiao.png"),
                             name:"商品动销率",
-                            RatePin:_this.dataProcess(data.stock_sale_rate, 'percent').num+_this.dataProcess(data.stock_sale_rate, 'percent').unit, //动销率
+                            RatePin:_this.dataProcess(data.stock_sale_rate, 'percent').num+_this.dataProcess(data.stock_sale_rate, 'percent').unit, //商品动销率
                             btn:"动销清单",
                             produnarData
                         }
@@ -1116,22 +1116,23 @@
                 function getProDownData(){
                     var params = {
                         "inputParam":{
-                            "data_mon":_this.currentDate,
+                            "data_mon":"201907",
                             "data_type":"当月",
                             "money_type":"下滑",
+                            "bo_type":"商品"
                         },
-                        "outputCol":"dealer_id,data_mon,data_type,bo1,bo2,bo3,goods_id,money,money_lm,sub_money",
+                        "outputCol":"dealer_id,data_mon,data_type,bo1_name,bo2_name,bo3_name,goods_name,money,money_lm,dif_money",
                         "pageNum":1,
                         "pageSize":1000,
                         "whereCndt":{"dealer_id":"='ff8080816afa1fe1016b0b2cb8b36354'"},
                         "serviceId":"service_tjbg02_goods_sales_change"
                             }
-                    _this.ProExportData.raiseData = {
-                        //下滑门店导出数据
+                    _this.ProExportData.proraiseData = {
+                        //下滑产品导出数据
                         tableHeaderTxt:['序号','商品编码','商品名称','上月销量（元）','当月销量（元）','差额（元）'],
                         tableHeaderKey:params.outputCol,
                         tableData:'',
-                        tableName:'下滑门店'
+                        tableName:'下滑商品'
                     }
                     return _this.$http({
                         url: _this.testRequestHttpUrl+'?v=variabilityDown',
@@ -1139,27 +1140,27 @@
                         data: params,
                     })
                 }
-                //增长门店数据
+                //增长产品数据
                 function getProRaiseData(){
                     var params = {
-                        "inputParam":
-                            {
-                                "data_mon":_this.currentDate,
-                                "money_type":"上升",
-                                "data_type":"当月"
-                            },
-                        "outputCol":"dealer_id,data_mon,data_type,bo1,bo2,bo3,goods_id,money,money_lm,sub_money",
+                        "inputParam":{
+                            "data_mon":"201907",
+                            "data_type":"当月",
+                            "money_type":"上升",
+                            "bo_type":"商品"
+                        },
+                        "outputCol":"dealer_id,data_mon,data_type,bo1_name,bo2_name,bo3_name,goods_name,money,money_lm,dif_money",
                         "pageNum":1,
                         "pageSize":1000,
-                        "whereCndt":{"dealer_id":"='ff8080816b82b53d016bbb1bd5746d71'"},
+                        "whereCndt":{"dealer_id":"='ff8080816b5166a9016b53ad8ec324c9'"},
                         "serviceId":"service_tjbg02_goods_sales_change"
                     }
-                    _this.ProExportData.downData={
-                        //增长门店导出数据
+                    _this.ProExportData.prodownData={
+                        //增长产品导出数据
                         tableHeaderTxt:['序号','商品编码','商品名称','上月销量（元）','当月销量（元）','差额（元）'],
                         tableHeaderKey:params.outputCol,
                         tableData:'',
-                        tableName:'下滑门店'
+                        tableName:'增长商品'
                     }
                     return _this.$http({
                         url: _this.testRequestHttpUrl+'?v=variabilityUp',
@@ -1171,7 +1172,7 @@
                     .then(this.$http.spread((proraiseData, prodownData) => {
                             console.log(proraiseData)
                             console.log(prodownData)
-                            //增长门店数据
+                            //增长产品数据
                             let proraiseList = proraiseData.data.data. data
                             console.log(proraiseList)
                             let raisexAxisData = []//增长门店x轴
@@ -1180,13 +1181,13 @@
                             let raiseDifference = []//增长门店差异销售额
                             proraiseList.map(function(item,index){
                                 item.numberId = index+1
-                                raisexAxisData.push(item.bo2)
+                                raisexAxisData.push(item.goods_name)
                                 raiseLastMonth.push(item.money)
                                 raiseSameMonth.push(item.money_lm)
-                                raiseDifference.push(item.sub_money)
+                                raiseDifference.push(item.dif_money)
                             })
-                            _this.ProExportData.raiseData.tableData = proraiseList
-                            //增长门店柱状图数据
+                            _this.ProExportData.proraiseData.tableData = proraiseList
+                            //增长产品柱状图数据
                             let raiseBarData = {
                                 //id
                                 id:'barRaiseId',
@@ -1223,7 +1224,7 @@
                                 },
                             }
                             _this.upproStoresData = raiseBarData
-                            //下滑门店数据
+                            //下滑产品数据
                             let downList = prodownData.data.data.data
                             let downxAxisData = []//下滑门店x轴
                             let downLastMonth = []//下滑门店月平均销售额
@@ -1231,13 +1232,13 @@
                             let downDifference = []//下滑门店差异销售额
                             downList.map(function(item,index){
                                 item.numberId = index+1
-                                downxAxisData.push(item.bo2)
+                                downxAxisData.push(item.goods_name)
                                 downLastMonth.push(item.money)
                                 downSameMonth.push(item.money_lm)
-                                downDifference.push(item.sub_money)
+                                downDifference.push(item.dif_money)
                             })
-                            _this.ProExportData.downData.tableData = downList
-                            //下滑门店柱状图数据
+                            _this.ProExportData.prodownData.tableData = downList
+                            //下滑产品柱状图数据
                             let downBarData = {
                                 //id
                                 id:'barDownId',
@@ -1318,30 +1319,33 @@
                     console.log(_this.GoodsDetail)
                 })
             },
-            //产品-动销清单
-            getPinListing(){
-                var _this = this
-                var params = {
-                    "inputParam":{
-                        "data_mon":_this.currentDate,
-                        "data_type":"当月",
-                    },
-                    "outputCol":"dealer_id,data_mon,data_type,bo1_name,bo2_name,bo3_name,goods_name,order_qty,stock_qty,sale_rate",
-                    "pageNum":1,
-                    "pageSize":1000,
-                    "whereCndt":{"dealer_id":"='ff8080816a194910016a43b00eeb3a75'"},
-                    "serviceId":"service_tjbg02_goods_stock_sales"
-                }
-                this.$http({
-                    url: _this.testRequestHttpUrl + '?v=PinListDetail',
-                    method: 'POST',
-                    data: params
-                }).then(function (res) {
-                    var PinList = res.data.data;
-                    _this.PinListDetail = PinList;
-                    console.log(_this.PinListDetail)
-                })
-            },
+
+            // //产品-动销清单
+            // getPinListing(){
+            //     var _this = this
+            //     var params = {
+            //         "inputParam":{
+            //             "data_mon":_this.currentDate,
+            //             "data_type":"当月",
+            //             "bo_typ":'品类'
+            //         },
+            //         "outputCol":"dealer_id,data_mon,data_type,bo1_name,bo2_name,bo3_name,goods_name,order_qty,stock_qty,sale_rate",
+            //         "pageNum":1,
+            //         "pageSize":1000,
+            //         "whereCndt":{"dealer_id":"='ff8080816a194910016a43b00eeb3a75'"},
+            //         "serviceId":"service_tjbg02_goods_stock_sales"
+            //     }
+            //     this.$http({
+            //         url: _this.testRequestHttpUrl + '?v=PinListDetail',
+            //         method: 'POST',
+            //         data: params
+            //     }).then(function (res) {
+            //         var PinList = res.data.data;
+            //         _this.PinListDetail = PinList;
+            //         console.log(_this.PinListDetail)
+            //     })
+            // },
+
             //门店模块概览
             getStoresDetailed() {
                 var _this = this
@@ -1661,11 +1665,11 @@
                         }
                         let Chain = {
                             name: '环比增长:',
-                            inventoryChainVal: _this.dataProcess(data.saledays_mon, 'percent').num + _this.dataProcess(data.saledays_mon, 'percent').unit,
+                            inventoryChainVal: _this.getHandle(data.saledays_mon, data.saledays_yoy,2)
                         }
                         let Year = {
                             name: '同比增长:',
-                            inventoryChainVal: _this.dataProcess(data.saledays_yoy, 'percent').num + _this.dataProcess(data.saledays_yoy, 'percent').unit,
+                            inventoryChainVal: _this.getHandle(data.saledays_yoy, data.saledays_yoy,2)
                         }
                         //产品动销率树状图
                         let barDataMonth = [
@@ -1741,7 +1745,7 @@
                         isShowMax:false,
                     }
                         _this.inventoryDetails = {
-                            noSalesDetail: [
+                            noSalesDetail: [  //6个月未销售商品金额,6个月未销售商品数
                                 SalesMoney,
                                 SalesSum
                             ],
@@ -1754,17 +1758,17 @@
                             turnover:_this.dataProcess(data.turnover_rate, 'day').num+'次',  //库存周转次数
                         }
                         _this.inventoryDay = {
-                        inventorycompare: [
+                        inventorycompare: [  //同比环比数据
                             Chain,
                             Year
                         ],
                         receivableAverage: '库存件数可销天数（天）  ',
-                        inventoryVal: _this.dataProcess(data.saledays, 'day').num,
+                        inventoryVal: _this.dataProcess(data.saledays, 'day').num,  //库存件数可销天数
                          inventoryBarData
                     }
                         _this.stockAmount = false
                         _this.InventoryTurnover = false
-                        _this.DaysAvailableStock = false
+                        _this.DaysAvailableStock = false   //库存加载页面效果
                         console.log(_this.inventoryDetails)
                         console.log(_this.inventoryDay.inventoryBarData)
                     },
@@ -1801,19 +1805,21 @@
                                 xAxisData.push(value.data_mon);
                             }
                         }
-                        if(salesmanArr.length==0){
-                            salesmanArr.push(value.emp_name);
-                        }else{
-                            if(salesmanArr.indexOf(value.emp_name) == -1){
-                                salesmanArr.push(value.emp_name);
-                            }
-                        }
                     })
+                    salesmanArr.push('立白','好爸爸','超威','口腔','晟美');
                     salesmanArr.map(function(value,index){
                         var tempObjecd = {name:value,color:salesmanColor[index]},tempArr = [];
                         salesmanTrendData.map(function(data){
-                            if(value == data.emp_name){
-                                tempArr.push(!data.emp_rate ? 0 : _this.dataProcess(data.emp_rate, 'percent').num)
+                            if(value == '立白'){
+                                tempArr.push(!data.liby_saledays ? 0 : _this.dataProcess(data.liby_saledays, 'day').num)
+                            }else if(value == '好爸爸'){
+                                tempArr.push(!data.kispa_saledays ? 0 : _this.dataProcess(data.kispa_saledays, 'day').num)
+                            }else if(value == '超威'){
+                                tempArr.push(!data.cheerwin_saledays ? 0 : _this.dataProcess(data.cheerwin_saledays, 'day').num)
+                            }else if(value == '口腔'){
+                                tempArr.push(!data.oral_saledays ? 0 : _this.dataProcess(data.oral_saledays, 'day').num)
+                            }else if(value == '晟美'){
+                                tempArr.push(!data.shengmei_saledays ? 0 : _this.dataProcess(data.shengmei_saledays, 'day').num)
                             }
                         })
                         tempObjecd.data = tempArr;
@@ -1942,6 +1948,7 @@
                         ]
                     },
                 }
+                //产品数据列表数据
                 _this.proDetailTableData={
                     //产品动销清单明细
                     getPinListing:{
@@ -1949,6 +1956,7 @@
                             "inputParam":{
                                 "data_mon":_this.currentDate,
                                 "data_type":"当月",
+                                "bo_type":'品类'
                             },
                             "outputCol":"bo1_name,bo2_name,order_qty,stock_qty,sale_rate",
                             "pageNum":1,
@@ -1966,6 +1974,7 @@
                         ]
                     }
                 }
+                //库存数据列表数据
                 _this.invDetailTableData= {
                     //库存明细
                     getPinListing: {
@@ -1997,7 +2006,7 @@
                             "inputParam": {
                                 "data_mon": _this.currentDate,
                                 "data_type": "当月",
-                                "partition": "bo1_name"
+                                "partition": "bo2_name"
                             },
                             "isReturnTotalSize": "Y",
                             "outputCol": "bo1_name,bo2_name,saledays",
@@ -2043,6 +2052,37 @@
                             {txt:'逾期金额（元）',unit:'money'},
                         ]
                     },
+                }
+                    //二帮卖订单列表数据
+                _this.twoDetailTableData={
+                    //二帮卖订单明细
+                    getPinListing:{
+                        params : {
+                            "inputParam":{
+                                "data_mon":_this.currentDate,
+                                "data_type":"当月",
+                            },
+                            "outputCol":"dealer_id,data_mon,data_type,bo1,bo2,bo3,goods_name,money,ratio_rate,money_mom,money_yoy,gross_rate,gross_money_yoy,gross_money_mom",
+                            "pageNum":1,
+                            "pageSize":1000,
+                            "whereCndt":{"dealer_id":"='ff8080816a194910016a43b00eeb3a75'"},
+                            "serviceId":"service_tjbg02_sales_order_dtl"
+                        },
+                        header:[
+                            {txt:'序号',unit:false},
+                            {txt:'事业部',unit:false},
+                            {txt:'品类',unit:false},
+                            {txt:'品类下单金额（元）',unit:'money'},
+                            {txt:'占比',unit:'percent'},
+                            {txt:'环比',unit:'percent'},
+                            {txt:'同比',unit:'percent'},
+                            {txt:'毛利额（元）',unit:'percent'},
+                            {txt:'毛利率',unit:'percent'},
+                            {txt:'毛利额环比',unit:'percent'},
+                            {txt:'毛利额同比',unit:'percent'},
+
+                        ]
+                    }
                 }
 
             },
