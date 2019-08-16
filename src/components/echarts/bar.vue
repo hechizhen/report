@@ -213,7 +213,7 @@
                     _this.yAxisData = _this.barEchartsData.xAxisData
                 }
                 if(_this.isShowMax){
-                    _this.intervalData = 10000
+                    _this.intervalData = 'max'
                 }else{
                     _this.intervalData = null
                 }
@@ -221,11 +221,11 @@
                     tooltip: {
                         trigger: 'axis',
                         formatter:function(params){
-                            console.log(params)
-                            if(params[0].value==''){
-                                params[0].value='--'
+                            var relVal = '';
+                            for (var i = 0; i < params.length; i++) {
+                                relVal += params[i].marker+params[i].seriesName+':'+params[i].value+'</br>'
                             }
-                            return params[0].name+':'+params[0].value+_this.barEchartsData.unit
+                            return relVal;
                         }
                     },
                     legend: {

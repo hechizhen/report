@@ -144,7 +144,8 @@
                         type: 'pie',
                         radius: _this.pieEchartsData.radius,
                         hoverAnimation: true,
-                        minAngle:25,
+                        minAngle:10,
+                        avoidLabelOverlap: true, //是否启用防止标签重叠策略
                         center: _this.position,
                         color: _this.pieEchartsData.colorList,
                         label: labelStyle,

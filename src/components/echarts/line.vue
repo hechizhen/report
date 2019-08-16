@@ -145,7 +145,14 @@
                 _this.legendList = legendList
                 var option = {
                     tooltip: {
-                        trigger: 'axis'
+                        trigger: 'axis',
+                        formatter:function(params){
+                            var relVal = '';
+                            for (var i = 0; i < params.length; i++) {
+                                relVal += params[i].marker+params[i].seriesName+':'+params[i].value+'</br>'
+                            }
+                            return relVal;
+                        }
                     },
                     legend: {
                         show:false,
