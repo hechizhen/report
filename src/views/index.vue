@@ -1121,7 +1121,7 @@
                             "money_type":"下滑",
                             "bo_type":"商品"
                         },
-                        "outputCol":"dealer_id,data_mon,data_type,bo1_name,bo2_name,bo3_name,goods_name,money,money_lm,dif_money",
+                        "outputCol":"bo1_name,goods_name,money_lm,money,dif_money",
                         "pageNum":1,
                         "pageSize":1000,
                         "whereCndt":{"dealer_id":"='ff8080816afa1fe1016b0b2cb8b36354'"},
@@ -1149,7 +1149,7 @@
                             "money_type":"上升",
                             "bo_type":"商品"
                         },
-                        "outputCol":"dealer_id,data_mon,data_type,bo1_name,bo2_name,bo3_name,goods_name,money,money_lm,dif_money",
+                        "outputCol":"bo1_name,goods_name,money,money_lm,dif_money",
                         "pageNum":1,
                         "pageSize":1000,
                         "whereCndt":{"dealer_id":"='ff8080816b5166a9016b53ad8ec324c9'"},
@@ -1187,6 +1187,7 @@
                                 raiseDifference.push(item.dif_money)
                             })
                             _this.ProExportData.proraiseData.tableData = proraiseList
+                            console.log( _this.ProExportData.proraiseData.tableData)
                             //增长产品柱状图数据
                             let raiseBarData = {
                                 //id
@@ -1238,6 +1239,7 @@
                                 downDifference.push(item.dif_money)
                             })
                             _this.ProExportData.prodownData.tableData = downList
+                            console.log( _this.ProExportData.prodownData.tableData)
                             //下滑产品柱状图数据
                             let downBarData = {
                                 //id

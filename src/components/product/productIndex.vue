@@ -19,12 +19,12 @@
         </div>
         <core :coretype="'产品得分'" :coretext="87" :evaluate="'较好'"></core>
 
-        <upproductChart v-if="upShow" :trendChartClick="upClick"  :VariabilityUp="VariabilityUp"
+        <downproductChart v-if="upShow" :trendChartClick="upClick"  :VariabilityUp="VariabilityUp"
                         :raiseExportData="exportData.raiseData"
-                        :isShow="NumberGoodsDownBar"></upproductChart>  <!--下滑-->
-        <downproductChart v-if="downShow" :trendChartClick="downClick" :VariabilityDown="VariabilityDown"
+                        :isShow="NumberGoodsDownBar"></downproductChart>  <!--下滑-->
+        <upproductChart v-if="downShow" :trendChartClick="downClick" :VariabilityDown="VariabilityDown"
                           :downExportData="exportData.downData"
-                          :isShow="NumberGoodsUpBar"></downproductChart>  <!--增长-->
+                          :isShow="NumberGoodsUpBar"></upproductChart>  <!--增长-->
 
         <productChartPie v-if="pieShow" :trendChartClick="pieClick" :GoodsDetailPie="GoodsDetailPie" :tableData="productTableData"
                         :NumberGoodsPie="NumberGoodsPie" :NumberGoodsList="NumberGoodsList" :pieChartHandleClick="IndexChartHandleClick"
@@ -41,8 +41,8 @@
     import  commodityRight from './commodityRight'
     import  dataTitle from '../dataTitle'
     import  core from  '../core'
-    import  upproductChart from  './upproductChart'
-    import  downproductChart from  './downproductChart'
+    import  downproductChart from  './upproductChart'
+    import  upproductChart from  './downproductChart'
     import  productChartPie  from  './productChartPie'
     import loadingData from '../base/loadingData'
     export default {

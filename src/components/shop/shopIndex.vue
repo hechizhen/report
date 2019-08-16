@@ -100,6 +100,7 @@
             loadingData
         },
         mounted(){
+            console.log(this.exportData)
             console.log(this.upStoresData)
             console.log(this.downStoresData)
         },
