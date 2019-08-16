@@ -104,7 +104,6 @@
 		},
 		watch:{
             directionData(val){
-            	alert(1)
                 this.lineEchartsData = {
                     id:'lineIdBand',
                     xAxisData:val.monthArr,
