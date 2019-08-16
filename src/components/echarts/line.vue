@@ -4,6 +4,12 @@
         <div :id="lineEchartsData.id" class="lineChart">
 
         </div>
+        <div v-if="legendShow" class="checkBoxList">
+            <!-- <a-checkbox-group @change="onChange">
+                <a-checkbox v-for="(item,index) in legendList" :key="index" :value="item">{{item}}</a-checkbox>
+            </a-checkbox-group> -->
+            <a-checkbox v-for="(item,index) in legendList" :key="index" :value="item" @change="onChange" :defaultChecked="true">{{item}}</a-checkbox>
+        </div>
     </div>
 </template>
 <script>
@@ -91,7 +97,7 @@
         },
         data () {
             return {
-
+                legendList:''
             }
         },
         mounted () {
@@ -105,6 +111,14 @@
             });
         },
         methods: {
+            //选择checkbox
+            onChange (checkedValues) {
+                console.log('checked = ', checkedValues)
+                this.myChart.dispatchAction({
+                    type:'legendToggleSelect',
+                    name:checkedValues.target.value
+                })
+            },
             setLineOptions(){
                 var _this = this
                 let seriesData = []
@@ -123,12 +137,13 @@
                         symbol: "circle",
                     })
                 })
+                _this.legendList = legendList
                 var option = {
                     tooltip: {
                         trigger: 'axis'
                     },
                     legend: {
-                        show:_this.legendShow,
+                        show:false,
                         data: legendList,
                         bottom: "5%",
                         itemGap: 50,
@@ -142,7 +157,7 @@
                         left: '3%',
                         right: '4%',
                         bottom: '3%',
-                        height: '75%',
+                        height: '80%',
                         containLabel: true
                     },
                     xAxis: {
@@ -229,7 +244,14 @@
         height:100%;
         .lineChart{
             width:100%;
-            height:100%;
+            height:90%;
+        }
+        .checkBoxList{
+            width:100%;
+            height:10%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
     }
 </style>
