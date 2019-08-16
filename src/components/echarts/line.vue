@@ -280,7 +280,7 @@
         height:100%;
         .lineChart{
             width:100%;
-            height:100%;
+            height:90%;
         }
         .checkBoxList{
             width:100%;
