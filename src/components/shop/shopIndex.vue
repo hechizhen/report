@@ -37,14 +37,14 @@
                 type:Object
             },
             upStoresData:{  //增长bar数据
-                type:Array
+                type:Object
             },
             downStoresData:{   //下滑bar数据
-                type:Array
+                type:Object
             },
-            // isShow:{
-            //     type:Object
-            // },
+            isShow:{
+                type:Boolean
+            },
             downStoresBar:{     //下滑bar加载效果
                 type:Boolean
             },
@@ -52,10 +52,10 @@
                 type:Boolean
             },
             tableData:{     //表格数据
-                type:Array
+                type:Object
             },
             exportData:{   //导出表格函数
-                type:Array
+                type:Object
             },
         },
         data(){

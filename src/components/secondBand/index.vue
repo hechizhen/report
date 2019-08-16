@@ -69,7 +69,7 @@
 				default:false
 			},
 			tableData:{
-				type:Array
+				type:Object
 			}
 		},
 		data(){

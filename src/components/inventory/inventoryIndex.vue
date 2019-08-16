@@ -84,7 +84,7 @@
                 type:Object
             },
             inventoryDetails:{   //库存主页面概览
-                type:Array
+                type:Object
             },
             marketableDayChart:{    //库存走势图数据
                 type:Object
@@ -99,7 +99,7 @@
                 type:Boolean
             },
             tableData:{
-                type:Array    //表格数据
+                type:Object     //表格数据
             },
         },
         components:{

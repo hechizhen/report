@@ -237,6 +237,7 @@
             this.getSalesmanReached()
             this.getProductTableData()
             this.getDetailTableData()
+
         },
         computed: {
 
@@ -888,13 +889,13 @@
                 _this.CommodityRate = true
                 var params = {
                     "inputParam":{
-                        "data_mon":"201907",
+                        "data_mon":_this.currentDate,
                         "data_type":"当月"
                     },
                     "outputCol":"dealer_id,data_mon,data_type,stock_sale_rate,stock_sale_goods_cnt,goods_cnt,stock_sale_goods_cnt_mom,stock_sale_goods_cnt_yoy,sales_raise_goods_cnt,sales_drop_goods_cnt,liby_stock_sale_rate,kispa_stock_sale_rate,cheerwin_stock_sale_rate,oral_stock_sale_rate,shengmei_stock_sale_rate",
                     "pageNum":1,
                     "pageSize":1000,
-                    "whereCndt":{"dealer_id":"='ff8080816afa1fe1016b0b2cb8b36354'"},
+                    "whereCndt":{"dealer_id":"='ff8080816a194910016a43b00eeb3a75'"},
                     "serviceId":"service_tjbg02_goods"
                 }
                 this.$http({

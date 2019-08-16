@@ -70,7 +70,7 @@
                      type:Object
                  },
                  productTableData:{   //产品-列表数据
-                     type:Array
+                     type:Object
                  },
                  NumberGoodsDownBar:{  //下滑商品加载效果
                      type:Boolean
@@ -82,10 +82,10 @@
                      type:Boolean
                  },
                  NumberGoodsList:{   //动销商品数表格加载效果
-                     type:Array
+                     type:Object
                  },
                  tableData:{   //动销清单表格
-                     type:Array
+                     type:Object
                  },
                  exportData:{     //树状图导出数据
                      type:Object
