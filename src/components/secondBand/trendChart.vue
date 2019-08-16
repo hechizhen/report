@@ -15,7 +15,7 @@
 				</a-Row>
 			</div>
 			<div class="lineEcharts">
-				<echartsline :lineEchartsData="direction"></echartsline>
+				<echartsline :lineEchartsData="direction"  :legendShow="false" :grid="grid" v-if="direction.length != 0"></echartsline>
 			</div>
 		</div>
 		<loading-data :isShow="isShow"></loading-data>
@@ -46,7 +46,14 @@
 		data(){
 			return {
 				direction:this.lineEchartsData,
-				// isShow:true
+				grid:{
+					top: '5%',
+                    left: '3%',
+                    right: '4%',
+                    bottom: '5%',
+                    // height: '100%',
+                    containLabel: true
+				}
 			}
 		},
 		mounted(){
@@ -85,6 +92,7 @@
 						display: flex;
 						align-items: center;
 						div:nth-child(1) {
+							margin-right: 5px;
 							width: 12px;
 						    height: 4px;
 						    background: #2d92fc;
@@ -96,7 +104,6 @@
 					height: 100%;
 					display: flex;
 					align-items: center;
-					margin-right: 5px;
 					font-size:16px;
 					font-family:PingFangSC-Regular;
 					font-weight:400;

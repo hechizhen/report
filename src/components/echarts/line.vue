@@ -96,6 +96,16 @@
                     },
                 })
             },
+            grid: {
+                default: () => ({
+                    top: 'middle',
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    height: '70%',
+                    containLabel: true
+                })
+            },
         },
         components : {
 
@@ -179,12 +189,12 @@
                         type: "inside",
                     }],
                     grid: {
-                        top: 'middle',
-                        left: '3%',
-                        right: '4%',
-                        bottom: '3%',
-                        height: '70%',
-                        containLabel: true
+                        top: _this.grid.top,
+                        left: _this.grid.left,
+                        right: _this.grid.right,
+                        bottom: _this.grid.bottom,
+                        height: _this.grid.height,
+                        containLabel: _this.grid.containLabel
                     },
                     xAxis: {
                         type: 'category',
@@ -270,7 +280,7 @@
         height:100%;
         .lineChart{
             width:100%;
-            height:90%;
+            height:100%;
         }
         .checkBoxList{
             width:100%;

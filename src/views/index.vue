@@ -633,7 +633,7 @@
                             colorList:['#365AF8','#FFC925','#7B8EFB','#34DF8E','#A3FC8A','#FF7C25'],
                             labelType:1,
                             pieData:list,
-                            radius:['35%', '70%'],
+                            radius:['50%', '70%'],
                             borderWidth:0,
                         }
                         // 环比数据
@@ -692,7 +692,7 @@
                     var directionData = res.data.data.data,monthArr = [],seriesData=[],directionArr = {};
                     directionData.map(function(value){
                         monthArr.push(value.data_mon)
-                        seriesData.push(value.money)
+                        seriesData.push((value.money/10000).toFixed(2))
                     })
                     directionArr.monthArr = monthArr;
                     directionArr.seriesData = seriesData;
