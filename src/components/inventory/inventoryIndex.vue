@@ -1,7 +1,8 @@
 <template>
     <div>
-    <second-title :titleName="inventoryTitle" :explainSecondList="explainSecondList"></second-title>
-    <div class="inventoryindex">
+        <second-title :titleName="inventoryTitle" :explainSecondList="explainSecondList"></second-title>
+        <!--库存概览-->
+        <div class="inventoryindex">
         <div style="width: 100%;height: 100%;">
         <div class="inventory-table">
             <div class="table-head">
@@ -39,19 +40,28 @@
                     </a-Row>
                 </div>
                 <div class="productLeft-btn">
-                    <newButton :defaultVal="defaultVal" :buttonHandleClick="storeDetailHandleClick" ></newButton>
+                    <newButton :defaultVal="defaultVal" :buttonHandleClick="detailHandleClick" ></newButton>
                 </div>
             </div>
             <loading-data :isShow="stockAmount"></loading-data>
         </div>
         <inventoryCenten :turnoverTxt="inventoryDetails.turnoverTxt" :turnover="inventoryDetails.turnover" :isShow="InventoryTurnover"></inventoryCenten>
         <inventoryDase v-if="inventoryDay.length!=0" :inventoryTxt="inventoryDay" :isShow="DaysAvailableStock"
-                       :invtopography="invtopography"  :barData="inventoryDay.inventoryBarData"
+                     :barData="inventoryDay.inventoryBarData"
+                       :dealHandleClick="dealHandleClick"
         ></inventoryDase>
         </div>
-        <public-table v-if="isShowDetail" :close="closePopup" :tableHeader="tableData.header" :interfaceParams="tableData.params"></public-table>
-        <inventoryChart v-if="invechartsShow" :trendChartClick="trendChartClick" :lineEchartsData="lineEchartsData" :isShow="marketableDayLine"></inventoryChart>
+            <!--库存明细-->
+            <public-table v-if="isShowDetail" :close="closePopup" :tableHeader="tableData.getPinListing.header" :interfaceParams="tableData.getPinListing.params"></public-table>
+           <!--库存可销天数-->
+            <public-table v-if="isShowreceivable" :close="dealClosePopup" :tableHeader="tableData.getInvDayListing.header" :interfaceParams="tableData.getInvDayListing.params"></public-table>
+             <!--折线图-->
+            <inventoryChart v-if="invechartsShow" :trendChartClick="trendChartClick" :lineEchartsData="lineEchartsData" :isShow="marketableDayLine"></inventoryChart>
     </div>
+        <!--走势图line-->
+        <div class="bartu">
+            <trendChart></trendChart>
+        </div>
     <core :coretype="'库存得分'" :coretext="87" :evaluate="'较好'"></core>
     </div>
 </template>
@@ -65,6 +75,7 @@
     import  secondTitle from  '../secondTitle'
     import loadingData from '../base/loadingData'
     import publicTable from '../base/publicTable.vue'
+    import trendChart from  '../secondBand/trendChart'
     export default {
         name: "inventoryIndex",
         props:["inventoryDay","inventoryDetails","marketableDayChart","DaysAvailableStock","InventoryTurnover",
@@ -77,7 +88,8 @@
             inventoryChart,
             secondTitle,
             loadingData,
-            publicTable
+            publicTable,
+            trendChart
         },
         data(){
             return{
@@ -85,8 +97,8 @@
                 inventoryTitle: '库存',//库存标题
                 invechartsShow: false,
                 isShowDetail:false,
+                isShowreceivable:false,
                 marketableDay:[],
-                lineEchartsData:{},
                 defaultVal:"未销明细",
                 explainSecondList:{
                     imgType:6,
@@ -105,77 +117,78 @@
                     titleName:'库存指标解释',
                     span:6,
                     span2:18
-                }
+                },
             }
         },
         methods:{
-            invtopography(){
-                this.invechartsShow = true;
-            },
-            trendChartClick(){
-                this.invechartsShow = false;
-            },
-            storeDetailHandleClick(){
+            //打开库存明细
+            detailHandleClick(){
                 this.isShowDetail = true
-                // alert(111)
+                alert(111)
             },
+            //关闭库存明细
             closePopup(){
                 this.isShowDetail = false
             },
+            //关闭可销天数明细
+            dealClosePopup(){
+                this.isShowreceivable = false
+            },
+            //打开可销天数明细
+            dealHandleClick(){
+                this.isShowreceivable = true
+                alert(111)
+            }
         },
         watch:{
-            marketableDayChart(val){
-                this.lineEchartsData = {
-                    id:'lineId',
-                    xAxisData:val.monthArr,
-                    lineData:val.seriesData
-                }
-            },
         },
          mounted() {
-               console.log(this.tableData)
+               console.log(this.marketableDayChart)
          }
     }
 </script>
 
 <style lang="less" scoped>
-.inventoryindex{
-    width: 100%;
-    height:210px;
-}
-.commodityR-base:nth-child(2) .ant-col-6{
-    padding-left: 2%;
-}
-.table-headtxt:last-child  .yuan{
-    display: none !important;
-}
-.inventory-table .table-dase .table-base:first-child span{
-    border-bottom: 1px solid rgba(229,229,229,1);
-    padding-bottom: 2%;
-}
-.table-headtxt-one{
-    text-align: center; height: 50%;display: flex;align-items: center;justify-content: center
-}
-.table-headtxt-two{
-    display: inline-block;width: 100%;text-align:center;height: 50%;
-}
-.inventory-table .table-head .table-headtxt:nth-child(2){
-    width: 49%;
-}
-.shu{
-    width:1px;
-    height:94px;
-    border:1px solid rgba(255,255,255,1);
-    float: right;
-    position: absolute;
-    right: 0;
-    bottom: 10%;
-}
-.onetxt{
-    text-align: left;
-    margin-left: 4%;
-    border-bottom: 1px solid #E5E5E5;
-}
+    .inventoryindex{
+        width: 100%;
+        height:210px;
+    }
+    .commodityR-base:nth-child(2) .ant-col-6{
+        padding-left: 2%;
+    }
+    .table-headtxt:last-child  .yuan{
+        display: none !important;
+    }
+    .inventory-table .table-dase .table-base:first-child span{
+        border-bottom: 1px solid rgba(229,229,229,1);
+        padding-bottom: 2%;
+    }
+    .table-headtxt-one{
+        text-align: center; height: 50%;display: flex;align-items: center;justify-content: center
+    }
+    .table-headtxt-two{
+        display: inline-block;width: 100%;text-align:center;height: 50%;
+    }
+    .inventory-table .table-head .table-headtxt:nth-child(2){
+        width: 49%;
+    }
+    .commodityR-base:nth-child(2) .ant-col-4{
+        padding-left: 2%;
+    }
+    .shu{
+        width:1px;
+        height:94px;
+        border:1px solid rgba(255,255,255,1);
+        float: right;
+        position: absolute;
+        right: 0;
+        bottom: 10%;
+    }
+    .onetxt{
+        text-align: left;
+        margin-left: 4%;
+        border-bottom: 1px solid #E5E5E5;
+    }
     .inventory-table{
         width: 35%;
         float: left;
@@ -258,50 +271,53 @@
                 }
         }
     }
-.commodityR-base {
-    width: 100%;
-    float: left;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    .ant-col-18{
-        font-size:14px;
-        font-family:PingFangSC-Medium;
-        font-weight:500;
-        color:rgba(51,51,51,1);
-        display: inline-block;
-        width: 70%;
-        line-height: 44px;
-    }
-    .ant-col-6{
-        line-height: 44px;
-        font-size:18px;
-        font-family:PingFangSC-Semibold;
-        font-weight:600;
-        margin-bottom: 0;
-        display: inline-block;
-        color:rgba(51,51,51,1);
-        border-bottom: 1px solid #E5E5E5;
-    }
-}
-.productLeft-btn {
-    width:25%;
-    height:88px;
-    float: left;
-    display:flex;
-    /*justify-content: center;//子元素水平居中*/
-    align-items: center;//子元素垂直居中
-    .newButton {
-        span {
-            width: 48px;
-            font-size: 14px;
-            font-family: PingFangSC-Regular;
-            font-weight: 600;
-            color: rgba(51, 51, 51, 1);
+    .commodityR-base {
+        width: 100%;
+        float: left;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .ant-col-18{
+            font-size:14px;
+            font-family:PingFangSC-Medium;
+            font-weight:500;
+            color:rgba(51,51,51,1);
+            display: inline-block;
+            width: 70%;
+            line-height: 44px;
+        }
+        .ant-col-6{
+            line-height: 44px;
+            font-size:18px;
+            font-family:PingFangSC-Semibold;
+            font-weight:600;
+            margin-bottom: 0;
+            display: inline-block;
+            color:rgba(51,51,51,1);
+            border-bottom: 1px solid #E5E5E5;
         }
     }
-}
-.commodityR-base:nth-child(2) .ant-col-4{
-    padding-left: 2%;
-}
+    .productLeft-btn {
+        width:25%;
+        height:88px;
+        float: left;
+        display:flex;
+        /*justify-content: center;//子元素水平居中*/
+        align-items: center;//子元素垂直居中
+        .newButton {
+            span {
+                width: 48px;
+                font-size: 14px;
+                font-family: PingFangSC-Regular;
+                font-weight: 600;
+                color: rgba(51, 51, 51, 1);
+            }
+        }
+    }
+    .bartu{
+        margin-top: 3%;
+        height:296px;
+        background:rgba(255,255,255,1);
+        border-radius:10px;
+    }
 </style>

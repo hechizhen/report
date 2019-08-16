@@ -2,8 +2,8 @@
     <div class="inventoryDase">
         <div class="inventoryDase-left">
             <div style="width: 100%; height: 16%; margin-top: 5%;">
-                <span style=" width: 60%;">{{inventoryTxt.receivableAverage}}</span>
-                <newButton :defaultVal="defaultVal"  :buttonHandleClick="buttonHandleClickinv"  ></newButton>
+                <span >{{inventoryTxt.receivableAverage}}</span>
+                <!--<newButton :defaultVal="defaultVal"  :buttonHandleClick="buttonHandleClickinv"  ></newButton>-->
             </div>
             <b>{{inventoryTxt.inventoryVal}}</b>
             <div class="left-txt">
@@ -20,7 +20,7 @@
             </div>
         <div class="inventoryDase-right">
             <div class="btn">
-                <newButton :defaultVal="defaultValdown" ></newButton>
+                <newButton :defaultVal="defaultValdown" :buttonHandleClick="dealHandleClick"></newButton>
             </div>
             <div class="bartu">
              <barChart :barEchartsData="barData.config" :xAxis="barData.xAxis"
@@ -43,7 +43,7 @@
             return{
                 defaultVal:"走势图",
                 defaultValdown:"库存详情",
-                // isShow:true,
+                isShowDetail:false,
             }
         },
         props:{
@@ -53,23 +53,21 @@
             barData:{
                 type: Object
             },
-            invtopography:{
-                type:Function
-            },
             isShow:{
                 type:Boolean,
                 default:false,
+            },
+            dealHandleClick:{
+                type:Function
             }
         },
         methods:{
-            buttonHandleClickinv(val){
-                this.invtopography()
-            },
+
         },
         components:{
             barChart,
             newButton,
-            loadingData
+            loadingData,
         },
         watch:{
 
@@ -110,7 +108,7 @@
             display: inline-block;
             font-size:14px;
             font-family:PingFangSC-Medium;
-            font-weight:500;
+            font-weight:600;
             color:rgba(51,51,51,1);
             height: 32px;
             line-height:32px;
