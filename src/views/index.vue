@@ -1325,33 +1325,6 @@
                     console.log(_this.GoodsDetail)
                 })
             },
-
-            // //产品-动销清单
-            // getPinListing(){
-            //     var _this = this
-            //     var params = {
-            //         "inputParam":{
-            //             "data_mon":_this.currentDate,
-            //             "data_type":"当月",
-            //             "bo_typ":'品类'
-            //         },
-            //         "outputCol":"dealer_id,data_mon,data_type,bo1_name,bo2_name,bo3_name,goods_name,order_qty,stock_qty,sale_rate",
-            //         "pageNum":1,
-            //         "pageSize":1000,
-            //         "whereCndt":{"dealer_id":"='ff8080816a194910016a43b00eeb3a75'"},
-            //         "serviceId":"service_tjbg02_goods_stock_sales"
-            //     }
-            //     this.$http({
-            //         url: _this.testRequestHttpUrl + '?v=PinListDetail',
-            //         method: 'POST',
-            //         data: params
-            //     }).then(function (res) {
-            //         var PinList = res.data.data;
-            //         _this.PinListDetail = PinList;
-            //         console.log(_this.PinListDetail)
-            //     })
-            // },
-
             //门店模块概览
             getStoresDetailed() {
                 var _this = this
@@ -1836,7 +1809,6 @@
                     console.log(_this.marketableDayChart)
                 })
             },
-
             //获取二级页面表格数据
             getDetailTableData(){
                 //门店数据列表数据
