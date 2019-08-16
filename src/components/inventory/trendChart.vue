@@ -54,9 +54,9 @@
            		},
 				grid:{
 					top: '5%',
-                    left: '3%',
-                    right: '4%',
-                    bottom: '0%',
+                    left: '1%',
+                    right: '1%',
+                    bottom: '1%',
                     // height: '100%',
                     containLabel: true
 				}
