@@ -578,7 +578,7 @@
                         var salesmanData = res.data.data.data[0];
                         salesmanData.emp_rate = !salesmanData.emp_rate ? '--' : _this.dataProcess(salesmanData.emp_rate, 'percent', 1).num + '%'; //业务员达成
                         salesmanData.emp_cnt = !salesmanData.emp_cnt ? '--' : _this.dataProcess(salesmanData.emp_cnt, 'day').num;   //业务员人数
-                        salesmanData.emp_avg_money = !salesmanData.emp_avg_money ? '--' : _this.dataProcess(salesmanData.emp_avg_money, 'money').num;  //人均产出
+                        salesmanData.emp_avg_money = !salesmanData.emp_avg_money ? '--' : _this.dataProcess(salesmanData.emp_avg_money, 'money','tenth').num;  //人均产出
                         salesmanData.emp_drop_cnt = !salesmanData.emp_drop_cnt ? '--' : _this.dataProcess(salesmanData.emp_drop_cnt, 'day').num;  //下滑人数
                         salesmanData.all_cnt = !salesmanData.all_cnt ? '--' : _this.dataProcess(salesmanData.all_cnt, 'day').num;  //下滑人数
                         _this.salesmanData = salesmanData;
@@ -612,7 +612,7 @@
                      if(res.data.code == '200'){
                         var secondBandData = res.data.data.data[0],thatMonth = {},chainratio = {},yearOnYear = {};
                         // 当月数据
-                        thatMonth.money = !secondBandData.money ? '--' : _this.dataProcess(secondBandData.money, 'money', 1).num;  //本月下单金额
+                        thatMonth.money = !secondBandData.money ? '--' : _this.dataProcess(secondBandData.money, 'money', 'tenth').num;  //本月下单金额
                         if(secondBandData.money){
                             thatMonth.moneyInteger = thatMonth.money.split(".")[0];   //本月下单金额整数部分
                             thatMonth.moneyDecimal = '.' + thatMonth.money.split(".")[1];//本月下单金额小数部分
@@ -620,7 +620,7 @@
                             thatMonth.moneyInteger = '--';   //本月下单金额整数部分
                             thatMonth.moneyDecimal = '--';//本月下单金额小数部分
                         }
-                        thatMonth.gross_money = !secondBandData.gross_money ? '--' : _this.dataProcess(secondBandData.gross_money, 'money', 1).num; //毛利额
+                        thatMonth.gross_money = !secondBandData.gross_money ? '--' : _this.dataProcess(secondBandData.gross_money, 'money','tenth').num; //毛利额
                         thatMonth.gross_money_rate = !secondBandData.gross_money_rate ? '--' : _this.dataProcess(secondBandData.gross_money_rate, 'percent').num + '%'; //毛利率
                         var list = [{name:'立白',value:!secondBandData.liby_money ? 0 : secondBandData.liby_money},
                             {name:'好爸爸',value:!secondBandData.kispa_money ? 0 : secondBandData.kispa_money},
