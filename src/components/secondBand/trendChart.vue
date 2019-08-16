@@ -4,7 +4,10 @@
 			<div class="title">
 				<a-Row class="thendChartRow">
 				  <a-Col :span="12" class="thendChartCol1">
-				  	订单走势图
+				  	<div class="echartstitle">
+				  		<div></div>
+				  		<div>订单走势图</div>
+				  	</div>
 				  </a-Col>
 				  <a-Col :span="12" class="thendChartCol2">
 				  	单位：万元
@@ -12,7 +15,7 @@
 				</a-Row>
 			</div>
 			<div class="lineEcharts">
-				<echartsline :lineEchartsData="direction"></echartsline>
+				<echartsline :lineEchartsData="direction"  :legendShow="false" :grid="grid" v-if="direction.length != 0"></echartsline>
 			</div>
 		</div>
 		<loading-data :isShow="isShow"></loading-data>
@@ -43,7 +46,14 @@
 		data(){
 			return {
 				direction:this.lineEchartsData,
-				// isShow:true
+				grid:{
+					top: '5%',
+                    left: '3%',
+                    right: '4%',
+                    bottom: '0%',
+                    // height: '100%',
+                    containLabel: true
+				}
 			}
 		},
 		mounted(){
@@ -65,9 +75,11 @@
 		margin-top:24px;
 		height: 260px;
 		width: 100%;
+		padding: 5px;
 		.echarts {
 			height: 100%;
 			width: 100%;
+			padding: 0 20px;
 			background:rgba(255,255,255,1);
 			border-radius: 5px;
 			.title {
@@ -76,12 +88,22 @@
 				.thendChartRow {
 					height: 100%;
 					width: 100%;
+					.echartstitle {
+						display: flex;
+						align-items: center;
+						div:nth-child(1) {
+							margin-right: 5px;
+							width: 12px;
+						    height: 4px;
+						    background: #2d92fc;
+						    border-radius: 2px;
+						}
+					}
 				}
 				.thendChartCol1 {
 					height: 100%;
 					display: flex;
 					align-items: center;
-					padding-left: 4%;
 					font-size:16px;
 					font-family:PingFangSC-Regular;
 					font-weight:400;

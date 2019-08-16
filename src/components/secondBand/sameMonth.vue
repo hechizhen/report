@@ -65,8 +65,6 @@
 		},
 		watch:{
 			orderAmountData(val){
-				console.log('111111111111')
-				console.log(val)
 				this.pieEcharts = val.list
 			}
         },
@@ -174,6 +172,9 @@
 								color:rgba(51,51,51,1);
 							}
 						}
+						img {
+							vertical-align:baseline;
+						}
 					}
 					.recordRight {
 						height: 85px;
@@ -191,6 +192,9 @@
 								font-weight:500;
 								color:rgba(51,51,51,1);
 							}
+						}
+						img {
+							vertical-align:baseline;
 						}
 					}
 				}
