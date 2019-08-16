@@ -25,12 +25,14 @@
                       :prodownStoresData="prodownStoresData" :upproStoresData="upproStoresData" :productTableData="productTableData"
                       :NumberGoods="NumberGoods"  :CommodityRate="CommodityRate"  :NumberGoodsDownBar="NumberGoodsDownBar" :NumberGoodsUpBar="NumberGoodsUpBar"
                       :NumberGoodsPie="NumberGoodsPie" :NumberGoodsList="NumberGoodsList" v-if="CommodityTurnoverRate.length!=0"
-                      :tableData="proDetailTableData"  :exportData="ProExportData"
+                      :tableData="proDetailTableData"  :exportData="ProExportData" :homeChartHandleClick="detailChartHandleClick"
+                      :homePageNumChange="homePageNumChange" :homeCheckValChange="homeCheckValChange" :homeExportClick="homeExportClick"
+                      :detailExport="exportDetailData"
         ></productIndex>
         <!--门店-->
         <shopIndex  :StoresDetailed="StoresDetailed" v-if="StoresDetailed.length!=0 && storeDetailTableData!='' && upStoresData!=''"  :isShow="StoreisShow"
                     :upStoresData="upStoresData"  :downStoresData="downStoresData"  :downStoresBar="downStoresBar"   :upStoresBar="upStoresBar"
-                    :tableData="storeDetailTableData" :exportData="storeExportData"
+                    :tableData="storeDetailTableData" :exportData="storeExportData" 
         ></shopIndex>
          <!--库存-->
         <inventoryIndex  :inventoryDay="inventoryDay" :inventoryDetails="inventoryDetails" :marketableDayChart="marketableDayChart"
@@ -197,6 +199,10 @@
                         tableName:''
                     },
                 },
+                categoryName:'',
+                categoryList:'',
+                productPageNum:1,
+                exportDetailData:''
             }
         },
         created() {
@@ -259,6 +265,26 @@
                 this.getProductTableData()
                 this.getDetailTableData()
                 this.getPinListing()
+            },
+            detailChartHandleClick(item){
+                console.log(item)
+                this.categoryName = item
+                this.getProductTableData()
+                this.getProductExportData()
+            },
+            homeCheckValChange(item){
+                this.categoryName = item 
+                this.getProductTableData()
+                this.getProductExportData()
+            },
+            homePageNumChange(item){
+                this.productPageNum = item
+                this.getProductTableData()
+                this.getProductExportData()
+            },
+            homeExportClick(item){
+                this.exportPageSize = item
+                this.getProductExportData()
             },
             //体检报告概览
             getOverViewData() {
@@ -867,7 +893,7 @@
                     "outputCol":"dealer_id,data_mon,data_type,stock_sale_rate,stock_sale_goods_cnt,goods_cnt,stock_sale_goods_cnt_mom,stock_sale_goods_cnt_yoy,sales_raise_goods_cnt,sales_drop_goods_cnt,liby_stock_sale_rate,kispa_stock_sale_rate,cheerwin_stock_sale_rate,oral_stock_sale_rate,shengmei_stock_sale_rate",
                     "pageNum":1,
                     "pageSize":1000,
-                    "whereCndt":{"dealer_id":"='ff8080816b82b53d016bbb1bd5746d71'"},
+                    "whereCndt":{"dealer_id":"='ff8080816afa1fe1016b0b2cb8b36354'"},
                     "serviceId":"service_tjbg02_goods"
                 }
                 this.$http({
@@ -991,54 +1017,96 @@
                     },
                 )
             },
+            //产品-列表数据导出
+            getProductExportData(){
+                var _this = this
+                 var params = {
+                    "inputParam":
+                    {
+                        "data_mon":_this.currentDate,
+                        "data_type":"当月",
+                        "bo_type":"品类"
+                    },
+                    "outputCol":"bo1_name,bo2_name,bo3_name,goods_name,money,RATIO_RATE",
+                    "pageNum":_this.productPageNum,
+                    "isReturnTotalSize": "Y",
+                    "pageSize":_this.exportPageSize,
+                    "whereCndt":{"dealer_id":"='ff8080816a194910016a43b00eeb3a75'","bo2_name":"='"+_this.categoryName+"'"},
+                    "groupByCol":["bo1_name","bo2_name","bo3_name","goods_name"],
+                    "serviceId":"service_tjbg02_sales_order_dtl"
+                }
+                this.$http({
+                    url: _this.testRequestHttpUrl + '?v=GoodsDetailTable',
+                    method: 'POST',
+                    data: params
+                }).then(function (res) {
+                    console.log(res)
+                    var data = res.data.data.data;
+                    let headerTxt = [
+                        '事业部',
+                        '品类',
+                        '系列',
+                        '商品名称',
+                        '销量（元）',
+                        '销售占比',
+                    ]
+                    let headerKey = params.outputCol.split(',')
+                    _this.exportDetailData = {
+                        headerTxt:headerTxt,
+                        headerKey:headerKey,
+                        name:'商品明细',
+                        data:data
+                    }
+                })
+            },
             //产品-列表数据
             getProductTableData(){
                 var _this = this
                 _this.NumberGoodsList = true
+                 var params = {
+                    "inputParam":
+                    {
+                        "data_mon":_this.currentDate,
+                        "data_type":"当月",
+                        "bo_type":"品类"
+                    },
+                    "outputCol":"bo1_name,bo2_name,bo3_name,goods_name,money,RATIO_RATE",
+                    "pageNum":_this.productPageNum,
+                    "isReturnTotalSize": "Y",
+                    "pageSize":1000,
+                    "whereCndt":{"dealer_id":"='ff8080816a194910016a43b00eeb3a75'","bo2_name":"='"+_this.categoryName+"'"},
+                    "groupByCol":["bo1_name","bo2_name","bo3_name","goods_name"],
+                    "serviceId":"service_tjbg02_sales_order_dtl"
+                }
                 this.$http({
-                    url: _this.requestHttpUrl + '/commodityDetail',
+                    url: _this.testRequestHttpUrl + '?v=GoodsDetailTable',
                     method: 'POST',
-                    data: {
-                        dateTime: _this.currentDate
-                    }
+                    data: params
                 }).then(function (res) {
                     console.log(res)
-                    let data = res.data.data.data
-                    let tablecColumns = [
-                        {
-                            title:'商品编码',
-                            dataIndex:'code'
-                        },
-                        {
-                            title:'事业部',
-                            dataIndex:'business'
-                        },
-                        {
-                            title:'品类',
-                            dataIndex:'category'
-                        },
-                        {
-                            title:'系列',
-                            dataIndex:'series'
-                        },
-                        {
-                            title:'商品名称',
-                            dataIndex:'name'
-                        },
-                        {
-                            title:'销量',
-                            dataIndex:'sales'
-                        },
-                        {
-                            title:'销量占比',
-                            dataIndex:'salesPercent'
-                        },
+                    var data = res.data.data.data;
+                    let headerTxt = [
+                        {title:'事业部'},
+                        {title:'品类'},
+                        {title:'系列'},
+                        {title:'商品名称'},
+                        {title:'销量（元）'},
+                        {title:'销售占比'},
                     ]
+                    let headerKey = params.outputCol.split(',')
+                    headerKey.map(function(item,index){
+                        headerTxt[index].key = item
+                    })
+                    let tablecColumns = headerTxt
                     _this.productTableData = {
                         data:data,
-                        columns:tablecColumns
+                        columns:tablecColumns,
+                        totalSize:res.data.data.totalSize,
+                        defaultSize:params.pageSize,
+                        category:_this.categoryList
                     }
                     _this.NumberGoodsList = false
+                    console.log(_this.GoodsDetail)
                 })
             },
             //产品-产品下滑/增长商品
@@ -1055,7 +1123,7 @@
                         "outputCol":"dealer_id,data_mon,data_type,bo1,bo2,bo3,goods_id,money,money_lm,sub_money",
                         "pageNum":1,
                         "pageSize":1000,
-                        "whereCndt":{"dealer_id":"='ff8080816b82b53d016bbb1bd5746d71'"},
+                        "whereCndt":{"dealer_id":"='ff8080816afa1fe1016b0b2cb8b36354'"},
                         "serviceId":"service_tjbg02_goods_sales_change"
                             }
                     _this.ProExportData.raiseData = {
@@ -1217,24 +1285,35 @@
                 var _this = this
                 _this.NumberGoodsPie = true
                 var params = {
-                    "inputParam":{
+                    "inputParam":
+                    {
                         "data_mon":_this.currentDate,
                         "data_type":"当月",
-                        "bo_type":"商品",
+                        "bo_type":"品类"
                     },
-                    "outputCol":"dealer_id,data_mon,data_type,bo1,bo2,bo3,goods_id,money,ratio_rate,money_yoy,money_mom,gross_money_rate,gross_money_mom,gross_money_yoy",
+                    "outputCol":"  dealer_id,data_mon,data_type,bo1_name,bo2_name,bo3_name,goods_name,money,ratio_rate,money_mom,money_yoy,gross_rate,gross_money_yoy,gross_money_mom",
                     "pageNum":1,
                     "pageSize":1000,
-                    "whereCndt":{"dealer_id":"='ff8080816b82b53d016bbb1bd5746d71'"},
-                    "serviceId":"service_tjbg02_goods_sales_dtl"
+                    "whereCndt":{"dealer_id":"='ff8080816a194910016a43b00eeb3a75'"},
+                    "groupByCol":["bo1_name","bo2_name"],
+                    // "whereCndt":{"dealer_id":"='ff8080816a194910016a43b00eeb3a75'","bo2_name":"='消杀类'"},
+                    // "groupByCol":["bo1_name","bo2_name","bo3_name","goods_name"],
+                    "serviceId":"service_tjbg02_sales_order_dtl"
                 }
                 this.$http({
                     url: _this.testRequestHttpUrl + '?v=GoodsDetail',
                     method: 'POST',
                     data: params
                 }).then(function (res) {
-                    var Goods = res.data.data;
-                    _this.GoodsDetail = Goods;
+                    var Goods = res.data.data.data;
+                    let list =[]
+                    let list1=[]
+                    Goods.map(function(item){
+                        list.push({value:item.money,name:item.bo2_name})
+                        list1.push(item.bo2_name)
+                    })
+                    _this.categoryList = list1
+                    _this.GoodsDetail = list;
                     _this.NumberGoodsPie = false
                     console.log(_this.GoodsDetail)
                 })

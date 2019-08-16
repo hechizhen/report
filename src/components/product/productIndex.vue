@@ -27,7 +27,9 @@
                           :isShow="NumberGoodsUpBar"></downproductChart>  <!--增长-->
 
         <productChartPie v-if="pieShow" :trendChartClick="pieClick" :GoodsDetailPie="GoodsDetailPie" :tableData="productTableData"
-                        :NumberGoodsPie="NumberGoodsPie" :NumberGoodsList="NumberGoodsList"
+                        :NumberGoodsPie="NumberGoodsPie" :NumberGoodsList="NumberGoodsList" :pieChartHandleClick="IndexChartHandleClick"
+                        :checkValChange="indexCheckVal" :pageNumChange="indexPageNum" :exportClick="indexExportClick"
+                        :tableExport="detailExport"
         ></productChartPie>
         <!--<productList  v-if="listShow"  :trendChartClick="listClick" ></productList>-->
     </div>
@@ -45,9 +47,68 @@
     import loadingData from '../base/loadingData'
     export default {
         name: "cententindex",
-        props:["CommodityTurnoverRate","commoditydata","GoodsDetail","NumberGoods","CommodityRate",
-            "upproStoresData","prodownStoresData","productTableData","NumberGoodsDownBar","NumberGoodsUpBar",
-             "NumberGoodsPie","NumberGoodsList","tableData","exportData"],
+        // props:["CommodityTurnoverRate","commoditydata","GoodsDetail","NumberGoods","CommodityRate",
+        //     "upproStoresData","prodownStoresData","productTableData","NumberGoodsDownBar","NumberGoodsUpBar",
+        //      "NumberGoodsPie","NumberGoodsList","tableData","exportData","homeChartHandleClick"],
+             props:{
+                 CommodityTurnoverRate:{
+                     type:Object
+                 },
+                 commoditydata:{
+                     type:Object
+                 },
+                 GoodsDetail:{
+                     type:Object
+                 },
+                 NumberGoods:{
+                     type:Object
+                 },
+                 CommodityRate:{
+                     type:Object
+                 },
+                 upproStoresData:{
+                     type:Object
+                 },
+                 prodownStoresData:{
+                     type:Object
+                 },
+                 productTableData:{
+                     type:Object
+                 },
+                 NumberGoodsDownBar:{
+                     type:Object
+                 },
+                 NumberGoodsUpBar:{
+                     type:Object
+                 },
+                 NumberGoodsPie:{
+                     type:Object
+                 },
+                 NumberGoodsList:{
+                     type:Object
+                 },
+                 tableData:{
+                     type:Object
+                 },
+                 exportData:{
+                     type:Object
+                 },
+                 homeChartHandleClick:{
+                     type:Function
+                 },
+                 homePageNumChange:{
+                     type:Function
+                 },
+                 homeCheckValChange:{
+                     type:Function
+                 },
+                 homeExportClick:{
+                     type:Function
+                 },
+                 detailExport:{
+                     type:Object
+                 }
+             },
         components:{
             productLeft,
             productRight,
@@ -120,8 +181,25 @@
             },
             listClicks(){
                 this.upShow = false;
+            },
+            IndexChartHandleClick(item){
+                var _this  =this
+                console.log(item)
+                _this.homeChartHandleClick(item)
+            },
+            indexPageNum(item){
+                var _this  =this
+                console.log(item)
+                _this.homePageNumChange(item)
+            },
+            indexCheckVal(item){
+                var _this  =this
+                console.log(item)
+                _this.homeCheckValChange(item)
+            },
+            indexExportClick(item){
+                this.homeExportClick(item)
             }
-
         },
         watch:{
             GoodsDetail(val){
@@ -134,13 +212,8 @@
             prodownStoresData(val){
                this.VariabilityDown = val
             },
-
         },
         mounted() {
-         // console.log(this.goodsData)
-          console.log(this.tableData)
-            console.log(this.upproStoresData)
-            console.log(this.prodownStoresData)
         }
     }
 </script>

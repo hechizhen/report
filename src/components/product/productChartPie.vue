@@ -27,8 +27,8 @@
                     <a-Col :span="12" class="thendChartCol1">
                     </a-Col>
                     <a-Col :span="12" class="thendChartCol2">
-                        <a-button>导出当前商品</a-button>
-                        <a-button>导出全部商品</a-button>
+                        <a-button @click="exportNowData">导出当前商品</a-button>
+                        <a-button @click="exportAllData">导出全部商品</a-button>
                         <span @click="thendChartClicks">
                             <i class="iconfont icon-guanbi"></i>
                         </span>
@@ -37,21 +37,16 @@
             </div>
             <div class="lineEcharts">
                 <div class="lineEcharts-left">
-                    <a-radio-group @change="onChange" v-model="value">
-                        <a-radio class="radioStyle" :value="1">立白洗衣粉</a-radio>
-                        <a-radio class="radioStyle" :value="2">立白洗洁精</a-radio>
-                        <a-radio class="radioStyle" :value="3">立白洗衣液</a-radio>
-                        <a-radio class="radioStyle" :value="4">好爸爸</a-radio>
-                        <a-radio class="radioStyle" :value="5">消杀</a-radio>
-                        <a-radio class="radioStyle" :value="6">家居</a-radio>
-                    </a-radio-group>
+                       <RadioGroup v-model="checkedVal" vertical v-if="checkedVal!=''" @on-change="onChangeBox">
+                            <Radio :label="item" v-for="(item,index) in tableData.category" :key="index">
+                                <Icon type="social-apple"></Icon>
+                                <span>{{item}}</span>
+                            </Radio>
+                        </RadioGroup>
                 </div>
                 <div class="lineEcharts-right">
-                    <a-table :columns="tableData.columns" :dataSource="tableData.data" bordered  v-if="tableData.length!=0">
-                        <template slot="name" slot-scope="text">
-                            {{text}}
-                        </template>
-                    </a-table>
+                    <Table :height="500" :columns="tableData.columns" :data="tableData.data" border></Table>
+                    <Page :total="tableData.totalSize" :current="1" :page-size="tableData.defaultSize" show-elevator v-if="totalSize!='' && defaultSize!=''" @on-change="onChangeSize" />
                 </div>
             </div>
             <loading-data :isShow="NumberGoodsList"></loading-data>
@@ -73,6 +68,15 @@
             trendChartClick:{
                 type:Function
             },
+            pieChartHandleClick:{
+                type:Function
+            },
+            pageNumChange:{
+                type:Function
+            },
+            checkValChange:{
+                type:Function
+            },
             GoodsDetailPie:{
                 type:Object,
                 default:[]
@@ -90,6 +94,12 @@
             NumberGoodsList:{
                 type:Boolean,
                 default: false
+            },
+            tableExport:{
+                type:Object,
+            },
+            exportClick:{
+                type:Function
             }
         },
 
@@ -110,7 +120,9 @@
                     },
                     position:['50%','40%'],
                     legendShow:true
-                }
+                },
+                checkedVal:'',
+                pageSize:''
             }
         },
         mounted(){
@@ -121,16 +133,34 @@
             thendChartClicks(){
                 this.trendChartClick()
             },
-            chartHandleClick(){
-                this.pieShows = false;
+            chartHandleClick(item){
+                console.log(item)
+                this.checkedVal = item
+                this.pieShows = false
                 this.listShows =true
+                this.pieChartHandleClick(item)
             },
             slital(){
-                alert(1111)
             },
-            onChange (e) {
-                console.log('radio checked', e.target.value)
+            onChangeBox (val) {
+                console.log(val)
+                this.checkValChange(val)
             },
+            onChangeSize (val) {
+                console.log(val)
+                this.pageNumChange(val)
+            },
+            exportNowData(){
+                this.pageSize = 100
+                this.exportClick(this.pageSize)
+                console.log(this.tableExport)
+                this.exportHandleClick(this.tableExport.headerTxt,this.tableExport.headerKey,this.tableExport.data,this.tableExport.name)
+            },
+            exportAllData(){
+                this.pageSize = 9999
+                this.exportClick(this.pageSize)
+                this.exportHandleClick(this.tableExport.headerTxt,this.tableExport.headerKey,this.tableExport.data,this.tableExport.name)
+            }
         }
     }
 </script>
