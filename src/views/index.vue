@@ -20,7 +20,8 @@
         <salesman :salesmanData="salesmanData" :salesmanTrendData="salesmanTrendData" :salesmandownwardData="salesmandownwardData"
                   :salesmanReachedData="salesmanReachedData" :salesmanContributionData="salesmanContributionData" :isShow="salesmanReached"
                   :salesmanReachedBar="salesmanReachedBar" :salesmanContributionBar="salesmanContributionBar" :salesmandownwardBar="salesmandownwardBar"
-                  :salesmanTrendPie="salesmanTrendPie" :ownwardExportData="ownwardExportData"></salesman>
+                  :salesmanTrendPie="salesmanTrendPie" :ownwardExportData="ownwardExportData" :reachContributionData="reachContributionData" 
+                  v-if="reachContributionData!=''"></salesman>
         <!-- 商品 -->
         <productIndex :CommodityTurnoverRate="CommodityTurnoverRate"  :commoditydata="commoditydata" :GoodsDetail="GoodsDetail"
                       :prodownStoresData="prodownStoresData" :upproStoresData="upproStoresData" :productTableData="productTableData"
@@ -211,7 +212,9 @@
                 categoryName:'',
                 categoryList:'',
                 productPageNum:1,
-                exportDetailData:''
+                exportDetailData:'',
+                //达成贡献导出数据
+                reachContributionData:''
             }
         },
         created() {
@@ -243,7 +246,6 @@
             this.getSalesmanReached()
             this.getProductTableData()
             this.getDetailTableData()
-
         },
         computed: {
 
@@ -272,7 +274,6 @@
                 this.getDetailTableData()
             },
             detailChartHandleClick(item){
-                console.log(item)
                 this.categoryName = item
                 this.getProductTableData()
                 this.getProductExportData()
@@ -711,7 +712,6 @@
                     "outputCol":"data_mon,dealer_id,data_type,dealer_code,dealer_name,money,liby_money,kispa_money,cheerwin_money,oral_money,shengmei_money,other_money,money_lm,liby_money_lm,kispa_money_lm,cheerwin_money_lm,oral_money_lm,shengmei_money_lm,other_money_lm,money_ly,liby_money_ly,kispa_money_ly,cheerwin_money_ly,oral_money_ly,shengmei_money_ly,other_money_ly,gross_money,gross_money_rate,gross_money_lm,gross_money_mom,gross_money_rate_mom,gross_money_ly,gross_money_yoy,gross_money_rate_yoy",
                     "pageNum":1,
                     "pageSize":1000,
-                    "groupByCol":["dealer_id","data_mon"],
                     "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
                     "serviceId":"service_tjbg02_sales_order"
                 }
@@ -746,7 +746,6 @@
                     "outputCol":"dealer_id,data_mon,data_type,emp_name,emp_phone,emp_money,emp_target_money,emp_rate,emp_money_rate,gross_money,gross_rate",
                     "pageNum":1,
                     "pageSize":1000,
-                    "groupByCol":["dealer_id","data_mon","emp_id"],
                     "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
                     "serviceId":"service_tjbg02_emp_rate"
                 }
@@ -802,7 +801,6 @@
                     "outputCol":"dealer_id,data_mon,data_type,emp_name,money,money_lm,dif_money",
                     "pageNum":1,
                     "pageSize":1000,
-                    "groupByCol":["dealer_id","data_mon","emp_id"],
                     "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
                     "serviceId":"service_tjbg02_emp_drop"
                 }
@@ -820,7 +818,10 @@
                             difference.push(value.dif_money)
                             exportData.push({index:index+1,emp_name:value.emp_name,money:value.money,money_lm:value.money_lm,dif_money:value.dif_money})
                         })
-                        seriesData.push({name:'上月销售额',data:lastMonth,color:'#009EE2',barWidth:20},{name:'本月销售额',data:sameMonth,color:'#E9A837',barWidth:20},{name:'销售差额',data:difference,color:'#00E2BF',barWidth:20})
+                        seriesData.push(
+                            {name:'上月销售额',data:lastMonth,color:'#009EE2',barWidth:'自适应'},
+                            {name:'本月销售额',data:sameMonth,color:'#E9A837',barWidth:'自适应'},
+                            {name:'销售差额',data:difference,color:'#00E2BF',barWidth:'自适应'})
                         salesmandownwardObject.xAxisData = xAxisData;
                         salesmandownwardObject.seriesData = seriesData;
                         _this.salesmandownwardData = salesmandownwardObject
@@ -846,10 +847,9 @@
                         "data_mon":_this.currentDate,
                         "data_type":"当月"
                     },
-                    "outputCol":"dealer_id,data_mon,data_type,emp_name,emp_phone,emp_money,emp_target_money,emp_rate,emp_money_rate,gross_money,gross_rate,dealer_money",
+                    "outputCol":"emp_name,emp_phone,emp_target_money,emp_money,emp_dif_money,emp_rate,emp_money_rate,gross_money,gross_rate,dealer_money",
                     "pageNum":1,
                     "pageSize":1000,
-                    "groupByCol":["dealer_id","data_mon","emp_id"],
                     "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
                     "serviceId":"service_tjbg02_emp_rate"
                 }
@@ -860,18 +860,32 @@
                 }).then(function (res) {
                     if(res.data.code == '200'){
                         // 达成
+                        let targetList = []
                         var salesmanReachedData = res.data.data.data,xAxisData=[],seriesData=[],lastMonth=[],sameMonth=[],difference=[],salesmanReachedObject={},contributionseriesData=[],contributionlastMonth=[],contributiondifference = [],salesmanContributionObject={};
-                        salesmanReachedData.map(function(value){
+                        salesmanReachedData.map(function(value,index){
                             xAxisData.push(value.emp_name);
                             lastMonth.push(value.emp_target_money)
                             sameMonth.push(value.emp_money)
                             difference.push(value.emp_rate)
                             contributionlastMonth.push(value.dealer_money)
                             contributiondifference.push(value.emp_money_rate)
+                            value.numberId = index+1
+                            targetList.push(
+                                {numberId:value.numberId,emp_name:value.emp_name,emp_phone:value.emp_phone,emp_target_money:value.emp_target_money,emp_money:value.emp_money,
+                                emp_dif_money:value.emp_dif_money,emp_rate:value.emp_rate,emp_money_rate:value.emp_money_rate,gross_money:value.gross_money,gross_rate:value.gross_rate},
+                            )
                         })
+                        console.log(targetList)
+                        //导出数据
+                        _this.reachContributionData = {
+                            headerTxt:['序号','业务员姓名','联系电话','目标销量（元/月）','下单金额（元/月）','完成差额（元/月）','达成率','销量占比','毛利额（元）','毛利率'],
+                            headerKey:["numberId","emp_name","emp_phone","emp_target_money","emp_money","emp_dif_money","emp_rate","emp_money_rate","gross_money","gross_rate"],
+                            data:salesmanReachedData,
+                            name:'达成和贡献'
+                        }
                         seriesData.push(
-                            {name:'当月目标',data:sameMonth,color:'#85C1FF',barWidth:20},
-                            {name:'当月销量',data:lastMonth,color:'#2D92FC',barWidth:20},
+                            {name:'当月目标',data:sameMonth,color:'#85C1FF',barWidth:'自适应'},
+                            {name:'当月销量',data:lastMonth,color:'#2D92FC',barWidth:'自适应'},
                             {name:'达成率',data:difference,color:'#fff',barWidth:0},
                             )
                         salesmanReachedObject.xAxisData = xAxisData;
@@ -880,8 +894,8 @@
                         _this.salesmanReachedBar = false
                         // 贡献
                         contributionseriesData.push(
-                            {name:'当月销量',data:sameMonth,color:'#85C1FF',barWidth:20},
-                            {name:'当月总销量',data:contributionlastMonth,color:'#2D92FC',barWidth:20},
+                            {name:'当月销量',data:sameMonth,color:'#85C1FF',barWidth:'自适应'},
+                            {name:'当月总销量',data:contributionlastMonth,color:'#2D92FC',barWidth:'自适应'},
                             {name:'贡献率',data:contributiondifference,color:'#fff',barWidth:0}
                             )
                         salesmanContributionObject.xAxisData = xAxisData;
@@ -1469,10 +1483,11 @@
                         "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
                         "serviceId":"service_tjbg02_store_sales_change"
                     }
+                    let numArray = ['numberId']
                     _this.storeExportData.raiseData = {
                         //增长门店导出数据
                         tableHeaderTxt:['序号','业务员姓名','联系电话','门店名称','门店老板姓名','门店老板电话','门店地址','月均销量（元）','当月销量（元）','差额（元）'],
-                        tableHeaderKey:params.outputCol,
+                        tableHeaderKey:numArray.concat(params.outputCol.split(',')),
                         tableData:'',
                         tableName:'下滑门店'
                     }
@@ -1497,10 +1512,11 @@
                         "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
                         "serviceId":"service_tjbg02_store_sales_change"
                     }
+                    let numArray = ['numberId']
                     _this.storeExportData.downData={
                         //下滑门店导出数据
                         tableHeaderTxt:['序号','业务员姓名','联系电话','门店名称','门店老板姓名','门店老板电话','门店地址','月均销量（元）','当月销量（元）','差额（元）'],
-                        tableHeaderKey:params.outputCol,
+                        tableHeaderKey:numArray.concat(params.outputCol.split(',')),
                         tableData:'',
                         tableName:'增长门店'
                     }

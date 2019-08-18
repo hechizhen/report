@@ -75,13 +75,12 @@
 		margin-top:24px;
 		height: 260px;
 		width: 100%;
-		padding: 5px;
 		.echarts {
 			height: 100%;
 			width: 100%;
 			padding: 0 20px;
 			background:rgba(255,255,255,1);
-			border-radius: 5px;
+			border-radius:10px;
 			.title {
 				height: 15%;
 				width: 100%;

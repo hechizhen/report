@@ -6,7 +6,8 @@
 		<trendChart  v-if="echartsShow" :trendChartClick="trendChartClick" :lineEchartsData="direction" :isShow="salesmanTrendPie"></trendChart>
 		<glide  v-if="glideShow" :trendChartClick="glideClick" :salesmandownward="salesmandownward" :isShow="salesmandownwardBar"></glide>
 		<contribution   v-if="contributionShow" :trendChartClick="contributionClick" :salesmanReached="salesmanReached" :salesmanContribution="salesmanContribution"
-						:salesmanContributionBar="salesmanContributionBar"  :salesmanReachedBar="salesmanReachedBar"></contribution>
+						:salesmanContributionBar="salesmanContributionBar"  :salesmanReachedBar="salesmanReachedBar"
+						:exportData="reachContributionData"></contribution>
 	</div>
 </template>
 <script>
@@ -71,6 +72,9 @@
 				type:Boolean,
 				default:false,
 			},
+			reachContributionData:{
+				type:Object
+			}
 		},
 		data(){
 			return {
@@ -97,6 +101,7 @@
 			}
 		},
 		mounted(){
+			console.log(this.reachContributionData)
 		},
 		methods:{
 			explicit(a){
@@ -127,7 +132,8 @@
 		watch:{
             salesmanTrendData(val){
             	this.direction = {
-                    id:'lineId',
+					id:'lineSalesTrendId',
+					unit:['money','tenth'],
                     xAxisData:val.monthArr,
                     lineData:val.seriesData
             	}

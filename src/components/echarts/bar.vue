@@ -271,7 +271,7 @@
                     }
                     if(_this.dataZoomShow){
                         var dataZoom = [{
-                            height: '80%',
+                            height: '70%',
                             yAxisIndex: [
                                 0
                             ],

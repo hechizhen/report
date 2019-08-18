@@ -16,8 +16,8 @@
 			<div class="lineEcharts">
 				<barEcharts :barEchartsData="barEcharts"></barEcharts>
 			</div>
+			<loading-data :isShow="isShow"></loading-data>
 		</div>
-		<loading-data :isShow="isShow"></loading-data>
 	</div>
 </template>
 <script>
@@ -47,8 +47,8 @@
 			return {
 				// isShow:true,
 				barEcharts:{
-                    id:'barId',
-                    unit:'%',
+                    id:'barDownManId',
+                    unit:['money','tenth'],
                     xAxisData:this.salesmandownward.xAxisData,
                     label:{
                         isShow:false
@@ -72,8 +72,8 @@
 		watch:{
             salesmandownward(val){
             	this.barEcharts = {
-                    id:'barId',
-                    unit:'%',
+                    id:'barDownManId',
+                    unit:['money','tenth'],
                     xAxisData:val.xAxisData,
                     xAxis:{
                         isShowLine:false,
@@ -116,6 +116,7 @@
 			width: 80%;
 			background:rgba(255,255,255,1);
 			border-radius: 5px;
+			position: relative;
 			.title {
 				height: 10%;
 				width: 100%;

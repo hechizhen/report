@@ -125,7 +125,8 @@
             directionData(val){
                 this.lineEchartsData = {
                     id:'lineIdBand',
-                    xAxisData:val.monthArr,
+					xAxisData:val.monthArr,
+					unit:['money','tenth'],
                     lineData:[
                         {
                             name:'订单金额',

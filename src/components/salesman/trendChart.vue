@@ -14,8 +14,8 @@
 			<div class="lineEcharts">
 				<echartsline :lineEchartsData="direction"></echartsline>
 			</div>
+			<loading-data :isShow="isShow"></loading-data>
 		</div>
-		<loading-data :isShow="isShow"></loading-data>
 	</div>
 </template>
 <script>
@@ -77,6 +77,7 @@
 			width: 80%;
 			background:rgba(255,255,255,1);
 			border-radius: 5px;
+			position: relative;
 			.title {
 				height: 10%;
 				width: 100%;
