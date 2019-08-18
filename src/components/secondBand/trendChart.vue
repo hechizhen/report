@@ -15,7 +15,7 @@
 				</a-Row>
 			</div>
 			<div class="lineEcharts">
-				<echartsline :lineEchartsData="direction"  :legendShow="false" :grid="grid" v-if="direction.length != 0"></echartsline>
+				<echartsline :lineEchartsData="direction"  :legendShow="false" :grid="grid" v-if="direction.length != 0" :dataZoomShow="false"></echartsline>
 			</div>
 		</div>
 		<loading-data :isShow="isShow"></loading-data>
