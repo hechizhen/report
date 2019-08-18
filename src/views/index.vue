@@ -258,9 +258,6 @@
                 this.getOverViewData()
                 this.getOneHelpSalesData()
                 this.getFinanceOverviewData()
-                // this.getFinanceTableData()
-                // this.getReceivableData()
-                // this.getOverdueData()
                 this.getinventoryDetail()
                 this.getStoresDetailed()
                 this.getCommodityTurnoverRate()
@@ -1177,7 +1174,7 @@
                     let keyValue = params.outputCol.split(',')
                     let numArray = ['numberId']
                     _this.tableHeaderKey = numArray.concat(keyValue)
-                    _this.ProExportData.proraiseData = {
+                    _this.ProExportData.prodownData = {
                         //增长产品导出数据
                         tableHeaderTxt:['序号','商品编码','商品名称','上月销量（元）','当月销量（元）','差额（元）'],
                         tableData:'',

@@ -20,10 +20,10 @@
         <core :coretype="'产品得分'" :coretext="87" :evaluate="'较好'"></core>
 
         <downproductChart v-if="upShow" :trendChartClick="upClick"  :VariabilityUp="VariabilityUp"
-                        :raiseExportData="exportData.raiseData"
+                        :raiseExportData="exportData.proraiseData"
                         :isShow="NumberGoodsDownBar"></downproductChart>  <!--下滑-->
         <upproductChart v-if="downShow" :trendChartClick="downClick" :VariabilityDown="VariabilityDown"
-                          :downExportData="exportData.downData"
+                          :downExportData="exportData.prodownData"
                           :isShow="NumberGoodsUpBar"></upproductChart>  <!--增长-->
 
         <productChartPie v-if="pieShow" :trendChartClick="pieClick" :GoodsDetailPie="GoodsDetailPie" :tableData="productTableData"
@@ -134,6 +134,7 @@
                 // productisShow:true,
                 // commodityisShow:true,
                 titName:"商品", // 产品
+                //指标注释
                 explainSecondList:{
                     imgType:5,
                     tableData:[
@@ -220,6 +221,7 @@
             },
         },
         mounted() {
+            console.log(this.exportData)
         }
     }
 </script>
