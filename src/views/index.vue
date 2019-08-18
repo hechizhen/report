@@ -1388,7 +1388,7 @@
                     let ActivestresPer = {
                         ActiveStores:"门店单产",
                         ActiveStoresing:"(万元)",
-                        NoSales:_this.dataProcess(data.store_avg_money, 'money').num,
+                        NoSales:_this.dataProcess(data.store_avg_money, 'money','tenth').num,
                         }
                     let ActivestresSum = {
                         ActiveStores:"总门店数",
@@ -1402,11 +1402,11 @@
                     }
                     let nearnoTrade = {
                         name: "3个月无交易门店应收欠款(万元):",
-                        NoSales: '￥'+ _this.dataProcess(data.mon3_unsale_store_dept_money, 'money').num,
+                        NoSales: '￥'+ _this.dataProcess(data.mon3_unsale_store_dept_money, 'money','tenth').num,
                     }
                     let nearnoTrades = {
                         name: "闭店应收账款(万元):",
-                        NoSales: '￥'+_this.dataProcess(data.close_store_dept_money, 'money').num,
+                        NoSales: '￥'+_this.dataProcess(data.close_store_dept_money, 'money','tenth').num,
                     }
                     _this.StoresDetailed = {
                         shopTitle:"门店活跃率:",
