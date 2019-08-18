@@ -15,7 +15,7 @@
         <!-- 二帮卖分析-订单 -->
         <secondBand :orderAmountData="orderAmountData" :directionData="directionData" :towHelYoy="towHelYoy" :towHelProportion="towHelProportion"
                     :towHelpSaleMonthShow="towHelpSaleMonthShow" :towHelpSaleMonthLineShow="towHelpSaleMonthLineShow"
-                    :tableData="twoDetailTableData.getPinListing"  v-if="orderAmountData"></secondBand>
+                    :tableData="twoDetailTableData.gettwoListing"  v-if="orderAmountData"></secondBand>
         <!-- 二帮卖分析-业务员 -->
         <salesman :salesmanData="salesmanData" :salesmanTrendData="salesmanTrendData" :salesmandownwardData="salesmandownwardData"
                   :salesmanReachedData="salesmanReachedData" :salesmanContributionData="salesmanContributionData" :isShow="salesmanReached"
@@ -258,9 +258,6 @@
                 this.getOverViewData()
                 this.getOneHelpSalesData()
                 this.getFinanceOverviewData()
-                // this.getFinanceTableData()
-                // this.getReceivableData()
-                // this.getOverdueData()
                 this.getinventoryDetail()
                 this.getStoresDetailed()
                 this.getCommodityTurnoverRate()
@@ -1177,7 +1174,7 @@
                     let keyValue = params.outputCol.split(',')
                     let numArray = ['numberId']
                     _this.tableHeaderKey = numArray.concat(keyValue)
-                    _this.ProExportData.proraiseData = {
+                    _this.ProExportData.prodownData = {
                         //增长产品导出数据
                         tableHeaderTxt:['序号','商品编码','商品名称','上月销量（元）','当月销量（元）','差额（元）'],
                         tableData:'',
@@ -2048,16 +2045,18 @@
                     //二帮卖订单列表数据
                 _this.twoDetailTableData={
                     //二帮卖订单明细
-                    getPinListing:{
+                    gettwoListing:{
                         params : {
                             "inputParam":{
-                                "data_mon":_this.currentDate,
+                                "data_mon":"201908",
                                 "data_type":"当月",
+                                "bo_type":"品类"
                             },
-                            "outputCol":"bo1_name,bo2_name,bo2_money,ratio_rate,money_mom,money_yoy,gross_rate,gross_money_yoy,gross_money_mom",
+                            "outputCol":"bo1_name,bo2_name,money,ratio_rate,money_mom,money_yoy,gross_rate,gross_money_yoy,gross_money_mom",
                             "pageNum":1,
                             "pageSize":1000,
-                            "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
+                            "groupByCol":["dealer_id","data_mon"],
+                            "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
                             "serviceId":"service_tjbg02_sales_order_dtl"
                         },
                         header:[

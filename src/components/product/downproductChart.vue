@@ -45,7 +45,7 @@
                 default:false,
             },
             //导出数据
-            raiseExportData:{
+            downExportData:{
                 type:Object,
             }
         },
@@ -61,7 +61,7 @@
                 this.trendChartClick()
             },
             exportData(){
-                this.exportHandleClick(this.raiseExportData.tableHeaderTxt,this.raiseExportData.tableHeaderKey,this.raiseExportData.tableData,this.raiseExportData.tableName)
+                this.exportHandleClick(this.downExportData.tableHeaderTxt,this.downExportData.tableHeaderKey,this.downExportData.tableData,this.downExportData.tableName)
             }
         }
     }
