@@ -84,13 +84,35 @@
                 loadingShow:false,
                 maxHeight:'500',
                 tableLoading:false,
-                pageNumber:1
+                pageNumber:1,
+                result:'',
             }
         },
         created(){
+            // alert(JSON.stringify(this.tableHeader))
         },
         mounted () {
+            //  alert(JSON.stringify(this.tableHeader))
             this.getTableData()
+        },
+         computed:{
+            getObj () {
+            this.result={
+                params:this.interfaceParams,
+                header:this.tableHeader
+            }
+                return this.result
+            },
+        },
+        watch: {
+            getObj: {
+                handler(newName) {
+                    this.newInterfaceParams = newName.params
+                    this.newTableHeader = newName.header
+                    this.getTableData()
+                },
+                deep: true
+            },
         },
         methods: {
             //分页
@@ -172,16 +194,6 @@
                     _this.loadingShow=false
                 })
             },
-        },
-        computed:{
-
-        },
-        watch: {
-            tableHeader(val){
-                alert(val)
-                this.newTableHeader= val
-                deep:true
-            }
         },
         distroyed: function () {
 

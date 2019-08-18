@@ -28,7 +28,7 @@
         <productIndex :CommodityTurnoverRate="CommodityTurnoverRate"  :commoditydata="commoditydata" :GoodsDetail="GoodsDetail"
                       :prodownStoresData="prodownStoresData" :upproStoresData="upproStoresData" :productTableData="productTableData"
                       :NumberGoods="NumberGoods"  :CommodityRate="CommodityRate"  :NumberGoodsDownBar="NumberGoodsDownBar" :NumberGoodsUpBar="NumberGoodsUpBar"
-                      :NumberGoodsPie="NumberGoodsPie" :NumberGoodsList="NumberGoodsList" v-if="CommodityTurnoverRate.length!=0"
+                      :NumberGoodsPie="NumberGoodsPie" :NumberGoodsList="NumberGoodsList" v-if="CommodityTurnoverRate.length!=0 && exportDetailData!=''"
                       :tableData="proDetailTableData.getPinListing"  :exportData="ProExportData" :homeChartHandleClick="detailChartHandleClick"
                       :homePageNumChange="homePageNumChange" :homeCheckValChange="homeCheckValChange" :homeExportClick="homeExportClick"
                       :detailExport="exportDetailData"  :selectButtonClick="proDetaSelectButtonClick"
@@ -298,6 +298,8 @@
             },
             //二帮卖订单详情切换维度调用方法
             twoDetaSelectButtonClick(val){
+                // alert(1)
+                // alert(val)
                 if(val == '系列'){
                     //二帮卖订单列表数据
                     this.twoDetailTableData={
@@ -406,6 +408,12 @@
                         }
                     }
                 }
+                
+            //    alert(2)
+            //    this.twoDetailTableData =  JSON.parse(JSON.stringify(this.twoDetailTableData));
+            //    this.$set(this.twoDetailTableData,"twoDetailTableData",this.twoDetailTableData)
+
+
             },
             //产品-动销清单切换维度调用方法
             proDetaSelectButtonClick(val){
@@ -491,117 +499,6 @@
                                 {txt:'订单SKU数',unit:false},
                                 {txt:'库存SKU数',unit:false},
                                 {txt:'品类动销率',unit:false},
-                            ]
-                        }
-                    }
-                }
-            },
-            //二帮卖订单详情切换维度调用方法
-            selectButtonClick(val){
-                if(val == '系列'){
-                    //二帮卖订单列表数据
-                    this.twoDetailTableData={
-                        //二帮卖订单明细系列维度
-                        gettwoListing:{
-                            params : {
-                                "inputParam":{
-                                    "data_mon":this.currentDate,
-                                    "data_type":"当月",
-                                    "bo_type":"系列"
-                                },
-                                "outputCol":"bo1_name,bo2_name,bo3_name,money,ratio_rate,money_mom,money_yoy,gross_rate,gross_money_yoy,gross_money_mom",
-                                "pageNum":1,
-                                "pageSize":1000,
-                                "groupByCol":["dealer_id","data_mon",'bo3_name'],
-                                "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
-                                "serviceId":"service_tjbg02_sales_order_dtl"
-                            },
-                            header:[
-                                {txt:'序号',unit:false},
-                                {txt:'事业部',unit:false},
-                                {txt:'品类',unit:false},
-                                {txt:'系列',unit:false},
-                                {txt:'品类下单金额（元）',unit:'money'},
-                                {txt:'占比',unit:'percent'},
-                                {txt:'环比',unit:'percent'},
-                                {txt:'同比',unit:'percent'},
-                                {txt:'毛利额（元）',unit:'percent'},
-                                {txt:'毛利率',unit:'percent'},
-                                {txt:'毛利额环比',unit:'percent'},
-                                {txt:'毛利额同比',unit:'percent'},
-
-                            ]
-                        }
-                    }
-                }
-                else if(val == '商品'){
-                    //二帮卖订单列表数据
-                    this.twoDetailTableData={
-                        //二帮卖订单明细商品维度
-                        gettwoListing:{
-                            params : {
-                                "inputParam":{
-                                    "data_mon":this.currentDate,
-                                    "data_type":"当月",
-                                    "bo_type":"商品"
-                                },
-                                "outputCol":"bo1_name,bo2_name,bo3_name,goods_name,money,ratio_rate,money_mom,money_yoy,gross_rate,gross_money_yoy,gross_money_mom",
-                                "pageNum":1,
-                                "pageSize":1000,
-                                "groupByCol":["dealer_id","data_mon",'goods_name'],
-                                "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
-                                "serviceId":"service_tjbg02_sales_order_dtl"
-                            },
-                            header:[
-                                {txt:'序号',unit:false},
-                                {txt:'事业部',unit:false},
-                                {txt:'品类',unit:false},
-                                {txt:'系列',unit:false},
-                                {txt:'商品名称',unit:false},
-                                {txt:'商品金额（元）',unit:'money'},
-                                {txt:'占比',unit:'percent'},
-                                {txt:'环比',unit:'percent'},
-                                {txt:'同比',unit:'percent'},
-                                {txt:'毛利额（元）',unit:'percent'},
-                                {txt:'毛利率',unit:'percent'},
-                                {txt:'毛利额环比',unit:'percent'},
-                                {txt:'毛利额同比',unit:'percent'},
-
-                            ]
-                        }
-                    }
-                }
-                else {
-                    //二帮卖订单列表数据
-                    this.twoDetailTableData={
-                        //二帮卖订单明细品类维度
-                        gettwoListing:{
-                            params : {
-                                "inputParam":{
-                                    "data_mon":this.currentDate,
-                                    "data_type":"当月",
-                                    "bo_type":"品类"
-                                },
-                                "outputCol":"bo1_name,bo2_name,money,ratio_rate,money_mom,money_yoy,gross_rate,gross_money_yoy,gross_money_mom",
-                                "pageNum":1,
-                                "pageSize":1000,
-                                "groupByCol":["dealer_id","data_mon"],
-                                "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
-                                "serviceId":"service_tjbg02_sales_order_dtl"
-                            },
-                            header:[
-                                {txt:'序号',unit:false},
-                                {txt:'事业部',unit:false},
-                                {txt:'品类',unit:false},
-                                {txt:'品类下单金额（元）',unit:'money'},
-                                {txt:'占比',unit:'percent'},
-                                {txt:'环比',unit:'percent'},
-                                {txt:'同比',unit:'percent'},
-                                {txt:'毛利额（元）',unit:'percent'},
-                                {txt:'毛利率',unit:'percent'},
-                                {txt:'毛利额环比',unit:'percent'},
-                                {txt:'毛利额同比',unit:'percent'},
-
                             ]
                         }
                     }
