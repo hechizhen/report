@@ -1402,11 +1402,11 @@
                     }
                     let nearnoTrade = {
                         name: "3个月无交易门店应收欠款(万元):",
-                        NoSales: '￥'+ _this.dataProcess(data.mon3_unsale_store_dept_money, 'money').num,
+                        NoSales: '￥'+ _this.dataProcess(data.mon3_unsale_store_dept_money, 'money','tenth').num,
                     }
                     let nearnoTrades = {
                         name: "闭店应收账款(万元):",
-                        NoSales: '￥'+_this.dataProcess(data.close_store_dept_money, 'money').num,
+                        NoSales: '￥'+_this.dataProcess(data.close_store_dept_money, 'money','tenth').num,
                     }
                     _this.StoresDetailed = {
                         shopTitle:"门店活跃率:",
