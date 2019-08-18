@@ -126,6 +126,7 @@
                 this.lineEchartsData = {
                     id:'lineIdBand',
                     xAxisData:val.monthArr,
+                    unit:['tenth'],
                     lineData:[
                         {
                             name:'订单金额',
