@@ -49,13 +49,13 @@
         name: "cententindex",
              props:{
                  CommodityTurnoverRate:{   //商品动销率概览数据
-                     type:Array
+                     type:Object
                  },
                  commoditydata:{    //动销商品数概览数据
-                     type:Array
+                     type:Object
                  },
                  GoodsDetail:{      //商品饼图数据
-                     type:Object
+                     type:Array
                  },
                  NumberGoods:{    //动销商品数概览加载效果
                      type:Boolean
@@ -82,7 +82,7 @@
                      type:Boolean
                  },
                  NumberGoodsList:{   //动销商品数表格加载效果
-                     type:Object
+                     type:Boolean
                  },
                  tableData:{   //动销清单表格
                      type:Object

@@ -2047,16 +2047,13 @@
                     //二帮卖订单明细
                     getPinListing:{
                         params : {
-                            "inputParam":{
-                                "data_mon":_this.currentDate,
-                                "data_type":"当月",
-                            },
-                            "outputCol":"bo1_name,bo2_name,bo2_money,ratio_rate,money_mom,money_yoy,gross_rate,gross_money_yoy,gross_money_mom",
+                            "inputParam":{"data_mon":"201908","data_type":"当月","bo_type":"品类"},
+                            "outputCol":"bo1_name,bo2_name,money,ratio_rate,money_mom,money_yoy,gross_rate,gross_money_yoy,gross_money_mom",
                             "pageNum":1,
                             "pageSize":1000,
-                            "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
-                            "serviceId":"service_tjbg02_sales_order_dtl"
-                        },
+                            "groupbycol":["dealer_id","data_mon"],
+                            "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                            "serviceId":"service_tjbg02_sales_order_dtl"},
                         header:[
                             {txt:'序号',unit:false},
                             {txt:'事业部',unit:false},
