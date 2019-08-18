@@ -52,10 +52,10 @@
         ></inventoryDase>
         </div>
             <!--库存明细-->
-            <public-table v-if="isShowDetail" :close="closePopup" :tableHeader="tableData.getPinListing.header" :interfaceParams="tableData.getPinListing.params"></public-table>
+            <public-table v-if="isShowDetail" :close="closePopup" :tableHeader="getPinListing.header" :interfaceParams="getPinListing.params"></public-table>
            <!--库存可销天数-->
-            <public-table v-if="isShowreceivable" :close="dealClosePopup" :tableHeader="tableData.getInvDayListing.header"
-                          :buttonGroup="buttonGroup" :interfaceParams="tableData.getInvDayListing.params"></public-table>
+            <public-table v-if="isShowreceivable" :close="dealClosePopup" :tableHeader="getInvDayListing.header"
+                          :buttonGroup="buttonGroup" :interfaceParams="getInvDayListing.params" :selectButtonClick="selectButtonClick"></public-table>
              <!--折线图-->
             <!-- <inventoryChart v-if="invechartsShow" :trendChartClick="trendChartClick" :lineEchartsData="marketableDayLine" :isShow="marketableDayLine"></inventoryChart> -->
     </div>
@@ -98,9 +98,15 @@
             stockAmount:{           //库存金额加载效果
                 type:Boolean
             },
-            tableData:{
-                type:Object     //表格数据
+            getPinListing:{
+                type:Object     //库存未销明细表格数据
             },
+            getInvDayListing:{
+                type:Object     //库存可销天数表格数据
+            },
+            selectButtonClick:{  //切换维度点击事件
+                type:Function
+            }
         },
         components:{
             inventoryCenten,
@@ -121,6 +127,7 @@
                 isShowDetail:false,
                 isShowreceivable:false,
                 marketableDay:[],
+                newTableData:'',
                 defaultVal:"未销明细",
                 buttonGroup:{   //切换维度按钮
                     show:true,
@@ -165,9 +172,15 @@
             }
         },
         watch:{
+            getInvDayListing(val){
+                console.log(val)
+                this.newTableData = val
+                deep:true
+            }
         },
          mounted() {
-               console.log(this.marketableDayChart)
+             console.log(this.getInvDayListing)
+             this.newTableData = this.getInvDayListing
          }
     }
 </script>

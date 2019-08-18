@@ -77,6 +77,7 @@
                 tableHeaderTxt:'',
                 //参数
                 newInterfaceParams:this.interfaceParams,
+                newTableHeader:this.tableHeader,
                 requestList:'',
                 totalSize:'',//数据总条数
                 defaultSize:'',//数据条数/页
@@ -141,7 +142,7 @@
                     _this.tableHeaderKey = numArray.concat(keyValue)
                     //表头文字
                     let header = []
-                    _this.tableHeader.map(function(item){
+                    _this.newTableHeader.map(function(item){
                         header.push(item.txt)
                     })
                     _this.tableHeaderTxt = header
@@ -176,6 +177,11 @@
 
         },
         watch: {
+            tableHeader(val){
+                alert(val)
+                this.newTableHeader= val
+                deep:true
+            }
         },
         distroyed: function () {
 

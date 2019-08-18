@@ -15,7 +15,9 @@
         <!-- 二帮卖分析-订单 -->
         <secondBand :orderAmountData="orderAmountData" :directionData="directionData" :towHelYoy="towHelYoy" :towHelProportion="towHelProportion"
                     :towHelpSaleMonthShow="towHelpSaleMonthShow" :towHelpSaleMonthLineShow="towHelpSaleMonthLineShow"
-                    :tableData="twoDetailTableData.gettwoListing"  v-if="orderAmountData"></secondBand>
+                    :tableData="twoDetailTableData.gettwoListing"  v-if="orderAmountData"  :selectButtonClick="twoDetaSelectButtonClick"
+
+        ></secondBand>
         <!-- 二帮卖分析-业务员 -->
         <salesman :salesmanData="salesmanData" :salesmanTrendData="salesmanTrendData" :salesmandownwardData="salesmandownwardData"
                   :salesmanReachedData="salesmanReachedData" :salesmanContributionData="salesmanContributionData" :isShow="salesmanReached"
@@ -27,9 +29,9 @@
                       :prodownStoresData="prodownStoresData" :upproStoresData="upproStoresData" :productTableData="productTableData"
                       :NumberGoods="NumberGoods"  :CommodityRate="CommodityRate"  :NumberGoodsDownBar="NumberGoodsDownBar" :NumberGoodsUpBar="NumberGoodsUpBar"
                       :NumberGoodsPie="NumberGoodsPie" :NumberGoodsList="NumberGoodsList" v-if="CommodityTurnoverRate.length!=0"
-                      :tableData="proDetailTableData"  :exportData="ProExportData" :homeChartHandleClick="detailChartHandleClick"
+                      :tableData="proDetailTableData.getPinListing"  :exportData="ProExportData" :homeChartHandleClick="detailChartHandleClick"
                       :homePageNumChange="homePageNumChange" :homeCheckValChange="homeCheckValChange" :homeExportClick="homeExportClick"
-                      :detailExport="exportDetailData"
+                      :detailExport="exportDetailData"  :selectButtonClick="proDetaSelectButtonClick"
         ></productIndex>
         <!--门店-->
         <shopIndex  :StoresDetailed="StoresDetailed" v-if="StoresDetailed.length!=0 && storeDetailTableData!='' && upStoresData!=''"  :isShow="StoreisShow"
@@ -39,7 +41,9 @@
          <!--库存-->
         <inventoryIndex  :inventoryDay="inventoryDay" :inventoryDetails="inventoryDetails" :marketableDayChart="marketableDayChart"
                          :DaysAvailableStock="DaysAvailableStock" :InventoryTurnover="InventoryTurnover" :stockAmount="stockAmount"
-                         :marketableDayLine="marketableDayLine"   v-if="inventoryDay.length!=0 && marketableDayChart.length != 0" :tableData="invDetailTableData" > </inventoryIndex>
+                         :marketableDayLine="marketableDayLine"   v-if="inventoryDay.length!=0 && marketableDayChart.length != 0"
+                         :getPinListing="invDetailTableData.getPinListing"  :getInvDayListing="invDetailTableData.getInvDayListing" :selectButtonClick="invDetaSelectButtonClick"
+        > </inventoryIndex>
         <!-- 财务 -->
         <finance :financeData="financeData" :receivableData="receivableData" :overDueData="overDueData" :titleName="financeTitle"
         v-if="financeData.length!=0 && receivableData.length!=0 && overDueData.length!=0" :isShow="financeIsShow"
@@ -291,6 +295,405 @@
             homeExportClick(item){
                 this.exportPageSize = item
                 this.getProductExportData()
+            },
+            //二帮卖订单详情切换维度调用方法
+            twoDetaSelectButtonClick(val){
+                if(val == '系列'){
+                    //二帮卖订单列表数据
+                    this.twoDetailTableData={
+                        //二帮卖订单明细系列维度
+                        gettwoListing:{
+                            params : {
+                                "inputParam":{
+                                    "data_mon":this.currentDate,
+                                    "data_type":"当月",
+                                    "bo_type":"系列"
+                                },
+                                "outputCol":"bo1_name,bo2_name,bo3_name,money,ratio_rate,money_mom,money_yoy,gross_rate,gross_money_yoy,gross_money_mom",
+                                "pageNum":1,
+                                "pageSize":1000,
+                                "groupByCol":["dealer_id","data_mon",'bo3_name'],
+                                "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                                "serviceId":"service_tjbg02_sales_order_dtl"
+                            },
+                            header:[
+                                {txt:'序号',unit:false},
+                                {txt:'事业部',unit:false},
+                                {txt:'品类',unit:false},
+                                {txt:'系列',unit:false},
+                                {txt:'品类下单金额（元）',unit:'money'},
+                                {txt:'占比',unit:'percent'},
+                                {txt:'环比',unit:'percent'},
+                                {txt:'同比',unit:'percent'},
+                                {txt:'毛利额（元）',unit:'percent'},
+                                {txt:'毛利率',unit:'percent'},
+                                {txt:'毛利额环比',unit:'percent'},
+                                {txt:'毛利额同比',unit:'percent'},
+
+                            ]
+                        }
+                    }
+                }
+                else if(val == '商品'){
+                    //二帮卖订单列表数据
+                    this.twoDetailTableData={
+                        //二帮卖订单明细商品维度
+                        gettwoListing:{
+                            params : {
+                                "inputParam":{
+                                    "data_mon":this.currentDate,
+                                    "data_type":"当月",
+                                    "bo_type":"商品"
+                                },
+                                "outputCol":"bo1_name,bo2_name,bo3_name,goods_name,money,ratio_rate,money_mom,money_yoy,gross_rate,gross_money_yoy,gross_money_mom",
+                                "pageNum":1,
+                                "pageSize":1000,
+                                "groupByCol":["dealer_id","data_mon",'goods_name'],
+                                "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                                "serviceId":"service_tjbg02_sales_order_dtl"
+                            },
+                            header:[
+                                {txt:'序号',unit:false},
+                                {txt:'事业部',unit:false},
+                                {txt:'品类',unit:false},
+                                {txt:'系列',unit:false},
+                                {txt:'商品名称',unit:false},
+                                {txt:'商品金额（元）',unit:'money'},
+                                {txt:'占比',unit:'percent'},
+                                {txt:'环比',unit:'percent'},
+                                {txt:'同比',unit:'percent'},
+                                {txt:'毛利额（元）',unit:'percent'},
+                                {txt:'毛利率',unit:'percent'},
+                                {txt:'毛利额环比',unit:'percent'},
+                                {txt:'毛利额同比',unit:'percent'},
+
+                            ]
+                        }
+                    }
+                }
+                else {
+                    //二帮卖订单列表数据
+                    this.twoDetailTableData={
+                        //二帮卖订单明细品类维度
+                        gettwoListing:{
+                            params : {
+                                "inputParam":{
+                                    "data_mon":this.currentDate,
+                                    "data_type":"当月",
+                                    "bo_type":"品类"
+                                },
+                                "outputCol":"bo1_name,bo2_name,money,ratio_rate,money_mom,money_yoy,gross_rate,gross_money_yoy,gross_money_mom",
+                                "pageNum":1,
+                                "pageSize":1000,
+                                "groupByCol":["dealer_id","data_mon"],
+                                "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                                "serviceId":"service_tjbg02_sales_order_dtl"
+                            },
+                            header:[
+                                {txt:'序号',unit:false},
+                                {txt:'事业部',unit:false},
+                                {txt:'品类',unit:false},
+                                {txt:'品类下单金额（元）',unit:'money'},
+                                {txt:'占比',unit:'percent'},
+                                {txt:'环比',unit:'percent'},
+                                {txt:'同比',unit:'percent'},
+                                {txt:'毛利额（元）',unit:'percent'},
+                                {txt:'毛利率',unit:'percent'},
+                                {txt:'毛利额环比',unit:'percent'},
+                                {txt:'毛利额同比',unit:'percent'},
+
+                            ]
+                        }
+                    }
+                }
+            },
+            //产品-动销清单切换维度调用方法
+            proDetaSelectButtonClick(val){
+                if(val == '系列'){
+                    //动销清单表格数据
+                    this.proDetailTableData={
+                        //产品动销清单明细  系列
+                        getPinListing:{
+                            params : {
+                                "inputParam":{
+                                    "data_mon":this.currentDate,
+                                    "data_type":"当月",
+                                    "bo_type":'系列'
+                                },
+                                "outputCol":"bo1_name,bo2_name,bo3_name,order_qty,stock_qty,sale_rate",
+                                "pageNum":1,
+                                "pageSize":1000,
+                                "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
+                                "serviceId":"service_tjbg02_goods_stock_sales"
+                            },
+                            header:[
+                                {txt:'序号',unit:false},
+                                {txt:'事业部',unit:false},
+                                {txt:'品类',unit:false},
+                                {txt:'系列',unit:false},
+                                {txt:'订单SKU数',unit:false},
+                                {txt:'库存SKU数',unit:false},
+                                {txt:'系列动销率',unit:false},
+                            ]
+                        }
+                    }
+                }
+                else if(val == '商品'){
+                    //动销清单表格数据
+                    this.proDetailTableData={
+                        //产品动销清单明细  商品
+                        getPinListing:{
+                            params : {
+                                "inputParam":{
+                                    "data_mon":this.currentDate,
+                                    "data_type":"当月",
+                                    "bo_type":'商品'
+                                },
+                                "outputCol":"bo1_name,bo2_name,bo2_name,goods_code79,goods_name,sale_rate",
+                                "pageNum":1,
+                                "pageSize":1000,
+                                "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
+                                "serviceId":"service_tjbg02_goods_stock_sales"
+                            },
+                            header:[
+                                {txt:'序号',unit:false},
+                                {txt:'事业部',unit:false},
+                                {txt:'品类',unit:false},
+                                {txt:'系列',unit:false},
+                                {txt:'商品编码',unit:false},
+                                {txt:'商品名称',unit:false},
+                                {txt:'是否动销',unit:false},
+                            ]
+                        }
+                    }
+                }
+                else {
+                    //动销清单表格数据
+                    this.proDetailTableData={
+                        //产品动销清单明细  品类
+                        getPinListing:{
+                            params : {
+                                "inputParam":{
+                                    "data_mon":this.currentDate,
+                                    "data_type":"当月",
+                                    "bo_type":'品类'
+                                },
+                                "outputCol":"bo1_name,bo2_name,order_qty,stock_qty,sale_rate",
+                                "pageNum":1,
+                                "pageSize":1000,
+                                "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
+                                "serviceId":"service_tjbg02_goods_stock_sales"
+                            },
+                            header:[
+                                {txt:'序号',unit:false},
+                                {txt:'事业部',unit:false},
+                                {txt:'品类',unit:false},
+                                {txt:'订单SKU数',unit:false},
+                                {txt:'库存SKU数',unit:false},
+                                {txt:'品类动销率',unit:false},
+                            ]
+                        }
+                    }
+                }
+            },
+            //二帮卖订单详情切换维度调用方法
+            selectButtonClick(val){
+                if(val == '系列'){
+                    //二帮卖订单列表数据
+                    this.twoDetailTableData={
+                        //二帮卖订单明细系列维度
+                        gettwoListing:{
+                            params : {
+                                "inputParam":{
+                                    "data_mon":this.currentDate,
+                                    "data_type":"当月",
+                                    "bo_type":"系列"
+                                },
+                                "outputCol":"bo1_name,bo2_name,bo3_name,money,ratio_rate,money_mom,money_yoy,gross_rate,gross_money_yoy,gross_money_mom",
+                                "pageNum":1,
+                                "pageSize":1000,
+                                "groupByCol":["dealer_id","data_mon",'bo3_name'],
+                                "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                                "serviceId":"service_tjbg02_sales_order_dtl"
+                            },
+                            header:[
+                                {txt:'序号',unit:false},
+                                {txt:'事业部',unit:false},
+                                {txt:'品类',unit:false},
+                                {txt:'系列',unit:false},
+                                {txt:'品类下单金额（元）',unit:'money'},
+                                {txt:'占比',unit:'percent'},
+                                {txt:'环比',unit:'percent'},
+                                {txt:'同比',unit:'percent'},
+                                {txt:'毛利额（元）',unit:'percent'},
+                                {txt:'毛利率',unit:'percent'},
+                                {txt:'毛利额环比',unit:'percent'},
+                                {txt:'毛利额同比',unit:'percent'},
+
+                            ]
+                        }
+                    }
+                }
+                else if(val == '商品'){
+                    //二帮卖订单列表数据
+                    this.twoDetailTableData={
+                        //二帮卖订单明细商品维度
+                        gettwoListing:{
+                            params : {
+                                "inputParam":{
+                                    "data_mon":this.currentDate,
+                                    "data_type":"当月",
+                                    "bo_type":"商品"
+                                },
+                                "outputCol":"bo1_name,bo2_name,bo3_name,goods_name,money,ratio_rate,money_mom,money_yoy,gross_rate,gross_money_yoy,gross_money_mom",
+                                "pageNum":1,
+                                "pageSize":1000,
+                                "groupByCol":["dealer_id","data_mon",'goods_name'],
+                                "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                                "serviceId":"service_tjbg02_sales_order_dtl"
+                            },
+                            header:[
+                                {txt:'序号',unit:false},
+                                {txt:'事业部',unit:false},
+                                {txt:'品类',unit:false},
+                                {txt:'系列',unit:false},
+                                {txt:'商品名称',unit:false},
+                                {txt:'商品金额（元）',unit:'money'},
+                                {txt:'占比',unit:'percent'},
+                                {txt:'环比',unit:'percent'},
+                                {txt:'同比',unit:'percent'},
+                                {txt:'毛利额（元）',unit:'percent'},
+                                {txt:'毛利率',unit:'percent'},
+                                {txt:'毛利额环比',unit:'percent'},
+                                {txt:'毛利额同比',unit:'percent'},
+
+                            ]
+                        }
+                    }
+                }
+                else {
+                    //二帮卖订单列表数据
+                    this.twoDetailTableData={
+                        //二帮卖订单明细品类维度
+                        gettwoListing:{
+                            params : {
+                                "inputParam":{
+                                    "data_mon":this.currentDate,
+                                    "data_type":"当月",
+                                    "bo_type":"品类"
+                                },
+                                "outputCol":"bo1_name,bo2_name,money,ratio_rate,money_mom,money_yoy,gross_rate,gross_money_yoy,gross_money_mom",
+                                "pageNum":1,
+                                "pageSize":1000,
+                                "groupByCol":["dealer_id","data_mon"],
+                                "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                                "serviceId":"service_tjbg02_sales_order_dtl"
+                            },
+                            header:[
+                                {txt:'序号',unit:false},
+                                {txt:'事业部',unit:false},
+                                {txt:'品类',unit:false},
+                                {txt:'品类下单金额（元）',unit:'money'},
+                                {txt:'占比',unit:'percent'},
+                                {txt:'环比',unit:'percent'},
+                                {txt:'同比',unit:'percent'},
+                                {txt:'毛利额（元）',unit:'percent'},
+                                {txt:'毛利率',unit:'percent'},
+                                {txt:'毛利额环比',unit:'percent'},
+                                {txt:'毛利额同比',unit:'percent'},
+
+                            ]
+                        }
+                    }
+                }
+            },
+            //库存可销天数详情切换维度调用方法
+            invDetaSelectButtonClick(val){
+                if(val == '系列'){
+                    //库存数据列表数据
+                    this.invDetailTableData= {
+                        //库存可销天数详细
+                        getInvDayListing: {
+                            params: {
+                                "inputParam": {
+                                    "data_mon": _this.currentDate,
+                                    "data_type": "当月",
+                                    "partition": "bo2_name"
+                                },
+                                "isReturnTotalSize": "Y",
+                                "outputCol": "bo1_name,bo2_name,bo3_name,saledays",
+                                "pageNum": 1,
+                                "pageSize": 10,
+                                "serviceId": "service_tjbg02_stock_saledays",
+                                "whereCndt": {"dealer_id": "='ff80808169c93eb80169d6a73cc02d04'"}
+                            },
+                            header: [
+                                {txt: '序号', unit: false},
+                                {txt: '事业部', unit: false},
+                                {txt: '品类', unit: false},
+                                {txt: '系列', unit: false},
+                                {txt: '可销天数', unit: 'day'},
+                            ]
+                        },
+                    }
+                }
+                else if(val == '商品'){
+                    //库存数据列表数据
+                    this.invDetailTableData= {
+                        //库存可销天数详细
+                        getInvDayListing: {
+                            params: {
+                                "inputParam": {
+                                    "data_mon": _this.currentDate,
+                                    "data_type": "当月",
+                                    "partition": "goods_name"
+                                },
+                                "isReturnTotalSize": "Y",
+                                "outputCol": "bo2_name,bo3_name,bo1_name,goods_name,saledays",
+                                "pageNum": 1,
+                                "pageSize": 10,
+                                "serviceId": "service_tjbg02_stock_saledays",
+                                "whereCndt": {"dealer_id": "='ff80808169c93eb80169d6a73cc02d04'"}
+                            },
+                            header: [
+                                {txt: '序号', unit: false},
+                                {txt: '品类', unit: false},
+                                {txt: '系列', unit: false},
+                                {txt: '商品编号', unit: false},
+                                {txt: '商品名称', unit: false},
+                                {txt: '可销天数', unit: 'day'},
+                            ]
+                        },
+                    }
+                }
+                else {
+                    //库存数据列表数据
+                    this.invDetailTableData= {
+                        //库存可销天数详细
+                        getInvDayListing: {
+                            params: {
+                                "inputParam": {
+                                    "data_mon": _this.currentDate,
+                                    "data_type": "当月",
+                                    "partition": "bo2_name"
+                                },
+                                "isReturnTotalSize": "Y",
+                                "outputCol": "bo1_name,bo2_name,bo3_name,saledays",
+                                "pageNum": 1,
+                                "pageSize": 10,
+                                "serviceId": "service_tjbg02_stock_saledays",
+                                "whereCndt": {"dealer_id": "='ff80808169c93eb80169d6a73cc02d04'"}
+                            },
+                            header: [
+                                {txt: '序号', unit: false},
+                                {txt: '事业部', unit: false},
+                                {txt: '品类', unit: false},
+                                {txt: '系列', unit: false},
+                                {txt: '可销天数', unit: 'day'},
+                            ]
+                        },
+                    }
+                }
             },
             //体检报告概览
             getOverViewData() {
@@ -915,7 +1318,7 @@
                 _this.CommodityRate = true
                 var params = {
                     "inputParam":{
-                        "data_mon":_this.currentDate,
+                        "data_mon":"201908",
                         "data_type":"当月"
                     },
                     "outputCol":"dealer_id,data_mon,data_type,stock_sale_rate,stock_sale_goods_cnt,goods_cnt,stock_sale_goods_cnt_mom,stock_sale_goods_cnt_yoy,sales_raise_goods_cnt,sales_drop_goods_cnt,liby_stock_sale_rate,kispa_stock_sale_rate,cheerwin_stock_sale_rate,oral_stock_sale_rate,shengmei_stock_sale_rate",
@@ -967,15 +1370,15 @@
                         }
                         //产品动销率树状图
                         let barDataMonth = [
-                            _this.dataProcess(data.liby_stock_sale_rate, 'percent').num,_this.dataProcess(data.kispa_stock_sale_rate, 'percent').num,
-                            _this.dataProcess(data.cheerwin_stock_sale_rate, 'percent').num,_this.dataProcess(data.oral_stock_sale_rate, 'percent').num,
-                            _this.dataProcess(data.shengmei_stock_sale_rate, 'percent').num
+                            data.liby_stock_sale_rate, data.kispa_stock_sale_rate,
+                            data.cheerwin_stock_sale_rate, data.oral_stock_sale_rate,
+                            data.shengmei_stock_sale_rate
                         ]
                         let Axiax = ['立白','好爸爸','超威','口腔','晟美']
                         let produnarData = {
                             config:{
                                 id: 'barIdProdun',
-                                unit:'%',
+                                unit:['percent'],
                                 xAxisData: Axiax,
                                 label: {
                                     isShow: true
@@ -1229,7 +1632,7 @@
                                 //id
                                 id:'barRaiseId',
                                 //数据单位
-                                unit:'万元',
+                                unit:['money','tenth'],
                                 //x轴单位
                                 xAxisData:raisexAxisData,
                                 type:'xAxis',
@@ -1283,7 +1686,7 @@
                                 //id
                                 id:'barDownId',
                                 //数据单位
-                                unit:'万元',
+                                unit:['money','tenth'],
                                 //x轴单位
                                 xAxisData:downxAxisData,
                                 type:'xAxis',
@@ -1692,7 +2095,7 @@
                         let inventoryBarData = {
                         config:{
                             id: 'barIdInventory',
-                            unit:'天',
+                            unit:['day'],
                             xAxisData: Axiax,
                             label: {
                                 isShow: true
@@ -1990,8 +2393,8 @@
                     getPinListing: {
                         params: {
                             "inputParam": {
-                                "data_mon": "201907"
-                                , "data_type": "当月"
+                                "data_mon":_this.currentDate,
+                                "data_type": "当月"
                             },
                             "isReturnTotalSize": "Y",
                             "outputCol": "bo3_name,goods_name,last_order_time,money,qty,unsale_days",
@@ -2069,7 +2472,7 @@
                     gettwoListing:{
                         params : {
                             "inputParam":{
-                                "data_mon":"201908",
+                                "data_mon":_this.currentDate,
                                 "data_type":"当月",
                                 "bo_type":"品类"
                             },

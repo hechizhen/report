@@ -20,7 +20,7 @@
 		  	</a-Row>
 		  </a-Col>
 		</a-Row>
-		<public-table v-if="isShowDetail" :close="closePopup" :tableHeader="tableData.header" :interfaceParams="tableData.params"  :buttonGroup="buttonGroup"></public-table>
+		<public-table v-if="isShowDetail" :close="closePopup" :tableHeader="newTableData.header" :interfaceParams="newTableData.params"  :buttonGroup="buttonGroup" :selectButtonClick="selectButtonClick"></public-table>
 		<core :coretype="'二帮卖得分'" :coretext="100" :evaluate="'优秀'"></core>
 	</div>
 </template>
@@ -70,6 +70,9 @@
 			},
 			tableData:{
 				type:Object
+			},
+			selectButtonClick:{
+				type:Function
 			}
 		},
 		data(){
@@ -99,11 +102,13 @@
 					span:7,
 					span2:17,
 					titleName:'二帮卖分析-订单指标解释',
+					newTableData:'',
 				}
 			}
 		},
 		mounted(){
-		console.log(this.tableData)
+			this.newTableData = this.tableData
+			console.log(this.selectButtonClick)
 		},
 		methods:{
 			explicit(a,b){
@@ -135,7 +140,12 @@
                         },
 					],
                 }
-            }
+            },
+			tableData(val){
+            	console.log(val)
+				this.newTableData = val
+				deep:true
+			}
         },
 		distroyed:{
 

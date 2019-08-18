@@ -12,7 +12,7 @@
                             :isGhost="true" :defaultVal="productdata.btn"></newButton>
             </div>
             <public-table v-if="isShowDetail" :close="closePopup" :tableHeader="tableData.header" :interfaceParams="tableData.params"
-                            :buttonGroup="buttonGroup"
+                            :buttonGroup="buttonGroup" :selectButtonClick="selectButtonClick"
             ></public-table>
         </div>
 </template>
@@ -22,7 +22,17 @@
     import publicTable from '../base/publicTable.vue'
     export default {
         name: "productLeft",
-        props:["productdata","listClick","tableData"],
+        props:{
+            productdata:{    //概览数据
+                type: Object
+            },
+            tableData:{    //动销清单表格数据
+                type:Array
+            },
+            selectButtonClick:{  //切换维度点击事件
+                type:Function
+            }
+        },
         data(){
             return{
                 buttonType:"default",
@@ -35,9 +45,11 @@
             }
         },
         methods:{
+            //打开动销清单
             storeDetailHandleClick(){
                 this.isShowDetail = true
             },
+            //关闭动销清单
             closePopup(){
                 this.isShowDetail = false
             },
@@ -45,6 +57,7 @@
         },
         mounted() {
            console.log(this.tableData)
+            console.log(this.selectButtonClick)
         },
         components:{
             newButton,
