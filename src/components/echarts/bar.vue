@@ -195,7 +195,7 @@
                                     color:_this.label.color,
                                     formatter:function(params){
                                         console.log(params)
-                                        return params.value+_this.barEchartsData.unit
+                                        return _this.dataProcess(params.value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num+_this.dataProcess(params.value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).unit
                                     }
                                 }
                             }
@@ -206,11 +206,49 @@
                     _this.xAxisData = _this.barEchartsData.xAxisData
                     _this.yAxisType = 'value'
                     _this.yAxisData = ''
+                    var yAxisLabel = {
+                        show:_this.yAxis.axisLabel.show,
+                        textStyle:{
+                            color:_this.yAxis.axisLabel.color,
+                            fontSize:_this.yAxis.axisLabel.fontSize,
+                        },
+                        formatter:function(value) {
+                            console.log(value)
+                            value = _this.dataProcess(value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num
+                            return value
+                        },
+                    }
+                    var xAxisLabel = {
+                        show:_this.xAxis.axisLabel.show,
+                        textStyle:{
+                            color:_this.xAxis.axisLabel.color,
+                            fontSize:_this.xAxis.axisLabel.fontSize,
+                        },
+                    }
                 }else{
                     _this.xAxisType = 'value'
                     _this.xAxisData = ''
                     _this.yAxisType = 'category'
                     _this.yAxisData = _this.barEchartsData.xAxisData
+                    var xAxisLabel = {
+                        show:_this.xAxis.axisLabel.show,
+                        textStyle:{
+                            color:_this.xAxis.axisLabel.color,
+                            fontSize:_this.xAxis.axisLabel.fontSize,
+                        },
+                        formatter:function(value) {
+                            console.log(value)
+                            value = _this.dataProcess(value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num
+                            return value
+                        },
+                    }
+                    var yAxisLabel = {
+                        show:_this.yAxis.axisLabel.show,
+                        textStyle:{
+                            color:_this.yAxis.axisLabel.color,
+                            fontSize:_this.yAxis.axisLabel.fontSize,
+                        },
+                    }
                 }
                 if(_this.isShowMax){
                     _this.intervalData = 'max'
@@ -223,7 +261,8 @@
                         formatter:function(params){
                             var relVal = '';
                             for (var i = 0; i < params.length; i++) {
-                                relVal += params[i].marker+params[i].seriesName+':'+params[i].value+'</br>'
+                                relVal += params[i].marker+params[i].seriesName+':'+_this.dataProcess(params[i].value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num+_this.dataProcess(params[i].value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).unit
+                                    +'</br>'
                             }
                             return relVal;
                         }
@@ -277,13 +316,7 @@
                                 color: _this.xAxis.axisLine.color,
                             }
                         },
-                        axisLabel:{
-                            show:_this.xAxis.axisLabel.show,
-                            textStyle:{
-                                color:_this.xAxis.axisLabel.color,
-                                fontSize:_this.xAxis.axisLabel.fontSize,
-                            }
-                        },
+                        axisLabel:xAxisLabel,
                         splitLine: {
                             show: _this.xAxis.splitLine.show,
                             lineStyle: {
@@ -304,13 +337,7 @@
                                 color: _this.yAxis.splitLine.color,
                             }
                         },
-                        axisLabel:{
-                            show:_this.yAxis.axisLabel.show,
-                            textStyle:{
-                                color:_this.yAxis.axisLabel.color,
-                                fontSize:_this.yAxis.axisLabel.fontSize,
-                            }
-                        },
+                        axisLabel:yAxisLabel,
                         axisLine: {
                             show: _this.yAxis.axisLine.show,
                             lineStyle: {

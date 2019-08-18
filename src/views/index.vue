@@ -386,7 +386,7 @@
                             config:{
                                 id: 'barIdMonthSales',
                                 xAxisData: Axiax,
-                                unit:'%',
+                                unit:['percent'],
                                 type: 'xAxis',
                                 barData: [
                                     {
@@ -463,7 +463,7 @@
                             config:{
                                 id: 'barIdYearSales',
                                 xAxisData: Axiax,
-                                unit:'%',
+                                unit:['percent'],
                                 type: 'xAxis',
                                 barData: [
                                     {
@@ -1391,7 +1391,7 @@
                     let ActivestresPer = {
                         ActiveStores:"门店单产",
                         ActiveStoresing:"(万元)",
-                        NoSales:_this.dataProcess(data.store_avg_money, 'money').num,
+                        NoSales:_this.dataProcess(data.store_avg_money, 'money','tenth').num,
                         }
                     let ActivestresSum = {
                         ActiveStores:"总门店数",
@@ -1472,10 +1472,10 @@
                         tableHeaderTxt:['序号','业务员姓名','联系电话','门店名称','门店老板姓名','门店老板电话','门店地址','月均销量（元）','当月销量（元）','差额（元）'],
                         tableHeaderKey:params.outputCol,
                         tableData:'',
-                        tableName:'增长门店'
+                        tableName:'下滑门店'
                     }
                     return _this.$http({
-                        url: _this.testRequestHttpUrl+'?v=raiseStore',
+                        url: _this.testRequestHttpUrl+'?v=downStore',
                         method: 'POST',
                         data: params,
                     })
@@ -1492,7 +1492,7 @@
                         "outputCol":"emp_name,emp_phone,store_name,store_contact,store_phone,store_address,money,mon3_avg_m_money,dif_money",
                         "pageNum":1,
                         "pageSize":1000,
-                        "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                        "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
                         "serviceId":"service_tjbg02_store_sales_change"
                     }
                     _this.storeExportData.downData={
@@ -1500,10 +1500,10 @@
                         tableHeaderTxt:['序号','业务员姓名','联系电话','门店名称','门店老板姓名','门店老板电话','门店地址','月均销量（元）','当月销量（元）','差额（元）'],
                         tableHeaderKey:params.outputCol,
                         tableData:'',
-                        tableName:'下滑门店'
+                        tableName:'增长门店'
                     }
                     return _this.$http({
-                        url: _this.testRequestHttpUrl+'?v=downStore',
+                        url: _this.testRequestHttpUrl+'?v=raiseStore',
                         method: 'POST',
                         data: params,
                     })
@@ -1532,26 +1532,26 @@
                                 //id
                                 id:'barRaiseId',
                                 //数据单位
-                                unit:'万元',
+                                unit:['money','tenth'],
                                 //x轴单位
                                 xAxisData:raisexAxisData,
                                 type:'xAxis',
                                 //柱状图数据
                                 barData:[
                                     {
-                                        name:'月均销售额(万元)',
+                                        name:'月均销售额',
                                         data:raiseLastMonth,
                                         color:'#2D92FC',
                                         barWidth:22,
                                     },
                                     {
-                                        name:'当月销售额(万元)',
+                                        name:'当月销售额',
                                         data:raiseSameMonth,
                                         color:'#FFBD7B',
                                         barWidth:22,
                                     },
                                     {
-                                        name:'销售差额(万元)',
+                                        name:'销售差额',
                                         data:raiseDifference,
                                         color:'#FE9600',
                                         barWidth:22,
@@ -1585,26 +1585,26 @@
                                 //id
                                 id:'barDownId',
                                 //数据单位
-                                unit:'万元',
+                                unit:['money','tenth'],
                                 //x轴单位
                                 xAxisData:downxAxisData,
                                 type:'xAxis',
                                 //柱状图数据
                                 barData:[
                                     {
-                                        name:'月均销售额(万元)',
+                                        name:'月均销售额',
                                         data:downLastMonth,
                                         color:'#2D92FC',
                                         barWidth:22,
                                     },
                                     {
-                                        name:'当月销售额(万元)',
+                                        name:'当月销售额',
                                         data:downSameMonth,
                                         color:'#FFBD7B',
                                         barWidth:22,
                                     },
                                     {
-                                        name:'销售差额(万元)',
+                                        name:'销售差额',
                                         data:downDifference,
                                         color:'#FE9600',
                                         barWidth:22,
