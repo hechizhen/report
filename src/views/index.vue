@@ -1200,10 +1200,12 @@
                             let raiseDifference = []//增长门店差异销售额
                             proraiseList.map(function(item,index){
                                 item.numberId = index+1
-                                raisexAxisData.push(item.goods_name)
-                                raiseLastMonth.push(item.money)
-                                raiseSameMonth.push(item.money_lm)
-                                raiseDifference.push(item.dif_money)
+                                if(index<5) {
+                                    raisexAxisData.push(item.goods_name)
+                                    raiseLastMonth.push(item.money)
+                                    raiseSameMonth.push(item.money_lm)
+                                    raiseDifference.push(item.dif_money)
+                                }
                             })
                             _this.ProExportData.proraiseData.tableData = proraiseList
                             console.log( _this.ProExportData.proraiseData)
@@ -1252,10 +1254,12 @@
                             let downDifference = []//下滑门店差异销售额
                             downList.map(function(item,index){
                                 item.numberId = index+1
-                                downxAxisData.push(item.goods_name)
-                                downLastMonth.push(item.money)
-                                downSameMonth.push(item.money_lm)
-                                downDifference.push(item.dif_money)
+                                if(index<5) {
+                                    downxAxisData.push(item.goods_name)
+                                    downLastMonth.push(item.money)
+                                    downSameMonth.push(item.money_lm)
+                                    downDifference.push(item.dif_money)
+                                }
                             })
                             _this.ProExportData.prodownData.tableData = downList
                             console.log( _this.ProExportData.prodownData.tableData)
