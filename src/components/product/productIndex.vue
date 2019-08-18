@@ -5,8 +5,8 @@
             <div class="product-content">
                 <a-Row >
                     <a-Col :span="10">
-                        <productLeft :productdata="CommodityTurnoverRate" :listClick="listClick"
-                                     :tableData="tableData.getPinListing"> </productLeft>
+                        <productLeft :productdata="CommodityTurnoverRate"  :selectButtonClick="selectButtonClick"
+                                     :tableData="newTableData"> </productLeft>
                         <productRight :barData="CommodityTurnoverRate.produnarData"  ></productRight>
                         <loading-data :isShow="CommodityRate"></loading-data>
                     </a-Col>
@@ -104,6 +104,9 @@
                  },
                  detailExport:{     //导出表格数据
                      type:Object
+                 },
+                 selectButtonClick:{  //切换维度点击事件
+                     type:Function
                  }
              },
         components:{
@@ -130,7 +133,7 @@
                 downShow:false,
                 pieShow:false,
                 listShow:false,
-                isShowDetail:false,
+                newTableData:'',
                 // productisShow:true,
                 // commodityisShow:true,
                 titName:"商品", // 产品
@@ -180,14 +183,6 @@
             pieClick(){
                 this.pieShow = false;
             },
-            //打开动销清单表格
-            listClick(){
-                this.isShowDetail = true;
-            },
-            //关闭动销清单表格
-            listClicks(){
-                this.upShow = false;
-            },
             IndexChartHandleClick(item){
                 var _this  =this
                 console.log(item)
@@ -208,20 +203,30 @@
             }
         },
         watch:{
+            //饼图监听
             GoodsDetail(val){
               this.GoodsDetailPie =val
             },
+            //下滑树状图监听
             upproStoresData(val){
                this.VariabilityUp = val
                 console.log(val)
             },
+            //增长树状图监听
             prodownStoresData(val){
                this.VariabilityDown = val
                 console.log(val)
             },
+            //切换维度表格监听
+            tableData(val){
+                console.log(val)
+                this.newTableData = val
+                deep:true
+            }
         },
         mounted() {
-            console.log(this.exportData)
+            console.log(this.tableData)
+            this.newTableData = this.tableData
         }
     }
 </script>
