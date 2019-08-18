@@ -15,7 +15,7 @@
         <!-- 二帮卖分析-订单 -->
         <secondBand :orderAmountData="orderAmountData" :directionData="directionData" :towHelYoy="towHelYoy" :towHelProportion="towHelProportion"
                     :towHelpSaleMonthShow="towHelpSaleMonthShow" :towHelpSaleMonthLineShow="towHelpSaleMonthLineShow"
-                    :tableData="twoDetailTableData.getPinListing"  v-if="orderAmountData"></secondBand>
+                    :tableData="twoDetailTableData.gettwoListing"  v-if="orderAmountData"></secondBand>
         <!-- 二帮卖分析-业务员 -->
         <salesman :salesmanData="salesmanData" :salesmanTrendData="salesmanTrendData" :salesmandownwardData="salesmandownwardData"
                   :salesmanReachedData="salesmanReachedData" :salesmanContributionData="salesmanContributionData" :isShow="salesmanReached"
@@ -2045,15 +2045,20 @@
                     //二帮卖订单列表数据
                 _this.twoDetailTableData={
                     //二帮卖订单明细
-                    getPinListing:{
+                    gettwoListing:{
                         params : {
-                            "inputParam":{"data_mon":"201908","data_type":"当月","bo_type":"品类"},
+                            "inputParam":{
+                                "data_mon":"201908",
+                                "data_type":"当月",
+                                "bo_type":"品类"
+                            },
                             "outputCol":"bo1_name,bo2_name,money,ratio_rate,money_mom,money_yoy,gross_rate,gross_money_yoy,gross_money_mom",
                             "pageNum":1,
                             "pageSize":1000,
-                            "groupbycol":["dealer_id","data_mon"],
+                            "groupByCol":["dealer_id","data_mon"],
                             "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
-                            "serviceId":"service_tjbg02_sales_order_dtl"},
+                            "serviceId":"service_tjbg02_sales_order_dtl"
+                        },
                         header:[
                             {txt:'序号',unit:false},
                             {txt:'事业部',unit:false},
