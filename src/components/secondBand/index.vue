@@ -20,7 +20,7 @@
 		  	</a-Row>
 		  </a-Col>
 		</a-Row>
-		<public-table v-if="isShowDetail" :close="closePopup" :tableHeader="tableData.header" :interfaceParams="tableData.params"></public-table>
+		<public-table v-if="isShowDetail" :close="closePopup" :tableHeader="tableData.header" :interfaceParams="tableData.params"  :buttonGroup="buttonGroup"></public-table>
 		<core :coretype="'二帮卖得分'" :coretext="100" :evaluate="'优秀'"></core>
 	</div>
 </template>
@@ -79,6 +79,10 @@
 				listing:['订单详情'],
 				lineEchartsData:"",
 				isShowDetail:false,
+				buttonGroup:{   //切换维度按钮
+					show:true,
+					list:['品类','系列','商品']
+				},
 				explainSecondList:{
 					imgType:2,
 					tableData:[
