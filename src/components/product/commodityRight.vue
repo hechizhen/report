@@ -66,16 +66,16 @@
     export default {
         name: "commodityRight",
         props:{
-            commoditydata:{
+            commoditydata:{   //产品页面概览数据
               type:Object,Array
             },
-            upraphy:{
+            upraphy:{   //打开下滑树状图
                 type:Function
             },
-            downraphy:{
+            downraphy:{  //打开增长树状图
                 type:Function
             },
-            pieraphy:{
+            pieraphy:{  //打开饼图
                 type:Function
             },
         },

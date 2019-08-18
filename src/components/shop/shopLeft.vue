@@ -48,22 +48,22 @@
     export default {
         name: "shopLeft",
         props:{
-            shopActives:{
+            shopActives:{  //门店页面概览数据
                 type:Object
             },
-            upraphy:{
+            upraphy:{  //下滑树状图数据
                 type:Function
             },
-            downraphy:{
+            downraphy:{  //增长树状图数据
                 type:Function
             },
-            tableData:{
+            tableData:{   //无交易明细表格数据
                 type:Object
             },
-            tradeTableData:{
+            tradeTableData:{   //应收明细表格数据
                 type:Object
             },
-            exportData:{
+            exportData:{  //导出数据功能
                 type:Object
             }
         },

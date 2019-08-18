@@ -14,7 +14,17 @@
     import loadingData from '../base/loadingData'
     export default {
         name: "inventoryCenten",
-        props:["turnoverTxt","turnover","isShow"],
+        props:{
+            turnoverTxt:{  //库存周转次数文字
+                type:String
+            },
+            turnover:{   //库存周转次数
+                type:String
+            },
+            isShow:{   //库存周转次数加载效果
+                type:Boolean
+            },
+        },
         data(){
             return{
                 // isShow:true

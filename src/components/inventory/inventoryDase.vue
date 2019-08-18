@@ -47,17 +47,17 @@
             }
         },
         props:{
-            inventoryTxt:{
+            inventoryTxt:{   //库存可销天数
                 type: Object,String
             },
-            barData:{
+            barData:{      //库存可销天数树状图
                 type: Object
             },
-            isShow:{
+            isShow:{     //库存可销天数加载效果
                 type:Boolean,
                 default:false,
             },
-            dealHandleClick:{
+            dealHandleClick:{   //库存可销天数库存详情
                 type:Function
             }
         },

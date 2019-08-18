@@ -19,7 +19,17 @@
     import publicTable from '../base/publicTable.vue'
     export default {
         name: "shopRight",
-        props:["ActiveDetail","tableData","dealTableData"],
+        props:{
+            ActiveDetail:{   //门店页面概览数据
+                type:Object
+            },
+            tableData:{   //新增门店数，门店详情
+                type:Object
+            },
+            dealTableData:{  //门店应收明细
+                type:Object
+            },
+        },
         data(){
             return{
                 defaultVal:"应收明细",

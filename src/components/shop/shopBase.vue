@@ -37,7 +37,17 @@
     import publicTable from '../base/publicTable.vue'
     export default {
         name: "shopBase",
-        props:["shopDaseData","defaultVal","detailHandleClick"],
+        props:{
+            shopDaseData:{  //门店底部展示数据
+                type:Object
+            },
+            defaultVal:{     //门店底部按钮名称
+                type:Object
+            },
+            detailHandleClick:{  //打开门店底部按钮显示表格
+                type:Object
+            },
+        },
         components:{
             newButton,
             publicTable
