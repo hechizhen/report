@@ -153,13 +153,35 @@
                     })
                 })
                 _this.legendList = legendList
+                if(_this.dataZoomShow){
+                    var dataZoom =[{
+                        height: 12,
+                        xAxisIndex: [
+                            0
+                        ],
+                        bottom:'8%',
+                        start: 10,
+                        end: 90,
+                        handleStyle:{
+                            color:"#d3dee5",
+
+                        },
+                        textStyle:{
+                            color:"#418eff"},
+                        borderColor:"#90979c"
+                        }, {
+                        type: "inside",
+                    }]
+                }else{
+                    var dataZoom= ''
+                }
                 var option = {
                     tooltip: {
                         trigger: 'axis',
                         formatter:function(params){
                             var relVal = '';
                             for (var i = 0; i < params.length; i++) {
-                                relVal += params[i].marker+params[i].seriesName+':'+params[i].value+'</br>'
+                                relVal += params[i].marker+params[i].seriesName+':'+_this.dataProcess(params[i].value,_this.lineEchartsData.unit[0],_this.lineEchartsData.unit[1]).num+_this.dataProcess(params[i].value,_this.lineEchartsData.unit[0],_this.lineEchartsData.unit[1]).unit+'</br>'
                             }
                             return relVal;
                         }
@@ -174,27 +196,7 @@
                             fontSize:14
                         }
                     },
-                    dataZoom: [{
-                        show: _this.dataZoomShow,
-                        height: 12,
-                        xAxisIndex: [
-                            0
-                        ],
-                        bottom:'8%',
-                        start: 10,
-                        end: 90,
-                        handleIcon: 'path://M306.1,413c0,2.2-1.8,4-4,4h-59.8c-2.2,0-4-1.8-4-4V200.8c0-2.2,1.8-4,4-4h59.8c2.2,0,4,1.8,4,4V413z',
-                        handleSize: '110%',
-                        handleStyle:{
-                            color:"#d3dee5",
-
-                        },
-                        textStyle:{
-                            color:"#418eff"},
-                        borderColor:"#90979c"
-                        }, {
-                        type: "inside",
-                    }],
+                    dataZoom: dataZoom,
                     grid: {
                         top: _this.grid.top,
                         left: _this.grid.left,
@@ -248,7 +250,12 @@
                             textStyle:{
                                 color:_this.yAxis.axisLabel.color,
                                 fontSize:_this.yAxis.axisLabel.fontSize
-                            }
+                            },
+                            formatter:function(value) {
+                                console.log(value)
+                                value = _this.dataProcess(value,_this.lineEchartsData.unit[0],_this.lineEchartsData.unit[1]).num
+                                return value
+                            },
                         },
                         splitLine: {
                             show: _this.yAxis.splitLine.show,

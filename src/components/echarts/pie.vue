@@ -129,6 +129,14 @@
                     legendList.push(item.name)
                 })
                 var option = {
+                    tooltip:{
+                        triggle:'item',
+                        formatter:function(params){
+                            console.log(params)
+                            let relVal = params.marker+params.name+':'+_this.dataProcess(params.value,_this.pieEchartsData.unit[0],_this.pieEchartsData.unit[1]).num+_this.dataProcess(params.value,_this.pieEchartsData.unit[0],_this.pieEchartsData.unit[1]).unit+'</br>'
+                            return relVal;
+                        }
+                    },
                     legend:{
                         show:_this.legendShow,
                         data:legendList,

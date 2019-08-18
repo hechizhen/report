@@ -663,6 +663,7 @@
                             id:'pieSalesManId',
                             colorList:['#365AF8','#FFC925','#7B8EFB','#34DF8E','#A3FC8A','#FF7C25'],
                             labelType:1,
+                            unit:['money','tenth'],
                             pieData:list,
                             radius:['50%', '70%'],
                             borderWidth:0,
@@ -1801,15 +1802,15 @@
                         var tempObjecd = {name:value,color:salesmanColor[index]},tempArr = [];
                         salesmanTrendData.map(function(data){
                             if(value == '立白'){
-                                tempArr.push(!data.liby_saledays ? 0 : _this.dataProcess(data.liby_saledays, 'day').num)
+                                tempArr.push(!data.liby_saledays ? 0 : data.liby_saledays)
                             }else if(value == '好爸爸'){
-                                tempArr.push(!data.kispa_saledays ? 0 : _this.dataProcess(data.kispa_saledays, 'day').num)
+                                tempArr.push(!data.kispa_saledays ? 0 : data.kispa_saledays)
                             }else if(value == '超威'){
-                                tempArr.push(!data.cheerwin_saledays ? 0 : _this.dataProcess(data.cheerwin_saledays, 'day').num)
+                                tempArr.push(!data.cheerwin_saledays ? 0 : data.cheerwin_saledays)
                             }else if(value == '口腔'){
-                                tempArr.push(!data.oral_saledays ? 0 : _this.dataProcess(data.oral_saledays, 'day').num)
+                                tempArr.push(!data.oral_saledays ? 0 : data.oral_saledays)
                             }else if(value == '晟美'){
-                                tempArr.push(!data.shengmei_saledays ? 0 : _this.dataProcess(data.shengmei_saledays, 'day').num)
+                                tempArr.push(!data.shengmei_saledays ? 0 :data.shengmei_saledays)
                             }
                         })
                         tempObjecd.data = tempArr;

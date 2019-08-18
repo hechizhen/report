@@ -225,6 +225,26 @@
                             fontSize:_this.xAxis.axisLabel.fontSize,
                         },
                     }
+                    if(_this.dataZoomShow){
+                        var dataZoom = [{
+                            height: 12,
+                            xAxisIndex: [
+                                0
+                            ],
+                            bottom:'8%',
+                            orient: 'vertical',
+                            start: 40,
+                            end: 90,
+                            handleStyle:{
+                                color:"#d3dee5",
+                            },
+                            textStyle:{
+                                color:"#418eff"},
+                            borderColor:"#90979c"
+                        }]
+                    }else{
+                        var dataZoom = ''
+                    }
                 }else{
                     _this.xAxisType = 'value'
                     _this.xAxisData = ''
@@ -248,6 +268,26 @@
                             color:_this.yAxis.axisLabel.color,
                             fontSize:_this.yAxis.axisLabel.fontSize,
                         },
+                    }
+                    if(_this.dataZoomShow){
+                        var dataZoom = [{
+                            height: '80%',
+                            yAxisIndex: [
+                                0
+                            ],
+                            left:'1%',
+                            orient: 'vertical',
+                            start: 40,
+                            end: 90,
+                            handleStyle:{
+                                color:"#d3dee5",
+                            },
+                            textStyle:{
+                                color:"#418eff"},
+                            borderColor:"#90979c"
+                        }]
+                    }else{
+                        var dataZoom = ''
                     }
                 }
                 if(_this.isShowMax){
@@ -277,25 +317,7 @@
                             fontSize:14
                         }
                     },
-                    dataZoom: [{
-                        show: _this.dataZoomShow,
-                        height: 12,
-                        xAxisIndex: [
-                            0
-                        ],
-                        bottom:'8%',
-                        start: 10,
-                        end: 90,
-                        handleIcon: 'path://M306.1,413c0,2.2-1.8,4-4,4h-59.8c-2.2,0-4-1.8-4-4V200.8c0-2.2,1.8-4,4-4h59.8c2.2,0,4,1.8,4,4V413z',
-                        handleSize: '110%',
-                        handleStyle:{
-                            color:"#d3dee5",
-
-                        },
-                        textStyle:{
-                            color:"#418eff"},
-                        borderColor:"#90979c"
-                    }],
+                    dataZoom: dataZoom,
                     grid: {
                         top: 'middle',
                         left: '3%',
@@ -307,8 +329,6 @@
                     xAxis: {
                         type: _this.xAxisType,
                         data: _this.xAxisData,
-                        // min:_this.minData,
-                        // max:_this.maxData,
                         interval: _this.intervalData,
                         axisLine: {
                             show: _this.xAxis.axisLine.show,

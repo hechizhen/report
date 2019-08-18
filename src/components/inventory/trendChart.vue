@@ -48,7 +48,8 @@
 		data(){
 			return {
 				direction:{
-	                id:'lineId',
+					id:'lineId',
+					unit:['day'],
 	                xAxisData:this.lineEchartsData.monthArr,
 	                lineData:this.lineEchartsData.seriesData
            		},
