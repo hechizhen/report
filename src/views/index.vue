@@ -670,9 +670,9 @@
                         }
                         // 环比数据
                         chainratio.name = '环比';
-                        chainratio.moneymonthly = _this.getHandle(secondBandData.money,secondBandData.money_lm,2);
-                        chainratio.grossmoneymonthly = _this.getHandle(secondBandData.gross_money,secondBandData.gross_money_lm,2);
-                        chainratio.rossmoneyratemonthly = _this.getHandle(secondBandData.gross_money_rate,secondBandData.gross_money_rate_lm,2);
+                        chainratio.moneymonthly = _this.getHandle(secondBandData.money,secondBandData.money_lm,2);   //金额环比
+                        chainratio.grossmoneymonthly = _this.dataProcess(secondBandData.gross_money_mom, 'percent').num+'%'; //毛利额环比
+                        chainratio.rossmoneyratemonthly = _this.dataProcess(secondBandData.gross_money_rate_mom, 'percent').num+'%'; //毛利率环比
                         chainratio.list = [{name:'立白',value:_this.getHandle(secondBandData.liby_money,secondBandData.liby_money_lm,2)},
                             {name:'好爸爸',value: _this.getHandle(secondBandData.kispa_money,secondBandData.kispa_money_lm,2)},
                             {name:'超威',value: _this.getHandle(secondBandData.cheerwin_money,secondBandData.cheerwin_money_lm,2)},
@@ -681,9 +681,9 @@
                             {name:'其他',value: _this.getHandle(secondBandData.other_money,secondBandData.other_money_lm,2)}]
                         // 同比数据
                         yearOnYear.name = '同比';
-                        yearOnYear.moneymonthly = _this.getHandle(secondBandData.money,secondBandData.money_ly,2);
-                        yearOnYear.grossmoneymonthly = _this.getHandle(secondBandData.gross_money,secondBandData.gross_money_ly,2);
-                        yearOnYear.rossmoneyratemonthly = _this.getHandle(secondBandData.gross_money_rate,secondBandData.gross_money_rate_ly,2);
+                        yearOnYear.moneymonthly = _this.getHandle(secondBandData.money,secondBandData.money_ly,2); //金额同比
+                        yearOnYear.grossmoneymonthly =  _this.dataProcess(secondBandData.gross_money_yoy, 'percent').num+'%';  //毛利额同比
+                        yearOnYear.rossmoneyratemonthly = _this.dataProcess(secondBandData.gross_money_rate_yoy, 'percent').num+'%'; //毛利率同比
                         yearOnYear.list = [{name:'立白',value:_this.getHandle(secondBandData.liby_money,secondBandData.liby_money_ly,2)},
                             {name:'好爸爸',value: _this.getHandle(secondBandData.kispa_money,secondBandData.kispa_money_ly,2)},
                             {name:'超威',value: _this.getHandle(secondBandData.cheerwin_money,secondBandData.cheerwin_money_ly,2)},
@@ -1201,10 +1201,12 @@
                             let raiseDifference = []//增长门店差异销售额
                             proraiseList.map(function(item,index){
                                 item.numberId = index+1
-                                raisexAxisData.push(item.goods_name)
-                                raiseLastMonth.push(item.money)
-                                raiseSameMonth.push(item.money_lm)
-                                raiseDifference.push(item.dif_money)
+                                if(index<5) {
+                                    raisexAxisData.push(item.goods_name)
+                                    raiseLastMonth.push(item.money)
+                                    raiseSameMonth.push(item.money_lm)
+                                    raiseDifference.push(item.dif_money)
+                                }
                             })
                             _this.ProExportData.proraiseData.tableData = proraiseList
                             console.log( _this.ProExportData.proraiseData)
@@ -1253,10 +1255,12 @@
                             let downDifference = []//下滑门店差异销售额
                             downList.map(function(item,index){
                                 item.numberId = index+1
-                                downxAxisData.push(item.goods_name)
-                                downLastMonth.push(item.money)
-                                downSameMonth.push(item.money_lm)
-                                downDifference.push(item.dif_money)
+                                if(index<5) {
+                                    downxAxisData.push(item.goods_name)
+                                    downLastMonth.push(item.money)
+                                    downSameMonth.push(item.money_lm)
+                                    downDifference.push(item.dif_money)
+                                }
                             })
                             _this.ProExportData.prodownData.tableData = downList
                             console.log( _this.ProExportData.prodownData.tableData)
