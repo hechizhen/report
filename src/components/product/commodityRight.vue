@@ -174,7 +174,7 @@
         }
     }
     .commodityRight {
-        width: 50%;
+        width: 49%;
         float: left;
         height: 260px;
         display: flex;
@@ -255,7 +255,7 @@
     }
         .commodityRight-sum{
             float: left;
-            width: 28%;
+            width: 29%;
             height: 260px;
             display: flex;
             justify-content: center;

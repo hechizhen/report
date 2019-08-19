@@ -70,7 +70,7 @@
                      type:Object
                  },
                  productTableData:{   //产品-列表数据
-                     type:Array
+                     type:Object
                  },
                  NumberGoodsDownBar:{  //下滑商品加载效果
                      type:Boolean
