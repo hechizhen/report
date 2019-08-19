@@ -17,7 +17,7 @@
 				</a-Row>
 			</div>
 			<div class="lineEcharts">
-				<echartsline :lineEchartsData="direction"  :legendShow="true" :grid="grid" v-if="direction.length != 0"></echartsline>
+				<echartsline :lineEchartsData="lineEchartsData"  :legendShow="true" :grid="grid" v-if="lineEchartsData != ''"></echartsline>
 			</div>
 		</div>
 		<loading-data :isShow="isShow"></loading-data>
@@ -47,12 +47,6 @@
 		},
 		data(){
 			return {
-				direction:{
-					id:'lineStockId',
-					unit:['day'],
-	                xAxisData:this.lineEchartsData.monthArr,
-	                lineData:this.lineEchartsData.seriesData
-           		},
 				grid:{
 					top: '5%',
                     left: '1%',
@@ -64,7 +58,7 @@
 			}
 		},
 		mounted(){
-			
+			console.log(this.lineEchartsData)
 		},
 		methods:{
 			thendChartClick(){

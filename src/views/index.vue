@@ -41,7 +41,7 @@
          <!--库存-->
         <inventoryIndex  :inventoryDay="inventoryDay" :inventoryDetails="inventoryDetails" :marketableDayChart="marketableDayChart"
                          :DaysAvailableStock="DaysAvailableStock" :InventoryTurnover="InventoryTurnover" :stockAmount="stockAmount"
-                         :marketableDayLine="marketableDayLine"   v-if="inventoryDay.length!=0 && marketableDayChart.length != 0"
+                         :marketableDayLine="marketableDayLine"   v-if="inventoryDay.length!=0 && Object.keys(marketableDayChart).length!=0"
                          :getPinListing="invDetailTableData.getPinListing"  :getInvDayListing="invDetailTableData.getInvDayListing" :selectButtonClick="invDetaSelectButtonClick"
         > </inventoryIndex>
         <!-- 财务 -->
@@ -2315,7 +2315,12 @@
                         seriesData.push(tempObjecd)
                     })
                     var tempsalesmanTrendData = {monthArr:xAxisData,seriesData:seriesData}
-                    _this.marketableDayChart = tempsalesmanTrendData;
+                    _this.marketableDayChart = {
+                        id:'lineStockId',
+                        unit:['day'],
+                        xAxisData:xAxisData,
+                        lineData:seriesData
+                    }
                     _this.marketableDayLine = false
                     console.log(_this.marketableDayChart)
                 })
@@ -2532,6 +2537,7 @@
                             "isReturnTotalSize": "Y",
                             "outputCol": "bo1_name,bo2_name,saledays",
                             "groupByCol": ["bo1_name","bo2_name"],
+                            "orderCol":"bo1_orderNum,bo2_orderNum,saledays desc",
                             "pageNum": 1,
                             "pageSize": 100,
                             "serviceId": "service_tjbg02_stock_saledays",

@@ -125,8 +125,7 @@
             }
             .lineEcharts {
                 height: 90%;
-                width: 96%;
-                margin-left: 4%;
+                width: 100%;
             }
         }
     }
