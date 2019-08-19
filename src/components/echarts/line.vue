@@ -66,7 +66,7 @@
                     axisLabel:{
                         show:true,
                         color:'#333333',
-                        fontSize:18
+                        fontSize:14
                     },
                     //网格线
                     splitLine:{
@@ -87,7 +87,7 @@
                     axisLabel:{
                         show:true,
                         color:'#333333',
-                        fontSize:18
+                        fontSize:14
                     },
                     //网格线
                     splitLine:{

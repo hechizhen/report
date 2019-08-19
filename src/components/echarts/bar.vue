@@ -90,7 +90,7 @@
                     axisLabel:{
                         show:true,
                         color:'#333333',
-                        fontSize:16
+                        fontSize:14
                     },
                     //网格线
                     splitLine:{
@@ -111,7 +111,7 @@
                     axisLabel:{
                         show:true,
                         color:'#333333',
-                        fontSize:16
+                        fontSize:14
                     },
                     //网格线
                     splitLine:{
@@ -311,8 +311,11 @@
                         formatter:function(params){
                             var relVal = '';
                             for (var i = 0; i < params.length; i++) {
-                                relVal += params[i].marker+params[i].seriesName+':'+_this.dataProcess(params[i].value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num+_this.dataProcess(params[i].value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).unit
-                                    +'</br>'
+                                if(params[i].seriesName=='达成率' || params[i].seriesName=='贡献率'){
+                                    relVal += params[i].marker+params[i].seriesName+':'+_this.dataProcess(params[i].value,'percent').num+_this.dataProcess(params[i].value,'percent').unit+'</br>'
+                                }else{
+                                    relVal += params[i].marker+params[i].seriesName+':'+_this.dataProcess(params[i].value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num+_this.dataProcess(params[i].value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).unit+'</br>'
+                                }
                             }
                             return relVal;
                         }

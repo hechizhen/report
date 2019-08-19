@@ -1166,16 +1166,48 @@
                     directionArr.monthArr = monthArr;
                     directionArr.seriesData = seriesData;
                     _this.directionData ={
-                        id:'lineIdBandDirect',
-                        xAxisData:directionArr.monthArr,
-                        unit:['money','tenth'],
-                        lineData:[
-                            {
-                                name:'订单金额',
-                                data:directionArr.seriesData,
-                                color:'#00E2BF'
+                        config:{
+                            id:'lineIdBandDirect',
+                            xAxisData:directionArr.monthArr,
+                            unit:['money','tenth'],
+                            lineData:[
+                                {
+                                    name:'订单金额',
+                                    data:directionArr.seriesData,
+                                    color:'#00E2BF'
+                                },
+                            ],
+                        },
+                        xAxis:{
+                            axisLine:{
+                                show:true,
+                                color:'#333'
                             },
-                        ],
+                            axisLabel:{
+                                show:true,
+                                color:'#333',
+                                fontSize:14
+                            },
+                            splitLine:{
+                                show:false,
+                                color:'#C3C6CD'
+                            },
+                        },
+                        yAxis:{
+                            axisLine:{
+                                show:true,
+                                color:'#333'
+                            },
+                            axisLabel:{
+                                show:true,
+                                color:'#333',
+                                fontSize:14
+                            },
+                            splitLine:{
+                                show:true,
+                                color:'#C3C6CD'
+                            },
+                        },
                     }
                     console.log(_this.directionData)
                     _this.towHelpSaleMonthLineShow = false
@@ -1388,11 +1420,11 @@
                         console.log(data)
                         let goodsChainVal = {
                             name: "环比:",
-                            NoSales: _this.getHandle(data.stock_sale_goods_cnt_mom, data.stock_sale_goods_cnt_mom,2)
+                            NoSales: _this.dataProcess(data.stock_sale_goods_cnt_mom,'percent').num+_this.dataProcess(data.stock_sale_goods_cnt_mom,'percent').unit
                         }
                         let goodsYearVal = {
                             name: "同比:",
-                            NoSales: _this.getHandle(data.stock_sale_goods_cnt_yoy,data.stock_sale_goods_cnt_yoy,2)
+                            NoSales: _this.dataProcess(data.stock_sale_goods_cnt_yoy,'percent').num+_this.dataProcess(data.stock_sale_goods_cnt_yoy,'percent').unit
                         }
                         let downGoods = {
                             name:"销量增长商品数(个):",
@@ -2317,10 +2349,42 @@
                     })
                     var tempsalesmanTrendData = {monthArr:xAxisData,seriesData:seriesData}
                     _this.marketableDayChart = {
-                        id:'lineStockId',
-                        unit:['day'],
-                        xAxisData:xAxisData,
-                        lineData:seriesData
+                        config:{
+                            id:'lineStockId',
+                            unit:['day'],
+                            xAxisData:xAxisData,
+                            lineData:seriesData
+                        },
+                        xAxis:{
+                            axisLine:{
+                                show:true,
+                                color:'#333'
+                            },
+                            axisLabel:{
+                                show:true,
+                                color:'#333',
+                                fontSize:14
+                            },
+                            splitLine:{
+                                show:false,
+                                color:'#C3C6CD'
+                            },
+                        },
+                        yAxis:{
+                            axisLine:{
+                                show:true,
+                                color:'#333'
+                            },
+                            axisLabel:{
+                                show:true,
+                                color:'#333',
+                                fontSize:14
+                            },
+                            splitLine:{
+                                show:true,
+                                color:'#C3C6CD'
+                            },
+                        },
                     }
                     _this.marketableDayLine = false
                     console.log(_this.marketableDayChart)

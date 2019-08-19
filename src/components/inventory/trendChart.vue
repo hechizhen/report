@@ -17,7 +17,7 @@
 				</a-Row>
 			</div>
 			<div class="lineEcharts">
-				<echartsline :lineEchartsData="lineEchartsData"  :legendShow="true" :grid="grid" v-if="lineEchartsData != ''"></echartsline>
+				<echartsline :lineEchartsData="lineEchartsData.config" :xAxis="lineEchartsData.xAxis" :yAxis="lineEchartsData.yAxis" :legendShow="true" :grid="grid" v-if="lineEchartsData != ''"></echartsline>
 			</div>
 		</div>
 		<loading-data :isShow="isShow"></loading-data>
