@@ -32,7 +32,7 @@
 				  </a-Col>
 				  <a-Col :span="12" class="managerCol">
 				  	<p>总人数(人)</p>
-				  	<p>人均产出(万元)</p>
+				  	<p style="margin-top:6px;">人均产出(万元)</p>
 				  </a-Col>
 				  <a-Col :span="6" class="managerCol">
 				  	<p><span>{{salesmanData.all_cnt}}</span></p>

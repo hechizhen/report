@@ -23,12 +23,12 @@
                   :salesmanReachedData="salesmanReachedData" :salesmanContributionData="salesmanContributionData" :isShow="salesmanReached"
                   :salesmanReachedBar="salesmanReachedBar" :salesmanContributionBar="salesmanContributionBar" :salesmandownwardBar="salesmandownwardBar"
                   :salesmanTrendPie="salesmanTrendPie" :ownwardExportData="ownwardExportData" :reachContributionData="reachContributionData" 
-                  v-if="reachContributionData!=''"></salesman>
+                  v-if="reachContributionData!='' && salesmanTrendData!=''"></salesman>
         <!-- 商品 -->
         <productIndex :CommodityTurnoverRate="CommodityTurnoverRate"  :commoditydata="commoditydata" :GoodsDetail="GoodsDetail"
                       :prodownStoresData="prodownStoresData" :upproStoresData="upproStoresData" :productTableData="productTableData"
                       :NumberGoods="NumberGoods"  :CommodityRate="CommodityRate"  :NumberGoodsDownBar="NumberGoodsDownBar" :NumberGoodsUpBar="NumberGoodsUpBar"
-                      :NumberGoodsPie="NumberGoodsPie" :NumberGoodsList="NumberGoodsList" v-if="CommodityTurnoverRate.length!=0 && exportDetailData!=''"
+                      :NumberGoodsPie="NumberGoodsPie" :NumberGoodsList="NumberGoodsList" v-if="CommodityTurnoverRate.length!=0"
                       :tableData="proDetailTableData.getPinListing"  :exportData="ProExportData" :homeChartHandleClick="detailChartHandleClick"
                       :homePageNumChange="homePageNumChange" :homeCheckValChange="homeCheckValChange" :homeExportClick="homeExportClick"
                       :detailExport="exportDetailData"  :selectButtonClick="proDetaSelectButtonClick"
@@ -83,6 +83,7 @@
         },
         data() {
             return {
+                dealer_id:'ff80808169c93eb80169d6a73cc02d04',
                 indexDealName: '吴凌云',//经销商名称
                 indexScore: 97,//体检评分
                 indexSummary: '很好',//总结
@@ -298,8 +299,6 @@
             },
             //二帮卖订单详情切换维度调用方法
             twoDetaSelectButtonClick(val){
-                // alert(1)
-                // alert(val)
                 if(val == '系列'){
                     //二帮卖订单列表数据
                     this.twoDetailTableData={
@@ -313,9 +312,9 @@
                                 },
                                 "outputCol":"bo1_name,bo2_name,bo3_name,money,ratio_rate,money_mom,money_yoy,gross_rate,gross_money_yoy,gross_money_mom",
                                 "pageNum":1,
-                                "pageSize":1000,
-                                "groupByCol":["dealer_id","data_mon",'bo3_name'],
-                                "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                                "pageSize":10000,
+                                "groupByCol":["bo1_name","bo2_name","bo3_name"],
+                                "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
                                 "serviceId":"service_tjbg02_sales_order_dtl"
                             },
                             header:[
@@ -349,9 +348,9 @@
                                 },
                                 "outputCol":"bo1_name,bo2_name,bo3_name,goods_name,money,ratio_rate,money_mom,money_yoy,gross_rate,gross_money_yoy,gross_money_mom",
                                 "pageNum":1,
-                                "pageSize":1000,
-                                "groupByCol":["dealer_id","data_mon",'goods_name'],
-                                "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                                "pageSize":10000,
+                                "groupByCol":["bo1_name","bo2_name","bo3_name","goods_name"],
+                                "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
                                 "serviceId":"service_tjbg02_sales_order_dtl"
                             },
                             header:[
@@ -386,9 +385,9 @@
                                 },
                                 "outputCol":"bo1_name,bo2_name,money,ratio_rate,money_mom,money_yoy,gross_rate,gross_money_yoy,gross_money_mom",
                                 "pageNum":1,
-                                "pageSize":1000,
-                                "groupByCol":["dealer_id","data_mon"],
-                                "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                                "pageSize":10000,
+                                "groupByCol":["bo1_name","bo2_name"],
+                                "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
                                 "serviceId":"service_tjbg02_sales_order_dtl"
                             },
                             header:[
@@ -430,6 +429,7 @@
                                 },
                                 "outputCol":"bo1_name,bo2_name,bo3_name,order_qty,stock_qty,sale_rate",
                                 "pageNum":1,
+                                "groupByCol":["bo1_name","bo2_name","bo3_name"],
                                 "pageSize":1000,
                                 "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
                                 "serviceId":"service_tjbg02_goods_stock_sales"
@@ -458,6 +458,7 @@
                                     "bo_type":'商品'
                                 },
                                 "outputCol":"bo1_name,bo2_name,bo2_name,goods_code79,goods_name,sale_rate",
+                                "groupByCol":["bo1_name","bo2_name","bo3_name","goods_name"],
                                 "pageNum":1,
                                 "pageSize":1000,
                                 "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
@@ -488,6 +489,7 @@
                                 },
                                 "outputCol":"bo1_name,bo2_name,order_qty,stock_qty,sale_rate",
                                 "pageNum":1,
+                                "groupByCol":["bo1_name","bo2_name"],
                                 "pageSize":1000,
                                 "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
                                 "serviceId":"service_tjbg02_goods_stock_sales"
@@ -513,14 +515,15 @@
                         getInvDayListing: {
                             params: {
                                 "inputParam": {
-                                    "data_mon": _this.currentDate,
+                                    "data_mon": this.currentDate,
                                     "data_type": "当月",
                                     "partition": "bo2_name"
                                 },
                                 "isReturnTotalSize": "Y",
                                 "outputCol": "bo1_name,bo2_name,bo3_name,saledays",
+                                "groupByCol": ["bo1_name","bo2_name","bo3_name"],
                                 "pageNum": 1,
-                                "pageSize": 10,
+                                "pageSize": 1000,
                                 "serviceId": "service_tjbg02_stock_saledays",
                                 "whereCndt": {"dealer_id": "='ff80808169c93eb80169d6a73cc02d04'"}
                             },
@@ -541,14 +544,15 @@
                         getInvDayListing: {
                             params: {
                                 "inputParam": {
-                                    "data_mon": _this.currentDate,
+                                    "data_mon": this.currentDate,
                                     "data_type": "当月",
                                     "partition": "goods_name"
                                 },
                                 "isReturnTotalSize": "Y",
                                 "outputCol": "bo2_name,bo3_name,bo1_name,goods_name,saledays",
+                                "groupByCol": ["bo1_name","bo2_name","bo3_name","goods_name"],
                                 "pageNum": 1,
-                                "pageSize": 10,
+                                "pageSize": 1000,
                                 "serviceId": "service_tjbg02_stock_saledays",
                                 "whereCndt": {"dealer_id": "='ff80808169c93eb80169d6a73cc02d04'"}
                             },
@@ -570,14 +574,15 @@
                         getInvDayListing: {
                             params: {
                                 "inputParam": {
-                                    "data_mon": _this.currentDate,
+                                    "data_mon": this.currentDate,
                                     "data_type": "当月",
                                     "partition": "bo2_name"
                                 },
                                 "isReturnTotalSize": "Y",
                                 "outputCol": "bo1_name,bo2_name,bo3_name,saledays",
+                                "groupByCol": ["bo1_name","bo2_name"],
                                 "pageNum": 1,
-                                "pageSize": 10,
+                                "pageSize": 1000,
                                 "serviceId": "service_tjbg02_stock_saledays",
                                 "whereCndt": {"dealer_id": "='ff80808169c93eb80169d6a73cc02d04'"}
                             },
@@ -626,7 +631,7 @@
                         "outputCol":"data_mon,data_type,dealer_id,money,target_money,liby_money,liby_target_money,kispa_money,kispa_target_money,cheerwin_money,cheerwin_target_money,oral_money,oral_target_money,shengmei_money,shengmei_target_money,strategic_money,strategic_target_money",
                         "pageNum":1,
                         "pageSize":1000,
-                        "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
+                        "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
                         "serviceId":"service_tjbg01_sales"
                     }
                     return _this.$http({
@@ -646,7 +651,7 @@
                         "outputCol":"data_mon,data_type,dealer_id,money,target_money,liby_money,liby_target_money,kispa_money,kispa_target_money,cheerwin_money,cheerwin_target_money,oral_money,oral_target_money,shengmei_money,shengmei_target_money,strategic_money,strategic_target_money",
                         "pageNum":1,
                         "pageSize":1000,
-                        "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
+                        "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
                         "serviceId":"service_tjbg01_sales"
                     }
                     return _this.$http({
@@ -843,7 +848,7 @@
                         "pageNum": 1,
                         "pageSize": 1000,
                         "serviceId": "service_tjbg02_finace",
-                        "whereCndt": {"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"}
+                        "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
                     }
                 this.$http({
                     url: _this.testRequestHttpUrl + '?v=finance',
@@ -898,7 +903,7 @@
                     "outputCol":"dealer_id,data_mon,data_type,emp_rate,emp_avg_money,emp_cnt,emp_drop_cnt,all_cnt",
                     "pageNum":1,
                     "pageSize":1000,
-                    "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
+                    "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
                     "serviceId":"service_tjbg02_emp"
                 }
                 this.$http({
@@ -933,7 +938,7 @@
                     "outputCol":"data_mon,dealer_id,data_type,dealer_code,dealer_name,money,liby_money,kispa_money,cheerwin_money,oral_money,shengmei_money,other_money,money_lm,liby_money_lm,kispa_money_lm,cheerwin_money_lm,oral_money_lm,shengmei_money_lm,other_money_lm,money_ly,liby_money_ly,kispa_money_ly,cheerwin_money_ly,oral_money_ly,shengmei_money_ly,other_money_ly,gross_money,gross_money_rate,gross_money_lm,gross_money_mom,gross_money_rate_mom,gross_money_ly,gross_money_yoy,gross_money_rate_yoy",
                     "pageNum":1,
                     "pageSize":1000,
-                    "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
+                    "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
                     "serviceId":"service_tjbg02_sales_order"
                 }
                 this.$http({
@@ -1012,7 +1017,7 @@
                     "outputCol":"data_mon,dealer_id,data_type,dealer_code,dealer_name,money,liby_money,kispa_money,cheerwin_money,oral_money,shengmei_money,other_money,money_lm,liby_money_lm,kispa_money_lm,cheerwin_money_lm,oral_money_lm,shengmei_money_lm,other_money_lm,money_ly,liby_money_ly,kispa_money_ly,cheerwin_money_ly,oral_money_ly,shengmei_money_ly,other_money_ly,gross_money,gross_money_rate,gross_money_lm,gross_money_mom,gross_money_rate_mom,gross_money_ly,gross_money_yoy,gross_money_rate_yoy",
                     "pageNum":1,
                     "pageSize":1000,
-                    "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
+                    "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
                     "serviceId":"service_tjbg02_sales_order"
                 }
                 this.$http({
@@ -1046,7 +1051,7 @@
                     "outputCol":"dealer_id,data_mon,data_type,emp_name,emp_phone,emp_money,emp_target_money,emp_rate,emp_money_rate,gross_money,gross_rate",
                     "pageNum":1,
                     "pageSize":1000,
-                    "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
+                    "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
                     "serviceId":"service_tjbg02_emp_rate"
                 }
                 this.$http({
@@ -1101,7 +1106,7 @@
                     "outputCol":"dealer_id,data_mon,data_type,emp_name,money,money_lm,dif_money",
                     "pageNum":1,
                     "pageSize":1000,
-                    "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
+                    "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
                     "serviceId":"service_tjbg02_emp_drop"
                 }
                 this.$http({
@@ -1121,7 +1126,7 @@
                         seriesData.push(
                             {name:'上月销售额',data:lastMonth,color:'#009EE2',barWidth:'自适应'},
                             {name:'本月销售额',data:sameMonth,color:'#E9A837',barWidth:'自适应'},
-                            {name:'销售差额',data:difference,color:'#00E2BF',barWidth:'自适应'})
+                            {name:'销售差额',data:difference,color:'#FE9600',barWidth:'自适应'})
                         salesmandownwardObject.xAxisData = xAxisData;
                         salesmandownwardObject.seriesData = seriesData;
                         _this.salesmandownwardData = salesmandownwardObject
@@ -1150,7 +1155,7 @@
                     "outputCol":"emp_name,emp_phone,emp_target_money,emp_money,emp_dif_money,emp_rate,emp_money_rate,gross_money,gross_rate,dealer_money",
                     "pageNum":1,
                     "pageSize":1000,
-                    "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
+                    "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
                     "serviceId":"service_tjbg02_emp_rate"
                 }
                 this.$http({
@@ -1221,7 +1226,7 @@
                     "outputCol":"dealer_id,data_mon,data_type,stock_sale_rate,stock_sale_goods_cnt,goods_cnt,stock_sale_goods_cnt_mom,stock_sale_goods_cnt_yoy,sales_raise_goods_cnt,sales_drop_goods_cnt,liby_stock_sale_rate,kispa_stock_sale_rate,cheerwin_stock_sale_rate,oral_stock_sale_rate,shengmei_stock_sale_rate",
                     "pageNum":1,
                     "pageSize":1000,
-                    "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
+                    "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
                     "serviceId":"service_tjbg02_goods"
                 }
                 this.$http({
@@ -1271,6 +1276,7 @@
                             data.cheerwin_stock_sale_rate, data.oral_stock_sale_rate,
                             data.shengmei_stock_sale_rate
                         ]
+                        console.log(barDataMonth)
                         let Axiax = ['立白','好爸爸','超威','口腔','晟美']
                         let produnarData = {
                             config:{
@@ -1334,7 +1340,7 @@
                         }
                         _this.CommodityTurnoverRate = {
                             productimg:require("../assets/img/dongxiao.png"),
-                            name:"商品动销率",
+                            name:"商品分销率",
                             RatePin:_this.dataProcess(data.stock_sale_rate, 'percent').num+_this.dataProcess(data.stock_sale_rate, 'percent').unit, //商品动销率
                             btn:"动销清单",
                             produnarData
@@ -1359,7 +1365,7 @@
                     "pageNum":_this.productPageNum,
                     "isReturnTotalSize": "Y",
                     "pageSize":_this.exportPageSize,
-                    "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'","bo2_name":"='"+_this.categoryName+"'"},
+                    "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'","bo2_name":"='"+_this.categoryName+"'"},
                     "groupByCol":["bo1_name","bo2_name","bo3_name","goods_name"],
                     "serviceId":"service_tjbg02_sales_order_dtl"
                 }
@@ -1402,7 +1408,7 @@
                     "pageNum":_this.productPageNum,
                     "isReturnTotalSize": "Y",
                     "pageSize":1000,
-                    "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'","bo2_name":"='"+_this.categoryName+"'"},
+                    "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'","bo2_name":"='"+_this.categoryName+"'"},
                     "groupByCol":["bo1_name","bo2_name","bo3_name","goods_name"],
                     "serviceId":"service_tjbg02_sales_order_dtl"
                 }
@@ -1452,7 +1458,7 @@
                         "outputCol":"bo1_name,goods_name,money_lm,money,dif_money",
                         "pageNum":1,
                         "pageSize":1000,
-                        "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
+                        "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
                         "serviceId":"service_tjbg02_goods_sales_change"
                             }
                     let keyValue = params.outputCol.split(',')
@@ -1483,7 +1489,7 @@
                         "outputCol":"bo1_name,goods_name,money,money_lm,dif_money",
                         "pageNum":1,
                         "pageSize":1000,
-                        "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
+                        "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
                         "serviceId":"service_tjbg02_goods_sales_change"
                     }
                     let keyValue = params.outputCol.split(',')
@@ -1631,10 +1637,10 @@
                         "data_type":"当月",
                         "bo_type":'品类'
                     },
-                    "outputCol":"dealer_id,data_mon,data_type,bo1_name,bo2_name,bo3_name,goods_name,money,ratio_rate,money_mom,money_yoy,gross_rate,gross_money_yoy,gross_money_mom",
+                    "outputCol":"bo1_name,bo2_name,bo3_name,goods_name,money,ratio_rate,money_mom,money_yoy,gross_rate,gross_money_yoy,gross_money_mom",
                     "pageNum":1,
                     "pageSize":1000,
-                    "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
+                    "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
                     "serviceId":"service_tjbg02_sales_order_dtl"
                 }
                 this.$http({
@@ -1669,7 +1675,7 @@
                     "outputCol":"dealer_id,data_mon,data_type,active_store_cnt,active_store_cnt_mom,active_store_cnt_yoy,sale_drop_store_cnt,sale_raise_store_cnt,unsale_store_cnt,mon3_unsale_store_cnt,mon3_unsale_store_dept_money,close_store_dept_money,store_avg_money,store_cnt,new_store_cnt,active_store_rate,mon6_unsale_store_cnt",
                     "pageNum":1,
                     "pageSize":1000,
-                    "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
+                    "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
                     "serviceId":"service_tjbg02_store"
                 }
                 this.$http({
@@ -1780,11 +1786,12 @@
                         "outputCol":"emp_name,emp_phone,store_name,store_contact,store_phone,store_address,money,mon3_avg_m_money,dif_money",
                         "pageNum":1,
                         "pageSize":1000,
-                        "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
-                        "serviceId":"service_tjbg02_store_sales_change"
+                        "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
+                        "serviceId":"service_tjbg02_store_sales_change",
+                        "orderCol": "dif_money desc"
                     }
                     let numArray = ['numberId']
-                    _this.storeExportData.raiseData = {
+                    _this.storeExportData.downData = {
                         //增长门店导出数据
                         tableHeaderTxt:['序号','业务员姓名','联系电话','门店名称','门店老板姓名','门店老板电话','门店地址','月均销量（元）','当月销量（元）','差额（元）'],
                         tableHeaderKey:numArray.concat(params.outputCol.split(',')),
@@ -1809,11 +1816,12 @@
                         "outputCol":"emp_name,emp_phone,store_name,store_contact,store_phone,store_address,money,mon3_avg_m_money,dif_money",
                         "pageNum":1,
                         "pageSize":1000,
-                        "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
-                        "serviceId":"service_tjbg02_store_sales_change"
+                        "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
+                        "serviceId":"service_tjbg02_store_sales_change",
+                        "orderCol": "dif_money desc"
                     }
                     let numArray = ['numberId']
-                    _this.storeExportData.downData={
+                    _this.storeExportData.raiseData={
                         //下滑门店导出数据
                         tableHeaderTxt:['序号','业务员姓名','联系电话','门店名称','门店老板姓名','门店老板电话','门店地址','月均销量（元）','当月销量（元）','差额（元）'],
                         tableHeaderKey:numArray.concat(params.outputCol.split(',')),
@@ -1948,7 +1956,7 @@
                 _this.DaysAvailableStock = true
                 var params = {
                     "inputParam": {
-                        "data_mon":"201907",
+                        "data_mon":_this.currentDate,
                         "data_type":"当月"
                     },
                     "isReturnTotalSize": "Y",
@@ -1956,7 +1964,7 @@
                     "pageNum": 1,
                     "pageSize": 10,
                     "serviceId": "service_tjbg02_stock",
-                    "whereCndt": {"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"}
+                    "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
                 }
                 this.$http({
                     url: _this.testRequestHttpUrl + '?v=inventoryDetail',
@@ -1976,11 +1984,11 @@
                         }
                         let Chain = {
                             name: '环比增长:',
-                            inventoryChainVal: _this.getHandle(data.saledays_mon, data.saledays_yoy,2)
+                            inventoryChainVal: _this.dataProcess(data.saledays_mon,'percent').num+_this.dataProcess(data.saledays_mon,'percent').unit
                         }
                         let Year = {
                             name: '同比增长:',
-                            inventoryChainVal: _this.getHandle(data.saledays_yoy, data.saledays_yoy,2)
+                            inventoryChainVal: _this.dataProcess(data.saledays_yoy,'percent').num+_this.dataProcess(data.saledays_yoy,'percent').unit
                         }
                         //产品动销率树状图
                         let barDataMonth = [
@@ -2000,7 +2008,7 @@
                             type: 'xAxis',
                             barData: [
                                 {
-                                    name: 'ABC',
+                                    name: '库存可销天数',
                                     data: barDataMonth,
                                     color: '#3699FF',
                                     barWidth: 11,
@@ -2091,7 +2099,7 @@
                 _this.marketableDayLine = true
                 var params = {
                     "inputParam": {
-                        "data_mon":"201907",
+                        "data_mon":_this.currentDate,
                         "data_type":"13"
                     },
                     "isReturnTotalSize": "Y",
@@ -2099,7 +2107,8 @@
                     "pageNum": 1,
                     "pageSize": 10,
                     "serviceId": "service_tjbg02_stock",
-                    "whereCndt": {"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"}
+                    "orderCol": "data_mon asc",
+                    "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
                 }
                 this.$http({
                     url: _this.testRequestHttpUrl + '?v=marketableDayChart',
@@ -2158,7 +2167,7 @@
                             "outputCol":"emp_name,emp_phone,store_name,store_contact,store_phone,money,money_rate,sale_goods_cnt,sale_goods_cnt_lm",
                             "pageNum":1,
                             "pageSize":100,
-                            "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
+                            "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
                             "serviceId":"service_tjbg02_store_active"
                         },
                         header:[
@@ -2186,7 +2195,7 @@
                             "outputCol":"emp_name,emp_phone,store_name,store_contact,store_phone,store_address,new_store_cnt",
                             "pageNum":1,
                             "pageSize":100,
-                            "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
+                            "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
                             "serviceId":"service_tjbg02_store_create"
                         },
                         header:[
@@ -2212,7 +2221,7 @@
                             "outputCol":"emp_name,emp_phone,store_name,store_contact,store_phone,store_address,last_order_time,last_order_money,unsale_days",
                             "pageNum":1,
                             "pageSize":100,
-                            "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
+                            "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
                             "serviceId":"service_tjbg02_store_unsale"
                         },
                         header:[
@@ -2224,8 +2233,8 @@
                             {txt:'门店老板电话',unit:false},
                             {txt:'门店地址',unit:false},
                             {txt:'最近交易时间',unit:false},
-                            {txt:'最近交易金额（元）',unit:'day'},
-                            {txt:'无交易时长（天）',unit:'money'},
+                            {txt:'最近交易金额（元）',unit:'money'},
+                            {txt:'无交易时长（天）',unit:'day'},
                         ]
                     },
                     //无交易门店应收账款明细
@@ -2240,7 +2249,7 @@
                             "outputCol":"emp_name,emp_phone,store_name,store_contact,store_phone,store_address,store_status,last_order_time,unsale_days,debt_money",
                             "pageNum":1,
                             "pageSize":100,
-                            "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
+                            "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
                             "serviceId":"service_tjbg02_store_unsale"
                         },
                         header:[
@@ -2271,22 +2280,23 @@
                             "outputCol":"bo1_name,bo2_name,order_qty,stock_qty,sale_rate",
                             "pageNum":1,
                             "pageSize":1000,
-                            "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
+                            "groupByCol":["bo1_name","bo2_name"],
+                            "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
                             "serviceId":"service_tjbg02_goods_stock_sales"
                         },
                         header:[
                             {txt:'序号',unit:false},
                             {txt:'事业部',unit:false},
                             {txt:'品类',unit:false},
-                            {txt:'订单SKU数',unit:false},
-                            {txt:'库存SKU数',unit:false},
-                            {txt:'品类动销率',unit:false},
+                            {txt:'订单SKU数',unit:'day'},
+                            {txt:'库存SKU数',unit:'day'},
+                            {txt:'品类动销率',unit:'percent'},
                         ]
                     }
                 }
                 //库存数据列表数据
                 _this.invDetailTableData= {
-                    //库存明细
+                    //未销明细
                     getPinListing: {
                         params: {
                             "inputParam": {
@@ -2296,9 +2306,10 @@
                             "isReturnTotalSize": "Y",
                             "outputCol": "bo3_name,goods_name,last_order_time,money,qty,unsale_days",
                             "pageNum": 1,
-                            "pageSize": 10,
+                            "pageSize": 1000,
+                            "orderCol": "unsale_days desc" ,
                             "serviceId": "service_tjbg02_stock_unsale",
-                            "whereCndt": {"dealer_id": "='ff80808169c93eb80169d6a73cc02d04'"}
+                            "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
                         },
                         header: [
                             {txt: '序号', unit: false},
@@ -2320,10 +2331,11 @@
                             },
                             "isReturnTotalSize": "Y",
                             "outputCol": "bo1_name,bo2_name,saledays",
+                            "groupByCol": ["bo1_name","bo2_name"],
                             "pageNum": 1,
                             "pageSize": 10,
                             "serviceId": "service_tjbg02_stock_saledays",
-                            "whereCndt": {"dealer_id": "='ff80808169c93eb80169d6a73cc02d04'"}
+                            "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
                         },
                         header: [
                             {txt: '序号', unit: false},
@@ -2345,10 +2357,11 @@
                             },
                             "isReturnTotalSize": "Y",
                             "outputCol": "emp_name,emp_phone,store_name,store_concat,store_phone,receivable_time,overdue_days,overdue_money",
+                            "orderCol":'overdue_money desc',
                             "pageNum": 1,
                             "pageSize": 100,
                             "serviceId": "service_tjbg02_finace_overdue_dtl",
-                            "whereCndt": {"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"}
+                            "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
                         },
                         header:[
                             {txt:'序号',unit:false},
@@ -2376,8 +2389,8 @@
                             "outputCol":"bo1_name,bo2_name,money,ratio_rate,money_mom,money_yoy,gross_rate,gross_money_yoy,gross_money_mom",
                             "pageNum":1,
                             "pageSize":1000,
-                            "groupByCol":["dealer_id","data_mon"],
-                            "whereCndt":{"dealer_id":"='ff8080816c0b0669016c416c850a4149'"},
+                            "groupByCol":["bo1_name","bo2_name"],
+                            "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
                             "serviceId":"service_tjbg02_sales_order_dtl"
                         },
                         header:[
@@ -2388,7 +2401,7 @@
                             {txt:'占比',unit:'percent'},
                             {txt:'环比',unit:'percent'},
                             {txt:'同比',unit:'percent'},
-                            {txt:'毛利额（元）',unit:'percent'},
+                            {txt:'毛利额（元）',unit:'money'},
                             {txt:'毛利率',unit:'percent'},
                             {txt:'毛利额环比',unit:'percent'},
                             {txt:'毛利额同比',unit:'percent'},

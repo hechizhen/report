@@ -126,7 +126,7 @@ export default{
   //获取达成率
   Vue.prototype.getReachPercent = function(a,b){
     if(b!=0 && b!=null){
-      var reach = ((a/b)*100).toFixed(2)
+      var reach = (a/b).toFixed(2)
     }else{
       var reach = ''
     }
@@ -167,7 +167,8 @@ export default{
                     num, unit
                 }
             } else {
-                return "Not A Number!"
+                var num = '--'
+                var unit = ''
             }
         } else {
             var num = '--'

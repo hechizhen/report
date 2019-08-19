@@ -131,8 +131,9 @@
 		},
 		watch:{
             salesmanTrendData(val){
+				console.log(val)
             	this.direction = {
-					id:'lineSalesTrendId',
+					id:'lineSalesTrendId11',
 					unit:['money','tenth'],
                     xAxisData:val.monthArr,
                     lineData:val.seriesData

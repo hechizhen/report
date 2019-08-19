@@ -15,7 +15,7 @@
 				  </a-Col>
 				  <a-Col :span="12" class="thendChartCol2">
 				  			<div>单位：万元</div>  
-							<new-button  :defaultVal="defaultVal" :buttonHandleClick ="exportClick"></new-button>
+							<new-button  :defaultVal="defaultVal" :buttonHandleClick ="exportClick" style="margin-left:4%"></new-button>
 				  			<span @click="thendChartClick('关闭')"><i class="iconfont icon-guanbi"></i></span>
 				  </a-Col>
 				</a-Row>
