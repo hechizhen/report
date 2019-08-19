@@ -30,7 +30,7 @@
                       :prodownStoresData="prodownStoresData" :upproStoresData="upproStoresData"
                       :NumberGoods="NumberGoods"  :CommodityRate="CommodityRate"  :NumberGoodsDownBar="NumberGoodsDownBar" :NumberGoodsUpBar="NumberGoodsUpBar"
                       :NumberGoodsPie="NumberGoodsPie" :NumberGoodsList="NumberGoodsList" v-if="CommodityTurnoverRate.length!=0"
-                      :tableData="proDetailTableData.getPinListing"  :exportData="ProExportData"  :productTableData="proDetailTableData.productTableData"
+                      :tableData="getPinListing"  :exportData="ProExportData"  :productTableData="productTableData"
                       :detailExport="exportDetailData"  :selectButtonClick="proDetaSelectButtonClick"  :proListDetaSelectButtonClick="proListDetaSelectButtonClick"
         ></productIndex>
         <!--门店-->
@@ -169,11 +169,12 @@
                 },
                 salesmanReachedData:{},  //业务员-达成
                 salesmanContributionData:{},//业务员-贡献
-                // productTableData:'',//产品列表数据
+                productTableData:'',//产品列表数据
                 //活跃门店二级表格数据
                 storeDetailTableData:'',
                 //产品清单二级表格数据
                 proDetailTableData:'',
+                getPinListing:'',
                 //财务模块二级表格数据
                 financeDetailTableData:'',
                 //二帮卖订单列表数据
@@ -436,9 +437,8 @@
             proDetaSelectButtonClick(val){
                 if(val == '系列'){
                     //动销清单表格数据
-                    this.proDetailTableData={
                         //产品动销清单明细  系列
-                        getPinListing:{
+                        this.getPinListing={
                             titleName:'商品动销明细-系列',
                             params : {
                                 "inputParam":{
@@ -460,16 +460,14 @@
                                 {txt:'系列',unit:false},
                                 {txt:'订单SKU数',unit:false},
                                 {txt:'库存SKU数',unit:false},
-                                {txt:'系列动销率',unit:false},
+                                {txt:'系列动销率',unit:'percent'},
                             ]
                         }
-                    }
                 }
                 else if(val == '商品'){
                     //动销清单表格数据
-                    this.proDetailTableData={
                         //产品动销清单明细  商品
-                        getPinListing:{
+                    this.getPinListing={
                             titleName:'商品动销明细-商品',
                             params : {
                                 "inputParam":{
@@ -493,14 +491,12 @@
                                 {txt:'商品名称',unit:false},
                                 {txt:'是否动销',unit:false},
                             ]
-                        }
                     }
                 }
                 else {
                     //动销清单表格数据
-                    this.proDetailTableData={
                         //产品动销清单明细  品类
-                        getPinListing:{
+                        this.getPinListing={
                             titleName:'商品动销明细-品类',
                             params : {
                                 "inputParam":{
@@ -521,9 +517,8 @@
                                 {txt:'品类',unit:false},
                                 {txt:'订单SKU数',unit:false},
                                 {txt:'库存SKU数',unit:false},
-                                {txt:'品类动销率',unit:false},
+                                {txt:'品类动销率',unit:'percent'},
                             ]
-                        }
                     }
                 }
             },
@@ -531,9 +526,8 @@
             proListDetaSelectButtonClick(val){
                 if(val == '品类'){
                     //商品销量表格数据
-                    this.proDetailTableData={
                         //产品商品销量明细  品类
-                        productTableData:{
+                        this.productTableData={
                             titleName:'下单商品明细-品类',
                             params : {
                                 "inputParam":{
@@ -555,14 +549,12 @@
                                 {txt:'销售（元/月）',unit:'money'},
                                 {txt:'销售占比',unit:'percent'},
                             ]
-                        }
                     }
                 }
                 else if(val == '系列'){
                     //商品销量表格数据
-                    this.proDetailTableData={
                         //产品商品销量明细  系列
-                        productTableData:{
+                    this.productTableData={
                             titleName:'下单商品明细-系列',
                         params : {
                             "inputParam":{
@@ -586,13 +578,11 @@
                             {txt:'销售占比',unit:'percent'},
                         ]
                     }
-                    }
                 }
                 else if(val == '商品'){
                     //商品销量表格数据
-                    this.proDetailTableData={
                         //产品商品销量明细  商品
-                        productTableData:{
+                    this.productTableData={
                             titleName:'下单商品明细-商品',
                             params : {
                                 "inputParam":{
@@ -617,13 +607,11 @@
                                 {txt:'当月销售占比',unit:'percent'},
                             ]
                         }
-                    }
                 }
                 else {
                     //商品销量表格数据
-                    this.proDetailTableData={
                         //产品商品销量明细  事业部
-                        productTableData:{
+                    this.productTableData={
                             titleName:'下单商品明细-事业部',
                             params : {
                                 "inputParam":{
@@ -645,7 +633,6 @@
                                 {txt:'销售占比',unit:'percent'},
                             ]
                         }
-                    }
                 }
             },
             //库存可销天数详情切换维度调用方法
@@ -693,7 +680,7 @@
                                     "partition": "goods_name"
                                 },
                                 "isReturnTotalSize": "Y",
-                                "outputCol": "bo2_name,bo3_name,bo1_name,goods_name,saledays",
+                                "outputCol": "bo2_name,bo3_name,bo3_name,goods_name,saledays",
                                 "groupByCol": ["bo1_name","bo2_name","bo3_name","goods_name"],
                                 "pageNum": 1,
                                 "pageSize": 100,
@@ -1639,7 +1626,7 @@
                     }
                     let keyValue = params.outputCol.split(',')
                     let numArray = ['numberId']
-                    _this.tableHeaderKey = numArray.concat(keyValue)
+                        _this.tableHeaderKey = numArray.concat(keyValue)
                     _this.ProExportData.prodownData = {
                         //下滑产品导出数据
                         tableHeaderTxt:['序号','商品编码','商品名称','上月销量（元）','当月销量（元）','差额（元）'],
@@ -2461,9 +2448,8 @@
                     },
                 }
                 //产品数据列表数据
-                _this.proDetailTableData={
                     //产品动销清单明细
-                    getPinListing:{
+                    _this.getPinListing={
                         titleName:'商品动销明细-品类',
                         params : {
                             "inputParam":{
@@ -2487,7 +2473,7 @@
                             {txt:'品类动销率',unit:'percent'},
                         ]
                     },
-                    productTableData:{
+                    _this.productTableData={
                         titleName:'下单商品明细-事业部',
                         params : {
                             "inputParam":{
@@ -2508,7 +2494,7 @@
                             {txt:'销售（元/月）',unit:'money'},
                             {txt:'销售占比',unit:'percent'},
                         ]
-                    }
+
 
                 }
                 //库存数据列表数据
@@ -2522,7 +2508,7 @@
                                 "data_type": "当月"
                             },
                             "isReturnTotalSize": "Y",
-                            "outputCol": "bo3_name,goods_name,last_order_time,unsale_days,qty,money",
+                            "outputCol": "goods_code79,goods_name,last_order_time,unsale_days,qty,money",
                             "pageNum": 1,
                             "pageSize": 1000,
                             "orderCol": "unsale_days desc" ,
