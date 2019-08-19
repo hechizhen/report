@@ -274,7 +274,6 @@
                     font-weight: bold;
                     color: rgba(255, 255, 255, 1);
                     text-align: center;
-                    padding: 10px;
                     p {
                         font-size: 16px;
                         margin-bottom: 10%;

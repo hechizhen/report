@@ -1698,7 +1698,7 @@
                                 //id
                                 id:'barRaiseId',
                                 //数据单位
-                                unit:['money','tenth'],
+                                unit:['money'],
                                 //x轴单位
                                 xAxisData:raisexAxisData,
                                 type:'xAxis',
@@ -1752,7 +1752,7 @@
                                 //id
                                 id:'barDownId',
                                 //数据单位
-                                unit:['money','tenth'],
+                                unit:['money'],
                                 //x轴单位
                                 xAxisData:downxAxisData,
                                 type:'xAxis',
