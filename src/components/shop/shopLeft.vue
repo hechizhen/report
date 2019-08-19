@@ -36,8 +36,8 @@
         <span class="shu"></span>
       </div>
          <shopBase :shopDaseData="shopActives.shopDaseData" :defaultVal="defaultVal" :detailHandleClick="tradeDetailHandleClick"></shopBase>
-         <public-table v-if="isShowDetail" :close="closePopup" :tableHeader="tableData.header" :interfaceParams="tableData.params"></public-table>
-         <public-table v-if="isShowTrade" :close="closePopupTrade" :tableHeader="tradeTableData.header" :interfaceParams="tradeTableData.params"></public-table>
+         <public-table v-if="isShowDetail" :close="closePopup" :tableHeader="tableData.header" :interfaceParams="tableData.params" :titleName="tableData.titleName"></public-table>
+         <public-table v-if="isShowTrade" :close="closePopupTrade" :tableHeader="tradeTableData.header" :interfaceParams="tradeTableData.params" :titleName="tradeTableData.titleName"></public-table>
     </div>
 </template>
 

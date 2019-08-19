@@ -42,7 +42,7 @@
                 type:Object
             },
             defaultVal:{     //门店底部按钮名称
-                type:Object
+                type:String
             },
             detailHandleClick:{  //打开门店底部按钮显示表格
                 type:Object

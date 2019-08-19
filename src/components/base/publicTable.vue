@@ -3,6 +3,9 @@
     <div class="publicTable">
         <div class="publicBox">
             <loading-data :isShow="loadingShow"></loading-data>
+            <div class="titleName">
+                <p>{{titleName}}</p>
+            </div>
             <div class="titleBox">
                 <div class="buttonGroup" v-if="buttonGroup.show">
                     <a-radio-group :defaultValue="buttonGroup.list[0]" buttonStyle="solid" @change="changeDimension">
@@ -49,6 +52,10 @@
             //多维度单选点击
             selectButtonClick:{
                 type:Function
+            },
+            titleName:{
+                type:String,
+                default:''
             }
         },
         components : {
@@ -246,5 +253,10 @@
             font-size: 30px;
             cursor: pointer;
         }
+    }
+    .titleName{
+        font-size: 22px;
+        display: flex;
+        justify-content: center;
     }
 </style>

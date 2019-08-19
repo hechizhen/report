@@ -11,7 +11,7 @@
                         <loading-data :isShow="CommodityRate"></loading-data>
                     </a-Col>
                     <a-Col :span="13" :push="1">
-                        <commodityRight :commoditydata="commoditydata" :upraphy="upraphy" :downraphy="downraphy"  :tableData="productTableData"  :selectButtonClick="proListDetaSelectButtonClick"></commodityRight>
+                        <commodityRight :commoditydata="commoditydata" :upraphy="upraphy" :downraphy="downraphy"  :tableData="productTableData"  :selectButtonClick="proListDetaSelectButtonClick" ></commodityRight>
                         <loading-data :isShow="NumberGoods"></loading-data>
                     </a-Col>
                 </a-Row>
