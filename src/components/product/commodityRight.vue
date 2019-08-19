@@ -268,7 +268,6 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                margin-left: 2%;
 
                 .commodityRight-sumtxt {
                     font-family: PingFangSC-Medium;
@@ -278,6 +277,7 @@
                     padding: 10px;
                     p {
                         font-size: 16px;
+                        margin-bottom: 10%;
                     }
 
                     span {
