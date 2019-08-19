@@ -116,7 +116,6 @@
             }
         },
         mounted () {
-             console.log(this.lineEchartsData)
             var _this = this
             let echarts = _this.$echarts;
             _this.myChart = echarts.init(document.getElementById(_this.lineEchartsData.id))
@@ -128,7 +127,6 @@
         methods: {
             //选择checkbox
             onChange (checkedValues) {
-                console.log('checked = ', checkedValues)
                 this.myChart.dispatchAction({
                     type:'legendToggleSelect',
                     name:checkedValues.target.value
@@ -150,6 +148,7 @@
                             }
                         },
                         symbol: "circle",
+                        symbolSize:6,
                     })
                 })
                 _this.legendList = legendList
@@ -183,8 +182,6 @@
                             type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
                         },
                         formatter:function(params){
-                            console.log(params)
-                            console.log(_this.lineEchartsData.unit[0])
                             var relVal = '';
                             for (var i = 0; i < params.length; i++) {
                                 relVal += params[i].marker+params[i].seriesName+':'+_this.dataProcess(params[i].value,_this.lineEchartsData.unit[0],_this.lineEchartsData.unit[1]).num+_this.dataProcess(params[i].value,_this.lineEchartsData.unit[0],_this.lineEchartsData.unit[1]).unit+'</br>'
@@ -258,10 +255,7 @@
                                 fontSize:_this.yAxis.axisLabel.fontSize
                             },
                             formatter:function(value) {
-                                console.log(value)
                                 value = _this.dataProcess(value,_this.lineEchartsData.unit[0],_this.lineEchartsData.unit[1]).num
-                                console.log(_this.lineEchartsData.unit[0])
-                                console.log(value)
                                 return value
                             },
                         },

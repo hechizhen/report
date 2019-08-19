@@ -123,7 +123,6 @@
             }
         },
         mounted () {
-            console.log(this.barEchartsData)
             var _this = this
             let echarts = _this.$echarts;
             _this.myChart = echarts.init(document.getElementById(_this.barEchartsData.id))
@@ -194,7 +193,6 @@
                                     position: _this.label.position,
                                     color:_this.label.color,
                                     formatter:function(params){
-                                        console.log(params)
                                         return _this.dataProcess(params.value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num+_this.dataProcess(params.value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).unit
                                     }
                                 }
@@ -206,7 +204,6 @@
                     _this.xAxisData = _this.barEchartsData.xAxisData
                     _this.yAxisType = 'value'
                     _this.yAxisData = ''
-                    var toolTrigger = 'axis'
                     var yAxisLabel = {
                         show:_this.yAxis.axisLabel.show,
                         textStyle:{
@@ -214,7 +211,6 @@
                             fontSize:_this.yAxis.axisLabel.fontSize,
                         },
                         formatter:function(value) {
-                            console.log(value)
                             value = _this.dataProcess(value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num
                             return value
                         },
@@ -250,7 +246,6 @@
                     _this.xAxisType = 'value'
                     _this.xAxisData = ''
                     _this.yAxisType = 'category'
-                    var toolTrigger = 'yxis'
                     _this.yAxisData = _this.barEchartsData.xAxisData
                     var xAxisLabel = {
                         show:_this.xAxis.axisLabel.show,
@@ -259,7 +254,6 @@
                             fontSize:_this.xAxis.axisLabel.fontSize,
                         },
                         formatter:function(value) {
-                            console.log(value)
                             value = _this.dataProcess(value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num
                             return value
                         },

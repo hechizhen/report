@@ -61,7 +61,7 @@
     </div>
         <!--走势图line-->
         <div class="bartu">
-            <trendChart  :lineEchartsData="marketableDayChart" v-if="marketableDayChart.length != 0"></trendChart>
+            <trendChart  :lineEchartsData="marketableDayChart" v-if="marketableDayChart != ''"></trendChart>
             <loading-data :isShow="marketableDayLine"></loading-data>
         </div>
     <core :coretype="'库存得分'" :coretext="87" :evaluate="'较好'"></core>
@@ -180,10 +180,10 @@
                 console.log(val)
                 this.newTableData = val
                 deep:true
-            }
+            },
         },
          mounted() {
-             console.log(this.getInvDayListing)
+             console.log(this.marketableDayChart)
              this.newTableData = this.getInvDayListing
          }
     }
