@@ -674,7 +674,7 @@
                                     "partition": "goods_name"
                                 },
                                 "isReturnTotalSize": "Y",
-                                "outputCol": "bo2_name,bo3_name,bo1_name,goods_name,saledays",
+                                "outputCol": "bo2_name,bo3_name,bo3_name,goods_name,saledays",
                                 "groupByCol": ["bo1_name","bo2_name","bo3_name","goods_name"],
                                 "pageNum": 1,
                                 "pageSize": 100,
@@ -2459,7 +2459,7 @@
                             {txt:'品类动销率',unit:'percent'},
                         ]
                     },
-                        _this.productTableData={
+                    _this.productTableData={
                         titleName:'下单商品明细-事业部',
                         params : {
                             "inputParam":{
@@ -2494,7 +2494,7 @@
                                 "data_type": "当月"
                             },
                             "isReturnTotalSize": "Y",
-                            "outputCol": "bo3_name,goods_name,last_order_time,unsale_days,qty,money",
+                            "outputCol": "goods_code79,goods_name,last_order_time,unsale_days,qty,money",
                             "pageNum": 1,
                             "pageSize": 1000,
                             "orderCol": "unsale_days desc" ,
