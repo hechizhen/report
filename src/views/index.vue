@@ -26,7 +26,7 @@
                   :salesmanTrendPie="salesmanTrendPie" :ownwardExportData="ownwardExportData" :reachContributionData="reachContributionData"
                   v-if="reachContributionData!='' && salesmanTrendData!=''"></salesman>
         <!-- 商品 -->
-        <productIndex :CommodityTurnoverRate="CommodityTurnoverRate"  :commoditydata="commoditydata" :GoodsDetail="GoodsDetail"
+        <productIndex :CommodityTurnoverRate="CommodityTurnoverRate"  :commoditydata="commoditydata"
                       :prodownStoresData="prodownStoresData" :upproStoresData="upproStoresData"
                       :NumberGoods="NumberGoods"  :CommodityRate="CommodityRate"  :NumberGoodsDownBar="NumberGoodsDownBar" :NumberGoodsUpBar="NumberGoodsUpBar"
                       :NumberGoodsPie="NumberGoodsPie" :NumberGoodsList="NumberGoodsList" v-if="CommodityTurnoverRate.length!=0"
@@ -107,7 +107,7 @@
                 //产品-动销商品数下滑商品
                 prodownStoresData:"",
                 //产品-动销商品明细-饼图
-                GoodsDetail:"",
+                // GoodsDetail:"",
                 //门店活跃明细
                 StoresDetailed:"",
                 //门店-门店下滑门店
@@ -1698,7 +1698,7 @@
                                 //id
                                 id:'barRaiseId',
                                 //数据单位
-                                unit:['money','tenth'],
+                                unit:['money'],
                                 //x轴单位
                                 xAxisData:raisexAxisData,
                                 type:'xAxis',
@@ -1752,7 +1752,7 @@
                                 //id
                                 id:'barDownId',
                                 //数据单位
-                                unit:['money','tenth'],
+                                unit:['money'],
                                 //x轴单位
                                 xAxisData:downxAxisData,
                                 type:'xAxis',
@@ -2282,7 +2282,7 @@
                     method: 'POST',
                     data: params
                 }).then(function (res) {
-                    var salesmanTrendData = res.data.data.data,xAxisData=[],salesmanArr=[],seriesData=[],salesmanColor=['#1378EC','#EE723F','#E9B533','#65E6F5'];
+                    var salesmanTrendData = res.data.data.data,xAxisData=[],salesmanArr=[],seriesData=[],salesmanColor=['#1378ec','#ee723f','#e9b533','#cc57d9','#1b9ad9','#39d4e7'];
                   console.log(salesmanTrendData)
                     salesmanTrendData.map(function(value){
                         if(xAxisData.length==0){

@@ -39,13 +39,13 @@
         name: "shopBase",
         props:{
             shopDaseData:{  //门店底部展示数据
-                type:Object
+                type:Array
             },
             defaultVal:{     //门店底部按钮名称
                 type:String
             },
             detailHandleClick:{  //打开门店底部按钮显示表格
-                type:Object
+                type:Function
             },
         },
         components:{
