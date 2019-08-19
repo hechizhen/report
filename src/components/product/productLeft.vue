@@ -27,7 +27,7 @@
                 type: Object
             },
             tableData:{    //动销清单表格数据
-                type:Array
+                type:Object
             },
             selectButtonClick:{  //切换维度点击事件
                 type:Function

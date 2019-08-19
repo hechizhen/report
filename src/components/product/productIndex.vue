@@ -54,9 +54,9 @@
                  commoditydata:{    //动销商品数概览数据
                      type:Object
                  },
-                 GoodsDetail:{      //商品饼图数据
-                     type:Array
-                 },
+                 // GoodsDetail:{      //商品饼图数据
+                 //     type:Array
+                 // },
                  NumberGoods:{    //动销商品数概览加载效果
                      type:Boolean
                  },
@@ -64,10 +64,12 @@
                      type:Boolean
                  },
                  upproStoresData:{   //增长商品数据
-                     type:Object
+                     type:Object,
+                     default:[]
                  },
                  prodownStoresData:{   //下滑商品数据
-                     type:Object
+                     type:Object,
+                     default:[]
                  },
                  productTableData:{   //产品-列表数据
                      type:Object
@@ -102,9 +104,9 @@
                  homeExportClick:{   //切换时间触发函数
                      type:Function
                  },
-                 detailExport:{     //导出表格数据
-                     type:Object
-                 },
+                 // detailExport:{     //导出表格数据
+                 //     type:Object
+                 // },
                  selectButtonClick:{  //切换维度点击事件
                      type:Function
                  },
@@ -128,7 +130,7 @@
                 goodsData:"",
                 VariabilityUp:this.upproStoresData,
                 VariabilityDown:this.prodownStoresData,
-                GoodsDetailPie:this.GoodsDetail,
+                // GoodsDetailPie:this.GoodsDetail,
                 pieEchartsData:{},
                 barEchartsDataDown:{},
                 barEchartsDataUp:{},
@@ -207,9 +209,9 @@
         },
         watch:{
             //饼图监听
-            GoodsDetail(val){
-              this.GoodsDetailPie =val
-            },
+            // GoodsDetail(val){
+            //   this.GoodsDetailPie =val
+            // },
             //下滑树状图监听
             upproStoresData(val){
                this.VariabilityUp = val
