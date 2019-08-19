@@ -126,7 +126,7 @@ export default{
   //获取达成率
   Vue.prototype.getReachPercent = function(a,b){
     if(b!=0 && b!=null){
-      var reach = (a/b).toFixed(2)
+      var reach = a/b
     }else{
       var reach = ''
     }

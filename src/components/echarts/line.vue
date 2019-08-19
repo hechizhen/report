@@ -179,6 +179,8 @@
                     tooltip: {
                         trigger: 'axis',
                         formatter:function(params){
+                            console.log(params)
+                            console.log(_this.lineEchartsData.unit[0])
                             var relVal = '';
                             for (var i = 0; i < params.length; i++) {
                                 relVal += params[i].marker+params[i].seriesName+':'+_this.dataProcess(params[i].value,_this.lineEchartsData.unit[0],_this.lineEchartsData.unit[1]).num+_this.dataProcess(params[i].value,_this.lineEchartsData.unit[0],_this.lineEchartsData.unit[1]).unit+'</br>'
@@ -254,6 +256,8 @@
                             formatter:function(value) {
                                 console.log(value)
                                 value = _this.dataProcess(value,_this.lineEchartsData.unit[0],_this.lineEchartsData.unit[1]).num
+                                console.log(_this.lineEchartsData.unit[0])
+                                console.log(value)
                                 return value
                             },
                         },

@@ -10,6 +10,10 @@
                 <span class="spanFont">查询日期：</span>
                 <a-month-picker :defaultValue="moment(defaultDate, monthFormat)" :format="monthFormat" :allowClear="false" @change="changeDate" />
                 <button-list :buttonType="buttonList.buttonType" :isGhost="buttonList.isGhost" :buttonHandleClick="buttonHandleClick" :defaultVal="buttonList.defaultVal" style="margin-left:20px;"></button-list>
+                <span>选择经销商</span>
+                <a-select :defaultValue="dealList[0].name" style="width: 200px" @change="onChange">
+                    <a-select-option v-for="(item,index) in dealList" :key="index" :value="item.name">{{item.name}}</a-select-option>
+                </a-select>
             </p>
         </div>
         <div class="headerTitle_right">
@@ -52,6 +56,12 @@
             //修改时间
             changeDateHandle:{
                 type:Function,
+            },
+            dealList:{
+                type:Array
+            },
+            changeDealId:{
+                type:Function
             }
         },
         components : {
@@ -65,7 +75,8 @@
                     buttonType:'primary',
                     defaultVal:'查询',
                     isGhost:false
-                }
+                },
+                newId:''
             }
         },
         mounted () {
@@ -82,6 +93,17 @@
                 let dateTime = newDate
                 dateTime = dateTime.substring(0,4)+dateTime.substring(5,7)
                 this.changeDateHandle(dateTime)
+            },
+            //选择经销商
+            onChange(val){
+                var _this = this
+                _this.dealList.map(function(item){
+                    console.log(item)
+                    if(item.name==val){
+                        _this.newId = item.id
+                    }
+                })
+                _this.changeDealId(_this.newId)
             }
         },
         computed:{

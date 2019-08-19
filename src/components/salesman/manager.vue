@@ -36,7 +36,7 @@
 				  </a-Col>
 				  <a-Col :span="6" class="managerCol">
 				  	<p><span>{{salesmanData.all_cnt}}</span></p>
-				  	<p>￥<span>{{salesmanData.emp_avg_money}}</span></p>
+				  	<p style="margin-top:5px;">￥<span>{{salesmanData.emp_avg_money}}</span></p>
 				  </a-Col>
 				</a-Row>
 		  	</div>

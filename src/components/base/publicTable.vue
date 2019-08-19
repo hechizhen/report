@@ -9,8 +9,9 @@
                         <a-radio-button v-for="(item,index) in buttonGroup.list" :key="index" :value="item">{{item}}</a-radio-button>
                     </a-radio-group>
                 </div>
-                <new-button :defaultVal="exportButton.defaultVal" :buttonType="exportButton.buttonType" :buttonHandleClick="exportHandleClick" style="margin-right:2%;"></new-button>
-                <new-button :defaultVal="returnButton.defaultVal" :buttonType="returnButton.buttonType" :buttonHandleClick="returnHandleClick"></new-button>
+                <new-button :defaultVal="exportButton.defaultVal" :buttonHandleClick="exportHandleClick" style="margin-right:2%;"></new-button>
+                <!-- <new-button :defaultVal="returnButton.defaultVal" :buttonType="returnButton.buttonType" :buttonHandleClick="returnHandleClick"></new-button> -->
+                <i class="iconfont icon-guanbi iStyle" @click="returnHandleClick"></i>
             </div>
             <Table :height="maxHeight" :columns="tablecColumns" :data="tableData" border  v-if="tableData.length!=0" :loading="tableLoading"></Table>
             <div class="paginationTable">
@@ -59,12 +60,6 @@
                 //导出按钮样式
                 exportButton:{
                     defaultVal:'导出数据',
-                    buttonType:'primary'
-                },
-                //返回按钮样式
-                returnButton:{
-                    defaultVal:'关闭',
-                    buttonType:'primary'
                 },
                 inputVal:'',
                 tableData:'',//列表数据
@@ -243,6 +238,13 @@
             width:100%;
             text-align: right;
             padding:20px 0;
+        }
+        .iStyle{
+            position: absolute;
+            right:5px;
+            top:5px;
+            font-size: 30px;
+            cursor: pointer;
         }
     }
 </style>

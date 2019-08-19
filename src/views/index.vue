@@ -6,7 +6,8 @@
             <i></i>
         </div> -->
         <!-- 头部 -->
-        <header-title :dealName="indexDealName" :score="indexScore" :summary="indexSummary" :defaultDate="indexDefaultDate" :changeDateHandle="indexChangeDate"></header-title>
+        <header-title :dealName="indexDealName" :score="indexScore" :summary="indexSummary" :defaultDate="indexDefaultDate" :changeDateHandle="indexChangeDate"
+        :dealList="dealList" :changeDealId="changeUserId"></header-title>
         <!-- 一帮卖分析 -->
         <one-help-sale-en :titleName="oneHelpSaleTitle" :monthSalesData="monthSalesData" :monthBarData="monthBarData"  :coreData="oneHelpSaleScoreList"
         :yearSalesData="yearSalesData" :yearBarData="yearBarData" :monthShow="oneHelpSaleMonthShow" :yearShow="oneHelpSaleYearShow"
@@ -218,7 +219,19 @@
                 productPageNum:1,
                 exportDetailData:'',
                 //达成贡献导出数据
-                reachContributionData:''
+                reachContributionData:'',
+                dealList:[
+                    {id:'8a981eb458580fe9015860d7b87c0307',name:'立白生产环境测试库'},
+                    {id:'8a981eb458580fe9015860d8b87c0307',name:'广州立白集团企业有限公司'},
+                    {id:'ff80808169c93eb80169d6756c101eef',name:'富平县百洁商贸有限公司'},
+                    {id:'ff80808169c93eb80169d69fb8d92c31',name:'宜昌市太华商贸有限公司'},
+                    {id:'ff80808169c93eb80169d6a73cc02d04',name:'黄梅县林峰日化经营部'},
+                    {id:'ff80808169c93eb80169d6bd844a2de1',name:'鄂州市嘉德商贸有限公司'},
+                    {id:'ff80808169d8d9b30169db5961eb0011',name:'荆州市立晨商贸有限公司'},
+                    {id:'ff8080816a194910016a42de93bb1164',name:'苏州汇浚贸易有限公司'},
+                    {id:'ff8080816a194910016a43acc36938b8',name:'徐州信如商贸有限公司【沛县】'},
+                    {id:'ff8080816a194910016a43b00eeb3a75',name:'芜湖市明坤日用百货贸易有限公司'},
+                ]
             }
         },
         created() {
@@ -248,7 +261,6 @@
             this.getRaiseDownStores()
             this.getSalesmanReached()
             this.getDetailTableData()
-            this.getGoodsdetail()
         },
         computed: {
 
@@ -257,43 +269,46 @@
 
         },
         methods: {
-            //修改时间
-            indexChangeDate(val) {
-                this.currentDate = val
+            //选择经销商
+            changeUserId(item){
+                this.dealer_id = item
+                this.getsalesmanTrend()
                 this.getOverViewData()
                 this.getOneHelpSalesData()
                 this.getFinanceOverviewData()
+                this.getsalesman()
+                this.getsecondBand()
                 this.getinventoryDetail()
                 this.getStoresDetailed()
                 this.getCommodityTurnoverRate()
-                this.getsalesmanTrend()
-                this.getsalesmandownward()
+                this.getdirection()
                 this.getmarketableDayChart()
                 this.getVariability()
+                this.getsalesmandownward()
                 this.getRaiseDownStores()
                 this.getSalesmanReached()
                 this.getDetailTableData()
             },
-            // detailChartHandleClick(item){
-            //     this.categoryName = item
-            //     this.getProductTableData()
-            //     this.getProductExportData()
-            // },
-            // homeCheckValChange(item){
-            //     this.categoryName = item
-            //     this.getProductTableData()
-            //     this.getProductExportData()
-            // },
-            // homePageNumChange(item){
-            //     this.productPageNum = item
-            //     this.getProductTableData()
-            //     this.getProductExportData()
-            // },
-            // homeExportClick(item){
-            //     this.exportPageSize = item
-            //     this.getProductExportData()
-            // },
-
+            //修改时间
+            indexChangeDate(val) {
+                this.currentDate = val
+                this.getsalesmanTrend()
+                this.getOverViewData()
+                this.getOneHelpSalesData()
+                this.getFinanceOverviewData()
+                this.getsalesman()
+                this.getsecondBand()
+                this.getinventoryDetail()
+                this.getStoresDetailed()
+                this.getCommodityTurnoverRate()
+                this.getdirection()
+                this.getmarketableDayChart()
+                this.getVariability()
+                this.getsalesmandownward()
+                this.getRaiseDownStores()
+                this.getSalesmanReached()
+                this.getDetailTableData()
+            },
             //二帮卖订单详情切换维度调用方法
             twoDetaSelectButtonClick(val){
                 if(val == '系列'){
@@ -307,7 +322,7 @@
                                     "data_type":"当月",
                                     "bo_type":"系列"
                                 },
-                                "outputCol":"bo1_name,bo2_name,bo3_name,money,ratio_rate,money_mom,money_yoy,gross_rate,gross_money_yoy,gross_money_mom",
+                                "outputCol":"bo1_name,bo2_name,,bo3_name,money,ratio_rate,money_mom,money_yoy,gross_money,gross_rate,gross_money_yoy,gross_money_mom",
                                 "pageNum":1,
                                 "pageSize":10000,
                                 "groupByCol":["bo1_name","bo2_name","bo3_name"],
@@ -343,7 +358,7 @@
                                     "data_type":"当月",
                                     "bo_type":"商品"
                                 },
-                                "outputCol":"bo1_name,bo2_name,bo3_name,goods_name,money,ratio_rate,money_mom,money_yoy,gross_rate,gross_money_yoy,gross_money_mom",
+                                "outputCol":"bo1_name,bo2_name,,bo3_name,goods_name,money,ratio_rate,money_mom,money_yoy,gross_money,gross_rate,gross_money_yoy,gross_money_mom",
                                 "pageNum":1,
                                 "pageSize":10000,
                                 "groupByCol":["bo1_name","bo2_name","bo3_name","goods_name"],
@@ -380,7 +395,7 @@
                                     "data_type":"当月",
                                     "bo_type":"品类"
                                 },
-                                "outputCol":"bo1_name,bo2_name,money,ratio_rate,money_mom,money_yoy,gross_rate,gross_money_yoy,gross_money_mom",
+                                "outputCol":"bo1_name,bo2_name,money,ratio_rate,money_mom,money_yoy,gross_money,gross_rate,gross_money_yoy,gross_money_mom",
                                 "pageNum":1,
                                 "pageSize":10000,
                                 "groupByCol":["bo1_name","bo2_name"],
@@ -404,12 +419,6 @@
                         }
                     }
                 }
-
-            //    alert(2)
-            //    this.twoDetailTableData =  JSON.parse(JSON.stringify(this.twoDetailTableData));
-            //    this.$set(this.twoDetailTableData,"twoDetailTableData",this.twoDetailTableData)
-
-
             },
             //产品-动销清单切换维度调用方法
             proDetaSelectButtonClick(val){
@@ -786,7 +795,7 @@
                         //本月下单金额达成率
                         _this.monthSalesData = {
                             sales:_this.dataProcess(salesMonthData.money,'money','tenth').num,
-                            reach:_this.getReachPercent(salesMonthData.money,salesMonthData.target_money)+'%',
+                            reach:(_this.getReachPercent(salesMonthData.money,salesMonthData.target_money)*100).toFixed(2)+'%',
                             bgColor:'#2D92FC',
                             titleName:'本月'
                         }
@@ -865,7 +874,7 @@
                         //年累计下单金额达成率
                         _this.yearSalesData = {
                             sales:_this.dataProcess(salesYearData.money,'money','tenth').num,
-                            reach:_this.getReachPercent(salesYearData.money,salesYearData.target_money)+'%',
+                            reach:(_this.getReachPercent(salesYearData.money,salesYearData.target_money)*100).toFixed(2)+'%',
                             bgColor:'#FF9500',
                             titleName:'年累计'
                         }
@@ -1194,7 +1203,7 @@
                         var tempObjecd = {name:value,color:salesmanColor[index]},tempArr = [];
                         salesmanTrendData.map(function(data){
                            if(value == data.emp_name){
-                                tempArr.push(!data.emp_rate ? 0 : _this.dataProcess(data.emp_rate, 'percent').num)
+                                tempArr.push(!data.emp_rate ? 0 : data.emp_rate)
                             }
                         })
                         tempObjecd.data = tempArr;
@@ -1202,8 +1211,8 @@
                     })
                     var tempsalesmanTrendData = {monthArr:xAxisData,seriesData:seriesData}
                     _this.salesmanTrendData = {
-                        id:'lineSalesTrendId11',
-                        unit:['money','tenth'],
+                        id:'lineSalesTrendId123',
+                        unit:['percent'],
                         xAxisData:tempsalesmanTrendData.monthArr,
                         lineData:tempsalesmanTrendData.seriesData
                     }
@@ -1338,7 +1347,7 @@
                 _this.CommodityRate = true
                 var params = {
                     "inputParam":{
-                        "data_mon":"201908",
+                        "data_mon":_this.currentDate,
                         "data_type":"当月"
                     },
                     "outputCol":"dealer_id,data_mon,data_type,stock_sale_rate,stock_sale_goods_cnt,goods_cnt,stock_sale_goods_cnt_mom,stock_sale_goods_cnt_yoy,sales_raise_goods_cnt,sales_drop_goods_cnt,liby_stock_sale_rate,kispa_stock_sale_rate,cheerwin_stock_sale_rate,oral_stock_sale_rate,shengmei_stock_sale_rate",
@@ -1579,7 +1588,7 @@
                         "pageSize":1000,
                         "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
                         "serviceId":"service_tjbg02_goods_sales_change"
-                            }
+                    }
                     let keyValue = params.outputCol.split(',')
                     let numArray = ['numberId']
                     _this.tableHeaderKey = numArray.concat(keyValue)
@@ -2520,7 +2529,7 @@
                         ]
                     },
                 }
-                    //二帮卖订单列表数据
+                //二帮卖订单列表数据
                 _this.twoDetailTableData={
                     //二帮卖订单明细
                     gettwoListing:{
@@ -2530,7 +2539,7 @@
                                 "data_type":"当月",
                                 "bo_type":"品类"
                             },
-                            "outputCol":"bo1_name,bo2_name,money,ratio_rate,money_mom,money_yoy,gross_rate,gross_money_yoy,gross_money_mom",
+                            "outputCol":"bo1_name,bo2_name,money,ratio_rate,money_mom,money_yoy,gross_money,gross_rate,gross_money_yoy,gross_money_mom",
                             "pageNum":1,
                             "pageSize":1000,
                             "groupByCol":["bo1_name","bo2_name"],

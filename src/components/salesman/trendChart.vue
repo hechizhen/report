@@ -7,7 +7,7 @@
 				  	走势图
 				  </a-Col>
 				  <a-Col :span="12" class="thendChartCol2">
-				  	单位：万元  <span @click="thendChartClick"><i class="iconfont icon-guanbi"></i></span>
+					 <span @click="thendChartClick"><i class="iconfont icon-guanbi"></i></span>
 				  </a-Col>
 				</a-Row>
 			</div>
