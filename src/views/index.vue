@@ -519,7 +519,7 @@
                                 "outputCol":"bo1_name,bo2_name,money,ratio_rate",
                                 "pageNum":1,
                                 "pageSize":1000,
-                                "groupByCol":["dealer_id","data_mon"],
+                                "groupByCol":["bo1_name","bo2_name"],
                                 "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
                                 "serviceId":"service_tjbg02_sales_order_dtl"
                             },
@@ -547,7 +547,7 @@
                             "outputCol":"bo1_name,bo2_name,bo3_name,money,ratio_rate",
                                 "pageNum":1,
                                 "pageSize":1000,
-                                "groupByCol":["dealer_id","data_mon"],
+                               "groupByCol":["bo1_name","bo2_name","bo3_name"],
                                 "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
                             "serviceId":"service_tjbg02_sales_order_dtl"
                         },
@@ -576,7 +576,7 @@
                                 "outputCol":"bo1_name,bo2_name,bo3_name,goods_name,money,ratio_rate",
                                 "pageNum":1,
                                 "pageSize":1000,
-                                "groupByCol":["dealer_id","data_mon"],
+                                "groupByCol":["bo1_name","bo2_name","bo3_name","goods_name"],
                                 "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
                                 "serviceId":"service_tjbg02_sales_order_dtl"
                             },
@@ -606,7 +606,7 @@
                                 "outputCol":"bo1_name,money,ratio_rate",
                                 "pageNum":1,
                                 "pageSize":1000,
-                                "groupByCol":["dealer_id","data_mon"],
+                                "groupByCol":["bo1_name"],
                                 "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
                                 "serviceId":"service_tjbg02_sales_order_dtl"
                             },
@@ -2421,7 +2421,7 @@
                             "outputCol":"bo1_name,money,ratio_rate",
                             "pageNum":1,
                             "pageSize":1000,
-                            "groupByCol":["dealer_id","data_mon"],
+                            "groupByCol":["bo1_name"],
                             "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
                             "serviceId":"service_tjbg02_sales_order_dtl"
                         },
