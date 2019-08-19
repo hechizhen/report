@@ -1,5 +1,6 @@
 <template>
 	<div class="sameMonth">
+		<loading-data :isShow="isShow"></loading-data>
 		<div class="sameMonthcontent">
 			<div class="title">
 			   <div class="titleborder"></div>
@@ -31,7 +32,6 @@
 				</div>
 			</div>
 		</div>
-		<loading-data :isShow="isShow"></loading-data>
 	</div>
 </template>
 <script>

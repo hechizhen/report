@@ -62,6 +62,7 @@
         <!--走势图line-->
         <div class="bartu">
             <trendChart  :lineEchartsData="marketableDayChart" v-if="marketableDayChart.length != 0"></trendChart>
+            <loading-data :isShow="marketableDayLine"></loading-data>
         </div>
     <core :coretype="'库存得分'" :coretext="87" :evaluate="'较好'"></core>
     </div>
@@ -94,6 +95,9 @@
             },
             InventoryTurnover:{        //库存周转次数加载效果
                 type:Boolean
+            },
+            marketableDayLine:{     //库存可销天数走势图加载效果
+              type:Boolean
             },
             stockAmount:{           //库存金额加载效果
                 type:Boolean
@@ -356,5 +360,6 @@
         height:100%;
         background:rgba(255,255,255,1);
         border-radius:10px;
+        position: relative;
     }
 </style>

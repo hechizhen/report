@@ -308,6 +308,9 @@
                 this.getRaiseDownStores()
                 this.getSalesmanReached()
                 this.getDetailTableData()
+                this.getsecondBand()
+                this.getdirection()
+                this.getsalesman()
             },
             //二帮卖订单详情切换维度调用方法
             twoDetaSelectButtonClick(val){
@@ -1136,6 +1139,7 @@
                         _this.towHelpSaleMonthShow = false
                         _this.towHelProportion = false
                         _this.towHelYoy = false
+
                      }
                 })
             },
@@ -1504,6 +1508,7 @@
                     },
                 )
             },
+
             // //产品-列表数据导出
             // getProductExportData(){
             //     var _this = this
@@ -1600,6 +1605,8 @@
             //产品-产品下滑/增长商品
             getVariability() {
                 var _this = this
+                _this.NumberGoodsUpBar = true
+                _this.NumberGoodsDownBar = true
                 //下滑产品数据
                 function getProDownData(){
                     var params = {
@@ -1666,8 +1673,8 @@
                 }
                 this.$http.all([getProRaiseData(), getProDownData()])
                     .then(this.$http.spread((proraiseData, prodownData) => {
-                            console.log(proraiseData)
-                            console.log(prodownData)
+                            console.log(proraiseData)  //增长
+                            console.log(prodownData)   //下滑
                             //增长产品数据
                             let proraiseList = proraiseData.data.data.data
                             console.log(proraiseList)
@@ -1773,13 +1780,13 @@
                                 showType:0,//0横过来 1竖起来
                                 //markline
                                 markLineList:{
-                                    show:false
+                                    show:_this
                                 },
                             }
                             _this.prodownStoresData = downBarData
                              console.log(_this.downStoresData)
-                            _this.downStoresBar = false
-                            _this.upStoresBar = false
+                            _this.NumberGoodsUpBar = false
+                           _this.NumberGoodsDownBar = false
                         })
                     )
             },
@@ -1820,6 +1827,7 @@
             //     })
             // },
             //
+
             // 门店模块概览
             getStoresDetailed() {
                 var _this = this
@@ -1906,18 +1914,18 @@
                             ],
                                 downSales,
                                 upSales,
-                            shopDaseData:[
+                            shopDaseData:[  //近3个月无交易门店数，6个月无交易门店数
                                 noTrade,
                                 noTrades
                             ]
                         },
                         ActiveDetail:{
-                            shopActiveDetail:[
+                            shopActiveDetail:[ //门店单产,总门店数,新增门店数
                                 ActivestresPer,
                                 ActivestresSum,
                                 ActivestresnNew
                             ],
-                            shopDaseData:[
+                            shopDaseData:[  //3个月无交易门店应收欠款,闭店应收账款
                                 nearnoTrade,
                                 nearnoTrades
                             ]
@@ -2274,7 +2282,7 @@
                     method: 'POST',
                     data: params
                 }).then(function (res) {
-                    var salesmanTrendData = res.data.data.data,xAxisData=[],salesmanArr=[],seriesData=[],salesmanColor=['#009EE2','#E9A837','#00E2BF','#65E6F5'];
+                    var salesmanTrendData = res.data.data.data,xAxisData=[],salesmanArr=[],seriesData=[],salesmanColor=['#1378EC','#EE723F','#E9B533','#65E6F5'];
                   console.log(salesmanTrendData)
                     salesmanTrendData.map(function(value){
                         if(xAxisData.length==0){
@@ -2285,7 +2293,7 @@
                             }
                         }
                     })
-                    salesmanArr.push('立白','好爸爸','超威','口腔','晟美');
+                    salesmanArr.push('全部','立白','好爸爸','超威','口腔','晟美');
                     salesmanArr.map(function(value,index){
                         var tempObjecd = {name:value,color:salesmanColor[index]},tempArr = [];
                         salesmanTrendData.map(function(data){
@@ -2299,6 +2307,8 @@
                                 tempArr.push(!data.oral_saledays ? 0 : data.oral_saledays)
                             }else if(value == '晟美'){
                                 tempArr.push(!data.shengmei_saledays ? 0 :data.shengmei_saledays)
+                            }else {
+                                tempArr.push(!data.saledays ? 0 :data.saledays)
                             }
                         })
                         tempObjecd.data = tempArr;
@@ -2306,6 +2316,7 @@
                     })
                     var tempsalesmanTrendData = {monthArr:xAxisData,seriesData:seriesData}
                     _this.marketableDayChart = tempsalesmanTrendData;
+                    _this.marketableDayLine = false
                     console.log(_this.marketableDayChart)
                 })
             },
