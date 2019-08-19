@@ -15,7 +15,7 @@
 				  	<totalAmount :displayData="orderAmountData.yearOnYear" :isShow="towHelYoy"></totalAmount>
 				</a-Col>
 				<a-Col :span="24">
-				  	<trendChart :lineEchartsData="lineEchartsData" :isShow="towHelpSaleMonthLineShow" v-if="lineEchartsData"></trendChart>
+				  	<trendChart :lineEchartsData="lineEchartsData" :isShow="towHelpSaleMonthLineShow" v-if="lineEchartsData!=''"></trendChart>
 				</a-Col>
 		  	</a-Row>
 		  </a-Col>
@@ -102,12 +102,10 @@
 					span:7,
 					span2:17,
 					titleName:'二帮卖分析-订单指标解释',
-					newTableData:'',
 				}
 			}
 		},
 		mounted(){
-			this.newTableData = this.tableData
 			console.log(this.selectButtonClick)
 		},
 		methods:{
@@ -128,6 +126,7 @@
 		},
 		watch:{
             directionData(val){
+				console.log(val)
                 this.lineEchartsData = {
                     id:'lineIdBand',
 					xAxisData:val.monthArr,

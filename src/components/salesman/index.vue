@@ -3,7 +3,7 @@
 		<subTitle :subtitlename="subtitlename" :listing="listing" :explainSecondList="explainSecondList"></subTitle>
 		<manager :explicit="explicit" :salesmanData="salesmanData" :isShow="isShow"></manager>
 		<core :coretype="'业务员得分'" :coretext="100" :evaluate="'较好'"></core>
-		<trendChart  v-if="echartsShow" :trendChartClick="trendChartClick" :lineEchartsData="direction" :isShow="salesmanTrendPie"></trendChart>
+		<trendChart  v-if="echartsShow" :trendChartClick="trendChartClick" :lineEchartsData="salesmanTrendData" :isShow="salesmanTrendPie"></trendChart>
 		<glide  v-if="glideShow" :trendChartClick="glideClick" :salesmandownward="salesmandownward" :isShow="salesmandownwardBar"></glide>
 		<contribution   v-if="contributionShow" :trendChartClick="contributionClick" :salesmanReached="salesmanReached" :salesmanContribution="salesmanContribution"
 						:salesmanContributionBar="salesmanContributionBar"  :salesmanReachedBar="salesmanReachedBar"
@@ -130,15 +130,6 @@
 			}
 		},
 		watch:{
-            salesmanTrendData(val){
-				console.log(val)
-            	this.direction = {
-					id:'lineSalesTrendId11',
-					unit:['money','tenth'],
-                    xAxisData:val.monthArr,
-                    lineData:val.seriesData
-            	}
-        	},
         	salesmandownwardData(val) {
         		this.salesmandownward = val
         	},

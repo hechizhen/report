@@ -1025,11 +1025,10 @@
                     method: 'POST',
                     data: params
                 }).then(function (res) {
-
                     var directionData = res.data.data.data,monthArr = [],seriesData=[],directionArr = {};
                     directionData.map(function(value){
                         monthArr.push(value.data_mon)
-                        seriesData.push((value.money/10000).toFixed(2))
+                        seriesData.push(value.money)
                     })
                     directionArr.monthArr = monthArr;
                     directionArr.seriesData = seriesData;
@@ -1088,7 +1087,12 @@
                         seriesData.push(tempObjecd)
                     })
                     var tempsalesmanTrendData = {monthArr:xAxisData,seriesData:seriesData}
-                    _this.salesmanTrendData = tempsalesmanTrendData
+                    _this.salesmanTrendData = {
+                        id:'lineSalesTrendId11',
+                        unit:['money','tenth'],
+                        xAxisData:tempsalesmanTrendData.monthArr,
+                        lineData:tempsalesmanTrendData.seriesData
+                    }
                     console.log( _this.salesmanTrendData)
                     _this.salesmanTrendPie = false;
 
