@@ -3,6 +3,7 @@
             <barChart :barEchartsData="barData.config" :xAxis="barData.xAxis"
                       :yAxis="barData.yAxis" :legendShow="barData.legendShow"
                       :isShowMax="barData.isShowMax" :label="barData.label"
+                      :grid="barData.grid"
             ></barChart>
     </div>
 </template>

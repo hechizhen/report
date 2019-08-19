@@ -82,6 +82,7 @@
             height: 80%;
             width: 90%;
             background:rgba(255,255,255,1);
+            border-radius: 5px;
             .title {
                 height: 10%;
                 width: 100%;

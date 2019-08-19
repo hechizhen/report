@@ -238,6 +238,12 @@
             let date = new Date;
             let year = date.getFullYear();
             let month = date.getMonth() + 1;
+            let day = date.getDate();
+            if(day<6){
+                month = month -2
+            }else{
+                month = month -1
+            }
             month = month < 10 ? "0" + month : month;
             //获取当前接口年月
             this.currentDate = year + '' + month
@@ -537,7 +543,7 @@
                                 },
                                 "outputCol":"bo1_name,bo2_name,money,ratio_rate",
                                 "pageNum":1,
-                                "pageSize":1000,
+                                "pageSize":100,
                                 "groupByCol":["bo1_name","bo2_name"],
                                 "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
                                 "serviceId":"service_tjbg02_sales_order_dtl"
@@ -566,7 +572,7 @@
                             },
                             "outputCol":"bo1_name,bo2_name,bo3_name,money,ratio_rate",
                                 "pageNum":1,
-                                "pageSize":1000,
+                                "pageSize":100,
                                "groupByCol":["bo1_name","bo2_name","bo3_name"],
                                 "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
                             "serviceId":"service_tjbg02_sales_order_dtl"
@@ -596,7 +602,7 @@
                                 },
                                 "outputCol":"bo1_name,bo2_name,bo3_name,goods_name,money,ratio_rate",
                                 "pageNum":1,
-                                "pageSize":1000,
+                                "pageSize":100,
                                 "groupByCol":["bo1_name","bo2_name","bo3_name","goods_name"],
                                 "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
                                 "serviceId":"service_tjbg02_sales_order_dtl"
@@ -627,7 +633,7 @@
                                 },
                                 "outputCol":"bo1_name,money,ratio_rate",
                                 "pageNum":1,
-                                "pageSize":1000,
+                                "pageSize":100,
                                 "groupByCol":["bo1_name"],
                                 "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
                                 "serviceId":"service_tjbg02_sales_order_dtl"
@@ -841,7 +847,7 @@
                                 showType: 0,
                                 markLineList:{
                                     show:true,
-                                    data:100,
+                                    data:1,
                                 }
                             },
                             label: {
@@ -918,7 +924,7 @@
                                 showType: 0,
                                 markLineList:{
                                     show:true,
-                                    data:100,
+                                    data:1,
                                 }
                             },
                             label: {
@@ -1457,14 +1463,22 @@
                                     data:100,
                                 }
                             },
+                            grid:{
+                                top: 'middle',
+                                left: '3%',
+                                right: '15%',
+                                height: '75%',
+                                bottom:'3%',
+                                containLabel: true
+                            },
                             label: {
                                 isShow: true,
                                 position:'right'
                             },
                             xAxis:{
                                 axisLine:{
-                                    show:false,
-                                    color:'#3699FF'
+                                    show:true,
+                                    color:'rgba(207,222,255,0.2)'
                                 },
                                 axisLabel:{
                                     show:true,
@@ -1478,8 +1492,8 @@
                             },
                             yAxis:{
                                 axisLine:{
-                                    show:false,
-                                    color:'#fff'
+                                    show:true,
+                                    color:'rgba(207,222,255,0.2)'
                                 },
                                 axisLabel:{
                                     show:true,
@@ -2459,7 +2473,7 @@
                             },
                             "outputCol":"bo1_name,bo2_name,order_qty,stock_qty,sale_rate",
                             "pageNum":1,
-                            "pageSize":1000,
+                            "pageSize":100,
                             "groupByCol":["bo1_name","bo2_name"],
                             "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
                             "serviceId":"service_tjbg02_goods_stock_sales"
@@ -2617,7 +2631,6 @@
                         ]
                     }
                 }
-
             },
             //计算环比/同比
             getHandle(molecule,denominator,num){

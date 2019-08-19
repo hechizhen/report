@@ -33,7 +33,7 @@
                     showType:0,//0横过来 1竖起来
                     //markline
                     markLineList:{
-                        show:false
+                        show:false,
                     },
                 })
             },
@@ -65,6 +65,17 @@
             dataZoomShow:{
                 type:Boolean,
                 default:false
+            },
+            grid:{
+                type:Object,
+                default: () => ({
+                    top: 'middle',
+                    left: '3%',
+                    right: '4%',
+                    height: '75%',
+                    bottom:'3%',
+                    containLabel: true
+                })
             },
             //x轴参数
             xAxis:{
@@ -154,8 +165,8 @@
                                     position: 'start',
                                     // padding: [-12, 10, 0, -12],
                                     formatter:function(params){
-                                        // return params.name+':'
-                                        // +params.value+markLineConfiguration.unit
+                                        params.value = _this.dataProcess(params.value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num
+                                        return params.value
                                     },
                                     fontSize:12,
                                 }
@@ -317,14 +328,7 @@
                         }
                     },
                     dataZoom: dataZoom,
-                    grid: {
-                        top: 'middle',
-                        left: '3%',
-                        right: '4%',
-                        height: '75%',
-                        bottom:'3%',
-                        containLabel: true
-                    },
+                    grid: _this.grid,
                     xAxis: {
                         type: _this.xAxisType,
                         data: _this.xAxisData,
