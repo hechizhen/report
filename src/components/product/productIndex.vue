@@ -11,7 +11,7 @@
                         <loading-data :isShow="CommodityRate"></loading-data>
                     </a-Col>
                     <a-Col :span="13" :push="1">
-                        <commodityRight :commoditydata="commoditydata" :upraphy="upraphy" :downraphy="downraphy" :pieraphy="pieraphy" ></commodityRight>
+                        <commodityRight :commoditydata="commoditydata" :upraphy="upraphy" :downraphy="downraphy"  :tableData="productTableData"  :selectButtonClick="proListDetaSelectButtonClick"></commodityRight>
                         <loading-data :isShow="NumberGoods"></loading-data>
                     </a-Col>
                 </a-Row>
@@ -26,11 +26,11 @@
                           :downExportData="exportData.prodownData"
                           :isShow="NumberGoodsUpBar"></upproductChart>  <!--增长-->
 
-        <productChartPie v-if="pieShow" :trendChartClick="pieClick" :GoodsDetailPie="GoodsDetailPie" :tableData="productTableData"
-                        :NumberGoodsPie="NumberGoodsPie" :NumberGoodsList="NumberGoodsList" :pieChartHandleClick="IndexChartHandleClick"
-                        :checkValChange="indexCheckVal" :pageNumChange="indexPageNum" :exportClick="indexExportClick"
-                        :tableExport="detailExport"
-        ></productChartPie>
+        <!--<productChartPie v-if="pieShow" :trendChartClick="pieClick" :GoodsDetailPie="GoodsDetailPie" :tableData="productTableData"-->
+                        <!--:NumberGoodsPie="NumberGoodsPie" :NumberGoodsList="NumberGoodsList" :pieChartHandleClick="IndexChartHandleClick"-->
+                        <!--:checkValChange="indexCheckVal" :pageNumChange="indexPageNum" :exportClick="indexExportClick"-->
+                        <!--:tableExport="detailExport"-->
+        <!--&gt;</productChartPie>-->
         <!--<productList  v-if="listShow"  :trendChartClick="listClick" ></productList>-->
     </div>
 </template>
@@ -70,7 +70,7 @@
                      type:Object
                  },
                  productTableData:{   //产品-列表数据
-                     type:Object
+                     type:Array
                  },
                  NumberGoodsDownBar:{  //下滑商品加载效果
                      type:Boolean
@@ -106,6 +106,9 @@
                      type:Object
                  },
                  selectButtonClick:{  //切换维度点击事件
+                     type:Function
+                 },
+                 proListDetaSelectButtonClick:{  //商品明细表格切换维度
                      type:Function
                  }
              },
@@ -175,32 +178,32 @@
             downClick(){
                 this.downShow = false;
             },
-            //打开饼图
-            pieraphy(){
-                this.pieShow = true;
-            },
-            //关闭饼图
-            pieClick(){
-                this.pieShow = false;
-            },
-            IndexChartHandleClick(item){
-                var _this  =this
-                console.log(item)
-                _this.homeChartHandleClick(item)
-            },
-            indexPageNum(item){
-                var _this  =this
-                console.log(item)
-                _this.homePageNumChange(item)
-            },
-            indexCheckVal(item){
-                var _this  =this
-                console.log(item)
-                _this.homeCheckValChange(item)
-            },
-            indexExportClick(item){
-                this.homeExportClick(item)
-            }
+            // //打开饼图
+            // pieraphy(){
+            //     this.pieShow = true;
+            // },
+            // //关闭饼图
+            // pieClick(){
+            //     this.pieShow = false;
+            // },
+            // IndexChartHandleClick(item){
+            //     var _this  =this
+            //     console.log(item)
+            //     _this.homeChartHandleClick(item)
+            // },
+            // indexPageNum(item){
+            //     var _this  =this
+            //     console.log(item)
+            //     _this.homePageNumChange(item)
+            // },
+            // indexCheckVal(item){
+            //     var _this  =this
+            //     console.log(item)
+            //     _this.homeCheckValChange(item)
+            // },
+            // indexExportClick(item){
+            //     this.homeExportClick(item)
+            // }
         },
         watch:{
             //饼图监听
@@ -222,10 +225,10 @@
                 console.log(val)
                 this.newTableData = val
                 deep:true
-            }
+            },
         },
         mounted() {
-            console.log(this.tableData)
+            console.log(this.productTableData)
             this.newTableData = this.tableData
         }
     }

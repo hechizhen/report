@@ -9,7 +9,7 @@
                 <span>{{commoditydata.RatePin}}</span>
             </div>
             <div class="productLeft-btn">
-                <newButton :isGhost="true" :defaultVal="commoditydata.btn"  :buttonHandleClick="piebuttonHandleClick"></newButton>
+                <newButton :isGhost="true" :defaultVal="commoditydata.btn"  :buttonHandleClick="ListbuttonHandleClick"></newButton>
             </div>
         </div>
         <div class="commodityRight">
@@ -58,11 +58,15 @@
                 </div>
             </div>
         </div>
+        <public-table v-if="isShowDetail" :close="closePopup" :tableHeader="tableData.header" :interfaceParams="tableData.params"
+                      :buttonGroup="buttonGroup" :selectButtonClick="selectButtonClick"
+        ></public-table>
     </div>
 </template>
 
 <script>
     import  newButton from  '../base/newButton'
+    import publicTable from '../base/publicTable.vue'
     export default {
         name: "commodityRight",
         props:{
@@ -78,9 +82,20 @@
             pieraphy:{  //打开饼图
                 type:Function
             },
+            tableData:{  //表格数据
+                type:Object
+            },
+            selectButtonClick:{  //商品明细表格切换维度
+                type:Function
+            }
         },
         data(){
             return{
+                isShowDetail:false,
+                buttonGroup:{
+                    show:true,
+                    list:['事业部','品类','系列','商品']
+                },
 
             }
         },
@@ -91,15 +106,19 @@
             downbuttonHandleClick(val){
                 this.downraphy()
             },
-            piebuttonHandleClick(val){
-                this.pieraphy()
+            ListbuttonHandleClick(val){
+                this.isShowDetail=true
+            },
+            closePopup(){
+                this.isShowDetail=false
             }
         },
         components:{
-            newButton
+            newButton,
+            publicTable
         },
         mounted() {
-            console.log(this.commoditydata)
+            console.log(this.tableData)
         }
     }
 </script>

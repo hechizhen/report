@@ -22,16 +22,15 @@
         <salesman :salesmanData="salesmanData" :salesmanTrendData="salesmanTrendData" :salesmandownwardData="salesmandownwardData"
                   :salesmanReachedData="salesmanReachedData" :salesmanContributionData="salesmanContributionData" :isShow="salesmanReached"
                   :salesmanReachedBar="salesmanReachedBar" :salesmanContributionBar="salesmanContributionBar" :salesmandownwardBar="salesmandownwardBar"
-                  :salesmanTrendPie="salesmanTrendPie" :ownwardExportData="ownwardExportData" :reachContributionData="reachContributionData" 
+                  :salesmanTrendPie="salesmanTrendPie" :ownwardExportData="ownwardExportData" :reachContributionData="reachContributionData"
                   v-if="reachContributionData!='' && salesmanTrendData!=''"></salesman>
         <!-- 商品 -->
         <productIndex :CommodityTurnoverRate="CommodityTurnoverRate"  :commoditydata="commoditydata" :GoodsDetail="GoodsDetail"
-                      :prodownStoresData="prodownStoresData" :upproStoresData="upproStoresData" :productTableData="productTableData"
+                      :prodownStoresData="prodownStoresData" :upproStoresData="upproStoresData"
                       :NumberGoods="NumberGoods"  :CommodityRate="CommodityRate"  :NumberGoodsDownBar="NumberGoodsDownBar" :NumberGoodsUpBar="NumberGoodsUpBar"
                       :NumberGoodsPie="NumberGoodsPie" :NumberGoodsList="NumberGoodsList" v-if="CommodityTurnoverRate.length!=0"
-                      :tableData="proDetailTableData.getPinListing"  :exportData="ProExportData" :homeChartHandleClick="detailChartHandleClick"
-                      :homePageNumChange="homePageNumChange" :homeCheckValChange="homeCheckValChange" :homeExportClick="homeExportClick"
-                      :detailExport="exportDetailData"  :selectButtonClick="proDetaSelectButtonClick"
+                      :tableData="proDetailTableData.getPinListing"  :exportData="ProExportData"  :productTableData="proDetailTableData.productTableData"
+                      :detailExport="exportDetailData"  :selectButtonClick="proDetaSelectButtonClick"  :proListDetaSelectButtonClick="proListDetaSelectButtonClick"
         ></productIndex>
         <!--门店-->
         <shopIndex  :StoresDetailed="StoresDetailed" v-if="StoresDetailed.length!=0 && storeDetailTableData!='' && upStoresData!=''"  :isShow="StoreisShow"
@@ -169,7 +168,7 @@
                 },
                 salesmanReachedData:{},  //业务员-达成
                 salesmanContributionData:{},//业务员-贡献
-                productTableData:'',//产品列表数据
+                // productTableData:'',//产品列表数据
                 //活跃门店二级表格数据
                 storeDetailTableData:'',
                 //产品清单二级表格数据
@@ -242,15 +241,14 @@
             this.getinventoryDetail()
             this.getStoresDetailed()
             this.getCommodityTurnoverRate()
-            this.getGoodsdetail()
             this.getdirection()
             this.getmarketableDayChart()
             this.getVariability()
             this.getsalesmandownward()
             this.getRaiseDownStores()
             this.getSalesmanReached()
-            this.getProductTableData()
             this.getDetailTableData()
+            this.getGoodsdetail()
         },
         computed: {
 
@@ -268,35 +266,34 @@
                 this.getinventoryDetail()
                 this.getStoresDetailed()
                 this.getCommodityTurnoverRate()
-                this.getGoodsdetail()
                 this.getsalesmanTrend()
                 this.getsalesmandownward()
                 this.getmarketableDayChart()
                 this.getVariability()
                 this.getRaiseDownStores()
                 this.getSalesmanReached()
-                this.getProductTableData()
                 this.getDetailTableData()
             },
-            detailChartHandleClick(item){
-                this.categoryName = item
-                this.getProductTableData()
-                this.getProductExportData()
-            },
-            homeCheckValChange(item){
-                this.categoryName = item
-                this.getProductTableData()
-                this.getProductExportData()
-            },
-            homePageNumChange(item){
-                this.productPageNum = item
-                this.getProductTableData()
-                this.getProductExportData()
-            },
-            homeExportClick(item){
-                this.exportPageSize = item
-                this.getProductExportData()
-            },
+            // detailChartHandleClick(item){
+            //     this.categoryName = item
+            //     this.getProductTableData()
+            //     this.getProductExportData()
+            // },
+            // homeCheckValChange(item){
+            //     this.categoryName = item
+            //     this.getProductTableData()
+            //     this.getProductExportData()
+            // },
+            // homePageNumChange(item){
+            //     this.productPageNum = item
+            //     this.getProductTableData()
+            //     this.getProductExportData()
+            // },
+            // homeExportClick(item){
+            //     this.exportPageSize = item
+            //     this.getProductExportData()
+            // },
+
             //二帮卖订单详情切换维度调用方法
             twoDetaSelectButtonClick(val){
                 if(val == '系列'){
@@ -407,7 +404,7 @@
                         }
                     }
                 }
-                
+
             //    alert(2)
             //    this.twoDetailTableData =  JSON.parse(JSON.stringify(this.twoDetailTableData));
             //    this.$set(this.twoDetailTableData,"twoDetailTableData",this.twoDetailTableData)
@@ -431,7 +428,7 @@
                                 "pageNum":1,
                                 "groupByCol":["bo1_name","bo2_name","bo3_name"],
                                 "pageSize":1000,
-                                "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
+                                "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
                                 "serviceId":"service_tjbg02_goods_stock_sales"
                             },
                             header:[
@@ -461,7 +458,7 @@
                                 "groupByCol":["bo1_name","bo2_name","bo3_name","goods_name"],
                                 "pageNum":1,
                                 "pageSize":1000,
-                                "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
+                                "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
                                 "serviceId":"service_tjbg02_goods_stock_sales"
                             },
                             header:[
@@ -491,7 +488,7 @@
                                 "pageNum":1,
                                 "groupByCol":["bo1_name","bo2_name"],
                                 "pageSize":1000,
-                                "whereCndt":{"dealer_id":"='ff80808169c93eb80169d6a73cc02d04'"},
+                                "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
                                 "serviceId":"service_tjbg02_goods_stock_sales"
                             },
                             header:[
@@ -501,6 +498,123 @@
                                 {txt:'订单SKU数',unit:false},
                                 {txt:'库存SKU数',unit:false},
                                 {txt:'品类动销率',unit:false},
+                            ]
+                        }
+                    }
+                }
+            },
+            //产品-商品销量明细切换维度调用方法
+            proListDetaSelectButtonClick(val){
+                if(val == '品类'){
+                    //商品销量表格数据
+                    this.proDetailTableData={
+                        //产品商品销量明细  品类
+                        productTableData:{
+                            params : {
+                                "inputParam":{
+                                    "data_mon":this.currentDate,
+                                    "data_type":"当月",
+                                    "bo_type":'品类'
+                                },
+                                "outputCol":"bo1_name,bo2_name,money,ratio_rate",
+                                "pageNum":1,
+                                "pageSize":1000,
+                                "groupByCol":["bo1_name","bo2_name"],
+                                "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
+                                "serviceId":"service_tjbg02_sales_order_dtl"
+                            },
+                            header:[
+                                {txt:'序号',unit:false},
+                                {txt:'事业部',unit:false},
+                                {txt:'品类',unit:false},
+                                {txt:'销售（元/月）',unit:'money'},
+                                {txt:'销售占比',unit:'percent'},
+                            ]
+                        }
+                    }
+                }
+                else if(val == '系列'){
+                    //商品销量表格数据
+                    this.proDetailTableData={
+                        //产品商品销量明细  系列
+                        productTableData:{
+                        params : {
+                            "inputParam":{
+                                "data_mon":this.currentDate,
+                                    "data_type":"当月",
+                                    "bo_type":'系列'
+                            },
+                            "outputCol":"bo1_name,bo2_name,bo3_name,money,ratio_rate",
+                                "pageNum":1,
+                                "pageSize":1000,
+                               "groupByCol":["bo1_name","bo2_name","bo3_name"],
+                                "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
+                            "serviceId":"service_tjbg02_sales_order_dtl"
+                        },
+                        header:[
+                            {txt:'序号',unit:false},
+                            {txt:'事业部',unit:false},
+                            {txt:'品类',unit:false},
+                            {txt:'系列',unit:false},
+                            {txt:'销售（元/月）',unit:'money'},
+                            {txt:'销售占比',unit:'percent'},
+                        ]
+                    }
+                    }
+                }
+                else if(val == '商品'){
+                    //商品销量表格数据
+                    this.proDetailTableData={
+                        //产品商品销量明细  商品
+                        productTableData:{
+                            params : {
+                                "inputParam":{
+                                    "data_mon":this.currentDate,
+                                    "data_type":"当月",
+                                    "bo_type":'品类'
+                                },
+                                "outputCol":"bo1_name,bo2_name,bo3_name,goods_name,money,ratio_rate",
+                                "pageNum":1,
+                                "pageSize":1000,
+                                "groupByCol":["bo1_name","bo2_name","bo3_name","goods_name"],
+                                "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
+                                "serviceId":"service_tjbg02_sales_order_dtl"
+                            },
+                            header:[
+                                {txt:'序号',unit:false},
+                                {txt:'事业部',unit:false},
+                                {txt:'品类',unit:false},
+                                {txt:'系列',unit:false},
+                                {txt:'商品名称',unit:false},
+                                {txt:'商品销售（元/月）',unit:'money'},
+                                {txt:'当月销售占比',unit:'percent'},
+                            ]
+                        }
+                    }
+                }
+                else {
+                    //商品销量表格数据
+                    this.proDetailTableData={
+                        //产品商品销量明细  事业部
+                        productTableData:{
+                            params : {
+                                "inputParam":{
+                                    "data_mon":this.currentDate,
+                                    "data_type":"当月",
+                                    "bo_type":'事业部'
+                                },
+                                "outputCol":"bo1_name,money,ratio_rate",
+                                "pageNum":1,
+                                "pageSize":1000,
+                                "groupByCol":["bo1_name"],
+                                "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
+                                "serviceId":"service_tjbg02_sales_order_dtl"
+                            },
+                            header:[
+                                {txt:'序号',unit:false},
+                                {txt:'事业部',unit:false},
+                                {txt:'销售（元/月）',unit:'money'},
+                                {txt:'销售占比',unit:'percent'},
                             ]
                         }
                     }
@@ -1355,98 +1469,99 @@
                     },
                 )
             },
-            //产品-列表数据导出
-            getProductExportData(){
-                var _this = this
-                 var params = {
-                    "inputParam":
-                    {
-                        "data_mon":_this.currentDate,
-                        "data_type":"当月",
-                        "bo_type":"品类"
-                    },
-                    "outputCol":"bo1_name,bo2_name,bo3_name,goods_name,money,RATIO_RATE",
-                    "pageNum":_this.productPageNum,
-                    "isReturnTotalSize": "Y",
-                    "pageSize":_this.exportPageSize,
-                    "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'","bo2_name":"='"+_this.categoryName+"'"},
-                    "groupByCol":["bo1_name","bo2_name","bo3_name","goods_name"],
-                    "serviceId":"service_tjbg02_sales_order_dtl"
-                }
-                this.$http({
-                    url: _this.testRequestHttpUrl + '?v=GoodsDetailTable',
-                    method: 'POST',
-                    data: params
-                }).then(function (res) {
-                    console.log(res)
-                    var data = res.data.data.data;
-                    let headerTxt = [
-                        '事业部',
-                        '品类',
-                        '系列',
-                        '商品名称',
-                        '销量（元）',
-                        '销售占比',
-                    ]
-                    let headerKey = params.outputCol.split(',')
-                    _this.exportDetailData = {
-                        headerTxt:headerTxt,
-                        headerKey:headerKey,
-                        name:'商品明细',
-                        data:data
-                    }
-                })
-            },
-            //产品-列表数据
-            getProductTableData(){
-                var _this = this
-                _this.NumberGoodsList = true
-                 var params = {
-                    "inputParam":
-                    {
-                        "data_mon":_this.currentDate,
-                        "data_type":"当月",
-                        "bo_type":"品类"
-                    },
-                    "outputCol":"bo1_name,bo2_name,bo3_name,goods_name,money,RATIO_RATE",
-                    "pageNum":_this.productPageNum,
-                    "isReturnTotalSize": "Y",
-                    "pageSize":1000,
-                    "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'","bo2_name":"='"+_this.categoryName+"'"},
-                    "groupByCol":["bo1_name","bo2_name","bo3_name","goods_name"],
-                    "serviceId":"service_tjbg02_sales_order_dtl"
-                }
-                this.$http({
-                    url: _this.testRequestHttpUrl + '?v=GoodsDetailTable',
-                    method: 'POST',
-                    data: params
-                }).then(function (res) {
-                    console.log(res)
-                    var data = res.data.data.data;
-                    let headerTxt = [
-                        {title:'事业部'},
-                        {title:'品类'},
-                        {title:'系列'},
-                        {title:'商品名称'},
-                        {title:'销量（元）'},
-                        {title:'销售占比'},
-                    ]
-                    let headerKey = params.outputCol.split(',')
-                    headerKey.map(function(item,index){
-                        headerTxt[index].key = item
-                    })
-                    let tablecColumns = headerTxt
-                    _this.productTableData = {
-                        data:data,
-                        columns:tablecColumns,
-                        totalSize:res.data.data.totalSize,
-                        defaultSize:params.pageSize,
-                        category:_this.categoryList
-                    }
-                    _this.NumberGoodsList = false
-                    console.log(_this.productTableData)
-                })
-            },
+            // //产品-列表数据导出
+            // getProductExportData(){
+            //     var _this = this
+            //      var params = {
+            //         "inputParam":
+            //         {
+            //             "data_mon":_this.currentDate,
+            //             "data_type":"当月",
+            //             "bo_type":"品类"
+            //         },
+            //         "outputCol":"bo1_name,bo2_name,bo3_name,goods_name,money,RATIO_RATE",
+            //         "pageNum":_this.productPageNum,
+            //         "isReturnTotalSize": "Y",
+            //         "pageSize":_this.exportPageSize,
+            //         "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'","bo2_name":"='"+_this.categoryName+"'"},
+            //         "groupByCol":["bo1_name","bo2_name","bo3_name","goods_name"],
+            //         "serviceId":"service_tjbg02_sales_order_dtl"
+            //     }
+            //     this.$http({
+            //         url: _this.testRequestHttpUrl + '?v=GoodsDetailTable',
+            //         method: 'POST',
+            //         data: params
+            //     }).then(function (res) {
+            //         console.log(res)
+            //         var data = res.data.data.data;
+            //         let headerTxt = [
+            //             '事业部',
+            //             '品类',
+            //             '系列',
+            //             '商品名称',
+            //             '销量（元）',
+            //             '销售占比',
+            //         ]
+            //         let headerKey = params.outputCol.split(',')
+            //         _this.exportDetailData = {
+            //             headerTxt:headerTxt,
+            //             headerKey:headerKey,
+            //             name:'商品明细',
+            //             data:data
+            //         }
+            //     })
+            // },
+            // //产品-列表数据
+            // getProductTableData(){
+            //     var _this = this
+            //     _this.NumberGoodsList = true
+            //      var params = {
+            //         "inputParam":
+            //         {
+            //             "data_mon":_this.currentDate,
+            //             "data_type":"当月",
+            //             "bo_type":"品类"
+            //         },
+            //         "outputCol":"bo1_name,bo2_name,bo3_name,goods_name,money,RATIO_RATE",
+            //         "pageNum":_this.productPageNum,
+            //         "isReturnTotalSize": "Y",
+            //         "pageSize":1000,
+            //         "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'","bo2_name":"='"+_this.categoryName+"'"},
+            //         "groupByCol":["bo1_name","bo2_name","bo3_name","goods_name"],
+            //         "serviceId":"service_tjbg02_sales_order_dtl"
+            //     }
+            //     this.$http({
+            //         url: _this.testRequestHttpUrl + '?v=GoodsDetailTable',
+            //         method: 'POST',
+            //         data: params
+            //     }).then(function (res) {
+            //         console.log(res)
+            //         var data = res.data.data.data;
+            //         let headerTxt = [
+            //             {title:'事业部'},
+            //             {title:'品类'},
+            //             {title:'系列'},
+            //             {title:'商品名称'},
+            //             {title:'销量（元）'},
+            //             {title:'销售占比'},
+            //         ]
+            //         let headerKey = params.outputCol.split(',')
+            //         headerKey.map(function(item,index){
+            //             headerTxt[index].key = item
+            //         })
+            //         let tablecColumns = headerTxt
+            //         _this.productTableData = {
+            //             data:data,
+            //             columns:tablecColumns,
+            //             totalSize:res.data.data.totalSize,
+            //             defaultSize:params.pageSize,
+            //             category:_this.categoryList
+            //         }
+            //         _this.NumberGoodsList = false
+            //         console.log(_this.productTableData)
+            //     })
+            // },
+
             //产品-产品下滑/增长商品
             getVariability() {
                 var _this = this
@@ -1631,41 +1746,44 @@
                         })
                     )
             },
-            //产品-动销商品明细
-            getGoodsdetail() {
-                var _this = this
-                _this.NumberGoodsPie = true
-                var params = {
-                    "inputParam":{
-                        "data_mon":_this.currentDate,
-                        "data_type":"当月",
-                        "bo_type":'品类'
-                    },
-                    "outputCol":"bo1_name,bo2_name,bo3_name,goods_name,money,ratio_rate,money_mom,money_yoy,gross_rate,gross_money_yoy,gross_money_mom",
-                    "pageNum":1,
-                    "pageSize":1000,
-                    "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
-                    "serviceId":"service_tjbg02_sales_order_dtl"
-                }
-                this.$http({
-                    url: _this.testRequestHttpUrl + '?v=GoodsDetail',
-                    method: 'POST',
-                    data: params
-                }).then(function (res) {
-                    var Goods = res.data.data.data;
-                    let list =[]
-                    let list1=[]
-                    Goods.map(function(item){
-                        list.push({value:item.money,name:item.bo2_name})
-                        list1.push(item.bo2_name)
-                    })
-                    _this.categoryList = list1
-                    _this.GoodsDetail = list;
-                    _this.NumberGoodsPie = false
-                    console.log(_this.GoodsDetail)
-                })
-            },
-            //门店模块概览
+
+            // //产品-动销商品明细
+            // getGoodsdetail() {
+            //     var _this = this
+            //     _this.NumberGoodsPie = true
+            //     var params = {
+            //         "inputParam":{
+            //             "data_mon":_this.currentDate,
+            //             "data_type":"当月",
+            //             "bo_type":'品类'
+            //         },
+            //         "outputCol":"bo1_name,bo2_name,bo3_name,goods_name,money,ratio_rate,money_mom,money_yoy",
+            //         "pageNum":1,
+            //         "pageSize":1000,
+            //         "groupByCol":["dealer_id","data_mon"],
+            //         "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
+            //         "serviceId":"service_tjbg02_sales_order_dtl"
+            //     }
+            //     this.$http({
+            //         url: _this.testRequestHttpUrl + '?v=GoodsDetail',
+            //         method: 'POST',
+            //         data: params
+            //     }).then(function (res) {
+            //         var Goods = res.data.data.data;
+            //         let list =[]
+            //         let list1=[]
+            //         Goods.map(function(item){
+            //             list.push({value:item.money,name:item.bo2_name})
+            //             list1.push(item.bo2_name)
+            //         })
+            //         _this.categoryList = list1
+            //         _this.GoodsDetail = list;
+            //         _this.NumberGoodsPie = false
+            //         console.log(_this.GoodsDetail)
+            //     })
+            // },
+            //
+            // 门店模块概览
             getStoresDetailed() {
                 var _this = this
                 //显示loading状态
@@ -1952,7 +2070,7 @@
                     })
                 )
             },
-            //库存明细金额件数明细
+            //库存一级页面概览明细
             getinventoryDetail() {
                 var _this = this
                 _this.stockAmount = true
@@ -2296,7 +2414,29 @@
                             {txt:'库存SKU数',unit:'day'},
                             {txt:'品类动销率',unit:'percent'},
                         ]
+                    },
+                    productTableData:{
+                        params : {
+                            "inputParam":{
+                                "data_mon":_this.currentDate,
+                                "data_type":"当月",
+                                "bo_type":'事业部'
+                            },
+                            "outputCol":"bo1_name,money,ratio_rate",
+                            "pageNum":1,
+                            "pageSize":1000,
+                            "groupByCol":["bo1_name"],
+                            "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
+                            "serviceId":"service_tjbg02_sales_order_dtl"
+                        },
+                        header:[
+                            {txt:'序号',unit:false},
+                            {txt:'事业部',unit:false},
+                            {txt:'销售（元/月）',unit:'money'},
+                            {txt:'销售占比',unit:'percent'},
+                        ]
                     }
+
                 }
                 //库存数据列表数据
                 _this.invDetailTableData= {
