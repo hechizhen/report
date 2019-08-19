@@ -16,7 +16,7 @@
                 <over-due :overDueData="overDueData" :overDueClick="overDueHandleClick"></over-due>
             </div>
             <loading-data :isShow="isShow"></loading-data>
-            <public-table v-if="isShowDetail" :close="closePopup" :tableHeader="tableData.header" :interfaceParams="tableData.params"></public-table>
+            <public-table v-if="isShowDetail" :close="closePopup" :tableHeader="tableData.header" :interfaceParams="tableData.params" :titleName="tableData.titleName"></public-table>
         </div>
     </div>
 </template>

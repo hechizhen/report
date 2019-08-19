@@ -12,7 +12,7 @@
                             :isGhost="true" :defaultVal="productdata.btn"></newButton>
             </div>
             <public-table v-if="isShowDetail" :close="closePopup" :tableHeader="tableData.header" :interfaceParams="tableData.params"
-                            :buttonGroup="buttonGroup" :selectButtonClick="selectButtonClick"
+                            :buttonGroup="buttonGroup" :selectButtonClick="selectButtonClick"    :titleName="tableData.titleName"
             ></public-table>
         </div>
 </template>

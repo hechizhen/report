@@ -301,6 +301,7 @@
                     this.twoDetailTableData={
                         //二帮卖订单明细系列维度
                         gettwoListing:{
+                            titleName:'二帮卖下单毛利明细-系列',
                             params : {
                                 "inputParam":{
                                     "data_mon":this.currentDate,
@@ -337,6 +338,7 @@
                     this.twoDetailTableData={
                         //二帮卖订单明细商品维度
                         gettwoListing:{
+                            titleName:'二帮卖下单毛利明细-商品',
                             params : {
                                 "inputParam":{
                                     "data_mon":this.currentDate,
@@ -374,6 +376,7 @@
                     this.twoDetailTableData={
                         //二帮卖订单明细品类维度
                         gettwoListing:{
+                            titleName:'二帮卖下单毛利明细-品类',
                             params : {
                                 "inputParam":{
                                     "data_mon":this.currentDate,
@@ -418,6 +421,7 @@
                     this.proDetailTableData={
                         //产品动销清单明细  系列
                         getPinListing:{
+                            titleName:'商品动销明细-系列',
                             params : {
                                 "inputParam":{
                                     "data_mon":this.currentDate,
@@ -448,6 +452,7 @@
                     this.proDetailTableData={
                         //产品动销清单明细  商品
                         getPinListing:{
+                            titleName:'商品动销明细-商品',
                             params : {
                                 "inputParam":{
                                     "data_mon":this.currentDate,
@@ -478,6 +483,7 @@
                     this.proDetailTableData={
                         //产品动销清单明细  品类
                         getPinListing:{
+                            titleName:'商品动销明细-品类',
                             params : {
                                 "inputParam":{
                                     "data_mon":this.currentDate,
@@ -510,6 +516,7 @@
                     this.proDetailTableData={
                         //产品商品销量明细  品类
                         productTableData:{
+                            titleName:'下单商品明细-品类',
                             params : {
                                 "inputParam":{
                                     "data_mon":this.currentDate,
@@ -538,6 +545,7 @@
                     this.proDetailTableData={
                         //产品商品销量明细  系列
                         productTableData:{
+                            titleName:'下单商品明细-系列',
                         params : {
                             "inputParam":{
                                 "data_mon":this.currentDate,
@@ -567,11 +575,12 @@
                     this.proDetailTableData={
                         //产品商品销量明细  商品
                         productTableData:{
+                            titleName:'下单商品明细-商品',
                             params : {
                                 "inputParam":{
                                     "data_mon":this.currentDate,
                                     "data_type":"当月",
-                                    "bo_type":'品类'
+                                    "bo_type":'商品'
                                 },
                                 "outputCol":"bo1_name,bo2_name,bo3_name,goods_name,money,ratio_rate",
                                 "pageNum":1,
@@ -597,6 +606,7 @@
                     this.proDetailTableData={
                         //产品商品销量明细  事业部
                         productTableData:{
+                            titleName:'下单商品明细-事业部',
                             params : {
                                 "inputParam":{
                                     "data_mon":this.currentDate,
@@ -627,6 +637,7 @@
                     this.invDetailTableData= {
                         //库存可销天数详细
                         getInvDayListing: {
+                            titleName:'库存可销天数-系列',
                             params: {
                                 "inputParam": {
                                     "data_mon": this.currentDate,
@@ -656,6 +667,7 @@
                     this.invDetailTableData= {
                         //库存可销天数详细
                         getInvDayListing: {
+                            titleName:'库存可销天数-商品',
                             params: {
                                 "inputParam": {
                                     "data_mon": this.currentDate,
@@ -686,6 +698,7 @@
                     this.invDetailTableData= {
                         //库存可销天数详细
                         getInvDayListing: {
+                            titleName:'库存可销天数-品类',
                             params: {
                                 "inputParam": {
                                     "data_mon": this.currentDate,
@@ -1336,6 +1349,7 @@
             getCommodityTurnoverRate() {
                 var _this = this
                 _this.CommodityRate = true
+                _this.NumberGoods = true
                 var params = {
                     "inputParam":{
                         "data_mon":"201908",
@@ -1464,6 +1478,7 @@
                             produnarData
                         }
                         _this.CommodityRate = false
+                        _this.NumberGoods=false
                         console.log(_this.CommodityTurnoverRate)
                         console.log(_this.commoditydata)
                     },
@@ -2274,11 +2289,12 @@
             },
             //获取二级页面表格数据
             getDetailTableData(){
-                //门店数据列表数据
                 var _this = this
+                //门店数据列表数据
                 _this.storeDetailTableData = {
                     //活跃门店详情
                     activeStoreDetail:{
+                        titleName:'门店贡献',
                         params:{
                             "inputParam":
                                 {
@@ -2307,6 +2323,7 @@
                     },
                     //新增门店详情
                     addStoreDetail:{
+                        titleName:'新增门店明细',
                         params:{
                             "inputParam":
                                 {
@@ -2333,6 +2350,7 @@
                     },
                     //无交易明细
                     noTradeData:{
+                        titleName:'无交易门店明细',
                         params:{
                             "inputParam":
                                 {
@@ -2361,6 +2379,7 @@
                     },
                     //无交易门店应收账款明细
                     noDealDetail:{
+                        titleName:'无交易门店应收账款明细',
                         params:{
                             "inputParam":
                                 {
@@ -2393,6 +2412,7 @@
                 _this.proDetailTableData={
                     //产品动销清单明细
                     getPinListing:{
+                        titleName:'商品动销明细-品类',
                         params : {
                             "inputParam":{
                                 "data_mon":_this.currentDate,
@@ -2416,6 +2436,7 @@
                         ]
                     },
                     productTableData:{
+                        titleName:'下单商品明细-事业部',
                         params : {
                             "inputParam":{
                                 "data_mon":_this.currentDate,
@@ -2442,13 +2463,14 @@
                 _this.invDetailTableData= {
                     //未销明细
                     getPinListing: {
+                        titleName:'未销售商品明细',
                         params: {
                             "inputParam": {
                                 "data_mon":_this.currentDate,
                                 "data_type": "当月"
                             },
                             "isReturnTotalSize": "Y",
-                            "outputCol": "bo3_name,goods_name,last_order_time,money,qty,unsale_days",
+                            "outputCol": "bo3_name,goods_name,last_order_time,unsale_days,qty,money",
                             "pageNum": 1,
                             "pageSize": 1000,
                             "orderCol": "unsale_days desc" ,
@@ -2460,13 +2482,14 @@
                             {txt: '商品编码', unit: false},
                             {txt: '商品名称', unit: false},
                             {txt: '最近交易时间', unit: false},
-                            {txt: '库存金额（元）', unit: 'money'},
-                            {txt: '库存件数（件）', unit: 'day'},
                             {txt: '无交易时长（天）', unit: 'day'},
+                            {txt: '库存件数（件）', unit: 'day'},
+                            {txt: '库存金额（元）', unit: 'money'},
                         ]
                     },
                     //库存可销天数详细
                     getInvDayListing: {
+                        titleName:'库存可销天数-品类',
                         params: {
                             "inputParam": {
                                 "data_mon": _this.currentDate,
@@ -2493,6 +2516,7 @@
                 _this.financeDetailTableData = {
                     //逾期明细
                     overdueDetail:{
+                        titleName:'逾期金额明细',
                         params:{
                             "inputParam":
                             {
@@ -2524,6 +2548,7 @@
                 _this.twoDetailTableData={
                     //二帮卖订单明细
                     gettwoListing:{
+                        titleName:'二帮卖下单毛利明细-品类',
                         params : {
                             "inputParam":{
                                 "data_mon":_this.currentDate,

@@ -20,7 +20,7 @@
 		  	</a-Row>
 		  </a-Col>
 		</a-Row>
-		<public-table v-if="isShowDetail" :close="closePopup" :tableHeader="tableData.header" :interfaceParams="tableData.params"  :buttonGroup="buttonGroup" :selectButtonClick="selectButtonClick"></public-table>
+		<public-table v-if="isShowDetail" :close="closePopup" :tableHeader="tableData.header" :interfaceParams="tableData.params" :titleName="tableData.titleName" :buttonGroup="buttonGroup" :selectButtonClick="selectButtonClick"></public-table>
 		<core :coretype="'二帮卖得分'" :coretext="100" :evaluate="'优秀'"></core>
 	</div>
 </template>

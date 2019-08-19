@@ -58,7 +58,7 @@
                 </div>
             </div>
         </div>
-        <public-table v-if="isShowDetail" :close="closePopup" :tableHeader="tableData.header" :interfaceParams="tableData.params"
+        <public-table v-if="isShowDetail" :close="closePopup" :tableHeader="tableData.header" :interfaceParams="tableData.params"  :titleName="tableData.titleName"
                       :buttonGroup="buttonGroup" :selectButtonClick="selectButtonClick"
         ></public-table>
     </div>

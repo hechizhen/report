@@ -52,10 +52,10 @@
         ></inventoryDase>
         </div>
             <!--库存明细-->
-            <public-table v-if="isShowDetail" :close="closePopup" :tableHeader="getPinListing.header" :interfaceParams="getPinListing.params"></public-table>
+            <public-table v-if="isShowDetail" :close="closePopup" :tableHeader="getPinListing.header" :interfaceParams="getPinListing.params" :titleName="getPinListing.titleName"></public-table>
            <!--库存可销天数-->
             <public-table v-if="isShowreceivable" :close="dealClosePopup" :tableHeader="getInvDayListing.header"
-                          :buttonGroup="buttonGroup" :interfaceParams="getInvDayListing.params" :selectButtonClick="selectButtonClick"></public-table>
+                          :buttonGroup="buttonGroup" :interfaceParams="getInvDayListing.params" :selectButtonClick="selectButtonClick" :titleName="getInvDayListing.titleName"></public-table>
              <!--折线图-->
             <!-- <inventoryChart v-if="invechartsShow" :trendChartClick="trendChartClick" :lineEchartsData="marketableDayLine" :isShow="marketableDayLine"></inventoryChart> -->
     </div>
