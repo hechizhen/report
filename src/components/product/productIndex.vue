@@ -19,11 +19,11 @@
         </div>
         <core :coretype="'产品得分'" :coretext="87" :evaluate="'较好'"></core>
 
-        <downproductChart v-if="upShow" :trendChartClick="upClick"  :VariabilityUp="VariabilityUp"
-                        :raiseExportData="exportData.proraiseData"
+        <downproductChart v-if="downShow" :trendChartClick="downClick"  :VariabilityDown="VariabilityDown"
+                        :downExportData="exportData.prodownData"
                         :isShow="NumberGoodsDownBar"></downproductChart>  <!--下滑-->
-        <upproductChart v-if="downShow" :trendChartClick="downClick" :VariabilityDown="VariabilityDown"
-                          :downExportData="exportData.prodownData"
+        <upproductChart v-if="upShow" :trendChartClick="upClick" :VariabilityUp="VariabilityUp"
+                          :raiseExportData="exportData.proraiseData"
                           :isShow="NumberGoodsUpBar"></upproductChart>  <!--增长-->
 
         <!--<productChartPie v-if="pieShow" :trendChartClick="pieClick" :GoodsDetailPie="GoodsDetailPie" :tableData="productTableData"-->
@@ -41,8 +41,8 @@
     import  commodityRight from './commodityRight'
     import  dataTitle from '../dataTitle'
     import  core from  '../core'
-    import  downproductChart from  './upproductChart'
-    import  upproductChart from  './downproductChart'
+    import  upproductChart from  './upproductChart'
+    import  downproductChart from  './downproductChart'
     import  productChartPie  from  './productChartPie'
     import loadingData from '../base/loadingData'
     export default {
@@ -164,7 +164,7 @@
         methods:{
             //打开下滑树状图
             upraphy(){
-                this.upShow = true;
+                this.downShow = true;
             },
             //关闭下滑树状图
             upClick(){
@@ -172,7 +172,7 @@
             },
             //打开增长树状图
             downraphy(){
-                this.downShow = true;
+                this.upShow = true;
             },
             //关闭增长树状图
             downClick(){
@@ -214,11 +214,13 @@
             upproStoresData(val){
                this.VariabilityUp = val
                 console.log(val)
+                console.log(this.VariabilityUp)
             },
             //增长树状图监听
             prodownStoresData(val){
                this.VariabilityDown = val
                 console.log(val)
+                console.log(this.VariabilityDown)
             },
             //切换维度表格监听
             tableData(val){
@@ -228,7 +230,7 @@
             },
         },
         mounted() {
-            console.log(this.productTableData)
+            console.log(this.exportData)
             this.newTableData = this.tableData
         }
     }

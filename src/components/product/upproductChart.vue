@@ -4,7 +4,7 @@
             <div class="title">
                 <a-Row class="thendChartRow">
                     <a-Col :span="12" class="thendChartCol1">
-                        下滑商品
+                        增长商品
                     </a-Col>
                     <a-Col :span="12" class="thendChartCol2">
                         单位：万元

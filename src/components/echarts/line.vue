@@ -167,7 +167,8 @@
 
                         },
                         textStyle:{
-                            color:"#418eff"},
+                            color:"#418eff"
+                        },
                         borderColor:"#90979c"
                         }, {
                         type: "inside",
@@ -178,6 +179,9 @@
                 var option = {
                     tooltip: {
                         trigger: 'axis',
+                        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                        },
                         formatter:function(params){
                             console.log(params)
                             console.log(_this.lineEchartsData.unit[0])
@@ -280,12 +284,12 @@
 
         },
         watch: {
-            // lineEchartsData(val){
-            //     var _this = this  
-            //     let echarts = _this.$echarts;
-            //     _this.myChart = echarts.init(document.getElementById(_this.lineEchartsData.id))
-            //     _this.setLineOptions()
-            // }
+            lineEchartsData(val){
+                var _this = this  
+                let echarts = _this.$echarts;
+                _this.myChart = echarts.init(document.getElementById(_this.lineEchartsData.id))
+                _this.setLineOptions()
+            }
         },
         distroyed: function () {
 

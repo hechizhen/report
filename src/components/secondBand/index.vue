@@ -15,7 +15,7 @@
 				  	<totalAmount :displayData="orderAmountData.yearOnYear" :isShow="towHelYoy"></totalAmount>
 				</a-Col>
 				<a-Col :span="24">
-				  	<trendChart :lineEchartsData="lineEchartsData" :isShow="towHelpSaleMonthLineShow" v-if="lineEchartsData!=''"></trendChart>
+				  	<trendChart :lineEchartsData="directionLineData" :isShow="towHelpSaleMonthLineShow" v-if="directionLineData!=''"></trendChart>
 				</a-Col>
 		  	</a-Row>
 		  </a-Col>
@@ -48,7 +48,7 @@
 				type:Object,
 				default:{}
 			},
-			directionData:{
+			directionLineData:{
 				type:Object,
 				default:{}
 			},
@@ -106,7 +106,7 @@
 			}
 		},
 		mounted(){
-			console.log(this.selectButtonClick)
+			console.log(this.directionLineData)
 		},
 		methods:{
 			explicit(a,b){
@@ -125,21 +125,10 @@
 
 		},
 		watch:{
-            directionData(val){
-				console.log(val)
-                this.lineEchartsData = {
-                    id:'lineIdBand',
-					xAxisData:val.monthArr,
-					unit:['money','tenth'],
-                    lineData:[
-                        {
-                            name:'订单金额',
-                            data:val.seriesData,
-                            color:'#00E2BF'
-                        },
-					],
-                }
-            },
+            // directionData(val){
+			// 	console.log(val)
+                
+            // },
         },
 		distroyed:{
 

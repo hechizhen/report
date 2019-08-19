@@ -14,9 +14,9 @@
         v-if="monthBarData.length!=0 && monthSalesData.length!=0 && yearSalesData.length!=0 && yearBarData.length!=0"></one-help-sale-en>
 
         <!-- 二帮卖分析-订单 -->
-        <secondBand :orderAmountData="orderAmountData" :directionData="directionData" :towHelYoy="towHelYoy" :towHelProportion="towHelProportion"
+        <secondBand :orderAmountData="orderAmountData" :directionLineData="directionData" :towHelYoy="towHelYoy" :towHelProportion="towHelProportion"
                     :towHelpSaleMonthShow="towHelpSaleMonthShow" :towHelpSaleMonthLineShow="towHelpSaleMonthLineShow"
-                    :tableData="twoDetailTableData.gettwoListing"  v-if="orderAmountData"  :selectButtonClick="twoDetaSelectButtonClick"
+                    :tableData="twoDetailTableData.gettwoListing"  v-if="orderAmountData!='' && Object.keys(directionData).length!=0"  :selectButtonClick="twoDetaSelectButtonClick"
 
         ></secondBand>
         <!-- 二帮卖分析-业务员 -->
@@ -323,9 +323,9 @@
                                     "data_type":"当月",
                                     "bo_type":"系列"
                                 },
-                                "outputCol":"bo1_name,bo2_name,,bo3_name,money,ratio_rate,money_mom,money_yoy,gross_money,gross_rate,gross_money_yoy,gross_money_mom",
+                                "outputCol":"bo1_name,bo2_name,bo3_name,money,ratio_rate,money_mom,money_yoy,gross_money,gross_rate,gross_money_yoy,gross_money_mom",
                                 "pageNum":1,
-                                "pageSize":10000,
+                                "pageSize":100,
                                 "groupByCol":["bo1_name","bo2_name","bo3_name"],
                                 "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
                                 "serviceId":"service_tjbg02_sales_order_dtl"
@@ -360,9 +360,9 @@
                                     "data_type":"当月",
                                     "bo_type":"商品"
                                 },
-                                "outputCol":"bo1_name,bo2_name,,bo3_name,goods_name,money,ratio_rate,money_mom,money_yoy,gross_money,gross_rate,gross_money_yoy,gross_money_mom",
+                                "outputCol":"bo1_name,bo2_name,bo3_name,goods_name,money,ratio_rate,money_mom,money_yoy,gross_money,gross_rate,gross_money_yoy,gross_money_mom",
                                 "pageNum":1,
-                                "pageSize":10000,
+                                "pageSize":100,
                                 "groupByCol":["bo1_name","bo2_name","bo3_name","goods_name"],
                                 "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
                                 "serviceId":"service_tjbg02_sales_order_dtl"
@@ -400,7 +400,7 @@
                                 },
                                 "outputCol":"bo1_name,bo2_name,money,ratio_rate,money_mom,money_yoy,gross_money,gross_rate,gross_money_yoy,gross_money_mom",
                                 "pageNum":1,
-                                "pageSize":10000,
+                                "pageSize":100,
                                 "groupByCol":["bo1_name","bo2_name"],
                                 "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
                                 "serviceId":"service_tjbg02_sales_order_dtl"
@@ -657,7 +657,7 @@
                                 "outputCol": "bo1_name,bo2_name,bo3_name,saledays",
                                 "groupByCol": ["bo1_name","bo2_name","bo3_name"],
                                 "pageNum": 1,
-                                "pageSize": 1000,
+                                "pageSize": 100,
                                 "serviceId": "service_tjbg02_stock_saledays",
                                 "whereCndt": {"dealer_id": "='ff80808169c93eb80169d6a73cc02d04'"}
                             },
@@ -687,7 +687,7 @@
                                 "outputCol": "bo2_name,bo3_name,bo1_name,goods_name,saledays",
                                 "groupByCol": ["bo1_name","bo2_name","bo3_name","goods_name"],
                                 "pageNum": 1,
-                                "pageSize": 1000,
+                                "pageSize": 100,
                                 "serviceId": "service_tjbg02_stock_saledays",
                                 "whereCndt": {"dealer_id": "='ff80808169c93eb80169d6a73cc02d04'"}
                             },
@@ -718,7 +718,7 @@
                                 "outputCol": "bo1_name,bo2_name,bo3_name,saledays",
                                 "groupByCol": ["bo1_name","bo2_name"],
                                 "pageNum": 1,
-                                "pageSize": 1000,
+                                "pageSize": 100,
                                 "serviceId": "service_tjbg02_stock_saledays",
                                 "whereCndt": {"dealer_id": "='ff80808169c93eb80169d6a73cc02d04'"}
                             },
@@ -1168,7 +1168,18 @@
                     })
                     directionArr.monthArr = monthArr;
                     directionArr.seriesData = seriesData;
-                    _this.directionData = directionArr;
+                    _this.directionData ={
+                        id:'lineIdBandDirect',
+                        xAxisData:directionArr.monthArr,
+                        unit:['money','tenth'],
+                        lineData:[
+                            {
+                                name:'订单金额',
+                                data:directionArr.seriesData,
+                                color:'#00E2BF'
+                            },
+                        ],
+                    }
                     console.log(_this.directionData)
                     _this.towHelpSaleMonthLineShow = false
                 })
@@ -1405,7 +1416,7 @@
                             downGoods,  //销量增长商品数
                             upGoods,   //销量下滑商品数
                             commodityname:"总商品数",
-                            name:"动销商品数",
+                            name:"分销商品数",
                             btn:"商品明细",
                             RatePin:data.stock_sale_goods_cnt,  //动销商品数
                             commoditysum:data.goods_cnt,   //总商品数
@@ -1430,7 +1441,7 @@
                                 type: 'xAxis',
                                 barData: [
                                     {
-                                        name: 'ABC',
+                                        name: '分销率',
                                         data: barDataMonth,
                                         color: '#fff',
                                         barWidth: 11
@@ -1483,7 +1494,7 @@
                             productimg:require("../assets/img/dongxiao.png"),
                             name:"商品分销率",
                             RatePin:_this.dataProcess(data.stock_sale_rate, 'percent').num+_this.dataProcess(data.stock_sale_rate, 'percent').unit, //商品动销率
-                            btn:"动销清单",
+                            btn:"分销清单",
                             produnarData
                         }
                         _this.CommodityRate = false
@@ -1593,7 +1604,7 @@
                 function getProDownData(){
                     var params = {
                         "inputParam":{
-                            "data_mon":"201907",
+                            "data_mon":_this.currentDate,
                             "data_type":"当月",
                             "money_type":"下滑",
                             "bo_type":"商品"
@@ -1601,13 +1612,14 @@
                         "outputCol":"bo1_name,goods_name,money_lm,money,dif_money",
                         "pageNum":1,
                         "pageSize":1000,
+                        "orderCol":'dif_money desc',
                         "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
                         "serviceId":"service_tjbg02_goods_sales_change"
                     }
                     let keyValue = params.outputCol.split(',')
                     let numArray = ['numberId']
                     _this.tableHeaderKey = numArray.concat(keyValue)
-                    _this.ProExportData.proraiseData = {
+                    _this.ProExportData.prodownData = {
                         //下滑产品导出数据
                         tableHeaderTxt:['序号','商品编码','商品名称','上月销量（元）','当月销量（元）','差额（元）'],
                         tableData:'',
@@ -1624,7 +1636,7 @@
                 function getProRaiseData(){
                     var params = {
                         "inputParam":{
-                            "data_mon":"201907",
+                            "data_mon":_this.currentDate,
                             "data_type":"当月",
                             "money_type":"上升",
                             "bo_type":"商品"
@@ -1632,13 +1644,14 @@
                         "outputCol":"bo1_name,goods_name,money,money_lm,dif_money",
                         "pageNum":1,
                         "pageSize":1000,
+                        "orderCol":'dif_money desc',
                         "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
                         "serviceId":"service_tjbg02_goods_sales_change"
                     }
                     let keyValue = params.outputCol.split(',')
                     let numArray = ['numberId']
                     _this.tableHeaderKey = numArray.concat(keyValue)
-                    _this.ProExportData.prodownData = {
+                    _this.ProExportData.proraiseData = {
                         //增长产品导出数据
                         tableHeaderTxt:['序号','商品编码','商品名称','上月销量（元）','当月销量（元）','差额（元）'],
                         tableData:'',
@@ -1656,7 +1669,7 @@
                             console.log(proraiseData)
                             console.log(prodownData)
                             //增长产品数据
-                            let proraiseList = proraiseData.data.data. data
+                            let proraiseList = proraiseData.data.data.data
                             console.log(proraiseList)
                             let raisexAxisData = []//增长门店x轴
                             let raiseLastMonth = []//增长门店当月销售额
@@ -1685,19 +1698,19 @@
                                 //柱状图数据
                                 barData:[
                                     {
-                                        name:'当月销售额(万元)',
+                                        name:'当月销售额',
                                         data:raiseLastMonth,
                                         color:'#2D92FC',
                                         barWidth:22,
                                     },
                                     {
-                                        name:'上月销售额(万元)',
+                                        name:'上月销售额',
                                         data:raiseSameMonth,
                                         color:'#FFBD7B',
                                         barWidth:22,
                                     },
                                     {
-                                        name:'销售差额(万元)',
+                                        name:'销售差额',
                                         data:raiseDifference,
                                         color:'#FE9600',
                                         barWidth:22,
@@ -2138,9 +2151,9 @@
                         }
                         //产品动销率树状图
                         let barDataMonth = [
-                            _this.dataProcess(data.liby_saledays, 'day').num,_this.dataProcess(data.kispa_saledays, 'day').num,
-                            _this.dataProcess(data.cheerwin_saledays, 'day').num,_this.dataProcess(data.shengmei_saledays, 'day').num,
-                            _this.dataProcess(data.oral_saledays, 'day').num,   _this.dataProcess(data.wonderland_saledays, 'day').num
+                            data.liby_saledays,data.kispa_saledays,
+                            data.cheerwin_saledays,data.shengmei_saledays,
+                            data.oral_saledays, data.wonderland_saledays
                         ]
                         let Axiax = ['立白','好爸爸','超威','晟美','口腔','壹乐源']
                         let inventoryBarData = {
@@ -2223,14 +2236,14 @@
                             turnover:_this.dataProcess(data.turnover_rate, 'day').num+'次',  //库存周转次数
                         }
                         _this.inventoryDay = {
-                        inventorycompare: [  //同比环比数据
-                            Chain,
-                            Year
-                        ],
-                        receivableAverage: '库存件数可销天数（天）  ',
-                        inventoryVal: _this.dataProcess(data.saledays, 'day').num,  //库存件数可销天数
-                         inventoryBarData
-                    }
+                            inventorycompare: [  //同比环比数据
+                                Chain,
+                                Year
+                            ],
+                            receivableAverage: '库存件数可销天数（天）',
+                            inventoryVal: _this.dataProcess(data.saledays, 'day').num,  //库存件数可销天数
+                            inventoryBarData
+                        }
                         _this.stockAmount = false
                         _this.InventoryTurnover = false
                         _this.DaysAvailableStock = false   //库存加载页面效果
@@ -2251,7 +2264,7 @@
                     "isReturnTotalSize": "Y",
                     "outputCol": "dealer_id,data_mon,data_type,money,qty,mon6_unsale_money,non6_unsale_qty,turnover_rate,saledays,saledays_mon,saledays_yoy,liby_saledays,kispa_saledays,cheerwin_saledays,shengmei_saledays,oral_saledays,wonderland_saledays",
                     "pageNum": 1,
-                    "pageSize": 10,
+                    "pageSize": 10000,
                     "serviceId": "service_tjbg02_stock",
                     "orderCol": "data_mon asc",
                     "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
@@ -2509,7 +2522,7 @@
                             "outputCol": "bo1_name,bo2_name,saledays",
                             "groupByCol": ["bo1_name","bo2_name"],
                             "pageNum": 1,
-                            "pageSize": 10,
+                            "pageSize": 100,
                             "serviceId": "service_tjbg02_stock_saledays",
                             "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
                         },
