@@ -141,23 +141,23 @@
             font-size:12px;
             font-weight:500;
             padding-top: 26px;
+            padding-bottom: 7%;
             display: grid;
+
             span{
                 font-size:12px;
                 font-weight:500;
-                padding-top: 0;
             }
         }
         span{
             font-size:26px;
             font-weight:600;
-            padding-top: 12px;
         }
         .productLeft-btn{
             line-height: 26px;
             text-align: center;
             margin: auto;
-            margin-top: 20%;
+            margin-top: 8%;
 
         }
     }

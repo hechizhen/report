@@ -316,7 +316,6 @@
                 this.getRaiseDownStores()
                 this.getSalesmanReached()
                 this.getDetailTableData()
-                this.getsecondBand()
                 this.getdirection()
                 this.getsalesman()
             },
@@ -1080,7 +1079,13 @@
                     data: params
                 }).then(function (res) {
                      if(res.data.code == '200'){
-                        var secondBandData = res.data.data.data[0],thatMonth = {},chainratio = {},yearOnYear = {};
+                         //判断二帮卖-订单走势图接口参数是否为空
+                         if(res.data.data.data.length!=0){
+                             var secondBandData = res.data.data.data[0]
+                         }else{
+                             var secondBandData=''
+                         }
+                        var thatMonth = {},chainratio = {},yearOnYear = {};
                         // 当月数据
                         thatMonth.money = !secondBandData.money ? '--' : _this.dataProcess(secondBandData.money, 'money', 'tenth').num;  //本月下单金额
                         if(secondBandData.money){
@@ -1159,7 +1164,14 @@
                     method: 'POST',
                     data: params
                 }).then(function (res) {
-                    var directionData = res.data.data.data,monthArr = [],seriesData=[],directionArr = {};
+                    console.log(res)
+                    //判断二帮卖-订单走势图接口参数是否为空
+                    if(res.data.data.data.length!=0){
+                        var directionData = res.data.data.data
+                    }else{
+                        var directionData=''
+                    }
+                    var monthArr = [],seriesData=[],directionArr = {};
                     directionData.map(function(value){
                         monthArr.push(value.data_mon)
                         seriesData.push(value.money)
@@ -1235,6 +1247,12 @@
                     method: 'POST',
                     data: params
                 }).then(function (res) {
+                    //判断业务员-走势图接口参数是否为空
+                    // if(res.data.data.data.length!=0){
+                    //     var salesmanTrendData = res.data.data.data
+                    // }else{
+                    //     var salesmanTrendData=''
+                    // }
                     var salesmanTrendData = res.data.data.data,xAxisData=[],salesmanArr=[],seriesData=[],salesmanColor=['#009EE2','#E9A837','#00E2BF','#65E6F5'];
                     console.log(salesmanTrendData)
                     salesmanTrendData.map(function(value){
@@ -1296,6 +1314,12 @@
                     data: params
                 }).then(function (res) {
                     if(res.data.code == '200'){
+                        //判断业务员-下滑人员接口参数是否为空
+                        // if(res.data.data.data.length!=0){
+                        //     var salesmandownwardData = res.data.data.data
+                        // }else{
+                        //     var salesmandownwardData=''
+                        // }
                         var salesmandownwardData = res.data.data.data,xAxisData=[],seriesData=[],lastMonth=[],sameMonth=[],difference=[],salesmandownwardObject={},exportData=[];
                         salesmandownwardData.map(function(value,index){
                             xAxisData.push(value.emp_name);
@@ -1345,6 +1369,13 @@
                     data: params
                 }).then(function (res) {
                     if(res.data.code == '200'){
+
+                        //判断业务员-达成-贡献接口参数是否为空
+                        // if(res.data.data.data.length!=0){
+                        //     var salesmanReachedData = res.data.data.data
+                        // }else{
+                        //     var salesmanReachedData=''
+                        // }
                         // 达成
                         let targetList = []
                         var salesmanReachedData = res.data.data.data,xAxisData=[],seriesData=[],lastMonth=[],sameMonth=[],difference=[],salesmanReachedObject={},contributionseriesData=[],contributionlastMonth=[],contributiondifference = [],salesmanContributionObject={};
@@ -1416,25 +1447,31 @@
                     method: 'POST',
                     data: params
                 }).then(function (res) {
+                    //判断产品-商品动销率，商品动销数接口参数是否为空
+                        if(res.data.data.data.length!=0){
+                            var data = res.data.data.data[0]
+                        }else{
+                            var data=''
+                        }
                         //  console.log(res)
-                        let data = res.data.data.data[0]
+                        // let data = res.data.data.data[0]
                         console.log(data)
                         let goodsChainVal = {
                             name: "环比:",
-                            NoSales: _this.dataProcess(data.stock_sale_goods_cnt_mom,'percent').num+_this.dataProcess(data.stock_sale_goods_cnt_mom,'percent').unit
+                            NoSales: !data.stock_sale_goods_cnt_mom ? '--' : _this.dataProcess(data.stock_sale_goods_cnt_mom,'percent').num+_this.dataProcess(data.stock_sale_goods_cnt_mom,'percent').unit
                         }
                         let goodsYearVal = {
                             name: "同比:",
-                            NoSales: _this.dataProcess(data.stock_sale_goods_cnt_yoy,'percent').num+_this.dataProcess(data.stock_sale_goods_cnt_yoy,'percent').unit
+                            NoSales: !data.stock_sale_goods_cnt_yoy ? '--' :_this.dataProcess(data.stock_sale_goods_cnt_yoy,'percent').num+_this.dataProcess(data.stock_sale_goods_cnt_yoy,'percent').unit
                         }
                         let downGoods = {
                             name:"销量增长商品数(个):",
-                            NoSales:data.sales_raise_goods_cnt,
+                            NoSales:!data.sales_raise_goods_cnt ? '--' :data.sales_raise_goods_cnt,
                             btn:"下滑商品"
                         }
                         let upGoods = {
                             name:"销量下滑商品数(个):",
-                            NoSales: data.sales_drop_goods_cnt,
+                            NoSales: !data.sales_drop_goods_cnt ? '--' :data.sales_drop_goods_cnt,
                             btn:"增长商品"
                         }
 
@@ -1448,8 +1485,8 @@
                             commodityname:"总商品数",
                             name:"分销商品数",
                             btn:"商品明细",
-                            RatePin:data.stock_sale_goods_cnt,  //动销商品数
-                            commoditysum:data.goods_cnt,   //总商品数
+                            RatePin:!data.stock_sale_goods_cnt ? '--' :data.stock_sale_goods_cnt,  //动销商品数
+                            commoditysum:!data.goods_cnt ? '--' :data.goods_cnt,   //总商品数
                             productimg: require("../assets/img/shangpinshu.png"),
                         }
                         //产品动销率树状图
@@ -1531,7 +1568,7 @@
                         _this.CommodityTurnoverRate = {
                             productimg:require("../assets/img/dongxiao.png"),
                             name:"商品分销率",
-                            RatePin:_this.dataProcess(data.stock_sale_rate, 'percent').num+_this.dataProcess(data.stock_sale_rate, 'percent').unit, //商品动销率
+                            RatePin:!data.stock_sale_rate ? '--' :_this.dataProcess(data.stock_sale_rate, 'percent').num+_this.dataProcess(data.stock_sale_rate, 'percent').unit, //商品动销率
                             btn:"分销清单",
                             produnarData
                         }
@@ -1710,18 +1747,24 @@
                             console.log(proraiseData)  //增长
                             console.log(prodownData)   //下滑
                             //增长产品数据
-                            let proraiseList = proraiseData.data.data.data
+                            //判断增长产品数据是否为空
+                            if(proraiseData.data.data.data.length!=0){
+                                var proraiseList = proraiseData.data.data.data
+                            }else{
+                                var proraiseList=''
+                            }
+                            // let proraiseList = proraiseData.data.data.data
                             console.log(proraiseList)
                             let raisexAxisData = []//增长门店x轴
-                            let raiseLastMonth = []//增长门店当月销售额
-                            let raiseSameMonth = []//增长门店上月销售额
+                            let raiseLastMonth = []//增长门店上月销售额
+                            let raiseSameMonth = []//增长门店当月销售额
                             let raiseDifference = []//增长门店差异销售额
                             proraiseList.map(function(item,index){
                                 item.numberId = index+1
                                 if(index<5) {
                                     raisexAxisData.push(item.goods_name)
-                                    raiseLastMonth.push(item.money)
-                                    raiseSameMonth.push(item.money_lm)
+                                    raiseLastMonth.push(item.money_lm)
+                                    raiseSameMonth.push(item.money)
                                     raiseDifference.push(item.dif_money)
                                 }
                             })
@@ -1739,13 +1782,13 @@
                                 //柱状图数据
                                 barData:[
                                     {
-                                        name:'当月销售额',
+                                        name:'上月销售额',
                                         data:raiseLastMonth,
                                         color:'#2D92FC',
                                         barWidth:22,
                                     },
                                     {
-                                        name:'上月销售额',
+                                        name:'当月销售额',
                                         data:raiseSameMonth,
                                         color:'#FFBD7B',
                                         barWidth:22,
@@ -1765,17 +1808,23 @@
                             }
                             _this.upproStoresData = raiseBarData
                             //下滑产品数据
-                            let downList = prodownData.data.data.data
+                            //判断下滑产品数据是否为空
+                            if(prodownData.data.data.data.length!=0){
+                                var downList = prodownData.data.data.data
+                            }else{
+                                var downList=''
+                            }
+                            // let downList = prodownData.data.data.data
                             let downxAxisData = []//下滑门店x轴
-                            let downLastMonth = []//下滑门店月平均销售额
+                            let downLastMonth = []//下滑门店上月销售额
                             let downSameMonth = []//下滑门店当月销售额
                             let downDifference = []//下滑门店差异销售额
                             downList.map(function(item,index){
                                 item.numberId = index+1
                                 if(index<5) {
                                     downxAxisData.push(item.goods_name)
-                                    downLastMonth.push(item.money)
-                                    downSameMonth.push(item.money_lm)
+                                    downLastMonth.push(item.money_lm)
+                                    downSameMonth.push(item.money)
                                     downDifference.push(item.dif_money)
                                 }
                             })
@@ -1793,7 +1842,7 @@
                                 //柱状图数据
                                 barData:[
                                     {
-                                        name:'月均销售额(万元)',
+                                        name:'上月销售额(万元)',
                                         data:downLastMonth,
                                         color:'#2D92FC',
                                         barWidth:22,
@@ -1884,7 +1933,13 @@
                     method: 'POST',
                     data: params
                 }).then(function (res) {
-                    let data = res.data.data.data[0]
+                    //判断门店模块概览数据是否为空
+                    if(res.data.data.data.length!=0){
+                        var data = res.data.data.data[0]
+                    }else{
+                        var data=''
+                    }
+                    // let data = res.data.data.data[0]
                     let AmountChainVal = {
                         name: "环比: ",
                         NoSales: _this.dataProcess(data.active_store_cnt_mom, 'percent').num + _this.dataProcess(data.active_store_cnt_mom, 'percent').unit
@@ -1895,21 +1950,21 @@
                     }
                     let downSales = {
                         name:"销量下滑门店数(家):",
-                        NoSales: data.sale_drop_store_cnt,
+                        NoSales: !data.sale_drop_store_cnt ? '--' : data.sale_drop_store_cnt,
                         btn:"下滑门店"
                     }
                     let upSales = {
                         name:"销量增长门店数(家):",
-                        NoSales: data.sale_raise_store_cnt,
+                        NoSales:!data.sale_raise_store_cnt ? '--' :  data.sale_raise_store_cnt,
                         btn:"增长门店"
                     }
                     let noTrade = {
                         name: "近3个月无交易门店数(家): ",
-                        NoSales: data.mon3_unsale_store_cnt
+                        NoSales: !data.mon3_unsale_store_cnt ? '--' : data.mon3_unsale_store_cnt
                     }
                     let noTrades = {
                         name: "6个月无交易门店数(家):",
-                        NoSales:data.mon6_unsale_store_cnt
+                        NoSales:!data.mon6_unsale_store_cnt ? '--' : data.mon6_unsale_store_cnt
                     }
                     let ActivestresPer = {
                         ActiveStores:"门店单产",
@@ -1919,12 +1974,12 @@
                     let ActivestresSum = {
                         ActiveStores:"总门店数",
                         ActiveStoresing:"(家)",
-                        NoSales:data.store_cnt
+                        NoSales:!data.store_cnt ? '--' :data.store_cnt
                     }
                     let ActivestresnNew = {
                         ActiveStores:"新增门店数",
                         ActiveStoresing:"(家)",
-                        NoSales:data.new_store_cnt
+                        NoSales:!data.new_store_cnt ? '--' :data.new_store_cnt
                     }
                     let nearnoTrade = {
                         name: "3个月无交易门店应收欠款(万元):",
@@ -1940,7 +1995,7 @@
                         shopActiveData: {
                             ActiveStoresTxt:"活跃门店数",
                             ActiveStoresing:"(家)",
-                            ActiveStores:data.active_store_cnt,  //门店活跃数
+                            ActiveStores:!data.active_store_cnt ? '--' :data.active_store_cnt,  //门店活跃数
                             detailbtn:"门店详情",
                             shopActiveTitle: [
                                 AmountChainVal,  //环比数额
@@ -2039,7 +2094,13 @@
                     .then(this.$http.spread((raiseData, downData) => {
                         console.log(raiseData)
                         //增长门店数据
-                        let raiseList = raiseData.data.data.data
+                        //判断增长门店数据是否为空
+                        if(raiseData.data.data.data.length!=0){
+                            var raiseList = raiseData.data.data.data
+                        }else{
+                            var raiseList=''
+                        }
+                        // let raiseList = raiseData.data.data.data
                         let raisexAxisData = []//增长门店x轴
                         let raiseLastMonth = []//增长门店月平均销售额
                         let raiseSameMonth = []//增长门店当月销售额
@@ -2092,7 +2153,13 @@
                         }
                         _this.upStoresData = raiseBarData
                         //下滑门店数据
-                        let downList = downData.data.data.data
+                        //判断下滑门店数据是否为空
+                        if(downData.data.data.data.length!=0){
+                            var downList = downData.data.data.data
+                        }else{
+                            var downList=''
+                        }
+                        // let downList = downData.data.data.data
                         let downxAxisData = []//下滑门店x轴
                         let downLastMonth = []//下滑门店月平均销售额
                         let downSameMonth = []//下滑门店当月销售额
@@ -2172,30 +2239,39 @@
                     method: 'POST',
                     data: params
                 }).then(function (res) {
-                        console.log(res)
-                        let data = res.data.data.data[0]
-                        console.log(data)
+                    console.log(res)
+                    //判断库存一级页面概览明细数据是否为空
+                    if(res.data.data.data.length!=0){
+                        var data = res.data.data.data[0]
+                    }else{
+                        var data=''
+                    }
+                        // let data = res.data.data.data[0]
+                        // console.log(data)
                         let SalesMoney = {
                             name: '6个月未销售商品金额(万元)',
-                            NoSales:'￥'+ _this.dataProcess(data.mon6_unsale_money, 'money','tenth').num
+                            NoSales:'￥'+!data.mon6_unsale_money ? '--' : _this.dataProcess(data.mon6_unsale_money, 'money','tenth').num
                         }
                         let SalesSum = {
                             name: '6个月未销售商品数(件)',
-                            NoSales: _this.dataProcess(data.non6_unsale_qty,'day').num
+                            NoSales:!data.non6_unsale_qty ? '--' : _this.dataProcess(data.non6_unsale_qty,'day').num
                         }
                         let Chain = {
                             name: '环比增长:',
-                            inventoryChainVal: _this.dataProcess(data.saledays_mon,'percent').num+_this.dataProcess(data.saledays_mon,'percent').unit
+                            inventoryChainVal:!data.saledays_mon ? '--' : _this.dataProcess(data.saledays_mon,'percent').num+_this.dataProcess(data.saledays_mon,'percent').unit
                         }
                         let Year = {
                             name: '同比增长:',
-                            inventoryChainVal: _this.dataProcess(data.saledays_yoy,'percent').num+_this.dataProcess(data.saledays_yoy,'percent').unit
+                            inventoryChainVal:!data.saledays_yoy ? '--' : _this.dataProcess(data.saledays_yoy,'percent').num+_this.dataProcess(data.saledays_yoy,'percent').unit
                         }
                         //产品动销率树状图
                         let barDataMonth = [
-                            data.liby_saledays,data.kispa_saledays,
-                            data.cheerwin_saledays,data.shengmei_saledays,
-                            data.oral_saledays, data.wonderland_saledays
+                            data.liby_saledays = !data.liby_saledays ? '--' : data.liby_saledays ,
+                            data.kispa_saledays = !data.kispa_saledays ? '--' : data.kispa_saledays ,
+                            data.cheerwin_saledays = !data.cheerwin_saledays ? '--' : data.cheerwin_saledays ,
+                            data.shengmei_saledays = !data.shengmei_saledays ? '--' : data.shengmei_saledays ,
+                            data.oral_saledays = !data.oral_saledays ? '--' : data.oral_saledays ,
+                            data.wonderland_saledays = !data.wonderland_saledays ? '--' : data.wonderland_saledays ,
                         ]
                         let Axiax = ['立白','好爸爸','超威','晟美','口腔','壹乐源']
                         let inventoryBarData = {
@@ -2271,11 +2347,11 @@
                             ],
                             noSalesbtn:"无交易明细",
                             amountTxt:"库存金额(万元)",
-                            amount: _this.dataProcess(data.money,'money','tenth').num,  //库存金额
+                            amount: !data.money ? '--' :_this.dataProcess(data.money,'money','tenth').num,  //库存金额
                             inventoryNumberTxt:"库存件数(件)",
-                            inventoryNumber:_this.dataProcess(data.qty, 'day').num,  //库存件数
+                            inventoryNumber:!data.qty ? '--' :_this.dataProcess(data.qty, 'day').num,  //库存件数
                             turnoverTxt:"库存周转次数",
-                            turnover:_this.dataProcess(data.turnover_rate, 'day').num+'次',  //库存周转次数
+                            turnover:!data.turnover_rate ? '--' :_this.dataProcess(data.turnover_rate, 'day').num+'次',  //库存周转次数
                         }
                         _this.inventoryDay = {
                             inventorycompare: [  //同比环比数据
@@ -2283,7 +2359,7 @@
                                 Year
                             ],
                             receivableAverage: '库存件数可销天数（天）',
-                            inventoryVal: _this.dataProcess(data.saledays, 'day').num,  //库存件数可销天数
+                            inventoryVal:!data.saledays ? '--' : _this.dataProcess(data.saledays, 'day').num,  //库存件数可销天数
                             inventoryBarData
                         }
                         _this.stockAmount = false
@@ -2316,8 +2392,15 @@
                     method: 'POST',
                     data: params
                 }).then(function (res) {
-                    var salesmanTrendData = res.data.data.data,xAxisData=[],salesmanArr=[],seriesData=[],salesmanColor=['#1378ec','#ee723f','#e9b533','#cc57d9','#1b9ad9','#39d4e7'];
-                  console.log(salesmanTrendData)
+                    console.log(res)
+                    //判断库存可销天数走势图数据是否为空
+                    if(res.data.data.data.length!=0){
+                        var salesmanTrendData = res.data.data.data
+                    }else{
+                        var salesmanTrendData=''
+                    }
+                    var xAxisData=[],salesmanArr=[],seriesData=[],salesmanColor=['#1378ec','#ee723f','#e9b533','#cc57d9','#1b9ad9','#39d4e7'];
+                   // console.log(salesmanTrendData)
                     salesmanTrendData.map(function(value){
                         if(xAxisData.length==0){
                             xAxisData.push(value.data_mon);

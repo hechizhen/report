@@ -231,12 +231,11 @@
                     font-weight: 400;
                     color: rgba(255, 255, 255, 1);
                     padding-left: 4%;
-                    display: inline-block;
-                    width: 100%;
+                    white-space: nowrap;
                 }
 
                 .productLeft-btn {
-                    width: 28%;
+                    width: 32%;
                     height: 100%;
                     line-height: 26px;
                     text-align: right;
@@ -289,7 +288,7 @@
         color: #fff;
     }
     .commodityR-baseone{
-        width: 58%;
+        width: 54%;
         float: left;
         display: flex;
         align-items: center;

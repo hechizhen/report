@@ -107,13 +107,7 @@
             line-height: 26px;
             margin: 22px  auto  51px;
             text-align: center;
-            span{
-                width:48px;
-                font-size:12px;
-                font-family:PingFangSC-Regular;
-                font-weight:400;
-                color:rgba(255,255,255,1);
-            }
         }
     }
+
 </style>
