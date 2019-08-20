@@ -83,7 +83,7 @@
         },
         data() {
             return {
-                dealer_id:'8a981eb458580fe9015860d7b87c0307',
+                dealer_id:'ff80808169c93eb80169d6a73cc02d04',
                 indexDealName: '吴凌云',//经销商名称
                 indexScore: 97,//体检评分
                 indexSummary: '很好',//总结
@@ -222,11 +222,11 @@
                 //达成贡献导出数据
                 reachContributionData:'',
                 dealList:[
+                    {id:'ff80808169c93eb80169d6a73cc02d04',name:'黄梅县林峰日化经营部'},
                     {id:'8a981eb458580fe9015860d7b87c0307',name:'立白生产环境测试库'},
                     {id:'8a981eb458580fe9015860d8b87c0307',name:'广州立白集团企业有限公司'},
                     {id:'ff80808169c93eb80169d6756c101eef',name:'富平县百洁商贸有限公司'},
                     {id:'ff80808169c93eb80169d69fb8d92c31',name:'宜昌市太华商贸有限公司'},
-                    {id:'ff80808169c93eb80169d6a73cc02d04',name:'黄梅县林峰日化经营部'},
                     {id:'ff80808169c93eb80169d6bd844a2de1',name:'鄂州市嘉德商贸有限公司'},
                     {id:'ff80808169d8d9b30169db5961eb0011',name:'荆州市立晨商贸有限公司'},
                     {id:'ff8080816a194910016a42de93bb1164',name:'苏州汇浚贸易有限公司'},
@@ -253,6 +253,7 @@
             this.indexDefaultDate = year + '/' + month
         },
         mounted() {
+            this.indexDealName = this.dealList[0].name
             this.getsalesmanTrend()
             this.getOverViewData()
             this.getOneHelpSalesData()
