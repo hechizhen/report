@@ -1950,21 +1950,21 @@
                     }
                     let downSales = {
                         name:"销量下滑门店数(家):",
-                        NoSales: data.sale_drop_store_cnt,
+                        NoSales: !data.sale_drop_store_cnt ? '--' : data.sale_drop_store_cnt,
                         btn:"下滑门店"
                     }
                     let upSales = {
                         name:"销量增长门店数(家):",
-                        NoSales: data.sale_raise_store_cnt,
+                        NoSales:!data.sale_raise_store_cnt ? '--' :  data.sale_raise_store_cnt,
                         btn:"增长门店"
                     }
                     let noTrade = {
                         name: "近3个月无交易门店数(家): ",
-                        NoSales: data.mon3_unsale_store_cnt
+                        NoSales: !data.mon3_unsale_store_cnt ? '--' : data.mon3_unsale_store_cnt
                     }
                     let noTrades = {
                         name: "6个月无交易门店数(家):",
-                        NoSales:data.mon6_unsale_store_cnt
+                        NoSales:!data.mon6_unsale_store_cnt ? '--' : data.mon6_unsale_store_cnt
                     }
                     let ActivestresPer = {
                         ActiveStores:"门店单产",
@@ -1974,12 +1974,12 @@
                     let ActivestresSum = {
                         ActiveStores:"总门店数",
                         ActiveStoresing:"(家)",
-                        NoSales:data.store_cnt
+                        NoSales:!data.store_cnt ? '--' :data.store_cnt
                     }
                     let ActivestresnNew = {
                         ActiveStores:"新增门店数",
                         ActiveStoresing:"(家)",
-                        NoSales:data.new_store_cnt
+                        NoSales:!data.new_store_cnt ? '--' :data.new_store_cnt
                     }
                     let nearnoTrade = {
                         name: "3个月无交易门店应收欠款(万元):",
@@ -1995,7 +1995,7 @@
                         shopActiveData: {
                             ActiveStoresTxt:"活跃门店数",
                             ActiveStoresing:"(家)",
-                            ActiveStores:data.active_store_cnt,  //门店活跃数
+                            ActiveStores:!data.active_store_cnt ? '--' :data.active_store_cnt,  //门店活跃数
                             detailbtn:"门店详情",
                             shopActiveTitle: [
                                 AmountChainVal,  //环比数额
