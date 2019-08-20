@@ -67,7 +67,7 @@
         float: left;
         background:rgba(238,240,245,.5);
         border-radius:6px 6px 0px 0px;
-        padding-left: 3%;
+        /*padding-left: 3%;*/
         .commodityR-base {
             width: 100%;
             float: left;
@@ -119,7 +119,10 @@
     }
     .onetxt{
         text-align: left;
-        padding-left: 10%;
+        padding-left: 12%;
+    }
+    .shopRight .onetxt{
+        padding-left: 7%;
     }
   .shopLeft .shopBase .productLeft-btn{
         justify-content: left;

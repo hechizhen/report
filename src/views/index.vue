@@ -1109,7 +1109,7 @@
                             labelType:1,
                             unit:['money','tenth'],
                             pieData:list,
-                            radius:['50%', '70%'],
+                            radius:['40%', '70%'],
                             borderWidth:0,
                         }
                         // 环比数据

@@ -109,6 +109,7 @@
                 span{
                     font-size: 14px;
                     font-weight: 500;
+                    margin-top: 5%;
                 }
             }
             span {

@@ -13,7 +13,8 @@
             </div>
         </div>
         <div class="overDueBottom">
-            <a-progress type="circle" :percent="Number(overDueData.overDueRadioPercent)" :successPercent="15"  :width="126" :showInfo="false" strokeColor="#6BBCFF" />
+            <!--<div class="overDueBottom-Lefe">-->
+            <a-progress type="circle" :percent="Number(overDueData.overDueRadioPercent)" :strokeWidth =11 :successPercent="15"  :width="126" :showInfo="false" strokeColor="#6BBCFF" />
             <div class="overDueBox">
                 <div>
                     <p>
@@ -25,6 +26,7 @@
                     </p>
                 </div>
             </div>
+            <!--</div>-->
             <new-button :defaultVal="defaultVal" :buttonHandleClick="detailHandleClick" style="position:absolute;right:0;"></new-button>
         </div>
     </div>
@@ -52,7 +54,7 @@
             }
         },
         mounted () {
-          
+
         },
         methods: {
             //逾期明细
@@ -61,13 +63,13 @@
             }
         },
         computed:{
-          
+
         },
         watch: {
-           
+
         },
         distroyed: function () {
-            
+
         }
     }
 </script>

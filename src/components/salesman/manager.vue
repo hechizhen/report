@@ -1,6 +1,6 @@
 <template>
 	<div class="manager">
-		<a-Row :gutter="20" class="managerRow">
+		<a-Row :gutter="26" class="managerRow">
 		  <a-Col :span="8" class="managerCol">
 		  	<div class="conclude">
 		  		<a-Row class="managerRow">

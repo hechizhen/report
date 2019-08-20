@@ -142,11 +142,13 @@
 							display: flex;
 						    align-items: center;
 						    justify-content: center;
+							display: none;
 						}
 						div:nth-child(3) {
 							height: 50%;
 							font-size:56px;
 							text-align: center;
+							font-weight:600;
 							span {
 								font-size:36px;
 							}
@@ -174,6 +176,7 @@
 						}
 						img {
 							vertical-align:baseline;
+							margin-right: 5px;
 						}
 					}
 					.recordRight {
@@ -185,6 +188,9 @@
 							font-family:PingFangSC-Medium;
 							font-weight:500;
 							color:rgba(51,51,51,1);
+							img{
+								margin-right: 5px;
+							}
 							span {
 								margin-left: 10px;
 								font-size:20px;

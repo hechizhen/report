@@ -55,7 +55,7 @@
 		},
 		data(){
 			return {
-				
+
 			}
 		},
 		mounted(){
@@ -96,7 +96,7 @@
 			}
 			.record {
 				width: 100%;
-				height: 120px;
+				height: 110px;
 				display: flex;
 			    align-items: center;
 				justify-content: center;
@@ -123,7 +123,7 @@
 			}
 			.proportion {
 				width: 100%;
-				height: 60px;
+				height: 80px;
 				.proportionitmes {
 					height: 100%;
 					.proportiondiv {

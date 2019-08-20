@@ -147,6 +147,7 @@
             span{
                 font-size:12px;
                 font-weight:500;
+                margin-top: 5%;
             }
         }
         span{
