@@ -167,7 +167,6 @@
                 align-items: center;
                 justify-content: flex-end;
                 padding: 10px 0;
-                height:40px;
                 .buttonGroup{
                     position: absolute;
                     left:20px;

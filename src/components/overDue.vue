@@ -14,7 +14,7 @@
         </div>
         <div class="overDueBottom">
             <!--<div class="overDueBottom-Lefe">-->
-            <a-progress type="circle" :percent="Number(overDueData.overDueRadioPercent)" :strokeWidth =11 :successPercent="15"  :width="126" :showInfo="false" strokeColor="#6BBCFF" />
+            <a-progress type="circle" :percent="Number(overDueData.overDueRadioPercent)" :strokeWidth ="10" :successPercent="15"  :width="126" :showInfo="false" strokeColor="#6BBCFF" />
             <div class="overDueBox">
                 <div>
                     <p>
@@ -98,6 +98,9 @@
                 font-weight:bold;
                 color:rgba(87,174,246,1);
                 margin-bottom:0;
+            }
+            p:first-child{
+                margin-left: 10px;
             }
             p:nth-child(2){
                 margin-top:10px;

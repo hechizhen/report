@@ -195,7 +195,18 @@
                             barWidth:item.barWidth,
                             itemStyle:{
                                 normal:{
-                                    color: item.color,
+                                    color: function(params) {
+                                        if(params.seriesName=='达成率'){
+                                            if(params.value<1){
+                                                var barColor = "#FF0048"
+                                            }else{
+                                                var barColor = "#D7D9E5"
+                                            }
+                                        }else{
+                                            var barColor = item.color
+                                        }
+                                        return barColor;
+                                    },
                                 },
                             },
                             label:{
@@ -314,6 +325,7 @@
                                 if(params[i].seriesName=='达成率' || params[i].seriesName=='贡献率'){
                                     relVal += params[i].marker+params[i].seriesName+':'+_this.dataProcess(params[i].value,'percent').num+_this.dataProcess(params[i].value,'percent').unit+'</br>'
                                 }else{
+                                    console.log(_this.dataProcess(params[i].value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num)
                                     relVal += params[i].marker+params[i].seriesName+':'+_this.dataProcess(params[i].value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num+_this.dataProcess(params[i].value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).unit+'</br>'
                                 }
                             }

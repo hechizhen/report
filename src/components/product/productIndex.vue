@@ -5,13 +5,13 @@
             <div class="product-content">
                 <a-Row >
                     <a-Col :span="10">
-                        <productLeft :productdata="CommodityTurnoverRate"  :selectButtonClick="selectButtonClick"
+                        <productLeft :productdata="CommodityTurnoverRate"  :selectButtonClick="selectButtonClick" :storeHandleClick="storeDetailHandleClick"
                                      :tableData="newTableData"> </productLeft>
-                        <productRight :barData="CommodityTurnoverRate.produnarData"  ></productRight>
+                        <productRight :barData="CommodityTurnoverRate.produnarData"></productRight>
                         <loading-data :isShow="CommodityRate"></loading-data>
                     </a-Col>
                     <a-Col :span="13" :push="1">
-                        <commodityRight :commoditydata="commoditydata" :upraphy="upraphy" :downraphy="downraphy"  :tableData="productTableData"  :selectButtonClick="proListDetaSelectButtonClick" ></commodityRight>
+                        <commodityRight :goodHandleClick="goodDetailHandleClick" :commoditydata="commoditydata" :upraphy="upraphy" :downraphy="downraphy"  :tableData="productTableData"  :selectButtonClick="proListDetaSelectButtonClick" ></commodityRight>
                         <loading-data :isShow="NumberGoods"></loading-data>
                     </a-Col>
                 </a-Row>
@@ -112,6 +112,14 @@
                  },
                  proListDetaSelectButtonClick:{  //商品明细表格切换维度
                      type:Function
+                 },
+                 //点击动销明细
+                 indexStoreHandleClick:{
+                     type:Function
+                 },
+                 //点击商品明细
+                 indexGoodDetailHandleClick:{
+                     type:Function
                  }
              },
         components:{
@@ -179,6 +187,14 @@
             //关闭增长树状图
             downClick(){
                 this.downShow = false;
+            },
+            //点击动销明细
+            storeDetailHandleClick(){
+                this.indexStoreHandleClick()
+            },
+            //点击商品明细
+            goodDetailHandleClick(){
+                this.indexGoodDetailHandleClick()
             },
             // //打开饼图
             // pieraphy(){

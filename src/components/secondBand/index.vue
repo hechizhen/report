@@ -73,6 +73,9 @@
 			},
 			selectButtonClick:{
 				type:Function
+			},
+			orderDetailClick:{
+				type:Function
 			}
 		},
 		data(){
@@ -114,6 +117,7 @@
 			},
 			//打开订单明细
 			detailHandleClick(){
+				this.orderDetailClick()
 				this.isShowDetail = true
 			},
 			//关闭订单明细

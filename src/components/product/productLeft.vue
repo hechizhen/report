@@ -31,6 +31,10 @@
             },
             selectButtonClick:{  //切换维度点击事件
                 type:Function
+            },
+            //分销清单点击
+            storeHandleClick:{
+                type:Function
             }
         },
         data(){
@@ -47,6 +51,7 @@
         methods:{
             //打开动销清单
             storeDetailHandleClick(){
+                this.storeHandleClick()
                 this.isShowDetail = true
             },
             //关闭动销清单

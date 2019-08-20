@@ -87,6 +87,9 @@
             },
             selectButtonClick:{  //商品明细表格切换维度
                 type:Function
+            },
+            goodHandleClick:{//点击商品明细
+                type:Function
             }
         },
         data(){
@@ -107,6 +110,7 @@
                 this.downraphy()
             },
             ListbuttonHandleClick(val){
+                this.goodHandleClick()
                 this.isShowDetail=true
             },
             closePopup(){

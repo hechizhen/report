@@ -110,6 +110,9 @@
             },
             selectButtonClick:{  //切换维度点击事件
                 type:Function
+            },
+            stockDetailHandleClick:{ //点击库存详情
+                type:Function
             }
         },
         components:{
@@ -172,6 +175,7 @@
             },
             //打开可销天数明细
             dealHandleClick(){
+                this.stockDetailHandleClick()
                 this.isShowreceivable = true
             }
         },
