@@ -18,6 +18,10 @@
             <loading-data :isShow="isShow"></loading-data>
             <public-table v-if="isShowDetail" :close="closePopup" :tableHeader="tableData.header" :interfaceParams="tableData.params" :titleName="tableData.titleName"></public-table>
         </div>
+        <preview-table v-if="storeShow" :data="tableStoreList" :columns="tableStoreColumns" titleName="门店效益" :buttonGroup="cardStore" 
+        :selectButtonClick="changeStoreButtonVal" :returnClick="storeReturnClick"></preview-table>
+        <preview-table v-if="personShow" :data="tablePersonList" :columns="tablePersonColumns" titleName="人均效能" :buttonGroup="cardPerson" 
+        :selectButtonClick="changePersonButtonVal"  :returnClick="personReturnClick"></preview-table>
     </div>
 </template>
 <script>
@@ -28,6 +32,8 @@
     import secondTitle from '../components/secondTitle.vue'
     import loadingData from './base/loadingData'
     import publicTable from './base/publicTable.vue'
+    import previewTable from './base/previewTable.vue'
+    import XLSX from 'xlsx'
     export default {
         name : 'finance',
         props:{
@@ -63,7 +69,8 @@
             newButton,
             secondTitle,
             loadingData,
-            publicTable
+            publicTable,
+            previewTable
         },
         data () {
             return {
@@ -91,20 +98,107 @@
 					],
 					titleName:'财务指标解释'
                 },
-                isShowDetail:false
+                isShowDetail:false,
+                storeShow:false,
+                personShow:false,
+                workbookStore:'',
+                workbookPerson:'',
+                cardStore:'',//门店维度
+                cardPerson:'',//人员维度
+                tableStoreColumns:'',//门店列头
+                tableStoreList:'',//门店数据
+                tablePersonColumns:'',//人员列头
+                tablePersonList:''//人员数据
             }
         },
         mounted () {
-
+            this.readWorkbookFromRemoteFileStore('src/static/test.xlsx')
+            this.readWorkbookFromRemoteFilePerson('src/static/test1.xlsx')
         },
         methods: {
+            //切换门店效益维度
+            changeStoreButtonVal(item){
+                this.getTableStore(item)
+            },
+            //切换人均效能维度
+            changePersonButtonVal(item){
+                this.getTablePerson(item)
+            },
+            readWorkbookFromRemoteFileStore: function (url) {
+                var xhr = new XMLHttpRequest()
+                xhr.open('get', url, true)
+                xhr.responseType = 'arraybuffer'
+                let _this = this
+                xhr.onload = function (e) {
+                    if (xhr.status === 200) {
+                        var data = new Uint8Array(xhr.response)
+                        var workbook = XLSX.read(data, {type: 'array'})
+                        console.log(workbook)
+
+                        var sheetNames = workbook.SheetNames // 工作表名称集合
+                        _this.workbookStore = workbook
+                        _this.cardStore = sheetNames
+                        _this.cardActive = sheetNames[0]
+                        _this.getTableStore(sheetNames[0])
+                    }
+                }
+                xhr.send()
+            },
+            getTableStore (sheetName) {
+                var worksheet = this.workbookStore.Sheets[sheetName]
+                this.tableStoreList = XLSX.utils.sheet_to_json(worksheet)
+                let header = Object.keys(this.tableStoreList[0])
+                let columns = []
+                header.map(function(item){
+                    columns.push({title:item,key:item})
+                })
+                this.tableStoreColumns = columns
+            },
+            readWorkbookFromRemoteFilePerson: function (url) {
+                var xhr = new XMLHttpRequest()
+                xhr.open('get', url, true)
+                xhr.responseType = 'arraybuffer'
+                let _this = this
+                xhr.onload = function (e) {
+                    if (xhr.status === 200) {
+                        var data = new Uint8Array(xhr.response)
+                        var workbook = XLSX.read(data, {type: 'array'})
+                        console.log(workbook)
+
+                        var sheetNames = workbook.SheetNames // 工作表名称集合
+                        _this.workbookPerson = workbook
+                        _this.cardPerson = sheetNames
+                        _this.cardActive = sheetNames[0]
+                        _this.getTablePerson(sheetNames[0])
+                    }
+                }
+                xhr.send()
+            },
+            getTablePerson (sheetName) {
+                var worksheet = this.workbookPerson.Sheets[sheetName]
+                this.tablePersonList = XLSX.utils.sheet_to_json(worksheet)
+                let header = Object.keys(this.tablePersonList[0])
+                let columns = []
+                header.map(function(item){
+                    columns.push({title:item,key:item})
+                })
+                this.tablePersonColumns = columns
+            },
             //门店收益
             storeHandleClick(){
-
+                this.storeShow = true
+            },
+            //关闭门店收益
+            storeReturnClick(){
+                this.storeShow = false
             },
             //人均效能
             personHandleClick(){
-
+                this.personShow = true
+            },
+            //关闭人均效能
+            personReturnClick(){
+                this.personShow = false
             },
             //关闭逾期明细
             closePopup(){

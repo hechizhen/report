@@ -64,7 +64,6 @@
     import shopIndex from '../components/shop/shopIndex' //门店
     import inventoryIndex from '../components/inventory/inventoryIndex' //库存
     import core from '../components/core.vue'
-    import XLSX from 'xlsx'
     export default {
         name: 'index',
         components: {
@@ -233,7 +232,8 @@
                     {id:'ff8080816a194910016a42de93bb1164',name:'苏州汇浚贸易有限公司'},
                     {id:'ff8080816a194910016a43acc36938b8',name:'徐州信如商贸有限公司【沛县】'},
                     {id:'ff8080816a194910016a43b00eeb3a75',name:'芜湖市明坤日用百货贸易有限公司'},
-                ]
+                ],
+                // xlsxAddress:require(),
             }
         },
         created() {
