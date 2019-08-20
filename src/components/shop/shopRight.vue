@@ -103,7 +103,7 @@
                 display: grid;
                 font-size: 14px;
                 font-weight: 500;
-                padding-top: 20%;
+                padding-top: 16%;
                 padding-bottom:5%;
                 margin-bottom: 0;
                 span{
@@ -112,7 +112,7 @@
                 }
             }
             span {
-                font-size: 26px;
+                font-size: 24px;
                 font-weight: 600;
             }
             .btn{

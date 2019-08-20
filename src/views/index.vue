@@ -2239,6 +2239,7 @@
                     method: 'POST',
                     data: params
                 }).then(function (res) {
+                    console.log(res)
                     //判断库存一级页面概览明细数据是否为空
                     if(res.data.data.data.length!=0){
                         var data = res.data.data.data[0]
@@ -2265,9 +2266,12 @@
                         }
                         //产品动销率树状图
                         let barDataMonth = [
-                            data.liby_saledays,data.kispa_saledays,
-                            data.cheerwin_saledays,data.shengmei_saledays,
-                            data.oral_saledays, data.wonderland_saledays
+                            data.liby_saledays = !data.liby_saledays ? '--' : data.liby_saledays ,
+                            data.kispa_saledays = !data.kispa_saledays ? '--' : data.kispa_saledays ,
+                            data.cheerwin_saledays = !data.cheerwin_saledays ? '--' : data.cheerwin_saledays ,
+                            data.shengmei_saledays = !data.shengmei_saledays ? '--' : data.shengmei_saledays ,
+                            data.oral_saledays = !data.oral_saledays ? '--' : data.oral_saledays ,
+                            data.wonderland_saledays = !data.wonderland_saledays ? '--' : data.wonderland_saledays ,
                         ]
                         let Axiax = ['立白','好爸爸','超威','晟美','口腔','壹乐源']
                         let inventoryBarData = {
@@ -2388,6 +2392,7 @@
                     method: 'POST',
                     data: params
                 }).then(function (res) {
+                    console.log(res)
                     //判断库存可销天数走势图数据是否为空
                     if(res.data.data.data.length!=0){
                         var salesmanTrendData = res.data.data.data
@@ -2395,7 +2400,7 @@
                         var salesmanTrendData=''
                     }
                     var xAxisData=[],salesmanArr=[],seriesData=[],salesmanColor=['#1378ec','#ee723f','#e9b533','#cc57d9','#1b9ad9','#39d4e7'];
-                  console.log(salesmanTrendData)
+                   // console.log(salesmanTrendData)
                     salesmanTrendData.map(function(value){
                         if(xAxisData.length==0){
                             xAxisData.push(value.data_mon);

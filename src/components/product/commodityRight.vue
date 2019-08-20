@@ -235,7 +235,7 @@
                 }
 
                 .productLeft-btn {
-                    width: 28%;
+                    width: 32%;
                     height: 100%;
                     line-height: 26px;
                     text-align: right;
@@ -294,7 +294,7 @@
         align-items: center;
     }
     .commodityR-basetwo{
-        width: 18%;
+        width: 14%;
         float: left;
         display: flex;
         align-items: center;

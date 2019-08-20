@@ -25,3 +25,38 @@ a {
     visibility: hidden;
     clear: both;
 }
+/*!*修改ant Design框架按钮产品专题鼠标经过默认颜色*!*/
+ /*.ant-btn:hover {*/
+    /*color: #FFF !important;*/
+    /*background-color: #268CF7 !important;*/
+    /*border-color: #FFFFFF !important;*/
+/*}*/
+/*!*修改ant Design框架按钮门店专题鼠标经过默认颜色*!*/
+ /*.shopLeft .shop-active .ant-btn:hover {*/
+     /*color: #FFF !important;*/
+     /*background-color: #0090DD !important;*/
+     /*border-color: #008BD6 !important;*/
+ /*}*/
+/*!*修改ant Design框架按钮门店专题鼠标经过默认颜色*!*/
+/*.shopRight .shopRight-title .ant-btn:hover {*/
+    /*color: #FFF !important;*/
+    /*background-color: #E80142 !important;*/
+    /*border-color: #E80142 !important;*/
+/*}*/
+ /*修改ant Design框架按钮默认字体大小*/
+.ant-btn{
+    font-size: 16px !important;
+}
+/*修改二帮卖-订单按钮默认字体大小*/
+.subtitle_list li{
+    font-size: 16px !important;
+}
+/*修改二帮卖-业务员按钮默认字体大小*/
+.manager .conclude .managerCol:nth-child(4) p{
+    width: 96px !important;
+    font-size: 16px !important;
+}
+.manager .compare .managerCol:nth-child(4) p{
+    width: 96px !important;
+    font-size: 16px !important;
+}
