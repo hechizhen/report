@@ -1835,7 +1835,7 @@
                                 //柱状图数据
                                 barData:[
                                     {
-                                        name:'月均销售额(万元)',
+                                        name:'上月销售额(万元)',
                                         data:downLastMonth,
                                         color:'#2D92FC',
                                         barWidth:22,
@@ -2239,7 +2239,7 @@
                         var data=''
                     }
                         // let data = res.data.data.data[0]
-                        console.log(data)
+                        // console.log(data)
                         let SalesMoney = {
                             name: '6个月未销售商品金额(万元)',
                             NoSales:'￥'+!data.mon6_unsale_money ? '--' : _this.dataProcess(data.mon6_unsale_money, 'money','tenth').num
