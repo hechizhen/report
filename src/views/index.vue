@@ -2242,19 +2242,19 @@
                         console.log(data)
                         let SalesMoney = {
                             name: '6个月未销售商品金额(万元)',
-                            NoSales:'￥'+ _this.dataProcess(data.mon6_unsale_money, 'money','tenth').num
+                            NoSales:'￥'+!data.mon6_unsale_money ? '--' : _this.dataProcess(data.mon6_unsale_money, 'money','tenth').num
                         }
                         let SalesSum = {
                             name: '6个月未销售商品数(件)',
-                            NoSales: _this.dataProcess(data.non6_unsale_qty,'day').num
+                            NoSales:!data.non6_unsale_qty ? '--' : _this.dataProcess(data.non6_unsale_qty,'day').num
                         }
                         let Chain = {
                             name: '环比增长:',
-                            inventoryChainVal: _this.dataProcess(data.saledays_mon,'percent').num+_this.dataProcess(data.saledays_mon,'percent').unit
+                            inventoryChainVal:!data.saledays_mon ? '--' : _this.dataProcess(data.saledays_mon,'percent').num+_this.dataProcess(data.saledays_mon,'percent').unit
                         }
                         let Year = {
                             name: '同比增长:',
-                            inventoryChainVal: _this.dataProcess(data.saledays_yoy,'percent').num+_this.dataProcess(data.saledays_yoy,'percent').unit
+                            inventoryChainVal:!data.saledays_yoy ? '--' : _this.dataProcess(data.saledays_yoy,'percent').num+_this.dataProcess(data.saledays_yoy,'percent').unit
                         }
                         //产品动销率树状图
                         let barDataMonth = [
@@ -2336,11 +2336,11 @@
                             ],
                             noSalesbtn:"无交易明细",
                             amountTxt:"库存金额(万元)",
-                            amount: _this.dataProcess(data.money,'money','tenth').num,  //库存金额
+                            amount: !data.money ? '--' :_this.dataProcess(data.money,'money','tenth').num,  //库存金额
                             inventoryNumberTxt:"库存件数(件)",
-                            inventoryNumber:_this.dataProcess(data.qty, 'day').num,  //库存件数
+                            inventoryNumber:!data.qty ? '--' :_this.dataProcess(data.qty, 'day').num,  //库存件数
                             turnoverTxt:"库存周转次数",
-                            turnover:_this.dataProcess(data.turnover_rate, 'day').num+'次',  //库存周转次数
+                            turnover:!data.turnover_rate ? '--' :_this.dataProcess(data.turnover_rate, 'day').num+'次',  //库存周转次数
                         }
                         _this.inventoryDay = {
                             inventorycompare: [  //同比环比数据
@@ -2348,7 +2348,7 @@
                                 Year
                             ],
                             receivableAverage: '库存件数可销天数（天）',
-                            inventoryVal: _this.dataProcess(data.saledays, 'day').num,  //库存件数可销天数
+                            inventoryVal:!data.saledays ? '--' : _this.dataProcess(data.saledays, 'day').num,  //库存件数可销天数
                             inventoryBarData
                         }
                         _this.stockAmount = false
