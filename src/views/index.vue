@@ -1416,25 +1416,31 @@
                     method: 'POST',
                     data: params
                 }).then(function (res) {
+                        //判断产品-商品动销率，商品动销数接口参数是否为空
+                        if(res.data.data.data.length!=0){
+                            var data = res.data.data.data[0]
+                        }else{
+                            var data=''
+                        }
                         //  console.log(res)
-                        let data = res.data.data.data[0]
+                        // let data = res.data.data.data[0]
                         console.log(data)
                         let goodsChainVal = {
                             name: "环比:",
-                            NoSales: _this.dataProcess(data.stock_sale_goods_cnt_mom,'percent').num+_this.dataProcess(data.stock_sale_goods_cnt_mom,'percent').unit
+                            NoSales: !data.stock_sale_goods_cnt_mom ? '--' : _this.dataProcess(data.stock_sale_goods_cnt_mom,'percent').num+_this.dataProcess(data.stock_sale_goods_cnt_mom,'percent').unit
                         }
                         let goodsYearVal = {
                             name: "同比:",
-                            NoSales: _this.dataProcess(data.stock_sale_goods_cnt_yoy,'percent').num+_this.dataProcess(data.stock_sale_goods_cnt_yoy,'percent').unit
+                            NoSales:!data.stock_sale_goods_cnt_yoy ? '--' : _this.dataProcess(data.stock_sale_goods_cnt_yoy,'percent').num+_this.dataProcess(data.stock_sale_goods_cnt_yoy,'percent').unit
                         }
                         let downGoods = {
                             name:"销量增长商品数(个):",
-                            NoSales:data.sales_raise_goods_cnt,
+                            NoSales:!data.sales_raise_goods_cnt ? '--' :data.sales_raise_goods_cnt,
                             btn:"下滑商品"
                         }
                         let upGoods = {
                             name:"销量下滑商品数(个):",
-                            NoSales: data.sales_drop_goods_cnt,
+                            NoSales: !data.sales_drop_goods_cnt ? '--' :data.sales_drop_goods_cnt,
                             btn:"增长商品"
                         }
 
@@ -1448,8 +1454,8 @@
                             commodityname:"总商品数",
                             name:"分销商品数",
                             btn:"商品明细",
-                            RatePin:data.stock_sale_goods_cnt,  //动销商品数
-                            commoditysum:data.goods_cnt,   //总商品数
+                            RatePin:!data.stock_sale_goods_cnt ? '--' :data.stock_sale_goods_cnt,  //动销商品数
+                            commoditysum:!data.goods_cnt ? '--' :data.goods_cnt,   //总商品数
                             productimg: require("../assets/img/shangpinshu.png"),
                         }
                         //产品动销率树状图
@@ -1531,7 +1537,7 @@
                         _this.CommodityTurnoverRate = {
                             productimg:require("../assets/img/dongxiao.png"),
                             name:"商品分销率",
-                            RatePin:_this.dataProcess(data.stock_sale_rate, 'percent').num+_this.dataProcess(data.stock_sale_rate, 'percent').unit, //商品动销率
+                            RatePin:!data.stock_sale_rate ? '--' :_this.dataProcess(data.stock_sale_rate, 'percent').num+_this.dataProcess(data.stock_sale_rate, 'percent').unit, //商品动销率
                             btn:"分销清单",
                             produnarData
                         }
@@ -1713,15 +1719,15 @@
                             let proraiseList = proraiseData.data.data.data
                             console.log(proraiseList)
                             let raisexAxisData = []//增长门店x轴
-                            let raiseLastMonth = []//增长门店当月销售额
-                            let raiseSameMonth = []//增长门店上月销售额
+                            let raiseLastMonth = []//增长门店上月销售额
+                            let raiseSameMonth = []//增长门店当月销售额
                             let raiseDifference = []//增长门店差异销售额
                             proraiseList.map(function(item,index){
                                 item.numberId = index+1
                                 if(index<5) {
                                     raisexAxisData.push(item.goods_name)
-                                    raiseLastMonth.push(item.money)
-                                    raiseSameMonth.push(item.money_lm)
+                                    raiseLastMonth.push(item.money_lm)
+                                    raiseSameMonth.push(item.money)
                                     raiseDifference.push(item.dif_money)
                                 }
                             })
@@ -1739,13 +1745,13 @@
                                 //柱状图数据
                                 barData:[
                                     {
-                                        name:'当月销售额',
+                                        name:'上月销售额',
                                         data:raiseLastMonth,
                                         color:'#2D92FC',
                                         barWidth:22,
                                     },
                                     {
-                                        name:'上月销售额',
+                                        name:'当月销售额',
                                         data:raiseSameMonth,
                                         color:'#FFBD7B',
                                         barWidth:22,
@@ -1767,15 +1773,15 @@
                             //下滑产品数据
                             let downList = prodownData.data.data.data
                             let downxAxisData = []//下滑门店x轴
-                            let downLastMonth = []//下滑门店月平均销售额
+                            let downLastMonth = []//下滑门店上月销售额
                             let downSameMonth = []//下滑门店当月销售额
                             let downDifference = []//下滑门店差异销售额
                             downList.map(function(item,index){
                                 item.numberId = index+1
                                 if(index<5) {
                                     downxAxisData.push(item.goods_name)
-                                    downLastMonth.push(item.money)
-                                    downSameMonth.push(item.money_lm)
+                                    downLastMonth.push(item.money_lm)
+                                    downSameMonth.push(item.money)
                                     downDifference.push(item.dif_money)
                                 }
                             })
@@ -1793,7 +1799,7 @@
                                 //柱状图数据
                                 barData:[
                                     {
-                                        name:'月均销售额(万元)',
+                                        name:'上月销售额(万元)',
                                         data:downLastMonth,
                                         color:'#2D92FC',
                                         barWidth:22,
