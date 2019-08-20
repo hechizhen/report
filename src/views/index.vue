@@ -1451,20 +1451,20 @@
                         console.log(data)
                         let goodsChainVal = {
                             name: "环比:",
-                            NoSales: _this.dataProcess(data.stock_sale_goods_cnt_mom,'percent').num+_this.dataProcess(data.stock_sale_goods_cnt_mom,'percent').unit
+                            NoSales: !data.stock_sale_goods_cnt_mom ? '--' : _this.dataProcess(data.stock_sale_goods_cnt_mom,'percent').num+_this.dataProcess(data.stock_sale_goods_cnt_mom,'percent').unit
                         }
                         let goodsYearVal = {
                             name: "同比:",
-                            NoSales: _this.dataProcess(data.stock_sale_goods_cnt_yoy,'percent').num+_this.dataProcess(data.stock_sale_goods_cnt_yoy,'percent').unit
+                            NoSales: !data.stock_sale_goods_cnt_yoy ? '--' :_this.dataProcess(data.stock_sale_goods_cnt_yoy,'percent').num+_this.dataProcess(data.stock_sale_goods_cnt_yoy,'percent').unit
                         }
                         let downGoods = {
                             name:"销量增长商品数(个):",
-                            NoSales:data.sales_raise_goods_cnt,
+                            NoSales:!data.sales_raise_goods_cnt ? '--' :data.sales_raise_goods_cnt,
                             btn:"下滑商品"
                         }
                         let upGoods = {
                             name:"销量下滑商品数(个):",
-                            NoSales: data.sales_drop_goods_cnt,
+                            NoSales: !data.sales_drop_goods_cnt ? '--' :data.sales_drop_goods_cnt,
                             btn:"增长商品"
                         }
 
@@ -1478,8 +1478,8 @@
                             commodityname:"总商品数",
                             name:"分销商品数",
                             btn:"商品明细",
-                            RatePin:data.stock_sale_goods_cnt,  //动销商品数
-                            commoditysum:data.goods_cnt,   //总商品数
+                            RatePin:!data.stock_sale_goods_cnt ? '--' :data.stock_sale_goods_cnt,  //动销商品数
+                            commoditysum:!data.goods_cnt ? '--' :data.goods_cnt,   //总商品数
                             productimg: require("../assets/img/shangpinshu.png"),
                         }
                         //产品动销率树状图

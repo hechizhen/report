@@ -231,8 +231,7 @@
                     font-weight: 400;
                     color: rgba(255, 255, 255, 1);
                     padding-left: 4%;
-                    display: inline-block;
-                    width: 100%;
+                    white-space: nowrap;
                 }
 
                 .productLeft-btn {
@@ -289,13 +288,13 @@
         color: #fff;
     }
     .commodityR-baseone{
-        width: 58%;
+        width: 54%;
         float: left;
         display: flex;
         align-items: center;
     }
     .commodityR-basetwo{
-        width: 14%;
+        width: 18%;
         float: left;
         display: flex;
         align-items: center;
