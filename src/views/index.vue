@@ -1079,7 +1079,13 @@
                     data: params
                 }).then(function (res) {
                      if(res.data.code == '200'){
-                        var secondBandData = res.data.data.data[0],thatMonth = {},chainratio = {},yearOnYear = {};
+                         //判断二帮卖-订单走势图接口参数是否为空
+                         if(res.data.data.data.length!=0){
+                             var secondBandData = res.data.data.data[0]
+                         }else{
+                             var secondBandData=''
+                         }
+                        var thatMonth = {},chainratio = {},yearOnYear = {};
                         // 当月数据
                         thatMonth.money = !secondBandData.money ? '--' : _this.dataProcess(secondBandData.money, 'money', 'tenth').num;  //本月下单金额
                         if(secondBandData.money){
@@ -1158,13 +1164,14 @@
                     method: 'POST',
                     data: params
                 }).then(function (res) {
+                    console.log(res)
                     //判断二帮卖-订单走势图接口参数是否为空
-                    // if(res.data.data.data.length!=0){
-                    //     var directionData = res.data.data.data[0]
-                    // }else{
-                    //     var directionData=''
-                    // }
-                    var directionData = res.data.data.data[0],monthArr = [],seriesData=[],directionArr = {};
+                    if(res.data.data.data.length!=0){
+                        var directionData = res.data.data.data
+                    }else{
+                        var directionData=''
+                    }
+                    var monthArr = [],seriesData=[],directionArr = {};
                     directionData.map(function(value){
                         monthArr.push(value.data_mon)
                         seriesData.push(value.money)
@@ -1241,12 +1248,12 @@
                     data: params
                 }).then(function (res) {
                     //判断业务员-走势图接口参数是否为空
-                    if(res.data.data.data.length!=0){
-                        var salesmanTrendData = res.data.data.data
-                    }else{
-                        var salesmanTrendData=''
-                    }
-                    var xAxisData=[],salesmanArr=[],seriesData=[],salesmanColor=['#009EE2','#E9A837','#00E2BF','#65E6F5'];
+                    // if(res.data.data.data.length!=0){
+                    //     var salesmanTrendData = res.data.data.data
+                    // }else{
+                    //     var salesmanTrendData=''
+                    // }
+                    var salesmanTrendData = res.data.data.data,xAxisData=[],salesmanArr=[],seriesData=[],salesmanColor=['#009EE2','#E9A837','#00E2BF','#65E6F5'];
                     console.log(salesmanTrendData)
                     salesmanTrendData.map(function(value){
                         if(xAxisData.length==0){
@@ -1308,12 +1315,12 @@
                 }).then(function (res) {
                     if(res.data.code == '200'){
                         //判断业务员-下滑人员接口参数是否为空
-                        if(res.data.data.data.length!=0){
-                            var salesmandownwardData = res.data.data.data
-                        }else{
-                            var salesmandownwardData=''
-                        }
-                        var xAxisData=[],seriesData=[],lastMonth=[],sameMonth=[],difference=[],salesmandownwardObject={},exportData=[];
+                        // if(res.data.data.data.length!=0){
+                        //     var salesmandownwardData = res.data.data.data
+                        // }else{
+                        //     var salesmandownwardData=''
+                        // }
+                        var salesmandownwardData = res.data.data.data,xAxisData=[],seriesData=[],lastMonth=[],sameMonth=[],difference=[],salesmandownwardObject={},exportData=[];
                         salesmandownwardData.map(function(value,index){
                             xAxisData.push(value.emp_name);
                             lastMonth.push(value.money_lm)
@@ -1364,14 +1371,14 @@
                     if(res.data.code == '200'){
 
                         //判断业务员-达成-贡献接口参数是否为空
-                        if(res.data.data.data.length!=0){
-                            var salesmanReachedData = res.data.data.data
-                        }else{
-                            var salesmanReachedData=''
-                        }
+                        // if(res.data.data.data.length!=0){
+                        //     var salesmanReachedData = res.data.data.data
+                        // }else{
+                        //     var salesmanReachedData=''
+                        // }
                         // 达成
                         let targetList = []
-                        var xAxisData=[],seriesData=[],lastMonth=[],sameMonth=[],difference=[],salesmanReachedObject={},contributionseriesData=[],contributionlastMonth=[],contributiondifference = [],salesmanContributionObject={};
+                        var salesmanReachedData = res.data.data.data,xAxisData=[],seriesData=[],lastMonth=[],sameMonth=[],difference=[],salesmanReachedObject={},contributionseriesData=[],contributionlastMonth=[],contributiondifference = [],salesmanContributionObject={};
                         salesmanReachedData.map(function(value,index){
                             xAxisData.push(value.emp_name);
                             lastMonth.push(value.emp_target_money)
