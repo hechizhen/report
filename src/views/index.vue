@@ -1159,12 +1159,12 @@
                     data: params
                 }).then(function (res) {
                     //判断二帮卖-订单走势图接口参数是否为空
-                    if(res.data.data.data.length!=0){
-                        var directionData = res.data.data.data[0]
-                    }else{
-                        var directionData=''
-                    }
-                    var monthArr = [],seriesData=[],directionArr = {};
+                    // if(res.data.data.data.length!=0){
+                    //     var directionData = res.data.data.data[0]
+                    // }else{
+                    //     var directionData=''
+                    // }
+                    var directionData = res.data.data.data[0],monthArr = [],seriesData=[],directionArr = {};
                     directionData.map(function(value){
                         monthArr.push(value.data_mon)
                         seriesData.push(value.money)
