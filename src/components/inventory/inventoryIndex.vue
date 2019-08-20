@@ -356,7 +356,7 @@
         }
     }
     .bartu{
-        margin-top: 3%;
+        margin-top: 23px;
         height:100%;
         background:rgba(255,255,255,1);
         border-radius:10px;
