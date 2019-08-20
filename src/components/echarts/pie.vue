@@ -135,7 +135,13 @@
                             console.log(params)
                             let relVal = params.marker+params.name+':'+_this.dataProcess(params.value,_this.pieEchartsData.unit[0],_this.pieEchartsData.unit[1]).num+_this.dataProcess(params.value,_this.pieEchartsData.unit[0],_this.pieEchartsData.unit[1]).unit+'</br>'
                             return relVal;
-                        }
+                        },
+                        backgroundColor:'#fff',
+                        textStyle:{
+                            color:'#333',
+                            fontSize:14
+                        },
+                        extraCssText: 'box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);'
                     },
                     legend:{
                         show:_this.legendShow,

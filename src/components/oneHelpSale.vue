@@ -13,7 +13,7 @@
                             <div class="oneHelpSaleTopMidSales">
                                 <div>
                                     <p>
-                                        <!-- <i class="iconfont icon-jinqian"></i> -->
+                                        <img :src="imgSrc" class="imgSrc">
                                         <span class="salesTxt">下单金额（万）</span>
                                     </p>
                                     <p>
@@ -68,6 +68,7 @@
         },
         data () {
             return {
+                imgSrc:require('../assets/img/jine-icon.png')
             }
         },
         mounted () {
@@ -213,6 +214,10 @@
                     height:185px;
                     width:100%;
                 }
+            }
+            .imgSrc{
+                width: 16px;
+                margin-bottom: 3px;
             }
         }
     }

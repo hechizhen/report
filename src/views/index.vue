@@ -64,6 +64,7 @@
     import shopIndex from '../components/shop/shopIndex' //门店
     import inventoryIndex from '../components/inventory/inventoryIndex' //库存
     import core from '../components/core.vue'
+    import XLSX from 'xlsx'
     export default {
         name: 'index',
         components: {
@@ -83,7 +84,7 @@
         },
         data() {
             return {
-                dealer_id:'ff80808169c93eb80169d6a73cc02d04',
+                dealer_id:'8a981eb458580fe9015860d7b87c0307',
                 indexDealName: '吴凌云',//经销商名称
                 indexScore: 97,//体检评分
                 indexSummary: '很好',//总结
@@ -1428,12 +1429,12 @@
                         }
                         let downGoods = {
                             name:"销量增长商品数(个):",
-                            NoSales:data.sales_drop_goods_cnt,
+                            NoSales:data.sales_raise_goods_cnt,
                             btn:"下滑商品"
                         }
                         let upGoods = {
                             name:"销量下滑商品数(个):",
-                            NoSales: data.sales_raise_goods_cnt,
+                            NoSales: data.sales_drop_goods_cnt,
                             btn:"增长商品"
                         }
 
@@ -2688,7 +2689,7 @@
                 if(!denominator){
                     tempObj = '--';
                 }else {
-                    tempObj = ((molecule-denominator)/denominator).toFixed(num)+'%';
+                    tempObj = (((molecule-denominator)/denominator)*100).toFixed(num)+'%';
                 }
                 return tempObj
             },

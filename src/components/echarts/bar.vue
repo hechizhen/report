@@ -318,7 +318,13 @@
                                 }
                             }
                             return relVal;
-                        }
+                        },
+                        backgroundColor:'#fff',
+                        textStyle:{
+                            color:'#333',
+                            fontSize:14
+                        },
+                        extraCssText: 'box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);'
                     },
                     legend: {
                         show:_this.legendShow,

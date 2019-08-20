@@ -187,7 +187,13 @@
                                 relVal += params[i].marker+params[i].seriesName+':'+_this.dataProcess(params[i].value,_this.lineEchartsData.unit[0],_this.lineEchartsData.unit[1]).num+_this.dataProcess(params[i].value,_this.lineEchartsData.unit[0],_this.lineEchartsData.unit[1]).unit+'</br>'
                             }
                             return relVal;
-                        }
+                        },
+                        backgroundColor:'#fff',
+                        textStyle:{
+                            color:'#333',
+                            fontSize:14
+                        },
+                        extraCssText: 'box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);'
                     },
                     legend: {
                         show:false,
