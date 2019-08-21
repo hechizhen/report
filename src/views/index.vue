@@ -584,7 +584,7 @@
                                 "pageSize":100,
                                 "groupByCol":["bo1_name","bo2_name"],
                                 "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
-                                "serviceId":"service_tjbg02_sales_order_dtl"
+                                "serviceId":"service_tjbg02_goods_sales_dtl"
                             },
                             header:[
                                 {txt:'序号',unit:false},
@@ -611,7 +611,7 @@
                                 "pageSize":100,
                                "groupByCol":["bo1_name","bo2_name","bo3_name"],
                                 "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
-                            "serviceId":"service_tjbg02_sales_order_dtl"
+                            "serviceId":"service_tjbg02_goods_sales_dtl"
                         },
                         header:[
                             {txt:'序号',unit:false},
@@ -639,7 +639,7 @@
                                 "pageSize":100,
                                 "groupByCol":["bo1_name","bo2_name","bo3_name","goods_name"],
                                 "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
-                                "serviceId":"service_tjbg02_sales_order_dtl"
+                                "serviceId":"service_tjbg02_goods_sales_dtl"
                             },
                             header:[
                                 {txt:'序号',unit:false},
@@ -668,7 +668,7 @@
                                 "pageSize":100,
                                 "groupByCol":["bo1_name"],
                                 "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
-                                "serviceId":"service_tjbg02_sales_order_dtl"
+                                "serviceId":"service_tjbg02_goods_sales_dtl"
                             },
                             header:[
                                 {txt:'序号',unit:false},
@@ -2561,7 +2561,7 @@
                     if(res.data.data.data.length!=0){
                         var data = res.data.data.data[0]
                     }else{
-                        var data=''
+                        var data= ''
                     }
                      _this.stockScoreParams={
                         "moduleName":"库存",
@@ -2613,19 +2613,19 @@
                         // console.log(data)
                         let SalesMoney = {
                             name: '6个月未销售商品金额(万元)',
-                            NoSales:'￥'+!data.mon6_unsale_money ? '--' : _this.dataProcess(data.mon6_unsale_money, 'money','tenth').num
+                            NoSales:'￥'+ _this.dataProcess(data.mon6_unsale_money, 'money','tenth').num
                         }
                         let SalesSum = {
                             name: '6个月未销售商品数(件)',
-                            NoSales:!data.non6_unsale_qty ? '--' : _this.dataProcess(data.non6_unsale_qty,'day').num
+                            NoSales: _this.dataProcess(data.non6_unsale_qty,'day').num
                         }
                         let Chain = {
                             name: '环比增长:',
-                            inventoryChainVal:!data.saledays_mon ? '--' : _this.dataProcess(data.saledays_mon,'percent').num+_this.dataProcess(data.saledays_mon,'percent').unit
+                            inventoryChainVal:_this.dataProcess(data.saledays_mon,'percent').num+_this.dataProcess(data.saledays_mon,'percent').unit
                         }
                         let Year = {
                             name: '同比增长:',
-                            inventoryChainVal:!data.saledays_yoy ? '--' : _this.dataProcess(data.saledays_yoy,'percent').num+_this.dataProcess(data.saledays_yoy,'percent').unit
+                            inventoryChainVal:_this.dataProcess(data.saledays_yoy,'percent').num+_this.dataProcess(data.saledays_yoy,'percent').unit
                         }
                         //产品动销率树状图
                         let barDataMonth = [
@@ -3145,7 +3145,7 @@
                         "pageSize":1000,
                         "groupByCol":["bo1_name"],
                         "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
-                        "serviceId":"service_tjbg02_sales_order_dtl"
+                        "serviceId":"service_tjbg02_goods_sales_dtl"
                     },
                     header:[
                         {txt:'序号',unit:false},
