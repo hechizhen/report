@@ -493,7 +493,7 @@ export default{
       }else if(oldVal<newVal){
         var stockDayRate = 50 - (newVal-oldVal)
       }
-      let average = this.sum(list)/valArray.length 
+      let average = this.sum(list)/valArray.length
       let average1 = this.sum(list1)/valArray1.length
       let score =  (Number(average)+Number(average1)+Number(stockRate))/3
       return score.toFixed(1)
@@ -549,13 +549,13 @@ export default{
   Vue.prototype.getHalfYearDate = function () {
     let now = new Date(), arr = []
     // 获取当前的时间
-    let nowMonth = now.getFullYear()+ '' + ((now.getMonth() + 1) < 10 ? '0' + (now.getMonth() + 1) : (now.getMonth() + 1))  
+    let nowMonth = now.getFullYear()+ '' + ((now.getMonth() + 1) < 10 ? '0' + (now.getMonth() + 1) : (now.getMonth() + 1))
     // 获取6个月前的时间
     now.setMonth(now.getMonth()-4)
     let thisMonth = now.getMonth() ==0 ? 12:now.getMonth()
     thisMonth = (thisMonth<10) ? "0"+thisMonth:thisMonth
-    let thisYear = now.getMonth() == 0 ? now.getFullYear() -1 : now.getFullYear() 
-    let agoMonth = thisYear + '' + thisMonth 
+    let thisYear = now.getMonth() == 0 ? now.getFullYear() -1 : now.getFullYear()
+    let agoMonth = thisYear + '' + thisMonth
     arr.push(agoMonth)
     arr.push(nowMonth)
     return arr
@@ -564,13 +564,13 @@ export default{
   Vue.prototype.getLocalYear = function() {
     let now = new Date(), arr = []
     // 获取当前的时间
-    let nowMonth = now.getFullYear()+ '' + ((now.getMonth() ) < 10 ? '0' + (now.getMonth()) : (now.getMonth()))  
+    let nowMonth = now.getFullYear()+ '' + ((now.getMonth() ) < 10 ? '0' + (now.getMonth()) : (now.getMonth()))
     // 获取6个月前的时间
     now.setMonth(now.getMonth()-5)
     let thisMonth = now.getMonth() ==0 ? 12:now.getMonth()
     thisMonth = (thisMonth<10) ? "0"+thisMonth:thisMonth
-    let thisYear = now.getMonth() == 0 ? now.getFullYear() -1 : now.getFullYear() 
-    let agoMonth = thisYear + '' + thisMonth 
+    let thisYear = now.getMonth() == 0 ? now.getFullYear() -1 : now.getFullYear()
+    let agoMonth = thisYear + '' + thisMonth
     arr.push(agoMonth)
     arr.push(nowMonth)
     return arr
@@ -644,7 +644,7 @@ export default{
             })
          }
      });
-    
+
     return multiTableData(resultArray,tableTitleColNum,colIndexArray);;
   };
 //转换成表格数据
@@ -689,7 +689,7 @@ export default{
         export_json_to_excel(tHeader, data, tableName);
     })
   }
-  Vue.prototype.formatJson = function(filterVal, jsonData) {
+   Vue.prototype.formatJson = function(filterVal, jsonData) {
       return jsonData.map(v => filterVal.map(j => v[j]))
   }
 }};
@@ -714,7 +714,7 @@ var multiTableData = function(handlerArray,tableTitleColNum,colIndexArray){
              if(item[1].length>0)
              {
                 item[1].map(function(subItem){
-                     
+
                     selectArray.map(function(thirdItem,thirdIndex){
                         indexNumber += 1;
                         jsonObj["colNumber"+indexNumber] = subItem[thirdItem];
@@ -722,9 +722,9 @@ var multiTableData = function(handlerArray,tableTitleColNum,colIndexArray){
                     });
                 });
              }
-             
-              
-             resultArray.push(jsonObj);     
+
+
+             resultArray.push(jsonObj);
 
        });
        handlerArray[0][1].map(function(tableitem){
@@ -770,3 +770,7 @@ var dataHandler  = function(handlerData,filterIndex){
   });
   return tempArray;
 };
+
+var redColor = function () {
+
+}

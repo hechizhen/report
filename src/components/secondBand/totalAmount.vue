@@ -7,28 +7,28 @@
 			</div>
 			<div class="record">
 				<p><img src="./../../assets/img/dkw_jine.png">下单总金额{{displayData.name}}</p>
-				<p>{{displayData.moneymonthly}}</p>
+				<p :class="displayData.classNameMoney">{{displayData.moneymonthly}}</p>
 			</div>
 			<a-Row class="proportion">
 				<a-Col :span="12" class="proportionitmes">
 				  	<div class="proportiondiv">
 				  		<p><img src="./../../assets/img/jine.png">毛利额{{displayData.name}}</p>
-				  		<p>{{displayData.grossmoneymonthly}}</p>
+				  		<p :class="displayData.classNamegross">{{displayData.grossmoneymonthly}}</p>
 				  	</div>
 				</a-Col>
 				<a-Col :span="12" class="proportionitmes">
 				  	<div class="proportiondiv">
 				  		<p><img src="./../../assets/img/maol-icon-2.png">毛利率{{displayData.name}}</p>
-				  		<p>{{displayData.rossmoneyratemonthly}}</p>
+				  		<p :class="displayData.classNameRoss">{{displayData.rossmoneyratemonthly}}</p>
 				  	</div>
 				</a-Col>
 			</a-Row>
 			<div class="brand">
 				<div class="brandtitle">下单{{displayData.name}}</div>
 				<ul class="cleatfix">
-					<li v-for="(item,index) in displayData.list" :key="index">
+					<li v-for="(item,index) in displayData.list" :key="index" >
 						<div>{{item.name}}</div>
-						<div>{{item.value}}</div>
+						<div :class="item.className">{{item.value}}</div>
 					</li>
 				</ul>
 			</div>

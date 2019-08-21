@@ -60,3 +60,7 @@ a {
     width: 96px !important;
     font-size: 16px !important;
 }
+
+.colorStyle{
+    color: rgba(255, 0, 72, 1) !important;
+}

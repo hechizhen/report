@@ -1332,26 +1332,43 @@
                         // 环比数据
                         chainratio.name = '环比';
                         chainratio.moneymonthly = _this.getHandle(secondBandData.money,secondBandData.money_lm,2);   //金额环比
-                        chainratio.grossmoneymonthly = _this.dataProcess(secondBandData.gross_money_mom, 'percent').num+'%'; //毛利额环比
-                        chainratio.rossmoneyratemonthly = _this.dataProcess(secondBandData.gross_money_rate_mom, 'percent').num+'%'; //毛利率环比
+                        chainratio.grossmoneymonthly = _this.dataProcess(secondBandData.gross_money_mom, 'percent').num + _this.dataProcess(secondBandData.gross_money_mom, 'percent').unit; //毛利额环比
+                        chainratio.rossmoneyratemonthly = _this.dataProcess(secondBandData.gross_money_rate_mom, 'percent').num+_this.dataProcess(secondBandData.gross_money_rate_mom, 'percent').unit;//毛利率环比
                         chainratio.list = [{name:'立白',value:_this.getHandle(secondBandData.liby_money,secondBandData.liby_money_lm,2)},
                             {name:'好爸爸',value: _this.getHandle(secondBandData.kispa_money,secondBandData.kispa_money_lm,2)},
                             {name:'超威',value: _this.getHandle(secondBandData.cheerwin_money,secondBandData.cheerwin_money_lm,2)},
                             {name:'口腔',value: _this.getHandle(secondBandData.oral_money,secondBandData.oral_money_lm,2)},
                             {name:'晟美',value: _this.getHandle(secondBandData.shengmei_money,secondBandData.shengmei_money_lm,2)},
                             {name:'其他',value: _this.getHandle(secondBandData.other_money,secondBandData.other_money_lm,2)}]
+                            chainratio.classNameMoney = chainratio.moneymonthly.indexOf('-')!=-1 && chainratio.moneymonthly!="--" ?  'colorStyle' : ''
+                            chainratio.classNamegross = chainratio.grossmoneymonthly.indexOf('-')!=-1 && chainratio.grossmoneymonthly!="--" ?  'colorStyle' : ''
+                            chainratio.classNameRoss = chainratio.rossmoneyratemonthly.indexOf('-')!=-1 && chainratio.rossmoneyratemonthly!="--" ?   'colorStyle' : ''
+                             chainratio.list.map(function(item){
+                                 if(item.value.indexOf('-')!=-1 && item.value!="--"){
+                                     item.className = 'colorStyle'
+                                 }
+                             })
                         // 同比数据
                         yearOnYear.name = '同比';
                         yearOnYear.moneymonthly = _this.getHandle(secondBandData.money,secondBandData.money_ly,2); //金额同比
-                        yearOnYear.grossmoneymonthly =  _this.dataProcess(secondBandData.gross_money_yoy, 'percent').num+'%';  //毛利额同比
-                        yearOnYear.rossmoneyratemonthly = _this.dataProcess(secondBandData.gross_money_rate_yoy, 'percent').num+'%'; //毛利率同比
+                        yearOnYear.grossmoneymonthly =  _this.dataProcess(secondBandData.gross_money_yoy, 'percent').num + _this.dataProcess(secondBandData.gross_money_yoy, 'percent').unit;  //毛利额同比
+                        yearOnYear.rossmoneyratemonthly = _this.dataProcess(secondBandData.gross_money_rate_yoy, 'percent').num + _this.dataProcess(secondBandData.gross_money_rate_yoy, 'percent').unit; //毛利率同比
                         yearOnYear.list = [{name:'立白',value:_this.getHandle(secondBandData.liby_money,secondBandData.liby_money_ly,2)},
                             {name:'好爸爸',value: _this.getHandle(secondBandData.kispa_money,secondBandData.kispa_money_ly,2)},
                             {name:'超威',value: _this.getHandle(secondBandData.cheerwin_money,secondBandData.cheerwin_money_ly,2)},
                             {name:'口腔',value: _this.getHandle(secondBandData.oral_money,secondBandData.oral_money_ly,2)},
                             {name:'晟美',value: _this.getHandle(secondBandData.shengmei_money,secondBandData.shengmei_money_ly,2)},
                             {name:'其他',value: _this.getHandle(secondBandData.other_money,secondBandData.other_money_ly,2)}]
+                         yearOnYear.classNameMoney = yearOnYear.moneymonthly.indexOf('-')!=-1 && yearOnYear.moneymonthly!="--" ?  'colorStyle' : ''
+                         yearOnYear.classNamegross = yearOnYear.grossmoneymonthly.indexOf('-')!=-1 && yearOnYear.grossmoneymonthly!="--" ?  'colorStyle' : ''
+                         yearOnYear.classNameRoss = yearOnYear.rossmoneyratemonthly.indexOf('-')!=-1 && yearOnYear.rossmoneyratemonthly!="--"  ?  'colorStyle' : ''
+                         yearOnYear.list.map(function(item){
+                             if(item.value.indexOf('-')!=-1 && item.value!="--"){
+                                 item.className = 'colorStyle'
+                             }
+                         })
                         _this.orderAmountData = {thatMonth:thatMonth,chainratio:chainratio,yearOnYear:yearOnYear}
+                        console.log( _this.orderAmountData)
                         _this.orderScoreParams={
                             "moduleName":"订单",
                             "kpi_values":[
@@ -1806,11 +1823,13 @@
                         console.log(data)
                         let goodsChainVal = {
                             name: "环比:",
-                            NoSales: !data.stock_sale_goods_cnt_mom ? '--' : _this.dataProcess(data.stock_sale_goods_cnt_mom,'percent').num+_this.dataProcess(data.stock_sale_goods_cnt_mom,'percent').unit
+                            NoSales: !data.stock_sale_goods_cnt_mom ? '--' : _this.dataProcess(data.stock_sale_goods_cnt_mom,'percent').num+_this.dataProcess(data.stock_sale_goods_cnt_mom,'percent').unit,
+                            classNameNoSales:data.stock_sale_goods_cnt_mom < 0 ? 'colorStyle' : '',
                         }
                         let goodsYearVal = {
                             name: "同比:",
-                            NoSales: !data.stock_sale_goods_cnt_yoy ? '--' :_this.dataProcess(data.stock_sale_goods_cnt_yoy,'percent').num+_this.dataProcess(data.stock_sale_goods_cnt_yoy,'percent').unit
+                            NoSales: !data.stock_sale_goods_cnt_yoy ? '--' :_this.dataProcess(data.stock_sale_goods_cnt_yoy,'percent').num+_this.dataProcess(data.stock_sale_goods_cnt_yoy,'percent').unit,
+                            classNameNoSales:data.stock_sale_goods_cnt_yoy < 0 ? 'colorStyle' : '',
                         }
                         let downGoods = {
                             name:"销量增长商品数(个):",
@@ -1826,7 +1845,8 @@
                         _this.commoditydata = {
                             commoditytitle:[  //环比同比数据
                                 goodsChainVal,
-                                goodsYearVal
+                                goodsYearVal,
+
                             ],
                             downGoods,  //销量增长商品数
                             upGoods,   //销量下滑商品数
@@ -2358,11 +2378,13 @@
                     // let data = res.data.data.data[0]
                     let AmountChainVal = {
                         name: "环比: ",
-                        NoSales: _this.dataProcess(data.active_store_cnt_mom, 'percent').num + _this.dataProcess(data.active_store_cnt_mom, 'percent').unit
+                        NoSales: _this.dataProcess(data.active_store_cnt_mom, 'percent').num + _this.dataProcess(data.active_store_cnt_mom, 'percent').unit,
+                        classNameNoSales:data.active_store_cnt_mom<0 ? 'colorStyle' : '',
                     }
                     let AmountYearVal = {
                         name: "同比: ",
-                        NoSales: _this.dataProcess(data.active_store_cnt_yoy, 'percent').num + _this.dataProcess(data.active_store_cnt_yoy, 'percent').unit
+                        NoSales: _this.dataProcess(data.active_store_cnt_yoy, 'percent').num + _this.dataProcess(data.active_store_cnt_yoy, 'percent').unit,
+                        classNameNoSales:data.active_store_cnt_yoy<0 ? 'colorStyle' : '',
                     }
                     let downSales = {
                         name:"销量下滑门店数(家):",

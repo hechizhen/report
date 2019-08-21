@@ -17,7 +17,7 @@
                 <div class="commodityR-title"  >
                     <div class="commodityR-title1" v-for="(item,index) in commoditydata.commoditytitle" :key="index">
                         <span>{{item.name}}</span>
-                        <p>{{item.NoSales}}</p>
+                        <p :class="item.classNameNoSales">{{item.NoSales}}</p>
                     </div>
                 </div>
                 <div class="commodityR-base">
@@ -122,7 +122,7 @@
             publicTable
         },
         mounted() {
-            console.log(this.tableData)
+            console.log(this.commoditydata)
         }
     }
 </script>
