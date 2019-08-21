@@ -1585,7 +1585,6 @@
                     data: params
                 }).then(function (res) {
                     if(res.data.code == '200'){
-
                         //判断业务员-达成-贡献接口参数是否为空
                         // if(res.data.data.data.length!=0){
                         //     var salesmanReachedData = res.data.data.data
@@ -1597,8 +1596,8 @@
                         var salesmanReachedData = res.data.data.data,xAxisData=[],seriesData=[],lastMonth=[],sameMonth=[],difference=[],salesmanReachedObject={},contributionseriesData=[],contributionlastMonth=[],contributiondifference = [],salesmanContributionObject={};
                         salesmanReachedData.map(function(value,index){
                             xAxisData.push(value.emp_name);
-                            lastMonth.push(value.emp_target_money)
-                            sameMonth.push(value.emp_money)
+                            lastMonth.push(value.emp_money)
+                            sameMonth.push(value.emp_target_money)
                             difference.push(value.emp_rate)
                             contributionlastMonth.push(value.dealer_money)
                             contributiondifference.push(value.emp_money_rate)
