@@ -75,7 +75,7 @@
 <style lang="less" scoped>
 	.thendChart {
 		margin-top:24px;
-		height: 260px;
+		height: 296px;
 		width: 100%;
 		padding: 5px;
 		.echarts {

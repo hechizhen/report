@@ -148,7 +148,7 @@
                         display: contents;
                     }
                     p{
-                        color:rgba(255, 0, 72, 1);
+                        color:#98A2B4;
                         margin-bottom: 0;
                         display: inline-block;
                         font-size: 14px;

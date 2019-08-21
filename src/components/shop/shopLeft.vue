@@ -183,7 +183,8 @@
                 color:rgba(51, 51, 51, 1);
             }
             p{
-                color:rgba(255, 0, 72, 1);
+                /*color:rgba(255, 0, 72, 1);*/
+                color:rgba(51, 51, 51, 1);
                 margin-bottom: 0;
                 display: inline-block;
             }
