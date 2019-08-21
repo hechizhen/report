@@ -64,7 +64,7 @@
             <trendChart  :lineEchartsData="marketableDayChart" v-if="marketableDayChart != ''"></trendChart>
             <loading-data :isShow="marketableDayLine"></loading-data>
         </div>
-    <core :coretype="'库存得分'" :coretext="87" :evaluate="'较好'"></core>
+    <core :coretype="'库存得分'" :coretext="coreData.coretext" :evaluate="'较好'"></core>
     </div>
 </template>
 
@@ -113,6 +113,10 @@
             },
             stockDetailHandleClick:{ //点击库存详情
                 type:Function
+            },
+            //评分
+            coreData:{
+                type:Object
             }
         },
         components:{

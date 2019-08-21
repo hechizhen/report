@@ -15,7 +15,7 @@
             <shopRight :ActiveDetail="StoresDetailed.ActiveDetail" :tableData="tableData.addStoreDetail" :dealTableData="tableData.noDealDetail"></shopRight>
         </div>
     </div>
-    <core :coretype="'门店得分'" :coretext="87" :evaluate="'较好'"></core>
+    <core :coretype="'门店得分'" :coretext="coreData.coretext" :evaluate="'较好'"></core>
     <shopChartUp v-if="upShow" :trendChartClick="upClick" :barEchartsData="upStoresData" :isShow="upStoresBar" :raiseExportData="exportData.raiseData"></shopChartUp>
     <shopChartrDown v-if="downShow" :trendChartClick="downClick"  :barEchartsData="downStoresData" :isShow="downStoresBar" :downExportData="exportData.downData"></shopChartrDown>
     <loading-data :isShow="isShow"></loading-data>
@@ -57,6 +57,10 @@
             exportData:{   //导出表格函数
                 type:Object
             },
+            //评分
+            coreData:{
+                type:Object
+            }
         },
         data(){
             return{

@@ -17,13 +17,14 @@
         <secondBand :orderAmountData="orderAmountData" :directionLineData="directionData" :towHelYoy="towHelYoy" :towHelProportion="towHelProportion"
                     :towHelpSaleMonthShow="towHelpSaleMonthShow" :towHelpSaleMonthLineShow="towHelpSaleMonthLineShow" :orderDetailClick="orderDetailHandleClick"
                     :tableData="twoDetailTableData.gettwoListing"  v-if="orderAmountData!='' && Object.keys(directionData).length!=0"  :selectButtonClick="twoDetaSelectButtonClick"
-
+                    :coreData="orderScoreList"
         ></secondBand>
         <!-- 二帮卖分析-业务员 -->
         <salesman :salesmanData="salesmanData" :salesmanTrendData="salesmanTrendData" :salesmandownwardData="salesmandownwardData"
                   :salesmanReachedData="salesmanReachedData" :salesmanContributionData="salesmanContributionData" :isShow="salesmanReached"
                   :salesmanReachedBar="salesmanReachedBar" :salesmanContributionBar="salesmanContributionBar" :salesmandownwardBar="salesmandownwardBar"
                   :salesmanTrendPie="salesmanTrendPie" :ownwardExportData="ownwardExportData" :reachContributionData="reachContributionData"
+                  :coreData="personScoreList"
                   v-if="reachContributionData!='' && salesmanTrendData!=''"></salesman>
         <!-- 商品 -->
         <productIndex :CommodityTurnoverRate="CommodityTurnoverRate"  :commoditydata="commoditydata" :indexStoreHandleClick="indexStoreHandleClick"
@@ -32,17 +33,20 @@
                       :NumberGoodsPie="NumberGoodsPie" :NumberGoodsList="NumberGoodsList" v-if="CommodityTurnoverRate.length!=0"
                       :tableData="getPinListing"  :exportData="ProExportData"  :productTableData="productTableData"
                       :detailExport="exportDetailData"  :selectButtonClick="proDetaSelectButtonClick"  :proListDetaSelectButtonClick="proListDetaSelectButtonClick"
+                      :coreData="productScoreList"
         ></productIndex>
         <!--门店-->
         <shopIndex  :StoresDetailed="StoresDetailed" v-if="StoresDetailed.length!=0 && storeDetailTableData!='' && upStoresData!=''"  :isShow="StoreisShow"
                     :upStoresData="upStoresData"  :downStoresData="downStoresData"  :downStoresBar="downStoresBar"   :upStoresBar="upStoresBar"
                     :tableData="storeDetailTableData" :exportData="storeExportData"
+                    :coreData="storeScoreList"
         ></shopIndex>
          <!--库存-->
         <inventoryIndex  :inventoryDay="inventoryDay" :inventoryDetails="inventoryDetails" :marketableDayChart="marketableDayChart" :stockDetailHandleClick="indexStockDetailHandleClick"
                          :DaysAvailableStock="DaysAvailableStock" :InventoryTurnover="InventoryTurnover" :stockAmount="stockAmount"
                          :marketableDayLine="marketableDayLine"   v-if="inventoryDay.length!=0 && Object.keys(marketableDayChart).length!=0"
                          :getPinListing="invDetailTableData.getPinListing"  :getInvDayListing="invDetailTableData.getInvDayListing" :selectButtonClick="invDetaSelectButtonClick"
+                         :coreData="stockScoreList"
         > </inventoryIndex>
         <!-- 财务 -->
         <finance :financeData="financeData" :receivableData="receivableData" :overDueData="overDueData" :titleName="financeTitle"
@@ -128,6 +132,31 @@
                 yearBarData: '',//本月/累计销量以及达成率
                 oneHelpSaleScoreList: {//一帮卖评分
                     coretype: '一帮卖得分',
+                    coretext: '',
+                    evaluate: ''
+                },
+                orderScoreList: {//二帮卖订单评分
+                    coretype: '订单得分',
+                    coretext: '',
+                    evaluate: ''
+                },
+                personScoreList: {//二帮卖业务员评分
+                    coretype: '人员得分',
+                    coretext: '',
+                    evaluate: ''
+                },
+                productScoreList: {//二帮卖商品评分
+                    coretype: '商品得分', 
+                    coretext: '',
+                    evaluate: ''
+                },
+                storeScoreList: {//二帮卖门店评分
+                    coretype: '门店得分',
+                    coretext: '',
+                    evaluate: ''
+                },
+                stockScoreList: {//二帮卖库存评分
+                    coretype: '库存得分',
                     coretext: '',
                     evaluate: ''
                 },
@@ -221,6 +250,7 @@
                 exportDetailData:'',
                 //达成贡献导出数据
                 reachContributionData:'',
+                //经销商列表
                 dealList:[
                     {id:'ff80808169c93eb80169d6a73cc02d04',name:'黄梅县林峰日化经营部'},
                     {id:'8a981eb458580fe9015860d7b87c0307',name:'立白生产环境测试库'},
@@ -233,7 +263,20 @@
                     {id:'ff8080816a194910016a43acc36938b8',name:'徐州信如商贸有限公司【沛县】'},
                     {id:'ff8080816a194910016a43b00eeb3a75',name:'芜湖市明坤日用百货贸易有限公司'},
                 ],
-                // xlsxAddress:require(),
+                //评分接口
+                scoreRequestUrl:'http://dccuat.liby.com.cn/tjbg-manage/gradeConfig/queryModuleScore',
+                //一帮卖评分参数
+                oneScoreParams:'',
+                //订单评分参数
+                orderScoreParams:'',
+                //人员评分参数
+                personScoreParams:'',
+                //商品评分参数
+                productScoreParams:'',
+                //门店评分参数
+                storeScoreParams:'',
+                //库存评分参数
+                stockScoreParams:'',
             }
         },
         created() {
@@ -953,16 +996,94 @@
                             isShowMax:true,
                         }
                         let score = _this.scoreProcess(barDataYear,barDataMonth)
-                        _this.oneHelpSaleScoreList={//一帮卖评分
-                            coretype: '一帮卖得分',
-                            coretext: score,
-                            evaluate: '优秀'
+                        //一帮卖评分接口参数
+                        _this.oneScoreParams = {
+                            "moduleName":"一帮卖",
+                            "kpi_values":[
+                                {
+                                    "kpi_name":"月立白达成率",
+                                    "kpi_value":_this.getReachPercent(salesMonthData.liby_money,salesMonthData.liby_target_money)*100
+                                },
+                                {
+                                    "kpi_name":"月达成率",
+                                    "kpi_value":_this.getReachPercent(salesMonthData.money,salesMonthData.target_money)*100
+                                },
+                                {
+                                    "kpi_name":"月超威达成率",
+                                    "kpi_value":_this.getReachPercent(salesMonthData.cheerwin_money,salesMonthData.cheerwin_target_money)*100
+                                },
+                                {
+                                    "kpi_name":"月好爸爸达成率",
+                                    "kpi_value":_this.getReachPercent(salesMonthData.kispa_money,salesMonthData.kispa_target_money)*100
+                                },
+                                {
+                                    "kpi_name":"月口腔达成率",
+                                    "kpi_value":_this.getReachPercent(salesMonthData.oral_money,salesMonthData.oral_target_money)*100
+                                },
+                                {
+                                    "kpi_name":"月晟美达成率",
+                                    "kpi_value":_this.getReachPercent(salesMonthData.shengmei_money,salesMonthData.shengmei_target_money)*100
+                                },
+                                {
+                                    "kpi_name":"月战略达成率",
+                                    "kpi_value":_this.getReachPercent(salesMonthData.strategic_money,salesMonthData.strategic_target_money)*100
+                                },
+                                {
+                                    "kpi_name":"年立白达成率",
+                                    "kpi_value":_this.getReachPercent(salesYearData.liby_money,salesYearData.liby_target_money)*100
+                                },
+                                {
+                                    "kpi_name":"年达成率",
+                                    "kpi_value":_this.getReachPercent(salesYearData.money,salesYearData.target_money)*100
+                                },
+                                {
+                                    "kpi_name":"年超威达成率",
+                                    "kpi_value":_this.getReachPercent(salesYearData.cheerwin_money,salesYearData.cheerwin_target_money)*100
+                                },
+                                {
+                                    "kpi_name":"年好爸爸达成率",
+                                    "kpi_value":_this.getReachPercent(salesYearData.kispa_money,salesYearData.kispa_target_money)*100
+                                },
+                                {
+                                    "kpi_name":"年口腔达成率",
+                                    "kpi_value":_this.getReachPercent(salesYearData.oral_money,salesYearData.oral_target_money)*100
+                                },
+                                {
+                                    "kpi_name":"年晟美达成率",
+                                    "kpi_value":_this.getReachPercent(salesYearData.shengmei_money,salesYearData.shengmei_target_money)*100
+                                },
+                                {
+                                    "kpi_name":"年战略达成率",
+                                    "kpi_value":_this.getReachPercent(salesYearData.strategic_money,salesYearData.strategic_target_money)*100
+                                }
+                            ]
                         }
+                        //一帮卖评分方法
+                        _this.getOneHelpSaleScoreData()
                         //隐藏laoding状态
                         _this.oneHelpSaleMonthShow = false
                         _this.oneHelpSaleYearShow = false
                     }
                 ));
+            },
+            //一帮卖分析-评分
+            getOneHelpSaleScoreData(){
+                var _this = this
+                this.$http({
+                    url: _this.scoreRequestUrl + '?v=oneScore',
+                    method: 'POST',
+                    data: _this.oneScoreParams
+                }).then(function (res) {
+                    console.log(res)
+                    if(res.data.code=='200'){
+                        let score = res.data.data.toFixed(1)
+                        _this.oneHelpSaleScoreList={//一帮卖评分
+                            coretype: '一帮卖得分',
+                            coretext: score,
+                            evaluate: '优秀'
+                        }
+                    }
+                })
             },
             //财务模块概览本数据
             getFinanceOverviewData() {
@@ -1046,6 +1167,24 @@
                 }).then(function (res) {
                     if(res.data.code == '200'){
                         var salesmanData = res.data.data.data[0];
+                        _this.personScoreParams={
+                            "moduleName":"业务员",
+                            "kpi_values":[
+                                {
+                                    "kpi_name":"业务员达成",
+                                    "kpi_value":salesmanData.emp_rate==null ? 0 : Number((salesmanData.emp_rate*100).toFixed(2))
+                                },
+                                {
+                                    "kpi_name":"人均产出",
+                                    "kpi_value":salesmanData.emp_avg_money==null ? 0 : salesmanData.emp_avg_money
+                                },
+                                {
+                                    "kpi_name":"业绩下滑人数占比",
+                                    "kpi_value":_this.getReachPercent(salesmanData.emp_drop_cnt,salesmanData.emp_cnt)*100
+                                },
+                            ]
+                        }
+                        _this.getTwoPersonScoreData()
                         salesmanData.emp_rate = !salesmanData.emp_rate ? '--' : _this.dataProcess(salesmanData.emp_rate, 'percent', 1).num + '%'; //业务员达成
                         salesmanData.emp_cnt = !salesmanData.emp_cnt ? '--' : _this.dataProcess(salesmanData.emp_cnt, 'day').num;   //业务员人数
                         salesmanData.emp_avg_money = !salesmanData.emp_avg_money ? '--' : _this.dataProcess(salesmanData.emp_avg_money, 'money','tenth').num;  //人均产出
@@ -1053,6 +1192,25 @@
                         salesmanData.all_cnt = !salesmanData.all_cnt ? '--' : _this.dataProcess(salesmanData.all_cnt, 'day').num;  //下滑人数
                         _this.salesmanData = salesmanData;
                         _this.salesmanReached = false
+                    }
+                })
+            },
+            //二帮卖分析-人员
+            getTwoPersonScoreData(){
+                var _this = this
+                this.$http({
+                    url: _this.scoreRequestUrl + '?v=personScore',
+                    method: 'POST',
+                    data: _this.personScoreParams
+                }).then(function (res) {
+                    console.log(res)
+                    if(res.data.code=='200'){
+                        let score = res.data.data.toFixed(1)
+                        _this.personScoreList={//一帮卖评分
+                            coretype: '一帮卖得分',
+                            coretext: score,
+                            evaluate: '优秀'
+                        }
                     }
                 })
             },
@@ -1136,11 +1294,68 @@
                             {name:'晟美',value: _this.getHandle(secondBandData.shengmei_money,secondBandData.shengmei_money_ly,2)},
                             {name:'其他',value: _this.getHandle(secondBandData.other_money,secondBandData.other_money_ly,2)}]
                         _this.orderAmountData = {thatMonth:thatMonth,chainratio:chainratio,yearOnYear:yearOnYear}
+                        _this.orderScoreParams={
+                            "moduleName":"订单",
+                            "kpi_values":[
+                                {
+                                    "kpi_name":"下单环比",
+                                    "kpi_value":_this.getHandleComputed(secondBandData.money,secondBandData.money_lm)
+                                },
+                                {
+                                    "kpi_name":"立白下单环比",
+                                    "kpi_value":_this.getHandleComputed(secondBandData.liby_money,secondBandData.liby_money_lm)*100
+                                },
+                                {
+                                    "kpi_name":"好爸爸下单环比",
+                                    "kpi_value":_this.getHandleComputed(secondBandData.kispa_money,secondBandData.kispa_money_lm)*100
+                                },
+                                {
+                                    "kpi_name":"超威下单环比",
+                                    "kpi_value":_this.getHandleComputed(secondBandData.cheerwin_money,secondBandData.cheerwin_money_lm)*100
+                                },
+                                {
+                                    "kpi_name":"口腔下单环比",
+                                    "kpi_value":_this.getHandleComputed(secondBandData.oral_money,secondBandData.oral_money_lm)*100
+                                },
+                                {
+                                    "kpi_name":"晟美下单环比",
+                                    "kpi_value":_this.getHandleComputed(secondBandData.shengmei_money,secondBandData.shengmei_money_lm)*100
+                                },
+                                {
+                                    "kpi_name":"毛利额环比",
+                                    "kpi_value":secondBandData.gross_money_yoy==null ? 0 : (secondBandData.gross_money_yoy*100).toFixed(2)
+                                },
+                                {
+                                    "kpi_name":"毛利率环比增长",
+                                    "kpi_value":secondBandData.gross_money_rate_mom==null ? 0 : (secondBandData.gross_money_rate_mom*100).toFixed(2)
+                                },
+                            ]
+                        }
+                        _this.getTwoOrderScoreData()
                         _this.towHelpSaleMonthShow = false
                         _this.towHelProportion = false
                         _this.towHelYoy = false
 
                      }
+                })
+            },
+            //二帮卖分析-订单评分
+            getTwoOrderScoreData(){
+                var _this = this
+                this.$http({
+                    url: _this.scoreRequestUrl + '?v=orderScore',
+                    method: 'POST',
+                    data: _this.orderScoreParams
+                }).then(function (res) {
+                    console.log(res)
+                    if(res.data.code=='200'){
+                        let score = res.data.data.toFixed(1)
+                        _this.orderScoreList={//一帮卖评分
+                            coretype: '一帮卖得分',
+                            coretext: score,
+                            evaluate: '优秀'
+                        }
+                    }
                 })
             },
             //二帮卖-订单走势图
@@ -1454,6 +1669,44 @@
                         }else{
                             var data=''
                         }
+                        _this.productScoreParams={
+                            "moduleName":"产品",
+                            "kpi_values":[
+                                {
+                                    "kpi_name":"商品动销率",
+                                    "kpi_value":data.stock_sale_rate==null ? 0 : Number((data.stock_sale_rate*100).toFixed(2))
+                                },
+                                {
+                                    "kpi_name":"立白商品动销率",
+                                    "kpi_value":data.liby_stock_sale_rate==null ? 0 : Number((data.liby_stock_sale_rate*100).toFixed(2))
+                                },
+                                {
+                                    "kpi_name":"好爸爸商品动销率",
+                                    "kpi_value":data.kispa_stock_sale_rate==null ? 0 : Number((data.kispa_stock_sale_rate*100).toFixed(2))
+                                },
+                                {
+                                    "kpi_name":"超威商品动销率",
+                                    "kpi_value":data.cheerwin_stock_sale_rate==null ? 0 : Number((data.cheerwin_stock_sale_rate*100).toFixed(2))
+                                },
+                                {
+                                    "kpi_name":"口腔商品动销率",
+                                    "kpi_value":data.oral_stock_sale_rate==null ? 0 : Number((data.oral_stock_sale_rate*100).toFixed(2))
+                                },
+                                {
+                                    "kpi_name":"晟美商品动销率",
+                                    "kpi_value":data.shengmei_stock_sale_rate==null ? 0 : Number((data.shengmei_stock_sale_rate*100).toFixed(2))
+                                },
+                                {
+                                    "kpi_name":"动销商品数环比",
+                                    "kpi_value":data.stock_sale_goods_cnt_mom==null ? 0 : Number((data.stock_sale_goods_cnt_mom*100).toFixed(2))
+                                },
+                                {
+                                    "kpi_name":"销量下滑商品占比",
+                                    "kpi_value":_this.getReachPercent(data.sales_drop_goods_cnt,data.goods_cnt)*100
+                                },
+                            ]
+                        }
+                        _this.getTwoProductScoreData()
                         //  console.log(res)
                         // let data = res.data.data.data[0]
                         console.log(data)
@@ -1580,7 +1833,25 @@
                     },
                 )
             },
-
+            //二帮卖分析-商品评分
+            getTwoProductScoreData(){
+                var _this = this
+                this.$http({
+                    url: _this.scoreRequestUrl + '?v=productScore',
+                    method: 'POST',
+                    data: _this.productScoreParams
+                }).then(function (res) {
+                    console.log(res)
+                    if(res.data.code=='200'){
+                        let score = res.data.data.toFixed(1)
+                        _this.productScoreList={//一帮卖评分
+                            coretype: '一帮卖得分',
+                            coretext: score,
+                            evaluate: '优秀'
+                        }
+                    }
+                })
+            },
             // //产品-列表数据导出
             // getProductExportData(){
             //     var _this = this
@@ -1940,6 +2211,32 @@
                     }else{
                         var data=''
                     }
+                    _this.storeScoreParams={
+                        "moduleName":"门店",
+                        "kpi_values":[
+                            {
+                                "kpi_name":"门店活跃率",
+                                "kpi_value":data.active_store_rate==null ? 0 : Number((data.active_store_rate*100).toFixed(2))
+                            },
+                            {
+                                "kpi_name":"活跃门店数环比",
+                                "kpi_value":data.active_store_cnt_mom==null ? 0 : Number((data.active_store_cnt_mom*100).toFixed(2))
+                            },
+                            {
+                                "kpi_name":"销量下滑门店占比",
+                                "kpi_value":_this.getReachPercent(data.sale_drop_store_cnt,data.store_cnt)*100
+                            },
+                            {
+                                "kpi_name":"当月无交易门店占比",
+                                "kpi_value":_this.getReachPercent(data.unsale_store_cnt,data.store_cnt)*100
+                            },
+                            {
+                                "kpi_name":"3个月无交易门店占比",
+                                "kpi_value":_this.getReachPercent(data.mon3_unsale_store_cnt,data.store_cnt)*100
+                            },
+                        ]
+                    }
+                    _this.getTwoStoreScoreData()
                     // let data = res.data.data.data[0]
                     let AmountChainVal = {
                         name: "环比: ",
@@ -2025,6 +2322,25 @@
                     console.log(_this.StoresDetailed)
                     },
                 )
+            },
+             //二帮卖分析-门店评分
+            getTwoStoScoreData(){
+                var _this = this
+                this.$http({
+                    url: _this.scoreRequestUrl + '?v=storeScore',
+                    method: 'POST',
+                    data: _this.storeScoreParams
+                }).then(function (res) {
+                    console.log(res)
+                    if(res.data.code=='200'){
+                        let score = res.data.data.toFixed(1)
+                        _this.storeScoreList={//一帮卖评分
+                            coretype: '一帮卖得分',
+                            coretext: score,
+                            evaluate: '优秀'
+                        }
+                    }
+                })
             },
             //门店-门店下滑/增长商品
             getRaiseDownStores() {
@@ -2247,6 +2563,52 @@
                     }else{
                         var data=''
                     }
+                     _this.stockScoreParams={
+                        "moduleName":"库存",
+                        "kpi_values":[
+                            {
+                                "kpi_name":"6个月未销售商品金额占比",
+                                "kpi_value":_this.getReachPercent(data.mon6_unsale_money,data.money)*100
+                            },
+                            {
+                                "kpi_name":"6个月未销售商品件数占比",
+                                "kpi_value":_this.getReachPercent(data.non6_unsale_qty,data.qty)*100
+                            },
+                            {
+                                "kpi_name":"库存周转率",
+                                "kpi_value":data.active_store_cnt_mom==null ? 0 : Number((data.active_store_cnt_mom*100).toFixed(2))
+                            },
+                            {
+                                "kpi_name":"库存可销天数",
+                                "kpi_value":data.saledays==null ? 0 : data.saledays
+                            },
+                            {
+                                "kpi_name":"立白库存可销天数",
+                                "kpi_value":data.liby_saledays==null ? 0 : data.liby_saledays
+                            },
+                            {
+                                "kpi_name":"好爸爸库存可销天数",
+                                "kpi_value":data.kispa_saledays==null ? 0 : data.kispa_saledays
+                            },
+                            {
+                                "kpi_name":"超威库存可销天数",
+                                "kpi_value":data.cheerwin_saledays==null ? 0 : data.cheerwin_saledays
+                            },
+                            {
+                                "kpi_name":"口腔库存可销天数",
+                                "kpi_value":data.oral_saledays==null ? 0 : data.oral_saledays
+                            },
+                            {
+                                "kpi_name":"晟美库存可销天数",
+                                "kpi_value":data.shengmei_saledays==null ? 0 : data.shengmei_saledays
+                            },
+                            {
+                                "kpi_name":"库存可销天数环比增长",
+                                "kpi_value":data.saledays_mon==null ? 0 : Number((data.saledays_mon*100).toFixed(2))
+                            },
+                        ]
+                    }
+                    _this.getTwoStockScoreData()
                         // let data = res.data.data.data[0]
                         // console.log(data)
                         let SalesMoney = {
@@ -2370,6 +2732,25 @@
                         console.log(_this.inventoryDay.inventoryBarData)
                     },
                 )
+            },
+            //二帮卖分析-库存评分
+            getTwoStockScoreData(){
+                var _this = this
+                this.$http({
+                    url: _this.scoreRequestUrl + '?v=stockScore',
+                    method: 'POST',
+                    data: _this.stockScoreParams
+                }).then(function (res) {
+                    console.log(res)
+                    if(res.data.code=='200'){
+                        let score = res.data.data.toFixed(1)
+                        _this.stockScoreList={//一帮卖评分
+                            coretype: '一帮卖得分',
+                            coretext: score,
+                            evaluate: '优秀'
+                        }
+                    }
+                })
             },
             // 库存-库存可销天数走势图
             getmarketableDayChart() {
@@ -2809,6 +3190,16 @@
                     tempObj = '--';
                 }else {
                     tempObj = (((molecule-denominator)/denominator)*100).toFixed(num)+'%';
+                }
+                return tempObj
+            },
+            //计算环比/同比
+            getHandleComputed(molecule,denominator){
+                var tempObj;
+                if(!denominator){
+                    tempObj = 0
+                }else {
+                    tempObj = (((molecule-denominator)/denominator)*100).toFixed(2);
                 }
                 return tempObj
             },

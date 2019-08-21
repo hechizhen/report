@@ -17,7 +17,7 @@
                 </a-Row>
             </div>
         </div>
-        <core :coretype="'产品得分'" :coretext="87" :evaluate="'较好'"></core>
+        <core :coretype="'产品得分'" :coretext="coreData.coretext" :evaluate="'较好'"></core>
 
         <downproductChart v-if="downShow" :trendChartClick="downClick"  :VariabilityDown="VariabilityDown"
                         :downExportData="exportData.prodownData"
@@ -120,7 +120,11 @@
                  //点击商品明细
                  indexGoodDetailHandleClick:{
                      type:Function
-                 }
+                 },
+                 //评分
+                 coreData:{
+                    type:Object
+                }
              },
         components:{
             productLeft,

@@ -10,6 +10,8 @@
                 <span class="spanFont">查询日期：</span>
                 <a-month-picker :defaultValue="moment(defaultDate, monthFormat)" :format="monthFormat" :allowClear="false" @change="changeDate" />
                 <button-list :buttonType="buttonList.buttonType" :isGhost="buttonList.isGhost" :buttonHandleClick="buttonHandleClick" :defaultVal="buttonList.defaultVal" style="margin-left:20px;"></button-list>
+            </p>
+            <p>
                 <span style="margin-left:5%;font-size:14px;">选择经销商：</span>
                 <a-select :defaultValue="dealList[0].name" style="width: 200px" @change="onChange">
                     <a-select-option v-for="(item,index) in dealList" :key="index" :value="item.name">{{item.name}}</a-select-option>

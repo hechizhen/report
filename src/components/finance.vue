@@ -112,8 +112,10 @@
             }
         },
         mounted () {
-            this.readWorkbookFromRemoteFileStore('src/static/test.xlsx')
-            this.readWorkbookFromRemoteFilePerson('src/static/test1.xlsx')
+            this.readWorkbookFromRemoteFileStore('./static/test.xlsx')
+            this.readWorkbookFromRemoteFilePerson('./static/test1.xlsx')
+            // this.readWorkbookFromRemoteFileStore('src/static/test.xlsx')
+            // this.readWorkbookFromRemoteFilePerson('src/static/test1.xlsx')
         },
         methods: {
             //切换门店效益维度
