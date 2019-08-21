@@ -2,7 +2,7 @@
 	<div class="core">
 		<p><span>{{coretype}}: </span>{{coretext}}</p>
 		<p>总结： <span>{{evaluate}}</span></p>
-		<p>|&nbsp;&nbsp;&nbsp;本月体检报整体<span>{{evaluate}}</span>，体检报告的总结情况。</p>
+		<p>|&nbsp;&nbsp;&nbsp;{{subscribe}}</p>
 	</div>
 </template>
 <script>
@@ -24,6 +24,9 @@
 				type:String,
 				default:'优秀'
 			},
+			subscribe:{
+				type:String
+			}
 		},
 
 		data(){

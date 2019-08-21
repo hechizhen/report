@@ -17,7 +17,7 @@
                 </a-Row>
             </div>
         </div>
-        <core :coretype="'产品得分'" :coretext="coreData.coretext" :evaluate="'较好'"></core>
+        <core :coretype="coreData.coretype" :coretext="coreData.coretext" :evaluate="coreData.coretype" :subscribe="coreData.subscribe"></core>
 
         <downproductChart v-if="downShow" :trendChartClick="downClick"  :VariabilityDown="VariabilityDown"
                         :downExportData="exportData.prodownData"

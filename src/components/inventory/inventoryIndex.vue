@@ -64,7 +64,7 @@
             <trendChart  :lineEchartsData="marketableDayChart" v-if="marketableDayChart != ''"></trendChart>
             <loading-data :isShow="marketableDayLine"></loading-data>
         </div>
-    <core :coretype="'库存得分'" :coretext="coreData.coretext" :evaluate="'较好'"></core>
+    <core :coretype="coreData.coretype" :coretext="coreData.coretext" :evaluate="coreData.evaluate" :subscribe="coreData.subscribe"></core>
     </div>
 </template>
 

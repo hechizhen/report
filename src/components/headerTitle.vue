@@ -19,11 +19,11 @@
             </p>
         </div>
         <div class="headerTitle_right">
-            <span class="spanFont2 spanSize">体检总得分：</span>
-            <span class="spanFont2 spanSize2">{{score}}</span>
+            <span class="spanFont2 spanSize">{{score.coretype}}：</span>
+            <span class="spanFont2 spanSize2">{{score.coretext}}</span>
             <span class="spanFont spanSize">总结：</span>
-            <span class="spanFont spanSize">{{summary}}</span>
-            <span class="spanFont1 spanSize3">本月体检报整体{{summary}}，体检报告的总结情况。</span>
+            <span class="spanFont spanSize">{{score.evaluate}}</span>
+            <span class="spanFont1 spanSize3">{{score.subscribe}}</span>
         </div>
     </div>
 </template>

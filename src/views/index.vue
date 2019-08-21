@@ -6,7 +6,7 @@
             <i></i>
         </div> -->
         <!-- 头部 -->
-        <header-title :dealName="indexDealName" :score="indexScore" :summary="indexSummary" :defaultDate="indexDefaultDate" :changeDateHandle="indexChangeDate"
+        <header-title :dealName="indexDealName" :score="totalScoreList" :summary="indexSummary" :defaultDate="indexDefaultDate" :changeDateHandle="indexChangeDate"
         :dealList="dealList" :changeDealId="changeUserId"></header-title>
         <!-- 一帮卖分析 -->
         <one-help-sale-en :titleName="oneHelpSaleTitle" :monthSalesData="monthSalesData" :monthBarData="monthBarData"  :coreData="oneHelpSaleScoreList"
@@ -130,6 +130,11 @@
                 monthBarData: '',//本月/累计销量以及达成率
                 yearSalesData: '',//本月/累计销量以及达成率
                 yearBarData: '',//本月/累计销量以及达成率
+                totalScoreList: {//总得分
+                    coretype: '总得分',
+                    coretext: '',
+                    evaluate: ''
+                },
                 oneHelpSaleScoreList: {//一帮卖评分
                     coretype: '一帮卖得分',
                     coretext: '',
@@ -264,7 +269,9 @@
                     {id:'ff8080816a194910016a43b00eeb3a75',name:'芜湖市明坤日用百货贸易有限公司'},
                 ],
                 //评分接口
-                scoreRequestUrl:'http://dccuat.liby.com.cn/tjbg-manage/gradeConfig/queryModuleScore',
+                scoreRequestUrl:'https://dcc.libyuat.com/tjbg-manage/gradeConfig/queryModuleScore',
+                scoreRequestSumUrl:'https://dcc.libyuat.com/tjbg-manage/gradeConfig/queryModuleSumScore',
+                scoreTxtRequestUrl:'https://dcc.libyuat.com/tjbg-manage/gradeConfig/queryModuleEvaluate',
                 //一帮卖评分参数
                 oneScoreParams:'',
                 //订单评分参数
@@ -277,6 +284,23 @@
                 storeScoreParams:'',
                 //库存评分参数
                 stockScoreParams:'',
+                //总评分参数
+                totalScoreParams:'',
+                //一帮卖评分描述参数
+                oneScoreTxtParams:'',
+                //订单评分描述参数
+                orderScoreTxtParams:'',
+                //人员评分描述参数
+                personScoreTxtParams:'',
+                //商品评分描述参数
+                productScoreTxtParams:'',
+                //门店评分描述参数
+                storeScoreTxtParams:'',
+                //库存描述评分参数
+                stockScoreTxtParams:'',
+                //总评分描述评分参数
+                totalScoreTxtParams:'',
+                loadingDataArray:[],
             }
         },
         created() {
@@ -313,6 +337,7 @@
             this.getRaiseDownStores()
             this.getSalesmanReached()
             this.getDetailTableData()
+            // this.getTotalScoreData()
         },
         computed: {
 
@@ -323,6 +348,7 @@
         methods: {
             //选择经销商
             changeUserId(item){
+                this.loadingDataArray = []
                 this.dealer_id = item
                 this.getsalesmanTrend()
                 this.getOverViewData()
@@ -343,6 +369,7 @@
             },
             //修改时间
             indexChangeDate(val) {
+                this.loadingDataArray = []
                 this.currentDate = val
                 this.getsalesmanTrend()
                 this.getOverViewData()
@@ -995,7 +1022,6 @@
                             legendShow:false,
                             isShowMax:true,
                         }
-                        let score = _this.scoreProcess(barDataYear,barDataMonth)
                         //一帮卖评分接口参数
                         _this.oneScoreParams = {
                             "moduleName":"一帮卖",
@@ -1058,6 +1084,15 @@
                                 }
                             ]
                         }
+                        // 一帮卖评分描述接口参数
+                        let oneScore1 = _this.getReachPercent(salesMonthData.liby_money,salesMonthData.liby_target_money)*100
+                        let oneScore2 = _this.getReachPercent(salesYearData.liby_money,salesYearData.liby_target_money)*100
+                        let oneScore3 = _this.getReachPercent(salesMonthData.strategic_money,salesMonthData.strategic_target_money)*100
+                        let oneScore4 = _this.getReachPercent(salesYearData.strategic_money,salesYearData.strategic_target_money)*100
+                        _this.oneScoreTxtParams = {
+                            moduleName:"一帮卖结论2",
+                            values:oneScore1+','+oneScore2+','+oneScore3+','+oneScore4
+                        }
                         //一帮卖评分方法
                         _this.getOneHelpSaleScoreData()
                         //隐藏laoding状态
@@ -1069,21 +1104,40 @@
             //一帮卖分析-评分
             getOneHelpSaleScoreData(){
                 var _this = this
-                this.$http({
-                    url: _this.scoreRequestUrl + '?v=oneScore',
-                    method: 'POST',
-                    data: _this.oneScoreParams
-                }).then(function (res) {
-                    console.log(res)
-                    if(res.data.code=='200'){
-                        let score = res.data.data.toFixed(1)
-                        _this.oneHelpSaleScoreList={//一帮卖评分
+                function getScoreData(){
+                    return _this.$http({
+                        url: _this.scoreRequestUrl + '?v=oneScore',
+                        method: 'POST',
+                        data: _this.oneScoreParams,
+                    })
+                }
+                function getScoreTxtData(){
+                    return _this.$http({
+                        url: _this.scoreTxtRequestUrl + '?v=oneScore',
+                        method: 'POST',
+                        data: $.param(_this.oneScoreTxtParams),
+                    })
+                }
+                //合并请求 同时请求
+                this.$http.all([getScoreData(), getScoreTxtData()])
+                    .then(this.$http.spread((score, scoreTxt) => {
+                        console.log(score)
+                        console.log(scoreTxt)
+                        let scoreData = score.data.data
+                        let scoreTxtData = scoreTxt.data.data
+                        //一帮卖评分
+                        _this.oneHelpSaleScoreList = {
                             coretype: '一帮卖得分',
-                            coretext: score,
-                            evaluate: '优秀'
+                            coretext: scoreData.toFixed(1),
+                            evaluate: scoreTxtData.grade_evaluate,
+                            subscribe: scoreTxtData.grade_evaluate_detail,
+                        }
+                        _this.loadingDataArray.push(true)
+                        if(_this.loadingDataArray.length==6){
+                            _this.getTotalScoreData()
                         }
                     }
-                })
+                ))
             },
             //财务模块概览本数据
             getFinanceOverviewData() {
@@ -1184,6 +1238,14 @@
                                 },
                             ]
                         }
+                        let personScore1 = salesmanData.emp_rate==null ? 0 : Number((salesmanData.emp_rate*100).toFixed(2))
+                        let personScore2 = salesmanData.emp_avg_money==null ? 0 : salesmanData.emp_avg_money
+                        let personScore3 = salesmanData.emp_drop_cnt
+                        // 人员评分描述接口参数
+                        _this.personScoreTxtParams = {
+                            moduleName:"业务员结论4",
+                            values:personScore1+','+personScore2+','+personScore3
+                        }
                         _this.getTwoPersonScoreData()
                         salesmanData.emp_rate = !salesmanData.emp_rate ? '--' : _this.dataProcess(salesmanData.emp_rate, 'percent', 1).num + '%'; //业务员达成
                         salesmanData.emp_cnt = !salesmanData.emp_cnt ? '--' : _this.dataProcess(salesmanData.emp_cnt, 'day').num;   //业务员人数
@@ -1195,24 +1257,41 @@
                     }
                 })
             },
-            //二帮卖分析-人员
+            //二帮卖分析-人员评分
             getTwoPersonScoreData(){
                 var _this = this
-                this.$http({
-                    url: _this.scoreRequestUrl + '?v=personScore',
-                    method: 'POST',
-                    data: _this.personScoreParams
-                }).then(function (res) {
-                    console.log(res)
-                    if(res.data.code=='200'){
-                        let score = res.data.data.toFixed(1)
-                        _this.personScoreList={//一帮卖评分
-                            coretype: '一帮卖得分',
-                            coretext: score,
-                            evaluate: '优秀'
+                function getScoreData(){
+                    return _this.$http({
+                        url: _this.scoreRequestUrl + '?v=personScore',
+                        method: 'POST',
+                        data: _this.personScoreParams
+                    })
+                }
+                function getScoreTxtData(){
+                    return _this.$http({
+                        url: _this.scoreTxtRequestUrl + '?v=personScore',
+                        method: 'POST',
+                        data: $.param(_this.personScoreTxtParams),
+                    })
+                }
+                //合并请求 同时请求
+                this.$http.all([getScoreData(), getScoreTxtData()])
+                    .then(this.$http.spread((score, scoreTxt) => {
+                        let scoreData = score.data.data
+                        let scoreTxtData = scoreTxt.data.data
+                        //一帮卖评分
+                        _this.personScoreList = {
+                            coretype: '人员得分',
+                            coretext: scoreData.toFixed(1),
+                            evaluate: scoreTxtData.grade_evaluate,
+                            subscribe: scoreTxtData.grade_evaluate_detail,
+                        }
+                        _this.loadingDataArray.push(true)
+                        if(_this.loadingDataArray.length==6){
+                            _this.getTotalScoreData()
                         }
                     }
-                })
+                ))
             },
             //二帮卖-订单
             getsecondBand() {
@@ -1331,6 +1410,12 @@
                                 },
                             ]
                         }
+                        let orderScore1 = _this.getHandleComputed(secondBandData.money,secondBandData.money_lm)
+                        let orderScore2 = secondBandData.gross_money_rate_mom==null ? 0 : (secondBandData.gross_money_rate_mom*100).toFixed(2)
+                        _this.orderScoreTxtParams = {
+                            moduleName:"订单结论3",
+                            values:orderScore1+','+orderScore2
+                        }
                         _this.getTwoOrderScoreData()
                         _this.towHelpSaleMonthShow = false
                         _this.towHelProportion = false
@@ -1342,21 +1427,38 @@
             //二帮卖分析-订单评分
             getTwoOrderScoreData(){
                 var _this = this
-                this.$http({
-                    url: _this.scoreRequestUrl + '?v=orderScore',
-                    method: 'POST',
-                    data: _this.orderScoreParams
-                }).then(function (res) {
-                    console.log(res)
-                    if(res.data.code=='200'){
-                        let score = res.data.data.toFixed(1)
-                        _this.orderScoreList={//一帮卖评分
-                            coretype: '一帮卖得分',
-                            coretext: score,
-                            evaluate: '优秀'
+                function getScoreData(){
+                    return _this.$http({
+                        url: _this.scoreRequestUrl + '?v=orderScore',
+                        method: 'POST',
+                        data: _this.orderScoreParams
+                    })
+                }
+                function getScoreTxtData(){
+                    return _this.$http({
+                        url: _this.scoreTxtRequestUrl + '?v=orderScore',
+                        method: 'POST',
+                        data: $.param(_this.orderScoreTxtParams),
+                    })
+                }
+                //合并请求 同时请求
+                this.$http.all([getScoreData(), getScoreTxtData()])
+                    .then(this.$http.spread((score, scoreTxt) => {
+                        let scoreData = score.data.data
+                        let scoreTxtData = scoreTxt.data.data
+                        //一帮卖评分
+                        _this.orderScoreList = {
+                            coretype: '订单得分',
+                            coretext: scoreData.toFixed(1),
+                            evaluate: scoreTxtData.grade_evaluate,
+                            subscribe: scoreTxtData.grade_evaluate_detail,
+                        }
+                        _this.loadingDataArray.push(true)
+                        if(_this.loadingDataArray.length==6){
+                            _this.getTotalScoreData()
                         }
                     }
-                })
+                ))
             },
             //二帮卖-订单走势图
             getdirection() {
@@ -1706,6 +1808,12 @@
                                 },
                             ]
                         }
+                        let orderScore1 = data.stock_sale_rate==null ? 0 : Number((data.stock_sale_rate*100).toFixed(2))
+                        let orderScore2 = data.stock_sale_goods_cnt_mom==null ? 0 : Number((data.stock_sale_goods_cnt_mom*100).toFixed(2))
+                        _this.productScoreTxtParams = {
+                            moduleName:"商品结论5",
+                            values:orderScore1+','+orderScore2
+                        }
                         _this.getTwoProductScoreData()
                         //  console.log(res)
                         // let data = res.data.data.data[0]
@@ -1836,21 +1944,38 @@
             //二帮卖分析-商品评分
             getTwoProductScoreData(){
                 var _this = this
-                this.$http({
-                    url: _this.scoreRequestUrl + '?v=productScore',
-                    method: 'POST',
-                    data: _this.productScoreParams
-                }).then(function (res) {
-                    console.log(res)
-                    if(res.data.code=='200'){
-                        let score = res.data.data.toFixed(1)
-                        _this.productScoreList={//一帮卖评分
-                            coretype: '一帮卖得分',
-                            coretext: score,
-                            evaluate: '优秀'
+                function getScoreData(){
+                    return _this.$http({
+                        url: _this.scoreRequestUrl + '?v=productScore',
+                        method: 'POST',
+                        data: _this.productScoreParams
+                    })
+                }
+                function getScoreTxtData(){
+                    return _this.$http({
+                        url: _this.scoreTxtRequestUrl + '?v=productScore',
+                        method: 'POST',
+                        data: $.param(_this.productScoreTxtParams),
+                    })
+                }
+                //合并请求 同时请求
+                this.$http.all([getScoreData(), getScoreTxtData()])
+                    .then(this.$http.spread((score, scoreTxt) => {
+                        let scoreData = score.data.data
+                        let scoreTxtData = scoreTxt.data.data
+                        //一帮卖评分
+                        _this.productScoreList = {
+                            coretype: '商品得分',
+                            coretext: scoreData.toFixed(1),
+                            evaluate: scoreTxtData.grade_evaluate,
+                            subscribe: scoreTxtData.grade_evaluate_detail,
+                        }
+                        _this.loadingDataArray.push(true)
+                        if(_this.loadingDataArray.length==6){
+                            _this.getTotalScoreData()
                         }
                     }
-                })
+                ))
             },
             // //产品-列表数据导出
             // getProductExportData(){
@@ -2236,6 +2361,13 @@
                             },
                         ]
                     }
+                    let storeScore1 = data.active_store_rate==null ? 0 : Number((data.active_store_rate*100).toFixed(2))
+                    let storeScore2 = data.store_avg_money==null ? 0 : data.store_avg_money
+                    let storeScore3 = _this.getReachPercent(data.mon3_unsale_store_cnt,data.store_cnt)*100
+                    _this.storeScoreTxtParams = {
+                        moduleName:"门店结论6",
+                        values:storeScore1+','+storeScore2+','+storeScore3
+                    }
                     _this.getTwoStoreScoreData()
                     // let data = res.data.data.data[0]
                     let AmountChainVal = {
@@ -2326,21 +2458,38 @@
              //二帮卖分析-门店评分
             getTwoStoreScoreData(){
                 var _this = this
-                this.$http({
-                    url: _this.scoreRequestUrl + '?v=storeScore',
-                    method: 'POST',
-                    data: _this.storeScoreParams
-                }).then(function (res) {
-                    console.log(res)
-                    if(res.data.code=='200'){
-                        let score = res.data.data.toFixed(1)
-                        _this.storeScoreList={//一帮卖评分
-                            coretype: '一帮卖得分',
-                            coretext: score,
-                            evaluate: '优秀'
+                function getScoreData(){
+                    return _this.$http({
+                        url: _this.scoreRequestUrl + '?v=storeScore',
+                        method: 'POST',
+                        data: _this.storeScoreParams
+                    })
+                }
+                function getScoreTxtData(){
+                    return _this.$http({
+                        url: _this.scoreTxtRequestUrl + '?v=storeScore',
+                        method: 'POST',
+                        data: $.param(_this.storeScoreTxtParams),
+                    })
+                }
+                //合并请求 同时请求
+                this.$http.all([getScoreData(), getScoreTxtData()])
+                    .then(this.$http.spread((score, scoreTxt) => {
+                        let scoreData = score.data.data
+                        let scoreTxtData = scoreTxt.data.data
+                        //一帮卖评分
+                        _this.storeScoreList = {
+                            coretype: '门店得分',
+                            coretext: scoreData.toFixed(1),
+                            evaluate: scoreTxtData.grade_evaluate,
+                            subscribe: scoreTxtData.grade_evaluate_detail,
+                        }
+                        _this.loadingDataArray.push(true)
+                        if(_this.loadingDataArray.length==6){
+                            _this.getTotalScoreData()
                         }
                     }
-                })
+                ))
             },
             //门店-门店下滑/增长商品
             getRaiseDownStores() {
@@ -2545,7 +2694,7 @@
                         "data_type":"当月"
                     },
                     "isReturnTotalSize": "Y",
-                    "outputCol": "dealer_id,data_mon,data_type,money,qty,mon6_unsale_money,non6_unsale_qty,turnover_rate,saledays,saledays_mon,saledays_yoy,liby_saledays,kispa_saledays,cheerwin_saledays,shengmei_saledays,oral_saledays,wonderland_saledays",
+                    "outputCol": "dealer_id,data_mon,data_type,money,qty,mon6_unsale_money,non6_unsale_qty,turnover_rate,saledays,saledays_mon,saledays_yoy,liby_saledays,kispa_saledays,cheerwin_saledays,shengmei_saledays,oral_saledays",
                     "pageNum": 1,
                     "pageSize": 10,
                     "serviceId": "service_tjbg02_stock",
@@ -2563,7 +2712,7 @@
                     }else{
                         var data= ''
                     }
-                     _this.stockScoreParams={
+                    _this.stockScoreParams={
                         "moduleName":"库存",
                         "kpi_values":[
                             {
@@ -2608,6 +2757,12 @@
                             },
                         ]
                     }
+                    let stockScore1 = data.saledays==null ? 0 : data.saledays
+                    let stockScore2 = _this.getReachPercent(data.mon6_unsale_money,data.money)*100
+                    _this.stockScoreTxtParams = {
+                        moduleName:"库存结论7",
+                        values:stockScore1+','+stockScore2
+                    }
                     _this.getTwoStockScoreData()
                         // let data = res.data.data.data[0]
                         // console.log(data)
@@ -2634,7 +2789,6 @@
                             data.cheerwin_saledays = !data.cheerwin_saledays ? '--' : data.cheerwin_saledays ,
                             data.shengmei_saledays = !data.shengmei_saledays ? '--' : data.shengmei_saledays ,
                             data.oral_saledays = !data.oral_saledays ? '--' : data.oral_saledays ,
-                            data.wonderland_saledays = !data.wonderland_saledays ? '--' : data.wonderland_saledays ,
                         ]
                         let Axiax = ['立白','好爸爸','超威','晟美','口腔','壹乐源']
                         let inventoryBarData = {
@@ -2736,21 +2890,38 @@
             //二帮卖分析-库存评分
             getTwoStockScoreData(){
                 var _this = this
-                this.$http({
-                    url: _this.scoreRequestUrl + '?v=stockScore',
-                    method: 'POST',
-                    data: _this.stockScoreParams
-                }).then(function (res) {
-                    console.log(res)
-                    if(res.data.code=='200'){
-                        let score = res.data.data.toFixed(1)
-                        _this.stockScoreList={//一帮卖评分
-                            coretype: '一帮卖得分',
-                            coretext: score,
-                            evaluate: '优秀'
+                function getScoreData(){
+                    return _this.$http({
+                        url: _this.scoreRequestUrl + '?v=stockScore',
+                        method: 'POST',
+                        data: _this.stockScoreParams
+                    })
+                }
+                function getScoreTxtData(){
+                    return _this.$http({
+                        url: _this.scoreTxtRequestUrl + '?v=stockScore',
+                        method: 'POST',
+                        data: $.param(_this.stockScoreTxtParams),
+                    })
+                }
+                //合并请求 同时请求
+                this.$http.all([getScoreData(), getScoreTxtData()])
+                    .then(this.$http.spread((score, scoreTxt) => {
+                        let scoreData = score.data.data
+                        let scoreTxtData = scoreTxt.data.data
+                        //一帮卖评分
+                        _this.stockScoreList = {
+                            coretype: '库存得分',
+                            coretext: scoreData.toFixed(1),
+                            evaluate: scoreTxtData.grade_evaluate,
+                            subscribe: scoreTxtData.grade_evaluate_detail,
+                        }
+                        _this.loadingDataArray.push(true)
+                        if(_this.loadingDataArray.length==6){
+                            _this.getTotalScoreData()
                         }
                     }
-                })
+                ))
             },
             // 库存-库存可销天数走势图
             getmarketableDayChart() {
@@ -2762,7 +2933,7 @@
                         "data_type":"13"
                     },
                     "isReturnTotalSize": "Y",
-                    "outputCol": "dealer_id,data_mon,data_type,money,qty,mon6_unsale_money,non6_unsale_qty,turnover_rate,saledays,saledays_mon,saledays_yoy,liby_saledays,kispa_saledays,cheerwin_saledays,shengmei_saledays,oral_saledays,wonderland_saledays",
+                    "outputCol": "dealer_id,data_mon,data_type,money,qty,mon6_unsale_money,non6_unsale_qty,turnover_rate,saledays,saledays_mon,saledays_yoy,liby_saledays,kispa_saledays,cheerwin_saledays,shengmei_saledays,oral_saledays",
                     "pageNum": 1,
                     "pageSize": 10000,
                     "serviceId": "service_tjbg02_stock",
@@ -3182,6 +3353,81 @@
                         {txt: '可销天数', unit: 'day'},
                     ]
                 }
+            },
+            //获取总评分
+            getTotalScoreData(){
+                var _this = this
+                //得分参数
+                _this.totalScoreParams={
+                    "moduleName":"总得分",
+                    "kpi_values":[
+                        {
+                            "kpi_name":"一帮卖",
+                            "kpi_value":Number(_this.oneHelpSaleScoreList.coretext)
+                        },
+                        {
+                            "kpi_name":"订单",
+                            "kpi_value":Number(_this.orderScoreList.coretext)
+                        },
+                        {
+                            "kpi_name":"业务员",
+                            "kpi_value":Number(_this.personScoreList.coretext)
+                        },
+                        {
+                            "kpi_name":"产品",
+                            "kpi_value":Number(_this.productScoreList.coretext)
+                        },
+                        {
+                            "kpi_name":"门店",
+                            "kpi_value":Number(_this.storeScoreList.coretext)
+                        },
+                        {
+                            "kpi_name":"库存",
+                            "kpi_value":Number(_this.stockScoreList.coretext)
+                        },
+                    ]
+                }
+                console.log(_this.totalScoreParams)
+                let totalScore1 = _this.oneHelpSaleScoreList.evaluate
+                let totalScore2 = _this.orderScoreList.evaluate
+                // let totalScore3 = _this.personScoreList.evaluate
+                // let totalScore4 = _this.productScoreList.evaluate
+                // let totalScore5 = _this.storeScoreList.evaluate
+                let totalScore6 = _this.stockScoreList.evaluate
+                //评价参数
+                _this.totalScoreTxtParams={
+                    moduleName:"整体结论1",
+                    values:"'"+totalScore2+"','"+totalScore6+"','"+totalScore1+"'"
+                }
+                function getScoreData(){
+                    return _this.$http({
+                        url: _this.scoreRequestSumUrl + '?v=totalScore',
+                        method: 'POST',
+                        data: _this.totalScoreParams
+                    })
+                }
+                function getScoreTxtData(){
+                    return _this.$http({
+                        url: _this.scoreTxtRequestUrl + '?v=totalScore',
+                        method: 'POST',
+                        data: $.param(_this.totalScoreTxtParams),
+                    })
+                }
+                //合并请求 同时请求
+                this.$http.all([getScoreData(), getScoreTxtData()])
+                    .then(this.$http.spread((score, scoreTxt) => {
+                        let scoreData = score.data.data
+                        let scoreTxtData = scoreTxt.data.data
+                        //总得分
+                        _this.totalScoreList = {
+                            coretype: '总得分',
+                            coretext: scoreData.toFixed(1),
+                            evaluate: scoreTxtData.grade_evaluate,
+                            subscribe: scoreTxtData.grade_evaluate_detail,
+                        }
+                        console.log(_this.stockScoreList)
+                    }
+                ))
             },
             //计算环比/同比
             getHandle(molecule,denominator,num){

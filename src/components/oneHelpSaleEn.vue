@@ -9,7 +9,7 @@
 				<one-help-sale :salesData="yearSalesData" :barData="yearBarData" :isShow="yearShow" v-if="yearSalesData.length!=0 && yearBarData.length!=0"></one-help-sale>
 			</div>
 		</div>
-		<core :coretype="coreData.coretype" :coretext="coreData.coretext" :evaluate="coreData.evaluate"></core>
+		<core :coretype="coreData.coretype" :coretext="coreData.coretext" :evaluate="coreData.evaluate" :subscribe="coreData.subscribe"></core>
 	</div>
 </template>
 <script>

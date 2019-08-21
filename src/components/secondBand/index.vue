@@ -21,7 +21,7 @@
 		  </a-Col>
 		</a-Row>
 		<public-table v-if="isShowDetail" :close="closePopup" :tableHeader="tableData.header" :interfaceParams="tableData.params" :titleName="tableData.titleName" :buttonGroup="buttonGroup" :selectButtonClick="selectButtonClick"></public-table>
-		<core :coretype="'二帮卖得分'" :coretext="coreData.coretext" :evaluate="'优秀'"></core>
+		<core :coretype="coreData.coretype" :coretext="coreData.coretext" :evaluate="coreData.evaluate" :subscribe="coreData.subscribe"></core>
 	</div>
 </template>
 <script>
@@ -112,7 +112,7 @@
 			}
 		},
 		mounted(){
-			console.log(this.directionLineData)
+			console.log(this.coreData)
 		},
 		methods:{
 			explicit(a,b){
