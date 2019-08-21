@@ -540,7 +540,7 @@
                                 "pageSize":100,
                                 "groupByCol":["bo1_name","bo2_name"],
                                 "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
-                                "serviceId":"service_tjbg02_sales_order_dtl"
+                                "serviceId":"service_tjbg02_goods_sales_dtl"
                             },
                             header:[
                                 {txt:'序号',unit:false},
@@ -567,7 +567,7 @@
                                 "pageSize":100,
                                "groupByCol":["bo1_name","bo2_name","bo3_name"],
                                 "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
-                            "serviceId":"service_tjbg02_sales_order_dtl"
+                            "serviceId":"service_tjbg02_goods_sales_dtl"
                         },
                         header:[
                             {txt:'序号',unit:false},
@@ -595,7 +595,7 @@
                                 "pageSize":100,
                                 "groupByCol":["bo1_name","bo2_name","bo3_name","goods_name"],
                                 "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
-                                "serviceId":"service_tjbg02_sales_order_dtl"
+                                "serviceId":"service_tjbg02_goods_sales_dtl"
                             },
                             header:[
                                 {txt:'序号',unit:false},
@@ -624,7 +624,7 @@
                                 "pageSize":100,
                                 "groupByCol":["bo1_name"],
                                 "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
-                                "serviceId":"service_tjbg02_sales_order_dtl"
+                                "serviceId":"service_tjbg02_goods_sales_dtl"
                             },
                             header:[
                                 {txt:'序号',unit:false},
@@ -2756,14 +2756,14 @@
                         "inputParam":{
                             "data_mon":this.currentDate,
                             "data_type":"当月",
-                            "bo_type":'事业部'
+                            "bo_type":'商品'
                         },
                         "outputCol":"bo1_name,money,ratio_rate",
                         "pageNum":1,
                         "pageSize":1000,
                         "groupByCol":["bo1_name"],
                         "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
-                        "serviceId":"service_tjbg02_sales_order_dtl"
+                        "serviceId":"service_tjbg02_goods_sales_dtl"
                     },
                     header:[
                         {txt:'序号',unit:false},
