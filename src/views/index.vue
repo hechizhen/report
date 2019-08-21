@@ -2552,7 +2552,7 @@
                         "data_type":"当月"
                     },
                     "isReturnTotalSize": "Y",
-                    "outputCol": "dealer_id,data_mon,data_type,money,qty,mon6_unsale_money,non6_unsale_qty,turnover_rate,saledays,saledays_mon,saledays_yoy,liby_saledays,kispa_saledays,cheerwin_saledays,shengmei_saledays,oral_saledays,wonderland_saledays",
+                    "outputCol": "dealer_id,data_mon,data_type,money,qty,mon6_unsale_money,non6_unsale_qty,turnover_rate,saledays,saledays_mon,saledays_yoy,liby_saledays,kispa_saledays,cheerwin_saledays,shengmei_saledays,oral_saledays",
                     "pageNum": 1,
                     "pageSize": 10,
                     "serviceId": "service_tjbg02_stock",
@@ -2641,9 +2641,9 @@
                             data.cheerwin_saledays = !data.cheerwin_saledays ? '--' : data.cheerwin_saledays ,
                             data.shengmei_saledays = !data.shengmei_saledays ? '--' : data.shengmei_saledays ,
                             data.oral_saledays = !data.oral_saledays ? '--' : data.oral_saledays ,
-                            data.wonderland_saledays = !data.wonderland_saledays ? '--' : data.wonderland_saledays ,
+                            // data.wonderland_saledays = !data.wonderland_saledays ? '--' : data.wonderland_saledays ,
                         ]
-                        let Axiax = ['立白','好爸爸','超威','晟美','口腔','壹乐源']
+                        let Axiax = ['立白','好爸爸','超威','口腔','晟美']
                         let inventoryBarData = {
                         config:{
                             id: 'barIdInventory',
