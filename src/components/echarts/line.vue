@@ -285,7 +285,7 @@
         },
         watch: {
             lineEchartsData(val){
-                var _this = this  
+                var _this = this
                 let echarts = _this.$echarts;
                 _this.myChart = echarts.init(document.getElementById(_this.lineEchartsData.id))
                 _this.setLineOptions()
@@ -302,11 +302,11 @@
         height:100%;
         .lineChart{
             width:100%;
-            height:90%;
+            height:80%;
         }
         .checkBoxList{
             width:100%;
-            height:10%;
+            height:20%;
             display: flex;
             align-items: center;
             justify-content: center;

@@ -150,6 +150,7 @@
                 font-weight:bold;
                 color:rgba(255,255,255,1);
                 margin: 0 auto;
+                white-space : nowrap
             }
             span{
                 width:99px;
@@ -208,7 +209,7 @@
                     }
 
                     p {
-                        color: rgba(255, 0, 72, 1);
+                        color: rgba(255, 255, 255, 1);
                         margin-bottom: 0;
                         display: inline-block;
                     }

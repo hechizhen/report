@@ -94,6 +94,8 @@
                 font-weight:bold;
                 color:rgba(255,255,255,1);
                 margin: 0 auto;
+                white-space : nowrap
+
             }
             span{
                 width:99px;
