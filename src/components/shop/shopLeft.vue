@@ -13,7 +13,7 @@
           <div class="shop-data-title" >
               <div class="shop-data-title1" v-for="(item,index) in shopActives.shopActiveTitle " :key="index"   >
                   <span>{{item.name}} </span>
-                  <p>{{item.NoSales}}</p>
+                  <p :class="item.classNameNoSales">{{item.NoSales}}</p>
               </div>
           </div>
           <div class="shop-data-base" >
@@ -26,7 +26,7 @@
           </div>
           <div class="shop-data-base" >
               <span>{{ shopActives.upSales.name}}</span>
-              <span>{{ shopActives.upSales.NoSales}}</span>
+              <span >{{ shopActives.upSales.NoSales}}</span>
               <div class="productLeft-btn">
                   <newButton :defaultVal="shopActives.upSales.btn" :buttonHandleClick="upbuttonHandleClick"
                   ></newButton>
