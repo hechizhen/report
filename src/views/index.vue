@@ -7,7 +7,7 @@
         </div> -->
         <!-- 头部 -->
         <header-title :dealName="indexDealName" :score="totalScoreList" :summary="indexSummary" :defaultDate="indexDefaultDate" :changeDateHandle="indexChangeDate"
-        :dealList="dealList" :changeDealId="changeUserId"></header-title>
+        :dealList="dealList"></header-title>
         <!-- 一帮卖分析 -->
         <one-help-sale-en :titleName="oneHelpSaleTitle" :monthSalesData="monthSalesData" :monthBarData="monthBarData"  :coreData="oneHelpSaleScoreList"
         :yearSalesData="yearSalesData" :yearBarData="yearBarData" :monthShow="oneHelpSaleMonthShow" :yearShow="oneHelpSaleYearShow"
@@ -346,31 +346,11 @@
 
         },
         methods: {
-            //选择经销商
-            changeUserId(item){
+            //点击查询
+            indexChangeDate(dateVal,selectVal) {
                 this.loadingDataArray = []
-                this.dealer_id = item
-                this.getsalesmanTrend()
-                this.getOverViewData()
-                this.getOneHelpSalesData()
-                this.getFinanceOverviewData()
-                this.getsalesman()
-                this.getsecondBand()
-                this.getinventoryDetail()
-                this.getStoresDetailed()
-                this.getCommodityTurnoverRate()
-                this.getdirection()
-                this.getmarketableDayChart()
-                this.getVariability()
-                this.getsalesmandownward()
-                this.getRaiseDownStores()
-                this.getSalesmanReached()
-                this.getDetailTableData()
-            },
-            //修改时间
-            indexChangeDate(val) {
-                this.loadingDataArray = []
-                this.currentDate = val
+                this.currentDate = dateVal
+                this.dealer_id = selectVal
                 this.getsalesmanTrend()
                 this.getOverViewData()
                 this.getOneHelpSalesData()
@@ -1220,7 +1200,6 @@
                     data: params
                 }).then(function (res) {
                     if(res.data.code == '200'){
-                        var salesmanData = res.data.data.data[0];
                         _this.personScoreParams={
                             "moduleName":"业务员",
                             "kpi_values":[

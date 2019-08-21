@@ -187,7 +187,16 @@
                         parentItem.numberId = (_this.pageNumber-1)*_this.defaultSize+parentIndex+1
                         _this.tableHeaderKey.map(function(childItem,index){
                             if(_this.tableHeader[index].unit){
-                                parentItem[childItem] = _this.dataProcess(parentItem[childItem],_this.tableHeader[index].unit,_this.tableHeader[index].unit1).num
+                                if(_this.tableHeader[index].unit!='percent'){
+                                    parentItem[childItem] = _this.dataProcess(parentItem[childItem],_this.tableHeader[index].unit,_this.tableHeader[index].unit1).num
+                                }else{
+                                    parentItem[childItem] = _this.dataProcess(parentItem[childItem],_this.tableHeader[index].unit,_this.tableHeader[index].unit1).num
+                                                            + _this.dataProcess(parentItem[childItem],_this.tableHeader[index].unit,_this.tableHeader[index].unit1).unit
+                                }
+                            }else{
+                                if(_this.tableHeader[index].txt=='是否开业' || _this.tableHeader[index].txt=='是否动销'){
+                                    parentItem[childItem] = parentItem[childItem]==0 ? '否' : '是'
+                                }
                             }
                         })
                     })
