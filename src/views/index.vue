@@ -2324,7 +2324,7 @@
                 )
             },
              //二帮卖分析-门店评分
-            getTwoStoScoreData(){
+            getTwoStoreScoreData(){
                 var _this = this
                 this.$http({
                     url: _this.scoreRequestUrl + '?v=storeScore',
