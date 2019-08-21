@@ -2796,10 +2796,6 @@
                             data.cheerwin_saledays = !data.cheerwin_saledays ? '--' : data.cheerwin_saledays ,
                             data.shengmei_saledays = !data.shengmei_saledays ? '--' : data.shengmei_saledays ,
                             data.oral_saledays = !data.oral_saledays ? '--' : data.oral_saledays ,
-<<<<<<< HEAD
-=======
-                            // data.wonderland_saledays = !data.wonderland_saledays ? '--' : data.wonderland_saledays ,
->>>>>>> 96f7ac5438e4692b77d0ed06fa7dba3467a3f26e
                         ]
                         let Axiax = ['立白','好爸爸','超威','口腔','晟美']
                         let inventoryBarData = {
