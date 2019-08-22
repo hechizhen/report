@@ -1200,6 +1200,7 @@
                     data: params
                 }).then(function (res) {
                     if(res.data.code == '200'){
+                        var salesmanData = res.data.data.data[0]
                         _this.personScoreParams={
                             "moduleName":"业务员",
                             "kpi_values":[
@@ -2784,11 +2785,13 @@
                         }
                         let Chain = {
                             name: '环比增长:',
-                            inventoryChainVal:_this.dataProcess(data.saledays_mon,'percent').num+_this.dataProcess(data.saledays_mon,'percent').unit
+                            inventoryChainVal:_this.dataProcess(data.saledays_mon,'percent').num+_this.dataProcess(data.saledays_mon,'percent').unit,
+                            inventoryChainValColor:data.saledays_mon<0 ? 'colorStyle' : ''
                         }
                         let Year = {
                             name: '同比增长:',
-                            inventoryChainVal:_this.dataProcess(data.saledays_yoy,'percent').num+_this.dataProcess(data.saledays_yoy,'percent').unit
+                            inventoryChainVal:_this.dataProcess(data.saledays_yoy,'percent').num+_this.dataProcess(data.saledays_yoy,'percent').unit,
+                            inventoryChainValColor:data.saledays_yoy<0 ? 'colorStyle' : ''
                         }
                         //产品动销率树状图
                         let barDataMonth = [

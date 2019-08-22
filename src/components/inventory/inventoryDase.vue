@@ -12,7 +12,7 @@
                     <span>{{item.name}}</span>
                     </div>
                     <div style="width: 50%; text-align: left">
-                    <p>{{item.inventoryChainVal}}</p>
+                    <p :class="item.inventoryChainValColor">{{item.inventoryChainVal}}</p>
                     </div>
                 </div>
                 </div>

@@ -75,9 +75,10 @@
                     defaultVal:'查询',
                     isGhost:false
                 },
-                newId:'',
+                newId:this.dealList[0].id,
                 defaultValDate:moment(this.defaultDate, this.monthFormat),
-                defaultSelectVal:this.dealList[0].name
+                defaultSelectVal:this.dealList[0].name,
+                defaultDateValue:this.defaultDate.substring(0,4)+this.defaultDate.substring(5,7)
             }
         },
         mounted () {
@@ -87,12 +88,12 @@
             moment,
             //点击查询
             buttonHandleClick(){
-                this.changeDateHandle(this.defaultValDate,this.newId)
+                this.changeDateHandle(this.defaultDateValue,this.newId)
             },
             //选择时间
             changeDate(val,newDate){
                 let dateTime = newDate
-                _this.defaultValDate = dateTime.substring(0,4)+dateTime.substring(5,7)
+                this.defaultDateValue = dateTime.substring(0,4)+dateTime.substring(5,7)
             },
             //选择经销商
             onChange(val){
