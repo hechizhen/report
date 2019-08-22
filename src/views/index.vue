@@ -421,7 +421,7 @@
                                     "data_type":"当月",
                                     "bo_type":"商品"
                                 },
-                                "outputCol":"bo1_name,bo2_name,bo3_name,goods_name,money,ratio_rate,money_mom,money_yoy,gross_money,gross_rate,gross_money_yoy,gross_money_mom",
+                                "outputCol":"bo1_name,bo2_name,bo3_name,goods_code69,goods_code79,goods_name,money,ratio_rate,money_mom,money_yoy,gross_money,gross_rate,gross_money_yoy,gross_money_mom",
                                 "pageNum":1,
                                 "pageSize":100,
                                 "groupByCol":["bo1_name","bo2_name","bo3_name","goods_name"],
@@ -433,6 +433,8 @@
                                 {txt:'事业部',unit:false},
                                 {txt:'品类',unit:false},
                                 {txt:'系列',unit:false},
+                                {txt:'69码',unit:false},
+                                {txt:'79码',unit:false},
                                 {txt:'商品名称',unit:false},
                                 {txt:'商品金额（元）',unit:'money'},
                                 {txt:'占比',unit:'percent'},
@@ -526,7 +528,7 @@
                                     "data_type":"当月",
                                     "bo_type":'商品'
                                 },
-                                "outputCol":"bo1_name,bo2_name,bo2_name,goods_code79,goods_name,sale_rate",
+                                "outputCol":"bo1_name,bo2_name,bo2_name,goods_code69,goods_code79,goods_name,sale_rate",
                                 "groupByCol":["bo1_name","bo2_name","bo3_name","goods_name"],
                                 "pageNum":1,
                                 "pageSize":1000,
@@ -538,7 +540,8 @@
                                 {txt:'事业部',unit:false},
                                 {txt:'品类',unit:false},
                                 {txt:'系列',unit:false},
-                                {txt:'商品编码',unit:false},
+                                {txt:'69码',unit:false},
+                                {txt:'79码',unit:false},
                                 {txt:'商品名称',unit:false},
                                 {txt:'是否动销',unit:false},
                             ]
@@ -641,7 +644,7 @@
                                     "data_type":"当月",
                                     "bo_type":'商品'
                                 },
-                                "outputCol":"bo1_name,bo2_name,bo3_name,goods_name,money,ratio_rate",
+                                "outputCol":"bo1_name,bo2_name,bo3_name,goods_code69,goods_code79,goods_name,money,ratio_rate",
                                 "pageNum":1,
                                 "pageSize":100,
                                 "groupByCol":["bo1_name","bo2_name","bo3_name","goods_name"],
@@ -653,6 +656,8 @@
                                 {txt:'事业部',unit:false},
                                 {txt:'品类',unit:false},
                                 {txt:'系列',unit:false},
+                                {txt:'69码',unit:false},
+                                {txt:'79码',unit:false},
                                 {txt:'商品名称',unit:false},
                                 {txt:'商品销售（元/月）',unit:'money'},
                                 {txt:'当月销售占比',unit:'percent'},
@@ -731,7 +736,7 @@
                                     "partition": "goods_name"
                                 },
                                 "isReturnTotalSize": "Y",
-                                "outputCol": "bo2_name,bo3_name,bo3_name,goods_name,saledays",
+                                "outputCol": "bo2_name,bo3_name,goods_code69,goods_code79,goods_name,saledays",
                                 "groupByCol": ["bo1_name","bo2_name","bo3_name","goods_name"],
                                 "pageNum": 1,
                                 "pageSize": 100,
@@ -742,7 +747,8 @@
                                 {txt: '序号', unit: false},
                                 {txt: '品类', unit: false},
                                 {txt: '系列', unit: false},
-                                {txt: '商品编号', unit: false},
+                                {txt: '69码', unit: false},
+                                {txt: '79码', unit: false},
                                 {txt: '商品名称', unit: false},
                                 {txt: '可销天数', unit: 'day'},
                             ]
@@ -1629,7 +1635,7 @@
                         "data_mon":_this.currentDate,
                         "data_type":"当月"
                     },
-                    "outputCol":"dealer_id,data_mon,data_type,emp_name,money,money_lm,dif_money",
+                    "outputCol":"dealer_id,data_mon,data_type,emp_name,emp_phone,money,money_lm,money_rate_lm,money_rate,dif_money",
                     "pageNum":1,
                     "pageSize":1000,
                     "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
@@ -1655,11 +1661,14 @@
                                 sameMonth.push(value.money)
                                 difference.push(Math.abs(value.dif_money))
                                 exportData.push({
-                                    index: index + 1,
-                                    emp_name: value.emp_name,
-                                    money: value.money,
-                                    money_lm: value.money_lm,
-                                    dif_money: value.dif_money
+                                    index: index + 1,  //序号
+                                    emp_name: value.emp_name,   //业务员
+                                    emp_phone:value.emp_phone,   //联系电话
+                                    money_lm: value.money_lm,         //上月销量（元）
+                                    money_rate_lm: _this.dataProcess(value.money_rate_lm,'percent').num +_this.dataProcess(value.money_rate_lm,'percent').unit,   //上月达成率
+                                    money: value.money, //当月销量（元）
+                                    money_rate:  _this.dataProcess(value.money_rate,'percent').num +_this.dataProcess(value.money_rate,'percent').unit, //当月达成率
+                                    dif_money: value.dif_money  //差额（元）
                                 })
                             }
                         })
@@ -1674,8 +1683,8 @@
                         console.log(_this.salesmandownwardData)
 
                         _this.ownwardExportData = {
-                            tableHeaderTxt:['序号','业务员','本月销售额','上月销售额','销售差额'],
-                            tableHeaderKey:['index','emp_name','money','money_lm','dif_money'],
+                            tableHeaderTxt:['序号','业务员','联系电话','上月销量（元）','上月达成率','当月销量（元）','当月达成率','差额（元）'],
+                            tableHeaderKey:['index','emp_name','emp_phone','money_lm','money_rate_lm','money','money_rate','dif_money'],
                             tableData:exportData,
                             tableName:'下滑业务员'
                         }
@@ -1721,9 +1730,18 @@
                             contributionlastMonth.push(value.dealer_money)
                             contributiondifference.push(value.emp_money_rate)
                             value.numberId = index+1
-                            targetList.push(
-                                {numberId:value.numberId,emp_name:value.emp_name,emp_phone:value.emp_phone,emp_target_money:value.emp_target_money,emp_money:value.emp_money,
-                                emp_dif_money:value.emp_dif_money,emp_rate:value.emp_rate,emp_money_rate:value.emp_money_rate,gross_money:value.gross_money,gross_rate:value.gross_rate},
+                            targetList.push(   //处理表格数据 百分比转换
+                                {   numberId:value.numberId,
+                                    emp_name:value.emp_name,
+                                    emp_phone:value.emp_phone,
+                                    emp_target_money:value.emp_target_money,
+                                    emp_money:value.emp_money,
+                                    emp_dif_money:value.emp_dif_money,
+                                    emp_rate:_this.dataProcess(value.emp_rate, 'percent').num+_this.dataProcess(value.emp_rate, 'percent').unit,
+                                    emp_money_rate:_this.dataProcess(value.emp_money_rate, 'percent').num+_this.dataProcess(value.emp_money_rate, 'percent').unit,
+                                    gross_money:value.gross_money,
+                                    gross_rate:_this.dataProcess(value.gross_rate, 'percent').num+_this.dataProcess(value.gross_rate, 'percent').unit,
+                                },
                             )
                         })
                         console.log(targetList)
@@ -1731,7 +1749,7 @@
                         _this.reachContributionData = {
                             headerTxt:['序号','业务员姓名','联系电话','目标销量（元/月）','下单金额（元/月）','完成差额（元/月）','达成率','销量占比','毛利额（元）','毛利率'],
                             headerKey:["numberId","emp_name","emp_phone","emp_target_money","emp_money","emp_dif_money","emp_rate","emp_money_rate","gross_money","gross_rate"],
-                            data:salesmanReachedData,
+                            data:targetList,  //获取到处理好的表格数据
                             name:'达成和贡献'
                         }
                         seriesData.push(
@@ -2103,7 +2121,7 @@
                             "money_type":"下滑",
                             "bo_type":"商品"
                         },
-                        "outputCol":"bo1_name,goods_name,money_lm,money,dif_money",
+                        "outputCol":"goods_code69,goods_code79,goods_name,money_lm,money,dif_money",
                         "pageNum":1,
                         "pageSize":1000,
                         "orderCol":'dif_money desc',
@@ -2115,7 +2133,7 @@
                         _this.tableHeaderKey = numArray.concat(keyValue)
                     _this.ProExportData.prodownData = {
                         //下滑产品导出数据
-                        tableHeaderTxt:['序号','商品编码','商品名称','上月销量（元）','当月销量（元）','差额（元）'],
+                        tableHeaderTxt:['序号','69码','79码','商品名称','上月销量（元）','当月销量（元）','差额（元）'],
                         tableData:'',
                         tableName:'下滑商品',
                         tableHeaderKey:numArray.concat(keyValue)
@@ -2135,7 +2153,7 @@
                             "money_type":"上升",
                             "bo_type":"商品"
                         },
-                        "outputCol":"bo1_name,goods_name,money,money_lm,dif_money",
+                        "outputCol":"goods_code69,goods_code79,goods_name,money,money_lm,dif_money",
                         "pageNum":1,
                         "pageSize":1000,
                         "orderCol":'dif_money desc',
@@ -2147,7 +2165,7 @@
                     _this.tableHeaderKey = numArray.concat(keyValue)
                     _this.ProExportData.proraiseData = {
                         //增长产品导出数据
-                        tableHeaderTxt:['序号','商品编码','商品名称','上月销量（元）','当月销量（元）','差额（元）'],
+                        tableHeaderTxt:['序号','69码','79码','商品名称','上月销量（元）','当月销量（元）','差额（元）'],
                         tableData:'',
                         tableName:'增长商品',
                         tableHeaderKey:numArray.concat(keyValue)
@@ -2177,6 +2195,7 @@
                             let raiseDifference = []//增长门店差异销售额
                             proraiseList.map(function(item,index){
                                 item.numberId = index+1
+
                                 if(index<5) {
                                     raisexAxisData.push(item.goods_name)
                                     raiseLastMonth.push(item.money_lm)
@@ -2527,7 +2546,7 @@
                                 "money_type":"下滑",
                                 "data_type":"当月"
                             },
-                        "outputCol":"emp_name,emp_phone,store_name,store_contact,store_phone,store_address,money,mon3_avg_m_money,dif_money",
+                        "outputCol":"emp_name,emp_phone,store_name,store_contact,store_phone,store_nature,store_address,money,mon3_avg_m_money,gross_money,gross_rate,dif_money",
                         "pageNum":1,
                         "pageSize":1000,
                         "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
@@ -2537,7 +2556,7 @@
                     let numArray = ['numberId']
                     _this.storeExportData.downData = {
                         //增长门店导出数据
-                        tableHeaderTxt:['序号','业务员姓名','联系电话','门店名称','门店老板姓名','门店老板电话','门店地址','月均销量（元）','当月销量（元）','差额（元）'],
+                        tableHeaderTxt:['序号','业务员姓名','联系电话','门店名称','门店老板姓名','门店老板电话','门店类型','门店地址','月均销量（元）','当月销量（元）','当月毛利额（元）','当月毛利率（元）','差额（元）'],
                         tableHeaderKey:numArray.concat(params.outputCol.split(',')),
                         tableData:'',
                         tableName:'下滑门店'
@@ -2557,7 +2576,7 @@
                                 "money_type":"上升",
                                 "data_type":"当月"
                             },
-                        "outputCol":"emp_name,emp_phone,store_name,store_contact,store_phone,store_address,money,mon3_avg_m_money,dif_money",
+                        "outputCol":"emp_name,emp_phone,store_name,store_contact,store_phone,store_nature,store_address,money,mon3_avg_m_money,gross_money,gross_rate,dif_money",
                         "pageNum":1,
                         "pageSize":1000,
                         "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
@@ -2567,7 +2586,7 @@
                     let numArray = ['numberId']
                     _this.storeExportData.raiseData={
                         //下滑门店导出数据
-                        tableHeaderTxt:['序号','业务员姓名','联系电话','门店名称','门店老板姓名','门店老板电话','门店地址','月均销量（元）','当月销量（元）','差额（元）'],
+                        tableHeaderTxt:['序号','业务员姓名','联系电话','门店名称','门店老板姓名','门店老板电话','门店类型','门店地址','月均销量（元）','当月销量（元）','当月毛利额（元）','当月毛利率（元）','差额（元）'],
                         tableHeaderKey:numArray.concat(params.outputCol.split(',')),
                         tableData:'',
                         tableName:'增长门店'
@@ -2595,6 +2614,7 @@
                         let raiseDifference = []//增长门店差异销售额
                         raiseList.map(function(item,index){
                             item.numberId = index+1
+                            item.gross_rate = _this.dataProcess(item.gross_rate,'percent').num +_this.dataProcess(item.gross_rate,'percent').unit    //处理毛利率数据
                             if(index<5){
                                 raisexAxisData.push(item.store_name)
                                 raiseLastMonth.push(item.mon3_avg_m_money)
@@ -2654,6 +2674,7 @@
                         let downDifference = []//下滑门店差异销售额
                         downList.map(function(item,index){
                             item.numberId = index+1
+                            item.gross_rate = _this.dataProcess(item.gross_rate,'percent').num +_this.dataProcess(item.gross_rate,'percent').unit  //处理毛利率数据
                             if(index<5){
                                 downxAxisData.push(item.store_name)
                                 downLastMonth.push(item.mon3_avg_m_money)
@@ -3067,7 +3088,7 @@
                                     "data_type":"当月",
                                 },
                             "isReturnTotalSize": "Y",
-                            "outputCol":"emp_name,emp_phone,store_name,store_contact,store_phone,money,money_rate,sale_goods_cnt,sale_goods_cnt_lm",
+                            "outputCol":"emp_name,emp_phone,store_name,store_contact,store_phone,store_nature,money,money_rate,gross_money,gross_rate,sale_goods_cnt,sale_goods_cnt_lm",
                             "pageNum":1,
                             "pageSize":100,
                             "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
@@ -3080,8 +3101,11 @@
                             {txt:'门店店名',unit:false},
                             {txt:'门店老板姓名',unit:false},
                             {txt:'门店老板联系方式',unit:false},
+                            {txt:'门店类型',unit:false},
                             {txt:'当月销量（元）',unit:'money'},
                             {txt:'当月销量占比',unit:'percent'},
+                            {txt:'当月毛利额',unit:false},
+                            {txt:'当月毛利率',unit:'percent'},
                             {txt:'当月门店销售SKU数量',unit:'day'},
                             {txt:'上月门店销售SKU数量',unit:'day'},
                         ]
@@ -3096,7 +3120,7 @@
                                     "data_type":"当月",
                                 },
                             "isReturnTotalSize": "Y",
-                            "outputCol":"emp_name,emp_phone,store_name,store_contact,store_phone,store_address,new_store_cnt",
+                            "outputCol":"emp_name,emp_phone,store_name,store_contact,store_phone,store_address,store_nature",
                             "pageNum":1,
                             "pageSize":100,
                             "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
@@ -3110,7 +3134,7 @@
                             {txt:'门店老板姓名',unit:false},
                             {txt:'门店老板电话',unit:false},
                             {txt:'门店地址',unit:false},
-                            {txt:'新增门店数（家）',unit:'day'},
+                            {txt:'门店类型',unit:false},
                         ]
                     },
                     //无交易明细
@@ -3123,7 +3147,7 @@
                                     "data_type":"当月",
                                 },
                             "isReturnTotalSize": "Y",
-                            "outputCol":"emp_name,emp_phone,store_name,store_contact,store_phone,store_address,last_order_time,last_order_money,unsale_days",
+                            "outputCol":"emp_name,emp_phone,store_name,store_contact,store_phone,store_nature,store_address,last_order_time,last_order_money,unsale_days",
                             "pageNum":1,
                             "pageSize":100,
                             "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
@@ -3136,6 +3160,7 @@
                             {txt:'门店名称',unit:false},
                             {txt:'门店老板姓名',unit:false},
                             {txt:'门店老板电话',unit:false},
+                            {txt:'门店类型',unit:false},
                             {txt:'门店地址',unit:false},
                             {txt:'最近交易时间',unit:false},
                             {txt:'最近交易金额（元）',unit:'money'},
@@ -3152,7 +3177,7 @@
                                     "data_type":"当月",
                                 },
                             "isReturnTotalSize": "Y",
-                            "outputCol":"emp_name,emp_phone,store_name,store_contact,store_phone,store_address,store_status,last_order_time,unsale_days,debt_money",
+                            "outputCol":"emp_name,emp_phone,store_name,store_contact,store_phone,store_nature,store_address,store_status,last_order_time,unsale_days,debt_money",
                             "pageNum":1,
                             "pageSize":100,
                             "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
@@ -3165,6 +3190,7 @@
                             {txt:'门店名称',unit:false},
                             {txt:'门店老板姓名',unit:false},
                             {txt:'门店老板电话',unit:false},
+                            {txt:'门店类型',unit:false},
                             {txt:'门店地址',unit:false},
                             {txt:'是否开业',unit:false},
                             {txt:'最近交易时间',unit:false},
@@ -3184,7 +3210,7 @@
                                 "data_type": "当月"
                             },
                             "isReturnTotalSize": "Y",
-                            "outputCol": "goods_code79,goods_name,last_order_time,unsale_days,qty,money",
+                            "outputCol": "goods_code69,goods_code79,goods_name,last_order_time,unsale_days,qty,money",
                             "pageNum": 1,
                             "pageSize": 1000,
                             "orderCol": "unsale_days desc" ,
@@ -3193,7 +3219,8 @@
                         },
                         header: [
                             {txt: '序号', unit: false},
-                            {txt: '商品编码', unit: false},
+                            {txt: '69码', unit: false},
+                            {txt: '79码', unit: false},
                             {txt: '商品名称', unit: false},
                             {txt: '最近交易时间', unit: false},
                             {txt: '无交易时长（天）', unit: 'day'},
@@ -3231,7 +3258,7 @@
                 _this.financeDetailTableData = {
                     //逾期明细
                     overdueDetail:{
-                        titleName:'逾期金额明细',
+                        titleName:'逾期金额汇总',
                         params:{
                             "inputParam":
                             {
@@ -3239,7 +3266,7 @@
                                 "data_type":"当月"
                             },
                             "isReturnTotalSize": "Y",
-                            "outputCol": "emp_name,emp_phone,store_name,store_concat,store_phone,receivable_time,overdue_days,overdue_money",
+                            "outputCol": "emp_name,emp_phone,store_code,store_name,store_concat,store_phone,store_nature,store_address,overdue_money",
                             "orderCol":'overdue_money desc',
                             "pageNum": 1,
                             "pageSize": 100,
@@ -3250,222 +3277,223 @@
                             {txt:'序号',unit:false},
                             {txt:'业务员名称',unit:false},
                             {txt:'业务员电话',unit:false},
+                            {txt:'门店编号',unit:false},
                             {txt:'门店店名',unit:false},
                             {txt:'门店老板姓名',unit:false},
                             {txt:'门店老板联系方式',unit:false},
-                            {txt:'约定交款日',unit:false},
-                            {txt:'逾期时长(天）',unit:'day'},
+                            {txt:'门店类型',unit:false},
+                            {txt:'门店地址',unit:false},
                             {txt:'逾期金额（元）',unit:'money'},
                         ]
                     },
                 }
-            },
-            //点击二帮卖订单详情
-            orderDetailHandleClick(){
-                //二帮卖订单列表数据
-                this.twoDetailTableData={
-                    //二帮卖订单明细
-                    gettwoListing:{
-                        titleName:'二帮卖下单毛利明细-品类',
+                 },
+                //点击二帮卖订单详情
+                orderDetailHandleClick(){
+                    //二帮卖订单列表数据
+                    this.twoDetailTableData={
+                        //二帮卖订单明细
+                        gettwoListing:{
+                            titleName:'二帮卖下单毛利明细-品类',
+                            params : {
+                                "inputParam":{
+                                    "data_mon":this.currentDate,
+                                    "data_type":"当月",
+                                    "bo_type":"品类"
+                                },
+                                "outputCol":"bo1_name,bo2_name,money,ratio_rate,money_mom,money_yoy,gross_money,gross_rate,gross_money_yoy,gross_money_mom",
+                                "pageNum":1,
+                                "pageSize":100,
+                                "groupByCol":["bo1_name","bo2_name"],
+                                "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
+                                "serviceId":"service_tjbg02_sales_order_dtl"
+                            },
+                            header:[
+                                {txt:'序号',unit:false},
+                                {txt:'事业部',unit:false},
+                                {txt:'品类',unit:false},
+                                {txt:'品类下单金额（元）',unit:'money'},
+                                {txt:'占比',unit:'percent'},
+                                {txt:'环比',unit:'percent'},
+                                {txt:'同比',unit:'percent'},
+                                {txt:'毛利额（元）',unit:'money'},
+                                {txt:'毛利率',unit:'percent'},
+                                {txt:'毛利额环比',unit:'percent'},
+                                {txt:'毛利额同比',unit:'percent'},
+
+                            ]
+                        }
+                    }
+                },
+                //点击分销清单
+                indexStoreHandleClick(){
+                     //产品动销清单明细
+                    this.getPinListing={
+                        titleName:'商品分销明细-品类',
                         params : {
                             "inputParam":{
                                 "data_mon":this.currentDate,
                                 "data_type":"当月",
-                                "bo_type":"品类"
+                                "bo_type":'品类'
                             },
-                            "outputCol":"bo1_name,bo2_name,money,ratio_rate,money_mom,money_yoy,gross_money,gross_rate,gross_money_yoy,gross_money_mom",
+                            "outputCol":"bo1_name,bo2_name,order_qty,stock_qty,sale_rate",
                             "pageNum":1,
                             "pageSize":100,
                             "groupByCol":["bo1_name","bo2_name"],
                             "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
-                            "serviceId":"service_tjbg02_sales_order_dtl"
+                            "serviceId":"service_tjbg02_goods_stock_sales"
                         },
                         header:[
                             {txt:'序号',unit:false},
                             {txt:'事业部',unit:false},
                             {txt:'品类',unit:false},
-                            {txt:'品类下单金额（元）',unit:'money'},
-                            {txt:'占比',unit:'percent'},
-                            {txt:'环比',unit:'percent'},
-                            {txt:'同比',unit:'percent'},
-                            {txt:'毛利额（元）',unit:'money'},
-                            {txt:'毛利率',unit:'percent'},
-                            {txt:'毛利额环比',unit:'percent'},
-                            {txt:'毛利额同比',unit:'percent'},
-
+                            {txt:'订单SKU数',unit:'day'},
+                            {txt:'库存SKU数',unit:'day'},
+                            {txt:'品类动销率',unit:'percent'},
                         ]
                     }
-                }
-            },
-            //点击分销清单
-            indexStoreHandleClick(){
-                 //产品动销清单明细
-                this.getPinListing={
-                    titleName:'商品分销明细-品类',
-                    params : {
-                        "inputParam":{
-                            "data_mon":this.currentDate,
-                            "data_type":"当月",
-                            "bo_type":'品类'
+                },
+                //点击商品明细
+                indexGoodDetailHandleClick(){
+                    //商品明细
+                    this.productTableData={
+                        titleName:'下单商品明细-事业部',
+                        params : {
+                            "inputParam":{
+                                "data_mon":this.currentDate,
+                                "data_type":"当月",
+                                "bo_type":'事业部'
+                            },
+                            "outputCol":"bo1_name,money,ratio_rate",
+                            "pageNum":1,
+                            "pageSize":1000,
+                            "groupByCol":["bo1_name"],
+                            "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
+                            "serviceId":"service_tjbg02_goods_sales_dtl"
                         },
-                        "outputCol":"bo1_name,bo2_name,order_qty,stock_qty,sale_rate",
-                        "pageNum":1,
-                        "pageSize":100,
-                        "groupByCol":["bo1_name","bo2_name"],
-                        "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
-                        "serviceId":"service_tjbg02_goods_stock_sales"
-                    },
-                    header:[
-                        {txt:'序号',unit:false},
-                        {txt:'事业部',unit:false},
-                        {txt:'品类',unit:false},
-                        {txt:'订单SKU数',unit:'day'},
-                        {txt:'库存SKU数',unit:'day'},
-                        {txt:'品类动销率',unit:'percent'},
-                    ]
-                }
-            },
-            //点击商品明细
-            indexGoodDetailHandleClick(){
-                //商品明细
-                this.productTableData={
-                    titleName:'下单商品明细-事业部',
-                    params : {
-                        "inputParam":{
-                            "data_mon":this.currentDate,
-                            "data_type":"当月",
-                            "bo_type":'事业部'
-                        },
-                        "outputCol":"bo1_name,money,ratio_rate",
-                        "pageNum":1,
-                        "pageSize":1000,
-                        "groupByCol":["bo1_name"],
-                        "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
-                        "serviceId":"service_tjbg02_goods_sales_dtl"
-                    },
-                    header:[
-                        {txt:'序号',unit:false},
-                        {txt:'事业部',unit:false},
-                        {txt:'销售（元/月）',unit:'money'},
-                        {txt:'销售占比',unit:'percent'},
-                    ]
-                }
-            },
-            //点击库存详情
-            indexStockDetailHandleClick(){
-                this.invDetailTableData.getInvDayListing= {
-                    //库存可销天数详细
-                    titleName:'库存可销天数-品类',
-                    params: {
-                        "inputParam": {
-                            "data_mon": this.currentDate,
-                            "data_type": "当月",
-                            "partition": "bo2_name"
-                        },
-                        "isReturnTotalSize": "Y",
-                        "outputCol": "bo1_name,bo2_name,saledays",
-                        "groupByCol": ["bo1_name","bo2_name"],
-                        "orderCol":"bo1_orderNum,bo2_orderNum,saledays desc",
-                        "pageNum": 1,
-                        "pageSize": 100,
-                        "serviceId": "service_tjbg02_stock_saledays",
-                        "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
-                    },
-                    header: [
-                        {txt: '序号', unit: false},
-                        {txt: '事业部', unit: false},
-                        {txt: '品类', unit: false},
-                        {txt: '可销天数', unit: 'day'},
-                    ]
-                }
-            },
-            //获取总评分
-            getTotalScoreData(){
-                var _this = this
-                //得分参数
-                _this.totalScoreParams={
-                    "moduleName":"总得分",
-                    "kpi_values":[
-                        {
-                            "kpi_name":"一帮卖",
-                            "kpi_value":Number(_this.oneHelpSaleScoreList.coretext)
-                        },
-                        {
-                            "kpi_name":"订单",
-                            "kpi_value":Number(_this.orderScoreList.coretext)
-                        },
-                        {
-                            "kpi_name":"业务员",
-                            "kpi_value":Number(_this.personScoreList.coretext)
-                        },
-                        {
-                            "kpi_name":"产品",
-                            "kpi_value":Number(_this.productScoreList.coretext)
-                        },
-                        {
-                            "kpi_name":"门店",
-                            "kpi_value":Number(_this.storeScoreList.coretext)
-                        },
-                        {
-                            "kpi_name":"库存",
-                            "kpi_value":Number(_this.stockScoreList.coretext)
-                        },
-                    ]
-                }
-                console.log(_this.totalScoreParams)
-                let totalScore1 = _this.oneHelpSaleScoreList.evaluate
-                let totalScore2 = _this.orderScoreList.evaluate
-                // let totalScore3 = _this.personScoreList.evaluate
-                // let totalScore4 = _this.productScoreList.evaluate
-                // let totalScore5 = _this.storeScoreList.evaluate
-                let totalScore6 = _this.stockScoreList.evaluate
-                //评价参数
-                _this.totalScoreTxtParams={
-                    moduleName:"整体结论1",
-                    values:"'"+totalScore2+"','"+totalScore6+"','"+totalScore1+"'"
-                }
-                function getScoreData(){
-                    return _this.$http({
-                        url: _this.scoreRequestSumUrl + '?v=totalScore',
-                        method: 'POST',
-                        data: _this.totalScoreParams
-                    })
-                }
-                function getScoreTxtData(){
-                    return _this.$http({
-                        url: _this.scoreTxtRequestUrl + '?v=totalScore',
-                        method: 'POST',
-                        data: $.param(_this.totalScoreTxtParams),
-                    })
-                }
-                //合并请求 同时请求
-                this.$http.all([getScoreData(), getScoreTxtData()])
-                    .then(this.$http.spread((score, scoreTxt) => {
-                        let scoreData = score.data.data
-                        let scoreTxtData = scoreTxt.data.data
-                        //总得分
-                        _this.totalScoreList = {
-                            coretype: '总得分',
-                            coretext: scoreData.toFixed(1),
-                            evaluate: scoreTxtData.grade_evaluate,
-                            subscribe: scoreTxtData.grade_evaluate_detail,
-                        }
-                        console.log(_this.stockScoreList)
+                        header:[
+                            {txt:'序号',unit:false},
+                            {txt:'事业部',unit:false},
+                            {txt:'销售（元/月）',unit:'money'},
+                            {txt:'销售占比',unit:'percent'},
+                        ]
                     }
-                ))
-            },
-            //计算环比/同比
-            getHandle(molecule,denominator,num){
-                var tempObj;
-                if(!denominator){
-                    tempObj = '--';
-                }else {
-                    tempObj = (((molecule-denominator)/denominator)*100).toFixed(num)+'%';
-                }
-                return tempObj
-            },
-            //计算环比/同比
-            getHandleComputed(molecule,denominator){
+                },
+                //点击库存详情
+                indexStockDetailHandleClick(){
+                    this.invDetailTableData.getInvDayListing= {
+                        //库存可销天数详细
+                        titleName:'库存可销天数-品类',
+                        params: {
+                            "inputParam": {
+                                "data_mon": this.currentDate,
+                                "data_type": "当月",
+                                "partition": "bo2_name"
+                            },
+                            "isReturnTotalSize": "Y",
+                            "outputCol": "bo1_name,bo2_name,saledays",
+                            "groupByCol": ["bo1_name","bo2_name"],
+                            "orderCol":"bo1_orderNum,bo2_orderNum,saledays desc",
+                            "pageNum": 1,
+                            "pageSize": 100,
+                            "serviceId": "service_tjbg02_stock_saledays",
+                            "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
+                        },
+                        header: [
+                            {txt: '序号', unit: false},
+                            {txt: '事业部', unit: false},
+                            {txt: '品类', unit: false},
+                            {txt: '可销天数', unit: 'day'},
+                        ]
+                    }
+                },
+                //获取总评分
+                getTotalScoreData(){
+                    var _this = this
+                    //得分参数
+                    _this.totalScoreParams={
+                        "moduleName":"总得分",
+                        "kpi_values":[
+                            {
+                                "kpi_name":"一帮卖",
+                                "kpi_value":Number(_this.oneHelpSaleScoreList.coretext)
+                            },
+                            {
+                                "kpi_name":"订单",
+                                "kpi_value":Number(_this.orderScoreList.coretext)
+                            },
+                            {
+                                "kpi_name":"业务员",
+                                "kpi_value":Number(_this.personScoreList.coretext)
+                            },
+                            {
+                                "kpi_name":"产品",
+                                "kpi_value":Number(_this.productScoreList.coretext)
+                            },
+                            {
+                                "kpi_name":"门店",
+                                "kpi_value":Number(_this.storeScoreList.coretext)
+                            },
+                            {
+                                "kpi_name":"库存",
+                                "kpi_value":Number(_this.stockScoreList.coretext)
+                            },
+                        ]
+                    }
+                    console.log(_this.totalScoreParams)
+                    let totalScore1 = _this.oneHelpSaleScoreList.evaluate
+                    let totalScore2 = _this.orderScoreList.evaluate
+                    // let totalScore3 = _this.personScoreList.evaluate
+                    // let totalScore4 = _this.productScoreList.evaluate
+                    // let totalScore5 = _this.storeScoreList.evaluate
+                    let totalScore6 = _this.stockScoreList.evaluate
+                    //评价参数
+                    _this.totalScoreTxtParams={
+                        moduleName:"整体结论1",
+                        values:"'"+totalScore2+"','"+totalScore6+"','"+totalScore1+"'"
+                    }
+                    function getScoreData(){
+                        return _this.$http({
+                            url: _this.scoreRequestSumUrl + '?v=totalScore',
+                            method: 'POST',
+                            data: _this.totalScoreParams
+                        })
+                    }
+                    function getScoreTxtData(){
+                        return _this.$http({
+                            url: _this.scoreTxtRequestUrl + '?v=totalScore',
+                            method: 'POST',
+                            data: $.param(_this.totalScoreTxtParams),
+                        })
+                    }
+                    //合并请求 同时请求
+                    this.$http.all([getScoreData(), getScoreTxtData()])
+                        .then(this.$http.spread((score, scoreTxt) => {
+                            let scoreData = score.data.data
+                            let scoreTxtData = scoreTxt.data.data
+                            //总得分
+                            _this.totalScoreList = {
+                                coretype: '总得分',
+                                coretext: scoreData.toFixed(1),
+                                evaluate: scoreTxtData.grade_evaluate,
+                                subscribe: scoreTxtData.grade_evaluate_detail,
+                            }
+                            console.log(_this.stockScoreList)
+                        }
+                    ))
+                },
+                //计算环比/同比
+                getHandle(molecule,denominator,num){
+                    var tempObj;
+                    if(!denominator){
+                        tempObj = '--';
+                    }else {
+                        tempObj = (((molecule-denominator)/denominator)*100).toFixed(num)+'%';
+                    }
+                    return tempObj
+                },
+                //计算环比/同比
+                getHandleComputed(molecule,denominator){
                 var tempObj;
                 if(!denominator){
                     tempObj = 0
