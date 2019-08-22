@@ -2731,10 +2731,8 @@
                     //判断库存一级页面概览明细数据是否为空
                     if(res.data.data.data.length!=0){
                         var data = res.data.data.data[0]
-                        // alert(1)
                     }else{
                         var data= ''
-                        // alert(2)
                     }
                     _this.stockScoreParams={
                         "moduleName":"库存",
@@ -2749,7 +2747,7 @@
                             },
                             {
                                 "kpi_name":"库存周转率",
-                                "kpi_value":data.active_store_cnt_mom==null ? 0 : Number((data.active_store_cnt_mom*100).toFixed(2))
+                                "kpi_value":data.turnover_rate==null ? 0 : data.turnover_rate
                             },
                             {
                                 "kpi_name":"库存可销天数",
