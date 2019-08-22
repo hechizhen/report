@@ -396,7 +396,7 @@
                                 {txt:'事业部',unit:false},
                                 {txt:'品类',unit:false},
                                 {txt:'系列',unit:false},
-                                {txt:'品类下单金额（元）',unit:'money'},
+                                {txt:'系列下单金额（元）',unit:'money'},
                                 {txt:'占比',unit:'percent'},
                                 {txt:'环比',unit:'percent'},
                                 {txt:'同比',unit:'percent'},
@@ -490,7 +490,7 @@
                     //动销清单表格数据
                         //产品动销清单明细  系列
                         this.getPinListing={
-                            titleName:'商品动销明细-系列',
+                            titleName:'商品分销明细-系列',
                             params : {
                                 "inputParam":{
                                     "data_mon":this.currentDate,
@@ -519,7 +519,7 @@
                     //动销清单表格数据
                         //产品动销清单明细  商品
                     this.getPinListing={
-                            titleName:'商品动销明细-商品',
+                            titleName:'商品分销明细-商品',
                             params : {
                                 "inputParam":{
                                     "data_mon":this.currentDate,
@@ -548,7 +548,7 @@
                     //动销清单表格数据
                         //产品动销清单明细  品类
                         this.getPinListing={
-                            titleName:'商品动销明细-品类',
+                            titleName:'商品分销明细-品类',
                             params : {
                                 "inputParam":{
                                     "data_mon":this.currentDate,
@@ -625,7 +625,7 @@
                             {txt:'事业部',unit:false},
                             {txt:'品类',unit:false},
                             {txt:'系列',unit:false},
-                            {txt:'销售（元/月）',unit:'money'},
+                            {txt:'系列销量（元/月）',unit:'money'},
                             {txt:'销售占比',unit:'percent'},
                         ]
                     }
@@ -3287,7 +3287,7 @@
             indexStoreHandleClick(){
                  //产品动销清单明细
                 this.getPinListing={
-                    titleName:'商品动销明细-品类',
+                    titleName:'商品分销明细-品类',
                     params : {
                         "inputParam":{
                             "data_mon":this.currentDate,
