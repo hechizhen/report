@@ -91,9 +91,11 @@
             publicTable
         },
         methods:{
+            //打开下滑树状图数据
             upbuttonHandleClick(val){
                 this.upraphy()
             },
+            //打开增长树状图数据
             downbuttonHandleClick(val){
                 this.downraphy()
             },

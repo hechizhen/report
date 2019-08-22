@@ -40,8 +40,8 @@
         },
         data(){
             return{
-                buttonType:"default",
-                isShowDetail:false,
+                buttonType:"default",//按钮样式
+                isShowDetail:false,  //表格隐藏
                 //多维度单选
                 buttonGroup:{
                     show:true,

@@ -13,6 +13,7 @@
     export default {
         name: "productRight",
         props:{
+            //横状图数据
             barData:{
                 type:Object
             }
@@ -26,7 +27,6 @@
             barChart
         },
         mounted() {
-            console.log(this.CommodityBar)
         }
     }
 </script>

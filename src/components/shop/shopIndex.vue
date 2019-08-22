@@ -65,16 +65,18 @@
         data(){
             return{
                 titName:"门店",
-                upShow: false,
-                downShow:false,
+                upShow: false, //增长树状图隐藏
+                downShow:false,  //下滑树状图隐藏
                 shopData:{
                     shopImg: require("../../assets/img/mendian.png"),
                 },
                 // isShow:true,
-                barEchartsDataUp:{},
-                barEchartsDataDown:{},
-                lityUpData:{},
-                lityDownData:{},
+                // barEchartsDataUp:{},
+                // barEchartsDataDown:{},
+                // lityUpData:{},
+                // lityDownData:{},
+
+                //门店指标解释
                 explainSecondList:{
                     imgType:4,
                     tableData:[
@@ -113,15 +115,19 @@
         watch:{
         },
         methods:{
+            //开大增长树状图
             upraphy(){
                 this.upShow = true;
             },
+            //关闭增长树状图
             upClick(){
                 this.upShow = false;
             },
+            //打开下滑树状图
             downraphy(){
                 this.downShow = true;
             },
+            //关闭下滑树状图
             downClick(){
                 this.downShow = false;
             },

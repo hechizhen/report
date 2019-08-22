@@ -34,12 +34,15 @@
             loadingData
         },
         props:{
+            //关闭
             trendChartClick:{
                 type:Function
             },
+            //树状图数据
             VariabilityUp:{
                 type:Object
             },
+            //looding效果
             isShow:{
                 type:Boolean,
                 default:false,
@@ -55,7 +58,7 @@
 
         data(){
             return {
-                defaultVal:"导出数据",
+                defaultVal:"导出数据", //按钮文字
                 // barEcharts:{
                 //     id:'barIdUp',
                 //     unit:'%',
@@ -73,9 +76,11 @@
             }
         },
         methods:{
+            //关闭方法
             thendChartClick(){
                 this.trendChartClick()
             },
+            //导出表格方法
             exportData(){
                 this.exportHandleClick(this.raiseExportData.tableHeaderTxt,this.raiseExportData.tableHeaderKey,this.raiseExportData.tableData,this.raiseExportData.tableName)
             }

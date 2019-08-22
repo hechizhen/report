@@ -34,16 +34,20 @@
             loadingData
         },
         props:{
+            //关闭单击事件
             trendChartClick:{
                 type:Function
             },
+            //树状图数据
             barEchartsData:{
                 type: Object
             },
+            //looding效果
             isShow:{
                 type:Boolean,
                 default:false,
             },
+            //导出数据
             downExportData:{
                 type:Object
             }
@@ -60,9 +64,11 @@
           console.log(this.barEchartsData)
         },
         methods:{
+            //关闭方法
             thendChartClicks(){
                 this.trendChartClick()
             },
+            //导出数据方法
             exportData(){
                 this.exportHandleClick(this.downExportData.tableHeaderTxt,this.downExportData.tableHeaderKey,this.downExportData.tableData,this.downExportData.tableName)
             }
