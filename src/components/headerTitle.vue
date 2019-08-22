@@ -12,8 +12,8 @@
                 <button-list :buttonType="buttonList.buttonType" :isGhost="buttonList.isGhost" :buttonHandleClick="buttonHandleClick" :defaultVal="buttonList.defaultVal" style="margin-left:20px;"></button-list>
             </p>
             <p>
-                <span style="font-size:14px;">选择经销商：</span>
-                <a-select v-model="defaultSelectVal" style="width: 200px" @change="onChange">
+                <span style="font-size:14px;">经销商：</span>
+                <a-select v-model="defaultSelectVal" style="width: 200px;height:40px;" @change="onChange">
                     <a-select-option v-for="(item,index) in dealList" :key="index" :value="item.name">{{item.name}}</a-select-option>
                 </a-select>
             </p>
@@ -88,7 +88,7 @@
             moment,
             //点击查询
             buttonHandleClick(){
-                this.changeDateHandle(this.defaultDateValue,this.newId)
+                this.changeDateHandle(this.defaultDateValue,this.newId,this.defaultSelectVal)
             },
             //选择时间
             changeDate(val,newDate){

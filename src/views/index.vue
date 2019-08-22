@@ -87,8 +87,8 @@
         },
         data() {
             return {
-                dealer_id:'ff80808169c93eb80169d6a73cc02d04',
-                indexDealName: '吴凌云',//经销商名称
+                dealer_id:'',
+                indexDealName: '',//经销商名称
                 indexScore: 97,//体检评分
                 indexSummary: '很好',//总结
                 indexDefaultDate: '',//默认时间
@@ -301,6 +301,8 @@
                 //总评分描述评分参数
                 totalScoreTxtParams:'',
                 loadingDataArray:[],
+                //是否展示经销商下拉框
+                isShowDealIdSelect:false,
             }
         },
         created() {
@@ -318,11 +320,19 @@
             this.currentDate = year + '' + month
             //获取当前默认显示年月
             this.indexDefaultDate = year + '/' + month
+            //获取本地链接判断登陆入口  预生产或者立购星
+            let href = location.href
+            if(href.indexOf('dealer_id')!=-1){
+                this.dealer_id = href.match(/dealerId(\S*)/)[1];
+                this.isShowDealIdSelect=false
+            }else{
+                this.dealer_id = 'ff80808169c93eb80169d6a73cc02d04'
+                this.isShowDealIdSelect=true
+            }
+            this.getDealIdListData()
         },
         mounted() {
-            this.indexDealName = this.dealList[0].name
             this.getsalesmanTrend()
-            this.getOverViewData()
             this.getOneHelpSalesData()
             this.getFinanceOverviewData()
             this.getsalesman()
@@ -337,7 +347,6 @@
             this.getRaiseDownStores()
             this.getSalesmanReached()
             this.getDetailTableData()
-            // this.getTotalScoreData()
         },
         computed: {
 
@@ -347,12 +356,15 @@
         },
         methods: {
             //点击查询
-            indexChangeDate(dateVal,selectVal) {
+            indexChangeDate(dateVal,selectVal,selectName) {
                 this.loadingDataArray = []
+                //判断入口为立购星或者预生产 是否改变经销商id
+                if(this.isShowDealIdSelect){
+                    this.dealer_id = selectVal
+                    this.indexDealName = selectName
+                }
                 this.currentDate = dateVal
-                this.dealer_id = selectVal
                 this.getsalesmanTrend()
-                this.getOverViewData()
                 this.getOneHelpSalesData()
                 this.getFinanceOverviewData()
                 this.getsalesman()
@@ -786,23 +798,52 @@
                     }
                 }
             },
-            //体检报告概览
-            getOverViewData() {
+            //获取经销商数据
+            getDealIdListData(){
                 var _this = this
+                //经销商集合接口参数
+                var params = {
+                    "inputParam":{},
+                    "outputCol": "dealer_id,dealer_name",
+                    "pageNum": 1,
+                    "pageSize": 1000,
+                    "serviceId": "service_tjbg02_dealer_all",
+                    "orderCol":"dealer_id desc"
+                }
                 this.$http({
-                    url: _this.requestHttpUrl + '/overviewScoring',
+                    url: _this.testRequestHttpUrl + '?v=dealList',
                     method: 'POST',
-                    data: {
-                        dateTime: _this.currentDate
-                    }
+                    data: params
                 }).then(function (res) {
                     console.log(res)
-                    let data = res.data.data.data
-                    _this.indexDealName = data.dealName
-                    _this.indexScore = data.score
-                    _this.indexSummary = data.summary
+                    let dealData = res.data.data.data
+                    let list = []
+                    dealData.map(function(item){
+                        list.push({name:item.dealer_name,id:item.dealer_id})
+                        if(_this.dealer_id == item.dealer_id){
+                            _this.indexDealName = item.dealer_name
+                        }
+                    })
+                    _this.dealList = list
                 })
             },
+            // //体检报告概览
+            // getOverViewData() {
+            //     var _this = this
+            //     this.$http({
+            //         url: _this.requestHttpUrl + '/overviewScoring',
+            //         method: 'POST',
+            //         data: {
+            //             dateTime: _this.currentDate
+            //         }
+            //     }).then(function (res) {
+            //         console.log(res)
+            //         let data = res.data.data.data
+            //         _this.indexDealName = data.dealName
+            //         _this.indexScore = data.score
+            //         _this.indexSummary = data.summary
+            //     })
+            // },
             //本月累计下单金额以及总达成 以及本月累计达成率
             getOneHelpSalesData() {
                 var _this = this
@@ -2802,20 +2843,21 @@
                     }
                     let stockScore1 = data.saledays==null ? 0 : data.saledays
                     let stockScore2 = _this.getReachPercent(data.mon6_unsale_money,data.money)*100
+                    let stockScore3 = data.saledays_mon==null ? 0 : Number((data.saledays_mon*100).toFixed(2))
                     _this.stockScoreTxtParams = {
                         moduleName:"库存结论7",
-                        values:stockScore1+','+stockScore2
+                        values:stockScore1+','+stockScore2+','+stockScore3
                     }
                     _this.getTwoStockScoreData()
                         // let data = res.data.data.data[0]
                         // console.log(data)
                         let SalesMoney = {
                             name: '6个月未销售商品金额(万元)',
-                            NoSales:'￥'+!data.mon6_unsale_money ? '--' : _this.dataProcess(data.mon6_unsale_money, 'money','tenth').num
+                            NoSales:'￥'+ _this.dataProcess(data.mon6_unsale_money, 'money','tenth').num
                         }
                         let SalesSum = {
                             name: '6个月未销售商品数(件)',
-                            NoSales:!data.non6_unsale_qty ? '--' : _this.dataProcess(data.non6_unsale_qty,'day').num
+                            NoSales:_this.dataProcess(data.non6_unsale_qty,'day').num
                         }
                         let Chain = {
                             name: '环比增长:',
