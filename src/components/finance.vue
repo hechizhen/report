@@ -18,9 +18,9 @@
             <loading-data :isShow="isShow"></loading-data>
             <public-table v-if="isShowDetail" :close="closePopup" :tableHeader="tableData.header" :interfaceParams="tableData.params" :titleName="tableData.titleName"></public-table>
         </div>
-        <preview-table v-if="storeShow" :data="tableStoreList" :columns="tableStoreColumns" titleName="门店效益" :buttonGroup="cardStore" 
+        <preview-table v-if="storeShow" :data="tableStoreList" :columns="tableStoreColumns" titleName="门店效益" :buttonGroup="cardStore"
         :selectButtonClick="changeStoreButtonVal" :returnClick="storeReturnClick"></preview-table>
-        <preview-table v-if="personShow" :data="tablePersonList" :columns="tablePersonColumns" titleName="人均效能" :buttonGroup="cardPerson" 
+        <preview-table v-if="personShow" :data="tablePersonList" :columns="tablePersonColumns" titleName="人均效能" :buttonGroup="cardPerson"
         :selectButtonClick="changePersonButtonVal"  :returnClick="personReturnClick"></preview-table>
     </div>
 </template>
@@ -86,15 +86,16 @@
 					imgType:7,
 					tableData:[
 						{title:'收入',data:'统计销售金额-销售折让-销退金额'},
-						{title:'大成本：',data:'统计商品、退货、赠品等成本'},
+						{title:'成本：',data:'统计商品、退货、赠品等成本'},
 						{title:'毛利：',data:'统计收入-成本'},
 						{title:'厂家费用：',data:'统计厂家费用（返利等）'},
 						{title:'支出费用：',data:'统计客户费用（投入门店的费用eg：陈列费等）、内部费用（工资、租金等）'},
 						{title:'利润：',data:'统计毛利+厂家费用-客户费用-内部费用'},
 						{title:'应收欠款：',data:'统计累计成交金额-实收金额'},
 						{title:'实收金额：',data:'统计累计用户实收账款'},
-						{title:'逾期金额：',data:'统计累计用户逾期金额'},
+						{title:'逾期应收：',data:'统计累计用户逾期金额（与立购星统一）'},
 						{title:'逾期占比：',data:'统计累计逾期金额/应收欠款'},
+                        {title:'逾期平均账龄：',data:'统计逾期天数/二帮卖逾期订单总数'},
 					],
 					titleName:'财务指标解释'
                 },

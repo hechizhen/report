@@ -1,6 +1,7 @@
 <template>
 	<div class="thendChart">
 		<div class="echarts">
+			<loading-data :isShow="isShow"></loading-data>
 			<div class="title">
 				<a-Row class="thendChartRow">
 				  <a-Col :span="12" class="thendChartCol1">
@@ -18,7 +19,6 @@
 				<echartsline :lineEchartsData="direction.config" :xAxis="direction.xAxis" :yAxis="direction.yAxis" :legendShow="false" :grid="grid" v-if="direction.length != 0" :dataZoomShow="false"></echartsline>
 			</div>
 		</div>
-		<loading-data :isShow="isShow"></loading-data>
 	</div>
 </template>
 <script>
@@ -82,6 +82,7 @@
 			padding: 0 20px;
 			background:rgba(255,255,255,1);
 			border-radius:10px;
+			position: relative;
 			.title {
 				height: 15%;
 				width: 100%;

@@ -1143,7 +1143,13 @@
                     method: 'POST',
                     data: params
                 }).then(function (res) {
-                    let data = res.data.data.data[0]
+                    //判断财务概览接口是否为空
+                    if(res.data.data.data.length!=0){
+                        var data = res.data.data.data[0]
+                    }else{
+                        var data=''
+                    }
+                    // let data = res.data.data.data[0]
                     //财务报表数据
                     let list = [
                         {name:'收入（万元）',val:_this.dataProcess(data.in_money, 'money','tenth').num},
@@ -1200,7 +1206,13 @@
                     data: params
                 }).then(function (res) {
                     if(res.data.code == '200'){
-                        var salesmanData = res.data.data.data[0]
+                        //判断财务概览接口是否为空
+                        if(res.data.data.data.length!=0){
+                            var salesmanData = res.data.data.data[0]
+                        }else{
+                            var salesmanData=''
+                        }
+                        // var salesmanData = res.data.data.data[0];
                         _this.personScoreParams={
                             "moduleName":"业务员",
                             "kpi_values":[
@@ -1563,12 +1575,12 @@
                     data: params
                 }).then(function (res) {
                     //判断业务员-走势图接口参数是否为空
-                    // if(res.data.data.data.length!=0){
-                    //     var salesmanTrendData = res.data.data.data
-                    // }else{
-                    //     var salesmanTrendData=''
-                    // }
-                    var salesmanTrendData = res.data.data.data,xAxisData=[],salesmanArr=[],seriesData=[],salesmanColor=['#009EE2','#E9A837','#00E2BF','#65E6F5'];
+                    if(res.data.data.data.length!=0){
+                        var salesmanTrendData = res.data.data.data
+                    }else{
+                        var salesmanTrendData=''
+                    }
+                    var xAxisData=[],salesmanArr=[],seriesData=[],salesmanColor=['#009EE2','#E9A837','#00E2BF','#65E6F5'];
                     console.log(salesmanTrendData)
                     salesmanTrendData.map(function(value){
                         if(xAxisData.length==0){
@@ -1630,18 +1642,18 @@
                 }).then(function (res) {
                     if(res.data.code == '200'){
                         //判断业务员-下滑人员接口参数是否为空
-                        // if(res.data.data.data.length!=0){
-                        //     var salesmandownwardData = res.data.data.data
-                        // }else{
-                        //     var salesmandownwardData=''
-                        // }
-                        var salesmandownwardData = res.data.data.data,xAxisData=[],seriesData=[],lastMonth=[],sameMonth=[],difference=[],salesmandownwardObject={},exportData=[];
+                        if(res.data.data.data.length!=0){
+                            var salesmandownwardData = res.data.data.data
+                        }else{
+                            var salesmandownwardData=''
+                        }
+                        var xAxisData=[],seriesData=[],lastMonth=[],sameMonth=[],difference=[],salesmandownwardObject={},exportData=[];
                         salesmandownwardData.map(function(value,index){
                             if(index<5) {
                                 xAxisData.push(value.emp_name);
                                 lastMonth.push(value.money_lm)
                                 sameMonth.push(value.money)
-                                difference.push(value.dif_money)
+                                difference.push(Math.abs(value.dif_money))
                                 exportData.push({
                                     index: index + 1,
                                     emp_name: value.emp_name,
@@ -1693,14 +1705,14 @@
                 }).then(function (res) {
                     if(res.data.code == '200'){
                         //判断业务员-达成-贡献接口参数是否为空
-                        // if(res.data.data.data.length!=0){
-                        //     var salesmanReachedData = res.data.data.data
-                        // }else{
-                        //     var salesmanReachedData=''
-                        // }
+                        if(res.data.data.data.length!=0){
+                            var salesmanReachedData = res.data.data.data
+                        }else{
+                            var salesmanReachedData=''
+                        }
                         // 达成
                         let targetList = []
-                        var salesmanReachedData = res.data.data.data,xAxisData=[],seriesData=[],lastMonth=[],sameMonth=[],difference=[],salesmanReachedObject={},contributionseriesData=[],contributionlastMonth=[],contributiondifference = [],salesmanContributionObject={};
+                        var xAxisData=[],seriesData=[],lastMonth=[],sameMonth=[],difference=[],salesmanReachedObject={},contributionseriesData=[],contributionlastMonth=[],contributiondifference = [],salesmanContributionObject={};
                         salesmanReachedData.map(function(value,index){
                             xAxisData.push(value.emp_name);
                             lastMonth.push(value.emp_money)
@@ -2714,12 +2726,14 @@
                     method: 'POST',
                     data: params
                 }).then(function (res) {
-                    console.log(res)
+                    // console.log(res)
                     //判断库存一级页面概览明细数据是否为空
                     if(res.data.data.data.length!=0){
                         var data = res.data.data.data[0]
+                        // alert(1)
                     }else{
                         var data= ''
+                        // alert(2)
                     }
                     _this.stockScoreParams={
                         "moduleName":"库存",
@@ -2777,21 +2791,22 @@
                         // console.log(data)
                         let SalesMoney = {
                             name: '6个月未销售商品金额(万元)',
-                            NoSales:'￥'+ _this.dataProcess(data.mon6_unsale_money, 'money','tenth').num
+                            NoSales:'￥'+!data.mon6_unsale_money ? '--' : _this.dataProcess(data.mon6_unsale_money, 'money','tenth').num
                         }
                         let SalesSum = {
                             name: '6个月未销售商品数(件)',
-                            NoSales: _this.dataProcess(data.non6_unsale_qty,'day').num
+                            NoSales:!data.non6_unsale_qty ? '--' : _this.dataProcess(data.non6_unsale_qty,'day').num
                         }
                         let Chain = {
                             name: '环比增长:',
                             inventoryChainVal:_this.dataProcess(data.saledays_mon,'percent').num+_this.dataProcess(data.saledays_mon,'percent').unit,
-                            inventoryChainValColor:data.saledays_mon<0 ? 'colorStyle' : ''
+                            inventoryChainValColor:data.saledays_mon<0 ? 'colorStyle' : '',
                         }
                         let Year = {
                             name: '同比增长:',
                             inventoryChainVal:_this.dataProcess(data.saledays_yoy,'percent').num+_this.dataProcess(data.saledays_yoy,'percent').unit,
                             inventoryChainValColor:data.saledays_yoy<0 ? 'colorStyle' : ''
+
                         }
                         //产品动销率树状图
                         let barDataMonth = [
@@ -2894,7 +2909,7 @@
                         _this.InventoryTurnover = false
                         _this.DaysAvailableStock = false   //库存加载页面效果
                         console.log(_this.inventoryDetails)
-                        console.log(_this.inventoryDay.inventoryBarData)
+                        console.log(_this.inventoryDay)
                     },
                 )
             },

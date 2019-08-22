@@ -17,8 +17,8 @@
 				default:'二帮卖得分'
 			},
 			coretext:{
-				type:Number,
-				default:100
+				type:String,
+				default:"100"
 			},
 			evaluate:{
 				type:String,

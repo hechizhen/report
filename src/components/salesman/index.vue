@@ -125,7 +125,7 @@
 					this.glideShow = false;
 				}else {
 					console.log(this.ownwardExportData)
-					this.exportHandleClick(this.ownwardExportData.tableHeaderTxt,this.ownwardExportData.tableHeaderKey,this.ownwardExportData.tableData,this.ownwardExportData.tableName)	
+					this.exportHandleClick(this.ownwardExportData.tableHeaderTxt,this.ownwardExportData.tableHeaderKey,this.ownwardExportData.tableData,this.ownwardExportData.tableName)
 				}
 			},
 			contributionClick(a){

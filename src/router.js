@@ -1,6 +1,6 @@
 const routers = [
     {
-        path: '/medical',
+        path: '/',
         meta: {
             title: ''
         },

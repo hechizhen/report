@@ -1,6 +1,7 @@
 <template>
 	<div class="totalAmount">
 		<div class="totalAmountcontent">
+			<loading-data :isShow="isShow"></loading-data>
 			<div class="title">
 			   <div class="titleborder"></div>
 			   <div class="titletext">{{displayData.name}}</div>
@@ -33,7 +34,6 @@
 				</ul>
 			</div>
 		</div>
-		<loading-data :isShow="isShow"></loading-data>
 	</div>
 </template>
 <script>
@@ -76,6 +76,7 @@
 			width: 100%;
 			height: 450px;
 			padding: 0 20px;
+			position: relative;
 			.title {
 				height: 50px;
 				display: flex;
@@ -153,7 +154,7 @@
 				}
 			}
 			.brand {
-				height: 265px;
+				height: 215px;
 				width: 100%;
 				.brandtitle {
 					height: 32px;
