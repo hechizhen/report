@@ -1,7 +1,7 @@
 
 <template>
     <div class="publicTable">
-        <div class="publicBox">
+        <div class="publicBox" ref="divHeight">
             <loading-data :isShow="loadingShow"></loading-data>
             <div class="titleName">
                 <p>{{titleName}}</p>
@@ -84,7 +84,7 @@
                 totalSize:'',//数据总条数
                 defaultSize:'',//数据条数/页
                 loadingShow:false,
-                maxHeight:'500',
+                maxHeight:'',
                 tableLoading:false,
                 pageNumber:1,
                 result:'',
@@ -95,6 +95,8 @@
         },
         mounted () {
             //  alert(JSON.stringify(this.tableHeader))
+            let height =this.$refs.divHeight.offsetHeight;
+            this.maxHeight = height*0.70
             this.getTableData()
         },
          computed:{

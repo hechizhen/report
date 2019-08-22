@@ -196,7 +196,7 @@
                             itemStyle:{
                                 normal:{
                                     color: function(params) {
-                                        if(params.seriesName=='达成率'){
+                                        if(params.seriesName=='达成率' && (_this.barEchartsData.id=="barIdMonthSales" || _this.barEchartsData.id=="barIdYearSales")){
                                             if(params.value<1){
                                                 var barColor = "#FF0048"
                                             }else{

@@ -64,3 +64,12 @@ a {
 .colorStyle{
     color: rgba(255, 0, 72, 1) !important;
 }
+.ant-calendar-picker-icon{
+    display: none!important
+}
+.ant-calendar-picker-input{
+    background-image:url('../assets//img/rq-icon.png')!important;
+    background-repeat: no-repeat;
+    background-size: 21px 18px;
+    background-position: right 10px center;
+}

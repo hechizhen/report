@@ -1,7 +1,7 @@
 
 <template>
     <div class="previewTable">
-        <div class="tableBox">
+        <div class="tableBox" ref="divHeight">
             <!-- <loading-data :isShow="loadingShow"></loading-data> -->
             <div class="title">
                 {{titleName}}
@@ -99,8 +99,8 @@
             }
         },
         mounted () {
-            console.log(this.data)
-            console.log(this.columns)
+            let height =this.$refs.divHeight.offsetHeight;
+            this.maxHeight = height*0.70
         },
         methods: {
             //选择维度

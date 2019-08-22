@@ -78,7 +78,7 @@
                 newId:this.dealList[0].id,
                 defaultValDate:moment(this.defaultDate, this.monthFormat),
                 defaultSelectVal:this.dealList[0].name,
-                defaultDateValue:this.defaultDate.substring(0,4)+this.defaultDate.substring(5,7)
+                defaultDateValue:this.defaultDate.substring(0,4)+this.defaultDate.substring(5,7),
             }
         },
         mounted () {
@@ -143,6 +143,7 @@
             display: flex;
             align-items: center;
             margin-top:10px;
+            position: relative;
         }
         .spanFont{
             color:#45485A

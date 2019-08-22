@@ -1,7 +1,7 @@
 
 <template>
     <div class="line">
-        <div :id="lineEchartsData.id" class="lineChart">
+        <div :id="lineEchartsData.id" :class="legendShow ? 'lineChart' : 'lineChart1'">
 
         </div>
         <div v-if="legendShow" class="checkBoxList">
@@ -101,7 +101,7 @@
                     top: 'middle',
                     left: '3%',
                     right: '4%',
-                    bottom: '3%',
+                    bottom: '5%',
                     height: '70%',
                     containLabel: true
                 })
@@ -313,6 +313,10 @@
         .lineChart{
             width:100%;
             height:80%;
+        }
+        .lineChart1{
+            width:100%;
+            height:90%;
         }
         .checkBoxList{
             width:100%;

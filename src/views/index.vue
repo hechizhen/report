@@ -1391,27 +1391,27 @@
                                 },
                                 {
                                     "kpi_name":"立白下单环比",
-                                    "kpi_value":_this.getHandleComputed(secondBandData.liby_money,secondBandData.liby_money_lm)*100
+                                    "kpi_value":_this.getHandleComputed(secondBandData.liby_money,secondBandData.liby_money_lm)
                                 },
                                 {
                                     "kpi_name":"好爸爸下单环比",
-                                    "kpi_value":_this.getHandleComputed(secondBandData.kispa_money,secondBandData.kispa_money_lm)*100
+                                    "kpi_value":_this.getHandleComputed(secondBandData.kispa_money,secondBandData.kispa_money_lm)
                                 },
                                 {
                                     "kpi_name":"超威下单环比",
-                                    "kpi_value":_this.getHandleComputed(secondBandData.cheerwin_money,secondBandData.cheerwin_money_lm)*100
+                                    "kpi_value":_this.getHandleComputed(secondBandData.cheerwin_money,secondBandData.cheerwin_money_lm)
                                 },
                                 {
                                     "kpi_name":"口腔下单环比",
-                                    "kpi_value":_this.getHandleComputed(secondBandData.oral_money,secondBandData.oral_money_lm)*100
+                                    "kpi_value":_this.getHandleComputed(secondBandData.oral_money,secondBandData.oral_money_lm)
                                 },
                                 {
                                     "kpi_name":"晟美下单环比",
-                                    "kpi_value":_this.getHandleComputed(secondBandData.shengmei_money,secondBandData.shengmei_money_lm)*100
+                                    "kpi_value":_this.getHandleComputed(secondBandData.shengmei_money,secondBandData.shengmei_money_lm)
                                 },
                                 {
                                     "kpi_name":"毛利额环比",
-                                    "kpi_value":secondBandData.gross_money_yoy==null ? 0 : (secondBandData.gross_money_yoy*100).toFixed(2)
+                                    "kpi_value":secondBandData.gross_money_mom==null ? 0 : (secondBandData.gross_money_mom*100).toFixed(2)
                                 },
                                 {
                                     "kpi_name":"毛利率环比增长",
