@@ -38,7 +38,7 @@
                 type:Function
             },
             barEchartsData:{
-                type: Function
+                type: Object
             },
             isShow:{
                 type:Boolean,
