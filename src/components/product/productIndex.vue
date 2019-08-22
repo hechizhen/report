@@ -64,14 +64,16 @@
                      type:Boolean
                  },
                  upproStoresData:{   //增长商品数据
-                     type:Object,String,
+                     type:Object,
+                     default:{}
                  },
                  prodownStoresData:{   //下滑商品数据
-                     type:Object,String,
+                     type:Object,
+                     default:{}
                  },
                  productTableData:{   //产品-列表数据
-                     type:String,
-                     default:""
+                     type:Object,
+                     default:{}
                  },
                  NumberGoodsDownBar:{  //下滑商品加载效果
                      type:Boolean
@@ -86,8 +88,8 @@
                      type:Boolean
                  },
                  tableData:{   //动销清单表格
-                     type:String,
-                     default:""
+                     type:Object,
+                     default:{}
                  },
                  exportData:{     //树状图导出数据
                      type:Object
@@ -150,7 +152,7 @@
                 downShow:false,
                 pieShow:false,
                 listShow:false,
-                newTableData:'',
+                newTableData:{},
                 // productisShow:true,
                 // commodityisShow:true,
                 titName:"商品", // 产品

@@ -107,9 +107,9 @@
                 //产品-动销商品数
                 commoditydata:"",
                 //产品-动销商品数增长商品
-                upproStoresData:"",
+                upproStoresData:{},
                 //产品-动销商品数下滑商品
-                prodownStoresData:"",
+                prodownStoresData:{},
                 //产品-动销商品明细-饼图
                 // GoodsDetail:"",
                 //门店活跃明细
@@ -203,18 +203,18 @@
                 },
                 salesmanReachedData:{},  //业务员-达成
                 salesmanContributionData:{},//业务员-贡献
-                productTableData:'',//产品列表数据
+                productTableData:{},//产品列表数据
                 //活跃门店二级表格数据
                 storeDetailTableData:'',
                 //产品清单二级表格数据
-                proDetailTableData:'',
-                getPinListing:'',
+                proDetailTableData:{},
+                getPinListing:{},
                 //财务模块二级表格数据
                 financeDetailTableData:'',
                 //二帮卖订单列表数据
-                twoDetailTableData:'',
+                twoDetailTableData:"",
                 //库存明细二级表格数据
-                invDetailTableData:'',
+                invDetailTableData:{},
                 //门店增长下滑导出数据
                 storeExportData:{
                     //增长导出数据
@@ -2283,6 +2283,7 @@
                                 },
                             }
                             _this.prodownStoresData = downBarData
+                            console.log( _this.prodownStoresData)
                              console.log(_this.downStoresData)
                             _this.NumberGoodsUpBar = false
                            _this.NumberGoodsDownBar = false

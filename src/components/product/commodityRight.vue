@@ -83,8 +83,7 @@
                 type:Function
             },
             tableData:{  //表格数据
-                type:String,
-                default:""
+                type:Object,String,
             },
             selectButtonClick:{  //商品明细表格切换维度
                 type:Function
