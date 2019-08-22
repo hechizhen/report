@@ -42,8 +42,8 @@
             },
             //评分
             score:{
-                type:Number,
-                default:88
+                type:Object,
+                default:{}
             },
             //总结
             summary:{
@@ -82,7 +82,7 @@
             }
         },
         mounted () {
-          
+                console.log(this.score)
         },
         methods: {
             moment,
@@ -107,13 +107,13 @@
             }
         },
         computed:{
-          
+
         },
         watch: {
-           
+
         },
         distroyed: function () {
-            
+
         }
     }
 </script>

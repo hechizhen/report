@@ -65,15 +65,15 @@
                  },
                  upproStoresData:{   //增长商品数据
                      type:Object,
-                     default:[]
+                     default:{}
                  },
                  prodownStoresData:{   //下滑商品数据
                      type:Object,
-                     default:[]
+                     default:{}
                  },
                  productTableData:{   //产品-列表数据
                      type:Object,
-                     default:[]
+                     default:{}
                  },
                  NumberGoodsDownBar:{  //下滑商品加载效果
                      type:Boolean
@@ -89,7 +89,7 @@
                  },
                  tableData:{   //动销清单表格
                      type:Object,
-                     default:[]
+                     default:{}
                  },
                  exportData:{     //树状图导出数据
                      type:Object
@@ -152,7 +152,7 @@
                 downShow:false,
                 pieShow:false,
                 listShow:false,
-                newTableData:'',
+                newTableData:{},
                 // productisShow:true,
                 // commodityisShow:true,
                 titName:"商品", // 产品
@@ -161,15 +161,17 @@
                     imgType:5,
                     tableData:[
                         {title:'商品分销率：',data:'统计当月订单商品的SKU数(去重)(只取立白)/有库存商品的SKU数(上月期末快照和当月期末快照去重)'},
-                        {title:'立白分销率：',data:'统计当月订单立白事业部商品的SKU数（去重）/立白事业部库存商品的SKU数'},
-                        {title:'好爸爸分销率：',data:'统计当月订单好爸爸事业部商品的SKU数（去重）/好爸爸事业部库存商品的SKU数'},
-                        {title:'超威分销率：',data:'统计当月订单超威商品的SKU数（去重）/超威库存商品的SKU数'},
-                        {title:'口腔分销率：',data:'统计当月订单口腔商品的SKU数（去重）/口腔库存商品的SKU数'},
-                        {title:'晟美分销率：',data:'统计当月订单晟美商品的SKU数（去重）/晟美库存商品的SKU数'},
+                        {title:'立白商品分销率：',data:'统计当月订单立白事业部商品的SKU数（去重）/立白事业部库存商品的SKU数'},
+                        {title:'好爸爸商品分销率：',data:'统计当月订单好爸爸事业部商品的SKU数（去重）/好爸爸事业部库存商品的SKU数'},
+                        {title:'超威商品分销率：',data:'统计当月订单超威商品的SKU数（去重）/超威库存商品的SKU数'},
+                        {title:'口腔商品分销率：',data:'统计当月订单口腔商品的SKU数（去重）/口腔库存商品的SKU数'},
+                        {title:'晟美商品分销率：',data:'统计当月订单晟美商品的SKU数（去重）/晟美库存商品的SKU数'},
                         {title:'总商品数：',data:'统计当月库存商品总SKU数（去重）（上月期末快照和当月期末快照去重）'},
                         {title:'动销商品数：',data:'统计当月商品下单SKU数（去重）'},
                         {title:'动销商品数环比：',data:'统计（当月下单商品数-上个月下单商品数）/上个月下单商品数*100%'},
                         {title:'动销商品数同比：',data:'统计（当月下单商品数-去年同月下单商品数）/去年同月下单商品数*100%'},
+                        {title:'销量下滑商品数：',data:'统计当月商品下单金额与上个月下单金额有所降低的商品数'},
+                        {title:'销量增长商品数：',data:'统计当月商品下单金额与上个月下单金额有所增长的商品数'},
                     ],
                     titleName:'二帮卖分析-产品指标解释',
                     span:6,

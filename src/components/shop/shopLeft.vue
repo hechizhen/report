@@ -58,10 +58,11 @@
                 type:Function
             },
             tableData:{   //无交易明细表格数据
-                type:Object
+                type:Object,String,
+                default:""
             },
             tradeTableData:{   //应收明细表格数据
-                type:Object
+                type:Object,String,
             },
             exportData:{  //导出数据功能
                 type:Object
