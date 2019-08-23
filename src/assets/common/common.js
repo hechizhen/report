@@ -692,6 +692,18 @@ export default{
    Vue.prototype.formatJson = function(filterVal, jsonData) {
       return jsonData.map(v => filterVal.map(j => v[j]))
   }
+  //滑动限制
+  Vue.prototype.stopScoll = function(){
+    var mo=function(e){e.preventDefault();};
+    document.body.style.overflow='hidden';
+    document.addEventListener("touchmove",mo,false);//禁止页面滑动
+  }
+  //取消滑动限制
+  Vue.prototype.moveScoll = function(){
+    var mo=function(e){e.preventDefault();};
+    document.body.style.overflow='';//出现滚动条
+    document.removeEventListener("touchmove",mo,false);
+  }
 }};
 
 var multiTableData = function(handlerArray,tableTitleColNum,colIndexArray){

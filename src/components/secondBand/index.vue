@@ -126,11 +126,13 @@
 			},
 			//打开订单明细
 			detailHandleClick(){
+				this.stopScoll()//禁止页面滑动
 				this.orderDetailClick()
 				this.isShowDetail = true
 			},
 			//关闭订单明细
 			closePopup(){
+				this.moveScoll()//禁止页面滑动
 				this.isShowDetail = false
 			},
 		},
