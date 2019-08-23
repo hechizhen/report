@@ -12,10 +12,10 @@
 				  <a-Col :span="6" class="managerCol">
 				  	<p>业务员达成</p>
 				  </a-Col>
-				  <a-Col :span="6" class="managerCol">
+				  <a-Col :span="5" class="managerCol">
 				  	<p>{{salesmanData.emp_rate}}</p>
 				  </a-Col>
-				  <a-Col :span="6" class="managerCol">
+				  <a-Col :span="7" class="managerCol">
 				  	<p @click="concludeClick('达成与贡献')">达成与贡献</p>
 				  	<p @click="trendClick('走势图')">走势图</p>
 				  </a-Col>
@@ -53,11 +53,11 @@
 				  	<p>总业务员人数(人)</p>
 				  	<p>业绩下滑人数(人)</p>
 				  </a-Col>
-				  <a-Col :span="4" class="managerCol">
+				  <a-Col :span="3" class="managerCol">
 				  	<p>{{salesmanData.emp_cnt}}</p>
 				  	<p>{{salesmanData.emp_drop_cnt}}</p>
 				  </a-Col>
-				  <a-Col :span="6" class="managerCol">
+				  <a-Col :span="7" class="managerCol">
 				  	<p @click="glidingClick('下滑人员')">下滑人员</p>
 				  </a-Col>
 				</a-Row>

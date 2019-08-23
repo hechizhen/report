@@ -53,7 +53,7 @@ a {
 }
 /*修改二帮卖-业务员按钮默认字体大小*/
 .manager .conclude .managerCol:nth-child(4) p{
-    width: 96px !important;
+    /*width: 96px !important;*/
     font-size: 16px !important;
 }
 .manager .compare .managerCol:nth-child(4) p{
