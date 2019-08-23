@@ -2241,12 +2241,11 @@
                             let raiseDifference = []//增长门店差异销售额
                             proraiseList.map(function(item,index){
                                 item.numberId = index+1
-
                                 if(index<5) {
-                                    downxAxisData.push(item.goods_name)  //商品名称
-                                    downLastMonth.push(item.money_lm)//上月销售额
-                                    downSameMonth.push(item.money)//当月销售额
-                                    downDifference.push(Math.abs(item.dif_money))//差异销售额
+                                    raisexAxisData.push(item.goods_name)  //商品名称
+                                    raiseLastMonth.push(item.money_lm)//上月销售额
+                                    raiseSameMonth.push(item.money)//当月销售额
+                                    raiseDifference.push(Math.abs(item.dif_money))//差异销售额
                                 }
                             })
                             _this.ProExportData.proraiseData.tableData = proraiseList
