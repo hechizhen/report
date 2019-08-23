@@ -26,6 +26,7 @@
                     <span>{{commoditydata.downGoods.name}}</span>
                     </div>
                     <div class="commodityR-basetwo">
+                        <!--//增长按钮-->
                     <span style="font-size:16px;font-family:PingFangSC-Semibold;font-weight:600;">{{commoditydata.downGoods.NoSales}}</span>
                     </div>
                     <div class="productLeft-btn">
@@ -40,6 +41,7 @@
                     <span>{{commoditydata.upGoods.name}}</span>
                     </div>
                     <div class="commodityR-basetwo">
+                        <!--//下滑按钮-->
                     <span style="font-size:16px;font-family:PingFangSC-Semibold;font-weight:600;">{{commoditydata.upGoods.NoSales}}</span>
                     </div>
                     <div class="productLeft-btn">
@@ -116,10 +118,18 @@
             ListbuttonHandleClick(val){
                 this.goodHandleClick()
                 this.isShowDetail=true
+                //页面出现弹框页面禁止滚动
+                var mo=function(e){e.preventDefault();};
+                document.body.style.overflow='hidden';
+                document.addEventListener("touchmove",mo,false)
             },
             //退出商品明细
             closePopup(){
                 this.isShowDetail=false
+                //弹框消失，恢复正常滑动效果
+                var mo=function(e){e.preventDefault();};
+                document.body.style.overflow='';//出现滚动条
+                document.removeEventListener("touchmove",mo,false);
             }
         },
         components:{
