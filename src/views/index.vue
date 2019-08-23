@@ -303,7 +303,7 @@
                 loadingDataArray:[],
                 //是否展示经销商下拉框
                 isShowDealIdSelect:false,
-                screenWidth: document.body.clientWidth, // 屏幕尺寸
+                screenWidth: window.screen.width, // 屏幕尺寸
                 bodyWdith:'',
             }
         },
@@ -338,6 +338,7 @@
         mounted() {
             if(this.screenWidth<=1480){
                 this.bodyWdith = this.screenWidth - 180 +'px'
+                alert(this.bodyWdith)
             }
             this.getsalesmanTrend()
             this.getOneHelpSalesData()
@@ -1801,8 +1802,8 @@
                             name:'达成和贡献'
                         }
                         seriesData.push(
-                            {name:'当月目标',data:sameMonth,color:'#FFBD7B',barWidth:'22'},
-                            {name:'当月销量',data:lastMonth,color:'#FE9600',barWidth:'22'},
+                            {name:'当月目标',data:sameMonth,color:'#FFBD7B',barWidth:'自适应'},
+                            {name:'当月销量',data:lastMonth,color:'#FE9600',barWidth:'自适应'},
                             {name:'达成率',data:difference,color:'#fff',barWidth:0},
                             )
                         salesmanReachedObject.xAxisData = xAxisData;
@@ -1811,8 +1812,8 @@
                         _this.salesmanReachedBar = false
                         // 贡献
                         contributionseriesData.push(
-                            {name:'当月销量',data:sameMonth,color:'#2D92FC',barWidth:'22'},
-                            {name:'当月总销量',data:contributionlastMonth,color:'#85C1FF',barWidth:'22'},
+                            {name:'当月销量',data:sameMonth,color:'#2D92FC',barWidth:'自适应'},
+                            {name:'当月总销量',data:contributionlastMonth,color:'#85C1FF',barWidth:'自适应'},
                             {name:'贡献率',data:contributiondifference,color:'#fff',barWidth:0}
                             )
                         salesmanContributionObject.xAxisData = xAxisData;

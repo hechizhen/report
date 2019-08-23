@@ -193,6 +193,7 @@
                             markLine:markLineObj,
                             barGap:barGap,
                             barWidth:item.barWidth,
+                            barMaxWidth:22,
                             itemStyle:{
                                 normal:{
                                     color: function(params) {
@@ -321,15 +322,17 @@
                         },
                     }
                     if(_this.dataZoomShow){
+                        let width = _this.barEchartsData.xAxisData.length
+                        
                         var dataZoom = [{
                             height: '70%',
                             yAxisIndex: [
                                 0
                             ],
-                            left:'1%',
+                            right:'1%',
                             orient: 'vertical',
-                            start: 40,
-                            end: 90,
+                            start: 10,
+                            end: 60,
                             handleStyle:{
                                 color:"#d3dee5",
                             },
