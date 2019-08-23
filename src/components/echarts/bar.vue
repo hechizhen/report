@@ -322,8 +322,21 @@
                         },
                     }
                     if(_this.dataZoomShow){
-                        let width = _this.barEchartsData.xAxisData.length
-                        
+                        // 业务员的人数数据长度
+                        let fieWidth = _this.barEchartsData.xAxisData.length
+                        // 肯定业务员的人数判断end结束的值
+                        if(fieWidth<= 5){
+                            var  endWidth = 100
+                        }
+                        else  if(fieWidth<=9){
+                            var  endWidth = 90
+                        }
+                        else{      //   10  60         12  45  19 35
+                            var  endWidth =( 5 / fieWidth ) * 90 +10
+                        }
+                        alert(fieWidth)
+                        alert(endWidth)
+
                         var dataZoom = [{
                             height: '70%',
                             yAxisIndex: [
@@ -332,7 +345,7 @@
                             right:'1%',
                             orient: 'vertical',
                             start: 10,
-                            end: 60,
+                            end: endWidth,
                             handleStyle:{
                                 color:"#d3dee5",
                             },
