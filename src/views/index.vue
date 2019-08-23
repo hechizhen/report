@@ -1,6 +1,6 @@
 
 <template>
-    <div class="index">
+    <div class="index" :style="{width:bodyWdith}">
         <!-- <div class="title">
             <p>体检报告</p>
             <i></i>
@@ -303,6 +303,8 @@
                 loadingDataArray:[],
                 //是否展示经销商下拉框
                 isShowDealIdSelect:false,
+                screenWidth: document.body.clientWidth, // 屏幕尺寸
+                bodyWdith:'',
             }
         },
         created() {
@@ -334,6 +336,9 @@
             this.getDealIdListData()
         },
         mounted() {
+            if(this.screenWidth<=1480){
+                this.bodyWdith = this.screenWidth - 180 +'px'
+            }
             this.getsalesmanTrend()
             this.getOneHelpSalesData()
             this.getFinanceOverviewData()
