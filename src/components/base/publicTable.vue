@@ -255,7 +255,7 @@
         .paginationTable{
             width:100%;
             text-align: right;
-            padding:20px 0;
+            padding:1.5% 0;
         }
         .iStyle{
             position: absolute;
