@@ -1968,7 +1968,7 @@
                             grid:{
                                 top: 'middle',
                                 left: '3%',
-                                right: '15%',
+                                right: '20%',
                                 height: '75%',
                                 bottom:'3%',
                                 containLabel: true

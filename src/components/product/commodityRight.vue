@@ -29,8 +29,8 @@
                     <span style="font-size:16px;font-family:PingFangSC-Semibold;font-weight:600;">{{commoditydata.downGoods.NoSales}}</span>
                     </div>
                     <div class="productLeft-btn">
-                        <newButton :isGhost="true" :defaultVal="commoditydata.downGoods.btn"
-                                   :buttonHandleClick="upbuttonHandleClick"
+                        <newButton :isGhost="true" :defaultVal="commoditydata.upGoods.btn"
+                                   :buttonHandleClick="downbuttonHandleClick"
                         ></newButton>
                     </div>
                 </div>
@@ -43,8 +43,8 @@
                     <span style="font-size:16px;font-family:PingFangSC-Semibold;font-weight:600;">{{commoditydata.upGoods.NoSales}}</span>
                     </div>
                     <div class="productLeft-btn">
-                        <newButton :isGhost="true" :defaultVal="commoditydata.upGoods.btn"
-                                   :buttonHandleClick="downbuttonHandleClick"
+                        <newButton :isGhost="true" :defaultVal="commoditydata.downGoods.btn"
+                                   :buttonHandleClick="upbuttonHandleClick"
                         ></newButton>
                     </div>
                 </div>
