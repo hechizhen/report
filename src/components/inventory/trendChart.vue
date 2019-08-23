@@ -33,13 +33,15 @@
 			loadingData
 		},
 		props:{
-			trendChartClick:{
-				type:Function
-			},
+			// trendChartClick:{
+			// 	type:Function
+			// },
+			//走势图数据
 			lineEchartsData:{
 				type:Object,
 				default:{}
 			},
+			//looding效果
 			isShow:{
 				type:Boolean,
 				default:false,
@@ -61,13 +63,13 @@
 			console.log(this.lineEchartsData)
 		},
 		methods:{
-			thendChartClick(){
-				this.trendChartClick()
-			},
+			// thendChartClick(){
+			// 	this.trendChartClick()
+			// },
 		},
 		watch:{
             lineEchartsData(val){
-                this.direction = val;
+                // this.direction = val;
             }
         },
 	}

@@ -25,7 +25,7 @@
 			core,
 			trendChart,
 			glide,
-			contribution
+			contribution,
 		},
 		props:{
 			salesmanData:{

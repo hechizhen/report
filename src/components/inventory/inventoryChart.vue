@@ -30,12 +30,15 @@
             loadingData
         },
         props:{
+            //关闭折线图
             trendChartClick:{
                 type:Function
             },
+            //折线图数据
             lineEchartsData:{
                 type: Object
             },
+            //looding效果
             isShow:{
                 type:Boolean,
                 default:false,

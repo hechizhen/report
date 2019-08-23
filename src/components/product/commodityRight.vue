@@ -29,8 +29,8 @@
                     <span style="font-size:16px;font-family:PingFangSC-Semibold;font-weight:600;">{{commoditydata.downGoods.NoSales}}</span>
                     </div>
                     <div class="productLeft-btn">
-                        <newButton :isGhost="true" :defaultVal="commoditydata.downGoods.btn"
-                                   :buttonHandleClick="upbuttonHandleClick"
+                        <newButton :isGhost="true" :defaultVal="commoditydata.upGoods.btn"
+                                   :buttonHandleClick="downbuttonHandleClick"
                         ></newButton>
                     </div>
                 </div>
@@ -43,8 +43,8 @@
                     <span style="font-size:16px;font-family:PingFangSC-Semibold;font-weight:600;">{{commoditydata.upGoods.NoSales}}</span>
                     </div>
                     <div class="productLeft-btn">
-                        <newButton :isGhost="true" :defaultVal="commoditydata.upGoods.btn"
-                                   :buttonHandleClick="downbuttonHandleClick"
+                        <newButton :isGhost="true" :defaultVal="commoditydata.downGoods.btn"
+                                   :buttonHandleClick="upbuttonHandleClick"
                         ></newButton>
                     </div>
                 </div>
@@ -94,6 +94,7 @@
         },
         data(){
             return{
+                //商品明细表格
                 isShowDetail:false,
                 buttonGroup:{
                     show:true,
@@ -103,16 +104,20 @@
             }
         },
         methods:{
+            //打开下滑树状图
             upbuttonHandleClick(val){
                 this.upraphy()
             },
+            //打开增长树状图
             downbuttonHandleClick(val){
                 this.downraphy()
             },
+            //点击商品明细
             ListbuttonHandleClick(val){
                 this.goodHandleClick()
                 this.isShowDetail=true
             },
+            //退出商品明细
             closePopup(){
                 this.isShowDetail=false
             }

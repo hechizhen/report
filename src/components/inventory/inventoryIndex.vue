@@ -134,16 +134,16 @@
             return{
                 Money:"￥",
                 inventoryTitle: '库存',//库存标题
-                invechartsShow: false,
-                isShowDetail:false,
-                isShowreceivable:false,
-                marketableDay:[],
-                newTableData:'',
+                // invechartsShow: false,
+                isShowDetail:false,  //库存明细
+                isShowreceivable:false, //库存可销天数
+                newTableData:'',   //库存可销天数表格数据
                 defaultVal:"未销明细",
                 buttonGroup:{   //切换维度按钮
                     show:true,
                     list:['品类','系列','商品']
                 },
+                //指标解释数据
                 explainSecondList:{
                     imgType:6,
                     tableData:[
@@ -187,6 +187,7 @@
             }
         },
         watch:{
+            //监听库存可销天数表格数据
             getInvDayListing(val){
                 console.log(val)
                 this.newTableData = val

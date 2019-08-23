@@ -38,22 +38,22 @@
         },
         data () {
             return {
-                
+
             }
         },
         mounted () {
-          
+
         },
         methods: {
         },
         computed:{
-          
+
         },
         watch: {
-           
+
         },
         distroyed: function () {
-            
+
         }
     }
 </script>
@@ -86,11 +86,13 @@
             font-size:14px;
             font-weight:bold;
             color:rgba(255,255,255,1);
+            white-space: nowrap;
         }
         .fontStyle1{
             font-size:12px;
             font-weight:bold;
             color:#98A2B4;
+            white-space: nowrap;
         }
         .fontStyle2{
             font-size:18px;

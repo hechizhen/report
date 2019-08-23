@@ -34,12 +34,15 @@
             loadingData
         },
         props:{
+            //关闭表格
             trendChartClick:{
                 type:Function
             },
+            //树状图数据
             VariabilityDown:{
                 type:Object
             },
+            //looding效果
             isShow:{
                 type:Boolean,
                 default:false,
@@ -57,9 +60,11 @@
             }
         },
         methods:{
+            //关闭表格方法
             thendChartClick(){
                 this.trendChartClick()
             },
+            //导出数据方法
             exportData(){
                 this.exportHandleClick(this.downExportData.tableHeaderTxt,this.downExportData.tableHeaderKey,this.downExportData.tableData,this.downExportData.tableName)
             }
