@@ -11,7 +11,7 @@
                 <a-month-picker v-model="defaultValDate" :format="monthFormat" :allowClear="false" @change="changeDate" />
                 <button-list :buttonType="buttonList.buttonType" :isGhost="buttonList.isGhost" :buttonHandleClick="buttonHandleClick" :defaultVal="buttonList.defaultVal" style="margin-left:20px;"></button-list>
             </p>
-            <p>
+            <p v-if="isShowDealIdSelect">
                 <span style="font-size:14px;">经销商：</span>
                 <a-select v-model="defaultSelectVal" style="width: 200px;height:40px;" @change="onChange">
                     <a-select-option v-for="(item,index) in dealList" :key="index" :value="item.name">{{item.name}}</a-select-option>
@@ -59,9 +59,14 @@
             changeDateHandle:{
                 type:Function,
             },
+            //经销商数据
             dealList:{
                 type:Array
             },
+            //是否展示经销商下拉框
+            isShowDealIdSelect:{
+                type:Boolean
+            }
         },
         components : {
             buttonList

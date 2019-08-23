@@ -7,7 +7,7 @@
         </div> -->
         <!-- 头部 -->
         <header-title :dealName="indexDealName" :score="totalScoreList" :summary="indexSummary" :defaultDate="indexDefaultDate" :changeDateHandle="indexChangeDate"
-        :dealList="dealList"></header-title>
+        :dealList="dealList" :isShowDealIdSelect="isShowDealIdSelect"></header-title>
         <!-- 一帮卖分析 -->
         <one-help-sale-en :titleName="oneHelpSaleTitle" :monthSalesData="monthSalesData" :monthBarData="monthBarData"  :coreData="oneHelpSaleScoreList"
         :yearSalesData="yearSalesData" :yearBarData="yearBarData" :monthShow="oneHelpSaleMonthShow" :yearShow="oneHelpSaleYearShow"
@@ -321,9 +321,11 @@
             //获取当前默认显示年月
             this.indexDefaultDate = year + '/' + month
             //获取本地链接判断登陆入口  预生产或者立购星
-            let href = location.href
+            // let href = this.getParamsFromIframe("dealerId")
+            // alert(href)
+            let href= location.href
             if(href.indexOf('dealer_id')!=-1){
-                this.dealer_id = href.match(/dealerId(\S*)/)[1];
+                this.dealer_id = href.match(/dealerId=(\S*)/)[1];
                 this.isShowDealIdSelect=false
             }else{
                 this.dealer_id = 'ff80808169c93eb80169d6a73cc02d04'
@@ -3544,6 +3546,14 @@
                 }
                 return tempObj
             },
+            getParamsFromIframe(name){
+                var reg = new RegExp("[^\?&]?" + encodeURI(name) + "=[^&]+");
+                var arr = window.parent.document.getElementsByClassName("show_ifm").contentWindow.location.search.match(reg);
+                if (arr != null) {
+                    return decodeURI(arr[0].substring(arr[0].search("=") + 1));
+                }
+                return "";
+            }
         }
     }
 </script>
