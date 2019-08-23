@@ -398,7 +398,7 @@
                                     "data_type":"当月",
                                     "bo_type":"系列"
                                 },
-                                "outputCol":"bo1_name,bo2_name,bo3_name,money,ratio_rate,money_mom,money_yoy,gross_money,gross_rate,gross_money_yoy,gross_money_mom",
+                                "outputCol":"bo1_name,bo2_name,bo3_name,money,ratio_rate,money_mom,money_yoy,gross_money,gross_rate,gross_money_mom,gross_money_yoy",
                                 "pageNum":1,
                                 "pageSize":100,
                                 "groupByCol":["bo1_name","bo2_name","bo3_name"],
@@ -435,7 +435,7 @@
                                     "data_type":"当月",
                                     "bo_type":"商品"
                                 },
-                                "outputCol":"bo1_name,bo2_name,bo3_name,goods_code69,goods_code79,goods_name,money,ratio_rate,money_mom,money_yoy,gross_money,gross_rate,gross_money_yoy,gross_money_mom",
+                                "outputCol":"bo1_name,bo2_name,bo3_name,goods_code69,goods_code79,goods_name,money,ratio_rate,money_mom,money_yoy,gross_money,gross_rate,gross_money_mom,gross_money_yoy",
                                 "pageNum":1,
                                 "pageSize":100,
                                 "groupByCol":["bo1_name","bo2_name","bo3_name","goods_name"],
@@ -475,7 +475,7 @@
                                     "data_type":"当月",
                                     "bo_type":"品类"
                                 },
-                                "outputCol":"bo1_name,bo2_name,money,ratio_rate,money_mom,money_yoy,gross_money,gross_rate,gross_money_yoy,gross_money_mom",
+                                "outputCol":"bo1_name,bo2_name,money,ratio_rate,money_mom,money_yoy,gross_money,gross_rate,gross_money_mom,gross_money_yoy",
                                 "pageNum":1,
                                 "pageSize":100,
                                 "groupByCol":["bo1_name","bo2_name"],
@@ -1259,7 +1259,7 @@
                         if(res.data.data.data.length!=0){
                             var salesmanData = res.data.data.data[0]
                         }else{
-                            var salesmanData=''
+                            var salesmanData= []
                         }
                         // var salesmanData = res.data.data.data[0];
                         _this.personScoreParams={
@@ -1542,12 +1542,12 @@
                 }).then(function (res) {
                     console.log(res)
                     //判断二帮卖-订单走势图接口参数是否为空
-                    if(res.data.data.data.length!=0){
-                        var directionData = res.data.data.data
-                    }else{
-                        var directionData=''
-                    }
-                    var monthArr = [],seriesData=[],directionArr = {};
+                    // if(res.data.data.data.length!=0){
+                    //     var directionData = res.data.data.data
+                    // }else{
+                    //     var directionData=[]
+                    // }
+                    var directionData = res.data.data.data,monthArr = [],seriesData=[],directionArr = {};
                     directionData.map(function(value){
                         monthArr.push(value.data_mon)
                         seriesData.push(value.money)
@@ -2243,12 +2243,11 @@
                             let raiseDifference = []//增长门店差异销售额
                             proraiseList.map(function(item,index){
                                 item.numberId = index+1
-
                                 if(index<5) {
-                                    downxAxisData.push(item.goods_name)  //商品名称
-                                    downLastMonth.push(item.money_lm)//上月销售额
-                                    downSameMonth.push(item.money)//当月销售额
-                                    downDifference.push(Math.abs(item.dif_money))//差异销售额
+                                    raisexAxisData.push(item.goods_name)  //商品名称
+                                    raiseLastMonth.push(item.money_lm)//上月销售额
+                                    raiseSameMonth.push(item.money)//当月销售额
+                                    raiseDifference.push(Math.abs(item.dif_money))//差异销售额
                                 }
                             })
                             _this.ProExportData.proraiseData.tableData = proraiseList
@@ -2814,7 +2813,7 @@
                     if(res.data.data.data.length!=0){
                         var data = res.data.data.data[0]
                     }else{
-                        var data= ''
+                        var data=[]
                     }
                     _this.stockScoreParams={
                         "moduleName":"库存",
@@ -3059,12 +3058,12 @@
                 }).then(function (res) {
                     console.log(res)
                     //判断库存可销天数走势图数据是否为空
-                    if(res.data.data.data.length!=0){
-                        var salesmanTrendData = res.data.data.data
-                    }else{
-                        var salesmanTrendData=''
-                    }
-                    var xAxisData=[],salesmanArr=[],seriesData=[],salesmanColor=['#1378ec','#ee723f','#e9b533','#cc57d9','#1b9ad9','#39d4e7'];
+                    // if(res.data.data.data.length!=0){
+                    //     var salesmanTrendData = res.data.data.data
+                    // }else{
+                    //     var salesmanTrendData=''
+                    // }
+                    var salesmanTrendData = res.data.data.data,xAxisData=[],salesmanArr=[],seriesData=[],salesmanColor=['#1378ec','#ee723f','#e9b533','#cc57d9','#1b9ad9','#39d4e7'];
                    // console.log(salesmanTrendData)
                     salesmanTrendData.map(function(value){
                         //非空值判断
@@ -3369,7 +3368,7 @@
                                     "data_type":"当月",
                                     "bo_type":"品类"
                                 },
-                                "outputCol":"bo1_name,bo2_name,money,ratio_rate,money_mom,money_yoy,gross_money,gross_rate,gross_money_yoy,gross_money_mom",
+                                "outputCol":"bo1_name,bo2_name,money,ratio_rate,money_mom,money_yoy,gross_money,gross_rate,gross_money_mom,gross_money_yoy",
                                 "pageNum":1,
                                 "pageSize":100,
                                 "groupByCol":["bo1_name","bo2_name"],
