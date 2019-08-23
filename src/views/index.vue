@@ -1815,7 +1815,7 @@
                         _this.salesmanReachedBar = false
                         // 贡献
                         contributionseriesData.push(
-                            {name:'当月销量',data:sameMonth,color:'#2D92FC',barWidth:'自适应'},
+                            {name:'当月销量',data:lastMonth,color:'#2D92FC',barWidth:'自适应'},
                             {name:'当月总销量',data:contributionlastMonth,color:'#85C1FF',barWidth:'自适应'},
                             {name:'贡献率',data:contributiondifference,color:'#fff',barWidth:0}
                             )
