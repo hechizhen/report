@@ -1696,21 +1696,21 @@
                         }
                         var xAxisData=[],seriesData=[],lastMonth=[],sameMonth=[],difference=[],salesmandownwardObject={},exportData=[];
                         salesmandownwardData.map(function(value,index){
+                            exportData.push({
+                                index: index + 1,  //序号
+                                emp_name: value.emp_name,   //业务员
+                                emp_phone:value.emp_phone,   //联系电话
+                                money_lm: value.money_lm,         //上月销量（元）
+                                money_rate_lm: _this.dataProcess(value.money_rate_lm,'percent').num +_this.dataProcess(value.money_rate_lm,'percent').unit,   //上月达成率
+                                money: value.money, //当月销量（元）
+                                money_rate:  _this.dataProcess(value.money_rate,'percent').num +_this.dataProcess(value.money_rate,'percent').unit, //当月达成率
+                                dif_money: value.dif_money  //差额（元）
+                            })
                             if(index<5) {
                                 xAxisData.push(value.emp_name);
                                 lastMonth.push(value.money_lm)
                                 sameMonth.push(value.money)
                                 difference.push(Math.abs(value.dif_money))
-                                exportData.push({
-                                    index: index + 1,  //序号
-                                    emp_name: value.emp_name,   //业务员
-                                    emp_phone:value.emp_phone,   //联系电话
-                                    money_lm: value.money_lm,         //上月销量（元）
-                                    money_rate_lm: _this.dataProcess(value.money_rate_lm,'percent').num +_this.dataProcess(value.money_rate_lm,'percent').unit,   //上月达成率
-                                    money: value.money, //当月销量（元）
-                                    money_rate:  _this.dataProcess(value.money_rate,'percent').num +_this.dataProcess(value.money_rate,'percent').unit, //当月达成率
-                                    dif_money: value.dif_money  //差额（元）
-                                })
                             }
                         })
                         seriesData.push(
@@ -2250,6 +2250,7 @@
                                 }
                             })
                             _this.ProExportData.proraiseData.tableData = proraiseList
+                             console.log(proraiseList)
                             console.log( _this.ProExportData.proraiseData)
                             //增长产品柱状图数据
                             let raiseBarData = {
@@ -2896,8 +2897,8 @@
                             data.liby_saledays = !data.liby_saledays ? '--' : data.liby_saledays ,  //立白树状图数据
                             data.kispa_saledays = !data.kispa_saledays ? '--' : data.kispa_saledays ,//好爸爸树状图数据
                             data.cheerwin_saledays = !data.cheerwin_saledays ? '--' : data.cheerwin_saledays ,//超威树状图数据
-                            data.shengmei_saledays = !data.shengmei_saledays ? '--' : data.shengmei_saledays ,//立白口腔树状图数据
-                            data.oral_saledays = !data.oral_saledays ? '--' : data.oral_saledays ,//晟美树状图数据
+                            data.oral_saledays = !data.oral_saledays ? '--' : data.oral_saledays ,//口腔树状图数据
+                            data.shengmei_saledays = !data.shengmei_saledays ? '--' : data.shengmei_saledays ,//晟美树状图数据
                         ]
                         let Axiax = ['立白','好爸爸','超威','口腔','晟美']  //X轴数据
                         let inventoryBarData = {
