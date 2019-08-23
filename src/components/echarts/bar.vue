@@ -334,8 +334,8 @@
                         else{      //   10  60         12  45  19 35
                             var  endWidth =( 5 / fieWidth ) * 90 +10
                         }
-                        alert(fieWidth)
-                        alert(endWidth)
+                        // alert(fieWidth)
+                        // alert(endWidth)
 
                         var dataZoom = [{
                             height: '70%',

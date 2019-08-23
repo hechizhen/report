@@ -206,10 +206,19 @@
             //关闭逾期明细
             closePopup(){
                 this.isShowDetail = false
+                //弹框消失，恢复正常滑动效果
+                var mo=function(e){e.preventDefault();};
+                document.body.style.overflow='';//出现滚动条
+                document.removeEventListener("touchmove",mo,false);
             },
             //打开逾期明细
             overDueHandleClick(){
                 this.isShowDetail = true
+                //页面出现弹框页面禁止滚动
+                var mo=function(e){e.preventDefault();};
+                document.body.style.overflow='hidden';
+                document.addEventListener("touchmove",mo,false)
+
             }
         },
         computed:{

@@ -36,10 +36,18 @@
 			//显示弹窗
 			detailHandleClick(){
 				this.isShow = true
+				//页面出现弹框页面禁止滚动
+				var mo=function(e){e.preventDefault();};
+				document.body.style.overflow='hidden';
+				document.addEventListener("touchmove",mo,false)
 			},
 			//关闭弹窗
 			closeHandleClick(){
 				this.isShow = false
+				//弹框消失，恢复正常滑动效果
+				var mo=function(e){e.preventDefault();};
+				document.body.style.overflow='';//出现滚动条
+				document.removeEventListener("touchmove",mo,false);
 			}
 		}
 	}

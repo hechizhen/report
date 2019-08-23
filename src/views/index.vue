@@ -1701,12 +1701,12 @@
                 }).then(function (res) {
                     if(res.data.code == '200'){
                         //判断业务员-下滑人员接口参数是否为空
-                        if(res.data.data.data.length!=0){
-                            var salesmandownwardData = res.data.data.data
-                        }else{
-                            var salesmandownwardData=''
-                        }
-                        var xAxisData=[],seriesData=[],lastMonth=[],sameMonth=[],difference=[],salesmandownwardObject={},exportData=[];
+                        // if(res.data.data.data.length!=0){
+                        //     var salesmandownwardData = res.data.data.data
+                        // }else{
+                        //     var salesmandownwardData=''
+                        // }
+                        var salesmandownwardData = res.data.data.data,xAxisData=[],seriesData=[],lastMonth=[],sameMonth=[],difference=[],salesmandownwardObject={},exportData=[];
                         salesmandownwardData.map(function(value,index){
                             exportData.push({
                                 index: index + 1,  //序号

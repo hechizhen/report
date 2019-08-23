@@ -54,10 +54,18 @@
             storeDetailHandleClick(){
                 this.storeHandleClick()
                 this.isShowDetail = true
+                //页面出现弹框页面禁止滚动
+                var mo=function(e){e.preventDefault();};
+                document.body.style.overflow='hidden';
+                document.addEventListener("touchmove",mo,false)
             },
             //关闭动销清单
             closePopup(){
                 this.isShowDetail = false
+                //弹框消失，恢复正常滑动效果
+                var mo=function(e){e.preventDefault();};
+                document.body.style.overflow='';//出现滚动条
+                document.removeEventListener("touchmove",mo,false);
             },
 
         },
