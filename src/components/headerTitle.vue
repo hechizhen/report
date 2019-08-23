@@ -13,7 +13,7 @@
             </p>
             <p>
                 <span style="font-size:14px;">经销商：</span>
-                <a-select v-model="defaultSelectVal" style="width: 200px;height:40px;" @change="onChange">
+                <a-select showSearch v-model="defaultSelectVal" style="width: 200px;height:40px;" @change="onChange">
                     <a-select-option v-for="(item,index) in dealList" :key="index" :value="item.name">{{item.name}}</a-select-option>
                 </a-select>
             </p>
@@ -109,7 +109,7 @@
                         _this.newId = item.id
                     }
                 })
-            }
+            },
         },
         computed:{
 

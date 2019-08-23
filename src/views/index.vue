@@ -303,11 +303,14 @@
                 loadingDataArray:[],
                 //是否展示经销商下拉框
                 isShowDealIdSelect:false,
-                screenWidth: document.body.clientWidth, // 屏幕尺寸
+                screenWidth: window.screen.width, // 屏幕尺寸
                 bodyWdith:'',
             }
         },
         created() {
+            if(this.screenWidth<=1480){
+                this.bodyWdith = this.screenWidth - 180 +'px'
+            }
             let date = new Date;
             let year = date.getFullYear();
             let month = date.getMonth() + 1;
@@ -334,10 +337,6 @@
             this.getDealIdListData()
         },
         mounted() {
-            if(this.screenWidth<=1480){
-                this.bodyWdith = this.screenWidth - 180 +'px'
-                alert(this.bodyWdith)
-            }
             this.getsalesmanTrend()
             this.getOneHelpSalesData()
             this.getFinanceOverviewData()
