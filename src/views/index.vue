@@ -303,7 +303,7 @@
                 loadingDataArray:[],
                 //是否展示经销商下拉框
                 isShowDealIdSelect:false,
-                screenWidth: window.screen.width, // 屏幕尺寸
+                screenWidth: document.body.clientWidth, // 屏幕尺寸
                 bodyWdith:'',
             }
         },
@@ -323,10 +323,8 @@
             //获取当前默认显示年月
             this.indexDefaultDate = year + '/' + month
             //获取本地链接判断登陆入口  预生产或者立购星
-            // let href = this.getParamsFromIframe("dealerId")
-            // alert(href)
-            let href= location.href
-            if(href.indexOf('dealer_id')!=-1){
+            let href= location.hash
+            if(href.indexOf('dealerId')!=-1){
                 this.dealer_id = href.match(/dealerId=(\S*)/)[1];
                 this.isShowDealIdSelect=false
             }else{
@@ -363,14 +361,20 @@
 
         },
         methods: {
+            getIframUrl(id){
+                var url = parent.document.getElementsByTagName(id).contentWindow.location.href;
+                return url;
+            },
             //点击查询
             indexChangeDate(dateVal,selectVal,selectName) {
                 this.loadingDataArray = []
+                this.dealer_id = selectVal
+                this.indexDealName = selectName
                 //判断入口为立购星或者预生产 是否改变经销商id
-                if(this.isShowDealIdSelect){
-                    this.dealer_id = selectVal
-                    this.indexDealName = selectName
-                }
+                // if(this.isShowDealIdSelect){
+                //     this.dealer_id = selectVal
+                //     this.indexDealName = selectName
+                // }
                 this.currentDate = dateVal
                 this.getsalesmanTrend()
                 this.getOneHelpSalesData()
