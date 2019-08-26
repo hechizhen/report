@@ -18,7 +18,7 @@
 			<div class="grossProfit">
 				<a-Row>
 					<a-Col :span="12" class="recordLeft">
-						<div><img src="./../../assets/img/jine.png">毛利额(万元)<span>￥</span>{{orderAmountData.gross_money}}</div>
+						<div><img src="./../../assets/img/jine.png">毛利额(万元)<span>￥</span><span class="txt">{{orderAmountData.gross_money}}</span></div>
 					</a-Col>
 					<a-Col :span="12" class="recordRight">
 						<div><img src="./../../assets/img/maoli-icon.png">毛利率<span>{{orderAmountData.gross_money_rate}}</span></div>
@@ -165,13 +165,20 @@
 							font-size:20px;
 							font-family:PingFangSC-Medium;
 							font-weight:500;
-							color:rgba(51,51,51,1);
+							color:#98A2B4;
 							span {
 								margin-left: 10px;
 								font-size:12px;
 								font-family:PingFangSC-Medium;
 								font-weight:bold;
 								color:rgba(51,51,51,1);
+							}
+							.txt{
+								color:rgba(51,51,51,1);
+								font-size:20px;
+								font-family:PingFangSC-Medium;
+								font-weight:500;
+								margin-left: 0;
 							}
 						}
 						img {
@@ -187,7 +194,7 @@
 							font-size:20px;
 							font-family:PingFangSC-Medium;
 							font-weight:500;
-							color:rgba(51,51,51,1);
+							color:#98A2B4;
 							img{
 								margin-right: 5px;
 							}

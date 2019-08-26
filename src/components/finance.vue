@@ -191,21 +191,29 @@
             storeHandleClick(){
                 this.stopScoll()
                 this.storeShow = true
+                //页面出现弹框页面禁止滚动
+                this.stopScoll()
             },
             //关闭门店收益
             storeReturnClick(){
                 this.moveScoll()
                 this.storeShow = false
+                //弹框消失，恢复正常滑动效果
+                this.moveScoll()
             },
             //人均效能
             personHandleClick(){
                 this.stopScoll()
                 this.personShow = true
+                //页面出现弹框页面禁止滚动
+                this.stopScoll()
             },
             //关闭人均效能
             personReturnClick(){
                 this.moveScoll()
                 this.personShow = false
+                //弹框消失，恢复正常滑动效果
+                this.moveScoll()
             },
             //关闭逾期明细
             closePopup(){

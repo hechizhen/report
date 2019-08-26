@@ -119,17 +119,13 @@
                 this.goodHandleClick()
                 this.isShowDetail=true
                 //页面出现弹框页面禁止滚动
-                var mo=function(e){e.preventDefault();};
-                document.body.style.overflow='hidden';
-                document.addEventListener("touchmove",mo,false)
+                this.stopScoll()
             },
             //退出商品明细
             closePopup(){
                 this.isShowDetail=false
                 //弹框消失，恢复正常滑动效果
-                var mo=function(e){e.preventDefault();};
-                document.body.style.overflow='';//出现滚动条
-                document.removeEventListener("touchmove",mo,false);
+                this.moveScoll()
             }
         },
         components:{
@@ -227,6 +223,8 @@
                         color: rgba(255, 255, 255, 1);
                         margin-bottom: 0;
                         display: inline-block;
+                        font-size: 16px;
+                        font-weight: 500;
                     }
                 }
             }

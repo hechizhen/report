@@ -103,33 +103,25 @@
             storeDetailHandleClick(){
                 this.isShowDetail = true
                 //页面出现弹框页面禁止滚动
-                var mo=function(e){e.preventDefault();};
-                document.body.style.overflow='hidden';
-                document.addEventListener("touchmove",mo,false)
+                this.stopScoll()
             },
             //关闭弹窗
             closePopup(){
                 this.isShowDetail = false
                 //弹框消失，恢复正常滑动效果
-                var mo=function(e){e.preventDefault();};
-                document.body.style.overflow='';//出现滚动条
-                document.removeEventListener("touchmove",mo,false);
+                this.moveScoll()
             },
             //点击无交易明细
             tradeDetailHandleClick(){
                 this.isShowTrade = true
                 //页面出现弹框页面禁止滚动
-                var mo=function(e){e.preventDefault();};
-                document.body.style.overflow='hidden';
-                document.addEventListener("touchmove",mo,false)
+                this.stopScoll()
             },
             //关闭无交易明细
             closePopupTrade(){
                 this.isShowTrade = false
                 //弹框消失，恢复正常滑动效果
-                var mo=function(e){e.preventDefault();};
-                document.body.style.overflow='';//出现滚动条
-                document.removeEventListener("touchmove",mo,false);
+                this.moveScoll()
             }
         }
     }

@@ -62,33 +62,25 @@
             detailHandleClick(){
                 this.isShowDetail = true
                 //页面出现弹框页面禁止滚动
-                var mo=function(e){e.preventDefault();};
-                document.body.style.overflow='hidden';
-                document.addEventListener("touchmove",mo,false)
+                this.stopScoll()
             },
             //关闭新增门店详情
             closePopup(){
                 this.isShowDetail = false
                 //弹框消失，恢复正常滑动效果
-                var mo=function(e){e.preventDefault();};
-                document.body.style.overflow='';//出现滚动条
-                document.removeEventListener("touchmove",mo,false);
+                this.moveScoll()
             },
             //关闭应收明细
             dealClosePopup(){
                 this.isShowreceivable = false
                 //弹框消失，恢复正常滑动效果
-                var mo=function(e){e.preventDefault();};
-                document.body.style.overflow='';//出现滚动条
-                document.removeEventListener("touchmove",mo,false);
+                this.moveScoll()
             },
             //打开应收明细
             dealHandleClick(){
                 this.isShowreceivable = true
                 //页面出现弹框页面禁止滚动
-                var mo=function(e){e.preventDefault();};
-                document.body.style.overflow='hidden';
-                document.addEventListener("touchmove",mo,false)
+                this.stopScoll()
             }
         }
     }
