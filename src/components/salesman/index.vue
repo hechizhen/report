@@ -109,19 +109,23 @@
 		methods:{
 			explicit(a){
 				if(a == '走势图'){
+					this.stopScoll()
 					this.echartsShow = true;
 				}else if(a == '下滑人员'){
+					this.stopScoll()
 					this.glideShow = true;
 				}else if(a == '达成与贡献'){
+					this.stopScoll()
 					this.contributionShow = true;
 				}
 			},
 			trendChartClick(a){
+				this.moveScoll()
 				this.echartsShow = false;
-
 			},
 			glideClick(a){
 				if(a == '关闭'){
+					this.moveScoll()
 					this.glideShow = false;
 				}else {
 					console.log(this.ownwardExportData)
@@ -129,6 +133,7 @@
 				}
 			},
 			contributionClick(a){
+				this.moveScoll()
 				this.contributionShow = false;
 			}
 		},

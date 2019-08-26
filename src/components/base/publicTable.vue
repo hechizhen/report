@@ -144,7 +144,7 @@
                     // 上面的index、nickName、name是tableData里对象的属性
                     const list = this.tableData;  //把data里的tableData存到list
                     const data = this.formatJson(filterVal, list);
-                    export_json_to_excel(tHeader, data, '列表excel');
+                    export_json_to_excel(tHeader, data, this.titleName);
                 })
             },
             formatJson(filterVal, jsonData) {

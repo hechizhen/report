@@ -12,12 +12,14 @@
 				  <a-Col :span="6" class="managerCol">
 				  	<p>业务员达成</p>
 				  </a-Col>
-				  <a-Col :span="5" class="managerCol">
+				  <a-Col :span="3" class="managerCol">
 				  	<p>{{salesmanData.emp_rate}}</p>
 				  </a-Col>
-				  <a-Col :span="7" class="managerCol">
-				  	<p @click="concludeClick('达成与贡献')">达成与贡献</p>
-				  	<p @click="trendClick('走势图')">走势图</p>
+				  <a-Col :span="9" class="managerCol" style="text-align: center;">
+				  	<!-- <p @click="concludeClick('达成与贡献')">达成与贡献</p>
+				  	<p @click="trendClick('走势图')">走势图</p> -->
+					  <new-button defaultVal="达成与贡献" :buttonHandleClick="concludeClick" isGhost="true"></new-button>
+					  <new-button defaultVal="走势图" :buttonHandleClick="trendClick" isGhost="true" style="margin-top:8px;" class="lineButton"></new-button>
 				  </a-Col>
 				</a-Row>
 		  	</div>
@@ -57,8 +59,9 @@
 				  	<p>{{salesmanData.emp_cnt}}</p>
 				  	<p>{{salesmanData.emp_drop_cnt}}</p>
 				  </a-Col>
-				  <a-Col :span="7" class="managerCol">
-				  	<p @click="glidingClick('下滑人员')">下滑人员</p>
+				  <a-Col :span="7" class="managerCol"  style="text-align: center;">
+				  	<!-- <p @click="glidingClick('下滑人员')">下滑人员</p> -->
+					  <new-button defaultVal="下滑人员" :buttonHandleClick="glidingClick" isGhost="true"></new-button>
 				  </a-Col>
 				</a-Row>
 		  	</div>
@@ -69,10 +72,12 @@
 </template>
 <script>
 	import loadingData from '../base/loadingData'
+	import newButton from '../base/newButton.vue'
 	export default {
 		name:'manager',
 		components:{
-			loadingData
+			loadingData,
+			newButton
 		},
 		props:{
 			explicit:{
@@ -96,14 +101,17 @@
 
 		},
 		methods:{
-			concludeClick(a){
-				this.explicit(a)
+			concludeClick(item){
+				let value = item.target.innerText
+				this.explicit(value)
 			},
-			trendClick(a){
-				this.explicit(a)
+			trendClick(item){
+				let value = item.target.innerText
+				this.explicit(value)
 			},
-			glidingClick(a){
-				this.explicit(a)
+			glidingClick(item){
+				let value = item.target.innerText
+				this.explicit(value)
 			}
 		},
 		computd:{
@@ -114,6 +122,13 @@
 		}
 	}
 </script>
+<style lang="less">
+.lineButton{
+	.ant-btn{
+		padding: 0 30px!important
+	}
+}
+</style>
 <style lang="less" scoped>
 	.manager {
 		width: 100%;

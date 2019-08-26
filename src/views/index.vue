@@ -7,7 +7,7 @@
         </div> -->
         <!-- 头部 -->
         <header-title :dealName="indexDealName" :score="totalScoreList" :summary="indexSummary" :defaultDate="indexDefaultDate" :changeDateHandle="indexChangeDate"
-        :dealList="dealList" :isShowDealIdSelect="isShowDealIdSelect"></header-title>
+        :dealList="dealList" :isShowDealIdSelect="isShowDealIdSelect" :startDate="startDate" :endDate="endDate" :startDateList="startDateList" v-if="startDateList.length!=0"></header-title>
         <!-- 一帮卖分析 -->
         <one-help-sale-en :titleName="oneHelpSaleTitle" :monthSalesData="monthSalesData" :monthBarData="monthBarData"  :coreData="oneHelpSaleScoreList"
         :yearSalesData="yearSalesData" :yearBarData="yearBarData" :monthShow="oneHelpSaleMonthShow" :yearShow="oneHelpSaleYearShow"
@@ -305,6 +305,9 @@
                 isShowDealIdSelect:false,
                 screenWidth: window.screen.width, // 屏幕尺寸
                 bodyWdith:'',
+                startDate:'',
+                endDate:'',
+                startDateList:''
             }
         },
         created() {
@@ -323,6 +326,7 @@
             month = month < 10 ? "0" + month : month;
             //获取当前接口年月
             this.currentDate = year + '' + month
+            this.endDate = year + '-' + month
             //获取当前默认显示年月
             this.indexDefaultDate = year + '/' + month
             //获取本地链接判断登陆入口  预生产或者立购星
@@ -360,9 +364,39 @@
 
         },
         methods: {
-            getIframUrl(id){
-                var url = parent.document.getElementsByTagName(id).contentWindow.location.href;
-                return url;
+            getStartDate(){
+                 var _this = this
+                //经销商集合接口参数
+                var params = {
+                    "inputParam":{},
+                    "outputCol": "dealer_name,date_dt",
+                    "pageNum": 1,
+                    "pageSize": 1000,
+                    "serviceId": "service_tjbg02_dealer_online_time",
+                    "orderCol":"date_dt desc"
+                }
+                this.$http({
+                    url: _this.testRequestHttpUrl + '?v=startDateList',
+                    method: 'POST',
+                    data: params
+                }).then(function (res) {
+                    console.log(res)
+                    let dealData = res.data.data.data
+                    dealData.map(function(item){
+                        if(_this.indexDealName.indexOf(item.dealer_name)!=-1){
+                            _this.startDate = (item.date_dt).substring(0,4)+'-'+(item.date_dt).substring(4,6)
+                        }
+                    })
+                    _this.dealList.map(function(parentItem){
+                        dealData.map(function(childItem){
+                            if(parentItem.name.indexOf(childItem.dealer_name)!=-1){
+                                parentItem.date_dt = (childItem.date_dt).substring(0,4)+'-'+(childItem.date_dt).substring(4,6)
+                            }
+                        })
+                    })
+                    console.log( _this.dealList)
+                    _this.startDateList = dealData
+                })
             },
             //点击查询
             indexChangeDate(dateVal,selectVal,selectName) {
@@ -412,7 +446,8 @@
                                 "pageSize":100,
                                 "groupByCol":["bo1_name","bo2_name","bo3_name"],
                                 "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
-                                "serviceId":"service_tjbg02_sales_order_dtl"
+                                "serviceId":"service_tjbg02_sales_order_dtl",
+                                "orderCol":'money desc'
                             },
                             header:[
                                 {txt:'序号',unit:false},
@@ -449,7 +484,8 @@
                                 "pageSize":100,
                                 "groupByCol":["bo1_name","bo2_name","bo3_name","goods_name"],
                                 "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
-                                "serviceId":"service_tjbg02_sales_order_dtl"
+                                "serviceId":"service_tjbg02_sales_order_dtl",
+                                "orderCol":'money desc'
                             },
                             header:[
                                 {txt:'序号',unit:false},
@@ -489,7 +525,8 @@
                                 "pageSize":100,
                                 "groupByCol":["bo1_name","bo2_name"],
                                 "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
-                                "serviceId":"service_tjbg02_sales_order_dtl"
+                                "serviceId":"service_tjbg02_sales_order_dtl",
+                                "orderCol":'money desc'
                             },
                             header:[
                                 {txt:'序号',unit:false},
@@ -527,7 +564,8 @@
                                 "groupByCol":["bo1_name","bo2_name","bo3_name"],
                                 "pageSize":1000,
                                 "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
-                                "serviceId":"service_tjbg02_goods_stock_sales"
+                                "serviceId":"service_tjbg02_goods_stock_sales",
+                                "orderCol":"bo1_orderNum,bo2_orderNum"
                             },
                             header:[
                                 {txt:'序号',unit:false},
@@ -551,12 +589,13 @@
                                     "data_type":"当月",
                                     "bo_type":'商品'
                                 },
-                                "outputCol":"bo1_name,bo2_name,bo2_name,goods_code69,goods_code79,goods_name,sale_rate",
+                                "outputCol":"bo1_name,bo2_name,bo3_name,goods_code69,goods_code79,goods_name,sale_rate",
                                 "groupByCol":["bo1_name","bo2_name","bo3_name","goods_name"],
                                 "pageNum":1,
                                 "pageSize":1000,
                                 "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
-                                "serviceId":"service_tjbg02_goods_stock_sales"
+                                "serviceId":"service_tjbg02_goods_stock_sales",
+                                "orderCol":"bo1_orderNum,bo2_orderNum,sale_rate desc"
                             },
                             header:[
                                 {txt:'序号',unit:false},
@@ -586,7 +625,8 @@
                                 "groupByCol":["bo1_name","bo2_name"],
                                 "pageSize":1000,
                                 "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
-                                "serviceId":"service_tjbg02_goods_stock_sales"
+                                "serviceId":"service_tjbg02_goods_stock_sales",
+                                "orderCol":"bo1_orderNum,bo2_orderNum,sale_rate desc"
                             },
                             header:[
                                 {txt:'序号',unit:false},
@@ -617,7 +657,8 @@
                                 "pageSize":100,
                                 "groupByCol":["bo1_name","bo2_name"],
                                 "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
-                                "serviceId":"service_tjbg02_goods_sales_dtl"
+                                "serviceId":"service_tjbg02_goods_sales_dtl",
+                                "orderCol":"bo1_orderNum,bo2_orderNum,money desc"
                             },
                             header:[
                                 {txt:'序号',unit:false},
@@ -640,11 +681,12 @@
                                     "bo_type":'系列'
                             },
                             "outputCol":"bo1_name,bo2_name,bo3_name,money,ratio_rate",
-                                "pageNum":1,
-                                "pageSize":100,
-                               "groupByCol":["bo1_name","bo2_name","bo3_name"],
-                                "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
-                            "serviceId":"service_tjbg02_goods_sales_dtl"
+                            "pageNum":1,
+                            "pageSize":100,
+                            "groupByCol":["bo1_name","bo2_name","bo3_name"],
+                            "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
+                            "serviceId":"service_tjbg02_goods_sales_dtl",
+                            "orderCol":"bo1_orderNum,bo2_orderNum,money desc"
                         },
                         header:[
                             {txt:'序号',unit:false},
@@ -672,7 +714,8 @@
                                 "pageSize":100,
                                 "groupByCol":["bo1_name","bo2_name","bo3_name","goods_name"],
                                 "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
-                                "serviceId":"service_tjbg02_goods_sales_dtl"
+                                "serviceId":"service_tjbg02_goods_sales_dtl",
+                                "orderCol":"bo1_orderNum,bo2_orderNum,money desc"
                             },
                             header:[
                                 {txt:'序号',unit:false},
@@ -703,7 +746,8 @@
                                 "pageSize":100,
                                 "groupByCol":["bo1_name"],
                                 "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
-                                "serviceId":"service_tjbg02_goods_sales_dtl"
+                                "serviceId":"service_tjbg02_goods_sales_dtl",
+                                "orderCol":"bo1_orderNum"
                             },
                             header:[
                                 {txt:'序号',unit:false},
@@ -734,7 +778,8 @@
                                 "pageNum": 1,
                                 "pageSize": 100,
                                 "serviceId": "service_tjbg02_stock_saledays",
-                                "whereCndt": {"dealer_id": "='ff80808169c93eb80169d6a73cc02d04'"}
+                                "whereCndt": {"dealer_id": "='ff80808169c93eb80169d6a73cc02d04'"},
+                                "orderCol":"bo1_orderNum,bo2_orderNum,saledays desc nulls last",
                             },
                             header: [
                                 {txt: '序号', unit: false},
@@ -764,7 +809,8 @@
                                 "pageNum": 1,
                                 "pageSize": 100,
                                 "serviceId": "service_tjbg02_stock_saledays",
-                                "whereCndt": {"dealer_id": "='ff80808169c93eb80169d6a73cc02d04'"}
+                                "whereCndt": {"dealer_id": "='ff80808169c93eb80169d6a73cc02d04'"},
+                                "orderCol":"bo1_orderNum,bo2_orderNum,saledays desc nulls last",
                             },
                             header: [
                                 {txt: '序号', unit: false},
@@ -796,7 +842,8 @@
                                 "pageNum": 1,
                                 "pageSize": 100,
                                 "serviceId": "service_tjbg02_stock_saledays",
-                                "whereCndt": {"dealer_id": "='ff80808169c93eb80169d6a73cc02d04'"}
+                                "whereCndt": {"dealer_id": "='ff80808169c93eb80169d6a73cc02d04'"},
+                                "orderCol":"bo1_orderNum,saledays desc nulls last",
                             },
                             header: [
                                 {txt: '序号', unit: false},
@@ -836,25 +883,10 @@
                         }
                     })
                     _this.dealList = list
+                    _this.getStartDate()
                 })
             },
-            // //体检报告概览
-            // getOverViewData() {
-            //     var _this = this
-            //     this.$http({
-            //         url: _this.requestHttpUrl + '/overviewScoring',
-            //         method: 'POST',
-            //         data: {
-            //             dateTime: _this.currentDate
-            //         }
-            //     }).then(function (res) {
-            //         console.log(res)
-            //         let data = res.data.data.data
-            //         _this.indexDealName = data.dealName
-            //         _this.indexScore = data.score
-            //         _this.indexSummary = data.summary
-            //     })
-            // },
+            //体检报告概览
             //本月累计下单金额以及总达成 以及本月累计达成率
             getOneHelpSalesData() {
                 var _this = this
@@ -1625,7 +1657,8 @@
                     "pageNum":1,
                     "pageSize":1000,
                     "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
-                    "serviceId":"service_tjbg02_emp_rate"
+                    "serviceId":"service_tjbg02_emp_rate",
+                    "orderCol":'emp_money desc'
                 }
                 this.$http({
                     url: _this.testRequestHttpUrl + '?v=salesmanTrend',
@@ -1691,7 +1724,8 @@
                     "pageNum":1,
                     "pageSize":1000,
                     "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
-                    "serviceId":"service_tjbg02_emp_drop"
+                    "serviceId":"service_tjbg02_emp_drop",
+                    "orderCol":"dif_money desc"
                 }
                 this.$http({
                     url: _this.testRequestHttpUrl + '?v=salesmandownward',
@@ -1757,7 +1791,8 @@
                     "pageNum":1,
                     "pageSize":1000,
                     "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
-                    "serviceId":"service_tjbg02_emp_rate"
+                    "serviceId":"service_tjbg02_emp_rate",
+                    "orderCol":'emp_money asc'
                 }
                 this.$http({
                     url: _this.testRequestHttpUrl + '?v=salesmanReached',
@@ -3168,7 +3203,8 @@
                             "pageNum":1,
                             "pageSize":100,
                             "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
-                            "serviceId":"service_tjbg02_store_active"
+                            "serviceId":"service_tjbg02_store_active",
+                            "orderCol":'money desc'
                         },
                         header:[
                             {txt:'序号',unit:false},
@@ -3200,7 +3236,7 @@
                             "pageNum":1,
                             "pageSize":100,
                             "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
-                            "serviceId":"service_tjbg02_store_create"
+                            "serviceId":"service_tjbg02_store_create",
                         },
                         header:[
                             {txt:'序号',unit:false},
@@ -3227,7 +3263,8 @@
                             "pageNum":1,
                             "pageSize":100,
                             "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
-                            "serviceId":"service_tjbg02_store_unsale"
+                            "serviceId":"service_tjbg02_store_unsale",
+                            "orderCol":"unsale_days desc"
                         },
                         header:[
                             {txt:'序号',unit:false},
@@ -3257,7 +3294,8 @@
                             "pageNum":1,
                             "pageSize":100,
                             "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
-                            "serviceId":"service_tjbg02_store_unsale"
+                            "serviceId":"service_tjbg02_store_unsale",
+                            "orderCol":"debt_money desc"
                         },
                         header:[
                             {txt:'序号',unit:false},
@@ -3363,213 +3401,216 @@
                         ]
                     },
                 }
-                 },
-                //点击二帮卖订单详情
-                orderDetailHandleClick(){
-                    //二帮卖订单列表数据
-                    this.twoDetailTableData={
-                        //二帮卖订单明细
-                        gettwoListing:{
-                            titleName:'二帮卖下单毛利明细-品类',
-                            params : {
-                                "inputParam":{
-                                    "data_mon":this.currentDate,
-                                    "data_type":"当月",
-                                    "bo_type":"品类"
-                                },
-                                "outputCol":"bo1_name,bo2_name,money,ratio_rate,money_mom,money_yoy,gross_money,gross_rate,gross_money_mom,gross_money_yoy",
-                                "pageNum":1,
-                                "pageSize":100,
-                                "groupByCol":["bo1_name","bo2_name"],
-                                "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
-                                "serviceId":"service_tjbg02_sales_order_dtl"
-                            },
-                            header:[
-                                {txt:'序号',unit:false},
-                                {txt:'事业部',unit:false},
-                                {txt:'品类',unit:false},
-                                {txt:'品类下单金额（元）',unit:'money'},
-                                {txt:'占比',unit:'percent'},
-                                {txt:'环比',unit:'percent'},
-                                {txt:'同比',unit:'percent'},
-                                {txt:'毛利额（元）',unit:'money'},
-                                {txt:'毛利率',unit:'percent'},
-                                {txt:'毛利额环比',unit:'percent'},
-                                {txt:'毛利额同比',unit:'percent'},
-
-                            ]
-                        }
-                    }
-                },
-                //点击分销清单
-                indexStoreHandleClick(){
-                     //产品动销清单明细
-                    this.getPinListing={
-                        titleName:'商品分销明细-品类',
+            },
+            //点击二帮卖订单详情
+            orderDetailHandleClick(){
+                //二帮卖订单列表数据
+                this.twoDetailTableData={
+                    //二帮卖订单明细
+                    gettwoListing:{
+                        titleName:'二帮卖下单毛利明细-品类',
                         params : {
                             "inputParam":{
                                 "data_mon":this.currentDate,
                                 "data_type":"当月",
-                                "bo_type":'品类'
+                                "bo_type":"品类"
                             },
-                            "outputCol":"bo1_name,bo2_name,order_qty,stock_qty,sale_rate",
+                            "outputCol":"bo1_name,bo2_name,money,ratio_rate,money_mom,money_yoy,gross_money,gross_rate,gross_money_mom,gross_money_yoy",
                             "pageNum":1,
                             "pageSize":100,
                             "groupByCol":["bo1_name","bo2_name"],
                             "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
-                            "serviceId":"service_tjbg02_goods_stock_sales"
+                            "serviceId":"service_tjbg02_sales_order_dtl",
+                            "orderCol":'money desc'
                         },
                         header:[
                             {txt:'序号',unit:false},
                             {txt:'事业部',unit:false},
                             {txt:'品类',unit:false},
-                            {txt:'订单SKU数',unit:'day'},
-                            {txt:'库存SKU数',unit:'day'},
-                            {txt:'品类动销率',unit:'percent'},
+                            {txt:'品类下单金额（元）',unit:'money'},
+                            {txt:'占比',unit:'percent'},
+                            {txt:'环比',unit:'percent'},
+                            {txt:'同比',unit:'percent'},
+                            {txt:'毛利额（元）',unit:'money'},
+                            {txt:'毛利率',unit:'percent'},
+                            {txt:'毛利额环比',unit:'percent'},
+                            {txt:'毛利额同比',unit:'percent'},
+
                         ]
                     }
-                },
-                //点击商品明细
-                indexGoodDetailHandleClick(){
-                    //商品明细
-                    this.productTableData={
-                        titleName:'下单商品明细-事业部',
-                        params : {
-                            "inputParam":{
-                                "data_mon":this.currentDate,
-                                "data_type":"当月",
-                                "bo_type":'事业部'
-                            },
-                            "outputCol":"bo1_name,money,ratio_rate",
-                            "pageNum":1,
-                            "pageSize":1000,
-                            "groupByCol":["bo1_name"],
-                            "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
-                            "serviceId":"service_tjbg02_goods_sales_dtl"
+                }
+            },
+            //点击分销清单
+            indexStoreHandleClick(){
+                    //产品动销清单明细
+                this.getPinListing={
+                    titleName:'商品分销明细-品类',
+                    params : {
+                        "inputParam":{
+                            "data_mon":this.currentDate,
+                            "data_type":"当月",
+                            "bo_type":'品类'
                         },
-                        header:[
-                            {txt:'序号',unit:false},
-                            {txt:'事业部',unit:false},
-                            {txt:'销售（元/月）',unit:'money'},
-                            {txt:'销售占比',unit:'percent'},
-                        ]
-                    }
-                },
-                //点击库存详情
-                indexStockDetailHandleClick(){
-                    this.invDetailTableData.getInvDayListing= {
-                        //库存可销天数详细
-                        titleName:'库存可销天数-品类',
-                        params: {
-                            "inputParam": {
-                                "data_mon": this.currentDate,
-                                "data_type": "当月",
-                                "partition": "bo2_name"
-                            },
-                            "isReturnTotalSize": "Y",
-                            "outputCol": "bo1_name,bo2_name,saledays",
-                            "groupByCol": ["bo1_name","bo2_name"],
-                            "orderCol":"bo1_orderNum,bo2_orderNum,saledays desc",
-                            "pageNum": 1,
-                            "pageSize": 100,
-                            "serviceId": "service_tjbg02_stock_saledays",
-                            "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
+                        "outputCol":"bo1_name,bo2_name,order_qty,stock_qty,sale_rate",
+                        "pageNum":1,
+                        "pageSize":100,
+                        "groupByCol":["bo1_name","bo2_name"],
+                        "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
+                        "serviceId":"service_tjbg02_goods_stock_sales",
+                        "orderCol":"bo1_orderNum,bo2_orderNum,sale_rate desc"
+                    },
+                    header:[
+                        {txt:'序号',unit:false},
+                        {txt:'事业部',unit:false},
+                        {txt:'品类',unit:false},
+                        {txt:'订单SKU数',unit:'day'},
+                        {txt:'库存SKU数',unit:'day'},
+                        {txt:'品类动销率',unit:'percent'},
+                    ]
+                }
+            },
+            //点击商品明细
+            indexGoodDetailHandleClick(){
+                //商品明细
+                this.productTableData={
+                    titleName:'下单商品明细-事业部',
+                    params : {
+                        "inputParam":{
+                            "data_mon":this.currentDate,
+                            "data_type":"当月",
+                            "bo_type":'事业部'
                         },
-                        header: [
-                            {txt: '序号', unit: false},
-                            {txt: '事业部', unit: false},
-                            {txt: '品类', unit: false},
-                            {txt: '可销天数', unit: 'day'},
-                        ]
-                    }
-                },
-                //获取总评分
-                getTotalScoreData(){
-                    var _this = this
-                    //得分参数
-                    _this.totalScoreParams={
-                        "moduleName":"总得分",
-                        "kpi_values":[
-                            {
-                                "kpi_name":"一帮卖",
-                                "kpi_value":Number(_this.oneHelpSaleScoreList.coretext)
-                            },
-                            {
-                                "kpi_name":"订单",
-                                "kpi_value":Number(_this.orderScoreList.coretext)
-                            },
-                            {
-                                "kpi_name":"业务员",
-                                "kpi_value":Number(_this.personScoreList.coretext)
-                            },
-                            {
-                                "kpi_name":"产品",
-                                "kpi_value":Number(_this.productScoreList.coretext)
-                            },
-                            {
-                                "kpi_name":"门店",
-                                "kpi_value":Number(_this.storeScoreList.coretext)
-                            },
-                            {
-                                "kpi_name":"库存",
-                                "kpi_value":Number(_this.stockScoreList.coretext)
-                            },
-                        ]
-                    }
-                    console.log(_this.totalScoreParams)
-                    let totalScore1 = _this.oneHelpSaleScoreList.evaluate
-                    let totalScore2 = _this.orderScoreList.evaluate
-                    // let totalScore3 = _this.personScoreList.evaluate
-                    // let totalScore4 = _this.productScoreList.evaluate
-                    // let totalScore5 = _this.storeScoreList.evaluate
-                    let totalScore6 = _this.stockScoreList.evaluate
-                    //评价参数
-                    _this.totalScoreTxtParams={
-                        moduleName:"整体结论1",
-                        values:"'"+totalScore2+"','"+totalScore6+"','"+totalScore1+"'"
-                    }
-                    function getScoreData(){
-                        return _this.$http({
-                            url: _this.scoreRequestSumUrl + '?v=totalScore',
-                            method: 'POST',
-                            data: _this.totalScoreParams
-                        })
-                    }
-                    function getScoreTxtData(){
-                        return _this.$http({
-                            url: _this.scoreTxtRequestUrl + '?v=totalScore',
-                            method: 'POST',
-                            data: $.param(_this.totalScoreTxtParams),
-                        })
-                    }
-                    //合并请求 同时请求
-                    this.$http.all([getScoreData(), getScoreTxtData()])
-                        .then(this.$http.spread((score, scoreTxt) => {
-                            let scoreData = score.data.data
-                            let scoreTxtData = scoreTxt.data.data
-                            //总得分
-                            _this.totalScoreList = {
-                                coretype: '总得分',
-                                coretext: scoreData.toFixed(1),
-                                evaluate: scoreTxtData.grade_evaluate,
-                                subscribe: scoreTxtData.grade_evaluate_detail,
-                            }
-                            console.log(_this.stockScoreList)
+                        "outputCol":"bo1_name,money,ratio_rate",
+                        "pageNum":1,
+                        "pageSize":1000,
+                        "groupByCol":["bo1_name"],
+                        "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
+                        "serviceId":"service_tjbg02_goods_sales_dtl",
+                        "orderCol":"bo1_orderNum"
+                    },
+                    header:[
+                        {txt:'序号',unit:false},
+                        {txt:'事业部',unit:false},
+                        {txt:'销售（元/月）',unit:'money'},
+                        {txt:'销售占比',unit:'percent'},
+                    ]
+                }
+            },
+            //点击库存详情
+            indexStockDetailHandleClick(){
+                this.invDetailTableData.getInvDayListing= {
+                    //库存可销天数详细
+                    titleName:'库存可销天数-品类',
+                    params: {
+                        "inputParam": {
+                            "data_mon": this.currentDate,
+                            "data_type": "当月",
+                            "partition": "bo2_name"
+                        },
+                        "isReturnTotalSize": "Y",
+                        "outputCol": "bo1_name,bo2_name,saledays",
+                        "groupByCol": ["bo1_name","bo2_name"],
+                        "pageNum": 1,
+                        "pageSize": 100,
+                        "serviceId": "service_tjbg02_stock_saledays",
+                        "whereCndt":{"dealer_id":"='"+this.dealer_id+"'"},
+                        "orderCol":"bo1_orderNum,saledays desc nulls last",
+                    },
+                    header: [
+                        {txt: '序号', unit: false},
+                        {txt: '事业部', unit: false},
+                        {txt: '品类', unit: false},
+                        {txt: '可销天数', unit: 'day'},
+                    ]
+                }
+            },
+            //获取总评分
+            getTotalScoreData(){
+                var _this = this
+                //得分参数
+                _this.totalScoreParams={
+                    "moduleName":"总得分",
+                    "kpi_values":[
+                        {
+                            "kpi_name":"一帮卖",
+                            "kpi_value":Number(_this.oneHelpSaleScoreList.coretext)
+                        },
+                        {
+                            "kpi_name":"订单",
+                            "kpi_value":Number(_this.orderScoreList.coretext)
+                        },
+                        {
+                            "kpi_name":"业务员",
+                            "kpi_value":Number(_this.personScoreList.coretext)
+                        },
+                        {
+                            "kpi_name":"产品",
+                            "kpi_value":Number(_this.productScoreList.coretext)
+                        },
+                        {
+                            "kpi_name":"门店",
+                            "kpi_value":Number(_this.storeScoreList.coretext)
+                        },
+                        {
+                            "kpi_name":"库存",
+                            "kpi_value":Number(_this.stockScoreList.coretext)
+                        },
+                    ]
+                }
+                console.log(_this.totalScoreParams)
+                let totalScore1 = _this.oneHelpSaleScoreList.evaluate
+                let totalScore2 = _this.orderScoreList.evaluate
+                // let totalScore3 = _this.personScoreList.evaluate
+                // let totalScore4 = _this.productScoreList.evaluate
+                // let totalScore5 = _this.storeScoreList.evaluate
+                let totalScore6 = _this.stockScoreList.evaluate
+                //评价参数
+                _this.totalScoreTxtParams={
+                    moduleName:"整体结论1",
+                    values:"'"+totalScore2+"','"+totalScore6+"','"+totalScore1+"'"
+                }
+                function getScoreData(){
+                    return _this.$http({
+                        url: _this.scoreRequestSumUrl + '?v=totalScore',
+                        method: 'POST',
+                        data: _this.totalScoreParams
+                    })
+                }
+                function getScoreTxtData(){
+                    return _this.$http({
+                        url: _this.scoreTxtRequestUrl + '?v=totalScore',
+                        method: 'POST',
+                        data: $.param(_this.totalScoreTxtParams),
+                    })
+                }
+                //合并请求 同时请求
+                this.$http.all([getScoreData(), getScoreTxtData()])
+                    .then(this.$http.spread((score, scoreTxt) => {
+                        let scoreData = score.data.data
+                        let scoreTxtData = scoreTxt.data.data
+                        //总得分
+                        _this.totalScoreList = {
+                            coretype: '总得分',
+                            coretext: scoreData.toFixed(1),
+                            evaluate: scoreTxtData.grade_evaluate,
+                            subscribe: scoreTxtData.grade_evaluate_detail,
                         }
-                    ))
-                },
-                //计算环比/同比
-                getHandle(molecule,denominator,num){
-                    var tempObj;
-                    if(!denominator){
-                        tempObj = '--';
-                    }else {
-                        tempObj = (((molecule-denominator)/denominator)*100).toFixed(num)+'%';
+                        console.log(_this.stockScoreList)
                     }
-                    return tempObj
-                },
-                //计算环比/同比
-                getHandleComputed(molecule,denominator){
+                ))
+            },
+            //计算环比/同比
+            getHandle(molecule,denominator,num){
+                var tempObj;
+                if(!denominator){
+                    tempObj = '--';
+                }else {
+                    tempObj = (((molecule-denominator)/denominator)*100).toFixed(num)+'%';
+                }
+                return tempObj
+            },
+            //计算环比/同比
+            getHandleComputed(molecule,denominator){
                 var tempObj;
                 if(!denominator){
                     tempObj = 0
@@ -3594,6 +3635,7 @@
        width:100%;
        padding:0 20px 50px 20px;
        background:#eaeff8;
+       position: relative;
        p{
            margin-bottom:0;
        }

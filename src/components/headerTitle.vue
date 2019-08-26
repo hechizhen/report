@@ -8,14 +8,9 @@
             </p>
             <p class="paddingStyle1">
                 <span class="spanFont">查询日期：</span>
-                <a-month-picker v-model="defaultValDate" :format="monthFormat" :allowClear="false" @change="changeDate" />
+                <!-- <a-month-picker v-model="defaultValDate" :disabledDate="disabledDate" :format="monthFormat" :allowClear="false" @change="changeDate" /> -->
+                <DatePicker type="month" v-model="defaultValDate" :options="options3" format="yyyy/MM" :clearable="false" @on-change="changeDate" ></DatePicker>
                 <button-list :buttonType="buttonList.buttonType" :isGhost="buttonList.isGhost" :buttonHandleClick="buttonHandleClick" :defaultVal="buttonList.defaultVal" style="margin-left:20px;"></button-list>
-            </p>
-            <p>
-                <span style="font-size:14px;">经销商：</span>
-                <a-select showSearch v-model="defaultSelectVal" style="width: 200px;height:40px;" @change="onChange">
-                    <a-select-option v-for="(item,index) in dealList" :key="index" :value="item.name">{{item.name}}</a-select-option>
-                </a-select>
             </p>
         </div>
         <div class="headerTitle_right">
@@ -24,6 +19,12 @@
             <span class="spanFont spanSize">总结：</span>
             <span class="spanFont spanSize">{{score.evaluate}}</span>
             <span class="spanFont1 spanSize3">{{score.subscribe}}</span>
+            <p>
+                <span style="font-size:14px;">经销商：</span>
+                <a-select showSearch v-model="defaultSelectVal" style="width: 200px;height:40px;" @change="onChange">
+                    <a-select-option v-for="(item,index) in dealList" :key="index" :value="item.name" :disabled="item.date_dt==nowDate ? true : false">{{item.name}}</a-select-option>
+                </a-select>
+            </p>
         </div>
     </div>
 </template>
@@ -63,9 +64,19 @@
             dealList:{
                 type:Array
             },
+            //s
+            startDateList:{
+                type:Array
+            },
             //是否展示经销商下拉框
             isShowDealIdSelect:{
                 type:Boolean
+            },
+            startDate:{
+                type:String
+            },
+            endDate:{
+                type:String
             }
         },
         components : {
@@ -81,23 +92,48 @@
                     isGhost:false
                 },
                 newId:this.dealList[0].id,
-                defaultValDate:moment(this.defaultDate, this.monthFormat),
+                defaultValDate:this.defaultDate,
                 defaultSelectVal:this.dealList[0].name,
                 defaultDateValue:this.defaultDate.substring(0,4)+this.defaultDate.substring(5,7),
+                headerStartDate:Number(this.startDate.substring(5,7)),
+                headerEndDate:Number(this.endDate.substring(5,7)),
+                nowDate:'',
+                options3: ''
             }
         },
+        created(){
+            let date = new Date;
+            let year = date.getFullYear();
+            let month = date.getMonth() + 1;
+            month = month<10 ? '0'+month : month
+            this.nowDate = year+'-'+month
+        },
         mounted () {
-                console.log(this.score)
+            let endTime = this.headerEndDate
+            let startTime = this.headerStartDate
+            this.options3 = {
+                disabledDate(date) {
+                    var _this = this
+                    const disabledDay = date.getMonth()+1;
+                    return disabledDay > endTime || disabledDay < startTime
+                },
+            }
         },
         methods: {
             moment,
+            disabledDate(current) {
+                let a = moment(this.headerEndDate)
+                let b = moment(this.headerStartDate)
+               return current && current > a || current < b
+            },
             //点击查询
             buttonHandleClick(){
                 this.changeDateHandle(this.defaultDateValue,this.newId,this.defaultSelectVal)
             },
             //选择时间
             changeDate(val,newDate){
-                let dateTime = newDate
+                console.log(val,newDate)
+                let dateTime = val
                 this.defaultDateValue = dateTime.substring(0,4)+dateTime.substring(5,7)
             },
             //选择经销商
@@ -107,6 +143,14 @@
                     console.log(item)
                     if(item.name==val){
                         _this.newId = item.id
+                        _this.defaultSelectVal = item.name
+                    }
+                })
+                _this.startDateList.map(function(item){
+                    console.log(item)
+                    console.log(_this.defaultSelectVal)
+                    if(_this.defaultSelectVal.indexOf(item.dealer_name)!=-1){
+                        _this.headerStartDate = Number(item.date_dt.substring(4,6))
                     }
                 })
             },
@@ -135,11 +179,13 @@
             height:100%;
         }
         .headerTitle_right{
-            width:55%;
-            height:100%;
-            display: flex;
-            align-items: flex-end;
-            padding-bottom:50px;
+            width: 55%;
+            height: 100%;
+            word-wrap: break-word;
+            word-break: break-all;
+            flex-wrap: wrap;
+            padding-top: 32px;
+            line-height: 20px;
         }
         .paddingStyle{
             padding-top:40px;
