@@ -119,33 +119,25 @@
             upraphy(){
                 this.upShow = true;
                 //页面出现弹框页面禁止滚动
-                var mo=function(e){e.preventDefault();};
-                document.body.style.overflow='hidden';
-                document.addEventListener("touchmove",mo,false)
+                this.stopScoll()
             },
             //关闭增长树状图
             upClick(){
                 this.upShow = false;
                 //弹框消失，恢复正常滑动效果
-                var mo=function(e){e.preventDefault();};
-                document.body.style.overflow='';//出现滚动条
-                document.removeEventListener("touchmove",mo,false);
+                this.moveScoll()
             },
             //打开下滑树状图
             downraphy(){
                 this.downShow = true;
                 //页面出现弹框页面禁止滚动
-                var mo=function(e){e.preventDefault();};
-                document.body.style.overflow='hidden';
-                document.addEventListener("touchmove",mo,false)
+                this.stopScoll()
             },
             //关闭下滑树状图
             downClick(){
                 this.downShow = false;
                 //弹框消失，恢复正常滑动效果
-                var mo=function(e){e.preventDefault();};
-                document.body.style.overflow='';//出现滚动条
-                document.removeEventListener("touchmove",mo,false);
+                this.moveScoll()
             },
         }
     }
