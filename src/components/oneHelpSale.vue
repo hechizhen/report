@@ -45,7 +45,7 @@
     import barChart from '../components/echarts/bar.vue'
     import loadingData from '../components/base/loadingData.vue'
     export default {
-        name : 'oneHelpSale',           
+        name : 'oneHelpSale',
         props:{
             //一帮卖本月/累计销量
             salesData:{
@@ -77,13 +77,13 @@
         methods: {
         },
         computed:{
-          
+
         },
         watch: {
-           
+
         },
         distroyed: function () {
-            
+
         }
     }
 </script>
@@ -160,7 +160,7 @@
                             align-items: center;
                             justify-content: center;
                             text-align: center;
-                            padding-top:60px;
+                            padding-top:50px;
                             span{
                                 color:#fff;
                             }
@@ -169,6 +169,7 @@
                             }
                             .sales{
                                 font-size: 18px;
+                                font-weight: 600;
                             }
                             .salesMoney{
                                 font-size: 30px;

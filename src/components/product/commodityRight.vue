@@ -223,6 +223,8 @@
                         color: rgba(255, 255, 255, 1);
                         margin-bottom: 0;
                         display: inline-block;
+                        font-size: 16px;
+                        font-weight: 500;
                     }
                 }
             }

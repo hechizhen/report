@@ -95,7 +95,7 @@
             white-space: nowrap;
         }
         .fontStyle2{
-            font-size:18px;
+            font-size:24px;
             font-weight:bold;
         }
         /deep/.ant-col-18{

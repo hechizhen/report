@@ -134,7 +134,7 @@
 		.conclude {
 			width: 100%;
 			height: 100%;
-			background:linear-gradient(90deg,rgba(0,210,203,1),rgba(50,213,131,1));
+			background:linear-gradient(90deg,rgba(1, 206, 199, 1),rgba(13, 207, 109, 1));
 			box-shadow:0px 2px 15px 0px rgba(255,182,2,0.13);
 			border-radius:6px;
 			.managerCol:nth-child(2) {
@@ -190,7 +190,7 @@
 		.produce {
 			width: 100%;
 			height: 100%;
-			background:linear-gradient(90deg,rgba(95,188,255,1),rgba(65,142,255,1));
+			background:linear-gradient(90deg,rgba(17, 113, 255, 1),rgba(22, 157, 255, 1));
 			box-shadow:0px 2px 15px 0px rgba(255,182,2,0.13);
 			border-radius:6px;
 			.managerCol {
@@ -219,7 +219,7 @@
 		.compare {
 			width: 100%;
 			height: 100%;
-			background:linear-gradient(90deg,rgba(255,149,0,1),rgba(255,198,43,1));
+			background:linear-gradient(90deg,rgba(254, 148, 0, 1),rgba(253, 184, 0, 1));
 			box-shadow:0px 2px 15px 0px rgba(255,182,2,0.13);
 			border-radius:6px;
 			.managerCol:nth-child(2) {

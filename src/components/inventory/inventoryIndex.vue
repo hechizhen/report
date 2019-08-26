@@ -257,7 +257,7 @@
         .table-head{
             width: 100%;
             height: 120px;
-            background:linear-gradient(90deg,rgba(71,79,231,1),rgba(29,145,240,1),rgba(71,79,231,1));
+            background:linear-gradient(90deg,#474FE7,#1D91F0);
             box-shadow:0px 2px 15px 0px rgba(255,182,2,0.13);
             border-radius:10px 10px 0 0;
             .table-headtxt{

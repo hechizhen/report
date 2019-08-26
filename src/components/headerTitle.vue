@@ -3,7 +3,7 @@
     <div class="headerTitle">
         <div class="headerTitle_left">
             <p class="paddingStyle">
-                <span class="spanFont spanSize">{{dealName}}经销商体验分析</span>
+                <span class="spanFont spanSize">{{dealName}}经销商</span>
                 <span class="spanFont1">以下是针对您企业的体验分析结果，请认真审阅：</span>
             </p>
             <p class="paddingStyle1">
@@ -161,7 +161,8 @@
             color:#2D92FC
         }
         .spanSize{
-            font-size: 16px;
+            font-size: 14px;
+            font-weight:500;
         }
         .spanSize1{
             font-size: 12px;
@@ -174,6 +175,7 @@
         .spanSize3{
             border-left:1px solid #A0A5B1;
             margin-left:15px;
+            font-size: 12px;
         }
     }
 </style>
