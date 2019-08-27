@@ -14,10 +14,10 @@
             </p>
         </div>
         <div class="headerTitle_right">
-            <span class="spanFont2 spanSize">{{score.coretype}}：</span>
+            <span class="spanFont2 spanSize4">{{score.coretype}}：</span>
             <span class="spanFont2 spanSize2">{{score.coretext}}</span>
-            <span class="spanFont spanSize">总结：</span>
-            <span class="spanFont spanSize">{{score.evaluate}}</span>
+            <span class="spanFont spanSize4">总结：</span>
+            <span class="spanFont spanSize4">{{score.evaluate}}</span>
             <span class="spanFont1 spanSize3">{{score.subscribe}}</span>
             <p>
                 <span style="font-size:14px;">经销商：</span>
@@ -217,7 +217,7 @@
             color:#2D92FC
         }
         .spanSize{
-            font-size: 14px;
+            font-size: 16px;
             font-weight:500;
         }
         .spanSize1{
@@ -232,6 +232,9 @@
             border-left:1px solid #A0A5B1;
             margin-left:15px;
             font-size: 12px;
+        }
+        .spanSize4{
+            font-size: 14px;
         }
     }
 </style>
