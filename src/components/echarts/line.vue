@@ -7,8 +7,9 @@
         <div v-if="legendShow" class="checkBoxList">
             <!-- <a-checkbox-group @change="onChange">
                 <a-checkbox v-for="(item,index) in legendList" :key="index" :value="item">{{item}}</a-checkbox>
-            </a-checkbox-group> -->
-            <a-checkbox v-for="(item,index) in legendList" :key="index" :value="item" @change="onChange" :defaultChecked="index==0 ? true : false">{{item}}</a-checkbox>
+            </a-checkbox-group> --> 
+            <a-checkbox v-for="(item,index) in legendList" :key="index" :value="item" @change="onChange" >{{item}}</a-checkbox>
+            <!-- :defaultChecked="index==0 ? true : false" -->
         </div>
     </div>
 </template>
@@ -71,7 +72,7 @@
                     //网格线
                     splitLine:{
                         show:false,
-                        color:'#CCCCCC'
+                        color:'#e3e3e3'
                     },
                 })
             },
@@ -92,7 +93,7 @@
                     //网格线
                     splitLine:{
                         show:true,
-                        color:'#CCCCCC'
+                        color:'#e3e3e3'
                     },
                 })
             },
@@ -213,7 +214,7 @@
                             color: "#333333",
                             fontSize:14
                         },
-                        selected: legendSelect
+                        // selected: legendSelect
                     },
                     dataZoom: dataZoom,
                     grid: {

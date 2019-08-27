@@ -9,9 +9,10 @@
 			<div class="record">
 				<a-Row class="recordConten">
 					<a-Col :span="24" class="recordLeft">
-						<div><img style="margin-right:5px;" src="./../../assets/img/jine-icon.png">下单金额(万元)</div>
-						<div>(以创建订单日期统计)</div>
-						<div><span>￥</span>{{orderAmountData.moneyInteger}}<span>{{orderAmountData.moneyDecimal}}</span></div>
+						<div>
+							<p><img style="margin-right:5px;" src="./../../assets/img/jine-icon.png">下单金额(万元)</p>
+							<p><span>￥</span>{{orderAmountData.moneyInteger}}<span>{{orderAmountData.moneyDecimal}}</span></p>
+						</div>
 					</a-Col>
 				</a-Row>
 			</div>
@@ -124,33 +125,26 @@
 						height: 100%;
 						background:linear-gradient(90deg,rgba(0,91,234,1),rgba(0,198,251,1));
 						border-radius:8px;
+						display: flex;
+						align-items: center;
+						justify-content: center;
 						div {
 							font-family:PingFangSC-Regular;
 							font-weight:400;
 							color:rgba(255,255,255,1);
-						}
-						div:nth-child(1) {
-							height: 40%;
+							p:nth-child(1) {
 							font-size:20px;
 							display: flex;
 						    align-items: center;
 						    justify-content: center;
-						}
-						div:nth-child(2) {
-							height: 15%;
-							font-size:12px;
-							display: flex;
-						    align-items: center;
-						    justify-content: center;
-							display: none;
-						}
-						div:nth-child(3) {
-							height: 50%;
-							font-size:56px;
-							text-align: center;
-							font-weight:600;
-							span {
-								font-size:36px;
+							}
+							p:nth-child(2) {
+								font-size:56px;
+								text-align: center;
+								font-weight:600;
+								span {
+									font-size:36px;
+								}
 							}
 						}
 					}

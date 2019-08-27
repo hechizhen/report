@@ -5,7 +5,8 @@
             <a-col :span="18" class="fontStyle">{{receivableData.receivableTxt}}</a-col>
             <a-col :span="6" class="fontStyle">
                 <span>{{receivableData.receivableValUnit}}</span>
-                <span class="fontStyle2">{{receivableData.receivableVal}}</span>
+                <span class="fontStyle2">{{receivableData.receivableVal.split('.')[0]}}.</span>
+                <span>{{receivableData.receivableVal.split('.')[1]}}</span>
             </a-col>
         </a-row>
         <a-row class="rowStyle bg1 borderBottom">

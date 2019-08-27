@@ -143,11 +143,14 @@
                     text-align: center;
                     justify-content: center;
                     .oneHelpSaleTopMid{
-                        border-radius:118px 118px 0 0;
-                        border:6px solid #fff;
-                        border-bottom:none;
+                        // border-radius:118px 118px 0 0;
+                        // border:6px solid #fff;
+                        // border-bottom:none;
+                        background:url("../assets/img/banhu-icon.png");
+                        background-repeat: no-repeat;
+                        background-size: 100%;
                         width:236px;
-                        height:118px;
+                        height: 124px;
                         position: relative;
                         display: flex;
                         align-items: center;

@@ -90,12 +90,12 @@
                     axisLabel:{
                         show:true,
                         color:'#333333',
-                        fontSize:14
+                        fontSize:16,
                     },
                     //网格线
                     splitLine:{
                         show:false,
-                        color:'#CCCCCC'
+                        color:'#e3e3e3'
                     },
                 }),
             },
@@ -111,12 +111,12 @@
                     axisLabel:{
                         show:true,
                         color:'#333333',
-                        fontSize:14
+                        fontSize:16
                     },
                     //网格线
                     splitLine:{
                         show:true,
-                        color:'#CCCCCC'
+                        color:'#e3e3e3'
                     },
                 }),
             },
@@ -337,6 +337,7 @@
                         }
                         var dataZoom = [{
                             height: '70%',
+                            width:20,
                             yAxisIndex: [
                                 0
                             ],
@@ -348,8 +349,9 @@
                                 color:"#d3dee5",
                             },
                             textStyle:{
-                                color:"#418eff"},
-                            borderColor:"#90979c"
+                                color:"#418eff"
+                            },
+                            borderColor:"#ebebeb"
                         }]
                     }else{
                         var dataZoom = ''
@@ -386,8 +388,11 @@
                         extraCssText: 'box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);'
                     },
                     legend: {
+                        itemHeight: 18,
+                        itemWidth: 18,
                         show:_this.legendShow,
                         data: legendList,
+                        icon:"rect",
                         bottom: "3%",
                         itemGap: 50,
                         textStyle: {

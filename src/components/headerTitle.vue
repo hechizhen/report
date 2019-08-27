@@ -22,7 +22,7 @@
             <p>
                 <span style="font-size:14px;">经销商：</span>
                 <a-select showSearch v-model="dealName" style="width: 200px;height:40px;" @change="onChange">
-                    <a-select-option v-for="(item,index) in dealList" :key="index" :value="item.name" :disabled="item.date_dt==nowDate ? true : false">{{item.name}}</a-select-option>
+                    <a-select-option v-for="(item,index) in dealList" :key="item+index" :value="item.name" :disabled="item.date_dt==nowDate ? true : false">{{item.name}}</a-select-option>
                 </a-select>
             </p>
         </div>
