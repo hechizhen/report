@@ -149,7 +149,7 @@
 		.conclude {
 			width: 100%;
 			height: 100%;
-			background:linear-gradient(90deg,rgba(1, 206, 199, 1),rgba(13, 207, 109, 1));
+			background:linear-gradient(90deg,rgba(13, 207, 109, 1),rgba(1, 206, 199, 1));
 			box-shadow:0px 2px 15px 0px rgba(255,182,2,0.13);
 			border-radius:6px;
 			.managerCol:nth-child(2) {

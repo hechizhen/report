@@ -13,21 +13,21 @@
             </div>
         </div>
         <div class="overDueBottom">
-            <!--<div class="overDueBottom-Lefe">-->
-            <a-progress type="circle" :percent="Number(overDueData.overDueRadioPercent)" :strokeWidth ="10" :successPercent="15"  :width="126" :showInfo="false" strokeColor="#6BBCFF" />
-            <div class="overDueBox">
-                <div>
-                    <p>
-                        <i></i>
-                        <span class="salesTxt">{{overDueData.overDueRadioTxt}}</span>
-                    </p>
-                    <p>
-                        {{overDueData.overDueRadio}}
-                    </p>
+            <div class="overDueBottomLeft">
+                <a-progress type="circle" :percent="Number(overDueData.overDueRadioPercent)" :strokeWidth ="10" :successPercent="15"  :width="126" :showInfo="false" strokeColor="#6BBCFF" />
+                <div class="overDueBox">
+                    <div>
+                        <p>
+                            <i></i>
+                            <span class="salesTxt">{{overDueData.overDueRadioTxt}}</span>
+                        </p>
+                        <p>
+                            {{overDueData.overDueRadio}}
+                        </p>
+                    </div>
                 </div>
             </div>
-            <!--</div>-->
-            <new-button :defaultVal="defaultVal" :buttonHandleClick="detailHandleClick" style="position:absolute;right:0;"></new-button>
+            <new-button :defaultVal="defaultVal" :buttonHandleClick="detailHandleClick"></new-button>
         </div>
     </div>
 </template>
@@ -121,6 +121,13 @@
             width:100%;
             height:173px;
             position: relative;
+            justify-content: center;
+            .overDueBottomLeft{
+                width:126px;
+                height:126px;
+                position: relative;
+                margin-right:30px;
+            }
             .overDueBox{
                 position: absolute;
                 width:126px;
@@ -129,6 +136,7 @@
                 align-items: center;
                 justify-content: center;
                 text-align: center;
+                top: 0;
                 p{
                     margin-bottom:0;
                     font-weight:bold;

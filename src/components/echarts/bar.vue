@@ -147,10 +147,11 @@
                 var _this = this
                 if(_this.barEchartsData.markLineList.show==true){
                     var markLineObj={
+                        symbol:'none',
+                        silent: true,
                         data: [{
                             name:_this.barEchartsData.markLineList.name,
                             yAxis:_this.barEchartsData.markLineList.data,
-                            symbol:'none',
                             lineStyle: {
                                 normal: {
                                     color: '#D7D9E5',
@@ -362,9 +363,9 @@
                 var option = {
                     tooltip: {
                         trigger: 'axis',
-                        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-                            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-                        },
+                        // axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                        //     type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                        // },
                         formatter:function(params){
                             var relVal = '';
                             for (var i = 0; i < params.length; i++) {

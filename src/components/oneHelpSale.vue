@@ -160,7 +160,7 @@
                             align-items: center;
                             justify-content: center;
                             text-align: center;
-                            padding-top:50px;
+                            padding-top:48px;
                             span{
                                 color:#fff;
                             }

@@ -21,7 +21,7 @@
             <span class="spanFont1 spanSize3">{{score.subscribe}}</span>
             <p>
                 <span style="font-size:14px;">经销商：</span>
-                <a-select showSearch v-model="defaultSelectVal" style="width: 200px;height:40px;" @change="onChange">
+                <a-select showSearch v-model="dealName" style="width: 200px;height:40px;" @change="onChange">
                     <a-select-option v-for="(item,index) in dealList" :key="index" :value="item.name" :disabled="item.date_dt==nowDate ? true : false">{{item.name}}</a-select-option>
                 </a-select>
             </p>
@@ -93,7 +93,7 @@
                 },
                 newId:this.dealList[0].id,
                 defaultValDate:this.defaultDate,
-                defaultSelectVal:this.dealList[0].name,
+                defaultSelectVal:'',
                 defaultDateValue:this.defaultDate.substring(0,4)+this.defaultDate.substring(5,7),
                 headerStartDate:Number(this.startDate.substring(5,7)),
                 headerEndDate:Number(this.endDate.substring(5,7)),
@@ -118,6 +118,7 @@
                     return disabledDay > endTime || disabledDay < startTime
                 },
             }
+            console.log(this.disabledDate())
         },
         methods: {
             moment,
@@ -153,6 +154,15 @@
                         _this.headerStartDate = Number(item.date_dt.substring(4,6))
                     }
                 })
+                let endTime = this.headerEndDate
+                let startTime = this.headerStartDate
+                this.options3 = {
+                    disabledDate(date) {
+                        var _this = this
+                        const disabledDay = date.getMonth()+1;
+                        return disabledDay > endTime || disabledDay < startTime
+                    },
+                }
             },
         },
         computed:{
