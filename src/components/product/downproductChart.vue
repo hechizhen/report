@@ -119,10 +119,13 @@
                     padding-right: 10%;
                     span {
                         position: absolute;
-                        top: 8px;
-                        right: 8px;
+                        top: 13px;
+                        right:15px;
                         color: rgba(180, 180, 180, 1);
                         cursor: pointer;
+                    }
+                    i{
+                        font-size: 40px;
                     }
                 }
             }

@@ -14,7 +14,7 @@
 				  	</div>
 				  </a-Col>
 				  <a-Col :span="12" class="thendChartCol2">
-				  			<div>单位：万元</div>  
+				  			<div>单位：万元</div>
 							<new-button  :defaultVal="defaultVal" :buttonHandleClick ="exportClick" style="margin-left:4%"></new-button>
 				  			<span @click="thendChartClick('关闭')"><i class="iconfont icon-guanbi"></i></span>
 				  </a-Col>
@@ -278,12 +278,12 @@
 					span {
 						position: absolute;
 						top: 8px;
-						right: 8px;
+						right: 15px;
 						color: rgba(180, 180, 180, 1);
 						cursor: pointer;
 					}
 					i{
-						font-size: 20px;
+						font-size: 40px;
 					}
 				}
 			}

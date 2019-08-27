@@ -259,9 +259,9 @@
         }
         .iStyle{
             position: absolute;
-            right:5px;
-            top:5px;
-            font-size: 30px;
+            right:15px;
+            top:8px;
+            font-size: 40px;
             cursor: pointer;
         }
     }
