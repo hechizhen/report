@@ -92,12 +92,12 @@
     padding-left: 0 !important;
 }
 .inventoryDase{
-    width:46%;
+    width:45%;
     height:208px;
     background:rgba(255,255,255,1);
     border-radius:10px;
     float: left;
-    margin-left: 1%;
+    margin-left: 2%;
     position: relative;
     .inventoryDase-left{
         width: 38%;

@@ -10,7 +10,7 @@
                         <productRight :barData="CommodityTurnoverRate.produnarData"></productRight>
                         <loading-data :isShow="CommodityRate"></loading-data>
                     </a-Col>
-                    <a-Col :span="13" :push="1">
+                    <a-Col :span="14">
                         <commodityRight :goodHandleClick="goodDetailHandleClick" :commoditydata="commoditydata" :upraphy="upraphy" :downraphy="downraphy"  :tableData="productTableData"  :selectButtonClick="proListDetaSelectButtonClick" ></commodityRight>
                         <loading-data :isShow="NumberGoods"></loading-data>
                     </a-Col>
@@ -283,11 +283,13 @@
                     height: 100%;
                     position: relative;
                 }
-                .ant-col-13{
+                .ant-col-14{
+                    width: 56.3%;
+                    height: 100%;
                     background:rgba(67,159,255,1);
                     border:1px solid rgba(105,151,255,1);
                     border-radius:6px;
-                    height: 100%;
+                    margin-left: 2%;
                     position: relative;
                 }
             }

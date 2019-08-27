@@ -76,7 +76,7 @@
 </script>
 <style lang="less" scoped>
 	.thendChart {
-		margin-top:24px;
+		margin-top:2%;
 		height: 296px;
 		width: 100%;
 		padding: 5px;
