@@ -73,3 +73,7 @@ a {
     background-size: 21px 18px;
     background-position: right 10px center;
 }
+/*日期查询按钮修改*/
+.ant-btn-primary{
+    border-radius: 16px !important;
+}
