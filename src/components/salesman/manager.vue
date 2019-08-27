@@ -1,6 +1,6 @@
 <template>
 	<div class="manager">
-		<a-Row :gutter="26" class="managerRow">
+		<a-Row  class="managerRow">
 		  <a-Col :span="8" class="managerCol">
 		  	<div class="conclude">
 		  		<a-Row class="managerRow">
@@ -144,6 +144,8 @@
 			padding:0!important;
 			.managerCol {
 				height: 100%;
+				padding-left: 1%;
+				padding-right: 1%;
 			}
 		}
 		.conclude {

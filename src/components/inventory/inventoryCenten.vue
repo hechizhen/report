@@ -38,12 +38,12 @@
 
 <style lang="less" scoped>
 .inventoryCenten{
-    width: 17%;
+    width: 16%;
     height:208px;
     background:rgba(255,255,255,1);
     border-radius:10px;
     float: left;
-    margin-left: 1%;
+    margin-left: 2%;
     position: relative;
     .inventoryCenten-bor{
         width:180px;
