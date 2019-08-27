@@ -2274,12 +2274,12 @@
                             console.log(prodownData)   //下滑
                             //增长产品数据
                             //判断增长产品数据是否为空
-                            if(proraiseData.data.data.data.length!=0){
-                                var proraiseList = proraiseData.data.data.data
-                            }else{
-                                var proraiseList=''
-                            }
-                            // let proraiseList = proraiseData.data.data.data
+                            // if(proraiseData.data.data.data.length!=0){
+                            //     var proraiseList = proraiseData.data.data.data
+                            // }else{
+                            //     var proraiseList=''
+                            // }
+                            let proraiseList = proraiseData.data.data.data
                             console.log(proraiseList)
                             let raisexAxisData = []//增长门店x轴
                             let raiseLastMonth = []//增长门店上月销售额
@@ -2336,12 +2336,12 @@
                             _this.upproStoresData = raiseBarData
                             //下滑产品数据
                             //判断下滑产品数据是否为空
-                            if(prodownData.data.data.data.length!=0){
-                                var downList = prodownData.data.data.data
-                            }else{
-                                var downList=''
-                            }
-                            // let downList = prodownData.data.data.data
+                            // if(prodownData.data.data.data.length!=0){
+                            //     var downList = prodownData.data.data.data
+                            // }else{
+                            //     var downList=''
+                            // }
+                            let downList = prodownData.data.data.data
                             let downxAxisData = []//下滑门店x轴
                             let downLastMonth = []//下滑门店上月销售额
                             let downSameMonth = []//下滑门店当月销售额
@@ -2706,12 +2706,12 @@
                         console.log(raiseData)
                         //增长门店数据
                         //判断增长门店数据是否为空
-                        if(raiseData.data.data.data.length!=0){
-                            var raiseList = raiseData.data.data.data
-                        }else{
-                            var raiseList=''
-                        }
-                        // let raiseList = raiseData.data.data.data
+                        // if(raiseData.data.data.data.length!=0){
+                        //     var raiseList = raiseData.data.data.data
+                        // }else{
+                        //     var raiseList=''
+                        // }
+                        let raiseList = raiseData.data.data.data
                         let raisexAxisData = []//增长门店x轴
                         let raiseLastMonth = []//增长门店月平均销售额
                         let raiseSameMonth = []//增长门店当月销售额
@@ -2766,12 +2766,12 @@
                         _this.upStoresData = raiseBarData
                         //下滑门店数据
                         //判断下滑门店数据是否为空
-                        if(downData.data.data.data.length!=0){
-                            var downList = downData.data.data.data
-                        }else{
-                            var downList=''
-                        }
-                        // let downList = downData.data.data.data
+                        // if(downData.data.data.data.length!=0){
+                        //     var downList = downData.data.data.data
+                        // }else{
+                        //     var downList=''
+                        // }
+                        let downList = downData.data.data.data
                         let downxAxisData = []//下滑门店x轴
                         let downLastMonth = []//下滑门店月平均销售额
                         let downSameMonth = []//下滑门店当月销售额

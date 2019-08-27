@@ -9,7 +9,7 @@
 			<div class="record">
 				<a-Row class="recordConten">
 					<a-Col :span="24" class="recordLeft">
-						<div><img style="margin-right:5px;" src="./../../assets/img/jine-icon.png">下单金额（万元）</div>
+						<div><img style="margin-right:5px;" src="./../../assets/img/jine-icon.png">下单金额(万元)</div>
 						<div>(以创建订单日期统计)</div>
 						<div><span>￥</span>{{orderAmountData.moneyInteger}}<span>{{orderAmountData.moneyDecimal}}</span></div>
 					</a-Col>
@@ -130,7 +130,7 @@
 							color:rgba(255,255,255,1);
 						}
 						div:nth-child(1) {
-							height: 35%;
+							height: 40%;
 							font-size:20px;
 							display: flex;
 						    align-items: center;
