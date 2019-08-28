@@ -7,8 +7,8 @@
         <div v-if="legendShow" class="checkBoxList">
             <!-- <a-checkbox-group @change="onChange">
                 <a-checkbox v-for="(item,index) in legendList" :key="index" :value="item">{{item}}</a-checkbox>
-            </a-checkbox-group> --> 
-            <a-checkbox v-for="(item,index) in legendList" :key="index" :value="item" @change="onChange" >{{item}}</a-checkbox>
+            </a-checkbox-group> -->
+            <a-checkbox v-for="(item,index) in legendList" :key="index" :value="item" @change="onChange" :defaultChecked="true" >{{item}}</a-checkbox>
             <!-- :defaultChecked="index==0 ? true : false" -->
         </div>
     </div>
@@ -58,6 +58,7 @@
             //x轴数据
             xAxis:{
                 default: () => ({
+
                     //x轴
                     axisLine:{
                         show:true,
@@ -67,7 +68,8 @@
                     axisLabel:{
                         show:true,
                         color:'#333333',
-                        fontSize:14
+                        fontSize:14,
+                        rotate:0
                     },
                     //网格线
                     splitLine:{
@@ -107,6 +109,7 @@
                     containLabel: true
                 })
             },
+
         },
         components : {
 
@@ -236,6 +239,7 @@
                         },
                         axisLabel:{
                             show:_this.xAxis.axisLabel.show,
+                            rotate:_this.xAxis.axisLabel.rotate,
                             textStyle:{
                                 color:_this.xAxis.axisLabel.color,
                                 fontSize:_this.xAxis.axisLabel.fontSize

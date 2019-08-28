@@ -53,7 +53,7 @@
 		p:nth-child(1) {
 			height: 25px;
 			width: 125px;
-			font-size:14px;
+			font-size:16px;
 			color:rgba(0,124,255,1);
 			text-align: center;
 			line-height: 25px;
@@ -61,11 +61,11 @@
 		}
 		p:nth-child(2) {
 			margin: 0px 10px;
-			font-size:14px;
+			font-size:16px;
 			color:rgba(51,51,51,1)
 		}
 		p:nth-child(3) {
-			font-size:12px;
+			font-size:14px;
 			color:rgba(152,162,180,1);
 		}
 	}

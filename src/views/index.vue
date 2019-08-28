@@ -390,7 +390,7 @@
                     })
                     _this.dealList.map(function(parentItem){
                         dealData.map(function(childItem){
-                            if(parentItem.name == childItem.dealer_name){
+                            if(parentItem.name.indexOf(childItem.date_dt_name)!= -1 ){
                                 parentItem.date_dt = (childItem.date_dt).substring(0,4)+'-'+(childItem.date_dt).substring(4,6)
                             }
                         })
@@ -1568,7 +1568,7 @@
                     "inputParam":
                         {
                             "data_mon":_this.currentDate,
-                            "data_type":'13'
+                            "data_type":'12'
                         },
 
                     "outputCol":"data_mon,dealer_id,data_type,dealer_code,dealer_name,money,liby_money,kispa_money,cheerwin_money,oral_money,shengmei_money,other_money,money_lm,liby_money_lm,kispa_money_lm,cheerwin_money_lm,oral_money_lm,shengmei_money_lm,other_money_lm,money_ly,liby_money_ly,kispa_money_ly,cheerwin_money_ly,oral_money_ly,shengmei_money_ly,other_money_ly,gross_money,gross_money_rate,gross_money_lm,gross_money_mom,gross_money_rate_mom,gross_money_ly,gross_money_yoy,gross_money_rate_yoy",
@@ -1591,8 +1591,9 @@
                     // }
                     var directionData = res.data.data.data,monthArr = [],seriesData=[],directionArr = {};
                     directionData.map(function(value){
-                        monthArr.push(value.data_mon)
-                        seriesData.push(value.money)
+                        // !data.liby_saledays ? 0 : data.liby_saledays
+                        monthArr.push(!value.data_mon ? 0 : value.data_mon)
+                        seriesData.push(!value.money ? 0 : value.money)
                     })
                     directionArr.monthArr = monthArr;
                     directionArr.seriesData = seriesData;
@@ -1617,7 +1618,8 @@
                             axisLabel:{
                                 show:true,
                                 color:'#333',
-                                fontSize:14
+                                fontSize:14,
+                                rotate:60
                             },
                             splitLine:{
                                 show:false,
@@ -1652,7 +1654,7 @@
                     "inputParam":
                         {
                             "data_mon":_this.currentDate,
-                            "data_type":"13"
+                            "data_type":"12"
                         },
                     "outputCol":"dealer_id,data_mon,data_type,emp_name,emp_phone,emp_money,emp_target_money,emp_rate,emp_money_rate,gross_money,gross_rate",
                     "pageNum":1,
@@ -1802,14 +1804,14 @@
                 }).then(function (res) {
                     if(res.data.code == '200'){
                         //判断业务员-达成-贡献接口参数是否为空
-                        if(res.data.data.data.length!=0){
-                            var salesmanReachedData = res.data.data.data
-                        }else{
-                            var salesmanReachedData=''
-                        }
+                        // if(res.data.data.data.length!=0){
+                        //     var salesmanReachedData = res.data.data.data
+                        // }else{
+                        //     var salesmanReachedData=''
+                        // }
                         // 达成
                         let targetList = []
-                        var xAxisData=[],seriesData=[],lastMonth=[],sameMonth=[],difference=[],salesmanReachedObject={},contributionseriesData=[],contributionlastMonth=[],contributiondifference = [],salesmanContributionObject={};
+                        var salesmanReachedData = res.data.data.data,xAxisData=[],seriesData=[],lastMonth=[],sameMonth=[],difference=[],salesmanReachedObject={},contributionseriesData=[],contributionlastMonth=[],contributiondifference = [],salesmanContributionObject={};
                         salesmanReachedData.map(function(value,index){
                             xAxisData.push(value.emp_name);
                             lastMonth.push(value.emp_money)
@@ -1987,13 +1989,19 @@
                             data.cheerwin_stock_sale_rate, data.oral_stock_sale_rate,
                             data.shengmei_stock_sale_rate
                         ]
-                        console.log(barDataMonth)
+                        let barDataMonths = [
+                            data.shengmei_stock_sale_rate, data.oral_stock_sale_rate,
+                            data.cheerwin_stock_sale_rate, data.kispa_stock_sale_rate,
+                            data.liby_stock_sale_rate
+                        ]
+                        // console.log(barDataMonth)
                         let Axiax = ['立白','好爸爸','超威','口腔','晟美']
+                        let Axiaxs = ['晟美','口腔','超威','好爸爸','立白']
                         let produnarData = {
                             config:{
                                 id: 'barIdProdun',
                                 unit:['percent'],
-                                xAxisData: Axiax,
+                                xAxisData: Axiaxs,
                                 label: {
                                     isShow: true
                                 },
@@ -2001,9 +2009,9 @@
                                 barData: [
                                     {
                                         name: '分销率',
-                                        data: barDataMonth,
+                                        data: barDataMonths,
                                         color: '#fff',
-                                        barWidth: 11
+                                        barWidth: 12
                                     },
                                 ],
                                 showType: 1,

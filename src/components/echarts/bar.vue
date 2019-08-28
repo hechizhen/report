@@ -66,6 +66,10 @@
                 type:Boolean,
                 default:false
             },
+            selectedMode:{
+                type:Boolean,
+                default:true
+            },
             grid:{
                 type:Object,
                 default: () => ({
@@ -91,6 +95,7 @@
                         show:true,
                         color:'#333333',
                         fontSize:16,
+                        rotate: 60,
                     },
                     //网格线
                     splitLine:{
@@ -105,13 +110,13 @@
                     //y轴
                     axisLine:{
                         show:true,
-                        color:'#3699FF'
+                        color:'#3699FF',
                     },
                     //y轴字体
                     axisLabel:{
                         show:true,
                         color:'#333333',
-                        fontSize:16
+                        fontSize:16,
                     },
                     //网格线
                     splitLine:{
@@ -332,7 +337,7 @@
                         else  if(fieWidth<=9){
                             var  endWidth = 90
                         }
-                        else{      //   10  60         12  45  19 35
+                        else{
                             var  endWidth =( 5 / fieWidth ) * 90 +10
                         }
                         var dataZoom = [{
@@ -362,6 +367,7 @@
                 }else{
                     _this.intervalData = null
                 }
+                console.log(xAxisLabel)
                 var option = {
                     tooltip: {
                         trigger: 'axis',
@@ -395,6 +401,7 @@
                         icon:"rect",
                         bottom: "3%",
                         itemGap: 50,
+                        selectedMode:_this.selectedMode,
                         textStyle: {
                             color: "#333333",
                             fontSize:14
