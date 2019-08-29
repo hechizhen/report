@@ -19,7 +19,7 @@
             <span class="spanFont spanSize4">总结：</span>
             <span class="spanFont spanSize4">{{score.evaluate}}</span>
             <span class="spanFont1 spanSize3">{{score.subscribe}}</span>
-            <p>
+            <p style="margin-top: 1%">
                 <span style="font-size:14px;">经销商：</span>
                 <a-select showSearch v-model="dealName" style="width: 200px;height:40px;" @change="onChange">
                     <a-select-option v-for="(item,index) in dealList" :key="item+index" :value="item.name" :disabled="item.date_dt==nowDate ? true : false">{{item.name}}</a-select-option>
@@ -194,7 +194,7 @@
             word-wrap: break-word;
             word-break: break-all;
             flex-wrap: wrap;
-            padding-top: 32px;
+            padding-top:1%;
             line-height: 20px;
         }
         .paddingStyle{
