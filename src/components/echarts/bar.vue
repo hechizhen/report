@@ -77,7 +77,7 @@
                     top: 'middle',
                     left: '3%',
                     right: '4%',
-                    height: '75%',
+                    height: '70%',
                     bottom:'3%',
                     containLabel: true
                 })
@@ -96,7 +96,7 @@
                         show:true,
                         color:'#333333',
                         fontSize:16,
-                        rotate: 60,
+                        height: '75%',
                     },
                     //网格线
                     splitLine:{
@@ -222,6 +222,7 @@
                                     show:_this.label.isShow,
                                     position: _this.label.position,
                                     color:_this.label.color,
+                                    marginTop:15,
                                     formatter:function(params){
                                         return _this.dataProcess(params.value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num+_this.dataProcess(params.value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).unit
                                     }
@@ -268,7 +269,7 @@
                                         tempStr = params.substring(start, paramsNameNumber);
                                     } else {
                                         // 每一次拼接字符串并换行
-                                        tempStr = params.substring(start, end) + "\n";
+                                        tempStr = params.substring(start, end) + "\n"+ "\n";
                                     }
                                     newParamsName += tempStr;// 最终拼成的字符串
                                 }

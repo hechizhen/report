@@ -2011,7 +2011,7 @@
                                         name: '分销率',
                                         data: barDataMonths,
                                         color: '#fff',
-                                        barWidth: 12
+                                        barWidth: 10
                                     },
                                 ],
                                 showType: 1,
