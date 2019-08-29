@@ -1661,7 +1661,7 @@
                     "pageSize":1000,
                     "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
                     "serviceId":"service_tjbg02_emp_rate",
-                    "orderCol":'emp_money desc'
+                    "orderCol":'data_mon asc'
                 }
                 this.$http({
                     url: _this.testRequestHttpUrl + '?v=salesmanTrend',

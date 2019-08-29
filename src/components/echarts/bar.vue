@@ -66,9 +66,10 @@
                 type:Boolean,
                 default:false
             },
+            //树状图下面数据是否能点击
             selectedMode:{
                 type:Boolean,
-                default:true
+                default:false
             },
             grid:{
                 type:Object,
