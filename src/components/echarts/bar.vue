@@ -66,13 +66,18 @@
                 type:Boolean,
                 default:false
             },
+            //树状图下面数据是否能点击
+            selectedMode:{
+                type:Boolean,
+                default:false
+            },
             grid:{
                 type:Object,
                 default: () => ({
                     top: 'middle',
                     left: '3%',
                     right: '4%',
-                    height: '75%',
+                    height: '70%',
                     bottom:'3%',
                     containLabel: true
                 })
@@ -91,6 +96,7 @@
                         show:true,
                         color:'#333333',
                         fontSize:16,
+                        height: '75%',
                     },
                     //网格线
                     splitLine:{
@@ -105,13 +111,13 @@
                     //y轴
                     axisLine:{
                         show:true,
-                        color:'#3699FF'
+                        color:'#3699FF',
                     },
                     //y轴字体
                     axisLabel:{
                         show:true,
                         color:'#333333',
-                        fontSize:16
+                        fontSize:16,
                     },
                     //网格线
                     splitLine:{
@@ -216,6 +222,7 @@
                                     show:_this.label.isShow,
                                     position: _this.label.position,
                                     color:_this.label.color,
+                                    marginTop:15,
                                     formatter:function(params){
                                         return _this.dataProcess(params.value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num+_this.dataProcess(params.value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).unit
                                     }
@@ -262,7 +269,7 @@
                                         tempStr = params.substring(start, paramsNameNumber);
                                     } else {
                                         // 每一次拼接字符串并换行
-                                        tempStr = params.substring(start, end) + "\n";
+                                        tempStr = params.substring(start, end) + "\n"+ "\n";
                                     }
                                     newParamsName += tempStr;// 最终拼成的字符串
                                 }
@@ -332,7 +339,7 @@
                         else  if(fieWidth<=9){
                             var  endWidth = 90
                         }
-                        else{      //   10  60         12  45  19 35
+                        else{
                             var  endWidth =( 5 / fieWidth ) * 90 +10
                         }
                         var dataZoom = [{
@@ -362,6 +369,7 @@
                 }else{
                     _this.intervalData = null
                 }
+                console.log(xAxisLabel)
                 var option = {
                     tooltip: {
                         trigger: 'axis',
@@ -395,6 +403,7 @@
                         icon:"rect",
                         bottom: "3%",
                         itemGap: 50,
+                        selectedMode:_this.selectedMode,
                         textStyle: {
                             color: "#333333",
                             fontSize:14

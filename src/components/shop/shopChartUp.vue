@@ -84,7 +84,7 @@
         justify-content: center;
         background-color: RGBA(69, 72, 90, 0.5);
         .echarts {
-            height: 80%;
+            height: 678px;
             width: 90%;
             background:rgba(255,255,255,1);
             border-radius: 5px;

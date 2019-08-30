@@ -77,3 +77,6 @@ a {
     background-color: #2D92FC!important;
     border-color: #2D92FC!important;
 }
+i{
+    z-index: 101 !important;
+}
