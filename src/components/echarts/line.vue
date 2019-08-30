@@ -8,7 +8,7 @@
             <!-- <a-checkbox-group @change="onChange">
                 <a-checkbox v-for="(item,index) in legendList" :key="index" :value="item">{{item}}</a-checkbox>
             </a-checkbox-group> --> 
-            <a-checkbox v-for="(item,index) in legendList" :key="index" :value="item" @change="onChange" >{{item}}</a-checkbox>
+            <a-checkbox v-for="(item,index) in legendList" :key="index" :value="item" @change="onChange" :defaultChecked="true">{{item}}</a-checkbox>
             <!-- :defaultChecked="index==0 ? true : false" -->
         </div>
     </div>

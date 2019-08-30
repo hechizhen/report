@@ -390,7 +390,7 @@
                     })
                     _this.dealList.map(function(parentItem){
                         dealData.map(function(childItem){
-                            if(parentItem.name == childItem.dealer_name){
+                            if(parentItem.name.indexOf(childItem.dealer_name)!=-1){
                                 parentItem.date_dt = (childItem.date_dt).substring(0,4)+'-'+(childItem.date_dt).substring(4,6)
                             }
                         })
