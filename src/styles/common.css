@@ -25,25 +25,109 @@ a {
     visibility: hidden;
     clear: both;
 }
-/*!*修改ant Design框架按钮产品专题鼠标经过默认颜色*!*/
- /*.ant-btn:hover {*/
-    /*color: #FFF !important;*/
-    /*background-color: #268CF7 !important;*/
-    /*border-color: #FFFFFF !important;*/
-/*}*/
-/*!*修改ant Design框架按钮门店专题鼠标经过默认颜色*!*/
- /*.shopLeft .shop-active .ant-btn:hover {*/
-     /*color: #FFF !important;*/
-     /*background-color: #0090DD !important;*/
-     /*border-color: #008BD6 !important;*/
- /*}*/
-/*!*修改ant Design框架按钮门店专题鼠标经过默认颜色*!*/
-/*.shopRight .shopRight-title .ant-btn:hover {*/
-    /*color: #FFF !important;*/
-    /*background-color: #E80142 !important;*/
-    /*border-color: #E80142 !important;*/
-/*}*/
- /*修改ant Design框架按钮默认字体大小*/
+/*修改ant Design框架按钮二帮卖业务员达成和贡献和走势图鼠标经过默认颜色*/
+.manager .ant-col-8:first-child .ant-col-9  .ant-btn:hover {
+    color: #FFF !important;
+    background-color: #06C062 !important;
+    border-color: #FFFFFF !important;
+}
+/*修改ant Design框架按钮二帮卖业务员下滑人员鼠标经过默认颜色*/
+.manager .ant-col-8:last-child .ant-col-7  .ant-btn:hover {
+    color: #FFF !important;
+    background-color: #E4A400 !important;
+    border-color: #FFFFFF !important;
+}
+/*修改ant Design框架按钮产品专题鼠标经过默认颜色*/
+ .ant-btn:hover {
+    color: #FFF !important;
+    background-color: #268CF7 !important;
+    border-color: #FFFFFF !important;
+}
+.ant-btn:active {
+    color: #fff !important;
+    background-color: #268CF7 !important;
+    border-color: #FFFFFF !important;
+}
+/*修改ant Design框架按钮门店专题鼠标经过默认颜色*/
+ .shopLeft .shop-active .ant-btn:hover {
+     color: #FFF !important;
+     background-color: #0090DD !important;
+     border-color: #008BD6 !important;
+ }
+/*修改ant Design框架按钮门店专题鼠标经过默认颜色*/
+.shopRight .shopRight-title .ant-btn:hover {
+    color: #FFF !important;
+    background-color: #E80142 !important;
+    border-color: #E80142 !important;
+}
+/*修改ant Design框架按钮门店专题增长下滑门店，无交易明细，应收明细，鼠标经过默认颜色*/
+.shopLeft .shop-data-base .ant-btn:hover {
+    color: #BEBEBE !important;
+    background-color: #ffffff !important;
+    border-color: #BFBFBF !important;
+}
+.shop-centen-middle .shopBase .ant-btn:hover {
+    color: #BEBEBE !important;
+    background-color: #ffffff !important;
+    border-color: #BFBFBF !important;
+}
+/*修改ant Design框架按钮门店专题增长下滑门店，无交易明细，应收明细，鼠标点击默认颜色*/
+.shopLeft .shop-data-base .ant-btn:active {
+    color: #333333 !important;
+    background-color: #D7D9E5 !important;
+    border-color: #BFBFBF !important;
+}
+.shop-centen-middle .shopBase .ant-btn:hover {
+    color: #333333 !important;
+    background-color: #D7D9E5 !important;
+    border-color: #BFBFBF !important;
+}
+/*修改ant Design框架按钮库存鼠标经过默认颜色*/
+.inventoryindex .ant-btn:hover {
+    color: #BEBEBE !important;
+    background-color: #ffffff !important;
+    border-color: #BFBFBF !important;
+}
+/*修改ant Design框架按钮库存鼠标点击默认颜色*/
+.inventoryindex .ant-btn:active {
+    color: #333333 !important;
+    background-color: #D7D9E5 !important;
+    border-color: #BFBFBF !important;
+}
+/*导出按钮样式*/
+.echarts .ant-btn:hover {
+    color: #BEBEBE !important;
+    background-color: #ffffff !important;
+    border-color: #BFBFBF !important;
+}
+.echarts .ant-btn:active {
+    color: #333333 !important;
+    background-color: #D7D9E5 !important;
+    border-color: #BFBFBF !important;
+}
+.publicTable .ant-btn:hover {
+    color: #BEBEBE !important;
+    background-color: #ffffff !important;
+    border-color: #BFBFBF !important;
+}
+.publicTable .ant-btn:active {
+    color: #333333 !important;
+    background-color: #D7D9E5 !important;
+    border-color: #BFBFBF !important;
+}
+/*预期明细样式*/
+.overDueBottom  .ant-btn:hover {
+    color: #BEBEBE !important;
+    background-color: #ffffff !important;
+    border-color: #BFBFBF !important;
+}
+.overDueBottom  .ant-btn:active {
+    color: #333333 !important;
+    background-color: #D7D9E5 !important;
+    border-color: #BFBFBF !important;
+}
+
+/*修改ant Design框架按钮默认字体大小*/
 .ant-btn{
     font-size: 16px !important;
 }
