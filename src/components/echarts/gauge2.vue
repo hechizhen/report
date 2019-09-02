@@ -57,7 +57,7 @@
                     gray: {
                         fontSize: 20,
                         color: '#fff',
-                        padding: 20
+                        padding: 8
                     },
                     white: {
                         fontSize: 30,
@@ -281,7 +281,7 @@
                                     return '{gray|' + _this.gaugeChartData.name + '\n' + '}{white|' + _this.gaugeChartData.data+'%' + '}'
                                 },
                                 rich: rich,
-                                offsetCenter: ['0', '-30%'],
+                                offsetCenter: ['0', '-26%'],
                             },
                             splitLine: {
                                 length: 25, //刻度节点线长度

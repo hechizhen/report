@@ -96,9 +96,9 @@
                     defaultVal:'查询',
                     isGhost:false
                 },
-                newId:this.dealList[0].id,
+                newId:'ff80808169c93eb80169d6a73cc02d04',
                 defaultValDate:this.defaultDate,
-                defaultSelectVal:'',
+                defaultSelectVal:this.dealName,
                 defaultDateValue:this.defaultDate.substring(0,4)+this.defaultDate.substring(5,7),
                 headerStartDate:Number(this.startDate.substring(5,7)),
                 headerEndDate:Number(this.endDate.substring(5,7)),
@@ -197,17 +197,18 @@
             height:100%;
         }
         .headerTitle_mid{
-            width: 17%;
+            width: 135px;
             height:100%;
         }
         .headerTitle_right{
             height: 100%;
-            width:38%;
+            width: calc(~"55% - 135px");
             word-wrap: break-word;
             word-break: break-all;
             flex-wrap: wrap;
             padding-top:45px;
             line-height: 20px;
+            padding-left:30px;
         }
         .paddingStyle{
             padding-top:40px;

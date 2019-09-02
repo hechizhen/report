@@ -202,12 +202,12 @@
                         margin-right:6px;
                     }
                     .rightTxt{
-                        font-size:20px;
+                        font-size:22px;
                         font-weight:500;
                         color:#fff;
                     }
                     .rightReach{
-                        font-size:22px;
+                        font-size:26px;
                         font-weight:500;
                         color:#fff;
                     }
@@ -229,8 +229,8 @@
                 }
             }
             .imgSrc{
-                width: 20px;
-                margin-bottom: 5px;
+                width: 24px;
+                margin-bottom: 6px;
             }
         }
     }

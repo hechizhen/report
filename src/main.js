@@ -8,6 +8,8 @@ import store from './store/store.js'
 import animated from 'animate.css'
 import common from  './assets/common/common.js'
 import 'babel-polyfill'
+import rem from './libs/rem';
+import './libs/rem.js'
 
 import Antd from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css'

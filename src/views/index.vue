@@ -401,6 +401,8 @@
                 this.loadingDataArray = []
                 this.dealer_id = selectVal
                 this.indexDealName = selectName
+                alert(selectName)
+                alert(selectVal)
                 //判断入口为立购星或者预生产 是否改变经销商id
                 // if(this.isShowDealIdSelect){
                 //     this.dealer_id = selectVal
@@ -1005,7 +1007,7 @@
                                 },
                                 axisLabel:{
                                     show:true,
-                                    color:'#D7D9E5',
+                                    color:'#c9cbd5',
                                     fontSize:12
                                 },
                                 splitLine:{
@@ -1084,7 +1086,7 @@
                                 },
                                 axisLabel:{
                                     show:true,
-                                    color:'#D7D9E5',
+                                    color:'#c9cbd5',
                                     fontSize:12
                                 },
                                 splitLine:{
