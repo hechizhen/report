@@ -3,19 +3,19 @@
 		<div class="leftLine"></div>
 		<div class="subtitle_content">{{subtitlename}}</div>
 		<div class="subtitle_list">
-			<ul>
-				<li v-for="(item,index) in listing" @click="listingClick(item,index)" :key="index">{{item}}</li>
-			</ul>
+			<NewButton :btnStyle="btnStyle" :buttonHandleClick="detailHandleClick" :txtStyle="txtStyle"></NewButton>
 		</div>
 		<explain :explainList="explainSecondList"></explain>
 	</div>
 </template>
 <script>
 	import explain from '../components/explain.vue'
+	import  NewButton from  './button'
 	export default {
 		name:'subtitle',
 		components:{
-			explain
+			explain,
+			NewButton
 		},
 		props:{
 			// 副标题名称
@@ -37,7 +37,18 @@
 
 		data(){
 			return {
-
+				btnStyle:{
+					width: '78px',
+					height: '30px',
+					border: '1px solid #00A6FF',
+					borderRadius:"8px",
+				    // hover:{
+					// 	color:'red'
+					// }
+				},
+				txtStyle:{
+					color:'#2D92FC'
+				}
 			}
 		},
 		methods:{
@@ -72,29 +83,13 @@
 	.subtitle_list {
 		margin-left: 15px;
 	}
-	.subtitle_list ul {
-		padding: 0;
-		margin: 0;
+	.subtitle_list .new-button .txt:hover{
+		color: #000;
 	}
-	.subtitle_list li {
-		cursor: pointer;
-		float: left;
-		height: 30px;
-		line-height: 30px;
-		padding: 0 10px;
-		border:1px solid rgba(0,166,255,1);
-		border-radius:8px;
-		margin-right: 15px;
-		font-size:14px;
-		font-family:PingFangSC-Regular;
-		font-weight:400;
-		color:rgba(45,146,252,1);
+
+	.subtitle_list .new-button:active{
+		color: #2D92FC;
+		background-color: #D7D9E5;
 	}
-	.subtitle_list li:hover {
-		color:rgba(106,179,255,1);
-	}
-	.subtitle_list li:active {
-		color:rgba(45,146,252,1);
-		background:rgba(215,217,229,1);
-	}
+
 </style>

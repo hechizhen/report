@@ -154,6 +154,7 @@
     background:rgba(255,255,255,1);
     border-radius:6px;
     margin: auto;
+    display: inline-block;
     .shop-centen-title{
         height:63px;
         line-height:63px;

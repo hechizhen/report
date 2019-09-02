@@ -25,111 +25,142 @@ a {
     visibility: hidden;
     clear: both;
 }
+/*修改ant Design框架按钮二帮卖订单详情，财务，鼠标经过默认颜色*/
+.subtitle .subtitle_list .new-button:hover {
+    color: #fff !important;
+    background-color: #fff !important;
+    border-color: #6AB3FF !important;
+}
+.finance .buttonList .new-button:hover {
+    color: #fff !important;
+    background-color: #fff !important;
+    border-color: #6AB3FF !important;
+}
+/*修改ant Design框架按钮二帮卖订单详情，财务，鼠标点击默认颜色*/
+.subtitle .subtitle_list .new-button:active {
+    color: #2D92FC !important;
+    background-color: #D7D9E5 !important;
+    border-color: #6AB3FF !important;
+}
+.finance .buttonList .new-button:active {
+    color: #2D92FC !important;
+    background-color: #D7D9E5 !important;
+    border-color: #6AB3FF !important;
+}
 /*修改ant Design框架按钮二帮卖业务员达成和贡献和走势图鼠标经过默认颜色*/
-.manager .ant-col-8:first-child .ant-col-9  .ant-btn:hover {
+.manager .ant-col-8:first-child .ant-col-9  .new-button:hover {
     color: #FFF !important;
     background-color: #06C062 !important;
     border-color: #FFFFFF !important;
 }
 /*修改ant Design框架按钮二帮卖业务员下滑人员鼠标经过默认颜色*/
-.manager .ant-col-8:last-child .ant-col-7  .ant-btn:hover {
+.manager .ant-col-8:last-child .ant-col-7  .new-button:hover {
     color: #FFF !important;
     background-color: #E4A400 !important;
     border-color: #FFFFFF !important;
 }
 /*修改ant Design框架按钮产品专题鼠标经过默认颜色*/
- .ant-btn:hover {
+ .new-button:hover {
     color: #FFF !important;
     background-color: #268CF7 !important;
     border-color: #FFFFFF !important;
 }
-.ant-btn:active {
+.new-button:active {
     color: #fff !important;
     background-color: #268CF7 !important;
     border-color: #FFFFFF !important;
 }
 /*修改ant Design框架按钮门店专题鼠标经过默认颜色*/
- .shopLeft .shop-active .ant-btn:hover {
+ .shopLeft .shop-active .new-button:hover {
      color: #FFF !important;
      background-color: #0090DD !important;
      border-color: #008BD6 !important;
  }
 /*修改ant Design框架按钮门店专题鼠标经过默认颜色*/
-.shopRight .shopRight-title .ant-btn:hover {
+.shopRight .shopRight-title .new-button:hover {
     color: #FFF !important;
     background-color: #E80142 !important;
     border-color: #E80142 !important;
 }
 /*修改ant Design框架按钮门店专题增长下滑门店，无交易明细，应收明细，鼠标经过默认颜色*/
-.shopLeft .shop-data-base .ant-btn:hover {
+.shopLeft .shop-data-base .new-button:hover {
     color: #BEBEBE !important;
     background-color: #ffffff !important;
     border-color: #BFBFBF !important;
 }
-.shop-centen-middle .shopBase .ant-btn:hover {
+.shop-centen-middle .shopBase .new-button:hover {
     color: #BEBEBE !important;
     background-color: #ffffff !important;
     border-color: #BFBFBF !important;
 }
 /*修改ant Design框架按钮门店专题增长下滑门店，无交易明细，应收明细，鼠标点击默认颜色*/
-.shopLeft .shop-data-base .ant-btn:active {
+.shopLeft .shop-data-base .new-button:active {
     color: #333333 !important;
     background-color: #D7D9E5 !important;
     border-color: #BFBFBF !important;
 }
-.shop-centen-middle .shopBase .ant-btn:hover {
+.shop-centen-middle .shopBase .new-button:hover {
     color: #333333 !important;
     background-color: #D7D9E5 !important;
     border-color: #BFBFBF !important;
 }
 /*修改ant Design框架按钮库存鼠标经过默认颜色*/
-.inventoryindex .ant-btn:hover {
+.inventoryindex .new-button:hover {
     color: #BEBEBE !important;
     background-color: #ffffff !important;
     border-color: #BFBFBF !important;
 }
 /*修改ant Design框架按钮库存鼠标点击默认颜色*/
-.inventoryindex .ant-btn:active {
+.inventoryindex .new-button:active {
     color: #333333 !important;
     background-color: #D7D9E5 !important;
     border-color: #BFBFBF !important;
 }
 /*导出按钮样式*/
-.echarts .ant-btn:hover {
+.echarts .new-button:hover {
     color: #BEBEBE !important;
     background-color: #ffffff !important;
     border-color: #BFBFBF !important;
 }
-.echarts .ant-btn:active {
+.echarts .new-button:active {
     color: #333333 !important;
     background-color: #D7D9E5 !important;
     border-color: #BFBFBF !important;
 }
-.publicTable .ant-btn:hover {
+.publicTable .new-button:hover {
     color: #BEBEBE !important;
     background-color: #ffffff !important;
     border-color: #BFBFBF !important;
 }
-.publicTable .ant-btn:active {
+.publicTable .new-button:active {
+    color: #333333 !important;
+    background-color: #D7D9E5 !important;
+    border-color: #BFBFBF !important;
+}
+.previewTable .new-button:hover {
+    color: #BEBEBE !important;
+    background-color: #ffffff !important;
+    border-color: #BFBFBF !important;
+}
+.previewTable .new-button:active {
     color: #333333 !important;
     background-color: #D7D9E5 !important;
     border-color: #BFBFBF !important;
 }
 /*预期明细样式*/
-.overDueBottom  .ant-btn:hover {
+.overDueBottom  .new-button:hover {
     color: #BEBEBE !important;
     background-color: #ffffff !important;
     border-color: #BFBFBF !important;
 }
-.overDueBottom  .ant-btn:active {
+.overDueBottom  .new-button:active {
     color: #333333 !important;
     background-color: #D7D9E5 !important;
     border-color: #BFBFBF !important;
 }
+/*二帮卖订单详情按钮*/
+.subtitle_list li:hover{
 
-/*修改ant Design框架按钮默认字体大小*/
-.ant-btn{
-    font-size: 16px !important;
 }
 /*修改二帮卖-订单按钮默认字体大小*/
 .subtitle_list li{
@@ -163,4 +194,7 @@ a {
 }
 i{
     z-index: 101 !important;
+}
+.bandSellings .subtitle .subtitle_list{
+    display: none !important;
 }

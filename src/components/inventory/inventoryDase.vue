@@ -20,7 +20,9 @@
             </div>
         <div class="inventoryDase-right">
             <div class="btn">
-                <newButton :defaultVal="defaultValdown" :buttonHandleClick="dealHandleClick"></newButton>
+                <newButton :defaultVal="defaultValdown" :buttonHandleClick="dealHandleClick"
+                            :btnStyle="btnStyle" :txtStyle="txtStyle"
+                ></newButton>
             </div>
             <div class="bartu">
              <barChart :barEchartsData="barData.config" :xAxis="barData.xAxis"
@@ -35,7 +37,7 @@
 
 <script>
     import barChart from '../../components/echarts/bar'
-    import  newButton from  '../base/newButton'
+    import  newButton from  '../button'
     import loadingData from '../base/loadingData'
     export default {
         name: "inventoryDase",
@@ -44,6 +46,19 @@
                 defaultVal:"走势图",
                 defaultValdown:"库存详情",
                 isShowDetail:false,
+                btnStyle:{
+                    width: '88px',
+                    height: '32px',
+                    border: '1px solid #DCDCDC',
+                    // hover:{
+                    // 	color:'red'
+                    // }
+                },
+                txtStyle:{
+                    fontSize:'14px',
+                    color:'#333333',
+                    fontWeight:500
+                },
             }
         },
         props:{
@@ -165,8 +180,11 @@
         margin-left: 1%;
         /*background-color: bisque;*/
         .btn{
+            width: 97%;
             height: 19%;
-            margin-bottom: 2%;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
             .newButton{
                 float: right;
                 margin-top: 2%;

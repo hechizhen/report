@@ -12,7 +12,7 @@
                         <a-radio-button v-for="(item,index) in buttonGroup" :key="index" :value="item">{{item}}</a-radio-button>
                     </a-radio-group>
                 </div>
-                <new-button defaultVal="下载表格" :buttonHandleClick="exportClick" style="margin-right:2%;"></new-button>
+                <newbutton defaultVal="下载表格" :buttonHandleClick="exportClick" style="margin-right:2%;" :btnStyle="btnStyle" :txtStyle="txtStyle"></newbutton>
                 <i class="iconfont icon-guanbi iStyle" @click="returnHandleClick"></i>
             </div>
             <Table :columns="columns" :data="data" border :height="400"></Table>
@@ -20,12 +20,12 @@
     </div>
 </template>
 <script>
-    import newButton from '../base/newButton.vue'
+    import newbutton from '../button'
     import loadingData from '../base/loadingData.vue'
     export default {
         name : 'previewTable',
         components : {
-            newButton,
+            newbutton,
             loadingData
         },
         props:{
@@ -95,7 +95,20 @@
             return {
                 headerTxt:'',
                 headerKey:'',
-                dimension:this.buttonGroup[0]
+                dimension:this.buttonGroup[0],
+                btnStyle:{
+                    width: '98px',
+                    height: '30px',
+                    border: '1px solid #959595',
+                },
+                txtStyle:{
+                    fontSize:'16px',
+                    color:'#333333',
+                    fontWeight:400,
+                    hover:{
+                        color:'#BEBEBE'
+                    },
+                },
             }
         },
         mounted () {

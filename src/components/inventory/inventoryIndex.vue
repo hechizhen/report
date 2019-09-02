@@ -40,7 +40,9 @@
                     </a-Row>
                 </div>
                 <div class="productLeft-btn">
-                    <newButton :defaultVal="defaultVal" :buttonHandleClick="detailHandleClick" ></newButton>
+                    <newButton :defaultVal="defaultVal" :buttonHandleClick="detailHandleClick"
+                               :btnStyle="btnStyle"  :txtStyle="txtStyle"
+                    ></newButton>
                 </div>
             </div>
             <loading-data :isShow="stockAmount"></loading-data>
@@ -71,7 +73,7 @@
 <script>
     import inventoryCenten from './inventoryCenten'
     import inventoryDase from './inventoryDase'
-    import  newButton from  '../base/newButton'
+    import  newButton from  '../button'
     import  core from  '../core'
     import  inventoryChart  from  './inventoryChart'
     import  secondTitle from  '../secondTitle'
@@ -142,6 +144,19 @@
                 buttonGroup:{   //切换维度按钮
                     show:true,
                     list:['品类','系列','商品']
+                },
+                btnStyle:{
+                    width: '88px',
+                    height: '32px',
+                    border: '1px solid #DCDCDC',
+                    // hover:{
+                    // 	color:'red'
+                    // }
+                },
+                txtStyle:{
+                    fontSize:'14px',
+                    color:'#333333',
+                    fontWeight:500
                 },
                 //指标解释数据
                 explainSecondList:{

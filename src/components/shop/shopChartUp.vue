@@ -8,7 +8,7 @@
                     </a-Col>
                     <a-Col :span="12" class="thendChartCol2">
                         单位：万元
-                        <newButton :defaultVal="defaultVal" :buttonHandleClick="exportData"> </newButton>
+                        <newButton :defaultVal="defaultVal" :buttonHandleClick="exportData" :txtStyle="txtStyle" :btnStyle="btnStyle"> </newButton>
                         <span @click="thendChartClick">
                             <i class="iconfont icon-guanbi"></i>
                         </span>
@@ -24,7 +24,7 @@
 </template>
 <script>
     import barEcharts from "../echarts/bar"
-    import  newButton from  '../base/newButton'
+    import  newButton from  '../button'
     import loadingData from '../base/loadingData'
     export default {
         name:'shopChart',
@@ -57,6 +57,20 @@
             return {
                 defaultVal:"导出数据",
                 // isShow:true,
+                btnStyle:{
+                    width: '98px',
+                    height: '30px',
+                    border: '1px solid #959595',
+                    marginLeft:'4%'
+                },
+                txtStyle:{
+                    fontSize:'16px',
+                    color:'#333333',
+                    fontWeight:400,
+                    hover:{
+                        color:'#BEBEBE'
+                    },
+                },
             }
         },
         methods:{

@@ -18,8 +18,8 @@
 				  <a-Col :span="9" class="managerCol" style="text-align: center;">
 				  	<!-- <p @click="concludeClick('达成与贡献')">达成与贡献</p>
 				  	<p @click="trendClick('走势图')">走势图</p> -->
-					  <new-button defaultVal="达成与贡献" :buttonHandleClick="concludeClick" :isGhost="true"></new-button>
-					  <new-button defaultVal="走势图" :buttonHandleClick="trendClick" :isGhost="true" style="margin-top:8px;" class="lineButton"></new-button>
+					  <newbutton defaultVal="达成与贡献" :buttonHandleClick="concludeClick" :btnStyle="btnStyle" :txtStyle="txtStyle"></newbutton>
+					  <newbutton defaultVal="走势图" :buttonHandleClick="trendClick" style="margin-top:8px;" class="lineButton" :btnStyle="btnStyle" :txtStyle="txtStyle"></newbutton>
 				  </a-Col>
 				</a-Row>
 		  	</div>
@@ -61,7 +61,7 @@
 				  </a-Col>
 				  <a-Col :span="7" class="managerCol"  style="text-align: center;">
 				  	<!-- <p @click="glidingClick('下滑人员')">下滑人员</p> -->
-					  <new-button defaultVal="下滑人员" :buttonHandleClick="glidingClick" :isGhost="true"></new-button>
+					  <newbutton defaultVal="下滑人员" :buttonHandleClick="glidingClick" :btnStyle="btnStyle" :txtStyle="txtStyle"></newbutton>
 				  </a-Col>
 				</a-Row>
 		  	</div>
@@ -72,12 +72,12 @@
 </template>
 <script>
 	import loadingData from '../base/loadingData'
-	import newButton from '../base/newButton.vue'
+	import newbutton from '../button'
 	export default {
 		name:'manager',
 		components:{
 			loadingData,
-			newButton
+			newbutton
 		},
 		props:{
 			explicit:{
@@ -95,6 +95,19 @@
 		data(){
 			return {
 				// isShow:true,
+				btnStyle:{
+					width: '86px',
+					height: '28px',
+					border: '1px solid #FFFFFF',
+					// hover:{
+					// 	color:'red'
+					// }
+				},
+				txtStyle:{
+					fontSize:'15px',
+					color:'#ffffff',
+					fontWeight:400
+				},
 			}
 		},
 		mounted(){
@@ -124,7 +137,7 @@
 </script>
 <style lang="less">
 .lineButton{
-	.ant-btn{
+	.new-button{
 		padding: 0 30px!important
 	}
 }
@@ -182,6 +195,7 @@
 				display: flex;
 			    justify-content: center;
 			    flex-direction: column;
+				align-items: center;
 			    p {
 			    	cursor: pointer;
 			    	margin: 0px;
@@ -284,6 +298,7 @@
 				display: flex;
 			    justify-content: center;
 			    flex-direction: column;
+				align-items: center;
 			    p {
 			    	cursor: pointer;
 			    	margin: 0px;

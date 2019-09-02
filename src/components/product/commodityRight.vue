@@ -9,7 +9,9 @@
                 <span>{{commoditydata.RatePin}}</span>
             </div>
             <div class="productLeft-btn">
-                <newButton :isGhost="true" :defaultVal="commoditydata.btn"  :buttonHandleClick="ListbuttonHandleClick"></newButton>
+                <newButton :defaultVal="commoditydata.btn"  :buttonHandleClick="ListbuttonHandleClick"
+                           :btnStyle="btnStyle"  :txtStyle="txtStyle"
+                ></newButton>
             </div>
         </div>
         <div class="commodityRight">
@@ -30,7 +32,7 @@
                     <span style="font-size:16px;font-family:PingFangSC-Semibold;font-weight:600;">{{commoditydata.downGoods.NoSales}}</span>
                     </div>
                     <div class="productLeft-btn">
-                        <newButton :isGhost="true" :defaultVal="commoditydata.upGoods.btn"
+                        <newButton :defaultVal="commoditydata.upGoods.btn" :btnStyle="btnStyle"  :txtStyle="txtStyle"
                                    :buttonHandleClick="downbuttonHandleClick"
                         ></newButton>
                     </div>
@@ -45,7 +47,7 @@
                     <span style="font-size:16px;font-family:PingFangSC-Semibold;font-weight:600;">{{commoditydata.upGoods.NoSales}}</span>
                     </div>
                     <div class="productLeft-btn">
-                        <newButton :isGhost="true" :defaultVal="commoditydata.downGoods.btn"
+                        <newButton  :defaultVal="commoditydata.downGoods.btn" :btnStyle="btnStyle"  :txtStyle="txtStyle"
                                    :buttonHandleClick="upbuttonHandleClick"
                         ></newButton>
                     </div>
@@ -67,7 +69,7 @@
 </template>
 
 <script>
-    import  newButton from  '../base/newButton'
+    import  newButton from  '../button'
     import publicTable from '../base/publicTable.vue'
     export default {
         name: "commodityRight",
@@ -101,6 +103,19 @@
                 buttonGroup:{
                     show:true,
                     list:['事业部','品类','系列','商品']
+                },
+                btnStyle:{
+                    width: '72px',
+                    height: '26px',
+                    border: '1px solid #FFFFFF',
+                    // hover:{
+                    // 	color:'red'
+                    // }
+                },
+                txtStyle:{
+                    fontSize:'12px',
+                    color:'#ffffff',
+                    fontWeight:400
                 },
 
             }
@@ -180,6 +195,9 @@
             line-height: 26px;
             margin: 22px  auto  51px;
             text-align: center;
+            justify-content: center;
+            align-items: center;
+            display: flex;
             span{
                 width:48px;
                 font-size:12px;
@@ -258,6 +276,9 @@
                     line-height: 26px;
                     text-align: right;
                     float: right;
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-end;
 
                     span {
                         width: 48px;

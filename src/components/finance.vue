@@ -2,8 +2,8 @@
     <div class="finance">
         <second-title :titleName="titleName" :explainSecondList="explainSecondList"></second-title>
         <div class="buttonList">
-            <new-button :buttonType="buttonDeafult.buttonType" :isGhost="buttonDeafult.isGhost" :defaultVal="buttonDeafult.defaultValL" :buttonHandleClick="storeHandleClick"></new-button>
-            <new-button :buttonType="buttonDeafult.buttonType" :isGhost="buttonDeafult.isGhost" :defaultVal="buttonDeafult.defaultValR" style="margin-left:12px;" :buttonHandleClick="personHandleClick"></new-button>
+            <newbutton :defaultVal="buttonDeafult.defaultValL" :buttonHandleClick="storeHandleClick" :btnStyle="btnStyle" :txtStyle="txtStyle"></newbutton>
+            <newbutton  :defaultVal="buttonDeafult.defaultValR" style="margin-left:12px;" :buttonHandleClick="personHandleClick" :btnStyle="btnStyle" :txtStyle="txtStyle"></newbutton>
         </div>
         <div class="financeBox">
             <div class="financeLeft">
@@ -28,7 +28,7 @@
     import financeTable from '../components/base/financeTable.vue'//财务报表
     import receivable from '../components/receivable.vue'//应收账款
     import overDue from '../components/overDue.vue'
-    import newButton from '../components/base/newButton.vue'
+    import newbutton from './button'
     import secondTitle from '../components/secondTitle.vue'
     import loadingData from './base/loadingData'
     import publicTable from './base/publicTable.vue'
@@ -66,7 +66,7 @@
             financeTable,
             receivable,
             overDue,
-            newButton,
+            newbutton,
             secondTitle,
             loadingData,
             publicTable,
@@ -77,10 +77,23 @@
                 // isShow:true,
                 //按钮样式
                 buttonDeafult:{
-                    buttonType:'primary',
-                    isGhost:true,
+                    // buttonType:'primary',
+                    // isGhost:true,
                     defaultValL:'门店效益',
                     defaultValR:'人均效能'
+                },
+                btnStyle:{
+                    width: '78px',
+                    height: '30px',
+                    border: '1px solid #00A6FF',
+                    // hover:{
+                    // 	color:'red'
+                    // }
+                },
+                txtStyle:{
+                    fontSize:'14px',
+                    color:'#2D92FC',
+                    fontWeight:400
                 },
                 explainSecondList:{
 					imgType:7,

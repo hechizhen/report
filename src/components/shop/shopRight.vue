@@ -4,7 +4,9 @@
         <div class="shop-active" v-for="(item,index) in ActiveDetail.shopActiveDetail" :key="index">
             <p>{{item.ActiveStores}}<span>{{item.ActiveStoresing}}</span></p>
             <span>{{item.NoSales}}</span>
-            <new-button v-if="index==2" :defaultVal="detailHandleList.defaultVal" :buttonType="detailHandleList.buttonType" :isGhost="detailHandleList.isGhost" :buttonHandleClick="detailHandleClick"></new-button>
+            <new-button :defaultVal="detailHandleList.defaultVal"  :buttonHandleClick="detailHandleClick"
+                        :btnStyle="btnStyle"  :txtStyle="txtStyle"
+            ></new-button>
         </div>
         </div>
         <shopBase :shopDaseData="ActiveDetail.shopDaseData" :defaultVal="defaultVal" :detailHandleClick="dealHandleClick"></shopBase>
@@ -15,7 +17,7 @@
 
 <script>
     import shopBase from './shopBase'
-    import newButton from '../base/newButton.vue'
+    import newButton from '../button'
     import publicTable from '../base/publicTable.vue'
     export default {
         name: "shopRight",
@@ -41,7 +43,22 @@
                     buttonType:'default'
                 },
                 isShowDetail:false,
-                isShowreceivable:false
+                isShowreceivable:false,
+                btnStyle:{
+                    width: '72px',
+                    height: '26px',
+                    border: '1px solid #FFFFFF',
+                    margin:'auto',
+                    marginTop:'10px'
+                    // hover:{
+                    // 	color:'red'
+                    // }
+                },
+                txtStyle:{
+                    fontSize:'12px',
+                    color:'#ffffff',
+                    fontWeight:400
+                },
             }
         },
         components:{
@@ -169,10 +186,10 @@
     .shopRight .shop-active:first-child{
         margin-left: 3% !important;
     }
-    .shopRight .shop-active:first-child .btn{
+    .shopRight .shop-active:first-child .new-button{
         display: none;
     }
-    .shopRight .shop-active:nth-child(2) .btn{
+    .shopRight .shop-active:nth-child(2) .new-button{
         display: none;
     }
 </style>
