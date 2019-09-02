@@ -15,7 +15,7 @@
 				  </a-Col>
 				  <a-Col :span="12" class="thendChartCol2">
 				  			<div>单位：万元</div>
-							<new-button  :defaultVal="defaultVal" :buttonHandleClick ="exportClick" style="margin-left:4%"></new-button>
+							<newbutton  :defaultVal="defaultVal" :buttonHandleClick ="exportClick" style="margin-left:4%" :txtStyle="txtStyle" :btnStyle="btnStyle"></newbutton>
 				  			<span @click="thendChartClick('关闭')"><i class="iconfont icon-guanbi"></i></span>
 				  </a-Col>
 				</a-Row>
@@ -36,13 +36,13 @@
 <script>
 	import barEcharts from "./../echarts/bar.vue"
 	import loadingData from '../base/loadingData'
-	import newButton from '../base/newButton.vue'
+	import newbutton from '../button'
 	export default {
 		name:'thendChart',
 		components:{
 			barEcharts,
 			loadingData,
-			newButton
+			newbutton
 		},
 		props:{
 			trendChartClick:{
@@ -138,6 +138,20 @@
 					},
 					barType:1
                 },
+				// 按鈕樣式
+				btnStyle:{
+					width: '98px',
+					height: '30px',
+					border: '1px solid #959595',
+					// hover:{
+					// 	color:'red'
+					// }
+				},
+				txtStyle:{
+					fontSize:'16px',
+					color:'#333333',
+					fontWeight:400
+				},
 			}
 		},
 		methods:{

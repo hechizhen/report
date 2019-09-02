@@ -12,7 +12,7 @@
                         <a-radio-button v-for="(item,index) in buttonGroup.list" :key="index" :value="item">{{item}}</a-radio-button>
                     </a-radio-group>
                 </div>
-                <new-button :defaultVal="exportButton.defaultVal" :buttonHandleClick="exportHandleClick" style="margin-right:2%;"></new-button>
+                <newbutton :defaultVal="exportButton.defaultVal" :buttonHandleClick="exportHandleClick" style="margin-right:2%;" :txtStyle="txtStyle" :btnStyle="btnStyle"></newbutton>
                 <!-- <new-button :defaultVal="returnButton.defaultVal" :buttonType="returnButton.buttonType" :buttonHandleClick="returnHandleClick"></new-button> -->
                 <i class="iconfont icon-guanbi iStyle" @click="returnHandleClick"></i>
             </div>
@@ -24,7 +24,7 @@
     </div>
 </template>
 <script>
-    import newButton from './newButton.vue'
+    import newbutton from '../button'
     import loadingData from '../base/loadingData.vue'
     export default {
         name : 'publicTable',
@@ -59,7 +59,7 @@
             }
         },
         components : {
-            newButton,
+            newbutton,
             loadingData
         },
         data () {
@@ -88,6 +88,19 @@
                 tableLoading:false,
                 pageNumber:1,
                 result:'',
+                btnStyle:{
+                    width: '98px',
+                    height: '30px',
+                    border: '1px solid #959595',
+                },
+                txtStyle:{
+                    fontSize:'16px',
+                    color:'#333333',
+                    fontWeight:400,
+                    hover:{
+                       color:'#BEBEBE'
+                    },
+                },
             }
         },
         created(){
@@ -270,4 +283,5 @@
         display: flex;
         justify-content: center;
     }
+
 </style>

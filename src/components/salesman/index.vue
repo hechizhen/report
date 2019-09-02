@@ -1,5 +1,5 @@
 <template>
-	<div class="bandSelling">
+	<div class="bandSellings">
 		<subTitle :subtitlename="subtitlename" :listing="listing" :explainSecondList="explainSecondList"></subTitle>
 		<manager :explicit="explicit" :salesmanData="salesmanData" :isShow="isShow"></manager>
 		<core :coretype="coreData.coretype" :coretext="coreData.coretext" :evaluate="coreData.evaluate" :subscribe="coreData.subscribe"></core>
@@ -157,5 +157,4 @@
 	}
 </script>
 <style lang="less" scoped>
-
 </style>

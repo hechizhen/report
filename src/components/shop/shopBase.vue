@@ -14,7 +14,7 @@
         </a-Row>
     </div>
     <div class="productLeft-btn">
-        <newButton :defaultVal="defaultVal" :buttonHandleClick="detailHandleClick"></newButton>
+        <newButton :defaultVal="defaultVal" :buttonHandleClick="detailHandleClick" :txtStyle="txtStyle" :btnStyle="btnStyle"></newButton>
     </div>
             <!--<a-Row>-->
                 <!--<div class="productLeft-btn">-->
@@ -33,10 +33,27 @@
 </template>
 
 <script>
-    import  newButton from  '../base/newButton'
+    import  newButton from  '../button'
     import publicTable from '../base/publicTable.vue'
     export default {
         name: "shopBase",
+        data(){
+            return{
+                btnStyle:{
+                    width: '88px',
+                        height: '32px',
+                        border: '1px solid #DCDCDC',
+                    // hover:{
+                    // 	color:'red'
+                    // }
+                },
+                txtStyle:{
+                    fontSize:'14px',
+                        color:'#333333',
+                        fontWeight:500
+                },
+            }
+        },
         props:{
             shopDaseData:{  //门店底部展示数据
                 type:Array

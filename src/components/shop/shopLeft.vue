@@ -5,7 +5,7 @@
           <p>{{shopActives.ActiveStoresTxt}}<span>{{shopActives.ActiveStoresing}}</span></p>
           <span>{{shopActives.ActiveStores}}</span>
           <div class="productLeft-btn">
-              <newButton :defaultVal="shopActives.detailbtn" :isGhost="true" :buttonHandleClick="storeDetailHandleClick"
+              <newButton :defaultVal="shopActives.detailbtn" :isGhost="true" :buttonHandleClick="storeDetailHandleClick" :btnStyle="btnStyle2"    :txtStyle="txtStyle2"
               ></newButton>
           </div>
       </div>
@@ -20,7 +20,7 @@
               <span>{{ shopActives.downSales.name}}</span>
               <span>{{ shopActives.downSales.NoSales}}</span>
               <div class="productLeft-btn">
-                  <newButton :defaultVal="shopActives.downSales.btn" :buttonHandleClick="downbuttonHandleClick"
+                  <newButton :defaultVal="shopActives.downSales.btn" :buttonHandleClick="downbuttonHandleClick" :btnStyle="btnStyle"    :txtStyle="txtStyle"
                   ></newButton>
               </div>
           </div>
@@ -28,7 +28,8 @@
               <span>{{ shopActives.upSales.name}}</span>
               <span >{{ shopActives.upSales.NoSales}}</span>
               <div class="productLeft-btn">
-                  <newButton :defaultVal="shopActives.upSales.btn" :buttonHandleClick="upbuttonHandleClick"
+                  <newButton :defaultVal="shopActives.upSales.btn" :buttonHandleClick="upbuttonHandleClick" :btnStyle="btnStyle"
+                             :txtStyle="txtStyle"
                   ></newButton>
               </div>
           </div>
@@ -42,7 +43,7 @@
 </template>
 
 <script>
-    import  newButton from  '../base/newButton'
+    import  newButton from  '../button'
     import shopBase from  './shopBase'
     import publicTable from '../base/publicTable.vue'
     export default {
@@ -82,7 +83,34 @@
                         show:true,
                         list:['品类','系列','商品']
                     })
-                }
+                },
+                // 按鈕樣式
+                btnStyle:{
+                    width: '88px',
+                    height: '32px',
+                    border: '1px solid #DCDCDC',
+                    // hover:{
+                    // 	color:'red'
+                    // }
+                },
+                txtStyle:{
+                    fontSize:'14px',
+                    color:'#333333',
+                    fontWeight:500
+                },
+                btnStyle2:{
+                    width: '72px',
+                    height: '26px',
+                    border: '1px solid #fff',
+                    // hover:{
+                    // 	color:'red'
+                    // }
+                },
+                txtStyle2:{
+                    fontSize:'12px',
+                    color:'#fff',
+                    fontWeight:400
+                },
             }
         },
         components:{
@@ -170,6 +198,9 @@
             text-align: center;
             margin: auto;
             margin-top: 8%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
         }
     }

@@ -8,8 +8,8 @@
                 <span>{{productdata.RatePin}}</span>
             </div>
             <div class="productLeft-btn">
-                <newButton  :buttonType="buttonType"  :buttonHandleClick="storeDetailHandleClick"
-                            :isGhost="true" :defaultVal="productdata.btn"></newButton>
+                <newButton  :buttonType="buttonType"  :buttonHandleClick="storeDetailHandleClick" :txtStyle="txtStyle" :btnStyle="btnStyle"
+                            :defaultVal="productdata.btn"></newButton>
             </div>
             <public-table v-if="isShowDetail" :close="closePopup" :tableHeader="tableData.header" :interfaceParams="tableData.params"
                             :buttonGroup="buttonGroup" :selectButtonClick="selectButtonClick"    :titleName="tableData.titleName"
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-    import  newButton from  '../base/newButton'
+    import  newButton from  '../button'
     import publicTable from '../base/publicTable.vue'
     export default {
         name: "productLeft",
@@ -46,6 +46,19 @@
                 buttonGroup:{
                     show:true,
                     list:['品类','系列','商品']
+                },
+                btnStyle:{
+                    width: '72px',
+                    height: '26px',
+                    border: '1px solid #FFFFFF',
+                    // hover:{
+                    // 	color:'red'
+                    // }
+                },
+                txtStyle:{
+                    fontSize:'12px',
+                    color:'#ffffff',
+                    fontWeight:400
                 },
             }
         },
@@ -119,6 +132,9 @@
             line-height: 26px;
             margin: 22px  auto  51px;
             text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
     }
 

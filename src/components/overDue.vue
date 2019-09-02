@@ -27,12 +27,12 @@
                     </div>
                 </div>
             </div>
-            <new-button :defaultVal="defaultVal" :buttonHandleClick="detailHandleClick"></new-button>
+            <newbutton :defaultVal="defaultVal" :buttonHandleClick="detailHandleClick" :txtStyle="txtStyle" :btnStyle="btnStyle"></newbutton>
         </div>
     </div>
 </template>
 <script>
-    import newButton from '../components/base/newButton.vue'
+    import newbutton from './button'
     export default {
         name : 'overDue',
         props:{
@@ -46,11 +46,24 @@
             }
         },
         components : {
-            newButton
+            newbutton
         },
         data () {
             return {
-                defaultVal:'逾期明细'
+                defaultVal:'逾期明细',
+                btnStyle:{
+                    width: '94px',
+                    height: '26px',
+                    border: '1px solid #DCDCDC',
+                    // hover:{
+                    // 	color:'red'
+                    // }
+                },
+                txtStyle:{
+                    fontSize:'12px',
+                    color:'#333333',
+                    fontWeight:400
+                },
             }
         },
         mounted () {
