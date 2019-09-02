@@ -177,7 +177,6 @@
     }
     .shop-centen-middle{
         width: 100%;
-        height: 75%;
         float: left;
     }
 
