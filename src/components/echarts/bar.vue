@@ -155,6 +155,7 @@
                     var markLineObj={
                         symbol:'none',
                         silent: true,
+                        z:2,
                         data: [{
                             name:_this.barEchartsData.markLineList.name,
                             yAxis:_this.barEchartsData.markLineList.data,
@@ -196,6 +197,8 @@
                         seriesData.push({
                             name: item.name,
                             type: 'bar',
+                            z:10,
+                            zlevel:10,
                             data: item.data,
                             markLine:markLineObj,
                             barGap:barGap,
@@ -225,7 +228,7 @@
                                     marginTop:15,
                                     formatter:function(params){
                                         return _this.dataProcess(params.value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num+_this.dataProcess(params.value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).unit
-                                    }
+                                    },
                                 }
                             }
                         })
@@ -329,7 +332,7 @@
                             fontSize:_this.yAxis.axisLabel.fontSize,
                         },
                     }
-                    if(_this.dataZoomShow){
+                    if(_this.dataZoomShow &&　_this.barEchartsData.barData.length>10){
                         // 业务员的人数数据长度
                         let fieWidth = _this.barEchartsData.xAxisData.length
                         // 肯定业务员的人数判断end结束的值
@@ -373,9 +376,18 @@
                 var option = {
                     tooltip: {
                         trigger: 'axis',
-                        // axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-                        //     type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-                        // },
+                        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                            type : 'cross',        // 默认为直线，可选为：'line' | 'shadow'
+                            label:{
+                                backgroundColor:'rgb(45, 146, 252)',
+                                formatter:function(params) {
+                                    if(params.seriesData.length==0){
+                                        params.value = _this.dataProcess(params.value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num+_this.dataProcess(params.value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).unit
+                                    }
+                                    return params.value
+                                }
+                            },
+                        },
                         formatter:function(params){
                             var relVal = '';
                             for (var i = 0; i < params.length; i++) {

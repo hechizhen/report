@@ -9,24 +9,23 @@
                 <div></div>
                 <div class="oneHelpSaleTopLeftBox" :style="{background:salesData.bgColor}">
                     <div class="flexMid">
-                        <div class="oneHelpSaleTopMid">
-                            <div class="oneHelpSaleTopMidSales">
-                                <div>
-                                    <p>
-                                        <img :src="imgSrc" class="imgSrc">
-                                        <span class="salesTxt">下单金额（万）</span>
-                                    </p>
-                                    <p>
-                                        <span class="sales">￥</span>
-                                        <span class="salesMoney">{{salesData.sales}}</span>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                        <!-- <div class="oneHelpSaleTopMid">
+                            <div class="oneHelpSaleTopMidSales"> -->
+                                <gauge-chart :gaugeChartData="gaugeChartData"></gauge-chart>
+                            <!-- </div>
+                        </div> -->
                     </div>
                     <div class="oneHelpSaleTopRight">
-                        <span class="rightTxt">总达成：</span>
-                        <span class="rightReach">{{salesData.reach}}</span>
+                        <Div>
+                            <p>
+                                <img :src="imgSrc" class="imgSrc">
+                                <span class="rightTxt">下单金额（万）</span>
+                            </p>
+                            <p>
+                                <span class="rightReach">￥</span>
+                                <span class="rightReach">{{salesData.sales}}</span>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -44,6 +43,7 @@
     import pieChart from '../components/echarts/pie.vue'
     import barChart from '../components/echarts/bar.vue'
     import loadingData from '../components/base/loadingData.vue'
+    import gaugeChart from '../components/echarts/gauge2.vue'
     export default {
         name : 'oneHelpSale',
         props:{
@@ -64,15 +64,22 @@
             pieChart,
             barChart,
             core,
-            loadingData
+            loadingData,
+            gaugeChart
         },
         data () {
             return {
-                imgSrc:require('../assets/img/jine-icon.png')
+                imgSrc:require('../assets/img/jine-icon.png'),
+                gaugeChartData:{
+                    name:'总达成',
+                    data:this.salesData.reach,
+                    id:this.salesData.id,
+                    color:this.salesData.color,
+                }
             }
         },
         mounted () {
-            console.log(this.barData)
+            console.log(this.gaugeChartData)
         },
         methods: {
         },
@@ -146,11 +153,11 @@
                         // border-radius:118px 118px 0 0;
                         // border:6px solid #fff;
                         // border-bottom:none;
-                        background:url("../assets/img/banhu-icon.png");
-                        background-repeat: no-repeat;
-                        background-size: 100%;
+                        // background:url("../assets/img/banhu-icon.png");
+                        // background-repeat: no-repeat;
+                        // background-size: 100%;
                         width:236px;
-                        height: 124px;
+                        height: 100%;
                         position: relative;
                         display: flex;
                         align-items: center;
@@ -163,7 +170,6 @@
                             align-items: center;
                             justify-content: center;
                             text-align: center;
-                            padding-top:48px;
                             span{
                                 color:#fff;
                             }
@@ -183,8 +189,11 @@
                 }
                 .oneHelpSaleTopRight{
                     height:100%;
+                    width:40%;
                     display: flex;
                     align-items: center;
+                    justify-content: center;
+                    text-align: center;
                     .rightRadius{
                         width:12px;
                         height:12px;
@@ -193,12 +202,12 @@
                         margin-right:6px;
                     }
                     .rightTxt{
-                        font-size:16px;
+                        font-size:20px;
                         font-weight:500;
                         color:#fff;
                     }
                     .rightReach{
-                        font-size:18px;
+                        font-size:22px;
                         font-weight:500;
                         color:#fff;
                     }
@@ -220,8 +229,8 @@
                 }
             }
             .imgSrc{
-                width: 16px;
-                margin-bottom: 3px;
+                width: 20px;
+                margin-bottom: 5px;
             }
         }
     }

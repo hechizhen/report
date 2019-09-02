@@ -16,7 +16,6 @@
                 default: () => ({
                     id:'pieId',
                     colorList:['#FF8352', '#E271DE', '#00FFFF', '#4AEAB0'],
-                    labelType:1,
                     pieData:[{
                                 value: 2154,
                                 name: 'TV'
@@ -59,7 +58,6 @@
             }
         },
         mounted () {
-
             var _this = this
             let echarts = _this.$echarts;
             _this.myChart = echarts.init(document.getElementById(_this.pieEchartsData.id))
@@ -85,106 +83,104 @@
                         align: 'center'
                     },
                 };
-                if(_this.pieEchartsData.labelType==1){
-                    var labelStyle= {
-                        normal: {
-                            padding: [0,-55,45,-55],
-                            textStyle: {
-                                fontSize: 12 * scale,
-                            },
-                            formatter: function(params, ticket, callback) {
-                                console.log(params)
-                                var total = 0; //考生总数量
-                                var percent = 0; //考生占比
-                                _this.pieEchartsData.pieData.forEach(function(value, index, array) {
-                                    total += value.value;
-                                });
-                                percent = ((params.value / total) * 100).toFixed(1);
-                                return '{yellow|' + params.name + '}\n{blue|' + percent + '%}';
-                            },
-                            rich: rich
-                        },
-                    }
-                }else if(_this.pieEchartsData.labelType==2){
-                    var labelStyle =  { //标签的位置
-                        normal: {
-                            show: true,
-                            position: 'inside', //标签的位置
-                            formatter: "{b}\n{d}%",
-                            textStyle: {
-                                color: '#333333',
-                                fontSize:14,
-                            }
-                        },
-                    }
-                }else{
-                    var labelStyle =  {
-                        normal: {
-                            show: false,
-                        },
-                    }
-                }
                 let legendList=[]
                 _this.pieEchartsData.pieData.map(function(item){
                     legendList.push(item.name)
                 })
                 var option = {
-                    tooltip:{
-                        triggle:'item',
-                        formatter:function(params){
-                            console.log(params)
-                            let relVal = params.marker+params.name+':'+_this.dataProcess(params.value,_this.pieEchartsData.unit[0],_this.pieEchartsData.unit[1]).num+_this.dataProcess(params.value,_this.pieEchartsData.unit[0],_this.pieEchartsData.unit[1]).unit+'</br>'
-                            return relVal;
+                    color:_this.pieEchartsData.colorList,
+                    legend: {
+                        orient: "horizontal",
+                        icon:"rect",
+                        bottom: "8%",
+                        itemGap: 40,
+                        data: legendList,
+                        itemWidth: 18,
+                        itemHeight: 18,
+                        formatter :function(name){
+                            return ''+name
                         },
-                        backgroundColor:'#fff',
-                        textStyle:{
-                            color:'#333',
-                            fontSize:14
-                        },
-                        extraCssText: 'box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);'
-                    },
-                    legend:{
-                        show:_this.legendShow,
-                        data:legendList,
-                        itemGap: 10,
                         textStyle: {
                             color: "#333333",
                             fontSize:14
-                        },
-                        bottom:'8%',
+                        }
                     },
                     series: [{
-                        name: '',
                         type: 'pie',
-                        radius: _this.pieEchartsData.radius,
-                        hoverAnimation: true,
-                        minAngle:35,
-                        avoidLabelOverlap: true, //是否启用防止标签重叠策略
-                        center: _this.position,
-                        color: _this.pieEchartsData.colorList,
-                        label: labelStyle,
+                        clockwise: false, //饼图的扇区是否是顺时针排布
+                        minAngle: 10, //最小的扇区角度（0 ~ 360）
+                        radius: ["40%", "70%"],
+                        center: ["50%", "40%"],
+                        avoidLabelOverlap: false,
                         itemStyle: { //图形样式
                             normal: {
                                 borderColor: '#ffffff',
                                 borderWidth: _this.pieEchartsData.borderWidth,
                             },
                         },
-                        labelLine: {
+                        label: {
                             normal: {
-                                length: 10 * scale,
-                                length2: 60,
-                                lineStyle: {
-                                    color: '#C3C6CD'
+                                show: false,
+                                position: 'center',
+                                // formatter: '{text|{b}}\n{c} ({d}%)',
+                                formatter: '{text|{b}}\n{d}%',
+                                rich: {
+                                    text: {
+                                        color: "#666",
+                                        fontSize: 18,
+                                        align: 'center',
+                                        verticalAlign: 'middle',
+                                        padding: 8
+                                    },
+                                    value: {
+                                        color: "#8693F3",
+                                        fontSize: 24,
+                                        align: 'center',
+                                        verticalAlign: 'middle',
+                                    },
+                                }
+                            },
+                            emphasis: {
+                                show: true,
+                                textStyle: {
+                                    fontSize: 24,
                                 }
                             }
                         },
                         data: _this.pieEchartsData.pieData
                     }]
                 };
-                this.myChart.setOption(option);
-                this.myChart.on('click', function eConfig(param){
-                        _this.chartHandleClick(param.data.name)
-                });
+                _this.myChart.setOption(option);
+                setTimeout(function() {
+                    _this.myChart.on('mouseover', function(params) {
+                        if (params.name == _this.pieEchartsData.pieData[0].name) {
+                            _this.myChart.dispatchAction({
+                                type: 'highlight',
+                                seriesIndex: 0,
+                                dataIndex: 0
+                            });
+                        } else {
+                            _this.myChart.dispatchAction({
+                                type: 'downplay',
+                                seriesIndex: 0,
+                                dataIndex: 0
+                            });
+                        }
+                    });
+
+                    _this.myChart.on('mouseout', function(params) {
+                        _this.myChart.dispatchAction({
+                            type: 'downplay',
+                            seriesIndex: 0,
+                            dataIndex: 0
+                        });
+                    });
+                    _this.myChart.dispatchAction({
+                        type: 'highlight',
+                        seriesIndex: 0,
+                        dataIndex: 0
+                    }); 
+                }, 1000);
             }
         },
         computed:{

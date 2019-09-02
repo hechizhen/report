@@ -1,13 +1,13 @@
 
 <template>
-    <div class="index" :style="{width:bodyWdith}">
+    <div class="index">
         <!-- <div class="title">
             <p>体检报告</p>
             <i></i>
         </div> -->
         <!-- 头部 -->
         <header-title :dealName="indexDealName" :score="totalScoreList" :summary="indexSummary" :defaultDate="indexDefaultDate" :changeDateHandle="indexChangeDate"
-        :dealList="dealList" :isShowDealIdSelect="isShowDealIdSelect" :startDate="startDate" :endDate="endDate" :startDateList="startDateList" v-if="startDateList.length!=0"></header-title>
+        :dealList="dealList" :isShowDealIdSelect="isShowDealIdSelect" :startDate="startDate" :endDate="endDate" :startDateList="startDateList" v-if="Object.keys(totalScoreList).length!=0 && startDateList.length!=0"></header-title>
         <!-- 一帮卖分析 -->
         <one-help-sale-en :titleName="oneHelpSaleTitle" :monthSalesData="monthSalesData" :monthBarData="monthBarData"  :coreData="oneHelpSaleScoreList"
         :yearSalesData="yearSalesData" :yearBarData="yearBarData" :monthShow="oneHelpSaleMonthShow" :yearShow="oneHelpSaleYearShow"
@@ -131,9 +131,6 @@
                 yearSalesData: '',//本月/累计销量以及达成率
                 yearBarData: '',//本月/累计销量以及达成率
                 totalScoreList: {//总得分
-                    coretype: '总得分',
-                    coretext: '',
-                    evaluate: ''
                 },
                 oneHelpSaleScoreList: {//一帮卖评分
                     coretype: '一帮卖得分',
@@ -269,6 +266,9 @@
                     {id:'ff8080816a194910016a43b00eeb3a75',name:'芜湖市明坤日用百货贸易有限公司'},
                 ],
                 //评分接口
+                // scoreRequestUrl:'http://dccuat.liby.com.cn/tjbg-manage/gradeConfig/queryModuleScore',
+                // scoreRequestSumUrl:'http://dccuat.liby.com.cn/tjbg-manage/gradeConfig/queryModuleSumScore',
+                // scoreTxtRequestUrl:'http://dccuat.liby.com.cn/tjbg-manage/gradeConfig/queryModuleEvaluate',
                 scoreRequestUrl:'https://dcc.libyuat.com/tjbg-manage/gradeConfig/queryModuleScore',
                 scoreRequestSumUrl:'https://dcc.libyuat.com/tjbg-manage/gradeConfig/queryModuleSumScore',
                 scoreTxtRequestUrl:'https://dcc.libyuat.com/tjbg-manage/gradeConfig/queryModuleEvaluate',
@@ -311,9 +311,6 @@
             }
         },
         created() {
-            if(this.screenWidth<=1480){
-                this.bodyWdith = this.screenWidth - 180 +'px'
-            }
             let date = new Date;
             let year = date.getFullYear();
             let month = date.getMonth() + 1;
@@ -946,10 +943,13 @@
                         //本月下单金额达成率
                         _this.monthSalesData = {
                             sales:_this.dataProcess(salesMonthData.money,'money','tenth').num,
-                            reach:(_this.getReachPercent(salesMonthData.money,salesMonthData.target_money)*100).toFixed(2)+'%',
+                            reach:(_this.getReachPercent(salesMonthData.money,salesMonthData.target_money)*100).toFixed(2),
                             bgColor:'#2D92FC',
-                            titleName:'本月'
+                            titleName:'本月',
+                            id:'monthgaugeId',
+                            color:"#5facfd"
                         }
+                        console.log(_this.monthSalesData)
                         //本月柱状图数据
                         var barDataMonth = [
                             _this.getReachPercent(salesMonthData.liby_money,salesMonthData.liby_target_money),_this.getReachPercent(salesMonthData.kispa_money,salesMonthData.kispa_target_money),
@@ -1025,9 +1025,11 @@
                         //年累计下单金额达成率
                         _this.yearSalesData = {
                             sales:_this.dataProcess(salesYearData.money,'money','tenth').num,
-                            reach:(_this.getReachPercent(salesYearData.money,salesYearData.target_money)*100).toFixed(2)+'%',
+                            reach:(_this.getReachPercent(salesYearData.money,salesYearData.target_money)*100).toFixed(2),
                             bgColor:'#FF9500',
-                            titleName:'年累计'
+                            titleName:'年累计',
+                            id:'yeargaugeId',
+                            color:"#f9ad4b"
                         }
                         //年累计柱状图数据
                         var barDataYear = [

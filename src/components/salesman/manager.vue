@@ -18,8 +18,8 @@
 				  <a-Col :span="9" class="managerCol" style="text-align: center;">
 				  	<!-- <p @click="concludeClick('达成与贡献')">达成与贡献</p>
 				  	<p @click="trendClick('走势图')">走势图</p> -->
-					  <new-button defaultVal="达成与贡献" :buttonHandleClick="concludeClick" isGhost="true"></new-button>
-					  <new-button defaultVal="走势图" :buttonHandleClick="trendClick" isGhost="true" style="margin-top:8px;" class="lineButton"></new-button>
+					  <new-button defaultVal="达成与贡献" :buttonHandleClick="concludeClick" :isGhost="true"></new-button>
+					  <new-button defaultVal="走势图" :buttonHandleClick="trendClick" :isGhost="true" style="margin-top:8px;" class="lineButton"></new-button>
 				  </a-Col>
 				</a-Row>
 		  	</div>
@@ -61,7 +61,7 @@
 				  </a-Col>
 				  <a-Col :span="7" class="managerCol"  style="text-align: center;">
 				  	<!-- <p @click="glidingClick('下滑人员')">下滑人员</p> -->
-					  <new-button defaultVal="下滑人员" :buttonHandleClick="glidingClick" isGhost="true"></new-button>
+					  <new-button defaultVal="下滑人员" :buttonHandleClick="glidingClick" :isGhost="true"></new-button>
 				  </a-Col>
 				</a-Row>
 		  	</div>

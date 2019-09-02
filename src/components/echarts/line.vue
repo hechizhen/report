@@ -191,9 +191,18 @@
                 var option = {
                     tooltip: {
                         trigger: 'axis',
-                        // axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-                        //     type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-                        // },
+                        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                            type : 'cross',        // 默认为直线，可选为：'line' | 'shadow'
+                            label:{
+                                backgroundColor:'rgb(45, 146, 252)',
+                                formatter:function(params) {
+                                    if(params.seriesData.length==0){
+                                        params.value = _this.dataProcess(params.value,_this.lineEchartsData.unit[0],_this.lineEchartsData.unit[1]).num+_this.dataProcess(params.value,_this.lineEchartsData.unit[0],_this.lineEchartsData.unit[1]).unit
+                                    }
+                                    return params.value
+                                }
+                            }
+                        },
                         formatter:function(params){
                             var relVal = '';
                             for (var i = 0; i < params.length; i++) {

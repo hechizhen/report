@@ -13,9 +13,12 @@
                 <button-list :buttonType="buttonList.buttonType" :isGhost="buttonList.isGhost" :buttonHandleClick="buttonHandleClick" :defaultVal="buttonList.defaultVal" style="margin-left:20px;"></button-list>
             </p>
         </div>
+        <div class="headerTitle_mid">
+            <gauge-chart :gaugeChartData="gaugeChartData" v-if="gaugeChartData!=''"></gauge-chart>
+        </div>
         <div class="headerTitle_right">
-            <span class="spanFont2 spanSize4">{{score.coretype}}：</span>
-            <span class="spanFont2 spanSize2">{{score.coretext}}</span>
+            <!-- <span class="spanFont2 spanSize4">{{score.coretype}}：</span>
+            <span class="spanFont2 spanSize2">{{score.coretext}}</span> -->
             <span class="spanFont spanSize4">总结：</span>
             <span class="spanFont spanSize4">{{score.evaluate}}</span>
             <span class="spanFont1 spanSize3">{{score.subscribe}}</span>
@@ -33,6 +36,7 @@
     import 'moment/locale/zh-cn';
     moment.locale('zh-cn');
     import buttonList from '../components/base/newButton.vue'
+    import gaugeChart from '../components/echarts/gauge1.vue'
     export default {
         name : 'headerTitle',
         props:{
@@ -80,7 +84,8 @@
             }
         },
         components : {
-            buttonList
+            buttonList,
+            gaugeChart
         },
         data () {
             return {
@@ -98,7 +103,8 @@
                 headerStartDate:Number(this.startDate.substring(5,7)),
                 headerEndDate:Number(this.endDate.substring(5,7)),
                 nowDate:'',
-                options3: ''
+                options3: '',
+                gaugeChartData:'',
             }
         },
         created(){
@@ -118,7 +124,11 @@
                     return disabledDay > endTime || disabledDay < startTime
                 },
             }
-            console.log(this.disabledDate())
+            this.gaugeChartData = {
+                    name:'总得分',
+                    data:this.score.coretext
+                }
+                console.log(this.gaugeChartData)
         },
         methods: {
             moment,
@@ -166,10 +176,8 @@
             },
         },
         computed:{
-
         },
         watch: {
-
         },
         distroyed: function () {
 
@@ -188,13 +196,17 @@
             width:45%;
             height:100%;
         }
+        .headerTitle_mid{
+            width: 17%;
+            height:100%;
+        }
         .headerTitle_right{
-            width: 55%;
             height: 100%;
+            width:38%;
             word-wrap: break-word;
             word-break: break-all;
             flex-wrap: wrap;
-            padding-top:1%;
+            padding-top:45px;
             line-height: 20px;
         }
         .paddingStyle{

@@ -76,7 +76,7 @@
 			}
 		},
 		mounted(){
-			console.log(this.yearBarData)
+			console.log(this.monthSalesData)
 		},
 		methods:{
 
