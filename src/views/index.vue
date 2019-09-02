@@ -30,7 +30,7 @@
         <productIndex :CommodityTurnoverRate="CommodityTurnoverRate"  :commoditydata="commoditydata" :indexStoreHandleClick="indexStoreHandleClick"
                       :prodownStoresData="prodownStoresData" :upproStoresData="upproStoresData" :indexGoodDetailHandleClick="indexGoodDetailHandleClick"
                       :NumberGoods="NumberGoods"  :CommodityRate="CommodityRate"  :NumberGoodsDownBar="NumberGoodsDownBar" :NumberGoodsUpBar="NumberGoodsUpBar"
-                      :NumberGoodsPie="NumberGoodsPie" :NumberGoodsList="NumberGoodsList" v-if="CommodityTurnoverRate.length!=0"
+                      :NumberGoodsPie="NumberGoodsPie" :NumberGoodsList="NumberGoodsList" v-if="CommodityTurnoverRate!=''"
                       :tableData="getPinListing"  :exportData="ProExportData"  :productTableData="productTableData"
                       :detailExport="exportDetailData"  :selectButtonClick="proDetaSelectButtonClick"  :proListDetaSelectButtonClick="proListDetaSelectButtonClick"
                       :coreData="productScoreList"
@@ -401,8 +401,6 @@
                 this.loadingDataArray = []
                 this.dealer_id = selectVal
                 this.indexDealName = selectName
-                alert(selectName)
-                alert(selectVal)
                 //判断入口为立购星或者预生产 是否改变经销商id
                 // if(this.isShowDealIdSelect){
                 //     this.dealer_id = selectVal

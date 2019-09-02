@@ -170,7 +170,7 @@
 
                     _this.myChart.on('mouseout', function(params) {
                         _this.myChart.dispatchAction({
-                            type: 'downplay',
+                            type: 'highlight',
                             seriesIndex: 0,
                             dataIndex: 0
                         });
