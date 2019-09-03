@@ -10,6 +10,12 @@
                 <div class="oneHelpSaleTopLeftBox" :style="{background:salesData.bgColor}">
                     <div class="flexMid">
                         <gauge-chart :gaugeChartData="gaugeChartData"></gauge-chart>
+                        <div class="flexMidBox">
+                            <div>
+                                <p>{{salesData.reach}}%</p>
+                                <p>总达成</p>
+                            </div>
+                        </div>
                     </div>
                     <div class="oneHelpSaleTopRight">
                         <Div>
@@ -145,6 +151,25 @@
                     align-items: center;
                     text-align: center;
                     justify-content: center;
+                    position: relative;
+                    .flexMidBox{
+                        position: absolute;
+                        width:100%;
+                        height:100%;
+                        display: flex;
+                        align-items: flex-end;
+                        justify-content: center;
+                        padding-bottom:20px;
+                        p:first-child{
+                            font-size:30px;
+                            color:#fff
+                        }
+                        p:nth-child(2){
+                            font-size:18px;
+                            color:#fff;
+                            margin-top:0.2rem
+                        }
+                    }
                     .oneHelpSaleTopMid{
                         // border-radius:118px 118px 0 0;
                         // border:6px solid #fff;

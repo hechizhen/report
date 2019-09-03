@@ -985,8 +985,8 @@
                             },
                             xAxis:{
                                 axisLine:{
-                                    show:false,
-                                    color:'#3699FF'
+                                    show:true,
+                                    color:'#D7D9E5'
                                 },
                                 axisLabel:{
                                     show:true,
@@ -1000,8 +1000,8 @@
                             },
                             yAxis:{
                                 axisLine:{
-                                    show:false,
-                                    color:'#3699FF'
+                                    show:true,
+                                    color:'#D7D9E5'
                                 },
                                 axisLabel:{
                                     show:true,
@@ -1064,8 +1064,8 @@
                             },
                             xAxis:{
                                 axisLine:{
-                                    show:false,
-                                    color:'#3699FF'
+                                    show:true,
+                                    color:'#D7D9E5'
                                 },
                                 axisLabel:{
                                     show:true,
@@ -1079,8 +1079,8 @@
                             },
                             yAxis:{
                                 axisLine:{
-                                    show:false,
-                                    color:'#3699FF'
+                                    show:true,
+                                    color:'#D7D9E5'
                                 },
                                 axisLabel:{
                                     show:true,

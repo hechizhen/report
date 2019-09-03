@@ -39,20 +39,20 @@
             setChartOption(){
                 var _this = this
                 var option = {
-                    title: {
-                        show: true,
-                        x: "center",
-                        y: "55%",
-                        text: _this.gaugeChartData.name,
-                    },
+                    // title: {
+                    //     show: true,
+                    //     x: "center",
+                    //     y: "55%",
+                    //     text: _this.gaugeChartData.name,
+                    // },
                     tooltip: {
                         formatter: "{a} <br/>{b} : {c}%"
                     },
                     series: [{
                         name: '在岗职工、从业人数',
                         type: 'gauge',
-                        center: ['50%', '50%'], // 默认全局居中
-                        radius: '85%',
+                        center: ['50%', '55%'], // 默认全局居中
+                        radius: '95%',
                         axisLine: {
                             show: false,
                             lineStyle: { // 属性lineStyle控制线条样式
@@ -71,7 +71,7 @@
                                     ],
                                     [1, '#eef0f5']
                                 ],
-                                width: 10
+                                width: 7
                             }
                         },
                         splitLine: {
@@ -90,7 +90,8 @@
                         },
                         detail: {
                             formatter: '{value}',
-                            offsetCenter: [0, '-10%']
+                            offsetCenter: [0, '-10%'],
+                            show:false
                         },
                         data: [{
                             value: _this.gaugeChartData.data,

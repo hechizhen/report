@@ -15,6 +15,12 @@
         </div>
         <div class="headerTitle_mid">
             <gauge-chart :gaugeChartData="gaugeChartData" v-if="gaugeChartData!=''"></gauge-chart>
+            <div class="headerTitle_mid_box">
+                <div>
+                    <p>{{score.coretext}}</p>
+                    <p>{{score.coretype}}</p>
+                </div>
+            </div>
         </div>
         <div class="headerTitle_right">
             <!-- <span class="spanFont2 spanSize4">{{score.coretype}}：</span>
@@ -198,7 +204,27 @@
         .headerTitle_mid{
             width: 4rem;
             height:100%;
-            margin-left:1.8rem
+            margin-left:1.8rem;
+            position: relative;
+            .headerTitle_mid_box{
+                position: absolute;
+                top:0;
+                width: 100%;
+                height:100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                p:first-child{
+                    color:#0068EC;
+                    font-size: 1rem;
+                    padding-top:0.3rem;
+                }
+                p:nth-child(2){
+                    color:#0068EC;
+                    font-size: 0.3rem;
+                }
+            }
         }
         .headerTitle_right{
             height: 100%;
@@ -247,7 +273,7 @@
             font-size: 12px;
         }
         .spanSize4{
-            font-size: 0.35rem;
+            font-size: 0.6rem;
         }
     }
 </style>

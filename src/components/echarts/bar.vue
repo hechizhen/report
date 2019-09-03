@@ -76,7 +76,7 @@
                 default: () => ({
                     top: 'middle',
                     left: '3%',
-                    right: '4%',
+                    right: '6%',
                     height: '70%',
                     bottom:'3%',
                     containLabel: true
@@ -170,7 +170,7 @@
                             label: {
                                 normal: {
                                     color: '#c9cbd5',
-                                    position: 'start',
+                                    position: 'end',
                                     // padding: [-12, 10, 0, -12],
                                     formatter:function(params){
                                         if(_this.barEchartsData.id=="barIdMonthSales" || _this.barEchartsData.id=="barIdYearSales" ){
@@ -194,7 +194,7 @@
                 if(_this.barType==0){
                     var barGap = 0
                 }else{
-                    var barGap = '-80%'
+                    var barGap = '-100%'
                 }
                 _this.barEchartsData.barData.map(function(item,index){
                         legendList.push(item.name)
@@ -208,7 +208,7 @@
                             barGap:barGap,
                             barWidth:item.barWidth,
                             silent: true,
-                            barMaxWidth:22,
+                            // barMaxWidth:22,
                             itemStyle:{
                                 normal:{
                                     color: function(params) {
@@ -380,10 +380,11 @@
                 }
                 if(_this.isShowMax){
                     _this.intervalData = 'max'
+                    var yAxisMax = 2
                 }else{
                     _this.intervalData = null
+                    var yAxisMax = null
                 }
-                console.log(xAxisLabel)
                 var option = {
                     tooltip: {
                         trigger: 'axis',
@@ -479,13 +480,19 @@
                             show: false
                         },
                         axisTick:{
-                            show: false
+                            show: true
                         },
+                          axisPointer: {
+                type: 'shadow'
+            }
                         // min:_this.minData,
                         // max:2,
                     },
                     series: seriesData
                 };
+                if(_this.barEchartsData.id=="barIdMonthSales" || _this.barEchartsData.id=="barIdYearSales" ){
+                    option.yAxis.max= yAxisMax
+                }
                 this.myChart.setOption(option);
             }
         },
