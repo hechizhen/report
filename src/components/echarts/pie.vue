@@ -67,6 +67,19 @@
             });
         },
         methods: {
+            remToPx(rem) {
+                var width = window.screen.width
+                if(width<=1400){
+                    var fontSize = 14
+                    var fontSize1 = 16
+                }else{
+                    var fontSize = 18
+                    var fontSize1 = 22
+                }
+                return {
+                    fontSize,fontSize1
+                }
+            },
             setPieOptions(){
                 var _this = this
                 var scale = 1;
@@ -93,7 +106,7 @@
                         orient: "horizontal",
                         icon:"rect",
                         bottom: "8%",
-                        itemGap: 25,
+                        itemGap: 18,
                         data: legendList,
                         itemWidth: 18,
                         itemHeight: 18,
@@ -127,14 +140,14 @@
                                 rich: {
                                     text: {
                                         color: "#666",
-                                        fontSize: 18,
+                                        fontSize: _this.remToPx().fontSize,
                                         align: 'center',
                                         verticalAlign: 'middle',
                                         padding: 8
                                     },
                                     value: {
                                         color: "#8693F3",
-                                        fontSize: 24,
+                                        fontSize: _this.remToPx().fontSize1,
                                         align: 'center',
                                         verticalAlign: 'middle',
                                     },
