@@ -74,29 +74,29 @@
 <style lang="less" scoped>
 	.sameMonth {
 		width: 100%;
-		padding: 5px;
+		padding: 1rem;
 		background:rgba(255,255,255,1);
 		border-radius:10px;
 		position: relative;
 		.sameMonthcontent {
 			width: 100%;
-			height: 735px;
+			height:18.02rem;
 			border:4px solid #00A6FF;
 			border-radius:10px;
 			padding: 0 20px;
 			.title {
-				height: 50px;
+				height: 2rem;
 				display: flex;
 	    		align-items: center;
 	    		.titleborder {
-	    			width:12px;
-					height:4px;
+					width:0.3rem;
+					height:0.1rem;
 					background:rgba(45,146,252,1);
 					border-radius:2px;
 	    		}
 	    		.titletext {
 	    			padding-left: 5px;
-	    			font-size:16px;
+					font-size:0.5rem;
 					font-family:PingFangSC-Medium;
 					font-weight:500;
 					color:rgba(51,51,51,1);
@@ -117,7 +117,7 @@
 			}
 			.record {
 				width: 100%;
-				height: 145px;
+				height: 4rem;
 				.recordConten {
 					height: 100%;
 					width: 100%;
@@ -133,13 +133,13 @@
 							font-weight:400;
 							color:rgba(255,255,255,1);
 							p:nth-child(1) {
-							font-size:20px;
+							font-size:0.5rem;
 							display: flex;
 						    align-items: center;
 						    justify-content: center;
 							}
 							p:nth-child(2) {
-								font-size:56px;
+								font-size:1rem;
 								text-align: center;
 								font-weight:600;
 								span {
@@ -152,24 +152,24 @@
 			}
 			.grossProfit {
 					.recordLeft {
-						height: 85px;
+						height: 2rem;
 						text-align: center;
-						padding-top: 30px;
+						padding-top: 1rem;
 						div {
-							font-size:20px;
+							font-size:0.6rem;
 							font-family:PingFangSC-Medium;
 							font-weight:500;
 							color:#98A2B4;
 							span {
 								margin-left: 10px;
-								font-size:12px;
+								font-size:0.4rem;
 								font-family:PingFangSC-Medium;
 								font-weight:bold;
 								color:rgba(51,51,51,1);
 							}
 							.txt{
 								color:rgba(51,51,51,1);
-								font-size:20px;
+								font-size:0.6rem;
 								font-family:PingFangSC-Medium;
 								font-weight:500;
 								margin-left: 0;
@@ -181,11 +181,11 @@
 						}
 					}
 					.recordRight {
-						height: 85px;
+						height: 2rem;
 						text-align: center;
-						padding-top: 30px;
+						padding-top: 1rem;
 						div {
-							font-size:20px;
+							font-size:0.6rem;
 							font-family:PingFangSC-Medium;
 							font-weight:500;
 							color:#98A2B4;
@@ -194,7 +194,7 @@
 							}
 							span {
 								margin-left: 10px;
-								font-size:20px;
+								font-size:0.6rem;
 								font-family:PingFangSC-Medium;
 								font-weight:500;
 								color:rgba(51,51,51,1);
@@ -207,19 +207,19 @@
 				}
 			.proportion {
 				width: 100%;
-				height: 500px;
+				/*height: 12rem;*/
 				.proportion_title {
 					width: 100%;
-					height: 45px;
-					padding-top: 20px;
-					font-size:18px;
+					height: 1.5rem;
+					padding-top: 0.6rem;
+					font-size: .5rem;
 					font-family:PingFangSC-Semibold;
 					font-weight:600;
 					color:rgba(51,51,51,1);
 				}
 				.proportion_echarts {
 					width: 100%;
-					height: 400px;
+					height: 8rem;
 				}
 			}
 		}

@@ -86,28 +86,28 @@
                 },
                 // 按鈕樣式
                 btnStyle:{
-                    width: '88px',
-                    height: '32px',
+                    width:'2.8rem',
+                    height:'1rem',
                     border: '1px solid #DCDCDC',
                     // hover:{
                     // 	color:'red'
                     // }
                 },
                 txtStyle:{
-                    fontSize:'14px',
+                    fontSize:'.4rem',
                     color:'#333333',
                     fontWeight:500
                 },
                 btnStyle2:{
-                    width: '72px',
-                    height: '26px',
+                    width: '2.6rem',
+                    height: '.9rem',
                     border: '1px solid #fff',
                     // hover:{
                     // 	color:'red'
                     // }
                 },
                 txtStyle2:{
-                    fontSize:'12px',
+                    fontSize:'.35rem',
                     color:'#fff',
                     fontWeight:400
                 },
@@ -160,13 +160,13 @@
     width: 51%;
     float: left;
     .shopLeft-centen{
-        height: 196px;
+        height: 5.51rem;
         display: flex;
         align-items: center;
     }
     .shop-active{
         width:17%;
-        height:165px;
+        height: 4.64rem;
         background:rgba(0,166,255,1);
         border-radius:6px;
         font-family:PingFangSC-Medium;
@@ -177,24 +177,23 @@
         p{
             width: 79%;
             margin-left: 10%;
-            font-size:12px;
+            font-size:.3rem;
             font-weight:500;
             padding-top: 26px;
             padding-bottom: 7%;
             display: grid;
 
             span{
-                font-size:12px;
+                font-size:.3rem;
                 font-weight:500;
                 margin-top: 5%;
             }
         }
         span{
-            font-size:26px;
+            font-size:0.65rem;
             font-weight:600;
         }
         .productLeft-btn{
-            line-height: 26px;
             text-align: center;
             margin: auto;
             margin-top: 8%;
@@ -209,7 +208,7 @@
         float: left;
       .shop-data-title {
         width: 80%;
-        line-height: 41px;
+        line-height: 1.11rem;
         background:rgba(238,240,245,1);
         border-radius:6px;
         margin: 3% 0 3% 7%;
@@ -219,7 +218,7 @@
             width: 49%;
             text-align: center;
             span{
-                font-size:14px;
+                font-size:.4rem;
                 font-family:PingFangSC-Regular;
                 font-weight:400;
                 color:rgba(51, 51, 51, 1);
@@ -238,15 +237,14 @@
             margin-top: 2%;
             margin-left: 8%;
             span{
-                line-height: 28px;
-                font-size:14px;
+                line-height: .8rem;
+                font-size:.4rem;
                 font-family:PingFangSC-Regular;
                 font-weight:400;
                 color:rgba(152,162,180,1);
             }
             .productLeft-btn{
                 height:100%;
-                line-height: 26px;
                 text-align: center;
                 float: right;
             }
@@ -254,7 +252,7 @@
     }
     .shu{
         width:1px;
-        height:101px;
+        height:3rem;
         background:rgba(221,232,255,1);
         border:1px solid rgba(229,229,229,1);
         float: right;

@@ -45,17 +45,17 @@
                 isShowDetail:false,
                 isShowreceivable:false,
                 btnStyle:{
-                    width: '72px',
-                    height: '26px',
+                    width: '2.6rem',
+                    height: '.9rem',
                     border: '1px solid #FFFFFF',
                     margin:'auto',
-                    marginTop:'10px'
+                    marginTop:'.25rem'
                     // hover:{
                     // 	color:'red'
                     // }
                 },
                 txtStyle:{
-                    fontSize:'12px',
+                    fontSize:'.35rem',
                     color:'#ffffff',
                     fontWeight:400
                 },
@@ -110,13 +110,13 @@
         float: left;
         /*margin-left: 9%;*/
         .shopRight-title{
-            height: 196px;
+            height: 5.51rem;
             display: flex;
             align-items: center;
         }
         .shop-active {
             width: 20%;
-            height: 165px;
+            height: 4.64rem;
             background:linear-gradient(90deg,rgba(0,166,255,1),rgba(140,93,255,1));
             border-radius: 6px;
             font-family: PingFangSC-Medium;
@@ -126,51 +126,20 @@
             margin-left:10%;
             p {
                 display: grid;
-                font-size: 14px;
+                font-size: .4rem;
                 font-weight: 500;
                 padding-top: 16%;
                 padding-bottom:5%;
                 margin-bottom: 0;
                 span{
-                    font-size: 14px;
+                    font-size: .4rem;
                     font-weight: 500;
                     margin-top: 5%;
                 }
             }
             span {
-                font-size: 24px;
+                font-size: .6rem;
                 font-weight: 600;
-            }
-            .btn{
-                cursor: pointer;
-                width: 90px;
-                text-align: center;
-                padding: 6px 0;
-                border: 1px solid #fff;
-                border-radius: 3px;
-                font-size: 14px;
-                font-family: PingFangSC-Regular;
-                font-weight: 400;
-                color: #fff;
-                margin: 10% auto 0;
-            }
-
-            .productLeft-btn {
-                width: 72px;
-                line-height: 26px;
-                text-align: center;
-                border: 1px solid rgba(255, 255, 255, 1);
-                border-radius: 6px;
-                margin-left: 20%;
-                margin-top: 20px;
-
-                span {
-                    width: 48px;
-                    font-size: 12px;
-                    font-family: PingFangSC-Regular;
-                    font-weight: 400;
-                    color: rgba(255, 255, 255, 1);
-                }
             }
         }
     }

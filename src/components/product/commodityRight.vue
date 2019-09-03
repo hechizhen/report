@@ -29,7 +29,7 @@
                     </div>
                     <div class="commodityR-basetwo">
                         <!--//增长按钮-->
-                    <span style="font-size:16px;font-family:PingFangSC-Semibold;font-weight:600;">{{commoditydata.downGoods.NoSales}}</span>
+                    <span  style="font-weight: 600;">{{commoditydata.downGoods.NoSales}}</span>
                     </div>
                     <div class="productLeft-btn">
                         <newButton :defaultVal="commoditydata.upGoods.btn" :btnStyle="btnStyle"  :txtStyle="txtStyle"
@@ -44,7 +44,7 @@
                     </div>
                     <div class="commodityR-basetwo">
                         <!--//下滑按钮-->
-                    <span style="font-size:16px;font-family:PingFangSC-Semibold;font-weight:600;">{{commoditydata.upGoods.NoSales}}</span>
+                    <span style="font-weight: 600;">{{commoditydata.upGoods.NoSales}}</span>
                     </div>
                     <div class="productLeft-btn">
                         <newButton  :defaultVal="commoditydata.downGoods.btn" :btnStyle="btnStyle"  :txtStyle="txtStyle"
@@ -105,15 +105,15 @@
                     list:['事业部','品类','系列','商品']
                 },
                 btnStyle:{
-                    width: '72px',
-                    height: '26px',
+                    width: '2.6rem',
+                    height: '.9rem',
                     border: '1px solid #FFFFFF',
                     // hover:{
                     // 	color:'red'
                     // }
                 },
                 txtStyle:{
-                    fontSize:'12px',
+                    fontSize:'.4rem',
                     color:'#ffffff',
                     fontWeight:400
                 },
@@ -158,8 +158,8 @@
         width: 22%;
         float: left;
         .productLeft-img{
-            width: 46px;
-            height: 46px;
+            width: 1.3rem;
+            height: 1.3rem;
             margin: auto;
             margin-top: 17%;
             img{
@@ -168,32 +168,29 @@
             }
         }
         .productLeft-txt{
-            margin-top: 10px;
+            margin-top: .3rem;
             p{
-                width:71px;
-                font-size:14px;
+                display: flex;
+                justify-content: center;
+                font-size:.4rem;
                 font-family:PingFangSC-Medium;
                 font-weight:bold;
                 color:rgba(255,255,255,1);
-                margin: 0 auto;
                 white-space : nowrap
             }
             span{
-                width:99px;
-                font-size:28px;
+               display: flex;
+                justify-content: center;
+                font-size:0.7rem;
                 font-family:PingFangSC-Semibold;
                 font-weight:600;
                 color:rgba(255,216,110,1);
-                margin: 0 auto;
-                display: block;
-                margin-top: 12px;
-                text-align: center;
+                margin-top: .3rem;
             }
         }
         .productLeft-btn{
             height:100%;
-            line-height: 26px;
-            margin: 22px  auto  51px;
+            margin: .5rem auto 0;
             text-align: center;
             justify-content: center;
             align-items: center;
@@ -210,7 +207,7 @@
     .commodityRight {
         width: 49%;
         float: left;
-        height: 260px;
+        height: 6.8rem;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -220,7 +217,7 @@
             text-align: center;
             .commodityR-title {
                 width: 100%;
-                line-height: 32px;
+                line-height: 0.9rem;
                 background: rgba(255,255,255,0.2);
                 border-radius: 6px;
                 display: inline-block;
@@ -231,7 +228,7 @@
                     text-align: center;
 
                     span {
-                        font-size: 16px;
+                        font-size: .4rem;
                         font-family: PingFangSC-Regular;
                         font-weight: 400;
                         color: rgba(255, 255, 255, 1);
@@ -241,7 +238,7 @@
                         color: rgba(255, 255, 255, 1);
                         margin-bottom: 0;
                         display: inline-block;
-                        font-size: 16px;
+                        font-size: .4rem;
                         font-weight: 500;
                     }
                 }
@@ -249,20 +246,20 @@
 
             .commodityR-base {
                 width: 100%;
-                height: 34px;
+                height: 1rem;
                 margin: 6% auto 0;
                 .quan {
                     float: left;
-                    width: 12px;
-                    height: 12px;
+                    width:0.3rem;
+                    height:0.3rem;
                     border: 4px solid rgba(255, 255, 255, 1);
                     border-radius: 50%;
                     display: inline-block;
                 }
 
                 span {
-                    line-height: 34px;
-                    font-size: 14px;
+                    line-height:  .99rem;
+                    font-size: .4rem;
                     font-family: PingFangSC-Regular;
                     font-weight: 400;
                     color: rgba(255, 255, 255, 1);
@@ -273,7 +270,6 @@
                 .productLeft-btn {
                     width: 32%;
                     height: 100%;
-                    line-height: 26px;
                     text-align: right;
                     float: right;
                     display: flex;
@@ -294,13 +290,13 @@
         .commodityRight-sum{
             float: left;
             width: 29%;
-            height: 260px;
+            height: 6.8rem;
             display: flex;
             justify-content: center;
             align-items: center;
             .commodityRight-sumbor {
-                width: 130px;
-                height: 130px;
+                width:3.83rem;
+                height:3.83rem;
                 border: 1px solid rgba(255, 255, 255, 1);
                 border-radius: 50%;
                 display: flex;
@@ -313,12 +309,12 @@
                     color: rgba(255, 255, 255, 1);
                     text-align: center;
                     p {
-                        font-size: 16px;
+                        font-size: .4rem;
                         margin-bottom: 10%;
                     }
 
                     span {
-                        font-size: 24px;
+                        font-size: .6rem;
                     }
                 }
             }

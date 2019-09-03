@@ -40,15 +40,12 @@
         data(){
             return{
                 btnStyle:{
-                    width: '88px',
-                        height: '32px',
-                        border: '1px solid #DCDCDC',
-                    // hover:{
-                    // 	color:'red'
-                    // }
+                    width:'2.8rem',
+                    height:'1rem',
+                    border: '1px solid #DCDCDC',
                 },
                 txtStyle:{
-                    fontSize:'14px',
+                    fontSize:'.4rem',
                         color:'#333333',
                         fontWeight:500
                 },
@@ -89,8 +86,8 @@
             width: 100%;
             float: left;
             .quan {
-                width:10px;
-                height:10px;
+                width:0.25rem;
+                height:0.25rem;
                 border:2px solid rgba(152,162,180,1);
                 border-radius:50%;
                 display: inline-block;
@@ -98,16 +95,16 @@
             }
 
             .ant-col-18{
-                line-height: 44px;
-                font-size:16px;
+                line-height: 1.2rem;
+                font-size:0.45rem;
                 font-family:PingFangSC-Medium;
                 font-weight:500;
                 color:rgba(152,162,180,1);
                 display: inline-block;
             }
             .ant-col-6{
-                line-height: 44px;
-                font-size:20px;
+                line-height: 1.2rem;
+                font-size:0.45rem;
                 font-family:PingFangSC-Semibold;
                 font-weight:600;
                 margin-bottom: 0;
@@ -117,21 +114,11 @@
         }
         .productLeft-btn {
             width:30%;
-            height:88px;
+            height: 6.94em;
             float: left;
             display:flex;
             justify-content: center;//子元素水平居中
             align-items: center;//子元素垂直居中
-            .newButton {
-
-                span {
-                    width: 48px;
-                    font-size: 14px;
-                    font-family: PingFangSC-Regular;
-                    font-weight: 600;
-                    color: rgba(51, 51, 51, 1);
-                }
-            }
         }
     }
     .onetxt{

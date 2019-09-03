@@ -74,11 +74,11 @@
 		border-radius:10px;
 		.totalAmountcontent {
 			width: 100%;
-			height: 450px;
-			padding: 0 20px;
+			height:12.23rem;
+			padding: 0 0.4rem;
 			position: relative;
 			.title {
-				height: 50px;
+				height: 1.1rem;
 				display: flex;
 	    		align-items: center;
 	    		.titleborder {
@@ -89,7 +89,7 @@
 	    		}
 	    		.titletext {
 	    			padding-left: 5px;
-	    			font-size:16px;
+					font-size: 0.44rem;
 					font-family:PingFangSC-Medium;
 					font-weight:500;
 					color:rgba(51,51,51,1);
@@ -97,7 +97,7 @@
 			}
 			.record {
 				width: 100%;
-				height: 110px;
+				height: 3rem;
 				display: flex;
 			    align-items: center;
 				justify-content: center;
@@ -110,13 +110,13 @@
 					}
 				}
 				p:nth-child(1) {
-					font-size:16px;
+					font-size:0.4rem;
 					font-family:PingFangSC-Regular;
 					font-weight:400;
 					color:rgba(51,51,51,1);
 				}
 				p:nth-child(2) {
-					font-size:44px;
+					font-size:1.2rem;
 					font-family:PingFangSC-Semibold;
 					font-weight:600;
 					color:rgba(51,51,51,1);
@@ -124,18 +124,17 @@
 			}
 			.proportion {
 				width: 100%;
-				height: 80px;
+				height: 2.3rem;
 				.proportionitmes {
 					height: 100%;
 					.proportiondiv {
-						height: 100%;
-						width: 100%;
+						height: 2rem;
 						display: flex;
 					    align-items: center;
 						flex-direction:column;
 			    		p {
 			    			margin: 0px;
-			    			font-size:16px;
+							font-size:0.45rem;
 							font-family:PingFangSC-Regular;
 							font-weight:bold;
 							img {
@@ -154,11 +153,11 @@
 				}
 			}
 			.brand {
-				height: 215px;
+				height: 4.5rem;
 				width: 100%;
 				.brandtitle {
-					height: 32px;
-					font-size:16px;
+					height: 0.9rem;
+					font-size:.42rem;
 					font-family:PingFangSC-Semibold;
 					font-weight:600;
 					color:rgba(51,51,51,1);
@@ -169,7 +168,7 @@
 					width: 100%;
 					li {
 						width: 33.33%;
-						height: 86px;
+						height: 2.5rem;
 						float: left;
 						border-right: 2px solid #fff;
 						div:nth-child(1){
@@ -177,7 +176,7 @@
 							font-family:PingFangSC-Medium;
 							font-weight:500;
 							color:rgba(152,162,180,1);
-							height: 50px;
+							height: 1.3rem;
 							width: 100%;
 							background:rgba(0,166,255,0.1);
 							display: flex;
@@ -185,8 +184,8 @@
 						    justify-content: center;
 						}
 						div:nth-child(2){
-							height: 36px;
-							font-size:12px;
+							height: 1.2rem;
+							font-size:.3rem;
 							font-family:PingFangSC-Semibold;
 							font-weight:600;
 							color:rgba(51,51,51,1);

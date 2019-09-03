@@ -7,7 +7,7 @@
                  <img :src="shopData.shopImg" style="width: 100%;height: 100%">
              </div>
             <div class="title-txt">
-              <p>{{StoresDetailed.shopTitle}} <span style=" font-size:24px;">{{StoresDetailed.StoreActivity}}</span></p>
+              <p>{{StoresDetailed.shopTitle}} <span style=" font-size:.7rem;">{{StoresDetailed.StoreActivity}}</span></p>
             </div>
         </div>
         <div class="shop-centen-middle">
@@ -150,30 +150,29 @@
 }
 .shop-centen{
     width: 100%;
-    height:350px;
+    height:9.63rem;
     background:rgba(255,255,255,1);
     border-radius:6px;
     margin: auto;
     display: inline-block;
     .shop-centen-title{
-        height:63px;
-        line-height:63px;
+        height:1.8rem;
+        line-height:1.8rem;
         margin: auto;
         border-bottom: 1px solid #E7E7E7;
         .title-img{
-            width:42px;
-            height: 42px;
+            width:1.2rem;
             float: left;
-            margin-left: 12px;
+            margin-left: .4rem;
         }
         .title-txt{
-            line-height: 63px;
-            font-size:16px;
+            line-height: 1.7rem;
+            font-size:.4rem;
             font-family:PingFangSC-Medium;
             font-weight:bold;
             color:rgba(51,51,51,1);
             float: left;
-            margin-left: 14px;
+            margin-left:.42rem;
         }
     }
     .shop-centen-middle{

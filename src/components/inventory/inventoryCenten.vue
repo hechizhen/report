@@ -39,29 +39,29 @@
 <style lang="less" scoped>
 .inventoryCenten{
     width: 16%;
-    height:208px;
+    height:5.53rem;
     background:rgba(255,255,255,1);
     border-radius:10px;
     float: left;
     margin-left: 2%;
     position: relative;
     .inventoryCenten-bor{
-        width:180px;
-        height:180px;
-        border:23px solid rgba(238,240,245,1);
-        border-radius:50%;
-        margin: 14px auto;
+        width: 5.2rem;
+        height: 5.2rem;
+        border: 23px solid #eef0f5;
+        border-radius: 50%;
+        margin: .2rem auto;
         .inventoryCenten-txt{
             text-align: center;
             margin-top: 34%;
             p{
-                font-size:14px;
+                font-size:.4rem;
                 font-family:PingFangSC-Medium;
                 font-weight:500;
                 color:rgba(152,162,180,1);
             }
             span{
-                font-size:26px;
+                font-size:.7rem;
                 font-family:PingFangSC-Medium;
                 font-weight:bold;
                 color:rgba(51,51,51,1);
