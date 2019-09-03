@@ -66,51 +66,52 @@
                     }
                 }
                 var option = {
-                    series: [{
-                            name: "白色圈刻度",
-                            type: "gauge",
-                            radius: "130%",
-                            splitNumber: 5,
-                            center: ["50%", "85%"],
-                            startAngle: 180, //刻度起始
-                            endAngle: 0, //刻度结束
-                            z: 4,
-                            axisTick: {
-                                show: false
-                            },
-                            splitLine: {
-                                length: 10, //刻度节点线长度
-                                lineStyle: {
-                                    width: 3,
-                                    color: '#FFF'
-                                } //刻度节点线
-                            },
-                            axisLabel: {
-                                show: false,
-                                color: '#',
-                                fontSize: 12,
-                            }, //刻度节点文字颜色
-                            pointer: {
-                                show: false
-                            },
-                            axisLine: {
-                                lineStyle: {
-                                    opacity: 0
-                                }
-                            },
-                            detail: {
-                                show: false
-                            },
-                            data: [{
-                                value: 0,
-                                name: ""
-                            }]
-                        },
+                    series: [
+                        // {
+                        //     name: "白色圈刻度",
+                        //     type: "gauge",
+                        //     radius: "130%",
+                        //     splitNumber: 5,
+                        //     center: ["50%", "85%"],
+                        //     startAngle: 180, //刻度起始
+                        //     endAngle: 0, //刻度结束
+                        //     z: 4,
+                        //     axisTick: {
+                        //         show: false
+                        //     },
+                        //     splitLine: {
+                        //         length: 10, //刻度节点线长度
+                        //         lineStyle: {
+                        //             width: 2,
+                        //             color: '#FFF'
+                        //         } //刻度节点线
+                        //     },
+                        //     axisLabel: {
+                        //         show: false,
+                        //         color: '#',
+                        //         fontSize: 12,
+                        //     }, //刻度节点文字颜色
+                        //     pointer: {
+                        //         show: false
+                        //     },
+                        //     axisLine: {
+                        //         lineStyle: {
+                        //             opacity: 0
+                        //         }
+                        //     },
+                        //     detail: {
+                        //         show: false
+                        //     },
+                        //     data: [{
+                        //         value: 0,
+                        //         name: ""
+                        //     }]
+                        // },
                         {
                             name: '外圈刻度m', //刻度背景
                             type: 'gauge',
                             z: 2,
-                            radius: '203%',
+                            radius: '200%',
                             splitNumber: 5,
                             startAngle: 180,
                             endAngle: 0,
@@ -166,7 +167,7 @@
                             axisLine: { // 坐标轴线
                                 lineStyle: { // 属性lineStyle控制线条样式
                                     color: colorSet,
-                                    width: 10,
+                                    width: 5,
                                     opacity: 1, //刻度背景宽度
                                 }
                             },
@@ -246,7 +247,7 @@
                             name: '蓝色刻度尺', //刻度背景
                             type: 'gauge',
                             z: 4,
-                            radius: '120%',
+                            radius: '123%',
                             splitNumber: 4,
                             startAngle: 180,
                             endAngle: degrees,
@@ -256,7 +257,7 @@
                             axisLine: { // 坐标轴线
                                 lineStyle: { // 属性lineStyle控制线条样式
                                     color: colorSet,
-                                    width: 15,
+                                    width: 5,
                                     opacity: 0, //刻度背景宽度
                                 }
                             },
@@ -282,9 +283,10 @@
                                 },
                                 rich: rich,
                                 offsetCenter: ['0', '-26%'],
+                                show:false,
                             },
                             splitLine: {
-                                length: 25, //刻度节点线长度
+                                length: 15, //刻度节点线长度
                                 lineStyle: {
                                     width: 3,
                                     color: '#fff'

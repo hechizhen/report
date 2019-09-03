@@ -173,7 +173,11 @@
                                     position: 'start',
                                     // padding: [-12, 10, 0, -12],
                                     formatter:function(params){
-                                        params.value = _this.dataProcess(params.value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num
+                                        if(_this.barEchartsData.id=="barIdMonthSales" || _this.barEchartsData.id=="barIdYearSales" ){
+                                            params.value = (params.value*100).toFixed(0)+'%'
+                                        }else{
+                                            params.value = _this.dataProcess(params.value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num
+                                        }
                                         return params.value
                                     },
                                     fontSize:12,
@@ -246,7 +250,11 @@
                             fontSize:_this.yAxis.axisLabel.fontSize,
                         },
                         formatter:function(value) {
-                            value = _this.dataProcess(value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num
+                            if(_this.barEchartsData.id=="barIdMonthSales" || _this.barEchartsData.id=="barIdYearSales" ){
+                                value = (value*100).toFixed(0)+'%'
+                            }else{
+                                value = _this.dataProcess(value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num
+                            }
                             return value
                         },
                     }

@@ -94,7 +94,7 @@
     .oneHelpSale{
         width:100%;
         position: relative;
-        height:11rem;
+        height:426px;
         .oneHelpSaleBox{
             background:rgba(255,255,255,1);
             border-radius:6px;
@@ -107,7 +107,7 @@
                 width:95%!important;
             }
             .oneHelpSaleTop{
-                height:5.5rem;
+                height:212px;
                 width:100%;
                 display: flex;
                 flex-wrap: wrap;
@@ -132,9 +132,9 @@
                 }
                 .oneHelpSaleTopLeftBox{
                     width:80%;
-                    height:4.25rem;
+                    height:185px;
                     border-radius:6px;
-                    margin-top:0.5rem;
+                    margin-top:21px;
                     display: flex;
                     flex-wrap: wrap;
                 }
@@ -211,16 +211,16 @@
             }
             .oneHelpSaleBottom{
                 width:100%;
-                height:5.5rem;
+                height:212px;
                 .oneHelpSaleBottomTitle{
                     font-weight:500;
                     color:#333;
                     font-size: 0.4rem;
                     margin-left:10px;
-                    height: 0.5rem;
+                    height: 30px;
                 }
                 .oneHelpSaleBottomContent{
-                    height:5rem;
+                    height:182px;
                     width:100%;
                 }
             }
