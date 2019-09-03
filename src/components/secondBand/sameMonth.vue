@@ -74,16 +74,16 @@
 <style lang="less" scoped>
 	.sameMonth {
 		width: 100%;
-		padding: 1rem;
+		padding: .2rem;
 		background:rgba(255,255,255,1);
 		border-radius:10px;
 		position: relative;
 		.sameMonthcontent {
 			width: 100%;
-			height:18.02rem;
+			height: 19.49rem;
 			border:4px solid #00A6FF;
 			border-radius:10px;
-			padding: 0 20px;
+			padding: 0 .5rem;
 			.title {
 				height: 2rem;
 				display: flex;

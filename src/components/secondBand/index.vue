@@ -3,10 +3,10 @@
 		<secondTitle :titleName="titleName"></secondTitle>
 		<subTitle :subtitlename="subtitlename" :listing="listing" :detailHandleClick="detailHandleClick"  :explainSecondList="explainSecondList"></subTitle>
 		<a-Row :gutter="23">
-		  <a-Col :span="10">
+		  <a-Col :span="9">
 		  	<sameMonth :orderAmountData="orderAmountData.thatMonth" :isShow="towHelpSaleMonthShow"></sameMonth>
 		  </a-Col>
-		  <a-Col :span="14">
+		  <a-Col :span="15">
 		  	<a-Row :gutter="20">
 		  		<a-Col :span="12">
 				  	<totalAmount :displayData="orderAmountData.chainratio" :isShow="towHelProportion"></totalAmount>
