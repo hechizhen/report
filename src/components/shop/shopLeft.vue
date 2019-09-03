@@ -179,7 +179,7 @@
             margin-left: 10%;
             font-size:.3rem;
             font-weight:500;
-            padding-top: 26px;
+            padding-top: .71rem;
             padding-bottom: 7%;
             display: grid;
 

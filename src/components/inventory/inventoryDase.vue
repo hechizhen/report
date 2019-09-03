@@ -47,15 +47,15 @@
                 defaultValdown:"库存详情",
                 isShowDetail:false,
                 btnStyle:{
-                    width: '88px',
-                    height: '32px',
+                    width:'2.8rem',
+                    height:'1rem',
                     border: '1px solid #DCDCDC',
                     // hover:{
                     // 	color:'red'
                     // }
                 },
                 txtStyle:{
-                    fontSize:'14px',
+                    fontSize:'.4rem',
                     color:'#333333',
                     fontWeight:500
                 },

@@ -41,7 +41,7 @@
 </script>
 <style lang="less" scoped>
 	.core {
-		height: 50px;
+		height: 2rem;
 		display: flex;
 		align-items: center;
 		p {
@@ -51,21 +51,21 @@
 			margin: 0px;
 		}
 		p:nth-child(1) {
-			height: 25px;
-			width: 125px;
-			font-size:16px;
-			color:rgba(0,124,255,1);
+			height: 1rem;
+			width: 4.95rem;
+			font-size: 0.6rem;
+			color: #007cff;
 			text-align: center;
-			line-height: 25px;
-			background:rgba(222,238,255,1);
+			line-height: 1rem;
+			background: #deeeff;
 		}
 		p:nth-child(2) {
 			margin: 0px 10px;
-			font-size:16px;
+			font-size: 0.6rem;
 			color:rgba(51,51,51,1)
 		}
 		p:nth-child(3) {
-			font-size:14px;
+			font-size:0.4rem;
 			color:rgba(152,162,180,1);
 		}
 	}

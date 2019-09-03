@@ -142,8 +142,9 @@
 								font-size:1rem;
 								text-align: center;
 								font-weight:600;
+								margin-top: .5rem;
 								span {
-									font-size:36px;
+									font-size: .8rem;
 								}
 							}
 						}

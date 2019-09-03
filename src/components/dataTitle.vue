@@ -30,21 +30,21 @@
 
 <style lang="less" scoped>
     .dataTitle {
-        height: 50px;
+        height: 2rem;
         width: 100%;
         display: flex;
         align-items: center;
         position: relative;
     }
     .leftLine{
-        width:6px;
-        height:20px;
+        width: .25rem;
+        height: .85rem;
         background:rgba(45,146,252,1);
         border-radius:3px;
     }
     .subtitle_content {
-        font-size:20px;
-        padding-left: 12px;
+        font-size: .8rem;
+        padding-left: .4rem;
         font-family:PingFangSC-Medium;
         font-weight:500;
         color:rgba(51,51,51,1);
