@@ -96,7 +96,7 @@
 <style lang="less" scoped>
 .shu{
     width:1px;
-    height:137px !important;
+    height:3.86rem !important;
     border:1px solid rgba(229,229,229,1);
     float: right;
     margin-top: 5%;
@@ -108,7 +108,7 @@
 }
 .inventoryDase{
     width:45%;
-    height:208px;
+    height:5.53rem;
     background:rgba(255,255,255,1);
     border-radius:10px;
     float: left;
@@ -121,12 +121,11 @@
         position: relative;
         span{
             display: inline-block;
-            font-size:14px;
+            font-size:.4rem;
             font-family:PingFangSC-Medium;
             font-weight:600;
             color:rgba(51,51,51,1);
-            height: 32px;
-            line-height:32px;
+            line-height: .9rem;
             float: left;
             padding-left: 6%;
         }
@@ -155,7 +154,7 @@
                     text-align: center;
                     display: flex;
                     span{
-                        font-size:14px;
+                        font-size:.4rem;
                         font-family:PingFangSC-Regular;
                         font-weight:400;
                         color:#98A2B4;
@@ -166,9 +165,9 @@
                         color:#98A2B4;
                         margin-bottom: 0;
                         display: inline-block;
-                        font-size: 14px;
+                        font-size: .4rem;
                         font-weight:600;
-                        line-height: 32px;
+                        line-height: .9rem;
                     }
             }
         }
@@ -197,9 +196,6 @@
     }
 }
 
- .ant-btn-default{
-    height: 20px;
-}
 .inventoryDase .inventoryDase-left .left-txt .left-txt-title:first-child{
     margin-top: 2%;
 }

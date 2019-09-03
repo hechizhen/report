@@ -38,13 +38,10 @@
 		data(){
 			return {
 				btnStyle:{
-					width: '78px',
-					height: '30px',
+					width: '2.4rem',
+					height: '.9rem',
 					border: '1px solid #00A6FF',
 					borderRadius:"8px",
-				    // hover:{
-					// 	color:'red'
-					// }
 				},
 				txtStyle:{
 					color:'#2D92FC'

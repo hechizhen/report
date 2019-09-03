@@ -83,15 +83,15 @@
                     defaultValR:'人均效能'
                 },
                 btnStyle:{
-                    width: '78px',
-                    height: '30px',
+                    width: '2.4rem',
+                    height: '.9rem',
                     border: '1px solid #00A6FF',
                     // hover:{
                     // 	color:'red'
                     // }
                 },
                 txtStyle:{
-                    fontSize:'14px',
+                    fontSize:'.4rem',
                     color:'#2D92FC',
                     fontWeight:400
                 },

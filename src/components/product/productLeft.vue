@@ -48,15 +48,15 @@
                     list:['品类','系列','商品']
                 },
                 btnStyle:{
-                    width: '72px',
-                    height: '26px',
+                    width: '2.6rem',
+                    height: '.9rem',
                     border: '1px solid #FFFFFF',
                     // hover:{
                     // 	color:'red'
                     // }
                 },
                 txtStyle:{
-                    fontSize:'12px',
+                    fontSize:'.4rem',
                     color:'#ffffff',
                     fontWeight:400
                 },
@@ -94,8 +94,8 @@
         width: 30%;
         float: left;
         .productLeft-img{
-            width: 46px;
-            height: 46px;
+            width: 1.3rem;
+            height: 1.3rem;
             margin: auto;
             margin-top: 17%;
             img{
@@ -104,33 +104,30 @@
             }
         }
         .productLeft-txt{
-            margin-top: 10px;
+            margin-top: .3rem;
             p{
-                width:71px;
+               display: flex;
+                justify-content: center;
                 font-size:14px;
                 font-family:PingFangSC-Medium;
                 font-weight:bold;
                 color:rgba(255,255,255,1);
-                margin: 0 auto;
                 white-space : nowrap
 
             }
             span{
-                width:99px;
-                font-size:28px;
+                font-size:0.7rem;
                 font-family:PingFangSC-Semibold;
                 font-weight:600;
                 color:rgba(255,216,110,1);
-                margin: 0 auto;
-                display: block;
+                display: flex;
+                justify-content: center;
                 margin-top: 12px;
-                text-align: center;
             }
         }
         .productLeft-btn{
             height:100%;
-            line-height: 26px;
-            margin: 22px  auto  51px;
+            margin: .5rem auto 0;
             text-align: center;
             display: flex;
             align-items: center;

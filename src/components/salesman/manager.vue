@@ -96,15 +96,15 @@
 			return {
 				// isShow:true,
 				btnStyle:{
-					width: '86px',
-					height: '28px',
+					width: '2.6rem',
+					height: '.9rem',
 					border: '1px solid #FFFFFF',
 					// hover:{
 					// 	color:'red'
 					// }
 				},
 				txtStyle:{
-					fontSize:'15px',
+					fontSize:'.45rem',
 					color:'#ffffff',
 					fontWeight:400
 				},
@@ -145,10 +145,10 @@
 <style lang="less" scoped>
 	.manager {
 		width: 100%;
-		height: 130px;
+		height:3.68rem;
 		background:rgba(255,255,255,1);
 		border-radius:10px;
-		padding: 15px 10px;
+		padding: .3rem .2rem;
 		position: relative;
 		.managerRow {
 			width: 100%;
@@ -173,7 +173,7 @@
 			    flex-direction: column;
 			    p {
 			     	margin: 0px;
-				    font-size:14px;
+				    font-size:.4rem;
 					font-family:PingF	angSC-Medium;
 					font-weight:bold;
 					color:rgba(255,255,255,1);
@@ -185,7 +185,7 @@
 			    flex-direction: column;
 			    p {
 			     	margin: 0px;
-				    font-size:14px;
+				    font-size:.4rem;
 					font-family:PingFangSC-Medium;
 					font-weight:bold;
 					color:rgba(255,255,255,1);
@@ -196,26 +196,6 @@
 			    justify-content: center;
 			    flex-direction: column;
 				align-items: center;
-			    p {
-			    	cursor: pointer;
-			    	margin: 0px;
-			    	width: 90px;
-			    	text-align: center;
-			    	padding: 6px 0;
-			    	border:1px solid rgba(255,255,255,1);
-					border-radius:3px;
-					font-size:14px;
-					font-family:PingFangSC-Regular;
-					font-weight:400;
-					color:rgba(255,255,255,1);
-			    }
-			    p:nth-child(2) {
-			    	margin-top: 6px;
-			    }
-				p:active {
-					color:rgba(255,255,255,1);
-					background:rgba(6,192,98,1);
-				}
 			}
 		}
 		.produce {
@@ -239,10 +219,10 @@
 			.managerCol:nth-child(3) {
 				p {
 					text-align: right;
-					padding-right: 40px;
-					font-size: 14px;
+					padding-right: 1rem;
+					font-size: .4rem;
 					span {
-						font-size: 16px;
+						font-size: .5rem;
 					}
 				}
 			}
@@ -269,7 +249,7 @@
 				}
 				p:nth-child(2) {
 					margin-top: 6px;
-					font-size:14px;
+					font-size:.4rem;
 				}
 			}
 			.managerCol:nth-child(3) {
@@ -281,7 +261,7 @@
 			    	text-align: right;
 			    	padding-right: 20%;
 			     	margin: 0px;
-				    font-size:14px;
+				    font-size:.4rem;
 					font-family:PingFangSC-Medium;
 					font-weight:bold;
 					color:rgba(255,255,255,1);
@@ -291,7 +271,7 @@
 				}
 				p:nth-child(2) {
 					margin-top: 6px;
-					font-size:14px;
+					font-size:.4rem;
 				}
 			}
 			.managerCol:nth-child(4)  {
@@ -299,26 +279,6 @@
 			    justify-content: center;
 			    flex-direction: column;
 				align-items: center;
-			    p {
-			    	cursor: pointer;
-			    	margin: 0px;
-			    	width: 90px;
-			    	text-align: center;
-			    	padding: 6px 0;
-			    	border:1px solid rgba(255,255,255,1);
-					border-radius:3px;
-					font-size:14px;
-					font-family:PingFangSC-Regular;
-					font-weight:400;
-					color:rgba(255,255,255,1);
-			    }
-			    p:nth-child(2) {
-			    	margin-top: 6px;
-			    }
-			    p:active {
-					color:rgba(255,255,255,1);
-					background:rgba(228,164,0,1);
-				}
 			}
 		}
 		.icon {
