@@ -151,46 +151,12 @@
         methods: {
             setBarOptions(){
                 var _this = this
-                if(_this.barEchartsData.markLineList.show==true){
-                    var markLineObj={
-                        symbol:'none',
-                        silent: true,
-                        z:2,
-                        data: [{
-                            name:_this.barEchartsData.markLineList.name,
-                            yAxis:_this.barEchartsData.markLineList.data,
-                            lineStyle: {
-                                normal: {
-                                    color: '#c9cbd5',
-                                    type: 'solid',
-                                    width: 1
-                                }
-                            },
-                            x: '',
-                            label: {
-                                normal: {
-                                    color: '#c9cbd5',
-                                    position: 'start',
-                                    // padding: [-12, 10, 0, -12],
-                                    formatter:function(params){
-                                        params.value = _this.dataProcess(params.value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num
-                                        return params.value
-                                    },
-                                    fontSize:12,
-                                }
-                            },
-                            type: 'average'
-                        }]
-                    };
-                }else{
-                    var markLineObj={}
-                }
                 let seriesData = []
                 let legendList = []
                 if(_this.barType==0){
                     var barGap = 0
                 }else{
-                    var barGap = '-80%'
+                    var barGap = '-100%'
                 }
                 _this.barEchartsData.barData.map(function(item,index){
                         legendList.push(item.name)
@@ -198,10 +164,7 @@
                             name: item.name,
                             type: 'bar',
                             z:10,
-                            zlevel:10,
                             data: item.data,
-                            markLine:markLineObj,
-                            barGap:barGap,
                             barWidth:item.barWidth,
                             silent: true,
                             barMaxWidth:22,
@@ -245,10 +208,7 @@
                             color:_this.yAxis.axisLabel.color,
                             fontSize:_this.yAxis.axisLabel.fontSize,
                         },
-                        formatter:function(value) {
-                            value = _this.dataProcess(value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num
-                            return value
-                        },
+                        
                     }
                     var xAxisLabel = {
                         show:_this.xAxis.axisLabel.show,
@@ -377,106 +337,77 @@
                 }
                 console.log(xAxisLabel)
                 var option = {
-                    tooltip: {
-                        trigger: 'axis',
-                        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-                            type : 'cross',        // 默认为直线，可选为：'line' | 'shadow'
-                            label:{
-                                backgroundColor:'rgb(45, 146, 252)',
-                                formatter:function(params) {
-                                    if(params.seriesData.length==0){
-                                        params.value = _this.dataProcess(params.value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num+_this.dataProcess(params.value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).unit
-                                    }
-                                    return params.value
-                                }
-                            },
-                        },
-                        formatter:function(params){
-                            var relVal = '';
-                            for (var i = 0; i < params.length; i++) {
-                                if(params[i].seriesName=='达成率' || params[i].seriesName=='贡献率'){
-                                    relVal += params[i].marker+params[i].seriesName+':'+_this.dataProcess(params[i].value,'percent').num+_this.dataProcess(params[i].value,'percent').unit+'</br>'
-                                }else{
-                                    console.log(_this.dataProcess(params[i].value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num)
-                                    relVal += params[i].marker+params[i].seriesName+':'+_this.dataProcess(params[i].value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num+_this.dataProcess(params[i].value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).unit+'</br>'
-                                }
-                            }
-                            return relVal;
-                        },
-                        backgroundColor:'#fff',
-                        textStyle:{
-                            color:'#333',
-                            fontSize:14
-                        },
-                        extraCssText: 'box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);'
+                grid: {
+                    left: '10%',
+                    top: '10%%',
+                    bottom: 60,
+                    right: '10%',
+                },
+                legend: {
+                    data: ['目标业绩', '完成业绩'],
+                    align: 'left',
+                    right: 0,
+                    textStyle: {
+                    color: "#434e79",
+                    fontSize: 14,
+                    fontWeight: 400
                     },
-                    legend: {
-                        itemHeight: 18,
-                        itemWidth: 18,
-                        show:_this.legendShow,
-                        data: legendList,
-                        icon:"rect",
-                        bottom: "3%",
-                        itemGap: 50,
-                        selectedMode:_this.selectedMode,
+                    itemWidth: 14,
+                    itemHeight: 14,
+                    itemGap: 35
+                },
+                tooltip: {
+                    trigger: "axis",
+                    padding: [8, 10],
+                    backgroundColor: 'rgba(0,0,0,0.5)',
+                    axisPointer: {
+                        type: "shadow",
                         textStyle: {
-                            color: "#333333",
-                            fontSize:14
+                            color: "#fff"
                         }
+                    }
+                },
+                xAxis: [{
+                    show:false
+                }],
+                yAxis: [{
+                    type: 'category',
+                    data: ['椒江团队', '临海团队', '温岭团队', '黄岩团队','黄岩团队','黄岩团队','黄岩团队','黄岩团队','黄岩团队','黄岩团队','黄岩团队'],
+                    axisLine: {
+                        show: false
                     },
-                    dataZoom: dataZoom,
-                    grid: _this.grid,
-                    xAxis: {
-                        type: _this.xAxisType,
-                        data: _this.xAxisData,
-                        interval: _this.intervalData,
-                        axisLine: {
-                            show: _this.xAxis.axisLine.show,
-                            lineStyle: {
-                                color: _this.xAxis.axisLine.color,
-                            }
-                        },
-                        axisLabel:xAxisLabel,
-                        splitLine: {
-                            show: _this.xAxis.splitLine.show,
-                            lineStyle: {
-                                color: _this.xAxis.splitLine.color,
-                            }
-                        },
-                        axisTick:{
-                            show: false
-                        }
+                    axisTick: {
+                        show: false
                     },
-                    yAxis: {
-                        type: _this.yAxisType,
-                        data: _this.yAxisData,
-                        interval: _this.intervalData,
-                        splitLine: {
-                            show:_this.yAxis.splitLine.show,
-                            lineStyle: {
-                                color: _this.yAxis.splitLine.color,
-                            }
+                    axisLabel: {
+                        show: true,
+                        textStyle: {
+                            color: "#434e79",
+                            fontSize: 16,
+                            fontWeight: 400
                         },
-                        axisLabel:yAxisLabel,
-                        axisLine: {
-                            show: _this.yAxis.axisLine.show,
-                            lineStyle: {
-                                color: _this.yAxis.axisLine.color,
-                            },
-                        },
-                        nameTextStyle: {
-                            color: "#999"
-                        },
-                        splitArea: {
-                            show: false
-                        },
-                        axisTick:{
-                            show: false
-                        },
-                        // min:_this.minData,
-                        // max:2,
+                    }
+                },
+                {
+                    show:false,
+                    type: 'category',
+                    data: ['椒江团队', '临海团队', '温岭团队', '黄岩团队','黄岩团队','黄岩团队','黄岩团队','黄岩团队','黄岩团队','黄岩团队','黄岩团队'],
+                    axisLine: {
+                        show: false
                     },
-                    series: seriesData
+                    axisTick: {
+                        show: false
+                    },
+                    axisLabel: {
+                        show: true,
+                        textStyle: {
+                            color: "#434e79",
+                            fontSize: 16,
+                            fontWeight: 400
+                        },
+                    }
+                }],
+                series: seriesData
                 };
                 this.myChart.setOption(option);
             }

@@ -3,7 +3,7 @@
     <div class="headerTitle">
         <div class="headerTitle_left">
             <p class="paddingStyle">
-                <span class="spanFont spanSize">{{dealName}}经销商</span>
+                <span class="spanFont spanSize">{{dealName}}</span>
                 <span class="spanFont1">以下是针对您企业的体检报告分析结果，请认真审阅：</span>
             </p>
             <p class="paddingStyle1">
@@ -187,31 +187,31 @@
 <style scoped lang="less">
     .headerTitle{
         width:100%;
-        padding:0 35px;
-        height:135px;
+        padding:0 1rem;
+        height:3.38rem;
         background:rgba(255,255,255,1);
         display: flex;
         flex-wrap: wrap;
         .headerTitle_left{
-            width:45%;
             height:100%;
         }
         .headerTitle_mid{
-            width: 135px;
+            width: 4rem;
             height:100%;
+            margin-left:1.8rem
         }
         .headerTitle_right{
             height: 100%;
-            width: calc(~"55% - 135px");
+            // width: calc(~"55% - 135px");
             word-wrap: break-word;
             word-break: break-all;
             flex-wrap: wrap;
-            padding-top:45px;
-            line-height: 20px;
-            padding-left:30px;
+            padding-top:1rem;
+            // line-height: 20px;
+            padding-left:0.5rem;
         }
         .paddingStyle{
-            padding-top:40px;
+            padding-top:1rem;
         }
         .paddingStyle1{
             display: flex;
@@ -230,11 +230,11 @@
             color:#2D92FC
         }
         .spanSize{
-            font-size: 16px;
+            font-size: 0.4rem;
             font-weight:500;
         }
         .spanSize1{
-            font-size: 12px;
+            font-size: 0.3rem;
         }
         .spanSize2{
             font-size: 50px;
@@ -247,7 +247,7 @@
             font-size: 12px;
         }
         .spanSize4{
-            font-size: 14px;
+            font-size: 0.35rem;
         }
     }
 </style>

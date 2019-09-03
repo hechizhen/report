@@ -9,11 +9,7 @@
                 <div></div>
                 <div class="oneHelpSaleTopLeftBox" :style="{background:salesData.bgColor}">
                     <div class="flexMid">
-                        <!-- <div class="oneHelpSaleTopMid">
-                            <div class="oneHelpSaleTopMidSales"> -->
-                                <gauge-chart :gaugeChartData="gaugeChartData"></gauge-chart>
-                            <!-- </div>
-                        </div> -->
+                        <gauge-chart :gaugeChartData="gaugeChartData"></gauge-chart>
                     </div>
                     <div class="oneHelpSaleTopRight">
                         <Div>
@@ -98,11 +94,11 @@
     .oneHelpSale{
         width:100%;
         position: relative;
-        height:426px;
+        height:11rem;
         .oneHelpSaleBox{
             background:rgba(255,255,255,1);
             border-radius:6px;
-            height:426px;
+            height:100%;
             width:100%;
             p{
                 margin:0;
@@ -111,7 +107,7 @@
                 width:95%!important;
             }
             .oneHelpSaleTop{
-                height:212px;
+                height:5.5rem;
                 width:100%;
                 display: flex;
                 flex-wrap: wrap;
@@ -136,9 +132,9 @@
                 }
                 .oneHelpSaleTopLeftBox{
                     width:80%;
-                    height:170px;
+                    height:4.25rem;
                     border-radius:6px;
-                    margin-top:20px;
+                    margin-top:0.5rem;
                     display: flex;
                     flex-wrap: wrap;
                 }
@@ -202,12 +198,12 @@
                         margin-right:6px;
                     }
                     .rightTxt{
-                        font-size:22px;
+                        font-size:0.35rem;
                         font-weight:500;
                         color:#fff;
                     }
                     .rightReach{
-                        font-size:26px;
+                        font-size:1rem;
                         font-weight:500;
                         color:#fff;
                     }
@@ -215,22 +211,22 @@
             }
             .oneHelpSaleBottom{
                 width:100%;
-                height:215px;
+                height:5.5rem;
                 .oneHelpSaleBottomTitle{
                     font-weight:500;
                     color:#333;
-                    font-size: 16px;
+                    font-size: 0.4rem;
                     margin-left:10px;
-                    height: 30px;
+                    height: 0.5rem;
                 }
                 .oneHelpSaleBottomContent{
-                    height:185px;
+                    height:5rem;
                     width:100%;
                 }
             }
             .imgSrc{
-                width: 24px;
-                margin-bottom: 6px;
+                width: 0.35rem;
+                margin-bottom: 0.1rem;
             }
         }
     }

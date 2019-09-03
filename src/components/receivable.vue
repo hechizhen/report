@@ -63,16 +63,11 @@
         width:90%;
         margin:0 auto;
         .rowStyle{
-            height:81px;
+            height:2rem;
             width:100%;
             display:flex;
             align-items: center;
-            line-height: 73px;
-        }
-        .rowStyle1{
-            height:43px;
-            width:100%;
-            line-height: 43px;
+            line-height:2rem;
         }
         .borderBottom{
             border-bottom:1px solid rgba(220,223,230,1);
@@ -84,32 +79,32 @@
             background:rgba(241,244,251,1);
         }
         .fontStyle{
-            font-size:14px;
+            font-size:0.35rem;
             font-weight:bold;
             color:rgba(255,255,255,1);
             white-space: nowrap;
         }
         .fontStyle1{
-            font-size:12px;
+            font-size:0.3rem;
             font-weight:bold;
             color:#98A2B4;
             white-space: nowrap;
         }
         .fontStyle2{
-            font-size:24px;
+            font-size:0.6rem;
             font-weight:bold;
         }
         /deep/.ant-col-18{
-            padding-left:21px;
+            padding-left:0.5rem;
         }
         /deep/.ant-col-6{
             text-align: right;
-            padding-right:21px;
+            padding-right:0.5rem;
         }
         .marginStyle{
-            margin-top:31px;
-            height:50px;
-            line-height: 50px;
+            margin-top:1rem;
+            height:1.2rem;
+            line-height: 1.2rem;
         }
     }
 </style>

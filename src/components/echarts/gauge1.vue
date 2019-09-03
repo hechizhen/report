@@ -96,7 +96,7 @@
                             value: _this.gaugeChartData.data,
                             label: {
                                 textStyle: {
-                                    fontSize: 12
+                                    fontSize: '0.5rem'
                                 }
                             }
                         }]

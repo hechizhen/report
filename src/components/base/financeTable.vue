@@ -49,28 +49,28 @@
         border:1px solid rgba(229,229,229,1);
         .rowStyle{
             width:100%;
-            height:40px;
+            height:1rem;
             border-bottom:1px solid rgba(229,229,229,1);
             display: flex;
             align-items: center;
            .colLeft{
                 text-align: right;
-                font-size:16px;
+                font-size:0.4rem;
                 font-weight:bold;
                 color:rgba(51,51,51,1);
            }
            .colRight{
                 text-align: right;
-                padding-right:30px;
+                padding-right:0.9rem;
                 span{
                     font-weight:bold;
                     color:rgba(51,51,51,1);
                 }
                 span:first-child{
-                    font-size:18px;
+                    font-size:0.45rem;
                 }
                 span:nth-child(2){
-                    font-size:24px;
+                    font-size:0.6rem;
                 }
            }
        }

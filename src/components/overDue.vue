@@ -91,15 +91,19 @@
     stroke: #FD6691!important;
     border:1px solid #fff;
 }
+.ant-progress-inner{
+    width:3rem!important;
+    height:3rem!important
+}
 </style>
 <style scoped lang="less">
     .overDue{
         width:80%;
         margin:0 auto;
-        padding-top:22px;
+        padding-top: 0.6rem;
         .overDueTopBox{
             width:100%;
-            height:90px;
+            height:2.25rem;
             border:1px solid rgba(87,174,246,1);
             border-radius:6px;
             display: flex;
@@ -107,24 +111,24 @@
             justify-content: center;
             text-align: center;
             p{
-                font-size:12px;
+                font-size:0.3rem;
                 font-weight:bold;
                 color:rgba(87,174,246,1);
                 margin-bottom:0;
             }
             p:first-child{
-                margin-left: 10px;
+                margin-left: 0.25rem;
             }
             p:nth-child(2){
-                margin-top:10px;
+                margin-top:0.25rem;
                 span{
                     color:rgba(87,174,246,1);
                 }
                 span:first-child{
-                    font-size: 16px;
+                    font-size: 0.4rem
                 }
                 span:nth-child(2){
-                    font-size: 24px;
+                    font-size: 0.6rem
                 }
             }
         }
@@ -132,19 +136,17 @@
             display: flex;
             align-items: center;
             width:100%;
-            height:173px;
+            height: 4.2rem;
             position: relative;
             justify-content: center;
             .overDueBottomLeft{
-                width:126px;
-                height:126px;
                 position: relative;
-                margin-right:30px;
+                margin-right:0.75rem;
             }
             .overDueBox{
                 position: absolute;
-                width:126px;
-                height:126px;
+                width:3rem;
+                height:3rem;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -156,10 +158,10 @@
                     color:rgba(51,51,51,1);
                 }
                 p:first-child{
-                    font-size:12px;
+                    font-size:0.3rem;
                 }
                 p:nth-child(2){
-                    font-size:20px;
+                    font-size:0.5rem;
                 }
             }
         }

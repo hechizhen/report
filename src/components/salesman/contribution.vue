@@ -34,7 +34,7 @@
 	</div>
 </template>
 <script>
-	import barEcharts from "./../echarts/bar.vue"
+	import barEcharts from "./../echarts/bar1.vue"
 	import loadingData from '../base/loadingData'
 	import newbutton from '../button'
 	export default {
