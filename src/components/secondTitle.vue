@@ -46,8 +46,8 @@
 </script>
 <style scoped lang="less">
     .secondTitle{
-        padding:29px 0 18px 0;
-        font-size:24px;
+        padding: .9rem 0 .8rem;
+        font-size: .8rem;
         font-weight:bold;
         color:rgba(51,51,51,1);
         display: flex;

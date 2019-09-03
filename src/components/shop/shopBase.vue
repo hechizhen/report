@@ -114,7 +114,7 @@
         }
         .productLeft-btn {
             width:30%;
-            height: 6.94em;
+            height: 2.5rem;
             float: left;
             display:flex;
             justify-content: center;//子元素水平居中
