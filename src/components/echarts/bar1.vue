@@ -76,7 +76,7 @@
                 default: () => ({
                     top: 'middle',
                     left: '3%',
-                    right: '4%',
+                    right: '6%',
                     height: '70%',
                     bottom:'3%',
                     containLabel: true
@@ -147,10 +147,49 @@
             $(window).resize(function() {
                 _this.myChart.resize()
             });
+            console.log(this.barEchartsData)
         },
         methods: {
             setBarOptions(){
                 var _this = this
+                if(_this.barEchartsData.markLineList.show==true){
+                    var markLineObj={
+                        symbol:'none',
+                        silent: true,
+                        z:2,
+                        data: [{
+                            name:_this.barEchartsData.markLineList.name,
+                            yAxis:_this.barEchartsData.markLineList.data,
+                            lineStyle: {
+                                normal: {
+                                    color: '#c9cbd5',
+                                    type: 'solid',
+                                    width: 0.5
+                                }
+                            },
+                            x: '',
+                            label: {
+                                normal: {
+                                    color: '#D7D9E5',
+                                    position: 'end',
+                                    // padding: [-12, 10, 0, -12],
+                                    formatter:function(params){
+                                        if(_this.barEchartsData.id=="barIdMonthSales" || _this.barEchartsData.id=="barIdYearSales" ){
+                                            params.value = (params.value*100).toFixed(0)+'%'
+                                        }else{
+                                            params.value = _this.dataProcess(params.value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num
+                                        }
+                                        return params.value
+                                    },
+                                    fontSize:12,
+                                }
+                            },
+                            type: 'average'
+                        }]
+                    };
+                }else{
+                    var markLineObj={}
+                }
                 let seriesData = []
                 let legendList = []
                 if(_this.barType==0){
@@ -164,24 +203,16 @@
                             name: item.name,
                             type: 'bar',
                             z:10,
+                            zlevel:10,
                             data: item.data,
-                            barWidth:item.barWidth,
+                            markLine:markLineObj,
+                            // barGap:barGap,
+                            // barWidth:item.barWidth,
                             silent: true,
-                            barMaxWidth:22,
+                            // barMaxWidth:22,
                             itemStyle:{
                                 normal:{
-                                    color: function(params) {
-                                        if(params.seriesName=='达成率' && (_this.barEchartsData.id=="barIdMonthSales" || _this.barEchartsData.id=="barIdYearSales")){
-                                            if(params.value<1){
-                                                var barColor = "#FF0048"
-                                            }else{
-                                                var barColor = "#D7D9E5"
-                                            }
-                                        }else{
-                                            var barColor = item.color
-                                        }
-                                        return barColor;
-                                    },
+                                    color: item.color
                                 },
                             },
                             label:{
@@ -197,218 +228,133 @@
                             }
                         })
                     })
-                if(_this.barEchartsData.showType==0){
-                    _this.xAxisType = 'category'
-                    _this.xAxisData = _this.barEchartsData.xAxisData
-                    _this.yAxisType = 'value'
-                    _this.yAxisData = ''
-                    var yAxisLabel = {
-                        show:_this.yAxis.axisLabel.show,
-                        textStyle:{
-                            color:_this.yAxis.axisLabel.color,
-                            fontSize:_this.yAxis.axisLabel.fontSize,
-                        },
-                        
-                    }
-                    var xAxisLabel = {
-                        show:_this.xAxis.axisLabel.show,
-                        interval:0,
-                        formatter : function(params){
-                            var newParamsName = "";// 最终拼接成的字符串
-                            var paramsNameNumber = params.length;// 实际标签的个数
-                            var provideNumber = 10;// 每行能显示的字的个数
-                            var rowNumber = Math.ceil(paramsNameNumber / provideNumber);// 换行的话，需要显示几行，向上取整
-                            /**
-                             * 判断标签的个数是否大于规定的个数， 如果大于，则进行换行处理 如果不大于，即等于或小于，就返回原标签
-                             */
-                            // 条件等同于rowNumber>1
-                            if (paramsNameNumber > provideNumber) {
-                                /** 循环每一行,p表示行 */
-                                for (var p = 0; p < rowNumber; p++) {
-                                    var tempStr = "";// 表示每一次截取的字符串
-                                    var start = p * provideNumber;// 开始截取的位置
-                                    var end = start + provideNumber;// 结束截取的位置
-                                    // 此处特殊处理最后一行的索引值
-                                    if (p == rowNumber - 1) {
-                                        // 最后一次不换行
-                                        tempStr = params.substring(start, paramsNameNumber);
-                                    } else {
-                                        // 每一次拼接字符串并换行
-                                        tempStr = params.substring(start, end) + "\n";
-                                    }
-                                    newParamsName += tempStr;// 最终拼成的字符串
-                                }
-
-                            } else {
-                                // 将旧标签的值赋给新标签
-                                newParamsName = params;
-                            }
-                            //将最终的字符串返回
-                            return newParamsName
-                        },
-                        textStyle:{
-                            color:_this.xAxis.axisLabel.color,
-                            fontSize:_this.xAxis.axisLabel.fontSize,
-                            lineHeight:40,
-                        },
-                    }
-                    if(_this.dataZoomShow){
-                        var dataZoom = [{
-                            height: 12,
-                            xAxisIndex: [
-                                0
-                            ],
-                            bottom:'8%',
-                            orient: 'vertical',
-                            start: 40,
-                            end: 90,
-                            handleStyle:{
-                                color:"#d3dee5",
-                            },
-                            textStyle:{
-                                color:"#418eff"},
-                            borderColor:"#90979c"
-                        }]
-                    }else{
-                        var dataZoom = ''
-                    }
-                }else{
-                    _this.xAxisType = 'value'
-                    _this.xAxisData = ''
-                    _this.yAxisType = 'category'
-                    _this.yAxisData = _this.barEchartsData.xAxisData
-                    var xAxisLabel = {
-                        show:_this.xAxis.axisLabel.show,
-                        textStyle:{
-                            color:_this.xAxis.axisLabel.color,
-                            fontSize:_this.xAxis.axisLabel.fontSize,
-                        },
-                        formatter:function(value) {
-                            value = _this.dataProcess(value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num
-                            return value
-                        },
-                    }
-                    var yAxisLabel = {
-                        show:_this.yAxis.axisLabel.show,
-                        textStyle:{
-                            color:_this.yAxis.axisLabel.color,
-                            fontSize:_this.yAxis.axisLabel.fontSize,
-                        },
-                    }
-                    if(_this.dataZoomShow &&　_this.barEchartsData.barData[0].data.length>10){
-                        // 业务员的人数数据长度
-                        let fieWidth = _this.barEchartsData.xAxisData.length
-                        // 肯定业务员的人数判断end结束的值
-                        if(fieWidth<= 5){
-                            var  endWidth = 100
-                        }
-                        else  if(fieWidth<=9){
-                            var  endWidth = 90
-                        }
-                        else{
-                            var  endWidth =( 5 / fieWidth ) * 90 +10
-                        }
-                        var dataZoom = [{
-                            height: '70%',
-                            width:20,
-                            yAxisIndex: [
-                                0
-                            ],
-                            right:'1%',
-                            orient: 'vertical',
-                            start: 10,
-                            end: endWidth,
-                            handleStyle:{
-                                color:"#d3dee5",
-                            },
-                            textStyle:{
-                                color:"#418eff"
-                            },
-                            borderColor:"#ebebeb"
-                        }]
-                    }else{
-                        var dataZoom = ''
-                    }
-                }
-                if(_this.isShowMax){
-                    _this.intervalData = 'max'
-                }else{
-                    _this.intervalData = null
-                }
-                console.log(xAxisLabel)
                 var option = {
-                grid: {
-                    left: '10%',
-                    top: '10%%',
-                    bottom: 60,
-                    right: '10%',
-                },
-                legend: {
-                    data: ['目标业绩', '完成业绩'],
-                    align: 'left',
-                    right: 0,
-                    textStyle: {
-                    color: "#434e79",
-                    fontSize: 14,
-                    fontWeight: 400
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                            type : 'cross',        // 默认为直线，可选为：'line' | 'shadow'
+                            label:{
+                                backgroundColor:'rgb(45, 146, 252)',
+                                // formatter:function(params) {
+                                //     if(params.seriesData.length==0){
+                                //         params.value = _this.dataProcess(params.value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num+_this.dataProcess(params.value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).unit
+                                //     }
+                                //     return params.value
+                                // }
+                            },
+                        },
+                        formatter:function(params){
+                            var relVal = '';
+                            for (var i = 0; i < params.length; i++) {
+                                relVal += params[i].marker+params[i].seriesName+':'+_this.dataProcess(params[i].value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num+_this.dataProcess(params[i].value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).unit+'</br>'
+                            }
+                            return relVal;
+                        },
+                        backgroundColor:'#fff',
+                        textStyle:{
+                            color:'#333',
+                            fontSize:14
+                        },
+                        extraCssText: 'box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);'
                     },
-                    itemWidth: 14,
-                    itemHeight: 14,
-                    itemGap: 35
-                },
-                tooltip: {
-                    trigger: "axis",
-                    padding: [8, 10],
-                    backgroundColor: 'rgba(0,0,0,0.5)',
-                    axisPointer: {
-                        type: "shadow",
+                    legend: {
+                        itemHeight: 18,
+                        itemWidth: 18,
+                        show:_this.legendShow,
+                        data: legendList,
+                        icon:"rect",
+                        bottom: "3%",
+                        itemGap: 50,
+                        selectedMode:_this.selectedMode,
                         textStyle: {
-                            color: "#fff"
+                            color: "#333333",
+                            fontSize:14
                         }
-                    }
-                },
-                xAxis: [{
-                    show:false
-                }],
-                yAxis: [{
-                    type: 'category',
-                    data: ['椒江团队', '临海团队', '温岭团队', '黄岩团队','黄岩团队','黄岩团队','黄岩团队','黄岩团队','黄岩团队','黄岩团队','黄岩团队'],
-                    axisLine: {
-                        show: false
                     },
-                    axisTick: {
-                        show: false
-                    },
-                    axisLabel: {
-                        show: true,
-                        textStyle: {
-                            color: "#434e79",
-                            fontSize: 16,
-                            fontWeight: 400
+                    grid: _this.grid,
+                    xAxis: {
+                        type: _this.xAxisType,
+                        data: _this.xAxisData,
+                        interval: _this.intervalData,
+                        axisLine: {
+                            show: _this.xAxis.axisLine.show,
+                            lineStyle: {
+                                color: _this.xAxis.axisLine.color,
+                            }
                         },
-                    }
-                },
-                {
-                    show:false,
-                    type: 'category',
-                    data: ['椒江团队', '临海团队', '温岭团队', '黄岩团队','黄岩团队','黄岩团队','黄岩团队','黄岩团队','黄岩团队','黄岩团队','黄岩团队'],
-                    axisLine: {
-                        show: false
-                    },
-                    axisTick: {
-                        show: false
-                    },
-                    axisLabel: {
-                        show: true,
-                        textStyle: {
-                            color: "#434e79",
-                            fontSize: 16,
-                            fontWeight: 400
+                        axisLabel:{
+                            show:_this.xAxis.axisLabel.show,
+                            interval:0,
+                            textStyle:{
+                                color:_this.xAxis.axisLabel.color,
+                                fontSize:_this.xAxis.axisLabel.fontSize,
+                            },
                         },
-                    }
-                }],
-                series: seriesData
+                        splitLine: {
+                            show: _this.xAxis.splitLine.show,
+                            lineStyle: {
+                                color: _this.xAxis.splitLine.color,
+                            }
+                        },
+                        axisTick:{
+                            show: false
+                        }
+                    },
+                    yAxis: {
+                        type: _this.yAxisType,
+                        data: _this.yAxisData,
+                        interval: _this.intervalData,
+                        splitLine: {
+                            show:_this.yAxis.splitLine.show,
+                            lineStyle: {
+                                color: _this.yAxis.splitLine.color,
+                            }
+                        },
+                        axisLabel:{
+                            show:_this.yAxis.axisLabel.show,
+                            textStyle:{
+                                color:_this.yAxis.axisLabel.color,
+                                fontSize:_this.yAxis.axisLabel.fontSize,
+                            },
+                        },
+                        axisLine: {
+                            show: _this.yAxis.axisLine.show,
+                            lineStyle: {
+                                color: _this.yAxis.axisLine.color,
+                            },
+                        },
+                        nameTextStyle: {
+                            color: "#999"
+                        },
+                        splitArea: {
+                            show: false
+                        },
+                        axisTick:{
+                            show: false
+                        },
+                    },
+                    series: [
+        {
+            name:'蒸发量',
+            type:'bar',
+            data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
+        },
+        {
+            name:'降水量',
+            type:'bar',
+            data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
+        },
+        {
+            name:'平均温度',
+            type:'line',
+            yAxisIndex: 1,
+            data:[2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
+        }
+    ]
                 };
+                if(_this.barEchartsData.id=="barIdMonthSales" || _this.barEchartsData.id=="barIdYearSales" ){
+                    option.yAxis.max= 2
+                }
                 this.myChart.setOption(option);
             }
         },

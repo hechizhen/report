@@ -5,8 +5,9 @@
             <a-col :span="18" class="fontStyle">{{receivableData.receivableTxt}}</a-col>
             <a-col :span="6" class="fontStyle">
                 <span>{{receivableData.receivableValUnit}}</span>
-                <span class="fontStyle2">{{receivableData.receivableVal.split('.')[0]}}.</span>
-                <span>{{receivableData.receivableVal.split('.')[1]}}</span>
+                <!-- <span class="fontStyle2">{{receivableData.receivableVal.split('.')[0]}}.</span>
+                <span>{{receivableData.receivableVal.split('.')[1]}}</span> -->
+                <span class="fontStyle2">{{receivableData.receivableVal}}</span>
             </a-col>
         </a-row>
         <a-row class="rowStyle bg1 borderBottom">
@@ -79,13 +80,13 @@
             background:rgba(241,244,251,1);
         }
         .fontStyle{
-            font-size:0.35rem;
+            font-size:0.45rem;
             font-weight:bold;
             color:rgba(255,255,255,1);
             white-space: nowrap;
         }
         .fontStyle1{
-            font-size:0.3rem;
+            font-size:0.45rem;
             font-weight:bold;
             color:#98A2B4;
             white-space: nowrap;

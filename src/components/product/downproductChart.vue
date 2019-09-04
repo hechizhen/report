@@ -23,7 +23,7 @@
     </div>
 </template>
 <script>
-    import barEcharts from "../echarts/bar"
+    import barEcharts from "../echarts/bar1"
     import  newButton from  '../base/newButton'
     import loadingData from '../base/loadingData'
     export default {

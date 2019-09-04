@@ -7,13 +7,13 @@
         </div>
         <div class="financeBox">
             <div class="financeLeft">
-                <finance-table :tableData="financeData"></finance-table>
-            </div>
-            <div class="financeMid">
                 <receivable :receivableData="receivableData"></receivable>
             </div>
-            <div class="financeRight">
+            <div class="financeMid">
                 <over-due :overDueData="overDueData" :overDueClick="overDueHandleClick"></over-due>
+            </div>
+            <div class="financeRight">
+                <finance-table :tableData="financeData"></finance-table>
             </div>
             <loading-data :isShow="isShow"></loading-data>
             <public-table v-if="isShowDetail" :close="closePopup" :tableHeader="tableData.header" :interfaceParams="tableData.params" :titleName="tableData.titleName"></public-table>
@@ -270,7 +270,7 @@
             display: flex;
             flex-wrap: wrap;
             .financeLeft{
-                width:40%;
+                width:30%;
                 height:100%;
                 display: flex;
                 align-items: center
@@ -278,11 +278,12 @@
             .financeMid{
                 width:30%;
                 height:100%;
-                padding-top:0.6rem;
+                // padding-top:0.6rem;
             }
             .financeRight{
-                width:30%;
+                width:40%;
                 height:100%;
+                padding-top:0.6rem;
             }
         }
     }

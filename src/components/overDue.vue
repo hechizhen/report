@@ -111,9 +111,9 @@
             justify-content: center;
             text-align: center;
             p{
-                font-size:0.3rem;
+                font-size:0.35rem;
                 font-weight:bold;
-                color:rgba(87,174,246,1);
+                color:#333;
                 margin-bottom:0;
             }
             p:first-child{
