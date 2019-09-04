@@ -48,15 +48,15 @@
                     list:['品类','系列','商品']
                 },
                 btnStyle:{
-                    width: '2.6rem',
-                    height: '.9rem',
+                    width: '72px',
+                    height: '26px',
                     border: '1px solid #FFFFFF',
                     // hover:{
                     // 	color:'red'
                     // }
                 },
                 txtStyle:{
-                    fontSize:'.4rem',
+                    fontSize:'12px',
                     color:'#ffffff',
                     fontWeight:400
                 },

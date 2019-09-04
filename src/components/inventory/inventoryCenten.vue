@@ -50,7 +50,7 @@
         height: 5.2rem;
         border: 23px solid #eef0f5;
         border-radius: 50%;
-        margin: .2rem auto;
+        margin: .17rem auto;
         .inventoryCenten-txt{
             text-align: center;
             margin-top: 34%;

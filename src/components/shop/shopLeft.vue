@@ -86,28 +86,28 @@
                 },
                 // 按鈕樣式
                 btnStyle:{
-                    width:'2.8rem',
-                    height:'1rem',
+                    width:'88px',
+                    height:'26px',
                     border: '1px solid #DCDCDC',
                     // hover:{
                     // 	color:'red'
                     // }
                 },
                 txtStyle:{
-                    fontSize:'.4rem',
+                    fontSize:'14px',
                     color:'#333333',
                     fontWeight:500
                 },
                 btnStyle2:{
-                    width: '2.6rem',
-                    height: '.9rem',
+                    width: '72px',
+                    height: '26px',
                     border: '1px solid #fff',
                     // hover:{
                     // 	color:'red'
                     // }
                 },
                 txtStyle2:{
-                    fontSize:'.35rem',
+                    fontSize:'12px',
                     color:'#fff',
                     fontWeight:400
                 },
