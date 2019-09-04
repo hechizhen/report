@@ -163,12 +163,13 @@
                                 normal: {
                                     color: '#c9cbd5',
                                     type: 'solid',
-                                    width: 0.5
+                                    width: 0.3
                                 }
                             },
                             x: '',
                             label: {
                                 normal: {
+                                    show:false,
                                     color: '#D7D9E5',
                                     position: 'end',
                                     // padding: [-12, 10, 0, -12],

@@ -4,13 +4,19 @@
         <div class="headerTitle_left">
             <p class="paddingStyle">
                 <!-- <span class="spanFont spanSize">{{dealName}}</span> -->
-                <span class="spanFont">以下是针对您企业的体检报告分析结果，请认真审阅：</span>
+                <span class="spanFont spanSize">以下是针对您企业的体检报告分析结果，请认真审阅：</span>
             </p>
             <p class="paddingStyle1">
                 <span class="spanFont">查询日期：</span>
                 <!-- <a-month-picker v-model="defaultValDate" :disabledDate="disabledDate" :format="monthFormat" :allowClear="false" @change="changeDate" /> -->
                 <DatePicker type="month" v-model="defaultValDate" :options="options3" format="yyyy/MM" :clearable="false" @on-change="changeDate" ></DatePicker>
                 <button-list :buttonType="buttonList.buttonType" :isGhost="buttonList.isGhost" :buttonHandleClick="buttonHandleClick" :defaultVal="buttonList.defaultVal" style="margin-left:20px;"></button-list>
+            </p>
+            <p style="margin-top: 1%">
+                <span style="font-size:14px;">经销商：</span>
+                <a-select showSearch v-model="dealName" @change="onChange">
+                    <a-select-option v-for="(item,index) in dealList" :key="item+index" :value="item.name" :disabled="item.date_dt==nowDate ? true : false">{{item.name}}</a-select-option>
+                </a-select>
             </p>
         </div>
         <div class="headerTitle_mid">
@@ -28,12 +34,6 @@
             <span class="spanFont spanSize4">总结：</span>
             <span class="spanFont spanSize4">{{score.evaluate}}</span>
             <span class="spanFont1 spanSize3">{{score.subscribe}}</span>
-            <p style="margin-top: 1%">
-                <span style="font-size:14px;">经销商：</span>
-                <a-select showSearch v-model="dealName" style="width: 200px;height:40px;" @change="onChange">
-                    <a-select-option v-for="(item,index) in dealList" :key="item+index" :value="item.name" :disabled="item.date_dt==nowDate ? true : false">{{item.name}}</a-select-option>
-                </a-select>
-            </p>
         </div>
     </div>
 </template>
@@ -194,12 +194,13 @@
     .headerTitle{
         width:100%;
         padding:0 1rem;
-        height:3.38rem;
+        height:135px;
         background:rgba(255,255,255,1);
         display: flex;
         flex-wrap: wrap;
+        align-items: center;
         .headerTitle_left{
-            height:100%;
+            // height:100%;
         }
         .headerTitle_mid{
             width: 4rem;
@@ -227,17 +228,19 @@
             }
         }
         .headerTitle_right{
-            height: 100%;
+            // height: 100%;
             // width: calc(~"55% - 135px");
             word-wrap: break-word;
             word-break: break-all;
             flex-wrap: wrap;
-            padding-top:1rem;
+            // padding-top:1rem;
             // line-height: 20px;
             padding-left:0.5rem;
+            display: flex;
+            align-items: center;
         }
         .paddingStyle{
-            padding-top:1rem;
+            // padding-top:1rem;
         }
         .paddingStyle1{
             display: flex;
@@ -258,6 +261,7 @@
         .spanSize{
             font-size: 0.4rem;
             font-weight:500;
+            color:rgba(160,165,177,1);
         }
         .spanSize1{
             font-size: 0.3rem;
