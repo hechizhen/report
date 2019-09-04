@@ -10,7 +10,7 @@
 						:imgType="explainList.imgType" :titleName="explainList.titleName"
 						:span="explainList.span"  	:span2="explainList.span2"
 		></explain-detail>
-		<div class="trendChart" v-if="isShow"></div>
+		<!-- <div class="trendChart" v-if="isShow"></div> -->
 	</div>
 </template>
 <script>

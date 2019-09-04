@@ -101,12 +101,12 @@
             },
             grid: {
                 default: () => ({
-                    top: 'middle',
-                    left: '3%',
-                    right: '4%',
+                    // top: 'middle',
+                    left: '6%',
+                    right: '6%',
                     bottom: '5%',
-                    height: '70%',
-                    containLabel: true
+                    // height: '70%',
+                    // containLabel: true
                 })
             },
 
@@ -196,7 +196,8 @@
                             label:{
                                 backgroundColor:'rgb(45, 146, 252)',
                                 formatter:function(params) {
-                                    if(params.seriesData.length==0){
+                                    console.log(params)
+                                    if(typeof(params.value)!='string'){
                                         params.value = _this.dataProcess(params.value,_this.lineEchartsData.unit[0],_this.lineEchartsData.unit[1]).num+_this.dataProcess(params.value,_this.lineEchartsData.unit[0],_this.lineEchartsData.unit[1]).unit
                                     }
                                     return params.value
@@ -229,14 +230,7 @@
                         selected: legendSelect
                     },
                     dataZoom: dataZoom,
-                    grid: {
-                        top: _this.grid.top,
-                        left: _this.grid.left,
-                        right: _this.grid.right,
-                        bottom: _this.grid.bottom,
-                        height: _this.grid.height,
-                        containLabel: _this.grid.containLabel
-                    },
+                    grid:_this.grid,
                     xAxis: {
                         type: 'category',
                         data: _this.lineEchartsData.xAxisData,
@@ -301,6 +295,9 @@
                     },
                     series: seriesData
                 };
+                if(_this.legendShow){
+                    option.grid.bottom = '7%'
+                }
                 this.myChart.setOption(option);
             }
         },
@@ -330,7 +327,7 @@
         }
         .lineChart1{
             width:100%;
-            height:90%;
+            height:100%;
         }
         .checkBoxList{
             width:100%;
@@ -339,6 +336,7 @@
             align-items: center;
             justify-content: center;
             flex-wrap: wrap;
+            overflow: auto;
         }
     }
 </style>

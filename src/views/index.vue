@@ -1764,9 +1764,9 @@
                             }
                         })
                         seriesData.push(
-                            {name:'上月销售额',data:lastMonth,color:'#009EE2',barWidth:'22'},
-                            {name:'本月销售额',data:sameMonth,color:'#E9A837',barWidth:'22'},
-                            {name:'销售差额',data:difference,color:'#FE9600',barWidth:'22'})
+                            {name:'上月销售额',data:lastMonth,color:'#009EE2',barWidth:'22',type:'bar'},
+                            {name:'本月销售额',data:sameMonth,color:'#E9A837',barWidth:'22',type:'bar'},
+                            {name:'销售差额',data:difference,color:'#FE9600',barWidth:'22',type:'line'})
                         salesmandownwardObject.xAxisData = xAxisData;
                         salesmandownwardObject.seriesData = seriesData;
                         _this.salesmandownwardData = salesmandownwardObject
@@ -2313,7 +2313,7 @@
                                 //id
                                 id:'barRaiseId',
                                 //数据单位
-                                unit:['money'],
+                                unit:['money','tenth'],
                                 //x轴单位
                                 xAxisData:raisexAxisData,
                                 type:'xAxis',
@@ -2376,7 +2376,7 @@
                                 //id
                                 id:'barDownId',
                                 //数据单位
-                                unit:['money'],
+                                unit:['money','tenth'],
                                 //x轴单位
                                 xAxisData:downxAxisData,
                                 type:'xAxis',
@@ -2387,18 +2387,21 @@
                                         data:downLastMonth,
                                         color:'#2D92FC',
                                         barWidth:22,
+                                        type:'bar'
                                     },
                                     {
                                         name:'当月销售额(万元)',
                                         data:downSameMonth,
                                         color:'#FFBD7B',
                                         barWidth:22,
+                                        type:'bar'
                                     },
                                     {
                                         name:'销售差额(万元)',
                                         data:downDifference,
                                         color:'#FE9600',
                                         barWidth:22,
+                                        type:'line'
                                     },
                                 ],
                                 showType:0,//0横过来 1竖起来
@@ -2757,18 +2760,21 @@
                                         data:raiseLastMonth,
                                         color:'#2D92FC',
                                         barWidth:22,
+                                        type:'bar'
                                     },
                                     {
                                         name:'当月销售额',
                                         data:raiseSameMonth,
                                         color:'#FFBD7B',
                                         barWidth:22,
+                                        type:'bar'
                                     },
                                     {
                                         name:'销售差额',
                                         data:raiseDifference,
                                         color:'#FE9600',
                                         barWidth:22,
+                                        type:'line'
                                     },
                                 ],
                                 showType:0,//0横过来 1竖起来
@@ -2817,18 +2823,21 @@
                                         data:downLastMonth,
                                         color:'#2D92FC',
                                         barWidth:22,
+                                        type:'bar'
                                     },
                                     {
                                         name:'当月销售额',
                                         data:downSameMonth,
                                         color:'#FFBD7B',
                                         barWidth:22,
+                                        type:'bar'
                                     },
                                     {
                                         name:'销售差额',
                                         data:downDifference,
                                         color:'#FE9600',
                                         barWidth:22,
+                                        type:'line'
                                     },
                                 ],
                                 showType:0,//0横过来 1竖起来

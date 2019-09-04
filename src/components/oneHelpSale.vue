@@ -145,7 +145,7 @@
                     flex-wrap: wrap;
                 }
                 .flexMid{
-                    width:60%;
+                    width:63%;
                     height:100%;
                     display: flex;
                     align-items: center;
@@ -210,7 +210,7 @@
                 }
                 .oneHelpSaleTopRight{
                     height:100%;
-                    width:40%;
+                    width:37%;
                     display: flex;
                     align-items: center;
                     justify-content: center;

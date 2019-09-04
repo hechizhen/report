@@ -77,7 +77,7 @@
 <style lang="less" scoped>
 	.thendChart {
 		margin-top:2%;
-		height:7.4rem;
+		height:250px;
 		width: 100%;
 		padding: 5px;
 		.echarts {
@@ -126,7 +126,7 @@
 					padding-right: 5%;
 					span {
 						position: absolute;
-						top: 8px;
+						top: 0.1rem;
 						right: 8px;
 						color: rgba(180, 180, 180, 1);
 						cursor: pointer;

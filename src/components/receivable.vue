@@ -74,7 +74,7 @@
             border-bottom:1px solid rgba(220,223,230,1);
         }
         .bg{
-            background:rgba(107,188,255,1);
+            background:rgba(29,145,240,1);
         }
         .bg1{
             background:rgba(241,244,251,1);

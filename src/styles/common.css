@@ -199,3 +199,15 @@ i{
 .bandSellings .subtitle .subtitle_list{
     display: none !important;
 }
+.ivu-table-cell{
+    padding:0!important;
+    text-align: center;
+    width: 100%;
+}
+.ant-checkbox-wrapper{
+    padding: 10px 0;
+}
+.ivu-table td, .ivu-table th{
+    text-align: center;
+    height: 35px!important;
+}

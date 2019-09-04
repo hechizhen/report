@@ -391,12 +391,13 @@
                             type : 'cross',        // 默认为直线，可选为：'line' | 'shadow'
                             label:{
                                 backgroundColor:'rgb(45, 146, 252)',
-                                // formatter:function(params) {
-                                //     if(params.seriesData.length==0){
-                                //         params.value = _this.dataProcess(params.value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num+_this.dataProcess(params.value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).unit
-                                //     }
-                                //     return params.value
-                                // }
+                                formatter:function(params) {
+                                    console.log(params)
+                                    if(typeof(params.value)!='string'){
+                                        params.value = _this.dataProcess(params.value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num+_this.dataProcess(params.value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).unit
+                                    }
+                                    return params.value
+                                }
                             },
                         },
                         formatter:function(params){

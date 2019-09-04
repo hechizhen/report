@@ -9,12 +9,12 @@
             <p class="paddingStyle1">
                 <span class="spanFont">查询日期：</span>
                 <!-- <a-month-picker v-model="defaultValDate" :disabledDate="disabledDate" :format="monthFormat" :allowClear="false" @change="changeDate" /> -->
-                <DatePicker type="month" v-model="defaultValDate" :options="options3" format="yyyy/MM" :clearable="false" @on-change="changeDate" ></DatePicker>
+                <DatePicker type="month" v-model="defaultValDate" :options="options3" format="yyyy/MM" :clearable="false" @on-change="changeDate" style="width:170px;"></DatePicker>
                 <button-list :buttonType="buttonList.buttonType" :isGhost="buttonList.isGhost" :buttonHandleClick="buttonHandleClick" :defaultVal="buttonList.defaultVal" style="margin-left:20px;"></button-list>
             </p>
-            <p style="margin-top: 1%">
+            <p style="margin-top: 2%">
                 <span style="font-size:14px;">经销商：</span>
-                <a-select showSearch v-model="dealName" @change="onChange">
+                <a-select showSearch v-model="dealName" @change="onChange" style="width:170px;">
                     <a-select-option v-for="(item,index) in dealList" :key="item+index" :value="item.name" :disabled="item.date_dt==nowDate ? true : false">{{item.name}}</a-select-option>
                 </a-select>
             </p>

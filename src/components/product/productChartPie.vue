@@ -211,7 +211,7 @@
                     padding-right: 40px;
                     span {
                         position: absolute;
-                        top: 8px;
+                        top: 0.1rem;
                         right: 8px;
                         color: rgba(180, 180, 180, 1);
                         cursor: pointer;
@@ -265,7 +265,7 @@
                     padding-right: 40px;
                     span {
                         position: absolute;
-                        top: 8px;
+                        top: 0.1rem;
                         right: 8px;
                         color: rgba(180, 180, 180, 1);
                         cursor: pointer;

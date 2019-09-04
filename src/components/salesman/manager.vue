@@ -159,6 +159,9 @@
 				height: 100%;
 				padding-left: 1%;
 				padding-right: 1%;
+				img{
+					width:1.5rem
+				}
 			}
 		}
 		.conclude {

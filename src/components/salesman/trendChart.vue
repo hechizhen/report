@@ -109,7 +109,7 @@
 					padding-right: 10%;
 					span {
 						position: absolute;
-						top: 8px;
+						top: 0.1rem;
 						right: 15px;
 						color: rgba(180, 180, 180, 1);
 						cursor: pointer;

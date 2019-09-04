@@ -23,7 +23,7 @@
     </div>
 </template>
 <script>
-    import barEcharts from "../echarts/bar"
+    import barEcharts from "../echarts/bar1"
     import  newButton from  '../button'
     import loadingData from '../base/loadingData'
     export default {
@@ -98,7 +98,7 @@
         justify-content: center;
         background-color: RGBA(69, 72, 90, 0.5);
         .echarts {
-            height: 678px;
+            height: 80%;
             width: 90%;
             background:rgba(255,255,255,1);
             border-radius: 5px;
@@ -133,7 +133,7 @@
                     padding-right: 10%;
                     span {
                         position: absolute;
-                        top: 13px;
+                        top: 0.1rem;
                         right: 15px;
                         color: rgba(180, 180, 180, 1);
                         cursor: pointer;

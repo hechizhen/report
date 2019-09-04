@@ -109,7 +109,7 @@
         mounted () {
             //  alert(JSON.stringify(this.tableHeader))
             let height =this.$refs.divHeight.offsetHeight;
-            this.maxHeight = height*0.70
+            this.maxHeight = height-150
             this.getTableData()
         },
          computed:{
@@ -193,6 +193,7 @@
                     //遍历表头key值
                     _this.tableHeaderKey.map(function(childItem,index){
                         list[index].key = childItem
+                        list[index].width = 'fit-content'
                     })
                     //获取表格表头格式
                     _this.tablecColumns = list
@@ -242,7 +243,7 @@
         .publicBox{
             width:90%;
             height:80%;
-            padding:20px;
+            padding: 0.5rem;
             background:#fff;
             border-radius: 5px;
             position: relative;
@@ -268,7 +269,7 @@
         .paginationTable{
             width:100%;
             text-align: right;
-            padding:1.5% 0;
+            padding:1% 0;
         }
         .iStyle{
             position: absolute;

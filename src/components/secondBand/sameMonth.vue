@@ -10,7 +10,7 @@
 				<a-Row class="recordConten">
 					<a-Col :span="24" class="recordLeft">
 						<div>
-							<p><img style="margin-right:5px;" src="./../../assets/img/jine-icon.png">下单金额(万元)</p>
+							<p><img style="margin-right:5px;width:0.6rem" src="./../../assets/img/jine-icon.png">下单金额(万元)</p>
 							<p><span>￥</span>{{orderAmountData.moneyInteger}}<span>{{orderAmountData.moneyDecimal}}</span></p>
 						</div>
 					</a-Col>

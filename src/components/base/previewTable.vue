@@ -15,7 +15,7 @@
                 <newbutton defaultVal="下载表格" :buttonHandleClick="exportClick" style="margin-right:2%;" :btnStyle="btnStyle" :txtStyle="txtStyle"></newbutton>
                 <i class="iconfont icon-guanbi iStyle" @click="returnHandleClick"></i>
             </div>
-            <Table :columns="columns" :data="data" border :height="400"></Table>
+            <Table :columns="columns" :data="data" border :height="maxHeight"></Table>
         </div>
     </div>
 </template>
@@ -109,11 +109,12 @@
                         color:'#BEBEBE'
                     },
                 },
+                maxHeight:'',
             }
         },
         mounted () {
             let height =this.$refs.divHeight.offsetHeight;
-            this.maxHeight = height*0.70
+            this.maxHeight = height-150
         },
         methods: {
             //选择维度
