@@ -106,7 +106,7 @@
                         orient: "horizontal",
                         icon:"rect",
                         bottom: "8%",
-                        itemGap: 18,
+                        itemGap: 10,
                         data: legendList,
                         itemWidth: 18,
                         itemHeight: 18,

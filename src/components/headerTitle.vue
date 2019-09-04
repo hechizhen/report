@@ -3,8 +3,8 @@
     <div class="headerTitle">
         <div class="headerTitle_left">
             <p class="paddingStyle">
-                <span class="spanFont spanSize">{{dealName}}</span>
-                <span class="spanFont1">以下是针对您企业的体检报告分析结果，请认真审阅：</span>
+                <!-- <span class="spanFont spanSize">{{dealName}}</span> -->
+                <span class="spanFont">以下是针对您企业的体检报告分析结果，请认真审阅：</span>
             </p>
             <p class="paddingStyle1">
                 <span class="spanFont">查询日期：</span>

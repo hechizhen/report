@@ -220,7 +220,7 @@
 				}
 				.proportion_echarts {
 					width: 100%;
-					height: 8rem;
+					height: 9.2rem;
 				}
 			}
 		}

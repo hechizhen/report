@@ -44,7 +44,7 @@
 </script>
 <style scoped lang="less">
     .financeTable{
-        width:98%;
+        width: 92%;
         margin:0 auto;
         border:1px solid rgba(229,229,229,1);
         .rowStyle{
@@ -57,7 +57,7 @@
                 text-align: right;
                 font-size:0.4rem;
                 font-weight:bold;
-                color:rgba(51,51,51,1);
+                color:rgba(152,162,180,1);
            }
            .colRight{
                 text-align: right;

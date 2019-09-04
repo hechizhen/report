@@ -1014,7 +1014,7 @@
                                 },
                             },
                             legendShow:false,
-                            isShowMax:true,
+                            isShowMax:false,
                         }
                         //判断年销量是否为空
                         if(salesYear.data.data.data.length!=0){
@@ -1093,7 +1093,7 @@
                                 },
                             },
                             legendShow:false,
-                            isShowMax:true,
+                            isShowMax:false,
                         }
                         //一帮卖评分接口参数
                         _this.oneScoreParams = {
@@ -1663,7 +1663,7 @@
                     "pageSize":1000,
                     "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
                     "serviceId":"service_tjbg02_emp_rate",
-                    "orderCol":'data_mon asc'
+                    "orderCol":'data_mon,orderNum asc'
                 }
                 this.$http({
                     url: _this.testRequestHttpUrl + '?v=salesmanTrend',
@@ -2324,18 +2324,21 @@
                                         data:raiseLastMonth,
                                         color:'#2D92FC',
                                         barWidth:22,
+                                        type:'bar'
                                     },
                                     {
                                         name:'当月销售额',
                                         data:raiseSameMonth,
                                         color:'#FFBD7B',
                                         barWidth:22,
+                                        type:'bar'
                                     },
                                     {
                                         name:'销售差额',
                                         data:raiseDifference,
                                         color:'#FE9600',
                                         barWidth:22,
+                                        type:'line'
                                     },
                                 ],
                                 showType:0,//0横过来 1竖起来

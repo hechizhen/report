@@ -163,13 +163,13 @@
                                 normal: {
                                     color: '#c9cbd5',
                                     type: 'solid',
-                                    width: 1
+                                    width: 0.5
                                 }
                             },
                             x: '',
                             label: {
                                 normal: {
-                                    color: '#c9cbd5',
+                                    color: '#D7D9E5',
                                     position: 'end',
                                     // padding: [-12, 10, 0, -12],
                                     formatter:function(params){
@@ -380,10 +380,8 @@
                 }
                 if(_this.isShowMax){
                     _this.intervalData = 'max'
-                    var yAxisMax = 2
                 }else{
                     _this.intervalData = null
-                    var yAxisMax = null
                 }
                 var option = {
                     tooltip: {
@@ -392,12 +390,12 @@
                             type : 'cross',        // 默认为直线，可选为：'line' | 'shadow'
                             label:{
                                 backgroundColor:'rgb(45, 146, 252)',
-                                formatter:function(params) {
-                                    if(params.seriesData.length==0){
-                                        params.value = _this.dataProcess(params.value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num+_this.dataProcess(params.value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).unit
-                                    }
-                                    return params.value
-                                }
+                                // formatter:function(params) {
+                                //     if(params.seriesData.length==0){
+                                //         params.value = _this.dataProcess(params.value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num+_this.dataProcess(params.value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).unit
+                                //     }
+                                //     return params.value
+                                // }
                             },
                         },
                         formatter:function(params){
@@ -480,18 +478,18 @@
                             show: false
                         },
                         axisTick:{
-                            show: true
+                            show: false
                         },
-                          axisPointer: {
-                type: 'shadow'
-            }
+            //               axisPointer: {
+            //     type: 'shadow'
+            // }
                         // min:_this.minData,
                         // max:2,
                     },
                     series: seriesData
                 };
                 if(_this.barEchartsData.id=="barIdMonthSales" || _this.barEchartsData.id=="barIdYearSales" ){
-                    option.yAxis.max= yAxisMax
+                    option.yAxis.max= 2
                 }
                 this.myChart.setOption(option);
             }
