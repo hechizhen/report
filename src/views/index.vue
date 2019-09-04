@@ -2579,7 +2579,7 @@
                     }
                     //门店门店活跃率数据
                     _this.StoresDetailed = {
-                        shopTitle:"门店活跃率:",
+                        shopTitle:"门店活跃率：",
                         StoreActivity: _this.dataProcess(data.active_store_rate, 'percent').num + _this.dataProcess(data.active_store_rate, 'percent').unit,  //门店活跃率
                         shopActiveData: {
                             ActiveStoresTxt:"活跃门店数",

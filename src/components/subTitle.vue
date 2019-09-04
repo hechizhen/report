@@ -57,7 +57,7 @@
 </script>
 <style lang="less" scoped>
 	.subtitle {
-		height: 50px;
+		height: 2rem;
 		width: 100%;
 		display: flex;
 		align-items: center;
@@ -66,19 +66,19 @@
 	}
 	.leftLine{
 		width:6px;
-		height:20px;
+		height:.5rem;
 		background:rgba(45,146,252,1);
 		border-radius:3px;
 	}
 	.subtitle_content {
-		font-size:20px;
-		padding-left: 12px;
+		font-size:.6rem;
+		padding-left: .3rem;
 		font-family:PingFangSC-Medium;
 		font-weight:500;
 		color:rgba(51,51,51,1);
 	}
 	.subtitle_list {
-		margin-left: 15px;
+		margin-left: .38rem;
 	}
 	.subtitle_list .new-button .txt:hover{
 		color: #000;

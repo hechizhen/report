@@ -7,7 +7,7 @@
                  <img :src="shopData.shopImg" style="width: 100%;height: 100%">
              </div>
             <div class="title-txt">
-              <p>{{StoresDetailed.shopTitle}} <span style=" font-size:.7rem;">{{StoresDetailed.StoreActivity}}</span></p>
+              <p style="display: flex; justify-content: center;">{{StoresDetailed.shopTitle}} <span style=" font-size:.7rem;">{{StoresDetailed.StoreActivity}}</span></p>
             </div>
         </div>
         <div class="shop-centen-middle">
