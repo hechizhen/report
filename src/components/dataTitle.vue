@@ -37,14 +37,14 @@
         position: relative;
     }
     .leftLine{
-        width: .25rem;
-        height: .85rem;
+        width: .2rem;
+        height: .75rem;
         background:rgba(45,146,252,1);
         border-radius:3px;
     }
     .subtitle_content {
-        font-size: .8rem;
-        padding-left: .4rem;
+        font-size: .6rem;
+        padding-left: .3rem;
         font-family:PingFangSC-Medium;
         font-weight:500;
         color:rgba(51,51,51,1);
