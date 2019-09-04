@@ -38,8 +38,8 @@
 		data(){
 			return {
 				btnStyle:{
-					width: '2.4rem',
-					height: '.9rem',
+					width: '78px',
+					height: '28px',
 					border: '1px solid #00A6FF',
 					borderRadius:"8px",
 				},
@@ -65,13 +65,13 @@
 	    /*justify-content: center;		*/
 	}
 	.leftLine{
-		width:6px;
-		height:.5rem;
+		width: .2rem;
+		height: .75rem;
 		background:rgba(45,146,252,1);
 		border-radius:3px;
 	}
 	.subtitle_content {
-		font-size:.6rem;
+		font-size: .6rem;
 		padding-left: .3rem;
 		font-family:PingFangSC-Medium;
 		font-weight:500;

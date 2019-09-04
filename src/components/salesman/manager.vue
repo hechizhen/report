@@ -96,15 +96,15 @@
 			return {
 				// isShow:true,
 				btnStyle:{
-					width: '2.6rem',
-					height: '.9rem',
+					width: '88px',
+					height: '26px',
 					border: '1px solid #FFFFFF',
 					// hover:{
 					// 	color:'red'
 					// }
 				},
 				txtStyle:{
-					fontSize:'.45rem',
+					fontSize:'14px',
 					color:'#ffffff',
 					fontWeight:400
 				},

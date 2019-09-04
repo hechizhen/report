@@ -98,7 +98,7 @@
 </script>
 <style lang="less" scoped>
 	.explainDetail {
-		width:978px;
+		width:29rem;
 		top:10%;;
 		left:0;
 		right:0;
@@ -106,60 +106,60 @@
 		position: fixed;
 		background:#fff;
 		z-index:100;
-		padding-bottom: 20px;
+		padding-bottom: .5rem;
 		p{
 			margin-bottom:0;
 		}
 		.explainTitleTop{
-			height:85px;
+			height:1.05rem;
 			width:100%;
 			text-align: center;
 			position: relative;
-			line-height: 80px;
-			font-size:24px;
+			line-height: 2rem;
+			font-size:.6rem;
 			font-weight:500;
 			color:rgba(255,255,255,1);
 			.close{
 				position: absolute;
 				top:0;
-				right:20px;
+				right:.5rem;
 				cursor: pointer;
 				i{
-					font-size: 40px;
+					font-size: 1rem;
 					color:#fff
 				}
 			}
 		}
 		.explainTitle{
-			height:125px;
+			height:3.125rem;
 			width:100%;
 			background-repeat: no-repeat;
 			background-size: 100% 100%;
-			margin-bottom:10px;
+			margin-bottom:.25rem;
 		}
 		.explainTxt{
-			font-size:16px;
+			font-size:.4rem;
 			font-weight:500;
 			color:rgba(255,255,255,1);
-			padding-left:60px;
+			padding-left:1.5rem;
 		}
 		.rowStyle{
-			height:46px;
+			height:1.1rem;
 			width:100%;
 			border-top:1px solid rgba(229,229,229,1);
-			line-height: 46px;
+			line-height: 1.1rem;
 		}
 		.rowStyle:last-child{
 			border-bottom:1px solid rgba(229,229,229,1);
 		}
 		.leftCol{
-			font-size: 16px;
+			font-size: .4rem;
 			font-weight:500;
-			padding-left:60px;
+			padding-left:1.5rem;
 		}
 		.rightCol{
 			color:#333333;
-			font-size: 16px;
+			font-size: .4rem;
 			font-weight:500;
 		}
 	}
