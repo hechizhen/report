@@ -24,7 +24,7 @@
                                 <span class="rightTxt">下单金额（万）</span>
                             </p>
                             <p>
-                                <span class="rightReach">￥</span>
+                                <span class="rightReachUnit">￥</span>
                                 <span class="rightReach">{{salesData.sales}}</span>
                             </p>
                         </div>
@@ -223,13 +223,18 @@
                         margin-right:6px;
                     }
                     .rightTxt{
-                        font-size:0.35rem;
+                        font-size:0.5rem;
                         font-weight:500;
                         color:#fff;
                     }
                     .rightReach{
                         font-size:1rem;
                         font-weight:500;
+                        color:#fff;
+                    }
+                    .rightReachUnit{
+                        font-size:0.5rem;
+                        font-weight:600;
                         color:#fff;
                     }
                 }
@@ -250,7 +255,7 @@
                 }
             }
             .imgSrc{
-                width: 0.35rem;
+                width: 0.5rem;
                 margin-bottom: 0.1rem;
             }
         }

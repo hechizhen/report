@@ -213,7 +213,7 @@
 			    flex-direction: column;
 			    p {
 			    	margin: 0px;
-			    	font-size:14px;
+			    	font-size:0.4rem;
 					font-family:PingFangSC-Medium;
 					font-weight:bold;
 					color:rgba(255,255,255,1);
@@ -242,7 +242,7 @@
 			    flex-direction: column;
 			    p {
 			     	margin: 0px;
-				    font-size:14px;
+				    font-size:0.4rem;
 					font-family:PingFangSC-Medium;
 					font-weight:bold;
 					color:rgba(255,255,255,1);

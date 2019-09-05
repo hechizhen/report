@@ -163,7 +163,7 @@
                                 normal: {
                                     color: '#c9cbd5',
                                     type: 'solid',
-                                    width: 0.3
+                                    width: 1
                                 }
                             },
                             x: '',
