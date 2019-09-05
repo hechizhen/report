@@ -134,9 +134,6 @@ export default{
   }
   // 数据处理
     Vue.prototype.dataProcess = function (data,type,typeVal) {
-      console.log(data)
-      console.log(type)
-      console.log(typeVal)
         if(data !== "" && data !== null && data !== undefined && data !== '--') {
             // if (data.indexOf(",") != -1) {
             var reg = /^-?[0-9]+.?[0-9]*/;//是否为数字

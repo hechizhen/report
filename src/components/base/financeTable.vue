@@ -49,13 +49,13 @@
         border:1px solid rgba(229,229,229,1);
         .rowStyle{
             width:100%;
-            height:1rem;
+            height:40px;
             border-bottom:1px solid rgba(229,229,229,1);
             display: flex;
             align-items: center;
            .colLeft{
                 text-align: right;
-                font-size:0.4rem;
+                font-size:16px;
                 font-weight:bold;
                 color:rgba(152,162,180,1);
            }
@@ -67,10 +67,10 @@
                     color:rgba(51,51,51,1);
                 }
                 span:first-child{
-                    font-size:0.45rem;
+                    font-size:14px;
                 }
                 span:nth-child(2){
-                    font-size:0.6rem;
+                    font-size:16px;
                 }
            }
        }

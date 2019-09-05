@@ -113,10 +113,9 @@
                 font-weight:bold;
                 color:rgba(255,255,255,1);
                 white-space : nowrap
-
             }
             span{
-                font-size:0.7rem;
+                font-size: 28px;
                 font-family:PingFangSC-Semibold;
                 font-weight:600;
                 color:rgba(255,216,110,1);

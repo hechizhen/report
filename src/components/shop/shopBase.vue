@@ -81,13 +81,16 @@
         float: left;
         background:rgba(238,240,245,.5);
         border-radius:6px 6px 0px 0px;
+        height: 2.4rem;
         /*padding-left: 3%;*/
         .commodityR-base {
             width: 100%;
-            float: left;
+            height: 50%;
+            display: flex;
+            align-items: center;
             .quan {
-                width:0.25rem;
-                height:0.25rem;
+                width:10px;
+                height:10px;
                 border:2px solid rgba(152,162,180,1);
                 border-radius:50%;
                 display: inline-block;
@@ -95,18 +98,16 @@
             }
 
             .ant-col-18{
-                line-height: 1.2rem;
-                font-size:0.45rem;
+                font-size:18px;
                 font-family:PingFangSC-Medium;
                 font-weight:500;
                 color:rgba(152,162,180,1);
                 display: inline-block;
             }
             .ant-col-6{
-                line-height: 1.2rem;
-                font-size:0.45rem;
+                font-size:18px;
                 font-family:PingFangSC-Semibold;
-                font-weight:600;
+                font-weight:500;
                 margin-bottom: 0;
                 display: inline-block;
                 color: rgba(152, 162, 180, 1);
@@ -114,7 +115,7 @@
         }
         .productLeft-btn {
             width:30%;
-            height: 2.5rem;
+            height: 100%;
             float: left;
             display:flex;
             justify-content: center;//子元素水平居中

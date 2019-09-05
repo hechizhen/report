@@ -51,21 +51,19 @@
 			margin: 0px;
 		}
 		p:nth-child(1) {
-			height: 1rem;
-			width: 4.95rem;
-			font-size: 0.6rem;
+			padding: 10px 10px;
+			font-size: 16px;
 			color: #007cff;
 			text-align: center;
-			line-height: 1rem;
 			background: #deeeff;
 		}
 		p:nth-child(2) {
 			margin: 0px 10px;
-			font-size: 0.6rem;
+			font-size: 14px;
 			color:rgba(51,51,51,1)
 		}
 		p:nth-child(3) {
-			font-size:0.4rem;
+			font-size: 12px;
 			color:rgba(152,162,180,1);
 		}
 	}

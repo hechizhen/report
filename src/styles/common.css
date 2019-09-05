@@ -211,3 +211,55 @@ a {
     text-align: center;
     height: 35px!important;
 }
+
+/* 媒体查询控制分辨率字体大小 */
+@media screen and (max-width: 1440px) {
+    .sameMonth .sameMonthcontent .record .recordConten .recordLeft div p:nth-child(2){
+        font-size: 40px!important;
+    }
+    .totalAmount .totalAmountcontent .record p:nth-child(2){
+        font-size: 40px!important;
+    }
+    .product .product-content .ant-row .ant-col-10{
+        height: 7.85rem!important;
+    }
+    .product .product-content .ant-row .ant-col-14{
+        height: 7.85rem!important;
+    }
+    .shop-centen[data-v-78b3ae49]{
+        height: 11.63rem!important;
+    }
+    .shopLeft .shopLeft-centen{
+        height: 6.51rem!important;
+    }
+    .shopLeft .shop-active{
+        height: 5.64rem!important;
+    }
+    .shopRight .shopRight-title{
+        height: 6.51rem!important;
+    }
+    .shopRight .shop-active{
+        height: 5.64rem!important;
+    }
+    .shopBase{
+        height:3.4rem!important;
+    }
+    .inventoryindex{
+        height: 6.53rem!important;
+    }
+    .receivable .fontStyle{
+        font-size: 16px!important;
+    }
+    .receivable .fontStyle1{
+        font-size: 16px!important;
+    }
+    .financeTable .rowStyle .colLeft{
+        font-size: 14px!important;
+    }
+    .inventory-table .table-head{
+        height:4rem!important;
+    }
+    .commodityRight{
+        height:7.8rem!important;
+    }
+}

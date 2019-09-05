@@ -108,7 +108,7 @@
 }
 .inventoryDase{
     width:45%;
-    height:5.53rem;
+    height:100%;
     background:rgba(255,255,255,1);
     border-radius:10px;
     float: left;
@@ -121,7 +121,7 @@
         position: relative;
         span{
             display: inline-block;
-            font-size:.4rem;
+            font-size:14px;
             font-family:PingFangSC-Medium;
             font-weight:600;
             color:rgba(51,51,51,1);
@@ -134,7 +134,7 @@
             float: left;
         }
         b{
-            font-size:32px;
+            font-size:28px;
             font-family:PingFangSC-Medium;
             font-weight:bold;
             color:rgba(29,145,240,1);
@@ -154,7 +154,7 @@
                     text-align: center;
                     display: flex;
                     span{
-                        font-size:.4rem;
+                        font-size:14px;
                         font-family:PingFangSC-Regular;
                         font-weight:400;
                         color:#98A2B4;
@@ -165,7 +165,7 @@
                         color:#98A2B4;
                         margin-bottom: 0;
                         display: inline-block;
-                        font-size: .4rem;
+                        font-size: 14px;
                         font-weight:600;
                         line-height: .9rem;
                     }

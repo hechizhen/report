@@ -143,6 +143,7 @@
 }
 </style>
 <style lang="less" scoped>
+	@fontSize:14px;
 	.manager {
 		width: 100%;
 		height:3.68rem;
@@ -176,7 +177,8 @@
 			    flex-direction: column;
 			    p {
 			     	margin: 0px;
-				    font-size:.4rem;
+				    // font-size:.4rem;
+				    font-size:@fontSize;
 					font-family:PingF	angSC-Medium;
 					font-weight:bold;
 					color:rgba(255,255,255,1);
@@ -188,7 +190,7 @@
 			    flex-direction: column;
 			    p {
 			     	margin: 0px;
-				    font-size:.4rem;
+				    font-size:@fontSize;
 					font-family:PingFangSC-Medium;
 					font-weight:bold;
 					color:rgba(255,255,255,1);
@@ -213,7 +215,7 @@
 			    flex-direction: column;
 			    p {
 			    	margin: 0px;
-			    	font-size:0.4rem;
+			    	font-size:@fontSize;
 					font-family:PingFangSC-Medium;
 					font-weight:bold;
 					color:rgba(255,255,255,1);
@@ -223,9 +225,9 @@
 				p {
 					text-align: right;
 					padding-right: 1rem;
-					font-size: .4rem;
+					font-size:@fontSize;
 					span {
-						font-size: .5rem;
+						font-size:@fontSize;
 					}
 				}
 			}
@@ -242,7 +244,7 @@
 			    flex-direction: column;
 			    p {
 			     	margin: 0px;
-				    font-size:0.4rem;
+				    font-size:@fontSize;
 					font-family:PingFangSC-Medium;
 					font-weight:bold;
 					color:rgba(255,255,255,1);
@@ -252,7 +254,7 @@
 				}
 				p:nth-child(2) {
 					margin-top: 6px;
-					font-size:.4rem;
+					font-size:@fontSize;
 				}
 			}
 			.managerCol:nth-child(3) {
@@ -264,7 +266,7 @@
 			    	text-align: right;
 			    	padding-right: 20%;
 			     	margin: 0px;
-				    font-size:.4rem;
+				    font-size:@fontSize;
 					font-family:PingFangSC-Medium;
 					font-weight:bold;
 					color:rgba(255,255,255,1);
@@ -274,7 +276,7 @@
 				}
 				p:nth-child(2) {
 					margin-top: 6px;
-					font-size:.4rem;
+					font-size:@fontSize;
 				}
 			}
 			.managerCol:nth-child(4)  {

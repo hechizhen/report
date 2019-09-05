@@ -64,11 +64,11 @@
         width:90%;
         margin:0 auto;
         .rowStyle{
-            height:2rem;
+            height:80px;
             width:100%;
             display:flex;
             align-items: center;
-            line-height:2rem;
+            line-height:80px;
         }
         .borderBottom{
             border-bottom:1px solid rgba(220,223,230,1);
@@ -80,19 +80,19 @@
             background:rgba(241,244,251,1);
         }
         .fontStyle{
-            font-size:0.45rem;
+            font-size:18px;
             font-weight:bold;
             color:rgba(255,255,255,1);
             white-space: nowrap;
         }
         .fontStyle1{
-            font-size:0.45rem;
+            font-size:18px;
             font-weight:bold;
             color:#98A2B4;
             white-space: nowrap;
         }
         .fontStyle2{
-            font-size:0.6rem;
+            font-size:24px;
             font-weight:bold;
         }
         /deep/.ant-col-18{

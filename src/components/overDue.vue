@@ -91,19 +91,18 @@
     stroke: #FD6691!important;
     border:1px solid #fff;
 }
-.ant-progress-inner{
-    width:3rem!important;
-    height:3rem!important
-}
+// .ant-progress-inner{
+//     width:3rem!important;
+//     height:3rem!important
+// }
 </style>
 <style scoped lang="less">
     .overDue{
         width:80%;
         margin:0 auto;
-        padding-top: 0.6rem;
         .overDueTopBox{
             width:100%;
-            height:2.25rem;
+            height:90px;
             border:1px solid rgba(87,174,246,1);
             border-radius:6px;
             display: flex;
@@ -111,7 +110,7 @@
             justify-content: center;
             text-align: center;
             p{
-                font-size:0.35rem;
+                font-size:14px;
                 font-weight:bold;
                 color:#333;
                 margin-bottom:0;
@@ -125,10 +124,10 @@
                     color:rgba(87,174,246,1);
                 }
                 span:first-child{
-                    font-size: 0.4rem
+                    font-size: 16px
                 }
                 span:nth-child(2){
-                    font-size: 0.6rem
+                    font-size: 24px
                 }
             }
         }
@@ -136,7 +135,7 @@
             display: flex;
             align-items: center;
             width:100%;
-            height: 4.2rem;
+            height: 150px;
             position: relative;
             justify-content: center;
             .overDueBottomLeft{
@@ -145,8 +144,8 @@
             }
             .overDueBox{
                 position: absolute;
-                width:3rem;
-                height:3rem;
+                width:126px;
+                height:126px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -158,10 +157,10 @@
                     color:rgba(51,51,51,1);
                 }
                 p:first-child{
-                    font-size:0.3rem;
+                    font-size:14px;
                 }
                 p:nth-child(2){
-                    font-size:0.5rem;
+                    font-size:20px;
                 }
             }
         }

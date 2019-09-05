@@ -110,7 +110,12 @@
 
         },
         watch: {
-
+            gaugeChartData(val){
+                var _this = this
+                let echarts = _this.$echarts;
+                _this.myChart = echarts.init(document.getElementById("gaugeId"))
+                _this.setChartOption()
+           }
         },
         distroyed: function () {
 

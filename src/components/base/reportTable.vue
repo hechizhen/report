@@ -158,7 +158,6 @@
                     })
                     //获取表格数据
                     _this.tableData = data
-                    console.log(_this.tableData)
                 })
             },
 
@@ -172,7 +171,6 @@
                             method: 'POST',
                             data: item.params
                         }).then(function (res) {
-                            console.log(res)
                             let data = res.data.data.data
                             let list = []
                             data.map(function (item, index) {
@@ -191,7 +189,6 @@
                         }
                     })
                 },3000)
-                console.log(_this.searchList)
             }
         },
         computed:{

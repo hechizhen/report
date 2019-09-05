@@ -254,14 +254,14 @@
         .buttonList{
             position: absolute;
             top:0;
-            left:2rem;
+            left:60px;
             padding: 0.8rem 0 0.45rem;
             display: flex;
             align-items: center;
         }
         .financeBox{
             width:100%;
-            height:7.2rem;
+            height:285px;
             background: #fff;
             border-radius: 6px;
             display: flex;
@@ -275,12 +275,14 @@
             .financeMid{
                 width:30%;
                 height:100%;
-                // padding-top:0.6rem;
+                display: flex;
+                align-items: center
             }
             .financeRight{
                 width:40%;
                 height:100%;
-                padding-top:0.6rem;
+                display: flex;
+                align-items: center
             }
         }
     }

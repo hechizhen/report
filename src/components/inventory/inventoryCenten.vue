@@ -39,7 +39,7 @@
 <style lang="less" scoped>
 .inventoryCenten{
     width: 16%;
-    height:5.53rem;
+    height: 100%;
     background:rgba(255,255,255,1);
     border-radius:10px;
     float: left;
@@ -55,13 +55,14 @@
             text-align: center;
             margin-top: 34%;
             p{
-                font-size:.4rem;
+                font-size:14px;
                 font-family:PingFangSC-Medium;
+                margin-bottom:10px;
                 font-weight:500;
                 color:rgba(152,162,180,1);
             }
             span{
-                font-size:.7rem;
+                font-size:26px;
                 font-family:PingFangSC-Medium;
                 font-weight:bold;
                 color:rgba(51,51,51,1);

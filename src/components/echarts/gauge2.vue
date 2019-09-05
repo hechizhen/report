@@ -44,7 +44,6 @@
                     value: _this.gaugeChartData.data
                 }];
                 var value = dataArr[0].value;
-                var min = value.split('.');
                 // var degrees = 180 - (180 * value / 15); //蓝色刻度尺计算
                 var degrees = 180 - (180 * value / 100); //蓝色刻度尺计算
                 // 蓝色背景
@@ -302,7 +301,12 @@
 
         },
         watch: {
-
+            gaugeChartData(val){
+                var _this = this
+                let echarts = _this.$echarts;
+                _this.myChart = echarts.init(document.getElementById(_this.gaugeChartData.id))
+                _this.setChartOption()
+           }
         },
         distroyed: function () {
 

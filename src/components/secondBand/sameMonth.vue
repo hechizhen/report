@@ -10,7 +10,7 @@
 				<a-Row class="recordConten">
 					<a-Col :span="24" class="recordLeft">
 						<div>
-							<p><img style="margin-right:5px;width:0.6rem" src="./../../assets/img/jine-icon.png">下单金额(万元)</p>
+							<p><img style="margin-right:5px;width:25px" src="./../../assets/img/jine-icon.png">下单金额(万元)</p>
 							<p><span>￥</span>{{orderAmountData.moneyInteger}}<span>{{orderAmountData.moneyDecimal}}</span></p>
 						</div>
 					</a-Col>
@@ -96,7 +96,8 @@
 	    		}
 	    		.titletext {
 	    			padding-left: 5px;
-					font-size:0.5rem;
+					// font-size:0.5rem;
+					font-size:16px;
 					font-family:PingFangSC-Medium;
 					font-weight:500;
 					color:rgba(51,51,51,1);
@@ -133,18 +134,21 @@
 							font-weight:400;
 							color:rgba(255,255,255,1);
 							p:nth-child(1) {
-							font-size:0.5rem;
-							display: flex;
-						    align-items: center;
-						    justify-content: center;
+								// font-size:0.5rem;
+								font-size:20px;
+								display: flex;
+								align-items: center;
+								justify-content: center;
 							}
 							p:nth-child(2) {
-								font-size:1rem;
+								// font-size:1rem;
+								font-size:56px;
 								text-align: center;
 								font-weight:600;
 								margin-top: .5rem;
 								span {
-									font-size: .8rem;
+									// font-size: .8rem;
+									font-size: 36px;
 								}
 							}
 						}
@@ -157,27 +161,30 @@
 						text-align: center;
 						padding-top: 1rem;
 						div {
-							font-size:0.6rem;
+							// font-size:0.6rem;
+							font-size:16px;
 							font-family:PingFangSC-Medium;
 							font-weight:500;
 							color:#98A2B4;
 							span {
 								margin-left: 10px;
-								font-size:0.4rem;
+								// font-size:0.4rem;
+								font-size:12px;
 								font-family:PingFangSC-Medium;
 								font-weight:bold;
 								color:rgba(51,51,51,1);
 							}
 							.txt{
 								color:rgba(51,51,51,1);
-								font-size:0.6rem;
+								// font-size:0.6rem;
+								font-size:16px;
 								font-family:PingFangSC-Medium;
 								font-weight:500;
 								margin-left: 0;
 							}
 						}
 						img {
-							vertical-align:baseline;
+							// vertical-align:baseline;
 							margin-right: 5px;
 						}
 					}
@@ -186,7 +193,7 @@
 						text-align: center;
 						padding-top: 1rem;
 						div {
-							font-size:0.6rem;
+							font-size:16px;
 							font-family:PingFangSC-Medium;
 							font-weight:500;
 							color:#98A2B4;
@@ -195,14 +202,14 @@
 							}
 							span {
 								margin-left: 10px;
-								font-size:0.6rem;
+								font-size:16px;
 								font-family:PingFangSC-Medium;
 								font-weight:500;
 								color:rgba(51,51,51,1);
 							}
 						}
 						img {
-							vertical-align:baseline;
+							// vertical-align:baseline;
 						}
 					}
 				}

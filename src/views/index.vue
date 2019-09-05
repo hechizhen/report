@@ -944,6 +944,7 @@
                         _this.monthSalesData = {
                             sales:_this.dataProcess(salesMonthData.money,'money','tenth').num,
                             reach:(_this.getReachPercent(salesMonthData.money,salesMonthData.target_money)*100).toFixed(2),
+                            chartReach:_this.getReachPercent(salesMonthData.money,salesMonthData.target_money)>1 ? 100 : (_this.getReachPercent(salesMonthData.money,salesMonthData.target_money)*100).toFixed(2),
                             bgColor:'#2D92FC',
                             titleName:'本月',
                             id:'monthgaugeId',
@@ -1026,6 +1027,7 @@
                         _this.yearSalesData = {
                             sales:_this.dataProcess(salesYearData.money,'money','tenth').num,
                             reach:(_this.getReachPercent(salesYearData.money,salesYearData.target_money)*100).toFixed(2),
+                            chartReach:_this.getReachPercent(salesYearData.money,salesYearData.target_money)>1 ? 100 : (_this.getReachPercent(salesYearData.money,salesYearData.target_money)*100).toFixed(2),
                             bgColor:'#FF9500',
                             titleName:'年累计',
                             id:'yeargaugeId',

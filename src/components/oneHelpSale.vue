@@ -74,7 +74,7 @@
                 imgSrc:require('../assets/img/jine-icon.png'),
                 gaugeChartData:{
                     name:'总达成',
-                    data:this.salesData.reach,
+                    data:this.salesData.chartReach,
                     id:this.salesData.id,
                     color:this.salesData.color,
                 }
@@ -89,7 +89,15 @@
 
         },
         watch: {
-
+            salesData(val){
+                console.log(val)
+                this.gaugeChartData = {
+                    name:'总达成',
+                    data:val.chartReach,
+                    id:val.id,
+                    color:val.color,
+                }
+            }
         },
         distroyed: function () {
 
@@ -161,7 +169,7 @@
                         justify-content: center;
                         padding-bottom:20px;
                         p:first-child{
-                            font-size:30px;
+                            font-size:24px;
                             color:#fff
                         }
                         p:nth-child(2){
@@ -223,17 +231,20 @@
                         margin-right:6px;
                     }
                     .rightTxt{
-                        font-size:0.5rem;
+                        // font-size:0.5rem;
+                        font-size:14px;
                         font-weight:500;
                         color:#fff;
                     }
                     .rightReach{
-                        font-size:1rem;
-                        font-weight:500;
+                        // font-size:1rem;
+                        font-size:30px;
+                        font-weight:600;
                         color:#fff;
                     }
                     .rightReachUnit{
-                        font-size:0.5rem;
+                        // font-size:0.5rem;
+                        font-size:18px;
                         font-weight:600;
                         color:#fff;
                     }
@@ -245,7 +256,8 @@
                 .oneHelpSaleBottomTitle{
                     font-weight:500;
                     color:#333;
-                    font-size: 0.4rem;
+                    // font-size: 0.4rem;
+                    font-size: 16px;
                     margin-left:10px;
                     height: 30px;
                 }
@@ -255,7 +267,8 @@
                 }
             }
             .imgSrc{
-                width: 0.5rem;
+                // width: 0.5rem;
+                width: 14px;
                 margin-bottom: 0.1rem;
             }
         }

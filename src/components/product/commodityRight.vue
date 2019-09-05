@@ -29,7 +29,7 @@
                     </div>
                     <div class="commodityR-basetwo">
                         <!--//增长按钮-->
-                    <span  style="font-weight: 600;">{{commoditydata.downGoods.NoSales}}</span>
+                    <span  style="font-weight: 600;font-size:16px">{{commoditydata.downGoods.NoSales}}</span>
                     </div>
                     <div class="productLeft-btn">
                         <newButton :defaultVal="commoditydata.upGoods.btn" :btnStyle="btnStyle"  :txtStyle="txtStyle"
@@ -44,7 +44,7 @@
                     </div>
                     <div class="commodityR-basetwo">
                         <!--//下滑按钮-->
-                    <span style="font-weight: 600;">{{commoditydata.upGoods.NoSales}}</span>
+                    <span style="font-weight: 600;font-size:16px">{{commoditydata.upGoods.NoSales}}</span>
                     </div>
                     <div class="productLeft-btn">
                         <newButton  :defaultVal="commoditydata.downGoods.btn" :btnStyle="btnStyle"  :txtStyle="txtStyle"
@@ -172,7 +172,7 @@
             p{
                 display: flex;
                 justify-content: center;
-                font-size:.4rem;
+                font-size:14px;
                 font-family:PingFangSC-Medium;
                 font-weight:bold;
                 color:rgba(255,255,255,1);
@@ -181,7 +181,7 @@
             span{
                display: flex;
                 justify-content: center;
-                font-size:0.7rem;
+                font-size:28px;
                 font-family:PingFangSC-Semibold;
                 font-weight:600;
                 color:rgba(255,216,110,1);
@@ -228,7 +228,7 @@
                     text-align: center;
 
                     span {
-                        font-size: .4rem;
+                        font-size: 16px;
                         font-family: PingFangSC-Regular;
                         font-weight: 400;
                         color: rgba(255, 255, 255, 1);
@@ -238,7 +238,7 @@
                         color: rgba(255, 255, 255, 1);
                         margin-bottom: 0;
                         display: inline-block;
-                        font-size: .4rem;
+                        font-size: 16px;
                         font-weight: 500;
                     }
                 }
@@ -248,25 +248,24 @@
                 width: 100%;
                 height: 1rem;
                 margin: 6% auto 0;
+                display: flex;
+                align-items: center;
                 .quan {
                     float: left;
-                    width:0.3rem;
-                    height:0.3rem;
-                    border: 4px solid rgba(255, 255, 255, 1);
+                    width:12px;
+                    height:12px;
+                    border: 3px solid rgba(255, 255, 255, 1);
                     border-radius: 50%;
                     display: inline-block;
                 }
-
                 span {
-                    line-height:  .99rem;
-                    font-size: .4rem;
+                    font-size: 14px;
                     font-family: PingFangSC-Regular;
                     font-weight: 400;
                     color: rgba(255, 255, 255, 1);
                     padding-left: 4%;
                     white-space: nowrap;
                 }
-
                 .productLeft-btn {
                     width: 32%;
                     height: 100%;
@@ -309,12 +308,12 @@
                     color: rgba(255, 255, 255, 1);
                     text-align: center;
                     p {
-                        font-size: .4rem;
+                        font-size: 16px;
                         margin-bottom: 10%;
                     }
 
                     span {
-                        font-size: .6rem;
+                        font-size: 24px;
                     }
                 }
             }

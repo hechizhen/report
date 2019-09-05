@@ -41,7 +41,6 @@
         },
         methods: {
             buttonClick(val){
-                console.log(val)
                 this.buttonHandleClick(val)
             }
         },

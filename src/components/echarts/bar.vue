@@ -161,9 +161,9 @@
                             yAxis:_this.barEchartsData.markLineList.data,
                             lineStyle: {
                                 normal: {
-                                    color: '#c9cbd5',
+                                    color: '#D7D9E5',
                                     type: 'solid',
-                                    width: 1
+                                    width: 0.5
                                 }
                             },
                             x: '',

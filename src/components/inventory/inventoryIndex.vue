@@ -276,28 +276,27 @@
                 width: 51%;
                 height: 100%;
                 float: left;
-                font-size:.4rem;
+                font-size: 14px;
                 font-family:PingFangSC-Medium;
                 font-weight:500;
                 color:rgba(255,255,255,1);
                 position: relative;
                 .yuan{
-                    width:0.38rem;
-                    height:0.38rem;
+                    width: 15px;
+                    height: 15px;
                     background-color: #fff;
                     color: #474FE7;
-                    display: inline-block;
                     border-radius: 50%;
                     text-align: center;
                     margin-right: 2%;
                 }
                 p{
                     display: inline-block;
-                    font-size:0.75rem;
+                    font-size:30px;
                     font-weight: bold;
                     margin-bottom: 0;
                     span{
-                        font-size: .5rem;
+                        font-size: 18px;
                     }
                 }
             }
@@ -317,7 +316,7 @@
         justify-content: center;
         align-items: center;
         .ant-col-18{
-            font-size:.4rem;
+            font-size:14px;
             font-family:PingFangSC-Medium;
             font-weight:500;
             color:rgba(51,51,51,1);
@@ -345,7 +344,7 @@
         align-items: center;//子元素垂直居中
     }
     .bartu{
-        margin-top: 2%;
+        margin-top: 20px;
         height:100%;
         background:rgba(255,255,255,1);
         border-radius:10px;

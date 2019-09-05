@@ -119,7 +119,6 @@
         methods: {
             //选择维度
             changeDimension(item){
-                console.log(item.target.value)
                 this.dimension = item.target.value
                 this.selectButtonClick(item.target.value)
             },

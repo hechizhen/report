@@ -177,20 +177,20 @@
         p{
             width: 79%;
             margin-left: 10%;
-            font-size:.3rem;
+            font-size: 12px;
             font-weight:500;
             padding-top: .71rem;
             padding-bottom: 7%;
             display: grid;
 
             span{
-                font-size:.3rem;
+                font-size: 12px;
                 font-weight:500;
                 margin-top: 5%;
             }
         }
         span{
-            font-size:0.65rem;
+            font-size:26px;
             font-weight:600;
         }
         .productLeft-btn{
@@ -218,13 +218,14 @@
             width: 49%;
             text-align: center;
             span{
-                font-size:.4rem;
+                font-size:16px;
                 font-family:PingFangSC-Regular;
                 font-weight:400;
                 color:rgba(51, 51, 51, 1);
             }
             p{
                 /*color:rgba(255, 0, 72, 1);*/
+                font-size:16px;
                 color:rgba(51, 51, 51, 1);
                 margin-bottom: 0;
                 display: inline-block;
@@ -233,20 +234,22 @@
     }
       .shop-data-base{
            width: 79%;
-            height: 12%;
-            margin-top: 2%;
+            margin-top: 1%;
             margin-left: 8%;
+            height: 1rem;
+            display: flex;
+            align-items: center;
+            position: relative;
             span{
-                line-height: .8rem;
-                font-size:.4rem;
+                font-size:14px;
                 font-family:PingFangSC-Regular;
                 font-weight:400;
                 color:rgba(152,162,180,1);
             }
             .productLeft-btn{
-                height:100%;
                 text-align: center;
-                float: right;
+                position: absolute;
+                right:0
             }
         }
     }

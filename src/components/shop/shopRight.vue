@@ -126,19 +126,19 @@
             margin-left:10%;
             p {
                 display: grid;
-                font-size: .4rem;
+                font-size:12px;
                 font-weight: 500;
                 padding-top: 16%;
                 padding-bottom:5%;
                 margin-bottom: 0;
                 span{
-                    font-size: .4rem;
+                    font-size: 12px;
                     font-weight: 500;
                     margin-top: 5%;
                 }
             }
             span {
-                font-size: .6rem;
+                font-size: 26px;
                 font-weight: 600;
             }
         }

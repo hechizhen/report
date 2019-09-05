@@ -7,13 +7,13 @@
                 <span class="spanFont spanSize">以下是针对您企业的体检报告分析结果，请认真审阅：</span>
             </p>
             <p class="paddingStyle1">
-                <span class="spanFont">查询日期：</span>
+                <span class="spanFont" style="font-size:14px;">查询日期：</span>
                 <!-- <a-month-picker v-model="defaultValDate" :disabledDate="disabledDate" :format="monthFormat" :allowClear="false" @change="changeDate" /> -->
                 <DatePicker type="month" v-model="defaultValDate" :options="options3" format="yyyy/MM" :clearable="false" @on-change="changeDate" style="width:170px;"></DatePicker>
                 <button-list :buttonType="buttonList.buttonType" :isGhost="buttonList.isGhost" :buttonHandleClick="buttonHandleClick" :defaultVal="buttonList.defaultVal" style="margin-left:20px;"></button-list>
             </p>
             <p style="margin-top: 2%">
-                <span style="font-size:14px;">经销商：</span>
+                <span style="font-size:14px;padding-left:10px;">经销商：</span>
                 <a-select showSearch v-model="dealName" @change="onChange" style="width:170px;">
                     <a-select-option v-for="(item,index) in dealList" :key="item+index" :value="item.name" :disabled="item.date_dt==nowDate ? true : false">{{item.name}}</a-select-option>
                 </a-select>
@@ -184,6 +184,12 @@
         computed:{
         },
         watch: {
+            score(val){
+                this.gaugeChartData = {
+                    name:'总得分',
+                    data:val.coretext
+                }
+            }
         },
         distroyed: function () {
 
@@ -203,7 +209,8 @@
             // height:100%;
         }
         .headerTitle_mid{
-            width: 4rem;
+            // width: 4rem;
+            width: 142px;
             height:100%;
             margin-left:1.8rem;
             position: relative;
@@ -218,12 +225,14 @@
                 text-align: center;
                 p:first-child{
                     color:#0068EC;
-                    font-size: 1rem;
+                    // font-size: 1rem;
+                    font-size: 46px;
                     padding-top:0.3rem;
                 }
                 p:nth-child(2){
                     color:#0068EC;
-                    font-size: 0.3rem;
+                    // font-size: 0.3rem;
+                    font-size: 13px;
                 }
             }
         }
@@ -249,7 +258,7 @@
             position: relative;
         }
         .spanFont{
-            color:#45485A
+            color:#45485A;
         }
         .spanFont1{
             color:#A0A5B1;
@@ -259,7 +268,8 @@
             color:#2D92FC
         }
         .spanSize{
-            font-size: 0.4rem;
+            // font-size: 0.4rem;
+            font-size: 12px;
             font-weight:500;
             color:rgba(160,165,177,1);
         }
