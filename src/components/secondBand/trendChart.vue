@@ -73,8 +73,8 @@
 </script>
 <style lang="less" scoped>
 	.thendChart {
-		margin-top: .7rem;
-		height: 6.69rem;
+		margin-top:24px;
+		height: 260px;
 		width: 100%;
 		.echarts {
 			height: 100%;

@@ -47,15 +47,12 @@
                 defaultValdown:"库存详情",
                 isShowDetail:false,
                 btnStyle:{
-                    width:'78px',
+                    width:'88px',
                     height:'26px',
                     border: '1px solid #DCDCDC',
-                    // hover:{
-                    // 	color:'red'
-                    // }
                 },
                 txtStyle:{
-                    fontSize:'12px',
+                    fontSize:'14px',
                     color:'#333333',
                     fontWeight:500
                 },
@@ -94,60 +91,61 @@
 </script>
 
 <style lang="less" scoped>
-.shu{
-    width:1px;
-    height:3.86rem !important;
-    border:1px solid rgba(229,229,229,1);
-    float: right;
-    margin-top: 5%;
-    position: absolute;
-    top: 10%;
-    right: 0;
-    margin-right:0 !important;
-    padding-left: 0 !important;
-}
-.inventoryDase{
-    width:45%;
-    height:100%;
-    background:rgba(255,255,255,1);
-    border-radius:10px;
-    float: left;
-    margin-left: 2%;
-    position: relative;
-    .inventoryDase-left{
-        width: 38%;
-        height: 100%;
+    .shu{
+        width:1px;
+        height:137px !important;
+        border:1px solid rgba(229,229,229,1);
+        float: right;
+        margin-top: 5%;
+        position: absolute;
+        top: 10%;
+        right: 0;
+        margin-right:0 !important;
+        padding-left: 0 !important;
+    }
+    .inventoryDase{
+        width:45%;
+        height:208px;
+        background:rgba(255,255,255,1);
+        border-radius:10px;
         float: left;
+        margin-left: 2%;
         position: relative;
-        span{
-            display: inline-block;
-            font-size:14px;
-            font-family:PingFangSC-Medium;
-            font-weight:600;
-            color:rgba(51,51,51,1);
-            line-height: .9rem;
+        .inventoryDase-left{
+            width: 38%;
+            height: 100%;
             float: left;
-            padding-left: 6%;
-        }
-        .newButton{
-            width:40% ;
-            float: left;
-        }
-        b{
-            font-size:28px;
-            font-family:PingFangSC-Medium;
-            font-weight:bold;
-            color:rgba(29,145,240,1);
-            margin-top: 5%;
-            display: block;
-            text-align: center;
-            height: 27%;
-        }
-        .left-txt{
-            width: 90%;
-            height: 36%;
-            background:rgba(238,240,245,1);
-            margin: 0 auto;
+            position: relative;
+            span{
+                display: inline-block;
+                font-size:14px;
+                font-family:PingFangSC-Medium;
+                font-weight:600;
+                color:rgba(51,51,51,1);
+                height: 32px;
+                line-height:32px;
+                float: left;
+                padding-left: 6%;
+            }
+            .newButton{
+                width:40% ;
+                float: left;
+            }
+            b{
+                font-size:32px;
+                font-family:PingFangSC-Medium;
+                font-weight:bold;
+                color:rgba(29,145,240,1);
+                margin-top: 5%;
+                display: block;
+                text-align: center;
+                height: 27%;
+            }
+            .left-txt{
+                width: 90%;
+                height: 36%;
+                background:rgba(238,240,245,1);
+                margin: 0 auto;
                 .left-txt-title {
                     float: left;
                     width: 100%;
@@ -167,39 +165,43 @@
                         display: inline-block;
                         font-size: 14px;
                         font-weight:600;
-                        line-height: .9rem;
+                        line-height: 32px;
                     }
+                }
+            }
+        }
+        .inventoryDase-right{
+            width: 60%;
+            height: 100%;
+            float: left;
+            margin-left: 1%;
+            /*background-color: bisque;*/
+            .btn{
+                height: 19%;
+                margin-bottom: 2%;
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                .newButton{
+                    float: right;
+                    margin-top: 2%;
+                    margin-right: 5%;
+                }
+            }
+            .bartu{
+                height: 77%;
             }
         }
     }
-    .inventoryDase-right{
-        width: 60%;
-        height: 100%;
-        float: left;
-        margin-left: 1%;
-        /*background-color: bisque;*/
-        .btn{
-            width: 97%;
-            height: 23%;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            .newButton{
-                float: right;
-                margin-top: 2%;
-                margin-right: 5%;
-            }
-        }
-        .bartu{
-            height: 77%;
-        }
-    }
-}
 
-.inventoryDase .inventoryDase-left .left-txt .left-txt-title:first-child{
-    margin-top: 2%;
-}
-.inventoryDase .inventoryDase-left .left-txt .left-txt-title:nth-child(2) p{
-    color: rgba(152, 162, 180, 1);
-}
+    .ant-btn-default{
+        height: 20px;
+    }
+    .inventoryDase .inventoryDase-left .left-txt .left-txt-title:first-child{
+        margin-top: 2%;
+    }
+    .inventoryDase .inventoryDase-left .left-txt .left-txt-title:nth-child(2) p{
+        color: rgba(152, 162, 180, 1);
+    }
 </style>
+

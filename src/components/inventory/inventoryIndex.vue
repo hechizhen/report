@@ -224,7 +224,7 @@
 <style lang="less" scoped>
     .inventoryindex{
         width: 100%;
-        height:5.53rem;
+        height:210px;
     }
     .commodityR-base:nth-child(2) .ant-col-6{
         padding-left: 2%;
@@ -250,7 +250,7 @@
     }
     .shu{
         width:1px;
-        height:2.65rem;
+        height:94px;
         border:1px solid rgba(255,255,255,1);
         float: right;
         position: absolute;
@@ -268,7 +268,7 @@
         position: relative;
         .table-head{
             width: 100%;
-            height:3rem;
+            height: 120px;
             background:linear-gradient(90deg,#474FE7,#1D91F0);
             box-shadow:0px 2px 15px 0px rgba(255,182,2,0.13);
             border-radius:10px 10px 0 0;
@@ -276,23 +276,25 @@
                 width: 51%;
                 height: 100%;
                 float: left;
-                font-size: 14px;
+                font-size:14px;
                 font-family:PingFangSC-Medium;
                 font-weight:500;
                 color:rgba(255,255,255,1);
                 position: relative;
                 .yuan{
-                    width: 15px;
-                    height: 15px;
+                    width:15px;
+                    height:15px;
                     background-color: #fff;
                     color: #474FE7;
+                    display: inline-block;
                     border-radius: 50%;
                     text-align: center;
                     margin-right: 2%;
                 }
                 p{
                     display: inline-block;
-                    font-size:30px;
+                    line-height: 33px;
+                    font-size: 30px;
                     font-weight: bold;
                     margin-bottom: 0;
                     span{
@@ -307,6 +309,39 @@
             position: relative;
             background:rgba(255,255,255,.5);
             border-radius:0px 0px 10px 10px ;
+            .table-base {
+                width: 80%;
+                height: 44px;
+                line-height: 44px;
+                margin-left: 10%;
+                span {
+                    line-height: 28px;
+                    font-size:16px;
+                    font-family:PingFangSC-Medium;
+                    font-weight:500;
+                    color:rgba(0,0,0,1);
+                    display: inline-block;
+                    width: 56%;
+                }
+            }
+            .tableLeft-btn {
+                position: absolute;
+                top: 30%;
+                right: 5%;
+                width:88px;
+                height:32px;
+                line-height: 26px;
+                text-align: center;
+                float: right;
+
+                span {
+                    width: 48px;
+                    font-size:14px;
+                    font-family:PingFangSC-Regular;
+                    font-weight:600;
+                    color:rgba(0,0,0,1);
+                }
+            }
         }
     }
     .commodityR-base {
@@ -322,10 +357,10 @@
             color:rgba(51,51,51,1);
             display: inline-block;
             width: 70%;
-            line-height: 1.24rem;
+            line-height: 44px;
         }
         .ant-col-6{
-            line-height: 1.24rem;
+            line-height: 44px;
             font-size:18px;
             font-family:PingFangSC-Semibold;
             font-weight:600;
@@ -337,14 +372,23 @@
     }
     .productLeft-btn {
         width:25%;
-        height: 2.48rem;
+        height:88px;
         float: left;
         display:flex;
         /*justify-content: center;//子元素水平居中*/
         align-items: center;//子元素垂直居中
+        .newButton {
+            span {
+                width: 48px;
+                font-size: 14px;
+                font-family: PingFangSC-Regular;
+                font-weight: 600;
+                color: rgba(51, 51, 51, 1);
+            }
+        }
     }
     .bartu{
-        margin-top: 20px;
+        margin-top: 23px;
         height:100%;
         background:rgba(255,255,255,1);
         border-radius:10px;

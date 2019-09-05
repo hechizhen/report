@@ -34,10 +34,10 @@
 <style lang="less" scoped>
     .productRight {
         width: 60%;
-        height: 100%;
+        height: 260px !important;
         float: left;
         /*.barChart >div canvas{*/
-            /*width: 90%;*/
+        /*width: 90%;*/
         /*}*/
 
     }

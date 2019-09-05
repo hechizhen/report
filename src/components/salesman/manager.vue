@@ -143,13 +143,12 @@
 }
 </style>
 <style lang="less" scoped>
-	@fontSize:14px;
 	.manager {
 		width: 100%;
-		height:3.68rem;
+		height: 130px;
 		background:rgba(255,255,255,1);
 		border-radius:10px;
-		padding: .3rem .2rem;
+		padding: 15px 10px;
 		position: relative;
 		.managerRow {
 			width: 100%;
@@ -160,9 +159,6 @@
 				height: 100%;
 				padding-left: 1%;
 				padding-right: 1%;
-				img{
-					width:1.5rem
-				}
 			}
 		}
 		.conclude {
@@ -173,12 +169,11 @@
 			border-radius:6px;
 			.managerCol:nth-child(2) {
 				display: flex;
-			    justify-content: center;
-			    flex-direction: column;
-			    p {
-			     	margin: 0px;
-				    // font-size:.4rem;
-				    font-size:@fontSize;
+				justify-content: center;
+				flex-direction: column;
+				p {
+					margin: 0px;
+					font-size:14px;
 					font-family:PingF	angSC-Medium;
 					font-weight:bold;
 					color:rgba(255,255,255,1);
@@ -186,11 +181,11 @@
 			}
 			.managerCol:nth-child(3)  {
 				display: flex;
-			    justify-content: center;
-			    flex-direction: column;
-			    p {
-			     	margin: 0px;
-				    font-size:@fontSize;
+				justify-content: center;
+				flex-direction: column;
+				p {
+					margin: 0px;
+					font-size:14px;
 					font-family:PingFangSC-Medium;
 					font-weight:bold;
 					color:rgba(255,255,255,1);
@@ -198,9 +193,28 @@
 			}
 			.managerCol:nth-child(4)  {
 				display: flex;
-			    justify-content: center;
-			    flex-direction: column;
-				align-items: center;
+				justify-content: center;
+				flex-direction: column;
+				p {
+					cursor: pointer;
+					margin: 0px;
+					width: 90px;
+					text-align: center;
+					padding: 6px 0;
+					border:1px solid rgba(255,255,255,1);
+					border-radius:3px;
+					font-size:14px;
+					font-family:PingFangSC-Regular;
+					font-weight:400;
+					color:rgba(255,255,255,1);
+				}
+				p:nth-child(2) {
+					margin-top: 6px;
+				}
+				p:active {
+					color:rgba(255,255,255,1);
+					background:rgba(6,192,98,1);
+				}
 			}
 		}
 		.produce {
@@ -211,23 +225,23 @@
 			border-radius:6px;
 			.managerCol {
 				display: flex;
-			    justify-content: center;
-			    flex-direction: column;
-			    p {
-			    	margin: 0px;
-			    	font-size:@fontSize;
+				justify-content: center;
+				flex-direction: column;
+				p {
+					margin: 0px;
+					font-size:14px;
 					font-family:PingFangSC-Medium;
 					font-weight:bold;
 					color:rgba(255,255,255,1);
-			    }
+				}
 			}
 			.managerCol:nth-child(3) {
 				p {
 					text-align: right;
-					padding-right: 1rem;
-					font-size:@fontSize;
+					padding-right: 40px;
+					font-size: 14px;
 					span {
-						font-size:@fontSize;
+						font-size: 16px;
 					}
 				}
 			}
@@ -240,11 +254,11 @@
 			border-radius:6px;
 			.managerCol:nth-child(2) {
 				display: flex;
-			    justify-content: center;
-			    flex-direction: column;
-			    p {
-			     	margin: 0px;
-				    font-size:@fontSize;
+				justify-content: center;
+				flex-direction: column;
+				p {
+					margin: 0px;
+					font-size:14px;
 					font-family:PingFangSC-Medium;
 					font-weight:bold;
 					color:rgba(255,255,255,1);
@@ -254,19 +268,19 @@
 				}
 				p:nth-child(2) {
 					margin-top: 6px;
-					font-size:@fontSize;
+					font-size:14px;
 				}
 			}
 			.managerCol:nth-child(3) {
 				display: flex;
-			    justify-content: center;
-			    flex-direction: column;
-			    p {
-			    	width: 100%;
-			    	text-align: right;
-			    	padding-right: 20%;
-			     	margin: 0px;
-				    font-size:@fontSize;
+				justify-content: center;
+				flex-direction: column;
+				p {
+					width: 100%;
+					text-align: right;
+					padding-right: 20%;
+					margin: 0px;
+					font-size:14px;
 					font-family:PingFangSC-Medium;
 					font-weight:bold;
 					color:rgba(255,255,255,1);
@@ -276,22 +290,42 @@
 				}
 				p:nth-child(2) {
 					margin-top: 6px;
-					font-size:@fontSize;
+					font-size:14px;
 				}
 			}
 			.managerCol:nth-child(4)  {
 				display: flex;
-			    justify-content: center;
-			    flex-direction: column;
-				align-items: center;
+				justify-content: center;
+				flex-direction: column;
+				p {
+					cursor: pointer;
+					margin: 0px;
+					width: 90px;
+					text-align: center;
+					padding: 6px 0;
+					border:1px solid rgba(255,255,255,1);
+					border-radius:3px;
+					font-size:14px;
+					font-family:PingFangSC-Regular;
+					font-weight:400;
+					color:rgba(255,255,255,1);
+				}
+				p:nth-child(2) {
+					margin-top: 6px;
+				}
+				p:active {
+					color:rgba(255,255,255,1);
+					background:rgba(228,164,0,1);
+				}
 			}
 		}
 		.icon {
 			width: 100%;
 			height: 100%;
 			display: flex;
-		    align-items: center;
-		    justify-content: center;
+			align-items: center;
+			justify-content: center;
 		}
 	}
 </style>
+

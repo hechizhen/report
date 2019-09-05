@@ -105,7 +105,7 @@
                     list:['事业部','品类','系列','商品']
                 },
                 btnStyle:{
-                    width: '72px',
+                    width: '88px',
                     height: '26px',
                     border: '1px solid #FFFFFF',
                     // hover:{
@@ -113,7 +113,7 @@
                     // }
                 },
                 txtStyle:{
-                    fontSize:'12px',
+                    fontSize:'14px',
                     color:'#ffffff',
                     fontWeight:400
                 },
@@ -158,8 +158,8 @@
         width: 22%;
         float: left;
         .productLeft-img{
-            width: 1.3rem;
-            height: 1.3rem;
+            width: 46px;
+            height: 46px;
             margin: auto;
             margin-top: 17%;
             img{
@@ -168,33 +168,35 @@
             }
         }
         .productLeft-txt{
-            margin-top: .3rem;
+            margin-top: 10px;
             p{
-                display: flex;
-                justify-content: center;
+                width:71px;
                 font-size:14px;
                 font-family:PingFangSC-Medium;
                 font-weight:bold;
                 color:rgba(255,255,255,1);
+                margin: 0 auto;
                 white-space : nowrap
             }
             span{
-               display: flex;
-                justify-content: center;
+                width:99px;
                 font-size:28px;
                 font-family:PingFangSC-Semibold;
                 font-weight:600;
                 color:rgba(255,216,110,1);
-                margin-top: .3rem;
+                margin: 0 auto;
+                display: block;
+                margin-top: 12px;
+                text-align: center;
             }
         }
         .productLeft-btn{
             height:100%;
-            margin: .5rem auto 0;
+            line-height: 26px;
+            margin: 22px  auto  51px;
             text-align: center;
-            justify-content: center;
-            align-items: center;
             display: flex;
+            justify-content: center;
             span{
                 width:48px;
                 font-size:12px;
@@ -207,7 +209,7 @@
     .commodityRight {
         width: 49%;
         float: left;
-        height: 6.8rem;
+        height: 260px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -217,7 +219,7 @@
             text-align: center;
             .commodityR-title {
                 width: 100%;
-                line-height: 0.9rem;
+                line-height: 32px;
                 background: rgba(255,255,255,0.2);
                 border-radius: 6px;
                 display: inline-block;
@@ -246,19 +248,19 @@
 
             .commodityR-base {
                 width: 100%;
-                height: 1rem;
+                height: 34px;
                 margin: 6% auto 0;
-                display: flex;
-                align-items: center;
                 .quan {
                     float: left;
-                    width:12px;
-                    height:12px;
-                    border: 3px solid rgba(255, 255, 255, 1);
+                    width: 12px;
+                    height: 12px;
+                    border: 4px solid rgba(255, 255, 255, 1);
                     border-radius: 50%;
                     display: inline-block;
                 }
+
                 span {
+                    line-height: 34px;
                     font-size: 14px;
                     font-family: PingFangSC-Regular;
                     font-weight: 400;
@@ -266,13 +268,13 @@
                     padding-left: 4%;
                     white-space: nowrap;
                 }
+
                 .productLeft-btn {
                     width: 32%;
                     height: 100%;
+                    line-height: 26px;
                     text-align: right;
-                    float: right;
                     display: flex;
-                    align-items: center;
                     justify-content: flex-end;
 
                     span {
@@ -286,38 +288,38 @@
             }
         }
     }
-        .commodityRight-sum{
-            float: left;
-            width: 29%;
-            height: 6.8rem;
+    .commodityRight-sum{
+        float: left;
+        width: 29%;
+        height: 260px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .commodityRight-sumbor {
+            width: 130px;
+            height: 130px;
+            border: 1px solid rgba(255, 255, 255, 1);
+            border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            .commodityRight-sumbor {
-                width:3.83rem;
-                height:3.83rem;
-                border: 1px solid rgba(255, 255, 255, 1);
-                border-radius: 50%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
 
-                .commodityRight-sumtxt {
-                    font-family: PingFangSC-Medium;
-                    font-weight: bold;
-                    color: rgba(255, 255, 255, 1);
-                    text-align: center;
-                    p {
-                        font-size: 16px;
-                        margin-bottom: 10%;
-                    }
+            .commodityRight-sumtxt {
+                font-family: PingFangSC-Medium;
+                font-weight: bold;
+                color: rgba(255, 255, 255, 1);
+                text-align: center;
+                p {
+                    font-size: 16px;
+                    margin-bottom: 10%;
+                }
 
-                    span {
-                        font-size: 24px;
-                    }
+                span {
+                    font-size: 24px;
                 }
             }
-      }
+        }
+    }
     .commodityRight .commodityR-centen .commodityR-title .commodityR-title1:nth-child(2) p{
         color: #fff;
     }

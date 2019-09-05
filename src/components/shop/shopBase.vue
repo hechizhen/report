@@ -81,13 +81,10 @@
         float: left;
         background:rgba(238,240,245,.5);
         border-radius:6px 6px 0px 0px;
-        height: 2.4rem;
         /*padding-left: 3%;*/
         .commodityR-base {
             width: 100%;
-            height: 50%;
-            display: flex;
-            align-items: center;
+            float: left;
             .quan {
                 width:10px;
                 height:10px;
@@ -98,16 +95,18 @@
             }
 
             .ant-col-18{
-                font-size:18px;
+                line-height: 44px;
+                font-size:16px;
                 font-family:PingFangSC-Medium;
                 font-weight:500;
                 color:rgba(152,162,180,1);
                 display: inline-block;
             }
             .ant-col-6{
-                font-size:18px;
+                line-height: 44px;
+                font-size:20px;
                 font-family:PingFangSC-Semibold;
-                font-weight:500;
+                font-weight:600;
                 margin-bottom: 0;
                 display: inline-block;
                 color: rgba(152, 162, 180, 1);
@@ -115,11 +114,21 @@
         }
         .productLeft-btn {
             width:30%;
-            height: 100%;
+            height:88px;
             float: left;
             display:flex;
             justify-content: center;//子元素水平居中
             align-items: center;//子元素垂直居中
+            .newButton {
+
+                span {
+                    width: 48px;
+                    font-size: 14px;
+                    font-family: PingFangSC-Regular;
+                    font-weight: 600;
+                    color: rgba(51, 51, 51, 1);
+                }
+            }
         }
     }
     .onetxt{
@@ -129,7 +138,7 @@
     .shopRight .onetxt{
         padding-left: 7%;
     }
-  .shopLeft .shopBase .productLeft-btn{
+    .shopLeft .shopBase .productLeft-btn{
         justify-content: left;
     }
 </style>

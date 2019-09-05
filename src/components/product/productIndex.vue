@@ -280,12 +280,12 @@
                     background:rgba(67,159,255,1);
                     border:1px solid rgba(105,151,255,1);
                     border-radius:6px;
-                    height: 6.85rem;
+                    height: 100%;
                     position: relative;
                 }
                 .ant-col-14{
                     width: 56.3%;
-                    height: 6.85rem;
+                    height: 100%;
                     background:rgba(67,159,255,1);
                     border:1px solid rgba(105,151,255,1);
                     border-radius:6px;

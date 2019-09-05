@@ -48,7 +48,7 @@
                     list:['品类','系列','商品']
                 },
                 btnStyle:{
-                    width: '72px',
+                    width: '88px',
                     height: '26px',
                     border: '1px solid #FFFFFF',
                     // hover:{
@@ -56,7 +56,7 @@
                     // }
                 },
                 txtStyle:{
-                    fontSize:'12px',
+                    fontSize:'14px',
                     color:'#ffffff',
                     fontWeight:400
                 },
@@ -94,8 +94,8 @@
         width: 30%;
         float: left;
         .productLeft-img{
-            width: 1.3rem;
-            height: 1.3rem;
+            width: 46px;
+            height: 46px;
             margin: auto;
             margin-top: 17%;
             img{
@@ -104,34 +104,38 @@
             }
         }
         .productLeft-txt{
-            margin-top: .3rem;
+            margin-top: 10px;
             p{
-               display: flex;
-                justify-content: center;
+                width:71px;
                 font-size:14px;
                 font-family:PingFangSC-Medium;
                 font-weight:bold;
                 color:rgba(255,255,255,1);
+                margin: 0 auto;
                 white-space : nowrap
+
             }
             span{
-                font-size: 28px;
+                width:99px;
+                font-size:28px;
                 font-family:PingFangSC-Semibold;
                 font-weight:600;
                 color:rgba(255,216,110,1);
-                display: flex;
-                justify-content: center;
+                margin: 0 auto;
+                display: block;
                 margin-top: 12px;
+                text-align: center;
             }
         }
         .productLeft-btn{
             height:100%;
-            margin: .5rem auto 0;
+            line-height: 26px;
+            margin: 22px  auto  51px;
             text-align: center;
             display: flex;
-            align-items: center;
             justify-content: center;
         }
     }
 
 </style>
+

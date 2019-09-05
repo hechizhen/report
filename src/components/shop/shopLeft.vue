@@ -99,7 +99,7 @@
                     fontWeight:500
                 },
                 btnStyle2:{
-                    width: '72px',
+                    width: '88px',
                     height: '26px',
                     border: '1px solid #fff',
                     // hover:{
@@ -107,7 +107,7 @@
                     // }
                 },
                 txtStyle2:{
-                    fontSize:'12px',
+                    fontSize:'14px',
                     color:'#fff',
                     fontWeight:400
                 },
@@ -156,113 +156,112 @@
 </script>
 
 <style lang="less" scoped>
-.shopLeft{
-    width: 51%;
-    float: left;
-    .shopLeft-centen{
-        height: 5.51rem;
-        display: flex;
-        align-items: center;
-    }
-    .shop-active{
-        width:17%;
-        height: 4.64rem;
-        background:rgba(0,166,255,1);
-        border-radius:6px;
-        font-family:PingFangSC-Medium;
-        color:rgba(255,255,255,1);
-        text-align: center;
+    .shopLeft{
+        width: 51%;
         float: left;
-        margin-left: 6%;
-        p{
-            width: 79%;
-            margin-left: 10%;
-            font-size: 12px;
-            font-weight:500;
-            padding-top: .71rem;
-            padding-bottom: 7%;
-            display: grid;
-
-            span{
-                font-size: 12px;
-                font-weight:500;
-                margin-top: 5%;
-            }
-        }
-        span{
-            font-size:26px;
-            font-weight:600;
-        }
-        .productLeft-btn{
-            text-align: center;
-            margin: auto;
-            margin-top: 8%;
+        .shopLeft-centen{
+            height: 196px;
             display: flex;
-            justify-content: center;
             align-items: center;
-
         }
-    }
-    .shop-data{
-        width: 70%;
-        float: left;
-      .shop-data-title {
-        width: 80%;
-        line-height: 1.11rem;
-        background:rgba(238,240,245,1);
-        border-radius:6px;
-        margin: 3% 0 3% 7%;
-        display: inline-block;
-        .shop-data-title1 {
+        .shop-active{
+            width:17%;
+            height:165px;
+            background:rgba(0,166,255,1);
+            border-radius:6px;
+            font-family:PingFangSC-Medium;
+            color:rgba(255,255,255,1);
+            text-align: center;
             float: left;
-            width: 49%;
-            text-align: center;
-            span{
-                font-size:16px;
-                font-family:PingFangSC-Regular;
-                font-weight:400;
-                color:rgba(51, 51, 51, 1);
-            }
+            margin-left: 6%;
             p{
-                /*color:rgba(255, 0, 72, 1);*/
-                font-size:16px;
-                color:rgba(51, 51, 51, 1);
-                margin-bottom: 0;
-                display: inline-block;
+                width: 79%;
+                margin-left: 10%;
+                font-size:12px;
+                font-weight:500;
+                padding-top: 26px;
+                padding-bottom: 7%;
+                display: grid;
+
+                span{
+                    font-size:12px;
+                    font-weight:500;
+                    margin-top: 5%;
+                }
             }
-        }
-    }
-      .shop-data-base{
-           width: 79%;
-            margin-top: 1%;
-            margin-left: 8%;
-            height: 1rem;
-            display: flex;
-            align-items: center;
-            position: relative;
             span{
-                font-size:14px;
-                font-family:PingFangSC-Regular;
-                font-weight:400;
-                color:rgba(152,162,180,1);
+                font-size:26px;
+                font-weight:600;
             }
             .productLeft-btn{
+                line-height: 26px;
                 text-align: center;
-                position: absolute;
-                right:0
+                margin: auto;
+                margin-top: 8%;
+                display: flex;
+                justify-content: center;
+
             }
         }
+        .shop-data{
+            width: 70%;
+            float: left;
+            .shop-data-title {
+                width: 80%;
+                line-height: 41px;
+                background:rgba(238,240,245,1);
+                border-radius:6px;
+                margin: 3% 0 3% 7%;
+                display: inline-block;
+                .shop-data-title1 {
+                    float: left;
+                    width: 49%;
+                    text-align: center;
+                    span{
+                        font-size:14px;
+                        font-family:PingFangSC-Regular;
+                        font-weight:400;
+                        color:rgba(51, 51, 51, 1);
+                    }
+                    p{
+                        /*color:rgba(255, 0, 72, 1);*/
+                        color:rgba(51, 51, 51, 1);
+                        margin-bottom: 0;
+                        display: inline-block;
+                    }
+                }
+            }
+            .shop-data-base{
+                width: 79%;
+                height: 12%;
+                margin-top: 2%;
+                margin-left: 8%;
+                span{
+                    line-height: 28px;
+                    font-size:14px;
+                    font-family:PingFangSC-Regular;
+                    font-weight:400;
+                    color:rgba(152,162,180,1);
+                }
+                .productLeft-btn{
+                    height:100%;
+                    line-height: 26px;
+                    text-align: center;
+                    float: right;
+                }
+            }
+        }
+        .shu{
+            width:1px;
+            height:101px;
+            background:rgba(221,232,255,1);
+            border:1px solid rgba(229,229,229,1);
+            float: right;
+            margin-top: 5%;
+        }
     }
-    .shu{
-        width:1px;
-        height:3rem;
-        background:rgba(221,232,255,1);
-        border:1px solid rgba(229,229,229,1);
-        float: right;
-        margin-top: 5%;
+    .shopLeft .shop-data .shop-data-title .shop-data-title1:nth-child(2) p{
+        color: rgba(51, 51, 51, 1);
     }
-}
-.shopLeft .shop-data .shop-data-title .shop-data-title1:nth-child(2) p{
-    color: rgba(51, 51, 51, 1);
-}
 </style>
+

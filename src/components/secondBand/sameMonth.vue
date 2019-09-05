@@ -74,51 +74,50 @@
 <style lang="less" scoped>
 	.sameMonth {
 		width: 100%;
-		padding: .2rem;
+		padding: 5px;
 		background:rgba(255,255,255,1);
 		border-radius:10px;
 		position: relative;
 		.sameMonthcontent {
 			width: 100%;
-			height: 19.49rem;
+			height: 735px;
 			border:4px solid #00A6FF;
 			border-radius:10px;
-			padding: 0 .5rem;
+			padding: 0 20px;
 			.title {
-				height: 2rem;
+				height: 50px;
 				display: flex;
-	    		align-items: center;
-	    		.titleborder {
-					width:0.3rem;
-					height:0.1rem;
+				align-items: center;
+				.titleborder {
+					width:12px;
+					height:4px;
 					background:rgba(45,146,252,1);
 					border-radius:2px;
-	    		}
-	    		.titletext {
-	    			padding-left: 5px;
-					// font-size:0.5rem;
+				}
+				.titletext {
+					padding-left: 5px;
 					font-size:16px;
 					font-family:PingFangSC-Medium;
 					font-weight:500;
 					color:rgba(51,51,51,1);
-	    		}
-	    		.titleclick {
-	    			cursor: pointer;
-	    			padding: 3px 0;
-	    			font-size:14px;
+				}
+				.titleclick {
+					cursor: pointer;
+					padding: 3px 0;
+					font-size:14px;
 					font-family:PingFangSC-Regular;
 					font-weight:400;
 					color:rgba(51,51,51,1);
-	    			margin-left: 6px;
-	    			width:68px;
+					margin-left: 6px;
+					width:68px;
 					text-align: center;
 					border:1px solid rgba(220,220,220,1);
 					border-radius:6px;
-	    		}
+				}
 			}
 			.record {
 				width: 100%;
-				height: 4rem;
+				height: 145px;
 				.recordConten {
 					height: 100%;
 					width: 100%;
@@ -134,21 +133,17 @@
 							font-weight:400;
 							color:rgba(255,255,255,1);
 							p:nth-child(1) {
-								// font-size:0.5rem;
 								font-size:20px;
 								display: flex;
 								align-items: center;
 								justify-content: center;
 							}
 							p:nth-child(2) {
-								// font-size:1rem;
 								font-size:56px;
 								text-align: center;
 								font-weight:600;
-								margin-top: .5rem;
 								span {
-									// font-size: .8rem;
-									font-size: 36px;
+									font-size:36px;
 								}
 							}
 						}
@@ -156,80 +151,78 @@
 				}
 			}
 			.grossProfit {
-					.recordLeft {
-						height: 2rem;
-						text-align: center;
-						padding-top: 1rem;
-						div {
-							// font-size:0.6rem;
-							font-size:16px;
+				.recordLeft {
+					height: 85px;
+					text-align: center;
+					padding-top: 30px;
+					div {
+						font-size:20px;
+						font-family:PingFangSC-Medium;
+						font-weight:500;
+						color:#98A2B4;
+						span {
+							margin-left: 10px;
+							font-size:12px;
+							font-family:PingFangSC-Medium;
+							font-weight:bold;
+							color:rgba(51,51,51,1);
+						}
+						.txt{
+							color:rgba(51,51,51,1);
+							font-size:20px;
 							font-family:PingFangSC-Medium;
 							font-weight:500;
-							color:#98A2B4;
-							span {
-								margin-left: 10px;
-								// font-size:0.4rem;
-								font-size:12px;
-								font-family:PingFangSC-Medium;
-								font-weight:bold;
-								color:rgba(51,51,51,1);
-							}
-							.txt{
-								color:rgba(51,51,51,1);
-								// font-size:0.6rem;
-								font-size:16px;
-								font-family:PingFangSC-Medium;
-								font-weight:500;
-								margin-left: 0;
-							}
-						}
-						img {
-							// vertical-align:baseline;
-							margin-right: 5px;
+							margin-left: 0;
 						}
 					}
-					.recordRight {
-						height: 2rem;
-						text-align: center;
-						padding-top: 1rem;
-						div {
-							font-size:16px;
-							font-family:PingFangSC-Medium;
-							font-weight:500;
-							color:#98A2B4;
-							img{
-								margin-right: 5px;
-							}
-							span {
-								margin-left: 10px;
-								font-size:16px;
-								font-family:PingFangSC-Medium;
-								font-weight:500;
-								color:rgba(51,51,51,1);
-							}
-						}
-						img {
-							// vertical-align:baseline;
-						}
+					img {
+						vertical-align:baseline;
+						margin-right: 5px;
 					}
 				}
+				.recordRight {
+					height: 85px;
+					text-align: center;
+					padding-top: 30px;
+					div {
+						font-size:20px;
+						font-family:PingFangSC-Medium;
+						font-weight:500;
+						color:#98A2B4;
+						img{
+							margin-right: 5px;
+						}
+						span {
+							margin-left: 10px;
+							font-size:20px;
+							font-family:PingFangSC-Medium;
+							font-weight:500;
+							color:rgba(51,51,51,1);
+						}
+					}
+					img {
+						vertical-align:baseline;
+					}
+				}
+			}
 			.proportion {
 				width: 100%;
-				/*height: 12rem;*/
+				height: 500px;
 				.proportion_title {
 					width: 100%;
-					height: 1.5rem;
-					padding-top: 0.6rem;
-					font-size: .5rem;
+					height: 45px;
+					padding-top: 20px;
+					font-size:18px;
 					font-family:PingFangSC-Semibold;
 					font-weight:600;
 					color:rgba(51,51,51,1);
 				}
 				.proportion_echarts {
 					width: 100%;
-					height: 9.2rem;
+					height: 400px;
 				}
 			}
 		}
 	}
 </style>
+
