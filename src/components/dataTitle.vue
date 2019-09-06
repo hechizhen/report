@@ -45,7 +45,6 @@
     .subtitle_content {
         font-size: 18px;
         padding-left: .3rem;
-        font-family:PingFangSC-Medium;
         font-weight:600;
         color:rgba(51,51,51,1);
     }

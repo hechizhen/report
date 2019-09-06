@@ -59,14 +59,12 @@
 
                 p {
                     font-size: 14px;
-                    font-family: PingFangSC-Medium;
                     font-weight: 500;
                     color: rgba(152, 162, 180, 1);
                 }
 
                 span {
                     font-size: 26px;
-                    font-family: PingFangSC-Medium;
                     font-weight: bold;
                     color: rgba(51, 51, 51, 1);
                 }

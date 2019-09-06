@@ -106,7 +106,6 @@
 					display: flex;
 					align-items: center;
 					font-size:16px;
-					font-family:PingFangSC-Regular;
 					font-weight:400;
 					color:rgba(51,51,51,1);
 				}
@@ -116,7 +115,6 @@
 					display: flex;
 					align-items: center;
 					nt-size:14px;
-					font-family:PingFangSC-Regular;
 					font-weight:400;
 					color:rgba(51,51,51,1);
 					justify-content: flex-end;

@@ -46,7 +46,6 @@
 		align-items: center;
 		p {
 			display: inline-block;
-			font-family:PingFangSC-Regular;
 			font-weight:400;
 			margin: 0px;
 		}

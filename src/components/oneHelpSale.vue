@@ -167,7 +167,9 @@
                         display: flex;
                         align-items: flex-end;
                         justify-content: center;
-                        padding-bottom:20px;
+                        padding-bottom:25px;
+                        top:0;
+                        left:0;
                         p:first-child{
                             font-size:24px;
                             color:#fff

@@ -172,7 +172,6 @@
             p{
                 width:71px;
                 font-size:14px;
-                font-family:PingFangSC-Medium;
                 font-weight:bold;
                 color:rgba(255,255,255,1);
                 margin: 0 auto;
@@ -181,7 +180,6 @@
             span{
                 width:99px;
                 font-size:28px;
-                font-family:PingFangSC-Semibold;
                 font-weight:600;
                 color:rgba(255,216,110,1);
                 margin: 0 auto;
@@ -200,7 +198,6 @@
             span{
                 width:48px;
                 font-size:12px;
-                font-family:PingFangSC-Regular;
                 font-weight:400;
                 color:rgba(255,255,255,1);
             }
@@ -231,7 +228,6 @@
 
                     span {
                         font-size: 16px;
-                        font-family: PingFangSC-Regular;
                         font-weight: 400;
                         color: rgba(255, 255, 255, 1);
                     }
@@ -254,7 +250,7 @@
                     float: left;
                     width: 12px;
                     height: 12px;
-                    border: 4px solid rgba(255, 255, 255, 1);
+                    border: 2px solid rgba(255, 255, 255, 1);
                     border-radius: 50%;
                     display: inline-block;
                 }
@@ -262,7 +258,6 @@
                 span {
                     line-height: 34px;
                     font-size: 14px;
-                    font-family: PingFangSC-Regular;
                     font-weight: 400;
                     color: rgba(255, 255, 255, 1);
                     padding-left: 4%;
@@ -280,7 +275,6 @@
                     span {
                         width: 48px;
                         font-size: 12px;
-                        font-family: PingFangSC-Regular;
                         font-weight: 400;
                         color: rgba(255, 255, 255, 1);
                     }
@@ -305,7 +299,6 @@
             align-items: center;
 
             .commodityRight-sumtxt {
-                font-family: PingFangSC-Medium;
                 font-weight: bold;
                 color: rgba(255, 255, 255, 1);
                 text-align: center;

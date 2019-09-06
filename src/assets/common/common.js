@@ -181,6 +181,81 @@ export default{
         //   return data;
         // }
     };
+    //echarts数据处理
+    Vue.prototype.chartDataProcess = function (data,type,typeVal) {
+      if(data !== "" && data !== null && data !== undefined && data !== '--') {
+          // if (data.indexOf(",") != -1) {
+          var reg = /^-?[0-9]+.?[0-9]*/;//是否为数字
+          var lG = Math.round(data * 1).toString().length;
+          //如果是数字
+          if (reg.test(data)) {
+              if (type == 'money') {
+                if(typeVal=='tenth'){
+                  var num = this.formatCurrency((data / 10000).toFixed(0))
+                  var unit = "万"
+                }else{
+                  var num = this.formatCurrency((data / 1).toFixed(0))
+                  var unit = "万"
+                }
+              } else if (type == 'percent') {
+                var num = (data * 100).toFixed(0)
+                var unit = '%'
+              } else if (type == 'day') {
+                  var num = this.formatCurrency((data / 1).toFixed(0))
+                  var unit = '天'
+              }else if(type=='time'){
+                  var num = (data / 1).toFixed(1)
+                  var unit = '小时/单'
+              }else if(type=='home'){
+                  var num = this.formatCurrency((data / 1).toFixed(0))
+              }else{
+                  var num = (data / 1).toFixed(0)
+                  var unit = ''
+              }
+              return {
+                  num, unit
+              }
+          } else {
+              var num = '--'
+              var unit = ''
+          }
+      } else {
+          var num = '--'
+          var unit = ''
+          return {
+              num, unit
+          }
+      }
+    }
+    Vue.prototype.monthProcess = function(data){
+      let num = Number(data.substring(4,6))
+      if(num==1){
+        var monthData = '一月'
+      }else if(num==2){
+        var monthData = '二月'
+      }else if(num==3){
+        var monthData = '三月'
+      }else if(num==4){
+        var monthData = '四月'
+      }else if(num==5){
+        var monthData = '五月'
+      }else if(num==6){
+        var monthData = '六月'
+      }else if(num==7){
+        var monthData = '七月'
+      }else if(num==8){
+        var monthData = '八月'
+      }else if(num==9){
+        var monthData = '九月'
+      }else if(num==10){
+        var monthData = '十月'
+      }else if(num==11){
+        var monthData = '十一月'
+      }else{
+        var monthData = '十二月'
+      }
+      return monthData
+    }
   //年月处理
   Vue.prototype.getMonthBetween = function(start,end){
       var result = [];

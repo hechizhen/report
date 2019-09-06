@@ -277,7 +277,6 @@
                 height: 100%;
                 float: left;
                 font-size:14px;
-                font-family:PingFangSC-Medium;
                 font-weight:500;
                 color:rgba(255,255,255,1);
                 position: relative;
@@ -317,7 +316,6 @@
                 span {
                     line-height: 28px;
                     font-size:16px;
-                    font-family:PingFangSC-Medium;
                     font-weight:500;
                     color:rgba(0,0,0,1);
                     display: inline-block;
@@ -337,7 +335,6 @@
                 span {
                     width: 48px;
                     font-size:14px;
-                    font-family:PingFangSC-Regular;
                     font-weight:600;
                     color:rgba(0,0,0,1);
                 }
@@ -352,7 +349,6 @@
         align-items: center;
         .ant-col-18{
             font-size:14px;
-            font-family:PingFangSC-Medium;
             font-weight:500;
             color:rgba(51,51,51,1);
             display: inline-block;
@@ -362,7 +358,6 @@
         .ant-col-6{
             line-height: 44px;
             font-size:18px;
-            font-family:PingFangSC-Semibold;
             font-weight:600;
             margin-bottom: 0;
             display: inline-block;
@@ -381,7 +376,6 @@
             span {
                 width: 48px;
                 font-size: 14px;
-                font-family: PingFangSC-Regular;
                 font-weight: 600;
                 color: rgba(51, 51, 51, 1);
             }

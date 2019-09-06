@@ -108,7 +108,6 @@
             p{
                 width:71px;
                 font-size:14px;
-                font-family:PingFangSC-Medium;
                 font-weight:bold;
                 color:rgba(255,255,255,1);
                 margin: 0 auto;
@@ -118,7 +117,6 @@
             span{
                 width:99px;
                 font-size:28px;
-                font-family:PingFangSC-Semibold;
                 font-weight:600;
                 color:rgba(255,216,110,1);
                 margin: 0 auto;

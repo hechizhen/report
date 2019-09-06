@@ -194,7 +194,6 @@
                     align-items: center;
                     padding-left: 10px;
                     font-size:20px;
-                    font-family:PingFangSC-Medium;
                     font-weight:700;
                     color:rgba(0,0,0,1);
                 }
@@ -204,7 +203,6 @@
                     display: flex;
                     align-items: center;
                     font-size:16px;
-                    font-family:PingFangSC-Regular;
                     font-weight:400;
                     color:rgba(51,51,51,1);
                     justify-content: flex-end;
@@ -248,7 +246,6 @@
                     align-items: center;
                     padding-left: 10px;
                     font-size:20px;
-                    font-family:PingFangSC-Medium;
                     font-weight:500;
                     color:rgba(0,0,0,1);
                 }
@@ -258,7 +255,6 @@
                     display: flex;
                     align-items: center;
                     font-size:16px;
-                    font-family:PingFangSC-Regular;
                     font-weight:400;
                     color:rgba(51,51,51,1);
                     justify-content: flex-end;
@@ -320,7 +316,6 @@
                         height: 50px;
                         line-height: 50px;
                         font-size:12px;
-                        font-family:PingFangSC-Regular;
                         font-weight:400;
                         color:rgba(51,51,51,1);
                         background:rgba(242,244,247,1);
@@ -343,7 +338,6 @@
                         line-height: 50px;
                         display: flex;
                         font-size:10px;
-                        font-family:MicrosoftYaHei;
                         font-weight:400;
                         color:rgba(51,51,51,1);
                         align-items: center;
@@ -366,7 +360,6 @@
                 margin-top: 2%;
                 span{
                     font-size:14px;
-                    font-family:MicrosoftYaHei;
                     font-weight:400;
                     color:rgba(51,51,51,1);
                 }
@@ -378,7 +371,6 @@
                     line-height: 32px;
                     text-align: right;
                     font-size:14px;
-                    font-family:MicrosoftYaHei;
                     font-weight:400;
                     color:rgba(102,102,102,1);
                 }

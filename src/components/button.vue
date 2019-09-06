@@ -56,7 +56,6 @@
     }
     .txt{
     font-size:14px;
-    font-family:PingFang SC;
     font-weight:400;
     }
 

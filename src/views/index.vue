@@ -970,7 +970,7 @@
                                     {
                                         name: '达成率',
                                         data: barDataMonth,
-                                        color: '#D7D9E5',
+                                        color: '#bdbfcd',
                                         barWidth: 11
                                     },
                                 ],
@@ -1006,7 +1006,7 @@
                                 },
                                 axisLabel:{
                                     show:true,
-                                    color:'#c9cbd5',
+                                    color:'#bdbfcd',
                                     fontSize:12
                                 },
                                 splitLine:{
@@ -1050,7 +1050,7 @@
                                     {
                                         name: '达成率',
                                         data: barDataYear,
-                                        color: '#D7D9E5',
+                                        color: '#bdbfcd',
                                         barWidth: 11
                                     },
                                 ],
@@ -1062,7 +1062,7 @@
                             },
                             label: {
                                 isShow: true,
-                                position:'top'
+                                position:'top',
                             },
                             xAxis:{
                                 axisLine:{
@@ -1086,7 +1086,7 @@
                                 },
                                 axisLabel:{
                                     show:true,
-                                    color:'#c9cbd5',
+                                    color:'#bdbfcd',
                                     fontSize:12
                                 },
                                 splitLine:{
@@ -1596,6 +1596,7 @@
                     var directionData = res.data.data.data,monthArr = [],seriesData=[],directionArr = {};
                     directionData.map(function(value){
                         // !data.liby_saledays ? 0 : data.liby_saledays
+                        value.data_mon = _this.monthProcess(value.data_mon)
                         monthArr.push(!value.data_mon ? 0 : value.data_mon)
                         seriesData.push(!value.money ? 0 : value.money)
                     })
@@ -1706,7 +1707,12 @@
                         tempObjecd.data = tempArr;
                         seriesData.push(tempObjecd)
                     })
-                    var tempsalesmanTrendData = {monthArr:xAxisData,seriesData:seriesData}
+                    let newxAxisData = []
+                    xAxisData.map(function(item){
+                        item = _this.monthProcess(item)
+                        newxAxisData.push(item)
+                    })
+                    var tempsalesmanTrendData = {monthArr:newxAxisData,seriesData:seriesData}
                     _this.salesmanTrendData = {
                         id:'lineSalesTrendId123',
                         unit:['percent'],
@@ -1817,26 +1823,28 @@
                         let targetList = []
                         var salesmanReachedData = res.data.data.data,xAxisData=[],seriesData=[],lastMonth=[],sameMonth=[],difference=[],salesmanReachedObject={},contributionseriesData=[],contributionlastMonth=[],contributiondifference = [],salesmanContributionObject={};
                         salesmanReachedData.map(function(value,index){
-                            xAxisData.push(value.emp_name);
-                            lastMonth.push(value.emp_money)
-                            sameMonth.push(value.emp_target_money)
-                            difference.push(value.emp_rate)
-                            contributionlastMonth.push(value.dealer_money)
-                            contributiondifference.push(value.emp_money_rate)
-                            value.numberId = index+1
-                            targetList.push(   //处理表格数据 百分比转换
-                                {   numberId:value.numberId,
-                                    emp_name:value.emp_name,
-                                    emp_phone:value.emp_phone,
-                                    emp_target_money:value.emp_target_money,
-                                    emp_money:value.emp_money,
-                                    emp_dif_money:value.emp_dif_money,
-                                    emp_rate:_this.dataProcess(value.emp_rate, 'percent').num+_this.dataProcess(value.emp_rate, 'percent').unit,
-                                    emp_money_rate:_this.dataProcess(value.emp_money_rate, 'percent').num+_this.dataProcess(value.emp_money_rate, 'percent').unit,
-                                    gross_money:value.gross_money,
-                                    gross_rate:_this.dataProcess(value.gross_rate, 'percent').num+_this.dataProcess(value.gross_rate, 'percent').unit,
-                                },
-                            )
+                            if(value.emp_name!='全部'){
+                                xAxisData.push(value.emp_name);
+                                lastMonth.push(value.emp_money)
+                                sameMonth.push(value.emp_target_money)
+                                difference.push(value.emp_rate)
+                                contributionlastMonth.push(value.dealer_money)
+                                contributiondifference.push(value.emp_money_rate)
+                                value.numberId = index+1
+                                targetList.push(   //处理表格数据 百分比转换
+                                    {   numberId:value.numberId,
+                                        emp_name:value.emp_name,
+                                        emp_phone:value.emp_phone,
+                                        emp_target_money:value.emp_target_money,
+                                        emp_money:value.emp_money,
+                                        emp_dif_money:value.emp_dif_money,
+                                        emp_rate:_this.dataProcess(value.emp_rate, 'percent').num+_this.dataProcess(value.emp_rate, 'percent').unit,
+                                        emp_money_rate:_this.dataProcess(value.emp_money_rate, 'percent').num+_this.dataProcess(value.emp_money_rate, 'percent').unit,
+                                        gross_money:value.gross_money,
+                                        gross_rate:_this.dataProcess(value.gross_rate, 'percent').num+_this.dataProcess(value.gross_rate, 'percent').unit,
+                                    },
+                                )
+                            }
                         })
                         console.log(targetList)
                         //导出数据
@@ -2562,7 +2570,7 @@
                         }
                     //门店总门店数数据
                     let ActivestresSum = {
-                        ActiveStores:"总门店数",
+                        ActiveStores:"总有效门店数",
                         ActiveStoresing:"(家)",
                         NoSales:!data.store_cnt ? '--' :data.store_cnt
                     }
@@ -3166,12 +3174,18 @@
                         tempObjecd.data = tempArr;
                         seriesData.push(tempObjecd)
                     })
-                    var tempsalesmanTrendData = {monthArr:xAxisData,seriesData:seriesData}
+                    let newxAxisData = []
+                    xAxisData.map(function(item){
+                        item = _this.monthProcess(item)
+                        newxAxisData.push(item)
+                    })
+                    console.log(newxAxisData)
+                    var tempsalesmanTrendData = {monthArr:newxAxisData,seriesData:seriesData}
                     _this.marketableDayChart = {
                         config:{
                             id:'lineStockId',
                             unit:['day'],
-                            xAxisData:xAxisData,
+                            xAxisData:newxAxisData,
                             lineData:seriesData
                         },
                         xAxis:{

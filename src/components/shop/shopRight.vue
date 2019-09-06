@@ -5,7 +5,7 @@
             <p>{{item.ActiveStores}}<span>{{item.ActiveStoresing}}</span></p>
             <span>{{item.NoSales}}</span>
             <new-button :defaultVal="detailHandleList.defaultVal"  :buttonHandleClick="detailHandleClick"
-                        :btnStyle="btnStyle"  :txtStyle="txtStyle"
+                        :btnStyle="btnStyle"  :txtStyle="txtStyle" v-if="index==2"
             ></new-button>
         </div>
         </div>
@@ -119,7 +119,6 @@
             height: 165px;
             background:linear-gradient(90deg,rgba(0,166,255,1),rgba(140,93,255,1));
             border-radius: 6px;
-            font-family: PingFangSC-Medium;
             color: rgba(255, 255, 255, 1);
             text-align: center;
             float: left;
@@ -149,7 +148,6 @@
                 border: 1px solid #fff;
                 border-radius: 3px;
                 font-size: 14px;
-                font-family: PingFangSC-Regular;
                 font-weight: 400;
                 color: #fff;
                 margin: 10% auto 0;
@@ -167,7 +165,6 @@
                 span {
                     width: 48px;
                     font-size: 12px;
-                    font-family: PingFangSC-Regular;
                     font-weight: 400;
                     color: rgba(255, 255, 255, 1);
                 }

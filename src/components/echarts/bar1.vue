@@ -233,19 +233,19 @@
                 var option = {
                     tooltip: {
                         trigger: 'axis',
-                        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-                            type : 'cross',        // 默认为直线，可选为：'line' | 'shadow'
-                            label:{
-                                backgroundColor:'rgb(45, 146, 252)',
-                                formatter:function(params) {
-                                    console.log(params)
-                                    if(typeof(params.value)!='string'){
-                                        params.value = _this.dataProcess(params.value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num+_this.dataProcess(params.value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).unit
-                                    }
-                                    return params.value
-                                }
-                            },
-                        },
+                        // axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                        //     type : 'cross',        // 默认为直线，可选为：'line' | 'shadow'
+                        //     label:{
+                        //         backgroundColor:'rgb(45, 146, 252)',
+                        //         formatter:function(params) {
+                        //             console.log(params)
+                        //             if(typeof(params.value)!='string'){
+                        //                 params.value = _this.dataProcess(params.value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num+_this.dataProcess(params.value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).unit
+                        //             }
+                        //             return params.value
+                        //         }
+                        //     },
+                        // },
                         formatter:function(params){
                             var relVal = '';
                             for (var i = 0; i < params.length; i++) {
@@ -296,6 +296,12 @@
                         axisLabel:{
                             show:true,
                             interval:0,
+                            rich:{
+                                 a: {
+                                    lineHeight: 22,
+                                    fontSize:16
+                                },
+                            },
                             formatter : function(params){
                                 var newParamsName = "";// 最终拼接成的字符串
                                 var paramsNameNumber = params.length;// 实际标签的个数
@@ -327,7 +333,7 @@
                                     newParamsName = params;
                                 }
                                 //将最终的字符串返回
-                                return newParamsName
+                                return '{a|'+newParamsName+'}'
                             },
                             textStyle:{
                                 color:_this.xAxis.axisLabel.color,
@@ -359,7 +365,7 @@
                                 fontSize:_this.yAxis.axisLabel.fontSize,
                             },
                             formatter:function(value) {
-                                value = _this.dataProcess(value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num
+                                value = _this.chartDataProcess(value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num
                                 return value
                             },
                         },

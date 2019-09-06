@@ -43,7 +43,7 @@
                 default: () => ({
                     isShow:false,
                     position:'top',
-                    color:'#A0A5B1'
+                    color:'#bdbfcd'
                 })
             },
             //是否显示图标
@@ -217,7 +217,7 @@
                                             if(params.value<1){
                                                 var barColor = "#FF0048"
                                             }else{
-                                                var barColor = "#D7D9E5"
+                                                var barColor = "#bdbfcd"
                                             }
                                         }else{
                                             var barColor = item.color
@@ -230,7 +230,18 @@
                                 normal:{
                                     show:_this.label.isShow,
                                     position: _this.label.position,
-                                    color:_this.label.color,
+                                    color: function(params) {
+                                        if(params.seriesName=='达成率' && (_this.barEchartsData.id=="barIdMonthSales" || _this.barEchartsData.id=="barIdYearSales")){
+                                            if(params.value<1){
+                                                var barColor = "#FF0048"
+                                            }else{
+                                                var barColor = "#bdbfcd"
+                                            }
+                                        }else{
+                                            var barColor = item.color
+                                        }
+                                        return barColor;
+                                    },
                                     marginTop:15,
                                     formatter:function(params){
                                         return _this.dataProcess(params.value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num+_this.dataProcess(params.value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).unit
@@ -251,10 +262,10 @@
                             fontSize:_this.yAxis.axisLabel.fontSize,
                         },
                         formatter:function(value) {
-                            if(_this.barEchartsData.id=="barIdMonthSales" || _this.barEchartsData.id=="barIdYearSales" ){
-                                value = (value*100).toFixed(0)+'%'
+                            if(_this.barEchartsData.unit[0]=='day' || _this.barEchartsData.unit[0]=='percent'){
+                                value = _this.chartDataProcess(value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num+_this.chartDataProcess(value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).unit
                             }else{
-                                value = _this.dataProcess(value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num
+                                value = _this.chartDataProcess(value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num
                             }
                             return value
                         },
@@ -333,7 +344,11 @@
                             fontSize:_this.xAxis.axisLabel.fontSize,
                         },
                         formatter:function(value) {
-                            value = _this.dataProcess(value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num
+                            if(_this.barEchartsData.unit[0]=='day' || _this.barEchartsData.unit[0]=='percent'){
+                                value = _this.chartDataProcess(value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num+_this.chartDataProcess(value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).unit
+                            }else{
+                                value = _this.chartDataProcess(value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num
+                            }
                             return value
                         },
                     }
@@ -387,19 +402,19 @@
                 var option = {
                     tooltip: {
                         trigger: 'axis',
-                        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-                            type : 'cross',        // 默认为直线，可选为：'line' | 'shadow'
-                            label:{
-                                backgroundColor:'rgb(45, 146, 252)',
-                                formatter:function(params) {
-                                    console.log(params)
-                                    if(typeof(params.value)!='string'){
-                                        params.value = _this.dataProcess(params.value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num+_this.dataProcess(params.value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).unit
-                                    }
-                                    return params.value
-                                }
-                            },
-                        },
+                        // axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                        //     type : 'cross',        // 默认为直线，可选为：'line' | 'shadow'
+                        //     label:{
+                        //         backgroundColor:'rgb(45, 146, 252)',
+                        //         formatter:function(params) {
+                        //             console.log(params)
+                        //             if(typeof(params.value)!='string'){
+                        //                 params.value = _this.dataProcess(params.value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num+_this.dataProcess(params.value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).unit
+                        //             }
+                        //             return params.value
+                        //         }
+                        //     },
+                        // },
                         formatter:function(params){
                             var relVal = '';
                             for (var i = 0; i < params.length; i++) {

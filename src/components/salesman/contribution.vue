@@ -241,7 +241,6 @@
 					height: 100%;
 					padding-left: 4%;
 					font-size:20px;
-					font-family:PingFangSC-Medium;
 					font-weight:500;
 					color:rgba(0,0,0,1);
 					display: flex;
@@ -252,7 +251,6 @@
 						p {
 							margin: 0px;
 							font-size:24px;
-							font-family:PingFangSC-Medium;
 							font-weight:500;
 							color:rgba(51,51,51,1);
 							display: flex;

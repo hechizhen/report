@@ -48,6 +48,11 @@
             position:{
                 type:Array,
                 default:()=>['50%','50%']
+            },
+            //图例是否可点击
+            selectedMode:{
+                type:Boolean,
+                default:false
             }
         },
         components : {
@@ -116,7 +121,8 @@
                         textStyle: {
                             color: "#333333",
                             fontSize:14
-                        }
+                        },
+                        selectedMode:_this.selectedMode,
                     },
                     series: [{
                         type: 'pie',

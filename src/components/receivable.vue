@@ -2,8 +2,8 @@
 <template>
     <div class="receivable">
         <a-row class="rowStyle bg">
-            <a-col :span="18" class="fontStyle">{{receivableData.receivableTxt}}</a-col>
-            <a-col :span="6" class="fontStyle">
+            <a-col :span="14" class="fontStyle">{{receivableData.receivableTxt}}</a-col>
+            <a-col :span="10" class="fontStyle">
                 <span>{{receivableData.receivableValUnit}}</span>
                 <!-- <span class="fontStyle2">{{receivableData.receivableVal.split('.')[0]}}.</span>
                 <span>{{receivableData.receivableVal.split('.')[1]}}</span> -->
@@ -11,15 +11,15 @@
             </a-col>
         </a-row>
         <a-row class="rowStyle bg1 borderBottom">
-            <a-col :span="18" class="fontStyle1">{{receivableData.receivableMonth}}</a-col>
-            <a-col :span="6" class="fontStyle1">
+            <a-col :span="14" class="fontStyle1">{{receivableData.receivableMonth}}</a-col>
+            <a-col :span="10" class="fontStyle1">
                 <span>{{receivableData.receivableMonthValUnit}}</span>
                 <span>{{receivableData.receivableMonthVal}}</span>
             </a-col>
         </a-row>
         <a-row class="rowStyle bg1">
-            <a-col :span="18" class="fontStyle1">{{receivableData.receivableAverage}}</a-col>
-            <a-col :span="6" class="fontStyle1">{{receivableData.receivableAverageVal}}</a-col>
+            <a-col :span="14" class="fontStyle1">{{receivableData.receivableAverage}}</a-col>
+            <a-col :span="10" class="fontStyle1">{{receivableData.receivableAverageVal}}</a-col>
         </a-row>
         <!-- <a-row class="rowStyle1 bg marginStyle">
             <a-col :span="18" class="fontStyle">{{receivableData.receivableDay}}</a-col>
@@ -95,10 +95,10 @@
             font-size:24px;
             font-weight:bold;
         }
-        /deep/.ant-col-18{
+        /deep/.ant-col-14{
             padding-left:0.5rem;
         }
-        /deep/.ant-col-6{
+        /deep/.ant-col-10{
             text-align: right;
             padding-right:0.5rem;
         }

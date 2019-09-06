@@ -112,10 +112,7 @@
 		background-color: RGBA(69, 72, 90, 0.5);
 		.explainDetailBox {
 			width: 32rem;
-			margin:0 auto;
-			position: fixed;
 			background:#fff;
-			z-index:100;
 			padding-bottom: .5rem;
 			p{
 				margin-bottom:0;

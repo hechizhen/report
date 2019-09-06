@@ -174,7 +174,6 @@
 				p {
 					margin: 0px;
 					font-size:14px;
-					font-family:PingF	angSC-Medium;
 					font-weight:bold;
 					color:rgba(255,255,255,1);
 				}
@@ -186,7 +185,6 @@
 				p {
 					margin: 0px;
 					font-size:14px;
-					font-family:PingFangSC-Medium;
 					font-weight:bold;
 					color:rgba(255,255,255,1);
 				}
@@ -194,6 +192,7 @@
 			.managerCol:nth-child(4)  {
 				display: flex;
 				justify-content: center;
+				align-items: center;
 				flex-direction: column;
 				p {
 					cursor: pointer;
@@ -204,7 +203,6 @@
 					border:1px solid rgba(255,255,255,1);
 					border-radius:3px;
 					font-size:14px;
-					font-family:PingFangSC-Regular;
 					font-weight:400;
 					color:rgba(255,255,255,1);
 				}
@@ -230,7 +228,6 @@
 				p {
 					margin: 0px;
 					font-size:14px;
-					font-family:PingFangSC-Medium;
 					font-weight:bold;
 					color:rgba(255,255,255,1);
 				}
@@ -259,7 +256,6 @@
 				p {
 					margin: 0px;
 					font-size:14px;
-					font-family:PingFangSC-Medium;
 					font-weight:bold;
 					color:rgba(255,255,255,1);
 					span {
@@ -281,7 +277,6 @@
 					padding-right: 20%;
 					margin: 0px;
 					font-size:14px;
-					font-family:PingFangSC-Medium;
 					font-weight:bold;
 					color:rgba(255,255,255,1);
 					span {
@@ -306,7 +301,6 @@
 					border:1px solid rgba(255,255,255,1);
 					border-radius:3px;
 					font-size:14px;
-					font-family:PingFangSC-Regular;
 					font-weight:400;
 					color:rgba(255,255,255,1);
 				}

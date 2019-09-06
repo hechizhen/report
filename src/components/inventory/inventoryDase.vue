@@ -119,7 +119,6 @@
             span{
                 display: inline-block;
                 font-size:14px;
-                font-family:PingFangSC-Medium;
                 font-weight:600;
                 color:rgba(51,51,51,1);
                 height: 32px;
@@ -133,7 +132,6 @@
             }
             b{
                 font-size:32px;
-                font-family:PingFangSC-Medium;
                 font-weight:bold;
                 color:rgba(29,145,240,1);
                 margin-top: 5%;
@@ -153,7 +151,6 @@
                     display: flex;
                     span{
                         font-size:14px;
-                        font-family:PingFangSC-Regular;
                         font-weight:400;
                         color:#98A2B4;
                         margin-top: 0;

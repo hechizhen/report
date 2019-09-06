@@ -150,7 +150,7 @@
     }
     .shop-centen{
         width: 100%;
-        height:350px;
+        height:347px;
         background:rgba(255,255,255,1);
         border-radius:6px;
         margin: auto;
@@ -168,7 +168,6 @@
             .title-txt{
                 line-height: 63px;
                 font-size:16px;
-                font-family:PingFangSC-Medium;
                 font-weight:bold;
                 color:rgba(51,51,51,1);
                 float: left;

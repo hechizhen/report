@@ -8,7 +8,15 @@
             <!-- <a-checkbox-group @change="onChange">
                 <a-checkbox v-for="(item,index) in legendList" :key="index" :value="item">{{item}}</a-checkbox>
             </a-checkbox-group> --> 
-            <a-checkbox v-for="(item,index) in legendList" :key="index" :value="item" @change="onChange" :defaultChecked="index==0 ? true : false">{{item}}</a-checkbox>
+            <!-- <a-checkbox v-for="(item,index) in legendList" :key="index" :value="item" @change="onChange" :defaultChecked="index==0 ? true : false">{{item}}</a-checkbox> -->
+            <ul>
+                <li v-for="(item,index) in legendList" :key="index" :value="item" @change="onChange" :defaultChecked="index==0 ? true : false">
+                    <p @click="onChange(item.name,index)">
+                        <i class="iconfont icon-gou" v-if="item.flag" :style="{color:colorList[index]}"></i>
+                    </p>
+                    <span>{{item.name}}</span>
+                </li>
+            </ul>
             <!-- :defaultChecked="index==0 ? true : false" -->
         </div>
     </div>
@@ -116,7 +124,8 @@
         },
         data () {
             return {
-                legendList:''
+                legendList:'',
+                colorList:''
             }
         },
         mounted () {
@@ -130,18 +139,23 @@
         },
         methods: {
             //选择checkbox
-            onChange (checkedValues) {
+            onChange (checkedValues,index) {
+                this.legendList[index].flag = !this.legendList[index].flag
                 this.myChart.dispatchAction({
                     type:'legendToggleSelect',
-                    name:checkedValues.target.value
+                    name:checkedValues
                 })
             },
             setLineOptions(){
                 var _this = this
                 let seriesData = []
                 let legendList = []
+                let legendChartList = []
+                let colorList = []
                 _this.lineEchartsData.lineData.map(function(item,index){
-                    legendList.push(item.name)
+                    legendList.push({name:item.name,flag:index==0?true:false})
+                    legendChartList.push(item.name)
+                    colorList.push(item.color)
                     seriesData.push({
                         name: item.name,
                         type: 'line',
@@ -156,9 +170,10 @@
                     })
                 })
                 _this.legendList = legendList
+                _this.colorList = colorList
                 //数据处理默认只展示第一条
                 var legendSelect={}
-                legendList.map(function(item,index){
+                legendChartList.map(function(item,index){
                     if(index==0){
                         legendSelect[item]=true
                     }else{
@@ -191,19 +206,19 @@
                 var option = {
                     tooltip: {
                         trigger: 'axis',
-                        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-                            type : 'cross',        // 默认为直线，可选为：'line' | 'shadow'
-                            label:{
-                                backgroundColor:'rgb(45, 146, 252)',
-                                formatter:function(params) {
-                                    console.log(params)
-                                    if(typeof(params.value)!='string'){
-                                        params.value = _this.dataProcess(params.value,_this.lineEchartsData.unit[0],_this.lineEchartsData.unit[1]).num+_this.dataProcess(params.value,_this.lineEchartsData.unit[0],_this.lineEchartsData.unit[1]).unit
-                                    }
-                                    return params.value
-                                }
-                            }
-                        },
+                        // axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                        //     type : 'cross',        // 默认为直线，可选为：'line' | 'shadow'
+                        //     // label:{
+                        //     //     backgroundColor:'rgb(45, 146, 252)',
+                        //     //     formatter:function(params) {
+                        //     //         console.log(params)
+                        //     //         if(typeof(params.value)!='string'){
+                        //     //             params.value = _this.dataProcess(params.value,_this.lineEchartsData.unit[0],_this.lineEchartsData.unit[1]).num+_this.dataProcess(params.value,_this.lineEchartsData.unit[0],_this.lineEchartsData.unit[1]).unit
+                        //     //         }
+                        //     //         return params.value
+                        //     //     }
+                        //     // }
+                        // },
                         formatter:function(params){
                             var relVal = '';
                             for (var i = 0; i < params.length; i++) {
@@ -220,7 +235,7 @@
                     },
                     legend: {
                         show:false,
-                        data: legendList,
+                        data: legendChartList,
                         bottom: "5%",
                         itemGap: 50,
                         textStyle: {
@@ -279,7 +294,11 @@
                                 fontSize:_this.yAxis.axisLabel.fontSize
                             },
                             formatter:function(value) {
-                                value = _this.dataProcess(value,_this.lineEchartsData.unit[0],_this.lineEchartsData.unit[1]).num
+                                if(_this.lineEchartsData.unit[0]=='percent'){
+                                    value = _this.chartDataProcess(value,_this.lineEchartsData.unit[0],_this.lineEchartsData.unit[1]).num+_this.chartDataProcess(value,_this.lineEchartsData.unit[0],_this.lineEchartsData.unit[1]).unit
+                                }else{
+                                    value = _this.chartDataProcess(value,_this.lineEchartsData.unit[0],_this.lineEchartsData.unit[1]).num
+                                }
                                 return value
                             },
                         },
@@ -317,6 +336,8 @@
         }
     }
 </script>
+<style lang="less">
+</style>
 <style scoped lang="less">
     .line{
         width:100%;
@@ -337,6 +358,32 @@
             justify-content: center;
             flex-wrap: wrap;
             overflow: auto;
+            ul{
+                li{
+                    padding:10px;
+                    float: left;
+                    display: flex;
+                    align-items: center;
+                    p{
+                        width:16px;
+                        height:16px;
+                        border:1px solid rgba(220,220,220,1);
+                        border-radius: 2px;
+                        position: relative;
+                        cursor:pointer;
+                        i{
+                            position: absolute;
+                            top:-2px;
+                            left:0;
+                            font-weight: bold;
+                            font-size: 16px;
+                        }
+                    }
+                    span{
+                        margin-left:10px;
+                    }
+                }
+            }
         }
     }
 </style>

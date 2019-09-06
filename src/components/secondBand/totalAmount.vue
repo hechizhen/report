@@ -90,7 +90,7 @@
 				.titletext {
 					padding-left: 5px;
 					font-size:16px;
-					font-family:PingFangSC-Medium;
+					
 					font-weight:500;
 					color:rgba(51,51,51,1);
 				}
@@ -111,13 +111,11 @@
 				}
 				p:nth-child(1) {
 					font-size:16px;
-					font-family:PingFangSC-Regular;
 					font-weight:400;
 					color:rgba(51,51,51,1);
 				}
 				p:nth-child(2) {
 					font-size:44px;
-					font-family:PingFangSC-Semibold;
 					font-weight:600;
 					color:rgba(51,51,51,1);
 				}
@@ -136,7 +134,6 @@
 						p {
 							margin: 0px;
 							font-size:16px;
-							font-family:PingFangSC-Regular;
 							font-weight:bold;
 							img {
 								margin-bottom:2px;
@@ -159,7 +156,6 @@
 				.brandtitle {
 					height: 32px;
 					font-size:16px;
-					font-family:PingFangSC-Semibold;
 					font-weight:600;
 					color:rgba(51,51,51,1);
 				}
@@ -174,7 +170,7 @@
 						border-right: 2px solid #fff;
 						div:nth-child(1){
 							font-size:14px;
-							font-family:PingFangSC-Medium;
+							
 							font-weight:500;
 							color:rgba(152,162,180,1);
 							height: 50px;
@@ -187,7 +183,6 @@
 						div:nth-child(2){
 							height: 36px;
 							font-size:12px;
-							font-family:PingFangSC-Semibold;
 							font-weight:600;
 							color:rgba(51,51,51,1);
 							display: flex;

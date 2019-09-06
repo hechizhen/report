@@ -169,7 +169,6 @@
             height:165px;
             background:rgba(0,166,255,1);
             border-radius:6px;
-            font-family:PingFangSC-Medium;
             color:rgba(255,255,255,1);
             text-align: center;
             float: left;
@@ -219,7 +218,6 @@
                     text-align: center;
                     span{
                         font-size:14px;
-                        font-family:PingFangSC-Regular;
                         font-weight:400;
                         color:rgba(51, 51, 51, 1);
                     }
@@ -239,7 +237,6 @@
                 span{
                     line-height: 28px;
                     font-size:14px;
-                    font-family:PingFangSC-Regular;
                     font-weight:400;
                     color:rgba(152,162,180,1);
                 }

@@ -97,7 +97,6 @@
 				.titletext {
 					padding-left: 5px;
 					font-size:16px;
-					font-family:PingFangSC-Medium;
 					font-weight:500;
 					color:rgba(51,51,51,1);
 				}
@@ -105,7 +104,6 @@
 					cursor: pointer;
 					padding: 3px 0;
 					font-size:14px;
-					font-family:PingFangSC-Regular;
 					font-weight:400;
 					color:rgba(51,51,51,1);
 					margin-left: 6px;
@@ -129,7 +127,6 @@
 						align-items: center;
 						justify-content: center;
 						div {
-							font-family:PingFangSC-Regular;
 							font-weight:400;
 							color:rgba(255,255,255,1);
 							p:nth-child(1) {
@@ -157,20 +154,18 @@
 					padding-top: 30px;
 					div {
 						font-size:20px;
-						font-family:PingFangSC-Medium;
+						
 						font-weight:500;
 						color:#98A2B4;
 						span {
 							margin-left: 10px;
 							font-size:12px;
-							font-family:PingFangSC-Medium;
 							font-weight:bold;
 							color:rgba(51,51,51,1);
 						}
 						.txt{
 							color:rgba(51,51,51,1);
 							font-size:20px;
-							font-family:PingFangSC-Medium;
 							font-weight:500;
 							margin-left: 0;
 						}
@@ -186,7 +181,7 @@
 					padding-top: 30px;
 					div {
 						font-size:20px;
-						font-family:PingFangSC-Medium;
+						
 						font-weight:500;
 						color:#98A2B4;
 						img{
@@ -195,7 +190,7 @@
 						span {
 							margin-left: 10px;
 							font-size:20px;
-							font-family:PingFangSC-Medium;
+							
 							font-weight:500;
 							color:rgba(51,51,51,1);
 						}
@@ -213,7 +208,6 @@
 					height: 45px;
 					padding-top: 20px;
 					font-size:18px;
-					font-family:PingFangSC-Semibold;
 					font-weight:600;
 					color:rgba(51,51,51,1);
 				}

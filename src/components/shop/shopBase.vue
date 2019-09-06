@@ -1,21 +1,23 @@
 <template>
 <div class="shopBase">
-    <div style="height: 100%;float: left;width: 70%">
-        <a-Row  class="commodityR-base" v-for="(item,index) in shopDaseData" :key="index">
-            <a-Col :span="18">
-                <div class="onetxt">
-                <div class="quan"></div>
-                {{item.name}}
-                </div>
-            </a-Col>
-            <a-Col :span="6">
-                {{item.NoSales}}
-            </a-Col>
-        </a-Row>
-    </div>
-    <div class="productLeft-btn">
-        <newButton :defaultVal="defaultVal" :buttonHandleClick="detailHandleClick" :txtStyle="txtStyle" :btnStyle="btnStyle"></newButton>
-    </div>
+        <div style="height: 100%;float: left;width: 70%;display: flex;align-items: center;">
+            <div>
+                <a-Row  class="commodityR-base" v-for="(item,index) in shopDaseData" :key="index">
+                    <a-Col :span="18">
+                        <div class="onetxt">
+                        <div class="quan"></div>
+                        {{item.name}}
+                        </div>
+                    </a-Col>
+                    <a-Col :span="6">
+                        {{item.NoSales}}
+                    </a-Col>
+                </a-Row>
+            </div>
+        </div>
+        <div class="productLeft-btn">
+            <newButton :defaultVal="defaultVal" :buttonHandleClick="detailHandleClick" :txtStyle="txtStyle" :btnStyle="btnStyle"></newButton>
+        </div>
             <!--<a-Row>-->
                 <!--<div class="productLeft-btn">-->
                     <!--<newButton :defaultVal="defaultVal"></newButton>-->
@@ -81,10 +83,12 @@
         float: left;
         background:rgba(238,240,245,.5);
         border-radius:6px 6px 0px 0px;
-        /*padding-left: 3%;*/
+        height: 88px;
         .commodityR-base {
             width: 100%;
             float: left;
+            display: flex;
+            align-items: center;
             .quan {
                 width:10px;
                 height:10px;
@@ -95,22 +99,21 @@
             }
 
             .ant-col-18{
-                line-height: 44px;
                 font-size:16px;
-                font-family:PingFangSC-Medium;
                 font-weight:500;
                 color:rgba(152,162,180,1);
                 display: inline-block;
             }
             .ant-col-6{
-                line-height: 44px;
                 font-size:20px;
-                font-family:PingFangSC-Semibold;
-                font-weight:600;
+                font-weight:500;
                 margin-bottom: 0;
                 display: inline-block;
                 color: rgba(152, 162, 180, 1);
             }
+        }
+        .commodityR-base:nth-child(2){
+            margin-top:10px;
         }
         .productLeft-btn {
             width:30%;
@@ -124,7 +127,6 @@
                 span {
                     width: 48px;
                     font-size: 14px;
-                    font-family: PingFangSC-Regular;
                     font-weight: 600;
                     color: rgba(51, 51, 51, 1);
                 }

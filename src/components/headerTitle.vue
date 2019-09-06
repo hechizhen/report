@@ -9,7 +9,7 @@
             <p class="paddingStyle1">
                 <span class="spanFont" style="font-size:14px;">查询日期：</span>
                 <!-- <a-month-picker v-model="defaultValDate" :disabledDate="disabledDate" :format="monthFormat" :allowClear="false" @change="changeDate" /> -->
-                <DatePicker type="month" v-model="defaultValDate" :options="options3" format="yyyy/MM" :clearable="false" @on-change="changeDate" style="width:170px;"></DatePicker>
+                <DatePicker type="month" v-model="defaultValDate" :options="options3" format="yyyy/MM" :clearable="false" @on-change="changeDate" style="width:170px"></DatePicker>
                 <button-list :buttonType="buttonList.buttonType" :isGhost="buttonList.isGhost" :buttonHandleClick="buttonHandleClick" :defaultVal="buttonList.defaultVal" style="margin-left:20px;"></button-list>
             </p>
             <p style="margin-top: 2%">
