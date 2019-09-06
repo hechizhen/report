@@ -57,7 +57,6 @@
 			}
 		},
 		mounted(){
-			console.log(this.lineEchartsData)
 		},
 		methods:{
 			thendChartClick(){

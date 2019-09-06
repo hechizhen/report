@@ -95,7 +95,6 @@
         },
         methods: {
             onChange(pageNumber) {
-                console.log('Page: ', pageNumber);
             },
             //点击查询
             searchHandleClick(){

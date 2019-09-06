@@ -72,7 +72,6 @@
             // }
         },
         mounted() {
-            // console.log(this.detailData)
         },
         methods:{
             //打开新增门店详情

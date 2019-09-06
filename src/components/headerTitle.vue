@@ -134,7 +134,6 @@
                     name:'总得分',
                     data:this.score.coretext
                 }
-                console.log(this.gaugeChartData)
         },
         methods: {
             moment,
@@ -149,7 +148,6 @@
             },
             //选择时间
             changeDate(val,newDate){
-                console.log(val,newDate)
                 let dateTime = val
                 this.defaultDateValue = dateTime.substring(0,4)+dateTime.substring(5,7)
             },
@@ -157,15 +155,12 @@
             onChange(val){
                 var _this = this
                 _this.dealList.map(function(item){
-                    console.log(item)
                     if(item.name==val){
                         _this.newId = item.id
                         _this.defaultSelectVal = item.name
                     }
                 })
                 _this.startDateList.map(function(item){
-                    console.log(item)
-                    console.log(_this.defaultSelectVal)
                     if(_this.defaultSelectVal.indexOf(item.dealer_name)!=-1){
                         _this.headerStartDate = Number(item.date_dt.substring(4,6))
                     }

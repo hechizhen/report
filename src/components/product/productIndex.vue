@@ -247,24 +247,18 @@
             //下滑树状图监听
             upproStoresData(val){
                this.VariabilityUp = val
-                console.log(val)
-                console.log(this.VariabilityUp)
             },
             //增长树状图监听
             prodownStoresData(val){
                this.VariabilityDown = val
-                console.log(val)
-                console.log(this.VariabilityDown)
             },
             //切换维度表格监听
             tableData(val){
-                console.log(val)
                 this.newTableData = val
                 deep:true
             },
         },
         mounted() {
-            console.log(this.exportData)
             this.newTableData = this.tableData
         }
     }

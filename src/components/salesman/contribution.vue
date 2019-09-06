@@ -69,7 +69,6 @@
 			}
 		},
 		mounted(){
-			console.log(this.exportData)
 		},
 		data(){
 			return {
@@ -169,7 +168,6 @@
 			},
 			//导出数据
 			exportClick(){
-				console.log(this.exportData)
 				this.exportHandleClick(this.exportData.headerTxt,this.exportData.headerKey,this.exportData.data,this.exportData.name)
 			}
 		},
@@ -222,7 +220,7 @@
 		display: flex;
 	    align-items: center;
 	    justify-content: center;
-		background-color: RGBA(69, 72, 90, 0.5);
+		background-color: rgba(0,0,0,0.5);
 		.echarts {
 			height: 70%;
 			width: 80%;

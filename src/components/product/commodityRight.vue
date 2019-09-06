@@ -148,7 +148,6 @@
             publicTable
         },
         mounted() {
-            console.log(this.commoditydata)
         }
     }
 </script>

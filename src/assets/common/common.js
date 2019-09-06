@@ -270,7 +270,6 @@ export default{
       while(curr <= max){
         var month = curr.getMonth();
         // month=month==0?12:month;
-        console.log(month);
 
         var str=curr.getFullYear()+""+(month<10?'0'+month:month);
         var s=curr.getFullYear()+"00";
@@ -443,8 +442,6 @@ export default{
     Vue.prototype.salesManScoreProcess = function (reach,averageProduce,radio) {
       //业务员达成
       reach = reach>100 ? 100 : reach
-      console.log(reach)
-      console.log(radio)
       //人均产出
       if(averageProduce<=100000){
         var produceScore = 0
@@ -461,16 +458,13 @@ export default{
       if(averageProduce>160000){
         var produceScore = 100
       }
-      console.log(produceScore)
       //业务下滑人数占比
       if(radio<=0){
         var salesRadio = 100
       }else{
         var salesRadio = 100-radio
-        console.log(salesRadio)
         salesRadio = salesRadio<0 ? 0 : salesRadio
       }
-      console.log(salesRadio)
       let score = (reach+produceScore+salesRadio)/3
       return score.toFixed(1)
     };
@@ -488,25 +482,20 @@ export default{
         }
       })
       let average = this.sum(list)/valArray.length
-      console.log(average)
       //动销商品数环比
       let ChainRatio = this.orderScoreProcess(oldVal,newVal)
-      console.log(ChainRatio)
       //业务下滑人数占比
       if(radio<=0){
         var salesRadio = 100
       }else{
-        console.log(radio)
         var salesRadio = 100-(100-radio)*2
         salesRadio = salesRadio<0 ? 0 : salesRadio
-        console.log(salesRadio)
       }
       let score = (Number(average)+Number(ChainRatio)+Number(salesRadio))/3
       return score.toFixed(1)
     }
     // 二帮卖门店评分计算    销量下滑门店占 当月无交易门店占比 3个月无交易门店占比：valArray  门店活跃率：activeRate  活跃门店数环比：oldVal newVal
     Vue.prototype.storeScoreProcess = function (activeRate,oldVal,newVal,valArray) {
-      console.log(valArray)
       //销量下滑门店占 当月无交易门店占比 3个月无交易门店占比
       let list = []
       valArray.map(function(item,index){
@@ -681,7 +670,6 @@ export default{
     * colIndexArray 选择列所有号集合
     */
     Vue.prototype.TranslateMulTableData = function (handlerArray, colNumber, tableTitleColNum, colIndexArray) {
-      console.log("数据处理_");
     var filterIndex = colNumber;
     var keysCollect = dataHandler(handlerArray,filterIndex);
     var keysCollect1 = dataHandler(handlerArray,tableTitleColNum);
@@ -817,7 +805,6 @@ var multiTableData = function(handlerArray,tableTitleColNum,colIndexArray){
        handlerArray[0][1].map(function(tableitem){
              tableTitleCol.push(tableitem[tableTitleColNum]);
         });
-       console.log("表头--》",tableTitleCol);
        var tableNames = Object.keys(resultArray[0]);
        var TableNameNumber = 0;
        var resultTableName = [];

@@ -79,8 +79,6 @@
 
         },
         mounted() {
-           console.log(this.tableData)
-            console.log(this.selectButtonClick)
         },
         components:{
             newButton,

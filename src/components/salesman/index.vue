@@ -104,7 +104,6 @@
 			}
 		},
 		mounted(){
-			console.log(this.reachContributionData)
 		},
 		methods:{
 			explicit(a){
@@ -128,7 +127,6 @@
 					this.moveScoll()
 					this.glideShow = false;
 				}else {
-					console.log(this.ownwardExportData)
 					this.exportHandleClick(this.ownwardExportData.tableHeaderTxt,this.ownwardExportData.tableHeaderKey,this.ownwardExportData.tableData,this.ownwardExportData.tableName)
 				}
 			},

@@ -126,7 +126,6 @@
             }
         },
         mounted(){
-            console.log(this.pieEchartsData)
         },
 
         methods:{
@@ -134,7 +133,6 @@
                 this.trendChartClick()
             },
             chartHandleClick(item){
-                console.log(item)
                 this.checkedVal = item
                 this.pieShows = false
                 this.listShows =true
@@ -143,17 +141,14 @@
             slital(){
             },
             onChangeBox (val) {
-                console.log(val)
                 this.checkValChange(val)
             },
             onChangeSize (val) {
-                console.log(val)
                 this.pageNumChange(val)
             },
             exportNowData(){
                 this.pageSize = 100
                 this.exportClick(this.pageSize)
-                console.log(this.tableExport)
                 this.exportHandleClick(this.tableExport.headerTxt,this.tableExport.headerKey,this.tableExport.data,this.tableExport.name)
             },
             exportAllData(){
@@ -175,7 +170,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: RGBA(69, 72, 90, 0.5);
+        background-color: rgba(0,0,0,0.5);
         .echarts {
             height: 80%;
             width: 90%;

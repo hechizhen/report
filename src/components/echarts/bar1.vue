@@ -147,7 +147,6 @@
             $(window).resize(function() {
                 _this.myChart.resize()
             });
-            console.log(this.barEchartsData)
         },
         methods: {
             setBarOptions(){
@@ -252,7 +251,6 @@
                                 if(params[i].seriesName=='达成率' || params[i].seriesName=='贡献率'){
                                     relVal += params[i].marker+params[i].seriesName+':'+_this.dataProcess(params[i].value,'percent').num+_this.dataProcess(params[i].value,'percent').unit+'</br>'
                                 }else{
-                                    console.log(_this.dataProcess(params[i].value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num)
                                     relVal += params[i].marker+params[i].seriesName+':'+_this.dataProcess(params[i].value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num+_this.dataProcess(params[i].value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).unit+'</br>'
                                 }
                             }

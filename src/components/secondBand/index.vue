@@ -118,7 +118,6 @@
 			}
 		},
 		mounted(){
-			console.log(this.coreData)
 		},
 		methods:{
 			explicit(a,b){

@@ -378,7 +378,6 @@
                     method: 'POST',
                     data: params
                 }).then(function (res) {
-                    console.log(res)
                     let dealData = res.data.data.data
                     dealData.map(function(item){
                         if(_this.indexDealName.indexOf(item.dealer_name)!=-1){
@@ -392,7 +391,6 @@
                             }
                         })
                     })
-                    console.log( _this.dealList)
                     _this.startDateList = dealData
                 })
             },
@@ -871,7 +869,6 @@
                     method: 'POST',
                     data: params
                 }).then(function (res) {
-                    console.log(res)
                     let dealData = res.data.data.data
                     let list = []
                     dealData.map(function(item){
@@ -950,7 +947,6 @@
                             id:'monthgaugeId',
                             color:"#5facfd"
                         }
-                        console.log(_this.monthSalesData)
                         //本月柱状图数据
                         var barDataMonth = [
                             _this.getReachPercent(salesMonthData.liby_money,salesMonthData.liby_target_money),_this.getReachPercent(salesMonthData.kispa_money,salesMonthData.kispa_target_money),
@@ -1006,7 +1002,7 @@
                                 },
                                 axisLabel:{
                                     show:true,
-                                    color:'#bdbfcd',
+                                    color:'#333333',
                                     fontSize:12
                                 },
                                 splitLine:{
@@ -1086,7 +1082,7 @@
                                 },
                                 axisLabel:{
                                     show:true,
-                                    color:'#bdbfcd',
+                                    color:'#333333',
                                     fontSize:12
                                 },
                                 splitLine:{
@@ -1196,8 +1192,6 @@
                 //合并请求 同时请求
                 this.$http.all([getScoreData(), getScoreTxtData()])
                     .then(this.$http.spread((score, scoreTxt) => {
-                        console.log(score)
-                        console.log(scoreTxt)
                         let scoreData = score.data.data
                         let scoreTxtData = scoreTxt.data.data
                         //一帮卖评分
@@ -1476,7 +1470,6 @@
                              }
                          })
                         _this.orderAmountData = {thatMonth:thatMonth,chainratio:chainratio,yearOnYear:yearOnYear}
-                        console.log( _this.orderAmountData)
                         _this.orderScoreParams={
                             "moduleName":"订单",
                             "kpi_values":[
@@ -1586,7 +1579,6 @@
                     method: 'POST',
                     data: params
                 }).then(function (res) {
-                    console.log(res)
                     //判断二帮卖-订单走势图接口参数是否为空
                     // if(res.data.data.data.length!=0){
                     //     var directionData = res.data.data.data
@@ -1647,7 +1639,6 @@
                             },
                         },
                     }
-                    console.log(_this.directionData)
                     _this.towHelpSaleMonthLineShow = false
                 })
             },
@@ -1680,7 +1671,6 @@
                         var salesmanTrendData=''
                     }
                     var xAxisData=[],salesmanArr=[],seriesData=[],salesmanColor=['#009EE2','#E9A837','#00E2BF','#65E6F5'];
-                    console.log(salesmanTrendData)
                     salesmanTrendData.map(function(value){
                         if(xAxisData.length==0){
                           xAxisData.push(value.data_mon);
@@ -1719,7 +1709,6 @@
                         xAxisData:tempsalesmanTrendData.monthArr,
                         lineData:tempsalesmanTrendData.seriesData
                     }
-                    console.log( _this.salesmanTrendData)
                     _this.salesmanTrendPie = false;
 
                 })
@@ -1779,7 +1768,6 @@
                         salesmandownwardObject.seriesData = seriesData;
                         _this.salesmandownwardData = salesmandownwardObject
                         _this.salesmandownwardBar = false
-                        console.log(_this.salesmandownwardData)
 
                         _this.ownwardExportData = {
                             tableHeaderTxt:['序号','业务员','联系电话','上月销量（元）','上月达成率','当月销量（元）','当月达成率','差额（元）'],
@@ -1846,7 +1834,6 @@
                                 )
                             }
                         })
-                        console.log(targetList)
                         //导出数据
                         _this.reachContributionData = {
                             headerTxt:['序号','业务员姓名','联系电话','目标销量（元/月）','下单金额（元/月）','完成差额（元/月）','达成率','销量占比','毛利额（元）','毛利率'],
@@ -1874,9 +1861,6 @@
                         _this.salesmanContributionData = salesmanContributionObject;
                         _this.salesmanContributionBar = false
 
-                        console.log('1111111111111111')
-                        console.log(_this.salesmanReachedData)
-                        console.log(_this.salesmanContributionData)
                     }
                 })
             },
@@ -1951,9 +1935,7 @@
                             values:orderScore1+','+orderScore2
                         }
                         _this.getTwoProductScoreData()
-                        //  console.log(res)
                         // let data = res.data.data.data[0]
-                        console.log(data)
                     //产品环比数据
                         let goodsChainVal = {
                             name: "环比:",
@@ -2006,7 +1988,6 @@
                             data.cheerwin_stock_sale_rate, data.kispa_stock_sale_rate,
                             data.liby_stock_sale_rate
                         ]
-                        // console.log(barDataMonth)
                         let Axiax = ['立白','好爸爸','超威','口腔','晟美']
                         let Axiaxs = ['晟美','口腔','超威','好爸爸','立白']
                         let produnarData = {
@@ -2086,8 +2067,6 @@
                         }
                         _this.CommodityRate = false //加载效果变关闭
                         _this.NumberGoods=false  //加载效果变关闭
-                        console.log(_this.CommodityTurnoverRate)
-                        console.log(_this.commoditydata)
                     },
                 )
             },
@@ -2291,8 +2270,6 @@
                 }
                 this.$http.all([getProRaiseData(), getProDownData()])
                     .then(this.$http.spread((proraiseData, prodownData) => {
-                            console.log(proraiseData)  //增长
-                            console.log(prodownData)   //下滑
                             //增长产品数据
                             //判断增长产品数据是否为空
                             // if(proraiseData.data.data.data.length!=0){
@@ -2301,7 +2278,6 @@
                             //     var proraiseList=''
                             // }
                             let proraiseList = proraiseData.data.data.data
-                            console.log(proraiseList)
                             let raisexAxisData = []//增长门店x轴
                             let raiseLastMonth = []//增长门店上月销售额
                             let raiseSameMonth = []//增长门店当月销售额
@@ -2316,8 +2292,6 @@
                                 }
                             })
                             _this.ProExportData.proraiseData.tableData = proraiseList
-                             console.log(proraiseList)
-                            console.log( _this.ProExportData.proraiseData)
                             //增长产品柱状图数据
                             let raiseBarData = {
                                 //id
@@ -2380,7 +2354,6 @@
                                 }
                             })
                             _this.ProExportData.prodownData.tableData = downList
-                            console.log( _this.ProExportData.prodownData.tableData)
                             //下滑产品柱状图数据
                             let downBarData = {
                                 //id
@@ -2421,8 +2394,6 @@
                                 },
                             }
                             _this.prodownStoresData = downBarData
-                            console.log( _this.prodownStoresData)
-                             console.log(_this.downStoresData)
                             _this.NumberGoodsUpBar = false//关闭looding效果
                            _this.NumberGoodsDownBar = false //关闭looding效果
                         })
@@ -2623,7 +2594,6 @@
                         }
                     }
                     _this.StoreisShow = false  //looding效果关闭
-                    console.log(_this.StoresDetailed)
                     },
                 )
             },
@@ -2730,7 +2700,6 @@
                 }
                 this.$http.all([getRaiseData(), getDownData()])
                     .then(this.$http.spread((raiseData, downData) => {
-                        console.log(raiseData)
                         //增长门店数据
                         //判断增长门店数据是否为空
                         // if(raiseData.data.data.data.length!=0){
@@ -3070,8 +3039,6 @@
                         _this.stockAmount = false
                         _this.InventoryTurnover = false
                         _this.DaysAvailableStock = false   //库存加载页面效果
-                        console.log(_this.inventoryDetails)
-                        console.log(_this.inventoryDay)
                     },
                 )
             },
@@ -3133,7 +3100,6 @@
                     method: 'POST',
                     data: params
                 }).then(function (res) {
-                    console.log(res)
                     //判断库存可销天数走势图数据是否为空
                     // if(res.data.data.data.length!=0){
                     //     var salesmanTrendData = res.data.data.data
@@ -3179,7 +3145,6 @@
                         item = _this.monthProcess(item)
                         newxAxisData.push(item)
                     })
-                    console.log(newxAxisData)
                     var tempsalesmanTrendData = {monthArr:newxAxisData,seriesData:seriesData}
                     _this.marketableDayChart = {
                         config:{
@@ -3220,7 +3185,6 @@
                         },
                     }
                     _this.marketableDayLine = false
-                    console.log(_this.marketableDayChart)
                 })
             },
             //获取二级页面表格数据
@@ -3596,7 +3560,6 @@
                         },
                     ]
                 }
-                console.log(_this.totalScoreParams)
                 let totalScore1 = _this.oneHelpSaleScoreList.evaluate
                 let totalScore2 = _this.orderScoreList.evaluate
                 // let totalScore3 = _this.personScoreList.evaluate
@@ -3634,7 +3597,6 @@
                             evaluate: scoreTxtData.grade_evaluate,
                             subscribe: scoreTxtData.grade_evaluate_detail,
                         }
-                        console.log(_this.stockScoreList)
                     }
                 ))
             },

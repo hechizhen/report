@@ -109,23 +109,23 @@
 		display: flex;
 	    align-items: center;
 	    justify-content: center;
-		background-color: RGBA(69, 72, 90, 0.5);
+		background-color: rgba(0,0,0,0.5);
 		.explainDetailBox {
-			width: 32rem;
+			width: 1000px;
 			background:#fff;
 			padding-bottom: .5rem;
 			p{
 				margin-bottom:0;
 			}
 			.explainTitleTop{
-				height:1.05rem;
-				width:100%;
+				height: 38px;
+				width: 100%;
 				text-align: center;
 				position: relative;
-				line-height: 2rem;
-				font-size:.8rem;
-				font-weight:500;
-				color:rgba(255,255,255,1);
+				line-height: 70px;
+				font-size: 24px;
+				font-weight: 500;
+				color: #fff;
 				.close{
 					position: absolute;
 					top:0;
@@ -138,35 +138,36 @@
 				}
 			}
 			.explainTitle{
-				height:3.125rem;
+				height:100px;
 				width:100%;
 				background-repeat: no-repeat;
 				background-size: 100% 100%;
-				margin-bottom:.25rem;
+				margin-bottom:10px;
 			}
 			.explainTxt{
-				font-size: .6rem;
+				font-size: 16px;
 				font-weight:500;
 				color:rgba(255,255,255,1);
-				padding-left:1.8rem;
+				padding-left: 62px;
+    			padding-top: 30px;
 			}
 			.rowStyle{
-				height:1.1rem;
+				height:40px;
 				width:100%;
 				border-top:1px solid rgba(229,229,229,1);
-				line-height: 1.1rem;
+				line-height:40px;
 			}
 			.rowStyle:last-child{
 				border-bottom:1px solid rgba(229,229,229,1);
 			}
 			.leftCol{
-				font-size: .4rem;
+				font-size: 16px;
 				font-weight:500;
-				padding-left:1.5rem;
+				padding-left:50px;
 			}
 			.rightCol{
 				color:#333333;
-				font-size: .4rem;
+				font-size: 16px;
 				font-weight:500;
 			}
 		}

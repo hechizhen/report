@@ -209,13 +209,11 @@
         watch:{
             //监听库存可销天数表格数据
             getInvDayListing(val){
-                console.log(val)
                 this.newTableData = val
                 deep:true
             },
         },
          mounted() {
-             console.log(this.marketableDayChart)
              this.newTableData = this.getInvDayListing
          }
     }

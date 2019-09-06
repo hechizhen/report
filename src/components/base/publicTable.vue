@@ -230,7 +230,7 @@
     .publicTable{
         width:100%;
         height:100%;
-        background-color: rgba(69,72,90,.5);
+        background-color:rgba(0,0,0,0.5);
         left: 0;
         top: 0;
         z-index: 10;

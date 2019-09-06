@@ -75,7 +75,6 @@
             }
         },
         mounted(){
-          console.log(this.barEchartsData)
         },
         methods:{
             //关闭方法
@@ -100,7 +99,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: RGBA(69, 72, 90, 0.5);
+        background-color: rgba(0,0,0,0.5);
         .echarts {
             height: 80%;
             width: 90%;

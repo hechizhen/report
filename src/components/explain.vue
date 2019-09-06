@@ -87,7 +87,7 @@
 			align-items: center;
 			-ms-flex-pack: center;
 			justify-content: center;
-			background-color: rgba(69,72,90,.5);
+			background-color:rgba(0,0,0,0.5);
 		}
 	}
 </style>

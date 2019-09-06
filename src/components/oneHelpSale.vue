@@ -81,7 +81,6 @@
             }
         },
         mounted () {
-            console.log(this.gaugeChartData)
         },
         methods: {
         },
@@ -90,7 +89,6 @@
         },
         watch: {
             salesData(val){
-                console.log(val)
                 this.gaugeChartData = {
                     name:'总达成',
                     data:val.chartReach,

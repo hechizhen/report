@@ -26,7 +26,6 @@
             }
         },
         mounted () {
-            console.log(this.gaugeChartData)
             var _this = this
             let echarts = _this.$echarts;
             _this.myChart = echarts.init(document.getElementById("gaugeId"))

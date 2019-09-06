@@ -164,7 +164,6 @@
                             obj.status = v.status
                             arr.push(obj)
                         })
-                        console.log(arr)
                         let para = {
                             //withList: JSON.stringify(this.da)
                             withList: arr

@@ -146,7 +146,6 @@
                     if (xhr.status === 200) {
                         var data = new Uint8Array(xhr.response)
                         var workbook = XLSX.read(data, {type: 'array'})
-                        console.log(workbook)
 
                         var sheetNames = workbook.SheetNames // 工作表名称集合
                         _this.workbookStore = workbook
@@ -176,7 +175,6 @@
                     if (xhr.status === 200) {
                         var data = new Uint8Array(xhr.response)
                         var workbook = XLSX.read(data, {type: 'array'})
-                        console.log(workbook)
 
                         var sheetNames = workbook.SheetNames // 工作表名称集合
                         _this.workbookPerson = workbook

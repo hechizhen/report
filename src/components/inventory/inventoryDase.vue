@@ -85,7 +85,6 @@
 
         },
         mounted () {
-            console.log(this.barData)
         },
     }
 </script>
