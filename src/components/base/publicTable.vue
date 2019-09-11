@@ -72,7 +72,7 @@
                 tableData:'',//列表数据
                 tableColmns:'',//表头数据
                 requestHttpUrl:this.$store.state.testRequestHttpUrl,//接口请求地址
-                requestHttpUrl1:'http://dccuat.liby.com.cn/hanadcc/queryData',//接口请求地址
+                requestHttpUrl1:this.$store.state.testRequestHttpUrl1,//接口请求地址
                  //表头key
                 tableHeaderKey:'',
                 //表头文字

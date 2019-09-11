@@ -318,6 +318,7 @@
                             xAxisIndex: [
                                 0
                             ],
+                            zoomLock:true,
                             bottom:'8%',
                             orient: 'vertical',
                             start: 40,
@@ -382,6 +383,7 @@
                             orient: 'vertical',
                             start: 10,
                             end: endWidth,
+                            zoomLock:true,
                             handleStyle:{
                                 color:"#d3dee5",
                             },

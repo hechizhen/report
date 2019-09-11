@@ -48,11 +48,11 @@
 			trendChartClick:{
 				type:Function
 			},
-			salesmanReached:{
+			salesmanReachedDetail:{
 				type:Object,
 				default:{}
 			},
-			salesmanContribution:{
+			salesmanContributionDetail:{
 				type:Object,
 				default:{}
 			},
@@ -80,12 +80,12 @@
 				salesmanReachedData:{
 					id:'barSalesManId',
 					unit:['money','tenth'],
-					xAxisData:this.salesmanReached.xAxisData,
+					xAxisData:this.salesmanReachedDetail.xAxisData,
 					label:{
 						isShow:false
 					},
 					type:'xAxis',
-					barData:this.salesmanReached.seriesData,
+					barData:this.salesmanReachedDetail.seriesData,
 					showType:1,//0横过来 1竖起来
 					markLineList:{
 						show:false
@@ -125,12 +125,12 @@
 	            salesmanContributionData:{
 					id:'barSalesManId',
 					unit:['money','tenth'],
-					xAxisData:this.salesmanContribution.xAxisData,
+					xAxisData:this.salesmanContributionDetail.xAxisData,
 					label:{
 						isShow:false
 					},
 					type:'xAxis',
-					barData:this.salesmanContribution.seriesData,
+					barData:this.salesmanContributionDetail.seriesData,
 					showType:1,//0横过来 1竖起来
 					markLineList:{
 						show:true
@@ -153,6 +153,8 @@
 				},
 			}
 		},
+		mounted(){
+		},
 		methods:{
 			thendChartClick(a){
 				this.trendChartClick(a)
@@ -172,7 +174,7 @@
 			}
 		},
 		watch:{
-            salesmanReached(value){
+            salesmanReachedDetail(value){
             	this.salesmanReachedData = {
 					id:'barSalesManId',
 					unit:['money','tenth'],
@@ -187,9 +189,10 @@
 						show:false
 					},
 					barType:1
-                }
+				}
+				deep:true
             },
-            salesmanReached(value){
+            salesmanContributionDetail(value){
             	this.salesmanContributionData = {
 					id:'barSalesManId',
 					unit:['money','tenth'],
@@ -204,7 +207,8 @@
 						show:false
 					},
 					barType:1
-                }
+				}
+				deep:true
             }
         },
 	}

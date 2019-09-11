@@ -6,7 +6,7 @@
                 <!-- <span class="spanFont spanSize">{{dealName}}</span> -->
                 <span class="spanFont spanSize">以下是针对您企业的体检报告分析结果，请认真审阅：</span>
             </p>
-            <p class="paddingStyle1">
+            <p class="paddingStyle1">   
                 <span class="spanFont" style="font-size:14px;">查询日期：</span>
                 <!-- <a-month-picker v-model="defaultValDate" :disabledDate="disabledDate" :format="monthFormat" :allowClear="false" @change="changeDate" /> -->
                 <DatePicker type="month" v-model="defaultValDate" :options="options3" format="yyyy/MM" :clearable="false" @on-change="changeDate" style="width:170px" v-if="options3!=''"></DatePicker>
@@ -14,7 +14,7 @@
             </p>
             <p style="margin-top: 2%">
                 <span style="font-size:14px;padding-left:10px;">经销商：</span>
-                <a-select showSearch v-model="dealName" @change="onChange" style="width:170px;">
+                <a-select showSearch v-model="defaultSelectVal" @change="onChange" style="width:170px;">
                     <a-select-option v-for="(item,index) in dealList" :key="item+index" :value="item.name" :disabled="item.date_dt==nowDate ? true : false">{{item.name}}</a-select-option>
                 </a-select>
             </p>

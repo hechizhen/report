@@ -430,7 +430,7 @@
                     this.twoDetailTableData={
                         //二帮卖订单明细系列维度
                         gettwoListing:{
-                            titleName:'二帮卖下单毛利明细-系列',
+                            titleName:'订单详情-系列',
                             params : {
                                 "inputParam":{
                                     "data_mon":this.currentDate,
@@ -468,7 +468,7 @@
                     this.twoDetailTableData={
                         //二帮卖订单明细商品维度
                         gettwoListing:{
-                            titleName:'二帮卖下单毛利明细-商品',
+                            titleName:'订单详情-商品',
                             params : {
                                 "inputParam":{
                                     "data_mon":this.currentDate,
@@ -509,7 +509,7 @@
                     this.twoDetailTableData={
                         //二帮卖订单明细品类维度
                         gettwoListing:{
-                            titleName:'二帮卖下单毛利明细-品类',
+                            titleName:'订单详情-品类',
                             params : {
                                 "inputParam":{
                                     "data_mon":this.currentDate,
@@ -3411,7 +3411,7 @@
                 this.twoDetailTableData={
                     //二帮卖订单明细
                     gettwoListing:{
-                        titleName:'二帮卖下单毛利明细-品类',
+                        titleName:'订单详情-品类',
                         params : {
                             "inputParam":{
                                 "data_mon":this.currentDate,

@@ -7,7 +7,7 @@
 				  <a-Col :span="12" class="thendChartCol1">
 				  	<div class="echartstitle">
 				  		<div></div>
-				  		<div>订单走势图</div>
+				  		<div>下单金额走势图</div>
 				  	</div>
 				  </a-Col>
 				  <a-Col :span="12" class="thendChartCol2">

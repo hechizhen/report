@@ -5,7 +5,7 @@
 		<core :coretype="coreData.coretype" :coretext="coreData.coretext" :evaluate="coreData.evaluate" :subscribe="coreData.subscribe"></core>
 		<trendChart  v-if="echartsShow" :trendChartClick="trendChartClick" :lineEchartsData="salesmanTrendData" :isShow="salesmanTrendPie"></trendChart>
 		<glide  v-if="glideShow" :trendChartClick="glideClick" :salesmandownward="salesmandownward" :isShow="salesmandownwardBar"></glide>
-		<contribution   v-if="contributionShow" :trendChartClick="contributionClick" :salesmanReached="salesmanReached" :salesmanContribution="salesmanContribution"
+		<contribution   v-if="contributionShow" :trendChartClick="contributionClick" :salesmanReachedDetail="salesmanReached" :salesmanContributionDetail="salesmanContribution"
 						:salesmanContributionBar="salesmanContributionBar"  :salesmanReachedBar="salesmanReachedBar"
 						:exportData="reachContributionData"></contribution>
 	</div>
