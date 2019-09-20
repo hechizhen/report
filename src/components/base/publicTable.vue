@@ -6,6 +6,7 @@
             <div class="titleName">
                 <p>{{titleName}}</p>
             </div>
+            <i class="iconfont icon-guanbi iStyle" @click="returnHandleClick"></i>
             <div class="titleBox">
                 <div class="buttonGroup" v-if="buttonGroup.show">
                     <a-radio-group :defaultValue="buttonGroup.list[0]" buttonStyle="solid" @change="changeDimension">
@@ -14,7 +15,6 @@
                 </div>
                 <newbutton :defaultVal="exportButton.defaultVal" :buttonHandleClick="exportHandleClick" style="margin-right:2%;" :txtStyle="txtStyle" :btnStyle="btnStyle"></newbutton>
                 <!-- <new-button :defaultVal="returnButton.defaultVal" :buttonType="returnButton.buttonType" :buttonHandleClick="returnHandleClick"></new-button> -->
-                <i class="iconfont icon-guanbi iStyle" @click="returnHandleClick"></i>
             </div>
             <Table :height="maxHeight" :columns="tablecColumns" :data="tableData" border  v-if="tableData.length!=0" :loading="tableLoading"></Table>
             <div class="paginationTable">
@@ -253,9 +253,11 @@
             align-items: center;
             justify-content: flex-end;
             padding: 10px 0;
+            position: relative;
             .buttonGroup{
                 position: absolute;
                 left:20px;
+                top:0
             }
         }
         .buttonList{

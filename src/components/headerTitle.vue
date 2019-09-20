@@ -31,9 +31,11 @@
         <div class="headerTitle_right">
             <!-- <span class="spanFont2 spanSize4">{{score.coretype}}：</span>
             <span class="spanFont2 spanSize2">{{score.coretext}}</span> -->
-            <span class="spanFont spanSize4">总结：</span>
-            <span class="spanFont spanSize4">{{score.evaluate}}</span>
-            <span class="spanFont1 spanSize3">{{score.subscribe}}</span>
+            <div>
+                <span class="spanFont spanSize4">总结：</span>
+                <span class="spanFont spanSize4">{{score.evaluate}}</span>
+                <span class="spanFont1 spanSize3">{{score.subscribe}}</span>
+            </div>
         </div>
     </div>
 </template>
@@ -233,7 +235,7 @@
         }
         .headerTitle_right{
             // height: 100%;
-            // width: calc(~"55% - 135px");
+            width: calc(~"64% - 135px");
             word-wrap: break-word;
             word-break: break-all;
             flex-wrap: wrap;

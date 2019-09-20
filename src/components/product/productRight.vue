@@ -34,7 +34,7 @@
 <style lang="less" scoped>
     .productRight {
         width: 60%;
-        height: 260px !important;
+        height: 240px !important;
         float: left;
         /*.barChart >div canvas{*/
         /*width: 90%;*/

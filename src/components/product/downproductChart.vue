@@ -7,7 +7,7 @@
                         下滑商品
                     </a-Col>
                     <a-Col :span="12" class="thendChartCol2">
-                        单位：万元
+                        单位：元
                         <newButton :defaultVal="defaultVal" :buttonHandleClick="exportData"> </newButton>
                         <span @click="thendChartClick">
                             <i class="iconfont icon-guanbi"></i>

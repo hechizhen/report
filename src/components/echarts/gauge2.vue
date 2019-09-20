@@ -110,7 +110,7 @@
                             name: '外圈刻度m', //刻度背景
                             type: 'gauge',
                             z: 2,
-                            radius: '200%',
+                            radius: '180%',
                             splitNumber: 5,
                             startAngle: 180,
                             endAngle: 0,
@@ -156,7 +156,7 @@
                             name: '蓝圈背景', //刻度背景
                             type: 'gauge',
                             z: 2,
-                            radius: '130%',
+                            radius: '112%',
                             splitNumber: 5,
                             startAngle: 180,
                             endAngle: 0,
@@ -246,7 +246,7 @@
                             name: '蓝色刻度尺', //刻度背景
                             type: 'gauge',
                             z: 4,
-                            radius: '123%',
+                            radius: '110%',
                             splitNumber: 4,
                             startAngle: 180,
                             endAngle: degrees,

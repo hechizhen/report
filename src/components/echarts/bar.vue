@@ -509,6 +509,9 @@
                 if(_this.barEchartsData.id=="barIdMonthSales" || _this.barEchartsData.id=="barIdYearSales" ){
                     option.yAxis.max= 2
                 }
+                if(_this.barEchartsData.id=="barIdProdun"){
+                    option.xAxis.max= 1
+                }
                 this.myChart.setOption(option);
             }
         },

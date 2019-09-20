@@ -5,7 +5,9 @@
 		<div class="subtitle_list">
 			<NewButton :btnStyle="btnStyle" :buttonHandleClick="detailHandleClick" :txtStyle="txtStyle"></NewButton>
 		</div>
-		<explain :explainList="explainSecondList"></explain>
+		<div class="subtitleBox">
+			<explain :explainList="explainSecondList"></explain>
+		</div>
 	</div>
 </template>
 <script>
@@ -87,5 +89,12 @@
 		color: #2D92FC;
 		background-color: #D7D9E5;
 	}
-
+	.subtitleBox{
+		display: flex;
+		align-items: center;
+		height:100%;
+		position: absolute;
+		right:30px;
+		top:0
+	}
 </style>

@@ -7,8 +7,9 @@ const store = new Vuex.Store({
       requestHttpUrl:localStorage.getItem("requestHttpUrl") || 'https://www.easy-mock.com/mock/5d429dcbd3020d2d3bc58a32/medicalReport',//easyMock接口请求地址
       // testRequestHttpUrl:localStorage.getItem("requestHttpUrl") || 'https://dcc.libyuat.com/hanadcc/queryByPage',//测试接口请求地址
     //   testRequestHttpUrl:localStorage.getItem("requestHttpUrl") || 'http://dccuat.liby.com.cn/hanadcc/queryByPage',//测试接口请求地址
-      testRequestHttpUrl:localStorage.getItem("requestHttpUrl") || 'https://dcc.liby.com/hanadcc/queryByPage',//测试接口请求地址
-      requestHttpUrl1:'https://dcc.liby.com.cn/hanadcc/queryData',//接口请求地址
+      testRequestHttpUrl:localStorage.getItem("requestHttpUrl") || 'http://dcc.liby.com.cn/hanadcc/queryByPage',//测试接口请求地址
+      // requestHttpUrl1:'https://dcc.libyuat.com/hanadcc/queryData',//接口请求地址
+      requestHttpUrl1:'http://dcc.liby.com.cn/hanadcc/queryData',//接口请求地址
       
   },
   mutations: {

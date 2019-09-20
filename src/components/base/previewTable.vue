@@ -6,6 +6,7 @@
             <div class="title">
                 {{titleName}}
             </div>
+            <i class="iconfont icon-guanbi iStyle" @click="returnHandleClick"></i>
             <div class="titleBox">
                 <div class="buttonGroup">
                     <a-radio-group :defaultValue="buttonGroup[0]" buttonStyle="solid" @change="changeDimension">
@@ -13,7 +14,6 @@
                     </a-radio-group>
                 </div>
                 <newbutton defaultVal="下载表格" :buttonHandleClick="exportClick" style="margin-right:2%;" :btnStyle="btnStyle" :txtStyle="txtStyle"></newbutton>
-                <i class="iconfont icon-guanbi iStyle" @click="returnHandleClick"></i>
             </div>
             <Table :columns="columns" :data="data" border :height="maxHeight"></Table>
         </div>
@@ -180,9 +180,11 @@
                 align-items: center;
                 justify-content: flex-end;
                 padding: 10px 0;
+                position: relative;
                 .buttonGroup{
                     position: absolute;
                     left:20px;
+                    top:0
                 }
             }
             .iStyle{

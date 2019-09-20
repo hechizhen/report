@@ -2,7 +2,9 @@
 <template>
     <div class="secondTitle">
         {{titleName}}
-        <explain :explainList="explainSecondList" v-if="titleName!='二帮卖分析'"></explain>
+        <div class="secondTitleBox">
+            <explain :explainList="explainSecondList" v-if="titleName!='二帮卖分析'"></explain>
+        </div>
     </div>
 </template>
 <script>
@@ -54,5 +56,13 @@
         display: flex;
         align-items: center;
         position: relative;
+        .secondTitleBox{
+            position: absolute;
+            right: 30px;
+            height:100%;
+            display: flex;
+            align-items: center;
+            top:5px;
+        }
     }
 </style>

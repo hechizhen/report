@@ -54,15 +54,12 @@
 </script>
 <style lang="less" scoped>
 	.explain {
-		height:100%;
 		display: flex;
 		align-items: center;
 		p{
 			margin:0;
 		}
 		.explainTxt{
-			position: absolute;
-			right:30px;
 			width:22px;
 			height:22px;
 			font-size: 18px;
