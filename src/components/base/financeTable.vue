@@ -2,8 +2,8 @@
 <template>
     <div class="financeTable">
         <a-row v-for="(item,index) in tableData" :key="index" class="rowStyle">
-            <a-col :span="6" class="colLeft">{{item.name}}</a-col>
-            <a-col :span="18" class="colRight">
+            <a-col :span="9" class="colLeft">{{item.name}}</a-col>
+            <a-col :span="15" class="colRight">
                 <span>￥</span>
                 <span>{{item.val}}</span>
             </a-col>
@@ -58,8 +58,10 @@
                 font-size:16px;
                 font-weight:bold;
                 color:rgba(152,162,180,1);
+                width:160px;
            }
            .colRight{
+                width: calc(~"100% - 160px");
                 text-align: right;
                 padding-right:0.9rem;
                 span{

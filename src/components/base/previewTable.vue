@@ -8,11 +8,11 @@
             </div>
             <i class="iconfont icon-guanbi iStyle" @click="returnHandleClick"></i>
             <div class="titleBox">
-                <div class="buttonGroup">
+                <!-- <div class="buttonGroup" >
                     <a-radio-group :defaultValue="buttonGroup[0]" buttonStyle="solid" @change="changeDimension">
                         <a-radio-button v-for="(item,index) in buttonGroup" :key="index" :value="item">{{item}}</a-radio-button>
                     </a-radio-group>
-                </div>
+                </div> -->
                 <newbutton defaultVal="下载表格" :buttonHandleClick="exportClick" style="margin-right:2%;" :btnStyle="btnStyle" :txtStyle="txtStyle"></newbutton>
             </div>
             <Table :columns="columns" :data="data" border :height="maxHeight"></Table>
@@ -136,7 +136,7 @@
                 })
                 this.headerTxt = headerTxt
                 this.headerKey = headerKey
-                this.exportHandleClick(this.headerTxt,this.headerKey,this.data,this.titleName+'-'+this.dimension )
+                this.exportHandleClick(this.headerTxt,this.headerKey,this.data,this.titleName)
             }
         },
         computed:{
@@ -162,6 +162,9 @@
         align-items: center;
         justify-content: center;
         background-color: rgba(0,0,0,0.5);
+        .ivu-table-tip{
+            display: none
+        }
         .tableBox{
             height: 80%;
             width: 90%;

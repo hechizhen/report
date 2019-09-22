@@ -45,11 +45,10 @@
                 isShowDetail:false,
                 isShowreceivable:false,
                 btnStyle:{
-                    width: '72px',
-                    height: '26px',
                     border: '1px solid #FFFFFF',
-                    margin:'auto',
-                    marginTop:'.25rem'
+                    margin:'8px auto',
+                    width: '88px',
+                    height: '26px',
                     // hover:{
                     // 	color:'red'
                     // }
@@ -114,8 +113,8 @@
             align-items: center;
         }
         .shop-active {
-            width: 20%;
-            height: 165px;
+            width: 23%;
+            height: 154px;
             background:linear-gradient(90deg,rgba(0,166,255,1),rgba(140,93,255,1));
             border-radius: 6px;
             color: rgba(255, 255, 255, 1);
@@ -124,15 +123,15 @@
             margin-left:10%;
             p {
                 display: grid;
-                font-size: 14px;
+                font-size: 12px;
                 font-weight: 500;
-                padding-top: 16%;
-                padding-bottom:5%;
+                padding-top: 35px;
+                padding-bottom:10px;
                 margin-bottom: 0;
                 span{
-                    font-size: 14px;
+                    font-size: 12px;
                     font-weight: 500;
-                    margin-top: 5%;
+                    margin-top: 4%;
                 }
             }
             span {

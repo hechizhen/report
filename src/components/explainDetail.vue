@@ -1,5 +1,5 @@
 <template>
-	<div class="explainDetail">
+	<div class="explainDetail" @click="close">
 		<div class="explainDetailBox">
 			<div class="explainTitle" :style="{backgroundImage: 'url(' + bgImage + ')'}">
 				<div class="explainTitleTop">

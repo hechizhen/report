@@ -195,13 +195,16 @@
 </script>
 <style scoped lang="less">
     .headerTitle{
-        width:100%;
-        padding:0 1rem;
+        width: calc(~"100% - 40px");
+        padding:0 20px;
         height:135px;
         background:rgba(255,255,255,1);
         display: flex;
         flex-wrap: wrap;
         align-items: center;
+        position: fixed;
+        top:0;
+        z-index: 10;
         .headerTitle_left{
             // height:100%;
         }
@@ -235,7 +238,7 @@
         }
         .headerTitle_right{
             // height: 100%;
-            width: calc(~"64% - 135px");
+            width: calc(~"63% - 135px");
             word-wrap: break-word;
             word-break: break-all;
             flex-wrap: wrap;

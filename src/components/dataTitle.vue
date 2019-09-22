@@ -3,7 +3,9 @@
         <div class="leftLine"></div>
         <div class="subtitle_content">{{subtitlename}}
         </div>
-        <explain :explainList="explainSecondList" ></explain>
+        <div class="subtitleBox">
+            <explain :explainList="explainSecondList" ></explain>
+        </div>
     </div>
 </template>
 
@@ -51,5 +53,12 @@
     .explain{
         height: 50%;
     }
-
+    .subtitleBox{
+		display: flex;
+		align-items: center;
+		height:100%;
+		position: absolute;
+		right:30px;
+		top:0
+	}
 </style>

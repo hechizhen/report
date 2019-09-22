@@ -3,6 +3,7 @@ html,body{
     height: 100%;
     line-height: 1.2 !important;
     font-family: "微软雅黑"!important; 
+    background: #eaeff8;
 }
 /*清除li标签默认样式*/
 ul,li {
@@ -255,14 +256,7 @@ a {
     .receivable .fontStyle1{
         font-size: 16px!important;
     }
-    .financeTable .rowStyle .colLeft{
-        font-size: 14px!important;
-        width:27%
-    } 
-    .financeTable .colRight{
-        width:73%
-    } 
-    .sameMonth .sameMonthcontent .grossProfit .recordLeft div{
+    /* .sameMonth .sameMonthcontent .grossProfit .recordLeft div{
         font-size: 18px!important;
     }
     .sameMonth .sameMonthcontent .grossProfit .recordRight div{
@@ -270,7 +264,7 @@ a {
     }
     .sameMonth .sameMonthcontent .grossProfit .recordLeft div span{
         margin-left:4px!important
-    }   
+    }    */
     /* .inventory-table .table-head{
         height:4rem!important;
     }

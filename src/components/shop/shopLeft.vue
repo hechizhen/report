@@ -165,8 +165,8 @@
             align-items: center;
         }
         .shop-active{
-            width:17%;
-            height:165px;
+            width:23%;
+            height:154px;
             background:rgba(0,166,255,1);
             border-radius:6px;
             color:rgba(255,255,255,1);
@@ -178,8 +178,8 @@
                 margin-left: 10%;
                 font-size:12px;
                 font-weight:500;
-                padding-top: 26px;
-                padding-bottom: 7%;
+                padding-top: 34px;
+                padding-bottom: 10px;
                 display: grid;
 
                 span{
@@ -189,14 +189,14 @@
                 }
             }
             span{
-                font-size:26px;
+                font-size:24px;
                 font-weight:600;
             }
             .productLeft-btn{
                 line-height: 26px;
                 text-align: center;
                 margin: auto;
-                margin-top: 8%;
+                margin-top: 8px;
                 display: flex;
                 justify-content: center;
 

@@ -209,7 +209,7 @@
                                                             + _this.dataProcess(parentItem[childItem],_this.tableHeader[index].unit,_this.tableHeader[index].unit1).unit
                                 }
                             }else{
-                                if(_this.tableHeader[index].txt=='是否开业' || _this.tableHeader[index].txt=='是否动销'){
+                                if(_this.tableHeader[index].txt=='是否开业' || _this.tableHeader[index].txt=='是否分销'){
                                     parentItem[childItem] = parentItem[childItem]==0 ? '否' : '是'
                                 }
                             }

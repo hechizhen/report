@@ -16,13 +16,13 @@
 					</a-Col>
 				</a-Row>
 			</div>
-			<div class="grossProfit">
+			<div class="grossProfit" ref="grossProfit">
 				<a-Row>
 					<a-Col :span="12" class="recordLeft">
-						<div><img src="./../../assets/img/jine.png">毛利额(万元)<span>￥</span><span class="txt">{{orderAmountData.gross_money}}</span></div>
+						<div><img src="./../../assets/img/jine.png">毛利额(万元)<br/><span>￥</span><span class="txt">{{orderAmountData.gross_money}}</span></div>
 					</a-Col>
 					<a-Col :span="12" class="recordRight">
-						<div><img src="./../../assets/img/maoli-icon.png">毛利率<span>{{orderAmountData.gross_money_rate}}</span></div>
+						<div><img src="./../../assets/img/maoli-icon.png">毛利率<br/><span class="txt">{{orderAmountData.gross_money_rate}}</span></div>
 					</a-Col>
 				</a-Row>
 			</div>
@@ -56,11 +56,11 @@
 		},
 		data(){
 			return {
-				pieEcharts:this.orderAmountData.list
+				pieEcharts:this.orderAmountData.list,
+				isFlag:false,
 			}
 		},
 		mounted(){
-
 		},
 		methods:{
 		},
@@ -153,8 +153,7 @@
 					text-align: center;
 					padding-top: 30px;
 					div {
-						font-size:20px;
-						
+						font-size:16px;
 						font-weight:500;
 						color:#98A2B4;
 						span {
@@ -171,8 +170,8 @@
 						}
 					}
 					img {
-						vertical-align:baseline;
 						margin-right: 5px;
+						width:16px;
 					}
 				}
 				.recordRight {
@@ -180,7 +179,7 @@
 					text-align: center;
 					padding-top: 30px;
 					div {
-						font-size:20px;
+						font-size:16px;
 						
 						font-weight:500;
 						color:#98A2B4;
@@ -196,7 +195,8 @@
 						}
 					}
 					img {
-						vertical-align:baseline;
+						width:16px;
+						margin-right: 5px;
 					}
 				}
 			}
@@ -215,6 +215,16 @@
 					width: 100%;
 					height: 400px;
 				}
+			}
+		}
+		.littleClass{
+			font-size: 15px!important;
+			img{
+				width: 16px;
+    			padding-bottom: 4px;
+			}
+			.txt{
+				font-size: 16px!important;
 			}
 		}
 	}

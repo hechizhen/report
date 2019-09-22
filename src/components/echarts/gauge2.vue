@@ -106,57 +106,63 @@
                         //         name: ""
                         //     }]
                         // },
-                        {
-                            name: '外圈刻度m', //刻度背景
-                            type: 'gauge',
-                            z: 2,
-                            radius: '180%',
-                            splitNumber: 5,
-                            startAngle: 180,
-                            endAngle: 0,
-                            min: 0,
-                            max: 100,
-                            center: ["50%", "85%"], //整体的位置设置
-                            axisLine: { // 坐标轴线
-                                lineStyle: { // 属性lineStyle控制线条样式
-                                    color: [
-                                        [0.8, '#5facfd'],
-                                        [1, '#5facfd']
-                                    ],
-                                    width: 5,
-                                    opacity: 0, //刻度背景宽度
-                                }
-                            },
-                            splitLine: {
-                                show: false
-                            },
-                            data: [{
-                                show: false,
-                                value: '80'
-                            }],
-                            axisLabel: {
-                                show: true,
-                                //   distance: 10,
-                                textStyle: {
-                                    color: '#fff',
-                                    fontSize: '16',
-                                },
-                            },
-                            pointer: {
-                                show: false
-                            },
-                            axisTick: {
-                                show: false
-                            },
-                            detail: {
-                                show: 0
-                            }
-                        },
+                        // {
+                        //     name: '外圈刻度m', //刻度背景
+                        //     type: 'gauge',
+                        //     z: 2,
+                        //     radius: '174%',
+                        //     splitNumber: 5,
+                        //     startAngle: 180,
+                        //     endAngle: 0,
+                        //     min: 0,
+                        //     max: 100,
+                        //     center: ["52%", "85%"], //整体的位置设置
+                        //     axisLine: { // 坐标轴线
+                        //     show: true,
+                        //         lineStyle: { // 属性lineStyle控制线条样式
+                        //             color: [
+                        //                 [0.8, '#5facfd'],
+                        //                 [1, '#5facfd']
+                        //             ],
+                        //             width: 2,
+                        //             opacity: 1, //刻度背景宽度
+                        //         }
+                        //     },
+                        //     splitLine: {
+                        //         show: false
+                        //     },
+                        //     data: [{
+                        //         show: false,
+                        //         value: '80'
+                        //     }],
+                        //     axisLabel: {
+                        //         show: true,
+                        //         distance: 0,
+                        //         //   distance: 10,
+                        //         formatter:function(value){
+                        //             console.log(value)
+                        //             return value+'%'
+                        //         },
+                        //         textStyle: {
+                        //             color: '#fff',
+                        //             fontSize: '12',
+                        //         },
+                        //     },
+                        //     pointer: {
+                        //         show: false
+                        //     },
+                        //     axisTick: {
+                        //         show: false
+                        //     },
+                        //     detail: {
+                        //         show: 0
+                        //     }
+                        // },
                         {
                             name: '蓝圈背景', //刻度背景
                             type: 'gauge',
                             z: 2,
-                            radius: '112%',
+                            radius: '130%',
                             splitNumber: 5,
                             startAngle: 180,
                             endAngle: 0,
@@ -177,8 +183,18 @@
                                 show: false,
                                 value: '80'
                             }],
-                            axisLabel: {
-                                show: false,
+                             axisLabel: {
+                                show: true,
+                                distance: -10,
+                                //   distance: 10,
+                                formatter:function(value){
+                                    console.log(value)
+                                    return value+'%'
+                                },
+                                textStyle: {
+                                    color: '#fff',
+                                    fontSize: '12',
+                                },
                             },
                             pointer: {
                                 show: false
@@ -246,7 +262,7 @@
                             name: '蓝色刻度尺', //刻度背景
                             type: 'gauge',
                             z: 4,
-                            radius: '110%',
+                            radius: '125%',
                             splitNumber: 4,
                             startAngle: 180,
                             endAngle: degrees,

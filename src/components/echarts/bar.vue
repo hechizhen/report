@@ -418,7 +418,7 @@
                         //     },
                         // },
                         formatter:function(params){
-                            var relVal = '';
+                            var relVal = params[0].name+'<br/>';
                             for (var i = 0; i < params.length; i++) {
                                 if(params[i].seriesName=='达成率' || params[i].seriesName=='贡献率'){
                                     relVal += params[i].marker+params[i].seriesName+':'+_this.dataProcess(params[i].value,'percent').num+_this.dataProcess(params[i].value,'percent').unit+'</br>'

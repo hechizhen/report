@@ -220,7 +220,7 @@
                         //     // }
                         // },
                         formatter:function(params){
-                            var relVal = '';
+                            var relVal = params[0].name+'<br/>';
                             for (var i = 0; i < params.length; i++) {
                                 relVal += params[i].marker+params[i].seriesName+':'+_this.dataProcess(params[i].value,_this.lineEchartsData.unit[0],_this.lineEchartsData.unit[1]).num+_this.dataProcess(params[i].value,_this.lineEchartsData.unit[0],_this.lineEchartsData.unit[1]).unit+'</br>'
                             }

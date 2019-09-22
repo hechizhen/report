@@ -158,13 +158,27 @@
             },
             getTableStore (sheetName) {
                 var worksheet = this.workbookStore.Sheets[sheetName]
+                console.log(worksheet)
                 this.tableStoreList = XLSX.utils.sheet_to_json(worksheet)
-                let header = Object.keys(this.tableStoreList[0])
+                console.log(this.tableStoreList)
+                let header = Object.keys(this.tableStoreList)
                 let columns = []
                 header.map(function(item){
                     columns.push({title:item,key:item})
                 })
-                this.tableStoreColumns = columns
+                this.tableStoreColumns = [
+                    {title:'序号',key:''},
+                    {title:'省区',key:''},
+                    {title:'经销商编码',key:''},
+                    {title:'经销商名称',key:''},
+                    {title:'门店名称',key:''},
+                    {title:'门店地址',key:''},
+                    {title:'门店销量（元）',key:''},
+                    {title:'毛利额（元）',key:''},
+                    {title:'费用名称明细',key:''},
+                    {title:'费用金额明细（元）',key:''},
+                    {title:'门店效益（元）',key:''},
+                ]
             },
             readWorkbookFromRemoteFilePerson: function (url) {
                 var xhr = new XMLHttpRequest()
@@ -188,12 +202,25 @@
             getTablePerson (sheetName) {
                 var worksheet = this.workbookPerson.Sheets[sheetName]
                 this.tablePersonList = XLSX.utils.sheet_to_json(worksheet)
-                let header = Object.keys(this.tablePersonList[0])
+                // let header = Object.keys(this.tablePersonList[0])
+                let header = Object.keys(this.tablePersonList)
                 let columns = []
                 header.map(function(item){
                     columns.push({title:item,key:item})
                 })
-                this.tablePersonColumns = columns
+                this.tablePersonColumns = [
+                    {title:'序号',key:''},
+                    {title:'省区',key:''},
+                    {title:'经销商编码',key:''},
+                    {title:'经销商名称',key:''},
+                    {title:'业务员名称',key:''},
+                    {title:'业务员联系电话',key:''},
+                    {title:'业务员销量（元）',key:''},
+                    {title:'支出名称明细',key:''},
+                    {title:'业务员毛利额（元）',key:''},
+                    {title:'支出金额明细（元）',key:''},
+                    {title:'业务员效能（元）',key:''},
+                ]
             },
             //门店收益
             storeHandleClick(){

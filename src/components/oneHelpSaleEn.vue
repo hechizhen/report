@@ -85,6 +85,7 @@
 <style lang="less" scoped>
 	.oneHelpSaleEn {
 		width:100%;
+		margin-top:135px;
 		.oneHelpSaleEnBox{
 			width:100%;
 			display: flex;
