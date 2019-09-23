@@ -233,7 +233,7 @@
         background-color:rgba(0,0,0,0.5);
         left: 0;
         top: 0;
-        z-index: 10;
+        z-index: 110;
         position: fixed;
         display: flex;
         align-items: center;

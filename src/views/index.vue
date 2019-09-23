@@ -1,17 +1,13 @@
 
 <template>
     <div class="index">
-        <!-- <div class="title">
-            <p>体检报告</p>
-            <i></i>
-        </div> -->
         <!-- 头部 -->
         <header-title :dealName="indexDealName" :score="totalScoreList" :summary="indexSummary" :defaultDate="indexDefaultDate" :changeDateHandle="indexChangeDate"
         :dealList="dealList" :isShowDealIdSelect="isShowDealIdSelect" :startDate="startDate" :endDate="endDate" :startDateList="startDateList" v-if="Object.keys(totalScoreList).length!=0 && startDateList.length!=0"></header-title>
         <!-- 一帮卖分析 -->
-        <one-help-sale-en :titleName="oneHelpSaleTitle" :monthSalesData="monthSalesData" :monthBarData="monthBarData"  :coreData="oneHelpSaleScoreList"
-        :yearSalesData="yearSalesData" :yearBarData="yearBarData" :monthShow="oneHelpSaleMonthShow" :yearShow="oneHelpSaleYearShow"
-        v-if="monthBarData.length!=0 && monthSalesData.length!=0 && yearSalesData.length!=0 && yearBarData.length!=0"></one-help-sale-en>
+            <one-help-sale-en :titleName="oneHelpSaleTitle" :monthSalesData="monthSalesData" :monthBarData="monthBarData"  :coreData="oneHelpSaleScoreList"
+            :yearSalesData="yearSalesData" :yearBarData="yearBarData" :monthShow="oneHelpSaleMonthShow" :yearShow="oneHelpSaleYearShow"
+            v-show="monthBarData.length!=0 && monthSalesData.length!=0 && yearSalesData.length!=0 && yearBarData.length!=0"></one-help-sale-en>
 
         <!-- 二帮卖分析-订单 -->
         <secondBand :orderAmountData="orderAmountData" :directionLineData="directionData" :towHelYoy="towHelYoy" :towHelProportion="towHelProportion"
@@ -126,10 +122,10 @@
                 marketableDayChart:"",
                 requestHttpUrl: this.$store.state.requestHttpUrl,//接口请求地址
                 testRequestHttpUrl: this.$store.state.testRequestHttpUrl,//接口请求地址
-                monthSalesData: '',//本月/累计销量以及达成率
-                monthBarData: '',//本月/累计销量以及达成率
-                yearSalesData: '',//本月/累计销量以及达成率
-                yearBarData: '',//本月/累计销量以及达成率
+                monthSalesData: [],//本月/累计销量以及达成率
+                monthBarData: [],//本月/累计销量以及达成率
+                yearSalesData: [],//本月/累计销量以及达成率
+                yearBarData: [],//本月/累计销量以及达成率
                 totalScoreList: {//总得分
                 },
                 oneHelpSaleScoreList: {//一帮卖评分
@@ -896,7 +892,7 @@
             },
             //体检报告概览
             //本月累计下单金额以及总达成 以及本月累计达成率
-            getOneHelpSalesData() {
+            async getOneHelpSalesData() {
                 var _this = this
                 //显示laoding状态
                 _this.oneHelpSaleMonthShow = true
@@ -1796,24 +1792,47 @@
                 var _this = this
                 _this.salesmanReachedBar = true;
                 _this.salesmanContributionBar = true;
-                var params = {
-                    "inputParam":{
-                        "data_mon":_this.currentDate,
-                        "data_type":"当月"
-                    },
-                    "outputCol":"emp_name,emp_phone,emp_target_money,emp_money,emp_dif_money,emp_rate,emp_money_rate,gross_money,gross_rate,dealer_money",
-                    "pageNum":1,
-                    "pageSize":1000,
-                    "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
-                    "serviceId":"service_tjbg02_emp_rate",
-                    "orderCol":'emp_money desc'
+                function descData(){
+                    var params = {
+                        "inputParam":{
+                            "data_mon":_this.currentDate,
+                            "data_type":"当月"
+                        },
+                        "outputCol":"emp_name,emp_phone,emp_target_money,emp_money,emp_dif_money,emp_rate,emp_money_rate,gross_money,gross_rate,dealer_money",
+                        "pageNum":1,
+                        "pageSize":1000,
+                        "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
+                        "serviceId":"service_tjbg02_emp_rate",
+                        "orderCol":'emp_money desc'
+                    }
+                    return _this.$http({
+                        url: _this.testRequestHttpUrl+'?v=salesmanReachedDesc',
+                        method: 'POST',
+                        data: params,
+                    })
                 }
-                this.$http({
-                    url: _this.testRequestHttpUrl + '?v=salesmanReached',
-                    method: 'POST',
-                    data: params
-                }).then(function (res) {
-                    if(res.data.code == '200'){
+                function ascData(){
+                    var params = {
+                        "inputParam":{
+                            "data_mon":_this.currentDate,
+                            "data_type":"当月"
+                        },
+                        "outputCol":"emp_name,emp_phone,emp_target_money,emp_money,emp_dif_money,emp_rate,emp_money_rate,gross_money,gross_rate,dealer_money",
+                        "pageNum":1,
+                        "pageSize":1000,
+                        "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
+                        "serviceId":"service_tjbg02_emp_rate",
+                        "orderCol":'emp_money asc'
+                    }
+                    return _this.$http({
+                        url: _this.testRequestHttpUrl+'?v=salesmanReachedAsc',
+                        method: 'POST',
+                        data: params,
+                    })
+                }
+                this.$http.all([descData(), ascData()])
+                    .then(this.$http.spread((descData, ascData) => {
+                    if(descData.data.code == '200' && ascData.data.code == '200'){
                         //判断业务员-达成-贡献接口参数是否为空
                         // if(res.data.data.data.length!=0){
                         //     var salesmanReachedData = res.data.data.data
@@ -1822,15 +1841,9 @@
                         // }
                         // 达成
                         let targetList = []
-                        var salesmanReachedData = res.data.data.data,xAxisData=[],seriesData=[],lastMonth=[],sameMonth=[],difference=[],salesmanReachedObject={},contributionseriesData=[],contributionlastMonth=[],contributiondifference = [],salesmanContributionObject={};
+                        var salesmanReachedData = descData.data.data.data,xAxisData=[],seriesData=[],lastMonth=[],sameMonth=[],difference=[],salesmanReachedObject={},contributionseriesData=[],contributionlastMonth=[],contributiondifference = [],salesmanContributionObject={};
                         salesmanReachedData.map(function(value,index){
                             if(value.emp_name!='全部'){
-                                xAxisData.push(value.emp_name);
-                                lastMonth.push(value.emp_money)
-                                sameMonth.push(value.emp_target_money)
-                                difference.push(value.emp_rate)
-                                contributionlastMonth.push(value.dealer_money)
-                                contributiondifference.push(value.emp_money_rate)
                                 value.numberId = index
                                 targetList.push(   //处理表格数据 百分比转换
                                     {   numberId:value.numberId,
@@ -1845,6 +1858,17 @@
                                         gross_rate:_this.dataProcess(value.gross_rate, 'percent').num+_this.dataProcess(value.gross_rate, 'percent').unit,
                                     },
                                 )
+                            }
+                        })
+                        let salesmanReachedData1=ascData.data.data.data
+                        salesmanReachedData1.map(function(value,index){
+                            if(value.emp_name!='全部'){
+                                xAxisData.push(value.emp_name)
+                                lastMonth.push(value.emp_money)
+                                sameMonth.push(value.emp_target_money)
+                                difference.push(value.emp_rate)
+                                contributionlastMonth.push(value.dealer_money)
+                                contributiondifference.push(value.emp_money_rate)
                             }
                         })
                         //导出数据
@@ -1875,7 +1899,7 @@
                         _this.salesmanContributionBar = false
 
                     }
-                })
+                }))
             },
             //产品-商品动销率，商品动销数
             getCommodityTurnoverRate() {
@@ -2119,98 +2143,6 @@
                     }
                 ))
             },
-            // //产品-列表数据导出
-            // getProductExportData(){
-            //     var _this = this
-            //      var params = {
-            //         "inputParam":
-            //         {
-            //             "data_mon":_this.currentDate,
-            //             "data_type":"当月",
-            //             "bo_type":"品类"
-            //         },
-            //         "outputCol":"bo1_name,bo2_name,bo3_name,goods_name,money,RATIO_RATE",
-            //         "pageNum":_this.productPageNum,
-            //         "isReturnTotalSize": "Y",
-            //         "pageSize":_this.exportPageSize,
-            //         "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'","bo2_name":"='"+_this.categoryName+"'"},
-            //         "groupByCol":["bo1_name","bo2_name","bo3_name","goods_name"],
-            //         "serviceId":"service_tjbg02_sales_order_dtl"
-            //     }
-            //     this.$http({
-            //         url: _this.testRequestHttpUrl + '?v=GoodsDetailTable',
-            //         method: 'POST',
-            //         data: params
-            //     }).then(function (res) {
-            //         console.log(res)
-            //         var data = res.data.data.data;
-            //         let headerTxt = [
-            //             '事业部',
-            //             '品类',
-            //             '系列',
-            //             '商品名称',
-            //             '销量（元）',
-            //             '销售占比',
-            //         ]
-            //         let headerKey = params.outputCol.split(',')
-            //         _this.exportDetailData = {
-            //             headerTxt:headerTxt,
-            //             headerKey:headerKey,
-            //             name:'商品明细',
-            //             data:data
-            //         }
-            //     })
-            // },
-            // //产品-列表数据
-            // getProductTableData(){
-            //     var _this = this
-            //     _this.NumberGoodsList = true
-            //      var params = {
-            //         "inputParam":
-            //         {
-            //             "data_mon":_this.currentDate,
-            //             "data_type":"当月",
-            //             "bo_type":"品类"
-            //         },
-            //         "outputCol":"bo1_name,bo2_name,bo3_name,goods_name,money,RATIO_RATE",
-            //         "pageNum":_this.productPageNum,
-            //         "isReturnTotalSize": "Y",
-            //         "pageSize":1000,
-            //         "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'","bo2_name":"='"+_this.categoryName+"'"},
-            //         "groupByCol":["bo1_name","bo2_name","bo3_name","goods_name"],
-            //         "serviceId":"service_tjbg02_sales_order_dtl"
-            //     }
-            //     this.$http({
-            //         url: _this.testRequestHttpUrl + '?v=GoodsDetailTable',
-            //         method: 'POST',
-            //         data: params
-            //     }).then(function (res) {
-            //         console.log(res)
-            //         var data = res.data.data.data;
-            //         let headerTxt = [
-            //             {title:'事业部'},
-            //             {title:'品类'},
-            //             {title:'系列'},
-            //             {title:'商品名称'},
-            //             {title:'销量（元）'},
-            //             {title:'销售占比'},
-            //         ]
-            //         let headerKey = params.outputCol.split(',')
-            //         headerKey.map(function(item,index){
-            //             headerTxt[index].key = item
-            //         })
-            //         let tablecColumns = headerTxt
-            //         _this.productTableData = {
-            //             data:data,
-            //             columns:tablecColumns,
-            //             totalSize:res.data.data.totalSize,
-            //             defaultSize:params.pageSize,
-            //             category:_this.categoryList
-            //         }
-            //         _this.NumberGoodsList = false
-            //         console.log(_this.productTableData)
-            //     })
-            // },
 
             //产品-产品下滑/增长商品
             getVariability() {
@@ -2229,7 +2161,7 @@
                         "outputCol":"goods_code69,goods_code79,goods_name,money_lm,money,dif_money",
                         "pageNum":1,
                         "pageSize":1000,
-                        "orderCol":'dif_money asc',
+                        "orderCol":'dif_money desc',
                         "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
                         "serviceId":"service_tjbg02_goods_sales_change"
                     }
@@ -2258,7 +2190,7 @@
                             "money_type":"上升",
                             "bo_type":"商品"
                         },
-                        "outputCol":"goods_code69,goods_code79,goods_name,money,money_lm,dif_money",
+                        "outputCol":"goods_code69,goods_code79,goods_name,money_lm,money,dif_money",
                         "pageNum":1,
                         "pageSize":1000,
                         "orderCol":'dif_money desc',
@@ -2412,43 +2344,6 @@
                         })
                     )
             },
-
-            // //产品-动销商品明细
-            // getGoodsdetail() {
-            //     var _this = this
-            //     _this.NumberGoodsPie = true
-            //     var params = {
-            //         "inputParam":{
-            //             "data_mon":_this.currentDate,
-            //             "data_type":"当月",
-            //             "bo_type":'品类'
-            //         },
-            //         "outputCol":"bo1_name,bo2_name,bo3_name,goods_name,money,ratio_rate,money_mom,money_yoy",
-            //         "pageNum":1,
-            //         "pageSize":1000,
-            //         "groupByCol":["dealer_id","data_mon"],
-            //         "whereCndt":{"dealer_id":"='"+_this.dealer_id+"'"},
-            //         "serviceId":"service_tjbg02_sales_order_dtl"
-            //     }
-            //     this.$http({
-            //         url: _this.testRequestHttpUrl + '?v=GoodsDetail',
-            //         method: 'POST',
-            //         data: params
-            //     }).then(function (res) {
-            //         var Goods = res.data.data.data;
-            //         let list =[]
-            //         let list1=[]
-            //         Goods.map(function(item){
-            //             list.push({value:item.money,name:item.bo2_name})
-            //             list1.push(item.bo2_name)
-            //         })
-            //         _this.categoryList = list1
-            //         _this.GoodsDetail = list;
-            //         _this.NumberGoodsPie = false
-            //         console.log(_this.GoodsDetail)
-            //     })
-            // },
-            //
 
             // 门店模块概览
             getStoresDetailed() {
@@ -3354,7 +3249,7 @@
                             {txt: '商品名称', unit: false},
                             {txt: '最近交易时间', unit: false},
                             {txt: '无交易时长（天）', unit: 'day'},
-                            {txt: '库存件数（件）', unit: 'day'},
+                            {txt: '库存件数（件）', unit: 'stock'},
                             {txt: '库存金额（元）', unit: 'money'},
                         ]
                     },

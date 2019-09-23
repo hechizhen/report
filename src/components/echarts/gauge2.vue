@@ -162,13 +162,13 @@
                             name: '蓝圈背景', //刻度背景
                             type: 'gauge',
                             z: 2,
-                            radius: '130%',
+                            radius: '120%',
                             splitNumber: 5,
                             startAngle: 180,
                             endAngle: 0,
                             min: 0,
                             max: 100,
-                            center: ["50%", "85%"], //整体的位置设置
+                            center: ["50%", "80%"], //整体的位置设置
                             axisLine: { // 坐标轴线
                                 lineStyle: { // 属性lineStyle控制线条样式
                                     color: colorSet,
@@ -262,13 +262,13 @@
                             name: '蓝色刻度尺', //刻度背景
                             type: 'gauge',
                             z: 4,
-                            radius: '125%',
-                            splitNumber: 4,
+                            radius: '115%',
+                            splitNumber: 5,
                             startAngle: 180,
                             endAngle: degrees,
                             // min: 0,
                             // max: 15,
-                            center: ["50%", "85%"], //整体的位置设置
+                            center: ["50%", "80%"], //整体的位置设置
                             axisLine: { // 坐标轴线
                                 lineStyle: { // 属性lineStyle控制线条样式
                                     color: colorSet,
@@ -289,7 +289,7 @@
                                     color: '#fff',
                                     width: 3
                                 },
-                                length: 8,
+                                length: 6,
                                 splitNumber: 5,
                             },
                             detail: {
@@ -301,7 +301,7 @@
                                 show:false,
                             },
                             splitLine: {
-                                length: 15, //刻度节点线长度
+                                length: 10, //刻度节点线长度
                                 lineStyle: {
                                     width: 3,
                                     color: '#fff'

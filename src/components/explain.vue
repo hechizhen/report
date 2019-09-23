@@ -75,7 +75,7 @@
 			position: fixed;
 			left: 0;
 			top: 0;
-			z-index: 10;
+			z-index: 120;
 			height: 100%;
 			width: 100%;
 			display: -ms-flexbox;

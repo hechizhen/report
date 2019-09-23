@@ -46,7 +46,8 @@
                 isShowreceivable:false,
                 btnStyle:{
                     border: '1px solid #FFFFFF',
-                    margin:'8px auto',
+                    margin:'0 auto',
+                    marginTop:'8px',
                     width: '88px',
                     height: '26px',
                     // hover:{
@@ -125,7 +126,7 @@
                 display: grid;
                 font-size: 12px;
                 font-weight: 500;
-                padding-top: 35px;
+                padding-top: 28px;
                 padding-bottom:10px;
                 margin-bottom: 0;
                 span{

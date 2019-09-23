@@ -165,7 +165,7 @@
                         display: flex;
                         align-items: flex-end;
                         justify-content: center;
-                        padding-bottom:25px;
+                        padding-bottom:30px;
                         top:0;
                         left:0;
                         p:first-child{

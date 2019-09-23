@@ -9,7 +9,7 @@
             <p>{{defaultVal}}</p>
         </div>
         <ul>
-            <li v-for="(item,index) in pieEchartsData.pieData" :key="index" @mouseover="limouseover(item,index)">
+            <li v-for="(item,index) in pieEchartsData.pieData" :key="index" @mouseover="limouseover(item,index)" @mouseout="limouseout(item,index)">
                 <p :style="{background:pieEchartsData.colorList[index]}"></p>
                 <p>{{item.name}}</p>
             </li>
@@ -95,9 +95,23 @@
         },
         methods: {
             limouseover(item,index){
+                var _this = this
                 this.defaultTxt = item.name
                 this.defaultColor = this.pieEchartsData.colorList[index]
                 this.defaultVal = ((item.value)/this.sumData*100).toFixed(2)+'%'
+                console.log(_this.myChart)
+                 _this.myChart.dispatchAction({
+                    type: 'highlight',
+                    seriesIndex: 0,
+                    dataIndex: index
+                });
+            },
+            limouseout(item,index){
+                 this.myChart.dispatchAction({
+                    type: 'downplay',
+                    seriesIndex: 0,
+                    dataIndex: index
+                });
             },
             remToPx(rem) {
                 var width = window.screen.width
@@ -198,6 +212,11 @@
                     }]
                 };
                 _this.myChart.setOption(option);
+                // _this.myChart.dispatchAction({
+                //     type: 'highlight',
+                //     seriesIndex: 0,
+                //     dataIndex: 0
+                // });
                 _this.myChart.on('mouseover', function(params) {
                     console.log(params)
                     _this.defaultTxt=params.name
@@ -215,6 +234,16 @@
                 let echarts = _this.$echarts;
                 _this.myChart = echarts.init(document.getElementById(_this.pieEchartsData.id))
                 _this.setPieOptions()
+
+                _this.defaultTxt = val.pieData[0].name
+                var sum = []
+                val.pieData.map((item,index) => {
+                    sum.push(item.value)
+                })
+                this.sumData = sum.reduce(function(prev,cur,index,array){
+                    return prev + cur
+                })
+                this.defaultVal = (((val.pieData[0].value)/this.sumData)*100).toFixed(2)+'%'
             }
         },
         distroyed: function () {
@@ -254,6 +283,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-wrap: wrap;
             li{
                 display: flex;
                 align-items: center;

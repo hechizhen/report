@@ -154,6 +154,9 @@ export default{
                 } else if (type == 'day') {
                     var num = this.formatCurrency((data / 1).toFixed(0))
                     var unit = '天'
+                } else if (type == 'stock') {
+                  var num = this.formatCurrency((data / 1).toFixed(2))
+                  var unit = '件'
                 }else if(type=='time'){
                     var num = (data / 1).toFixed(1)
                     var unit = '小时/单'

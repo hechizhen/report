@@ -37,6 +37,7 @@
                 <span class="spanFont1 spanSize3">{{score.subscribe}}</span>
             </div>
         </div>
+        <loading-data></loading-data>
     </div>
 </template>
 <script>
@@ -45,6 +46,7 @@
     moment.locale('zh-cn');
     import buttonList from '../components/base/newButton.vue'
     import gaugeChart from '../components/echarts/gauge1.vue'
+    import loadingData from './base/loadingData.vue'
     export default {
         name : 'headerTitle',
         props:{
@@ -93,7 +95,8 @@
         },
         components : {
             buttonList,
-            gaugeChart
+            gaugeChart,
+            loadingData
         },
         data () {
             return {
@@ -186,6 +189,9 @@
                     name:'总得分',
                     data:val.coretext
                 }
+            },
+            dealName(val){
+                this.defaultSelectVal = val
             }
         },
         distroyed: function () {
@@ -204,7 +210,7 @@
         align-items: center;
         position: fixed;
         top:0;
-        z-index: 10;
+        z-index: 101;
         .headerTitle_left{
             // height:100%;
         }

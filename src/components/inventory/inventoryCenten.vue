@@ -45,10 +45,11 @@
         float: left;
         margin-left: 2%;
         position: relative;
-
+        display: flex;
+        align-items: center;
         .inventoryCenten-bor {
-            width: 180px;
-            height: 180px;
+            width: 160px;
+            height: 160px;
             border: 23px solid rgba(238, 240, 245, 1);
             border-radius: 50%;
             margin: 14px auto;

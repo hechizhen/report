@@ -178,7 +178,7 @@
                 margin-left: 10%;
                 font-size:12px;
                 font-weight:500;
-                padding-top: 34px;
+                padding-top: 28px;
                 padding-bottom: 10px;
                 display: grid;
 
