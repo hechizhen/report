@@ -16,7 +16,7 @@
 				</a-Row>
 			</div>
 			<div class="lineEcharts">
-				<echartsline :lineEchartsData="direction.config" :xAxis="direction.xAxis" :yAxis="direction.yAxis" :legendShow="false" :grid="grid" v-if="direction.length != 0" :dataZoomShow="false"></echartsline>
+				<echartsline v-if="direction!=''" :lineEchartsData="direction.config" :xAxis="direction.xAxis" :yAxis="direction.yAxis" :legendShow="false" :grid="grid" :dataZoomShow="false"></echartsline>
 			</div>
 		</div>
 	</div>
@@ -57,6 +57,7 @@
 			}
 		},
 		mounted(){
+			console.log(this.direction)
 		},
 		methods:{
 			thendChartClick(){
@@ -65,7 +66,8 @@
 		},
 		watch:{
             lineEchartsData(val){
-                this.direction = val;
+				this.direction = val;
+				console.log(this.direction)
             }
         },
 	}

@@ -43,7 +43,7 @@
         width:100%;
         height:100%;
         background:	rgba(255,255,255,0.8);
-        z-index:100;
+        z-index:121;
         top: 0;
         display: flex;
         align-items: center;

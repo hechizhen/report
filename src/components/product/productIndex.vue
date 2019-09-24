@@ -4,13 +4,13 @@
             <dataTitle :subtitlename="titName" :explainSecondList="explainSecondList"></dataTitle>
             <div class="product-content">
                 <a-Row >
-                    <a-Col :span="10">
-                        <productLeft :productdata="CommodityTurnoverRate"  :selectButtonClick="selectButtonClick" :storeHandleClick="storeDetailHandleClick"
+                    <a-Col :span="10" style=" height: 257px;" >
+                        <productLeft :productdata="CommodityTurnover"  :selectButtonClick="selectButtonClick" :storeHandleClick="storeDetailHandleClick"
                                      :tableData="newTableData"> </productLeft>
-                        <productRight :barData="CommodityTurnoverRate.produnarData"></productRight>
+                        <productRight :barData="CommodityTurnover.produnarData"></productRight>
                         <loading-data :isShow="CommodityRate"></loading-data>
                     </a-Col>
-                    <a-Col :span="14">
+                    <a-Col :span="14" style=" height: 257px;" >
                         <commodityRight :goodHandleClick="goodDetailHandleClick" :commoditydata="commoditydata" :upraphy="upraphy" :downraphy="downraphy"  :tableData="productTableData"  :selectButtonClick="proListDetaSelectButtonClick" ></commodityRight>
                         <loading-data :isShow="NumberGoods"></loading-data>
                     </a-Col>
@@ -144,6 +144,7 @@
                 goodsData:"",
                 VariabilityUp:this.upproStoresData,
                 VariabilityDown:this.prodownStoresData,
+                CommodityTurnover:this.CommodityTurnoverRate,
                 // GoodsDetailPie:this.GoodsDetail,
                 pieEchartsData:{},
                 barEchartsDataDown:{},
@@ -256,6 +257,9 @@
             tableData(val){
                 this.newTableData = val
                 deep:true
+            },
+            CommodityTurnoverRate(val){
+                this.CommodityTurnover = val
             },
         },
         mounted() {

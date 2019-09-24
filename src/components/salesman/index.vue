@@ -3,7 +3,7 @@
 		<subTitle :subtitlename="subtitlename" :listing="listing" :explainSecondList="explainSecondList"></subTitle>
 		<manager :explicit="explicit" :salesmanData="salesmanData" :isShow="isShow"></manager>
 		<core :coretype="coreData.coretype" :coretext="coreData.coretext" :evaluate="coreData.evaluate" :subscribe="coreData.subscribe"></core>
-		<trendChart  v-if="echartsShow" :trendChartClick="trendChartClick" :lineEchartsData="salesmanTrendData" :isShow="salesmanTrendPie"></trendChart>
+		<trendChart  v-if="echartsShow" :trendChartClick="trendChartClick" :lineEchartsData="salesmanTrend" :isShow="salesmanTrendPie"></trendChart>
 		<glide  v-if="glideShow" :trendChartClick="glideClick" :salesmandownward="salesmandownward" :isShow="salesmandownwardBar"></glide>
 		<contribution   v-if="contributionShow" :trendChartClick="contributionClick" :salesmanReachedDetail="salesmanReached" :salesmanContributionDetail="salesmanContribution"
 						:salesmanContributionBar="salesmanContributionBar"  :salesmanReachedBar="salesmanReachedBar"
@@ -90,6 +90,7 @@
 				salesmandownward:this.salesmandownwardData,
 				salesmanReached:this.salesmanReachedData,
 				salesmanContribution:this.salesmanContributionData,
+				salesmanTrend:this.salesmanTrendData,
 				explainSecondList:{
 					imgType:3,
 					tableData:[
@@ -144,7 +145,10 @@
         	},
         	salesmanContributionData(val) {
         		this.salesmanContribution = val
-        	}
+			},
+			salesmanTrendData(val){
+				this.salesmanTrend = val
+			}
         },
 		computd:{
 

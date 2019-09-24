@@ -4,18 +4,18 @@
 		<subTitle :subtitlename="subtitlename" :listing="listing" :detailHandleClick="detailHandleClick"  :explainSecondList="explainSecondList"></subTitle>
 		<a-Row :gutter="23">
 		  <a-Col :span="9">
-		  	<sameMonth :orderAmountData="orderAmountData.thatMonth" :isShow="towHelpSaleMonthShow"></sameMonth>
+		  	<sameMonth :orderAmountData="newOrderAmountData.thatMonth" :isShow="towHelpSaleMonthShow"></sameMonth>
 		  </a-Col>
 		  <a-Col :span="15">
 		  	<a-Row :gutter="20">
 		  		<a-Col :span="12">
-				  	<totalAmount :displayData="orderAmountData.chainratio" :isShow="towHelProportion"></totalAmount>
+				  	<totalAmount :displayData="newOrderAmountData.chainratio" :isShow="towHelProportion"></totalAmount>
 				</a-Col>
 				<a-Col :span="12">
-				  	<totalAmount :displayData="orderAmountData.yearOnYear" :isShow="towHelYoy"></totalAmount>
+				  	<totalAmount :displayData="newOrderAmountData.yearOnYear" :isShow="towHelYoy"></totalAmount>
 				</a-Col>
 				<a-Col :span="24">
-				  	<trendChart :lineEchartsData="directionLineData" :isShow="towHelpSaleMonthLineShow" v-if="directionLineData!=''"></trendChart>
+				  	<trendChart :lineEchartsData="newDirectionData" :isShow="towHelpSaleMonthLineShow"></trendChart>
 				</a-Col>
 		  	</a-Row>
 		  </a-Col>
@@ -114,7 +114,9 @@
 					span:6,
 					span2:18,
 					titleName:'二帮卖分析-订单指标解释',
-				}
+				},
+				newOrderAmountData:this.orderAmountData,
+				newDirectionData:this.directionLineData
 			}
 		},
 		mounted(){
@@ -139,10 +141,15 @@
 
 		},
 		watch:{
-            // directionData(val){
-			// 	console.log(val)
-
-            // },
+			orderAmountData(val){
+				console.log(val)
+				this.newOrderAmountData = val
+			},
+            directionLineData(val){
+				this.newDirectionData = val
+				console.log(this.newDirectionData)
+				deep:true
+            },
         },
 		distroyed:{
 

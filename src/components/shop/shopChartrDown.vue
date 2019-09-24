@@ -7,7 +7,7 @@
                        下滑门店
                     </a-Col>
                     <a-Col :span="12" class="thendChartCol2">
-                        单位：万元
+                        单位：元
                         <newButton :defaultVal="defaultVal" :buttonHandleClick="exportData" :btnStyle="btnStyle" :txtStyle="txtStyle"> </newButton>
                         <span @click="thendChartClicks">
                             <i class="iconfont icon-guanbi"></i>
@@ -104,6 +104,7 @@
             height: 80%;
             width: 90%;
             background:rgba(255,255,255,1);
+            border-radius: 5px;
             .title {
                 height: 10%;
                 width: 100%;

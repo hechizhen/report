@@ -48,7 +48,7 @@
             <loading-data :isShow="stockAmount"></loading-data>
         </div>
         <inventoryCenten :turnoverTxt="inventoryDetails.turnoverTxt" :turnover="inventoryDetails.turnover" :isShow="InventoryTurnover"></inventoryCenten>
-        <inventoryDase v-if="inventoryDay.length!=0" :inventoryTxt="inventoryDay" :isShow="DaysAvailableStock"
+        <inventoryDase :inventoryTxt="inventoryDay" :isShow="DaysAvailableStock"
                      :barData="inventoryDay.inventoryBarData"
                        :dealHandleClick="dealHandleClick"
         ></inventoryDase>
@@ -63,7 +63,7 @@
     </div>
         <!--走势图line-->
         <div class="bartu">
-            <trendChart  :lineEchartsData="marketableDayChart" v-if="marketableDayChart != ''"></trendChart>
+            <trendChart  :lineEchartsData="marketableDayChart"></trendChart>
             <loading-data :isShow="marketableDayLine"></loading-data>
         </div>
     <core :coretype="coreData.coretype" :coretext="coreData.coretext" :evaluate="coreData.evaluate" :subscribe="coreData.subscribe"></core>

@@ -3,16 +3,16 @@
     <div class="index">
         <!-- 头部 -->
         <header-title :dealName="indexDealName" :score="totalScoreList" :summary="indexSummary" :defaultDate="indexDefaultDate" :changeDateHandle="indexChangeDate"
-        :dealList="dealList" :isShowDealIdSelect="isShowDealIdSelect" :startDate="startDate" :endDate="endDate" :startDateList="startDateList" v-if="Object.keys(totalScoreList).length!=0 && startDateList.length!=0"></header-title>
+        :dealList="dealList" :isShowDealIdSelect="isShowDealIdSelect" :startDate="startDate" :endDate="endDate" :startDateList="startDateList" :isShow="headerShow"
+        ></header-title>
         <!-- 一帮卖分析 -->
             <one-help-sale-en :titleName="oneHelpSaleTitle" :monthSalesData="monthSalesData" :monthBarData="monthBarData"  :coreData="oneHelpSaleScoreList"
-            :yearSalesData="yearSalesData" :yearBarData="yearBarData" :monthShow="oneHelpSaleMonthShow" :yearShow="oneHelpSaleYearShow"
-            v-show="monthBarData.length!=0 && monthSalesData.length!=0 && yearSalesData.length!=0 && yearBarData.length!=0"></one-help-sale-en>
+            :yearSalesData="yearSalesData" :yearBarData="yearBarData" :monthShow="oneHelpSaleMonthShow" :yearShow="oneHelpSaleYearShow"></one-help-sale-en>
 
         <!-- 二帮卖分析-订单 -->
         <secondBand :orderAmountData="orderAmountData" :directionLineData="directionData" :towHelYoy="towHelYoy" :towHelProportion="towHelProportion"
                     :towHelpSaleMonthShow="towHelpSaleMonthShow" :towHelpSaleMonthLineShow="towHelpSaleMonthLineShow" :orderDetailClick="orderDetailHandleClick"
-                    :tableData="twoDetailTableData.gettwoListing"  v-if="orderAmountData!='' && Object.keys(directionData).length!=0"  :selectButtonClick="twoDetaSelectButtonClick"
+                    :tableData="twoDetailTableData.gettwoListing"  :selectButtonClick="twoDetaSelectButtonClick"
                     :coreData="orderScoreList"
         ></secondBand>
         <!-- 二帮卖分析-业务员 -->
@@ -20,33 +20,33 @@
                   :salesmanReachedData="salesmanReachedData" :salesmanContributionData="salesmanContributionData" :isShow="salesmanReached"
                   :salesmanReachedBar="salesmanReachedBar" :salesmanContributionBar="salesmanContributionBar" :salesmandownwardBar="salesmandownwardBar"
                   :salesmanTrendPie="salesmanTrendPie" :ownwardExportData="ownwardExportData" :reachContributionData="reachContributionData"
-                  :coreData="personScoreList"
-                  v-if="reachContributionData!='' && salesmanTrendData!=''"></salesman>
+                  :coreData="personScoreList"></salesman>
         <!-- 商品 -->
         <productIndex :CommodityTurnoverRate="CommodityTurnoverRate"  :commoditydata="commoditydata" :indexStoreHandleClick="indexStoreHandleClick"
                       :prodownStoresData="prodownStoresData" :upproStoresData="upproStoresData" :indexGoodDetailHandleClick="indexGoodDetailHandleClick"
                       :NumberGoods="NumberGoods"  :CommodityRate="CommodityRate"  :NumberGoodsDownBar="NumberGoodsDownBar" :NumberGoodsUpBar="NumberGoodsUpBar"
-                      :NumberGoodsPie="NumberGoodsPie" :NumberGoodsList="NumberGoodsList" v-if="CommodityTurnoverRate!=''"
+                      :NumberGoodsPie="NumberGoodsPie" :NumberGoodsList="NumberGoodsList"
                       :tableData="getPinListing"  :exportData="ProExportData"  :productTableData="productTableData"
                       :detailExport="exportDetailData"  :selectButtonClick="proDetaSelectButtonClick"  :proListDetaSelectButtonClick="proListDetaSelectButtonClick"
                       :coreData="productScoreList"
         ></productIndex>
         <!--门店-->
-        <shopIndex  :StoresDetailed="StoresDetailed" v-if="StoresDetailed.length!=0 && storeDetailTableData!='' && upStoresData!=''"  :isShow="StoreisShow"
+        <shopIndex  :StoresDetailed="StoresDetailed"  :isShow="StoreisShow"
                     :upStoresData="upStoresData"  :downStoresData="downStoresData"  :downStoresBar="downStoresBar"   :upStoresBar="upStoresBar"
                     :tableData="storeDetailTableData" :exportData="storeExportData"
                     :coreData="storeScoreList"
         ></shopIndex>
+         <!-- v-if="StoresDetailed.length!=0 && storeDetailTableData!='' && upStoresData!=''" -->
          <!--库存-->
         <inventoryIndex  :inventoryDay="inventoryDay" :inventoryDetails="inventoryDetails" :marketableDayChart="marketableDayChart" :stockDetailHandleClick="indexStockDetailHandleClick"
                          :DaysAvailableStock="DaysAvailableStock" :InventoryTurnover="InventoryTurnover" :stockAmount="stockAmount"
-                         :marketableDayLine="marketableDayLine"   v-if="inventoryDay.length!=0 && Object.keys(marketableDayChart).length!=0"
+                         :marketableDayLine="marketableDayLine"   
                          :getPinListing="invDetailTableData.getPinListing"  :getInvDayListing="invDetailTableData.getInvDayListing" :selectButtonClick="invDetaSelectButtonClick"
                          :coreData="stockScoreList"
         > </inventoryIndex>
+        <!-- v-if="inventoryDay.length!=0 && Object.keys(marketableDayChart).length!=0" -->
         <!-- 财务 -->
-        <finance :financeData="financeData" :receivableData="receivableData" :overDueData="overDueData" :titleName="financeTitle"
-        v-if="financeData.length!=0 && receivableData.length!=0 && overDueData.length!=0" :isShow="financeIsShow"
+        <finance :financeData="financeData" :receivableData="receivableData" :overDueData="overDueData" :titleName="financeTitle" :isShow="financeIsShow"
         :tableData="financeDetailTableData.overdueDetail"></finance>
     </div>
 </template>
@@ -117,7 +117,90 @@
                 //库存金额，件数，可周转天数
                 inventoryDetails:"",
                 //库存可销天数
-                inventoryDay: "",
+                inventoryDay: {
+                    inventorycompare: [  //同比环比数据
+                         {
+                                    name: '环比增长:',
+                                    inventoryChainVal:'',
+                                    inventoryChainValColor:'',
+                                },
+                                //库存同比数据
+                                {
+                                    name: '同比增长:',
+                                    inventoryChainVal:'',
+                                    inventoryChainValColor:''
+
+                                }
+                    ],
+                    receivableAverage: '库存件数可销天数（天）',
+                    inventoryVal:'',  //库存件数可销天数
+                    inventoryBarData:{
+                        config:{
+                            id: 'barIdInventory',
+                            unit:['day'],
+                            xAxisData: [],
+                            label: {
+                                isShow: true
+                            },
+                            type: 'xAxis',
+                            barData: [
+                                {
+                                    name: '库存可销天数',
+                                    data: [],
+                                    color: '#3699FF',
+                                    barWidth: 11,
+                                    textStyle: {
+                                        color: "#000"
+                                    },
+                                },
+                            ],
+                            showType: 0,
+                            markLineList:{
+                                show:false,
+                                data:100,
+                            }
+                        },
+                        label: {
+                            isShow: true,
+                            position:'top',
+                            color: "#000",
+                            fontWeight: "bolder",
+
+                        },
+                        xAxis:{
+                            axisLine:{
+                                show:true,
+                                color:'#ccc'
+                            },
+                            axisLabel:{
+                                show:true,
+                                color:'#000',
+                                fontSize:12
+                            },
+                            splitLine:{
+                                show:false,
+                                color:'#ccc'
+                            },
+                        },
+                        yAxis:{
+                            axisLine:{
+                                show:false,
+                                color:'#ccc'
+                            },
+                            axisLabel:{
+                                show:true,
+                                color:'#333333',
+                                fontSize:12
+                            },
+                            splitLine:{
+                                show:true,
+                                color:'#eeeeee'
+                            },
+                        },
+                        legendShow:false,
+                        isShowMax:false,
+                    }   //树状图数据   //树状图数据
+                },
                 //库存-库存可销天数走势图
                 marketableDayChart:"",
                 requestHttpUrl: this.$store.state.requestHttpUrl,//接口请求地址
@@ -158,6 +241,7 @@
                     coretext: '',
                     evaluate: ''
                 },
+                headerShow:false,
                 oneHelpSaleMonthShow:false,  //一帮卖分析当月
                 oneHelpSaleYearShow:false,  //一帮卖分析年累计
                 towHelpSaleMonthShow:false,  //二帮卖当月
@@ -184,8 +268,71 @@
                 DaysAvailableStock:false,   //库存可销天数
                 financeIsShow:false,        //财务
                 salesmanData: {},//业务员数据
-                orderAmountData: '', //金额数据
-                directionData:{}, //订单走势图
+                orderAmountData: {
+                    thatMonth:{
+                        list:{
+                            id:'pieSalesManId',
+                            colorList:['#365AF8','#FFC925','#7B8EFB','#34DF8E','#A3FC8A','#FF7C25'],
+                            labelType:1,
+                            unit:['money','tenth'],
+                            pieData:[],
+                            radius:['40%', '70%'],
+                            borderWidth:0,
+                        },
+                        gross_money:'',
+                        gross_money_rate:'',
+                        money:'',
+                        moneyDecimal:'',
+                        moneyInteger:''
+                    },
+                    chainratio:'',
+                    yearOnYear:'',
+                }, //金额数据
+                directionData:{
+                        config:{
+                            id:'lineIdBandDirect',
+                            xAxisData:'',
+                            unit:['money','tenth'],
+                            lineData:[
+                                {
+                                    name:'订单金额',
+                                    data:'',
+                                    color:'#00E2BF'
+                                },
+                            ],
+                        },
+                        xAxis:{
+                            axisLine:{
+                                show:true,
+                                color:'#333'
+                            },
+                            axisLabel:{
+                                show:true,
+                                color:'#333',
+                                fontSize:14,
+                                rotate:60
+                            },
+                            splitLine:{
+                                show:false,
+                                color:'#C3C6CD'
+                            },
+                        },
+                        yAxis:{
+                            axisLine:{
+                                show:true,
+                                color:'#333'
+                            },
+                            axisLabel:{
+                                show:true,
+                                color:'#333',
+                                fontSize:14
+                            },
+                            splitLine:{
+                                show:true,
+                                color:'#C3C6CD'
+                            },
+                        },
+                    }, //订单走势图
                 salesmanTrendData:{},  //业务员走势图
                 salesmandownwardData:{}, //业务员下滑
                 ownwardExportData:{
@@ -265,12 +412,12 @@
                 // scoreRequestUrl:'http://dccuat.liby.com.cn/tjbg-manage/gradeConfig/queryModuleScore',
                 // scoreRequestSumUrl:'http://dccuat.liby.com.cn/tjbg-manage/gradeConfig/queryModuleSumScore',
                 // scoreTxtRequestUrl:'http://dccuat.liby.com.cn/tjbg-manage/gradeConfig/queryModuleEvaluate',
-                // scoreRequestUrl:'https://dcc.libyuat.com/tjbg-manage/gradeConfig/queryModuleScore',
-                // scoreRequestSumUrl:'https://dcc.libyuat.com/tjbg-manage/gradeConfig/queryModuleSumScore',
-                // scoreTxtRequestUrl:'https://dcc.libyuat.com/tjbg-manage/gradeConfig/queryModuleEvaluate',
-                scoreRequestUrl:'http://dcc.liby.com.cn/tjbg-manage/gradeConfig/queryModuleScore',
-                scoreRequestSumUrl:'http://dcc.liby.com.cn/tjbg-manage/gradeConfig/queryModuleSumScore',
-                scoreTxtRequestUrl:'http://dcc.liby.com.cn/tjbg-manage/gradeConfig/queryModuleEvaluate',
+                scoreRequestUrl:'https://dcc.libyuat.com/tjbg-manage/gradeConfig/queryModuleScore',
+                scoreRequestSumUrl:'https://dcc.libyuat.com/tjbg-manage/gradeConfig/queryModuleSumScore',
+                scoreTxtRequestUrl:'https://dcc.libyuat.com/tjbg-manage/gradeConfig/queryModuleEvaluate',
+                // scoreRequestUrl:'http://dcc.liby.com.cn/tjbg-manage/gradeConfig/queryModuleScore',
+                // scoreRequestSumUrl:'http://dcc.liby.com.cn/tjbg-manage/gradeConfig/queryModuleSumScore',
+                // scoreTxtRequestUrl:'http://dcc.liby.com.cn/tjbg-manage/gradeConfig/queryModuleEvaluate',
                 //一帮卖评分参数
                 oneScoreParams:'',
                 //订单评分参数
@@ -404,8 +551,8 @@
                 //     this.indexDealName = selectName
                 // }
                 this.currentDate = dateVal
-                this.getsalesmanTrend()
                 this.getOneHelpSalesData()
+                this.getsalesmanTrend()
                 this.getFinanceOverviewData()
                 this.getsalesman()
                 this.getsecondBand()
@@ -892,7 +1039,7 @@
             },
             //体检报告概览
             //本月累计下单金额以及总达成 以及本月累计达成率
-            async getOneHelpSalesData() {
+            getOneHelpSalesData() {
                 var _this = this
                 //显示laoding状态
                 _this.oneHelpSaleMonthShow = true
@@ -1184,6 +1331,7 @@
             //一帮卖分析-评分
             getOneHelpSaleScoreData(){
                 var _this = this
+                _this.headerShow = true
                 function getScoreData(){
                     return _this.$http({
                         url: _this.scoreRequestUrl + '?v=oneScore',
@@ -1648,6 +1796,7 @@
                             },
                         },
                     }
+                    console.log(_this.directionData)
                     _this.towHelpSaleMonthLineShow = false
                 })
             },
@@ -2143,7 +2292,6 @@
                     }
                 ))
             },
-
             //产品-产品下滑/增长商品
             getVariability() {
                 var _this = this
@@ -2311,21 +2459,21 @@
                                 //柱状图数据
                                 barData:[
                                     {
-                                        name:'上月销售额(万元)',
+                                        name:'上月销售额',
                                         data:downLastMonth,
                                         color:'#2D92FC',
                                         barWidth:22,
                                         type:'bar'
                                     },
                                     {
-                                        name:'当月销售额(万元)',
+                                        name:'当月销售额',
                                         data:downSameMonth,
                                         color:'#85C1FF',
                                         barWidth:22,
                                         type:'bar'
                                     },
                                     {
-                                        name:'销售差额(万元)',
+                                        name:'销售差额',
                                         data:downDifference,
                                         color:'#FE9600',
                                         barWidth:22,
@@ -2344,7 +2492,6 @@
                         })
                     )
             },
-
             // 门店模块概览
             getStoresDetailed() {
                 var _this = this
@@ -2433,12 +2580,12 @@
                     }
                     //门店近3个月无交易门店数数据
                     let noTrade = {
-                        name: "近3个月无交易门店数(家): ",
+                        name: "3-5个月无交易门店数(家): ",
                         NoSales: !data.mon3_unsale_store_cnt ? '--' : data.mon3_unsale_store_cnt
                     }
                     //门店6个月无交易门店数数据
                     let noTrades = {
-                        name: "6个月无交易门店数(家):",
+                        name: "6-12个月无交易门店数(家):",
                         NoSales:!data.mon6_unsale_store_cnt ? '--' : data.mon6_unsale_store_cnt
                     }
                     //门店门店单产数据
@@ -2474,7 +2621,7 @@
                         shopTitle:"门店活跃率：",
                         StoreActivity: _this.dataProcess(data.active_store_rate, 'percent').num + _this.dataProcess(data.active_store_rate, 'percent').unit,  //门店活跃率
                         shopActiveData: {
-                            ActiveStoresTxt:"活跃门店数",
+                            ActiveStoresTxt:"门店活跃数",
                             ActiveStoresing:"(家)",
                             ActiveStores:!data.active_store_cnt ? '--' :data.active_store_cnt,  //门店活跃数
                             detailbtn:"门店详情",
@@ -2636,7 +2783,7 @@
                                 //id
                                 id:'barRaiseId',
                                 //数据单位
-                                unit:['money','tenth'],
+                                unit:['money'],
                                 //x轴单位
                                 xAxisData:raisexAxisData,
                                 type:'xAxis',
@@ -2699,7 +2846,7 @@
                                 //id
                                 id:'barDownId',
                                 //数据单位
-                                unit:['money','tenth'],
+                                unit:['money'],
                                 //x轴单位
                                 xAxisData:downxAxisData,
                                 type:'xAxis',
@@ -2942,7 +3089,7 @@
                             ],
                             receivableAverage: '库存件数可销天数（天）',
                             inventoryVal:!data.saledays ? '--' : _this.dataProcess(data.saledays, 'day').num,  //库存件数可销天数
-                            inventoryBarData   //树状图数据
+                            inventoryBarData
                         }
                         _this.stockAmount = false
                         _this.InventoryTurnover = false
@@ -3473,9 +3620,6 @@
                 }
                 let totalScore1 = _this.oneHelpSaleScoreList.evaluate
                 let totalScore2 = _this.orderScoreList.evaluate
-                // let totalScore3 = _this.personScoreList.evaluate
-                // let totalScore4 = _this.productScoreList.evaluate
-                // let totalScore5 = _this.storeScoreList.evaluate
                 let totalScore6 = _this.stockScoreList.evaluate
                 //评价参数
                 _this.totalScoreTxtParams={
@@ -3508,6 +3652,7 @@
                             evaluate: scoreTxtData.grade_evaluate,
                             subscribe: scoreTxtData.grade_evaluate_detail,
                         }
+                        _this.headerShow = false
                     }
                 ))
             },

@@ -7,7 +7,7 @@
                         增长门店
                     </a-Col>
                     <a-Col :span="12" class="thendChartCol2">
-                        单位：万元
+                        单位：元
                         <newButton :defaultVal="defaultVal" :buttonHandleClick="exportData" :txtStyle="txtStyle" :btnStyle="btnStyle"> </newButton>
                         <span @click="thendChartClick">
                             <i class="iconfont icon-guanbi"></i>

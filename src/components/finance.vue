@@ -291,6 +291,7 @@
             border-radius: 6px;
             display: flex;
             flex-wrap: wrap;
+            position: relative;
             .financeLeft{
                 width:30%;
                 height:100%;

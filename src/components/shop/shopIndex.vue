@@ -1,24 +1,26 @@
 <template>
 <div class="shopindex">
     <dataTitle :subtitlename="titName" :explainSecondList="explainSecondList"></dataTitle>
-    <div class="shop-centen">
-        <div class="shop-centen-title">
-             <div class="title-img">
-                 <img :src="shopData.shopImg" style="width: 100%;height: 100%">
-             </div>
-            <div class="title-txt">
-              <p style="display: flex; justify-content: center;">{{StoresDetailed.shopTitle}} <span style=" font-size:24px;">{{StoresDetailed.StoreActivity}}</span></p>
+    <div class="shopCenter">
+        <div class="shop-centen">
+            <div class="shop-centen-title">
+                <div class="title-img">
+                    <img :src="shopData.shopImg" style="width: 100%;height: 100%">
+                </div>
+                <div class="title-txt">
+                <p style="display: flex; justify-content: center;">{{StoresDetailed.shopTitle}} <span style=" font-size:24px;">{{StoresDetailed.StoreActivity}}</span></p>
+                </div>
+            </div>
+            <div class="shop-centen-middle">
+                <shopLeft :shopActives="StoresDetailed.shopActiveData" :upraphy="upraphy" :downraphy="downraphy" :tableData="tableData.activeStoreDetail" :tradeTableData="tableData.noTradeData"></shopLeft>
+                <shopRight :ActiveDetail="StoresDetailed.ActiveDetail" :tableData="tableData.addStoreDetail" :dealTableData="tableData.noDealDetail"></shopRight>
             </div>
         </div>
-        <div class="shop-centen-middle">
-            <shopLeft :shopActives="StoresDetailed.shopActiveData" :upraphy="upraphy" :downraphy="downraphy" :tableData="tableData.activeStoreDetail" :tradeTableData="tableData.noTradeData"></shopLeft>
-            <shopRight :ActiveDetail="StoresDetailed.ActiveDetail" :tableData="tableData.addStoreDetail" :dealTableData="tableData.noDealDetail"></shopRight>
-        </div>
+        <loading-data :isShow="isShow"></loading-data>
     </div>
     <core :coretype="coreData.coretype" :coretext="coreData.coretext" :evaluate="coreData.evaluate" :subscribe="coreData.subscribe"></core>
     <shopChartUp v-if="upShow" :trendChartClick="upClick" :barEchartsData="upStoresData" :isShow="upStoresBar" :raiseExportData="exportData.raiseData"></shopChartUp>
     <shopChartrDown v-if="downShow" :trendChartClick="downClick"  :barEchartsData="downStoresData" :isShow="downStoresBar" :downExportData="exportData.downData"></shopChartrDown>
-    <loading-data :isShow="isShow"></loading-data>
 </div>
 </template>
 
@@ -145,9 +147,14 @@
         height: 100%;
         position: relative;
     }
-    .shop-centen{
+    .shopCenter{
         width: 100%;
         height:347px;
+        position: relative;
+    }   
+    .shop-centen{
+        width: 100%;
+        height:100%;
         background:rgba(255,255,255,1);
         border-radius:6px;
         margin: auto;

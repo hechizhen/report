@@ -198,7 +198,7 @@ export default{
                   var unit = "万"
                 }else{
                   var num = this.formatCurrency((data / 1).toFixed(0))
-                  var unit = "万"
+                  var unit = "元"
                 }
               } else if (type == 'percent') {
                 var num = (data * 100).toFixed(0)

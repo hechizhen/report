@@ -3,7 +3,6 @@
     <div class="headerTitle">
         <div class="headerTitle_left">
             <p class="paddingStyle">
-                <!-- <span class="spanFont spanSize">{{dealName}}</span> -->
                 <span class="spanFont spanSize">以下是针对您企业的体检报告分析结果，请认真审阅：</span>
             </p>
             <p class="paddingStyle1">   
@@ -29,15 +28,13 @@
             </div>
         </div>
         <div class="headerTitle_right">
-            <!-- <span class="spanFont2 spanSize4">{{score.coretype}}：</span>
-            <span class="spanFont2 spanSize2">{{score.coretext}}</span> -->
             <div>
                 <span class="spanFont spanSize4">总结：</span>
                 <span class="spanFont spanSize4">{{score.evaluate}}</span>
                 <span class="spanFont1 spanSize3">{{score.subscribe}}</span>
             </div>
         </div>
-        <loading-data></loading-data>
+        <loading-data :isShow="isShow"></loading-data>
     </div>
 </template>
 <script>
@@ -91,6 +88,9 @@
             },
             endDate:{
                 type:String
+            },
+            isShow:{
+                type:Boolean
             }
         },
         components : {
