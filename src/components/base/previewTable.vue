@@ -110,6 +110,8 @@
                     },
                 },
                 maxHeight:'',
+                monitorData:this.$store.state.monitorData,
+				originSource:this.$store.state.originSource
             }
         },
         mounted () {
@@ -117,6 +119,18 @@
             this.maxHeight = height-150
         },
         methods: {
+            //插入监控数据
+            setMonitorData(){
+				if(!this.originSource){
+					var _this = this
+                	_this.$http({
+						url: _this.$store.state.isLandUrl + '/userlog/insertCommonUserLog',
+						method: 'POST',
+						params: _this.monitorData
+					}).then(function (res) {
+					})
+				}
+            },
             //选择维度
             changeDimension(item){
                 this.dimension = item.target.value
@@ -128,6 +142,8 @@
             },
             //导出数据
             exportClick(){
+                this.monitorData.page_text = this.titleName+'导出数据'
+                this.setMonitorData()
                 let headerTxt = []
                 let headerKey = []
                 this.columns.map(function(item){

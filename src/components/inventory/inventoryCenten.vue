@@ -61,7 +61,7 @@
                 p {
                     font-size: 14px;
                     font-weight: 500;
-                    color: rgba(152, 162, 180, 1);
+                    color: #737d8f;
                 }
 
                 span {

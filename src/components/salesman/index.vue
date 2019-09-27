@@ -100,23 +100,44 @@
 						{title:'业绩下滑人数：',data:'统计当月业务员下单金额与上个月下单金额有所降低的业务员人数'},
 						{title:'人均产出：',data:'统计当月下单金额/系统的账号数（在职用户）'},
 					],
-					titleName:'二帮卖分析-业务员指标解释'
-				}
+					titleName:'二帮卖分析-业务员指标解释',
+				},
+				monitorData:this.$store.state.monitorData,
+				originSource:this.$store.state.originSource
 			}
 		},
 		mounted(){
 		},
 		methods:{
+			//插入监控数据
+            setMonitorData(){
+				if(!this.originSource){
+					var _this = this
+                	_this.$http({
+						url: _this.$store.state.isLandUrl + '/userlog/insertCommonUserLog',
+						method: 'POST',
+						params: _this.monitorData
+					}).then(function (res) {
+					})
+				}
+            },
 			explicit(a){
+				var _this = this
 				if(a == '走势图'){
-					this.stopScoll()
-					this.echartsShow = true;
+					_this.stopScoll()
+					_this.echartsShow = true;
+					_this.monitorData.page_text = '走势图'
+					_this.setMonitorData()
 				}else if(a == '下滑人员'){
-					this.stopScoll()
-					this.glideShow = true;
+					_this.stopScoll()
+					_this.glideShow = true;
+					_this.monitorData.page_text = '下滑人员'
+					_this.setMonitorData()
 				}else if(a == '达成与贡献'){
-					this.stopScoll()
-					this.contributionShow = true;
+					_this.stopScoll()
+					_this.contributionShow = true;
+					_this.monitorData.page_text = '达成与贡献'
+					_this.setMonitorData()
 				}
 			},
 			trendChartClick(a){

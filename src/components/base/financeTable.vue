@@ -57,7 +57,7 @@
                 text-align: right;
                 font-size:16px;
                 font-weight:bold;
-                color:rgba(152,162,180,1);
+                color: #737d8f;
                 width:160px;
            }
            .colRight{

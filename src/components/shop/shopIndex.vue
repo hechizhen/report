@@ -97,7 +97,7 @@
                     titleName:'二帮卖分析-门店指标解释',
                     span:6,
                     span2:18
-                }
+                },
             }
         },
         components:{

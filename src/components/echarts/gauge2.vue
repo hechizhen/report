@@ -188,7 +188,6 @@
                                 distance: -10,
                                 //   distance: 10,
                                 formatter:function(value){
-                                    console.log(value)
                                     return value+'%'
                                 },
                                 textStyle: {

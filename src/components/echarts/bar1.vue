@@ -301,8 +301,6 @@
                                 },
                             },
                             formatter : function(params){
-                                console.log(params)
-                                console.log(params.length)
                                 let lengths = params.length
                                 let text = lengths<9 ? params : params.substring(0,8)+'...'
                                 return text

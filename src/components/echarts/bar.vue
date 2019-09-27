@@ -199,12 +199,27 @@
                 }
                 _this.barEchartsData.barData.map(function(item,index){
                         legendList.push(item.name)
+                        let dataList = []
+                        if(_this.barEchartsData.id=="barIdMonthSales" || _this.barEchartsData.id=="barIdYearSales"){
+                            item.data.map((val,index)=>{
+                                item.value = val>2 ? 2 : val
+                                dataList.push(item.value)
+                            })
+                        }else if(_this.barEchartsData.id=="barIdInventory"){
+                            item.data.map((val,index)=>{
+                                item.value = val>300 ? 300 : val
+                                dataList.push(item.value)
+                            })
+                        }else{
+                            dataList = item.data
+                        }
+                        // console.log(dataList)
                         seriesData.push({
                             name: item.name,
                             type: 'bar',
                             z:10,
                             zlevel:10,
-                            data: item.data,
+                            data: dataList,
                             markLine:markLineObj,
                             barGap:barGap,
                             barWidth:item.barWidth,
@@ -244,7 +259,22 @@
                                     },
                                     marginTop:15,
                                     formatter:function(params){
-                                        return _this.dataProcess(params.value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num+_this.dataProcess(params.value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).unit
+                                        if(_this.barEchartsData.id=="barIdInventory" || _this.barEchartsData.id=="barIdMonthSales" || _this.barEchartsData.id=="barIdYearSales"){
+                                            let data = ''
+                                            _this.barEchartsData.xAxisData.map((item,index)=>{
+                                                if(item==params.name){
+                                                    data = _this.barEchartsData.barData[0].data[index]
+                                                }
+                                            })
+                                            if(_this.barEchartsData.id=="barIdInventory"){
+                                                return _this.dataProcess(data,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num
+                                            }else{
+                                                return _this.dataProcess(data,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num+_this.dataProcess(params.value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).unit
+                                            }
+                                            
+                                        }else{
+                                            return _this.dataProcess(params.value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num+_this.dataProcess(params.value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).unit
+                                        }
                                     },
                                 }
                             }
@@ -418,12 +448,20 @@
                         //     },
                         // },
                         formatter:function(params){
+                            console.log(params)
                             var relVal = params[0].name+'<br/>';
                             for (var i = 0; i < params.length; i++) {
-                                if(params[i].seriesName=='达成率' || params[i].seriesName=='贡献率'){
+                                if(_this.barEchartsData.id=='barSalesManId'){
                                     relVal += params[i].marker+params[i].seriesName+':'+_this.dataProcess(params[i].value,'percent').num+_this.dataProcess(params[i].value,'percent').unit+'</br>'
-                                }else{
-                                    relVal += params[i].marker+params[i].seriesName+':'+_this.dataProcess(params[i].value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num+_this.dataProcess(params[i].value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).unit+'</br>'
+                                }else if(_this.barEchartsData.id=="barIdMonthSales" || _this.barEchartsData.id=="barIdYearSales" || _this.barEchartsData.id=="barIdInventory"){
+                                    console.log(_this.barEchartsData.barData)
+                                    let data = ''
+                                    _this.barEchartsData.xAxisData.map((item,index)=>{
+                                        if(item==params[0].name){
+                                            data = _this.barEchartsData.barData[0].data[index]
+                                        }
+                                    })
+                                    relVal += params[i].marker+params[i].seriesName+':'+_this.dataProcess(data,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num+_this.dataProcess(params[i].value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).unit+'</br>'
                                 }
                             }
                             return relVal;
@@ -508,6 +546,20 @@
                 };
                 if(_this.barEchartsData.id=="barIdMonthSales" || _this.barEchartsData.id=="barIdYearSales" ){
                     option.yAxis.max= 2
+                }
+                if(_this.barEchartsData.id=="barIdInventory"){
+                    option.yAxis.max= 300
+                    option.yAxis.axisLabel = {
+                        show:_this.xAxis.axisLabel.show,
+                        textStyle:{
+                            color:'#737d8f',
+                            fontSize:_this.xAxis.axisLabel.fontSize,
+                        },
+                        formatter:function(value) {
+                            value = _this.chartDataProcess(value,_this.barEchartsData.unit[0],_this.barEchartsData.unit[1]).num
+                            return value
+                        },
+                    }
                 }
                 if(_this.barEchartsData.id=="barIdProdun"){
                     option.xAxis.max= 1

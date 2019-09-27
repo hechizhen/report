@@ -11,7 +11,7 @@
                 <DatePicker type="month" v-model="defaultValDate" :options="options3" format="yyyy/MM" :clearable="false" @on-change="changeDate" style="width:170px" v-if="options3!=''"></DatePicker>
                 <button-list :buttonType="buttonList.buttonType" :isGhost="buttonList.isGhost" :buttonHandleClick="buttonHandleClick" :defaultVal="buttonList.defaultVal" style="margin-left:20px;"></button-list>
             </p>
-            <p style="margin-top: 2%">
+            <p style="margin-top: 2%" v-if="isShowDealIdSelect">
                 <span style="font-size:14px;padding-left:10px;">经销商：</span>
                 <a-select showSearch v-model="defaultSelectVal" @change="onChange" style="width:170px;">
                     <a-select-option v-for="(item,index) in dealList" :key="item+index" :value="item.name" :disabled="item.date_dt==nowDate ? true : false">{{item.name}}</a-select-option>

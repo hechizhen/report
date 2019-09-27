@@ -8,11 +8,11 @@
             <b>{{inventoryTxt.inventoryVal}}</b>
             <div class="left-txt">
                 <div class="left-txt-title" v-for="(item,index) in inventoryTxt.inventorycompare" :key="index">
-                    <div style="width: 50%; text-align: center">
-                    <span>{{item.name}}</span>
+                    <div style="width: 50%; text-align: center;height:30px;line-height:30px;font-size: 14px;">
+                        {{item.name}}
                     </div>
-                    <div style="width: 50%; text-align: left">
-                    <p :class="item.inventoryChainValColor">{{item.inventoryChainVal}}</p>
+                    <div style="width: 50%; text-align: left;height:30px;line-height:30px;font-size: 14px;font-weight: 600;"  :class="item.inventoryChainValColor">
+                        {{item.inventoryChainVal}}
                     </div>
                 </div>
                 </div>
@@ -23,6 +23,7 @@
                 <newButton :defaultVal="defaultValdown" :buttonHandleClick="dealHandleClick"
                             :btnStyle="btnStyle" :txtStyle="txtStyle"
                 ></newButton>
+                <p class="stockUnit">单位：天</p>
             </div>
             <div class="bartu">
              <barChart :barEchartsData="barData.config" :xAxis="barData.xAxis"
@@ -151,7 +152,7 @@
                     span{
                         font-size:14px;
                         font-weight:400;
-                        color:#98A2B4;
+                        color: #737d8f;
                         margin-top: 0;
                         display: contents;
                     }
@@ -178,10 +179,16 @@
                 display: flex;
                 justify-content: flex-end;
                 align-items: center;
+                position: relative;
                 .newButton{
                     float: right;
                     margin-top: 2%;
                     margin-right: 5%;
+                }
+                .stockUnit{
+                    position: absolute;
+                    left:20px;
+                    bottom:0;
                 }
             }
             .bartu{

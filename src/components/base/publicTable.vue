@@ -17,9 +17,9 @@
                 <!-- <new-button :defaultVal="returnButton.defaultVal" :buttonType="returnButton.buttonType" :buttonHandleClick="returnHandleClick"></new-button> -->
             </div>
             <Table :height="maxHeight" :columns="tablecColumns" :data="tableData" border  v-if="tableData.length!=0" :loading="tableLoading"></Table>
-            <div class="paginationTable">
+            <!-- <div class="paginationTable">
                 <Page :total="totalSize" :current="1" :page-size="defaultSize" show-elevator v-if="totalSize!='' && defaultSize!=''" @on-change="onChange" />
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
@@ -101,6 +101,8 @@
                        color:'#BEBEBE'
                     },
                 },
+                monitorData:this.$store.state.monitorData,
+				originSource:this.$store.state.originSource
             }
         },
         created(){
@@ -132,6 +134,18 @@
             },
         },
         methods: {
+            //插入监控数据
+            setMonitorData(){
+				if(!this.originSource){
+					var _this = this
+                	_this.$http({
+						url: _this.$store.state.isLandUrl + '/userlog/insertCommonUserLog',
+						method: 'POST',
+						params: _this.monitorData
+					}).then(function (res) {
+					})
+				}
+            },
             //分页
             onChange(pageNumber) {
                 this.pageNumber = pageNumber
@@ -148,6 +162,8 @@
             },
              //导出的方法
             exportHandleClick() {
+                this.monitorData.page_text = this.titleName+'导出数据'
+                this.setMonitorData()
                 require.ensure([], () => {
                     const { export_json_to_excel } = require('../../excel/Export2Excel.js');
                     const tHeader = this.tableHeaderTxt

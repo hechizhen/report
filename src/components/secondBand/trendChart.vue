@@ -57,7 +57,6 @@
 			}
 		},
 		mounted(){
-			console.log(this.direction)
 		},
 		methods:{
 			thendChartClick(){
@@ -67,7 +66,6 @@
 		watch:{
             lineEchartsData(val){
 				this.direction = val;
-				console.log(this.direction)
             }
         },
 	}

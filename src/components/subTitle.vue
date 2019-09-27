@@ -27,7 +27,7 @@
 			},
 			listing:{
 				type:Array,
-				default:["订单详情"],
+				default:["销售详情"],
 			},
 			detailHandleClick:{
 				type:Function,

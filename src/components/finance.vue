@@ -119,7 +119,9 @@
                 tableStoreColumns:'',//门店列头
                 tableStoreList:'',//门店数据
                 tablePersonColumns:'',//人员列头
-                tablePersonList:''//人员数据
+                tablePersonList:'',//人员数据
+                monitorData:this.$store.state.monitorData,
+				originSource:this.$store.state.originSource
             }
         },
         mounted () {
@@ -158,9 +160,7 @@
             },
             getTableStore (sheetName) {
                 var worksheet = this.workbookStore.Sheets[sheetName]
-                console.log(worksheet)
                 this.tableStoreList = XLSX.utils.sheet_to_json(worksheet)
-                console.log(this.tableStoreList)
                 let header = Object.keys(this.tableStoreList)
                 let columns = []
                 header.map(function(item){
@@ -222,8 +222,22 @@
                     {title:'业务员效能（元）',key:''},
                 ]
             },
+            //插入监控数据
+            setMonitorData(){
+				if(!this.originSource){
+					var _this = this
+                	_this.$http({
+						url: _this.$store.state.isLandUrl + '/userlog/insertCommonUserLog',
+						method: 'POST',
+						params: _this.monitorData
+					}).then(function (res) {
+					})
+				}
+            },
             //门店收益
             storeHandleClick(){
+                this.monitorData.page_text = '门店收益'
+                this.setMonitorData()
                 this.stopScoll()
                 this.storeShow = true
                 //页面出现弹框页面禁止滚动
@@ -238,6 +252,8 @@
             },
             //人均效能
             personHandleClick(){
+                this.monitorData.page_text = '人均效能'
+                this.setMonitorData()
                 this.stopScoll()
                 this.personShow = true
                 //页面出现弹框页面禁止滚动
@@ -257,6 +273,8 @@
             },
             //打开逾期明细
             overDueHandleClick(){
+                this.monitorData.page_text = '逾期明细'
+                this.setMonitorData()
                 this.stopScoll()
                 this.isShowDetail = true
             }

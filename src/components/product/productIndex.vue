@@ -4,13 +4,13 @@
             <dataTitle :subtitlename="titName" :explainSecondList="explainSecondList"></dataTitle>
             <div class="product-content">
                 <a-Row >
-                    <a-Col :span="10" style=" height: 257px;" >
+                    <a-Col :span="10" style=" height: 240px;" >
                         <productLeft :productdata="CommodityTurnover"  :selectButtonClick="selectButtonClick" :storeHandleClick="storeDetailHandleClick"
                                      :tableData="newTableData"> </productLeft>
                         <productRight :barData="CommodityTurnover.produnarData"></productRight>
                         <loading-data :isShow="CommodityRate"></loading-data>
                     </a-Col>
-                    <a-Col :span="14" style=" height: 257px;" >
+                    <a-Col :span="14" style=" height: 240px;" >
                         <commodityRight :goodHandleClick="goodDetailHandleClick" :commoditydata="commoditydata" :upraphy="upraphy" :downraphy="downraphy"  :tableData="productTableData"  :selectButtonClick="proListDetaSelectButtonClick" ></commodityRight>
                         <loading-data :isShow="NumberGoods"></loading-data>
                     </a-Col>
@@ -177,12 +177,28 @@
                     titleName:'二帮卖分析-产品指标解释',
                     span:6,
                     span2:18
-                }
+                },
+                monitorData:this.$store.state.monitorData,
+				originSource:this.$store.state.originSource
             }
         },
         methods:{
+            //插入监控数据
+            setMonitorData(){
+				if(!this.originSource){
+					var _this = this
+                	_this.$http({
+						url: _this.$store.state.isLandUrl + '/userlog/insertCommonUserLog',
+						method: 'POST',
+						params: _this.monitorData
+					}).then(function (res) {
+					})
+				}
+            },
             //打开下滑树状图
             upraphy(){
+                this.monitorData.page_text = '下滑商品'
+                this.setMonitorData()
                 this.downShow = true;
                 //页面出现弹框页面禁止滚动
                 this.stopScoll()
@@ -195,6 +211,8 @@
             },
             //打开增长树状图
             downraphy(){
+                this.monitorData.page_text = '增长商品'
+                this.setMonitorData()
                 this.upShow = true;
                 //页面出现弹框页面禁止滚动
                 this.stopScoll()

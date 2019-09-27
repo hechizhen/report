@@ -111,6 +111,8 @@
                     color:'#fff',
                     fontWeight:400
                 },
+                monitorData:this.$store.state.monitorData,
+				originSource:this.$store.state.originSource
             }
         },
         components:{
@@ -119,16 +121,34 @@
             publicTable
         },
         methods:{
-            //打开下滑树状图数据
+            //插入监控数据
+            setMonitorData(){
+				if(!this.originSource){
+					var _this = this
+                	_this.$http({
+						url: _this.$store.state.isLandUrl + '/userlog/insertCommonUserLog',
+						method: 'POST',
+						params: _this.monitorData
+					}).then(function (res) {
+					})
+				}
+            },
+            //打开增长门店
             upbuttonHandleClick(val){
+                this.monitorData.page_text = '增长门店'
+                this.setMonitorData()
                 this.upraphy()
             },
-            //打开增长树状图数据
+            //打开下滑门店
             downbuttonHandleClick(val){
+                this.monitorData.page_text = '下滑门店'
+                this.setMonitorData()
                 this.downraphy()
             },
             //点击门店详情
             storeDetailHandleClick(){
+                this.monitorData.page_text = '门店详情'
+                this.setMonitorData()
                 this.isShowDetail = true
                 //页面出现弹框页面禁止滚动
                 this.stopScoll()
@@ -141,6 +161,8 @@
             },
             //点击无交易明细
             tradeDetailHandleClick(){
+                this.monitorData.page_text = '无交易明细'
+                this.setMonitorData()
                 this.isShowTrade = true
                 //页面出现弹框页面禁止滚动
                 this.stopScoll()
@@ -176,7 +198,7 @@
             p{
                 width: 79%;
                 margin-left: 10%;
-                font-size:12px;
+                font-size:14px;
                 font-weight:500;
                 padding-top: 28px;
                 padding-bottom: 10px;
@@ -238,7 +260,7 @@
                     line-height: 28px;
                     font-size:14px;
                     font-weight:400;
-                    color:rgba(152,162,180,1);
+                    color:#737d8f;
                 }
                 .productLeft-btn{
                     height:100%;

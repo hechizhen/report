@@ -215,6 +215,13 @@ a {
 .ivu-input{
     font-size: 14px!important
 }
+.ant-select-dropdown{
+    top:120px!important;
+    position: fixed!important;
+}
+.ant-progress-circle-path{
+    stroke: #1d91f0!important;
+}
 /* 媒体查询控制分辨率字体大小 */
 @media screen and (max-width: 1440px) {
     /* .sameMonth .sameMonthcontent .record .recordConten .recordLeft div p:nth-child(2){

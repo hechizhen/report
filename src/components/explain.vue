@@ -29,25 +29,36 @@
 		data(){
 			return {
 				//是否显示指标弹出框
-				isShow:false
+				isShow:false,
+				monitorData:this.$store.state.monitorData,
+				originSource:this.$store.state.originSource
 			}
 		},
 		methods:{
+			//插入监控数据
+            setMonitorData(){
+				if(!this.originSource){
+					var _this = this
+                	_this.$http({
+						url: _this.$store.state.isLandUrl + '/userlog/insertCommonUserLog',
+						method: 'POST',
+						params: _this.monitorData
+					}).then(function (res) {
+					})
+				}
+            },
 			//显示弹窗
 			detailHandleClick(){
+				this.monitorData.page_text = this.explainList.titleName
+                this.setMonitorData()
 				this.isShow = true
-				//页面出现弹框页面禁止滚动
-				var mo=function(e){e.preventDefault();};
-				document.body.style.overflow='hidden';
-				document.addEventListener("touchmove",mo,false)
+				this.stopScoll()//禁止页面滑动
 			},
 			//关闭弹窗
 			closeHandleClick(){
 				this.isShow = false
 				//弹框消失，恢复正常滑动效果
-				var mo=function(e){e.preventDefault();};
-				document.body.style.overflow='';//出现滚动条
-				document.removeEventListener("touchmove",mo,false);
+				this.moveScoll()
 			}
 		}
 	}

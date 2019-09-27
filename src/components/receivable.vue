@@ -88,7 +88,7 @@
         .fontStyle1{
             font-size:18px;
             font-weight:bold;
-            color:#98A2B4;
+            color: #737d8f;
             white-space: nowrap;
         }
         .fontStyle2{

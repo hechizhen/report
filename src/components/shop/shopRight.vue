@@ -59,6 +59,8 @@
                     color:'#ffffff',
                     fontWeight:400
                 },
+                monitorData:this.$store.state.monitorData,
+				originSource:this.$store.state.originSource
             }
         },
         components:{
@@ -74,8 +76,22 @@
         mounted() {
         },
         methods:{
+            //插入监控数据
+            setMonitorData(){
+				if(!this.originSource){
+					var _this = this
+                	_this.$http({
+						url: _this.$store.state.isLandUrl + '/userlog/insertCommonUserLog',
+						method: 'POST',
+						params: _this.monitorData
+					}).then(function (res) {
+					})
+				}
+            },
             //打开新增门店详情
             detailHandleClick(){
+                this.monitorData.page_text = '新增门店'
+                this.setMonitorData()
                 this.isShowDetail = true
                 //页面出现弹框页面禁止滚动
                 this.stopScoll()
@@ -94,6 +110,8 @@
             },
             //打开应收明细
             dealHandleClick(){
+                this.monitorData.page_text = '应收明细'
+                this.setMonitorData()
                 this.isShowreceivable = true
                 //页面出现弹框页面禁止滚动
                 this.stopScoll()
@@ -124,7 +142,7 @@
             margin-left:10%;
             p {
                 display: grid;
-                font-size: 12px;
+                font-size: 14px;
                 font-weight: 500;
                 padding-top: 28px;
                 padding-bottom:10px;

@@ -101,7 +101,7 @@
             .ant-col-18{
                 font-size:16px;
                 font-weight:500;
-                color:rgba(152,162,180,1);
+                color:#737d8f;
                 display: inline-block;
             }
             .ant-col-6{
@@ -109,7 +109,7 @@
                 font-weight:500;
                 margin-bottom: 0;
                 display: inline-block;
-                color: rgba(152, 162, 180, 1);
+                color: #737d8f;
             }
         }
         .commodityR-base:nth-child(2){

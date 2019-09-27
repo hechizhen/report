@@ -15,7 +15,7 @@
             //按钮文字
             defaultVal:{
                 type:String,
-                default:'订单详情'
+                default:'销售详情'
             },
             // 按钮样式
             btnStyle: {

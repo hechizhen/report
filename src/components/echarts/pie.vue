@@ -99,7 +99,6 @@
                 this.defaultTxt = item.name
                 this.defaultColor = this.pieEchartsData.colorList[index]
                 this.defaultVal = ((item.value)/this.sumData*100).toFixed(2)+'%'
-                console.log(_this.myChart)
                  _this.myChart.dispatchAction({
                     type: 'highlight',
                     seriesIndex: 0,
@@ -218,7 +217,6 @@
                 //     dataIndex: 0
                 // });
                 _this.myChart.on('mouseover', function(params) {
-                    console.log(params)
                     _this.defaultTxt=params.name
                     _this.defaultVal=params.percent+'%'
                     _this.defaultColor = params.color

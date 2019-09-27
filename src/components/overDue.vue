@@ -87,10 +87,10 @@
     }
 </script>
 <style lang="less">
-.ant-progress-circle-trail{
-    stroke: #FD6691!important;
-    border:1px solid #fff;
-}
+// .ant-progress-circle-trail{
+//     stroke: #FD6691!important;
+//     border:1px solid #fff;
+// }
 // .ant-progress-inner{
 //     width:3rem!important;
 //     height:3rem!important

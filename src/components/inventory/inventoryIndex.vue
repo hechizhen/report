@@ -177,28 +177,44 @@
                     span:7,
                     span2:17
                 },
+                monitorData:this.$store.state.monitorData,
+				originSource:this.$store.state.originSource
             }
         },
         methods:{
-            //打开库存明细
+            //插入监控数据
+            setMonitorData(){
+				if(!this.originSource){
+					var _this = this
+                	_this.$http({
+						url: _this.$store.state.isLandUrl + '/userlog/insertCommonUserLog',
+						method: 'POST',
+						params: _this.monitorData
+					}).then(function (res) {
+					})
+				}
+            },
+            //打开未销明细
             detailHandleClick(){
+                this.monitorData.page_text = '未销明细'
+                this.setMonitorData()
                 this.isShowDetail = true
                 //页面出现弹框页面禁止滚动
                  this.stopScoll()
             },
-            //关闭库存明细
+            //关闭未销明细
             closePopup(){
                 this.isShowDetail = false
                 //弹框消失，恢复正常滑动效果
                this.moveScoll()
             },
-            //关闭可销天数明细
+            //关闭库存详情
             dealClosePopup(){
                 this.isShowreceivable = false
                 //弹框消失，恢复正常滑动效果
                 this.moveScoll()
             },
-            //打开可销天数明细
+            //打开库存详情
             dealHandleClick(){
                 this.stockDetailHandleClick()
                 this.isShowreceivable = true
@@ -259,6 +275,7 @@
         text-align: left;
         margin-left: 4%;
         border-bottom: 1px solid #E5E5E5;
+        color: #737d8f;
     }
     .inventory-table{
         width: 35%;
@@ -359,7 +376,7 @@
             font-weight:600;
             margin-bottom: 0;
             display: inline-block;
-            color:rgba(51,51,51,1);
+            color: #737d8f;
             border-bottom: 1px solid #E5E5E5;
         }
     }

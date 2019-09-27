@@ -85,7 +85,7 @@
 			return {
 				titleName:'二帮卖分析',
 				subtitlename:'订单',
-				listing:['订单详情'],
+				listing:['销售详情'],
 				lineEchartsData:"",
 				isShowDetail:false,
 				buttonGroup:{   //切换维度按钮
@@ -142,12 +142,10 @@
 		},
 		watch:{
 			orderAmountData(val){
-				console.log(val)
 				this.newOrderAmountData = val
 			},
             directionLineData(val){
 				this.newDirectionData = val
-				console.log(this.newDirectionData)
 				deep:true
             },
         },

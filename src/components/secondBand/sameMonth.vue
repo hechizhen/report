@@ -19,10 +19,12 @@
 			<div class="grossProfit" ref="grossProfit">
 				<a-Row>
 					<a-Col :span="12" class="recordLeft">
-						<div><img src="./../../assets/img/jine.png">毛利额(万元)<br/><span>￥</span><span class="txt">{{orderAmountData.gross_money}}</span></div>
+						<div><img src="./../../assets/img/jine.png">毛利额(万元)</div>
+						<div class="fontStyle"><span>￥</span><span class="txt">{{orderAmountData.gross_money}}</span></div>
 					</a-Col>
 					<a-Col :span="12" class="recordRight">
-						<div><img src="./../../assets/img/maoli-icon.png">毛利率<br/><span class="txt">{{orderAmountData.gross_money_rate}}</span></div>
+						<div><img src="./../../assets/img/maoli-icon.png">毛利率</div>
+						<div class="fontStyle"><span class="txt">{{orderAmountData.gross_money_rate}}</span></div>
 					</a-Col>
 				</a-Row>
 			</div>
@@ -81,7 +83,6 @@
 		.sameMonthcontent {
 			width: 100%;
 			height: 735px;
-			border:4px solid #00A6FF;
 			border-radius:10px;
 			padding: 0 20px;
 			.title {
@@ -226,6 +227,9 @@
 			.txt{
 				font-size: 16px!important;
 			}
+		}
+		.fontStyle{
+			margin-top:8px;
 		}
 	}
 </style>
