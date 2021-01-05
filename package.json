@@ -18,7 +18,7 @@
     "@njleonzhang/postcss-px-to-rem": "^1.0.1",
     "animate.css": "^3.7.0",
     "ant-design-vue": "^1.3.13",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "clipboard": "^2.0.4",
     "countup": "^1.8.2",
     "echarts": "^3.8.4",
